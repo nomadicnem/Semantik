@@ -24,7 +24,7 @@
 canvas_flag::canvas_flag(canvas_view *i_oGraphWidget, canvas_item *i_oFrom)
 	: QGraphicsRectItem(), m_oGraph(i_oGraphWidget)
 {
-	setFlags(ItemIsMovable & ItemIsSelectable);
+	setFlags(NULL);
 	m_oItem = i_oFrom;
 	setRect(0, 0, 19, 19);
 

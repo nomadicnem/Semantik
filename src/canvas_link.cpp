@@ -19,7 +19,7 @@
 	canvas_link::canvas_link(canvas_view *i_oGraphWidget, canvas_item *i_oFrom, canvas_item *i_oTo)
 : QGraphicsPathItem(), m_oGraph(i_oGraphWidget)
 {
-	setFlags(ItemIsMovable & ItemIsSelectable);
+	setFlags(NULL);
 
 	m_oFrom = i_oFrom;
 	m_oTo = i_oTo;
