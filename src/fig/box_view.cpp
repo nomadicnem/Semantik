@@ -748,7 +748,8 @@ void box_view::change_colors(QAction* i_oAct)
 void box_view::slot_color()
 {
 	if (scene()->selectedItems().size() < 1) return;
-	QColor l_oColor = QColorDialog::getColor(l_oColor, this);
+	QColor l_oColor = QColorDialog::getColor(Qt::white, this);
+
 	if (!l_oColor.isValid()) return;
 	mem_prop_box *mem = new mem_prop_box(m_oMediator, m_iId);
 	foreach (QGraphicsItem *l_o, scene()->selectedItems())

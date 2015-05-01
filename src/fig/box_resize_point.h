@@ -35,7 +35,6 @@ class box_resize_point : public QGraphicsRectItem
 		bool m_bHeld;
 
 	private:
-		bool m_bChanged;
 		bool m_bForced;
 
 };
