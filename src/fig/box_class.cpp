@@ -186,7 +186,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 		} else if (l_o.m_oVisibility == visibility::DERIVED) {
 			l_sVis = "/";
 		} else {
-			Q_ASSERT("invalid visibility " + l_o.m_oVisibility);
+			Q_ASSERT(QString("Invalid visibility %1").arg(l_o.m_oVisibility) != "0");
 		}
 
 		l_oR.translate(QPointF(- l_fOff, 0));
@@ -254,7 +254,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 		} else if (l_o.m_oVisibility == visibility::DERIVED) {
 			l_sVis = "/";
 		} else {
-			Q_ASSERT("invalid visibility " + l_o.m_oVisibility);
+			Q_ASSERT(QString("Invalid visibility %1").arg(l_o.m_oVisibility) != "0");
 		}
 
 		l_oR.translate(QPointF(- l_fOff, 0));
@@ -440,7 +440,7 @@ void box_class::properties()
 		} else if (l_o.m_oVisibility == visibility::DERIVED) {
 			l_oS<<notr("derived\t");
 		} else {
-			Q_ASSERT("invalid visibility " + l_o.m_oVisibility);
+			Q_ASSERT(QString("Invalid visibility %1").arg(l_o.m_oVisibility) != "0");
 		}
 		if (l_o.m_bStatic) {
 			l_oS<<notr("static\t");
@@ -462,7 +462,7 @@ void box_class::properties()
 		} else if (l_o.m_oVisibility == visibility::DERIVED) {
 			l_oS<<notr("derived\t");
 		} else {
-			Q_ASSERT("invalid visibility " + l_o.m_oVisibility);
+			Q_ASSERT(QString("Invalid visibility %1").arg(l_o.m_oVisibility) != "0");
 		}
 		if (l_o.m_bAbstract) {
 			l_oS<<notr("abstract\t");

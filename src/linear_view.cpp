@@ -173,7 +173,7 @@ void linear_view::dropEvent(QDropEvent *i_oEv)
 				int k = m_oMediator->parent_of(j);
 
 				// make certain they have the same parent now
-				if (m_oMediator->parent_of(l_iId) != k);
+				if (m_oMediator->parent_of(l_iId) != k)
 				{
 					if (m_oMediator->parent_of(l_iId))
 					{
