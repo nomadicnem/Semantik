@@ -10,21 +10,22 @@
 ///////////////////////////////////////////////////////////////////
 
 mem_unlink::mem_unlink(sem_mediator* mod) : mem_command(mod) {
-
+	pos = 0;
 }
 
 void mem_unlink::redo() {
 	//qDebug()<<"redo mem_link"<<parent<<child;
-	Q_ASSERT(model->m_oLinks.contains(QPoint(parent, child)));
+	Q_ASSERT(model->m_oLinks.count(QPoint(parent, child)) == 1);
+	pos = model->m_oLinks.indexOf(QPoint(parent, child));
 	model->m_oLinks.removeAll(QPoint(parent, child));
 	model->notify_unlink_items(parent, child);
 	redo_dirty();
 }
 
 void mem_unlink::undo() {
-	//qDebug()<<"undo mem_link"<<parent<<child;
+	//qDebug()<<"undo mem_link"<<parent<<child<<pos;
 	Q_ASSERT(!model->m_oLinks.contains(QPoint(parent, child)));
-	model->m_oLinks.append(QPoint(parent, child));
+	model->m_oLinks.insert(pos, QPoint(parent, child));
 	model->notify_link_items(parent, child);
 	undo_dirty();
 }

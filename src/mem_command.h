@@ -21,6 +21,7 @@ class mem_unlink : public mem_command {
 
 		int parent;
 		int child;
+		int pos;
 		IType type() { return UNLINK; }
 };
 

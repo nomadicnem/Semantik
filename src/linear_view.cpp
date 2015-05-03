@@ -70,7 +70,21 @@ void linear_view::notify_link_items(int id1, int id2)
 	QTreeWidgetItem *l_oItem2 = m_oItems.value(id1);
 	QTreeWidgetItem *l_oRet = takeTopLevelItem(indexOfTopLevelItem(l_oItem1));
 	Q_ASSERT(l_oRet != NULL);
-	l_oItem2->insertChild(l_oItem2->childCount(), l_oItem1);
+
+	int l_iOffset = 0;
+	foreach (QPoint l_oP, m_oMediator->m_oLinks)
+	{
+		if (l_oP.x() == id1) // same parent
+		{
+			if (l_oP.y() == id2) // item found
+			{
+				break;
+			}
+			l_iOffset++;
+		}
+	}
+
+	l_oItem2->insertChild(l_iOffset, l_oItem1);
 	l_oItem2->setExpanded(true);
 
 	data_item *l_o = m_oMediator->m_oItems.value(id2);
@@ -210,6 +224,7 @@ void linear_view::dropEvent(QDropEvent *i_oEv)
 				int k = m_oMediator->parent_of(j);
 
 				// make certain they have the same parent now
+				// TODO do it in one step?
 				if (m_oMediator->parent_of(l_iId) != k)
 				{
 					if (m_oMediator->parent_of(l_iId))
