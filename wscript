@@ -134,7 +134,7 @@ def configure(conf):
 	if Options.options.icons:
 		icons = Options.options.icons
 
-	conf.load('gcc g++ qt4')
+	conf.load('compiler_c compiler_cxx qt4')
 	if not conf.env.CXX: conf.fatal('Semantik requires g++ (compilation only)')
 	if not conf.env.QT_LRELEASE: conf.fatal('Semantik requires the program lrelease (from the Qt linguist package? - compilation only)')
 	conf.load('python')
@@ -218,6 +218,7 @@ def configure(conf):
 	conf.define('GAP', 50, quote=False)
 
 def options(opt):
+	opt.load('compiler_c compiler_cxx')
 	opt.load('kde4')
 	opt.load('qt4')
 	opt.load('python ')
