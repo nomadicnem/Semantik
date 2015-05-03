@@ -114,9 +114,18 @@ void mem_link::undo() {
 ///////////////////////////////////////////////////////////////////
 
 mem_sel::mem_sel(sem_mediator* mod) : mem_command(mod) {
+	m_iSortSel = NO_ITEM;
+	m_iSortUnsel = NO_ITEM;
 	foreach (data_item* t, model->m_oItems.values()) {
 		if (t->m_bSelected) {
 			unsel.append(t->m_iId);
+		}
+	}
+	if (unsel.size() == 1)
+	{
+		if (model->m_iSortId != NO_ITEM)
+		{
+			m_iSortUnsel = model->m_iSortId;
 		}
 	}
 }
@@ -127,11 +136,24 @@ void mem_sel::apply() {
 	while (!model->m_oRedoStack.isEmpty())
 		delete model->m_oRedoStack.pop();
 
-	// merge a previous selection if possible
-	while (!model->m_oUndoStack.empty()) {
-		mem_command *me = model->m_oUndoStack.pop();
-		if (me->type() == SELECT) {
+	// TODO: merge a previous selection if possible?
+	/*if (m_iSortSel == NO_ITEM && m_iSortUnsel == NO_ITEM)
+	{
+		while (!model->m_oUndoStack.empty()) {
+			mem_command *me = model->m_oUndoStack.pop();
+			if (me->type() != SELECT)
+			{
+				model->m_oUndoStack.push(me);
+				break;
+			}
+
 			mem_sel *sal = (mem_sel*) me;
+			if (sal->m_iSortSel != NO_ITEM or sal->m_iSortUnsel != NO_ITEM)
+			{
+				model->m_oUndoStack.push(me);
+				break;
+			}
+
 			foreach (int i, sal->sel) {
 				if (!sel.contains(i) && !unsel.contains(i))
 					sel.append(i);
@@ -141,11 +163,8 @@ void mem_sel::apply() {
 					unsel.append(i);
 			}
 			delete sal;
-		} else {
-			model->m_oUndoStack.push(me);
-			break;
 		}
-	}
+	}*/
 
 	foreach (int k, sel) {
 		unsel.removeAll(k);
@@ -166,7 +185,21 @@ void mem_sel::redo() {
 	foreach (int k, sel) {
 		model->m_oItems[k]->m_bSelected = true;
 	}
+	if (m_iSortUnsel != NO_ITEM)
+	{
+		model->m_iSortId = NO_ITEM;
+		model->notify_sort(m_iSortUnsel, false);
+		model->m_iSortCursor = 0;
+		model->notify_message("", 0);
+	}
 	model->notify_select(unsel, sel);
+	if (m_iSortSel != NO_ITEM)
+	{
+		model->notify_sort(m_iSortSel, true);
+		model->m_iSortId = m_iSortSel;
+		model->m_iSortCursor = 0;
+		model->notify_message("", 0);
+	}
 }
 
 void mem_sel::undo() {
@@ -177,7 +210,21 @@ void mem_sel::undo() {
 	foreach (int k, unsel) {
 		model->m_oItems[k]->m_bSelected = true;
 	}
+	if (m_iSortSel != NO_ITEM)
+	{
+		model->notify_sort(m_iSortSel, false);
+		model->m_iSortId = NO_ITEM;
+		model->m_iSortCursor = 0;
+		model->notify_message("", 0);
+	}
 	model->notify_select(sel, unsel);
+	if (m_iSortUnsel != NO_ITEM)
+	{
+		model->notify_sort(m_iSortUnsel, true);
+		model->m_iSortId = m_iSortUnsel;
+		model->m_iSortCursor = 0;
+		model->notify_message("", 0);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////

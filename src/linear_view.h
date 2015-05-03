@@ -25,7 +25,7 @@ class linear_view : public QTreeWidget
 
 		void dropEvent(QDropEvent *);
 
-		bool m_bLockSelect;
+		int m_iLockSelect;
 
 	public slots:
 		void filter_slot(const QString & i_oS);
@@ -37,7 +37,7 @@ class linear_view : public QTreeWidget
 		void notify_link_items(int id1, int id2);
 		void notify_unlink_items(int id1, int id2);
 		void notify_select(const QList<int>& unsel, const QList<int>& sel);
-		void notify_sort(int id);
+		void notify_sort(int, bool);
 		void notify_edit(int id);
 		void notify_datatype(int);
 };

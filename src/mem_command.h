@@ -137,6 +137,7 @@ class mem_sort: public mem_command {
 		int m_iParent;
 		QList<QPoint> oldData;
 		QList<QPoint> newData;
+		bool m_bOrderOnly;
 
 		IType type() { return SORT; }
 };

@@ -23,7 +23,7 @@ linear_view::linear_view(QWidget *i_oParent, sem_mediator *i_oControl) : QTreeWi
 	header()->hide();
 	m_oMediator = i_oControl;
 	connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(selection_changed()));
-	m_bLockSelect = false;
+	m_iLockSelect = 0;
 }
 
 void linear_view::notify_add_item(int id)
@@ -39,7 +39,7 @@ void linear_view::notify_add_item(int id)
 
 void linear_view::notify_delete_item(int id)
 {
-	m_bLockSelect = true;
+	m_iLockSelect++;
 
 	QTreeWidgetItem *l_oItem = m_oItems.value(id);
 
@@ -54,11 +54,18 @@ void linear_view::notify_delete_item(int id)
 		takeTopLevelItem(indexOfTopLevelItem(l_oItem));
 	delete l_oItem;
 
-	m_bLockSelect = false;
+	m_iLockSelect--;
 }
 
 void linear_view::notify_link_items(int id1, int id2)
 {
+	m_iLockSelect++;
+	QList<int> l_oSel;
+	foreach (QTreeWidgetItem* l_oIt, selectedItems())
+	{
+		l_oSel.append(l_oIt->data(0, Qt::UserRole).toInt());
+	}
+
 	QTreeWidgetItem *l_oItem1 = m_oItems.value(id2);
 	QTreeWidgetItem *l_oItem2 = m_oItems.value(id1);
 	QTreeWidgetItem *l_oRet = takeTopLevelItem(indexOfTopLevelItem(l_oItem1));
@@ -68,10 +75,29 @@ void linear_view::notify_link_items(int id1, int id2)
 
 	data_item *l_o = m_oMediator->m_oItems.value(id2);
 	l_oItem1->setBackgroundColor(0, l_o->get_color_scheme().m_oInnerColor);
+
+
+	foreach (QTreeWidgetItem* l_oIt, selectedItems())
+	{
+		l_oIt->setSelected(false);
+	}
+	foreach (int l_i, l_oSel)
+	{
+		QTreeWidgetItem *l_oItem = m_oItems.value(l_i);
+		l_oItem->setSelected(true);
+	}
+	m_iLockSelect--;
 }
 
 void linear_view::notify_unlink_items(int id1, int id2)
 {
+	m_iLockSelect++;
+	QList<int> l_oSel;
+	foreach (QTreeWidgetItem* l_oIt, selectedItems())
+	{
+		l_oSel.append(l_oIt->data(0, Qt::UserRole).toInt());
+	}
+
 	QTreeWidgetItem *l_oItem1 = m_oItems.value(id1);
 	QTreeWidgetItem *l_oItem2 = m_oItems.value(id2);
 	if (l_oItem1->parent() == l_oItem2)
@@ -96,24 +122,34 @@ void linear_view::notify_unlink_items(int id1, int id2)
 	{
 		Q_ASSERT(1>1);
 	}
+
+	foreach (QTreeWidgetItem* l_oIt, selectedItems())
+	{
+		l_oIt->setSelected(false);
+	}
+	foreach (int l_i, l_oSel)
+	{
+		QTreeWidgetItem *l_oItem = m_oItems.value(l_i);
+		l_oItem->setSelected(true);
+	}
+	m_iLockSelect--;
 }
 
 void linear_view::selection_changed()
 {
-	if (!m_bLockSelect)
+	if (m_iLockSelect) return;
+
+	QList<QTreeWidgetItem*> l_oItems = selectedItems();
+	QList<int> lst;
+
+	foreach (QTreeWidgetItem* it, l_oItems)
 	{
-		QList<QTreeWidgetItem*> l_oItems = selectedItems();
-		QList<int> lst;
-
-		foreach (QTreeWidgetItem* it, l_oItems)
-		{
-			lst.append(it->data(0, Qt::UserRole).toInt());
-		}
-
-		mem_sel *sel = new mem_sel(m_oMediator);
-		sel->sel = lst;
-		sel->apply();
+		lst.append(it->data(0, Qt::UserRole).toInt());
 	}
+
+	mem_sel *sel = new mem_sel(m_oMediator);
+	sel->sel = lst;
+	sel->apply();
 }
 
 void linear_view::filter_slot(const QString & i_oS)
@@ -143,6 +179,7 @@ bool linear_view::filter_item(QTreeWidgetItem * i_oItem, const QString & i_oS)
 
 void linear_view::dropEvent(QDropEvent *i_oEv)
 {
+	m_iLockSelect++;
 	if (i_oEv->source() == this)
 	{
 		QTreeWidgetItem *l_oItem = itemAt(i_oEv->pos());
@@ -200,9 +237,9 @@ void linear_view::dropEvent(QDropEvent *i_oEv)
 						if (l_oP.y() == j) // item found
 						{
 							mem_sort *srt = new mem_sort(m_oMediator);
+							srt->m_bOrderOnly = true;
 							srt->init(k, l_iId, l+z);
 							srt->apply();
-
 							break;
 						}
 						l++;
@@ -219,20 +256,16 @@ void linear_view::dropEvent(QDropEvent *i_oEv)
 					link->apply();
 				}
 			}
-			QList<int> lst;
-			lst.append(l_iId);
-			mem_sel *sel = new mem_sel(m_oMediator);
-			sel->sel = lst;
-			sel->apply();
 		}
 	}
 	i_oEv->accept();
 	i_oEv->setDropAction(Qt::CopyAction);
+	m_iLockSelect--;
 }
 
 void linear_view::notify_select(const QList<int>& unsel, const QList<int>& sel)
 {
-	m_bLockSelect = true;
+	m_iLockSelect++;
 
 	QList<QTreeWidgetItem *> l_oLst = selectedItems();
 	foreach (QTreeWidgetItem* l_oItem, l_oLst)
@@ -251,7 +284,7 @@ void linear_view::notify_select(const QList<int>& unsel, const QList<int>& sel)
 		item->setExpanded(true);
 	}
 
-	m_bLockSelect = false;
+	m_iLockSelect--;
 }
 
 void linear_view::notify_repaint(int id)
@@ -261,14 +294,21 @@ void linear_view::notify_repaint(int id)
 	l_oItem->setBackgroundColor(0, l_o->get_color_scheme().m_oInnerColor);
 }
 
-void linear_view::notify_sort(int id)
+void linear_view::notify_sort(int l_iId, bool)
 {
-	QTreeWidgetItem *l_oItem = m_oItems.value(id);
+	m_iLockSelect++;
+	QList<int> l_oSel;
+	foreach (QTreeWidgetItem* l_oIt, selectedItems())
+	{
+		l_oSel.append(l_oIt->data(0, Qt::UserRole).toInt());
+	}
+
+	QTreeWidgetItem *l_oItem = m_oItems.value(l_iId);
 	int l_iCnt = 0;
 	for (int i=0; i<m_oMediator->m_oLinks.size(); i++)
 	{
 		QPoint l_oP = m_oMediator->m_oLinks.at(i);
-		if (l_oP.x() == id)
+		if (l_oP.x() == l_iId)
 		{
 			QTreeWidgetItem *l_oItem2 = m_oItems.value(l_oP.y());
 			int l_iIndex = l_oItem->indexOfChild(l_oItem2);
@@ -280,6 +320,17 @@ void linear_view::notify_sort(int id)
 			l_iCnt++;
 		}
 	}
+
+	foreach (QTreeWidgetItem* l_oIt, selectedItems())
+	{
+		l_oIt->setSelected(false);
+	}
+	foreach (int l_i, l_oSel)
+	{
+		QTreeWidgetItem *l_oItem = m_oItems.value(l_i);
+		l_oItem->setSelected(true);
+	}
+	m_iLockSelect--;
 }
 
 void linear_view::notify_edit(int i_iId)

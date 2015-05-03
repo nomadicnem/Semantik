@@ -1253,6 +1253,9 @@ sem_mediator::sem_mediator(QObject* i_oParent) : QObject(i_oParent)
 	num_seq = 1;
 	pic_seq = 1;
 
+	m_iSortId = NO_ITEM;
+	m_iSortCursor = 0;
+
 	m_sOutDir = "";
 	m_iTimerValue = 21 / 4;
 	m_bDirty = false;
@@ -1452,9 +1455,9 @@ void sem_mediator::notify_table(int id)
 	emit sig_table(id);
 }
 
-void sem_mediator::notify_sort(int id)
+void sem_mediator::notify_sort(int l_iId, bool l_bShow)
 {
-	emit sig_sort(id);
+	emit sig_sort(l_iId, l_bShow);
 }
 
 void sem_mediator::notify_change_data(int id)

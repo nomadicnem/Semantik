@@ -48,6 +48,8 @@ class mem_sel : public mem_command {
 		void apply();
 		QList<int> unsel;
 		QList<int> sel;
+		int m_iSortSel;
+		int m_iSortUnsel;
 		IType type() { return SELECT; }
 };
 

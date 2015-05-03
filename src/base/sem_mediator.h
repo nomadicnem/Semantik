@@ -64,7 +64,7 @@ class sem_mediator: public QObject
 		void sig_vars(int id);
 		void sig_pic(int id);
 		void sig_table(int id);
-		void sig_sort(int id);
+		void sig_sort(int, bool);
 		void sig_open_map();
 		void sig_change_data(int id);
 		void sig_export_item(int id);
@@ -148,7 +148,7 @@ class sem_mediator: public QObject
 		void notify_pic(int id);
 		void notify_datatype(int id);
 		void notify_table(int id);
-		void notify_sort(int id);
+		void notify_sort(int, bool);
 		void notify_change_data(int id);
 		void notify_export_item(int id);
 		void notify_export_doc();
@@ -211,6 +211,9 @@ class sem_mediator: public QObject
 
 		void check_undo(bool); // check if the undo/redo actions can be enabled
 		int itemSelected();
+
+		int m_iSortId;
+		int m_iSortCursor;
 
 		friend class semantik_reader;
 

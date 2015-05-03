@@ -61,7 +61,6 @@ class canvas_view : public QGraphicsView
 		QList<canvas_item*> selection();
 
 		void deselect_all(bool i_oSignal=true);
-		void show_sort(int i_iId, bool i_b);
 		void enable_menu_actions(); // like check_actions, but only for the popup menu
 		int batch_print_map(const KUrl& url, QPair<int, int> & size);
 
@@ -79,9 +78,6 @@ class canvas_view : public QGraphicsView
 		QVector<canvas_item*> m_oRect;
 
 		QPointF m_oLastPoint;
-
-		int m_iSortCursor;
-		int m_iSortId;
 
 		void move_sel(int i_iX, int i_iY);
 
@@ -140,7 +136,7 @@ class canvas_view : public QGraphicsView
 		void notify_repaint(int id);
 		void notify_edit(int id);
 		void notify_flag(int id);
-		void notify_sort(int id);
+		void notify_sort(int, bool);
 		void notify_open_map();
 		void notify_change_data(int id);
 		void notify_export_doc();

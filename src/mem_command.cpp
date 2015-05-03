@@ -284,6 +284,7 @@ void mem_table::undo()
 ///////////////////////////////////////////////////////////////////
 
 mem_sort::mem_sort(sem_mediator* mod) : mem_command(mod) {
+	m_bOrderOnly = false;
 }
 
 void mem_sort::init(int i_iParent, int i_iChild, int i_iNum)
@@ -352,7 +353,7 @@ void mem_sort::redo()
 		}
 	}
 	model->m_oLinks += newData;
-	model->notify_sort(m_iParent);
+	model->notify_sort(m_iParent, true & !m_bOrderOnly);
 	redo_dirty();
 }
 
@@ -368,7 +369,7 @@ void mem_sort::undo()
 		}
 	}
 	model->m_oLinks += oldData;
-	model->notify_sort(m_iParent);
+	model->notify_sort(m_iParent, true & !m_bOrderOnly);
 	undo_dirty();
 }
 

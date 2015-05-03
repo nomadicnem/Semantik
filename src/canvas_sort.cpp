@@ -14,6 +14,7 @@
 #include "canvas_item.h"
 #include  "canvas_sort.h"
 #include "canvas_view.h"
+#include  "sem_mediator.h"
 
 canvas_sort::canvas_sort(canvas_view *i_oGraphWidget, canvas_item *i_oFrom)
 	: QGraphicsEllipseItem(), m_oGraph(i_oGraphWidget)
@@ -44,7 +45,7 @@ canvas_sort::canvas_sort(canvas_view *i_oGraphWidget, canvas_item *i_oFrom)
 
 void canvas_sort::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *_option, QWidget * i_oW)
 {
-	if (m_oGraph->m_iSortCursor + 1 > m_oFrom->m_iNum)
+	if (m_oGraph->m_oMediator->m_iSortCursor + 1 > m_oFrom->m_iNum)
 	{
 		i_oPainter->setBrush(QColor(0, 255, 0));
 	}

@@ -51,9 +51,6 @@
 canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView(i_oWidget)
 {
 	m_oSemantikWindow = i_oWidget;
-	m_iSortId = NO_ITEM;
-	m_iSortCursor = 0;
-
 	m_bDisableGradient = false;
 	m_oLastPoint = QPointF(0, 0);
 
@@ -483,27 +480,6 @@ void canvas_view::slot_delete()
 	del->apply();
 }
 
-void canvas_view::show_sort(int i_iId, bool i_b)
-{
-	int j=0;
-	for (int i=0; i<m_oMediator->m_oLinks.size(); i++)
-	{
-		QPoint l_oP = m_oMediator->m_oLinks.at(i);
-		if (l_oP.x() == i_iId)
-		{
-			++j;
-			canvas_item *l_oRect = m_oItems.value(l_oP.y());
-
-			if (j != l_oRect->m_iNum)
-			{
-				l_oRect->m_iNum = j;
-			}
-			l_oRect->m_oSort->update();
-			l_oRect->m_oSort->setVisible(i_b);
-		}
-	}
-}
-
 void canvas_view::move_sel(int i_iX, int i_iY)
 {
 	QList<canvas_item*> sel = selection();
@@ -604,19 +580,6 @@ void canvas_view::notify_select(const QList<int>& unsel, const QList<int>& sel) 
 		{
 			m_oItems[k]->setSelected(false);
 		}
-	}
-
-	if (m_iSortId != NO_ITEM)
-	{
-		show_sort(m_iSortId, false);
-		m_iSortCursor = 0;
-		m_iSortId = NO_ITEM;
-	}
-
-	if (sel.size() == 1 && true) //
-	{
-		m_iSortId = sel.at(0);
-		m_iSortCursor = 0;
 	}
 }
 
@@ -998,29 +961,34 @@ void canvas_view::mouseReleaseEvent(QMouseEvent *i_oEv)
 		int l_iParentId = m_oMediator->parent_of(l_iId);
 
 		mem_sort *srt = new mem_sort(m_oMediator);
-		srt->init(l_iParentId, l_iId, m_iSortCursor);
+		srt->init(l_iParentId, l_iId, m_oMediator->m_iSortCursor);
 		srt->apply();
 
-		m_iSortCursor++;
-		if (m_iSortCursor >= m_oMediator->num_children(l_iParentId))
+		m_oMediator->m_iSortCursor++;
+		if (m_oMediator->m_iSortCursor >= m_oMediator->num_children(l_iParentId))
 		{
-			m_iSortCursor = 0;
+			m_oMediator->m_iSortCursor = 0;
 		}
 
-		emit sig_message(trUtf8("Click to set Item %1").arg(QString::number(m_iSortCursor+1)), -1);
+		emit sig_message(trUtf8("Click to set Item %1").arg(QString::number(m_oMediator->m_iSortCursor+1)), -1);
 		return;
 	}
 
 	canvas_sort_toggle *l_oToggle = dynamic_cast<canvas_sort_toggle*>(l_oItem);
 	if (l_oToggle)
 	{
-		//check_selection(); // TODO ITA
 		if (scene()->selectedItems().size() == 1)
 		{
 			canvas_item *it = static_cast<canvas_item*>(l_oToggle->parentItem());
-			m_iSortId = it->Id();
-			m_iSortCursor = 0;
-			show_sort(it->Id(), true);
+
+			QList<int> lst;
+			lst.append(it->Id());
+
+			mem_sel *sel = new mem_sel(m_oMediator);
+			sel->sel = lst;
+			sel->unsel = lst;
+			sel->m_iSortSel = it->Id();
+			sel->apply();
 		}
 		return;
 	}
@@ -1593,8 +1561,26 @@ void canvas_view::notify_flag(int id) {
 	m_oItems[id]->update_flags();
 }
 
-void canvas_view::notify_sort(int id) {
-	show_sort(id, true); // TODO ITA
+void canvas_view::notify_sort(int i_iId, bool i_bShow)
+{
+	int j=0;
+	for (int i=0; i<m_oMediator->m_oLinks.size(); i++)
+	{
+		QPoint l_oP = m_oMediator->m_oLinks.at(i);
+		if (l_oP.x() == i_iId)
+		{
+			++j;
+			canvas_item *l_oRect = m_oItems.value(l_oP.y());
+
+			if (j != l_oRect->m_iNum)
+			{
+				l_oRect->m_iNum = j;
+			}
+			l_oRect->m_oSort->update();
+			l_oRect->m_oSort->setVisible(i_bShow);
+		}
+	}
+
 }
 
 void canvas_view::notify_focus(void* ptr)
