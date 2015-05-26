@@ -117,6 +117,7 @@ mem_sel::mem_sel(sem_mediator* mod) : mem_command(mod) {
 	m_iSortSel = NO_ITEM;
 	m_iSortUnsel = NO_ITEM;
 	foreach (data_item* t, model->m_oItems.values()) {
+		Q_ASSERT(t != NULL);
 		if (t->m_bSelected) {
 			unsel.append(t->m_iId);
 		}

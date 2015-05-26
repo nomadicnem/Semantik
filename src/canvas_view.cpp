@@ -426,12 +426,17 @@ void canvas_view::slot_add_item()
 
 	deselect_all();
 
-	data_item *p = m_oMediator->m_oItems[l_iId];
+	data_item *p = m_oMediator->m_oItems.value(l_iId);
 	mem_add *add = new mem_add(m_oMediator);
 	add->init();
 	add->parent = l_iId;
-	add->item->m_iXX = p->m_iXX + 30;
-	add->item->m_iYY = p->m_iYY + 30;
+	if (p) {
+		add->item->m_iXX = p->m_iXX + 30;
+		add->item->m_iYY = p->m_iYY + 30;
+	} else {
+		add->item->m_iXX = m_oLastPoint.x();
+		add->item->m_iYY = m_oLastPoint.y();
+	}
 	add->apply();
 	if (m_oMediator->m_iAutoReorg)
 	{

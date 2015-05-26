@@ -1,3 +1,7 @@
+Semantik 0.9.5
+--------------
+* Fix for adding new items with right-click (Issue 53)
+
 Semantik 0.9.4
 --------------
 * Resize class elements

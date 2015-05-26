@@ -43,7 +43,7 @@ mem_move::mem_move(sem_mediator* mod) : mem_command(mod) {
 void mem_move::redo() {
 	//qDebug()<<"redo mem_move"<<sel;
 	for (int i = 0; i < sel.size(); ++i) {
-		data_item *it = model->m_oItems[sel[i]];
+		data_item *it = model->m_oItems.value(sel[i]);
 		it->m_iXX = newPos[i].x();
 		it->m_iYY = newPos[i].y();
 	}
@@ -54,7 +54,7 @@ void mem_move::redo() {
 void mem_move::undo() {
 	//qDebug()<<"undo mem_move"<<sel;
 	for (int i = 0; i < sel.size(); ++i) {
-		data_item *it = model->m_oItems[sel[i]];
+		data_item *it = model->m_oItems.value(sel[i]);
 		it->m_iXX = oldPos[i].x();
 		it->m_iYY = oldPos[i].y();
 	}
@@ -76,7 +76,7 @@ void mem_color::redo() {
 	QMap<int, int>::iterator i;
  	for (i = prevColors.begin(); i != prevColors.end(); ++i)
 	{
-		data_item *t = model->m_oItems[i.key()];
+		data_item *t = model->m_oItems.value(i.key());
 		t->m_iColor = newColor;
 		model->notify_repaint(i.key());
 	}
@@ -87,7 +87,7 @@ void mem_color::undo() {
 	QMap<int, int>::iterator i;
  	for (i = prevColors.begin(); i != prevColors.end(); ++i)
 	{
-		data_item *t = model->m_oItems[i.key()];
+		data_item *t = model->m_oItems.value(i.key());
 		t->m_iColor = i.value();
 		model->notify_repaint(i.key());
 	}
@@ -109,7 +109,7 @@ void mem_flag::redo() {
 	QMap<int, QList<QString> >::iterator i;
  	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
 	{
-		data_item *t = model->m_oItems[i.key()];
+		data_item *t = model->m_oItems.value(i.key());
 		t->m_oFlags = QList<QString>(i.value());
 		if (add) {
 			if (!t->m_oFlags.contains(flag)) {
@@ -127,7 +127,7 @@ void mem_flag::undo() {
 	QMap<int, QList<QString> >::iterator i;
  	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
 	{
-		data_item *t = model->m_oItems[i.key()];
+		data_item *t = model->m_oItems.value(i.key());
 		t->m_oFlags = i.value();
 		model->notify_flag(i.key());
 	}
@@ -214,7 +214,7 @@ void mem_vars::redo()
 	}
 	else
 	{
-		data_item *item = model->m_oItems[m_iId];
+		data_item *item = model->m_oItems.value(m_iId);
 		item->m_sHints = newVars;
 	}
 	model->notify_vars(m_iId);
@@ -229,7 +229,7 @@ void mem_vars::undo()
 	}
 	else
 	{
-		data_item *item = model->m_oItems[m_iId];
+		data_item *item = model->m_oItems.value(m_iId);
 		item->m_sHints = oldVars;
 	}
 	model->notify_vars(m_iId);
@@ -262,7 +262,7 @@ mem_table::mem_table(sem_mediator* mod) : mem_command(mod) {
 
 void mem_table::redo()
 {
-	data_item *item = model->m_oItems[m_iId];
+	data_item *item = model->m_oItems.value(m_iId);
 	item->m_iNumRows = newNRows;
 	item->m_iNumCols = newNCols;
 	item->m_oTableData = newData;
@@ -273,7 +273,7 @@ void mem_table::redo()
 
 void mem_table::undo()
 {
-	data_item *item = model->m_oItems[m_iId];
+	data_item *item = model->m_oItems.value(m_iId);
 	item->m_iNumRows = oldNRows;
 	item->m_iNumCols = oldNCols;
 	item->m_oTableData = oldData;
