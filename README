@@ -1,6 +1,7 @@
 Semantik 0.9.5, Thomas Nagy
-contact: tnagy at waf.io
-https://github.com/ita1024/semantik
+contact:       tnagy at waf.io
+Project page:  https://waf.io/semantik.html
+Source code:   https://github.com/ita1024/semantik
 -----------------------------------------------
 
 1. Compilation and installation:
@@ -75,4 +76,6 @@ semantik-d diag.semd -o foo.pdf
 4. License:
 
 GPL V3
+
+
 
