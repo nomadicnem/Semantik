@@ -10,20 +10,6 @@ top = '.'
 import os, sys, re, time
 from waflib import Options, Logs, Configure, Errors, Utils
 
-def compile_py(task):
-	outfile = task.m_outputs[0].abspath()
-	f = open(outfile, 'w')
-	try:
-		w = f.write
-		w('<!DOCTYPE RCC><RCC version="1.0">\n<qresource>\n')
-		for k in task.m_inputs:
-			w(' <file>')
-			w(k.m_name)
-			w('</file>\n')
-			w('</qresource>\n</RCC>')
-	finally:
-		f.close()
-
 def build(bld):
 
 	os.environ['LD_LIBRARY_PATH'] = ':'.join(bld.env['LIBPATH_KDECORE'] + [os.environ.get('LD_LIBRARY_PATH', '')])
