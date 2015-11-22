@@ -61,6 +61,8 @@ def build(bld):
 		bld.install_files('${TEMPLATE_DIR}/' + k+x, bld.path.ant_glob(rt+k+x+'/*'))
 
 	obj = bld(features='msgfmt', appname = 'semantik', langs=[x.path_from(bld.path).replace('.po', '') for x in bld.path.ant_glob('src/po/*.po')])
+	for x in bld.path.ant_glob('src/po/*.po'):
+		bld.symlink_as('${KDE4_LOCALE_INSTALL_DIR}/%s/LC_MESSAGES/semantik-d.mo' % x.name.strip('.po'), 'semantik.mo')
 
 	bld.install_files('${TEMPLATE_DIR}/beamer/beamermindist/art/', glob(rt+'beamer/beamermindist/art/*'))
 	bld.install_files('${TEMPLATE_DIR}/beamer/beamermindist/', glob(rt+'beamer/beamermindist/*'))
