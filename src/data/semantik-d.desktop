@@ -2,10 +2,10 @@
 Name=Semantik Diagrams
 Name[ru]=Диаграммы Semantik
 Exec=semantik-d %F
-GenericName=Semantik diagrams
-GenericName[ru]=Диаграммы Semantik
-Comment=Semantik diagrams
-Comment[ru]=Диаграммы Semantik
+GenericName=Manage Semantik diagrams
+GenericName[ru]=Управление диаграммами Semantik
+Comment=A tool for editing and organizing Semantik diagrams
+Comment[ru]=Утилита для редактирования и организации диаграмм Semantik
 Type=Application
 Terminal=false
 Icon=semantik-d
