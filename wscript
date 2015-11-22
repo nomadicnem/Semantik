@@ -82,8 +82,8 @@ def build(bld):
 		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/32x32/apps/semantik%s.png'% x, 'src/data/hi32-app-semantik%s.png'%x)
 		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/22x22/apps/semantik%s.png'% x, 'src/data/hi22-app-semantik%s.png'%x)
 
-		bld(rule="${GZIP} -c ${SRC} > ${TGT}", source='src/data/semantik%s.svg'%x, target='src/data/semantik%s.svgz'%x)
-		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/scalable/apps/semantik%s.svgz'%x, 'src/data/semantik%s.svgz'%x)
+		#bld(rule="${GZIP} -c ${SRC} > ${TGT}", source='src/data/semantik%s.svg'%x, target='src/data/semantik%s.svgz'%x)
+		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/scalable/apps/semantik%s.svg'%x, 'src/data/semantik%s.svg'%x)
 
 
 	bld.install_files('${KDE4_DATA_INSTALL_DIR}/semantik', 'src/data/semantikui.rc src/data/semantik-dui.rc src/data/tips')
