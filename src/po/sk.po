@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: semantik 0.7.3\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/semantik/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/ita1024/semantik/issues\n"
 "POT-Creation-Date: 2015-02-08 16:12+0100\n"
 "PO-Revision-Date: 2010-01-26 18:08+0100\n"
 "Last-Translator: Slavko\n"

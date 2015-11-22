@@ -45,7 +45,7 @@ int main(int i_iArgc, char **i_iArgv)
 	options.add("height <height>", ki18n("Diagram height for printing"), "0");
 
 	KAboutData l_o("semantik-d", "semantik", ki18n("Semantik-d"), version, ki18n(description), KAboutData::License_GPL_V3, ki18n("(C) 2013-2015 Thomas Nagy"), KLocalizedString());
-	l_o.setBugAddress("http://code.google.com/p/semantik/issues/list");
+	l_o.setBugAddress("https://github.com/ita1024/semantik/issues");
 	l_o.addAuthor(ki18n("Thomas Nagy"), KLocalizedString());
 
 	KCmdLineArgs::init(i_iArgc, i_iArgv, &l_o);
