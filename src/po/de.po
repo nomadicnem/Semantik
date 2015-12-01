@@ -1,0 +1,1244 @@
+# This file is put in the public domain.
+#
+# FIRST AUTHOR St. Briest <st.briest@gmx.de>, 2015.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: semantik\n"
+"Report-Msgid-Bugs-To: https://github.com/ita1024/semantik/issues\n"
+"POT-Creation-Date: 2015-02-08 16:12+0100\n"
+"PO-Revision-Date: 2015-11-28 15:00+0100\n"
+"Last-Translator: St. Briest\n"
+"Language-Team:\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Language: de_DE\n"
+"X-Source-Language: C\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: base/data_item.cpp:60 canvas_view.cpp:246 canvas_view.cpp:298
+#: canvas_view.cpp:310
+msgid "Empty"
+msgstr "Leer"
+
+#: base/flag_scheme.cpp:14
+msgid "Flag item(s) as..."
+msgstr "Kennzeichne als..."
+
+#: base/sem_mediator.cpp:282
+msgid "Automatic save failed for file: %1"
+msgstr "Automatische Sicherung für %1 fehlgeschagen"
+
+#: base/sem_mediator.cpp:285
+msgid "%1 saved automatically"
+msgstr "%1 automatisch gesichert"
+
+#: base/sem_mediator.cpp:304
+msgid "Color %1"
+msgstr "Farbe %1"
+
+#: base/sem_mediator.cpp:617
+msgid "File saving: missing file %1"
+msgstr "Dateisicherung: fehlende Datei %1"
+
+#: base/sem_mediator.cpp:642 base/sem_mediator.cpp:1147
+#: base/sem_mediator.cpp:1190
+msgid "Missing bindings for opening files"
+msgstr "Fehlende Verknüpfung für geöffnete Datei"
+
+#: base/sem_mediator.cpp:693
+msgid "Missing filter file %1 for opening files"
+msgstr "Fehlende Filterdatei %1 für geöffnete Datei "
+
+#: base/sem_mediator.cpp:693 base/sem_mediator.cpp:708
+msgid "Broken installation"
+msgstr "Fehlerhafte Installation"
+
+#: base/sem_mediator.cpp:708
+msgid "Missing python bindings for opening files"
+msgstr "Fehlende Python-Bindings für geöffnete Datei"
+
+#: base/sem_mediator.cpp:724
+msgid "Could not load the document %1"
+msgstr "Dokument %1 kann nicht geladen wetden"
+
+#: base/sem_mediator.cpp:724
+msgid "Broken document"
+msgstr "Fehlerhaftes Dokument"
+
+#: base/sem_mediator.cpp:1113
+msgid "Code generation failed: missing file %1"
+msgstr "Code-Erstellung fehlgeschlagen: fehlende Datei %1"
+
+#: base/sem_mediator.cpp:1152
+msgid "Document generation completed successfully"
+msgstr "Dokument erfolgreich erstellt"
+
+#: browser.cpp:21 canvas_view.cpp:143
+msgid "Toggle fullscreen"
+msgstr "Umschaltung auf/von Vollbild"
+
+#: canvas_view.cpp:92
+msgid "Add an element"
+msgstr "Element hinzufügen"
+
+#: canvas_view.cpp:97 fig/box_view.cpp:192
+msgid "Delete selection"
+msgstr "Auswahl entfernen"
+
+#: canvas_view.cpp:102
+msgid "Insert a sibling"
+msgstr "Schwesterelement einfügen"
+
+#: canvas_view.cpp:107
+msgid "Move up"
+msgstr "Bewege hoch"
+
+#: canvas_view.cpp:108
+msgid "Move down"
+msgstr "Bewege runter"
+
+#: canvas_view.cpp:109
+msgid "Move left"
+msgstr "Bewege nach links"
+
+#: canvas_view.cpp:110
+msgid "Move right"
+msgstr "Bewege nach rechts"
+
+#: canvas_view.cpp:112
+msgid "Select up"
+msgstr "oben auwählen"
+
+#: canvas_view.cpp:113
+msgid "Select down"
+msgstr "unten auswählen"
+
+#: canvas_view.cpp:114
+msgid "Select left"
+msgstr "links auswählen"
+
+#: canvas_view.cpp:115
+msgid "Select right"
+msgstr "rechts auswählen"
+
+#: canvas_view.cpp:118
+msgid "Select subtree"
+msgstr "Auswahl Subtree"
+
+#: canvas_view.cpp:123
+msgid "Next root"
+msgstr "nächter Baum"
+
+#: canvas_view.cpp:126
+msgid "Toggle edit"
+msgstr "Ändern ein"
+
+#: canvas_view.cpp:131
+msgid "Cancel edit"
+msgstr "Abbruch Ändern"
+
+#: canvas_view.cpp:147
+msgid "Colors"
+msgstr "Farben"
+
+#: canvas_view.cpp:158
+msgid "Text"
+msgstr "Text"
+
+#: canvas_view.cpp:159
+msgid "Diagram"
+msgstr "Diagramm"
+
+#: canvas_view.cpp:160
+msgid "Table"
+msgstr "Tabelle"
+
+#: canvas_view.cpp:161
+msgid "Image"
+msgstr "Bild"
+
+#: canvas_view.cpp:630
+msgid "Color"
+msgstr "Farbe"
+
+#: canvas_view.cpp:680
+msgid "Flag"
+msgstr "Kennzeichnung"
+
+#: canvas_view.cpp:1003
+msgid "Click to set Item %1"
+msgstr "Klicken um Element %1 zu setzen"
+
+#: canvas_view.cpp:1346
+msgid "*.png|PNG Files (*.png)"
+msgstr "*.png|PNG Dateien (*.png)"
+
+#: canvas_view.cpp:1384
+msgid "No destination file selected"
+msgstr "Keine Zieldatei ausgewählt"
+
+#: canvas_view.cpp:1419
+msgid "Exported '%1'"
+msgstr "'%1' exportiert"
+
+#: canvas_view.cpp:1421
+msgid "Could not save to %1"
+msgstr "%1 kann nicht gesichert werden"
+
+#: canvas_view.cpp:1421
+msgid "Missing picture"
+msgstr "fehlendes Bild"
+
+#: canvas_view.cpp:1713
+msgid "Semantik map"
+msgstr "Semantik map"
+
+#: canvas_view.cpp:1763 fig/box_view.cpp:1922
+msgid "Printing cancelled"
+msgstr "Druck abgebrochen"
+
+#: canvas_view.cpp:1774 fig/box_view.cpp:1933
+msgid "Printing completed"
+msgstr "Druck vollständig"
+
+#: canvas_view.cpp:1778 fig/box_view.cpp:1937
+msgid "Problem during printing :-("
+msgstr "Problem während des Drucks :-("
+
+#: config_dialog.cpp:29
+msgid "Document settings"
+msgstr "Dokumenteneinstellungen"
+
+#: config_dialog.cpp:37
+msgid "Reorganization type"
+msgstr "Art der Reorganisation"
+
+#: config_dialog.cpp:41
+msgid "Item position after keyboard insertion"
+msgstr "Elementeposition nach Tastatur-Einfügung"
+
+#: config_dialog.cpp:45
+msgid "Connection type"
+msgstr "Verbindungsart"
+
+#: config_dialog.cpp:49
+msgid "Save document automatically"
+msgstr "Dokument automatisch sichern"
+
+#: config_dialog.cpp:53
+msgid "Background color"
+msgstr "Hintergrundfarbe"
+
+#: config_dialog.cpp:58
+msgid "Fixed"
+msgstr "fest"
+
+#: config_dialog.cpp:58
+msgid "Force-based"
+msgstr "Einflussbasiert"
+
+#: config_dialog.cpp:58
+msgid "Incremental"
+msgstr "Inkrementell"
+
+#: config_dialog.cpp:62
+msgid "Close to parent"
+msgstr "am Übergeordeten"
+
+#: config_dialog.cpp:62
+msgid "Reorganize map"
+msgstr "Reorganisiert"
+
+#: config_dialog.cpp:66
+msgid "Lines"
+msgstr "Linien"
+
+#: config_dialog.cpp:66
+msgid "Splines"
+msgstr "Kurven"
+
+#: config_dialog.cpp:70
+msgid " min"
+msgstr " min"
+
+#: config_dialog.cpp:73
+msgid ""
+"Interval in minutes for saving the document automatically, 0 for disabling this feature"
+msgstr ""
+"Intervall in Minuten zur automatischen Sicherung des Dokuments, 0 zum ausschalten der Sicherung"
+
+#: data_view.cpp:17
+msgid "<p align='center'>No item selected</p>"
+msgstr "<p align='center'>Kein Element ausgewählt</p>"
+
+#: doc_dialog.cpp:30
+msgid "First Name"
+msgstr "Vorname"
+
+#: doc_dialog.cpp:34 generator_dialog.cpp:56
+msgid "Name"
+msgstr "Name"
+
+#: doc_dialog.cpp:38
+msgid "Organization"
+msgstr "Organisation"
+
+#: doc_dialog.cpp:42
+msgid "Email"
+msgstr "E-mail"
+
+#: export_map_dialog.cpp:31
+msgid "Export the map"
+msgstr "Map exportieren"
+
+#: export_map_dialog.cpp:37
+msgid "File to write"
+msgstr "Datei zur Speicherung"
+
+#: export_map_dialog.cpp:43
+msgid "Width"
+msgstr "Breite"
+
+#: export_map_dialog.cpp:51
+msgid "Height"
+msgstr "Höhe"
+
+#: fig/box_class_properties.cpp:89 vars_view.cpp:77
+msgid "Code complete"
+msgstr "Code vollständig"
+
+#: fig/box_class_properties.cpp:90 vars_view.cpp:78
+msgid "Ctrl+space"
+msgstr "Strg+Leertaste"
+
+#: fig/box_class_properties.cpp:246
+msgid "Class properties"
+msgstr "Klasseneigenschaften"
+
+#: fig/box_class_properties.cpp:283
+msgid "No class name given"
+msgstr "Kein Klassenname vergeben"
+
+#: fig/box_class_properties.cpp:283
+msgid "Missing class name"
+msgstr "Klassenname fehlt"
+
+#: fig/box_document_properties.cpp:27
+msgid "Diagram properties"
+msgstr "Diagrammeigenschaften"
+
+#: fig/box_document_properties.cpp:37
+msgid "Font"
+msgstr "Schriftart"
+
+#: fig/box_document_properties.cpp:39
+msgid "Font for diagram objects"
+msgstr "Schriftart für Diagrammobjekte"
+
+#: fig/box_fork.cpp:334 fig/box_item.cpp:136
+msgid "%1 x %2"
+msgstr "%1 x %2"
+
+#: fig/box_item.cpp:192
+msgid "Diagram box properties"
+msgstr "Diagramm-Box-Eigenschaften"
+
+#: fig/box_item.cpp:193
+msgid "Text:"
+msgstr "Text:"
+
+#: fig/box_link_properties.cpp:23
+msgid "Link properties"
+msgstr "Verbindungseigenschaften"
+
+#: fig/box_link_properties.cpp:33
+msgid "Thickness"
+msgstr "Dicke"
+
+#: fig/box_link_properties.cpp:37
+msgid "Line Type"
+msgstr "Linientyp"
+
+#: fig/box_link_properties.cpp:41
+msgid "Line Style"
+msgstr "Linienart"
+
+#: fig/box_link_properties.cpp:45
+msgid "Origin arrow"
+msgstr "Pfeilursprung"
+
+#: fig/box_link_properties.cpp:49
+msgid "Target arrow"
+msgstr "Pfeilziel"
+
+#: fig/box_link_properties.cpp:59
+msgid "Zigzag"
+msgstr "Zickzack"
+
+#: fig/box_link_properties.cpp:60
+msgid "Straight"
+msgstr "Gerade"
+
+#: fig/box_link_properties.cpp:64
+msgid "Invisible line"
+msgstr "Unsichtbare Linie"
+
+#: fig/box_link_properties.cpp:65
+msgid "Solid Line"
+msgstr "durchgehende Linie"
+
+#: fig/box_link_properties.cpp:66
+msgid "Dash Line"
+msgstr "Strichlinie"
+
+#: fig/box_link_properties.cpp:67
+msgid "Dot Line"
+msgstr "Punktlinie"
+
+#: fig/box_link_properties.cpp:71 fig/box_link_properties.cpp:79
+msgid "No arrow"
+msgstr "Kein Pfeil"
+
+#: fig/box_link_properties.cpp:72 fig/box_link_properties.cpp:80
+msgid "Triangle"
+msgstr "Dreieck voll"
+
+#: fig/box_link_properties.cpp:73 fig/box_link_properties.cpp:81
+msgid "Link"
+msgstr "Pfeil"
+
+#: fig/box_link_properties.cpp:74 fig/box_link_properties.cpp:82
+msgid "Inheritance"
+msgstr "Dreieck leer"
+
+#: fig/box_link_properties.cpp:75 fig/box_link_properties.cpp:83
+msgid "Aggregation"
+msgstr "Raute"
+
+#: fig/box_matrix.cpp:181
+msgid "Last row: %2px, last column: %3px (size: %4 x %5)"
+msgstr "Letzte Zeile: %2px, letzte Spalte: %3px (Größe: %4 x %5)"
+
+#: fig/box_matrix.cpp:197
+msgid "Row %1: %2px (size: %3 x %4)"
+msgstr "Zeile %1: %2px (Größe: %3 x %4)"
+
+#: fig/box_matrix.cpp:213
+msgid "Column %1: %2px (size: %3 x %4)"
+msgstr "Spalte %1: %2px (Größe: %3 x %4)"
+
+#: fig/box_view.cpp:102
+msgid "box_item"
+msgstr "box item"
+
+#: fig/box_view.cpp:104
+msgid "id"
+msgstr "ID"
+
+#: fig/box_view.cpp:109 fig/box_view.cpp:119
+msgid "c1"
+msgstr "c1"
+
+#: fig/box_view.cpp:110 fig/box_view.cpp:121
+msgid "c2"
+msgstr "c2"
+
+#: fig/box_view.cpp:111
+msgid "text"
+msgstr "text"
+
+#: fig/box_view.cpp:112
+msgid "col"
+msgstr "col"
+
+#: fig/box_view.cpp:115 fig/box_view.cpp:151
+msgid "box_link"
+msgstr "box link"
+
+#: fig/box_view.cpp:118
+msgid "p1"
+msgstr "p1"
+
+#: fig/box_view.cpp:120
+msgid "p2"
+msgstr "p2"
+
+#: fig/box_view.cpp:133
+msgid "pen_style"
+msgstr "pen style"
+
+#: fig/box_view.cpp:134
+msgid "border_width"
+msgstr "Randbreite"
+
+#: fig/box_view.cpp:138
+msgid "box_link_offset"
+msgstr "box link offset"
+
+#: fig/box_view.cpp:142
+msgid "x"
+msgstr "x"
+
+#: fig/box_view.cpp:142
+msgid "y"
+msgstr "y"
+
+#: fig/box_view.cpp:182
+msgid "Properties..."
+msgstr "Eigenschaften..."
+
+#: fig/box_view.cpp:187
+msgid "Activity"
+msgstr "Aktivität"
+
+#: fig/box_view.cpp:188
+msgid "Ctrl+Return"
+msgstr "Strg+Return"
+
+#: fig/box_view.cpp:193
+msgid "Delete"
+msgstr "Entfernen"
+
+#: fig/box_view.cpp:197
+msgid "Color..."
+msgstr "Farbe..."
+
+#: fig/box_view.cpp:202
+msgid "Raise"
+msgstr "Erhöhen"
+
+#: fig/box_view.cpp:203
+msgid "PgUp"
+msgstr "Bild hoch (PgUp)"
+
+#: fig/box_view.cpp:207
+msgid "Send back"
+msgstr "send back"
+
+#: fig/box_view.cpp:208
+msgid "PgDown"
+msgstr "Bild runter (PgDown)"
+
+#: fig/box_view.cpp:212
+msgid "Floating text"
+msgstr "Fließtext"
+
+#: fig/box_view.cpp:214
+msgid "Component"
+msgstr "Komponente"
+
+#: fig/box_view.cpp:216
+msgid "Node"
+msgstr "Node"
+
+#: fig/box_view.cpp:218
+msgid "Decision"
+msgstr "Entscheidung"
+
+#: fig/box_view.cpp:220
+msgid "Database"
+msgstr "Datenbank"
+
+#: fig/box_view.cpp:222
+msgid "Activity start"
+msgstr "Aktivität Beginn"
+
+#: fig/box_view.cpp:224
+msgid "Activity end"
+msgstr "Aktivität Ende"
+
+#: fig/box_view.cpp:226
+msgid "Horizontal fork/join"
+msgstr "Waagerechte Abgrenzung"
+
+#: fig/box_view.cpp:228
+msgid "Vertical fork/join"
+msgstr "Senkrechte Abgrenzung"
+
+#: fig/box_view.cpp:230
+msgid "Actor"
+msgstr "Aktor"
+
+#: fig/box_view.cpp:232
+msgid "Usecase"
+msgstr "Usecase"
+
+#: fig/box_view.cpp:234
+msgid "Matrix"
+msgstr "Tabelle"
+
+#: fig/box_view.cpp:236
+msgid "Boundary"
+msgstr "Umrandung"
+
+#: fig/box_view.cpp:238
+msgid "Class"
+msgstr "Klasse"
+
+#: fig/box_view.cpp:241
+msgid "Import from file..."
+msgstr "Aus Datei importieren..."
+
+#: fig/box_view.cpp:243
+msgid "Export to file..."
+msgstr "In Datei exportieren..."
+
+#: fig/box_view.cpp:245
+msgid "Copy image to clipboard"
+msgstr "Bild in Zwischenablage kopieren"
+
+#: fig/box_view.cpp:267
+msgid "File operations"
+msgstr "Dateioperationen"
+
+#: fig/box_view.cpp:279
+msgid "More elements"
+msgstr "Mehr Elemente"
+
+#: fig/box_view.cpp:317
+msgid "Alignment"
+msgstr "Ausrichtung"
+
+#: fig/box_view.cpp:319
+msgid "Align left"
+msgstr "Ausrichtung links"
+
+#: fig/box_view.cpp:320
+msgid "Align center"
+msgstr "Ausrichtung zentriert"
+
+#: fig/box_view.cpp:321
+msgid "Align right"
+msgstr "Ausrichtung rechts"
+
+#: fig/box_view.cpp:323
+msgid "Align top"
+msgstr "Ausrichtung oben"
+
+#: fig/box_view.cpp:324
+msgid "Align middle"
+msgstr "Ausrichtung mitte"
+
+#: fig/box_view.cpp:325
+msgid "Align bottom"
+msgstr "Ausrichtung unten"
+
+#: fig/box_view.cpp:328
+msgid "Size"
+msgstr "Größe"
+
+#: fig/box_view.cpp:330
+msgid "Same width"
+msgstr "Gleiche Breite"
+
+#: fig/box_view.cpp:331
+msgid "Same height"
+msgstr "Gleiche Höhe"
+
+#: fig/box_view.cpp:332
+msgid "Same width and height"
+msgstr "Gleiche Breite und Höhe"
+
+#: fig/box_view.cpp:589 fig/box_view.cpp:1871
+msgid "Semantik diagram"
+msgstr "Semantik Diagramm"
+
+#: fig/box_view.cpp:1684 fig/box_view.cpp:1720 fig/semantik_d_win.cpp:280
+msgid "*.semd|Semantik diagram (*.semd)"
+msgstr "*.semd|Semantik Diagramm (*.semd)"
+
+#: fig/box_view.cpp:1685 fig/semantik_d_win.cpp:281
+msgid "Choose a file to open"
+msgstr "Datei zum Öffnen wählen"
+
+#: fig/box_view.cpp:1721 semantik.cpp:419 semantik.cpp:481
+msgid "Choose a file name"
+msgstr "Dateiname wählen"
+
+#: fig/box_view.cpp:1735 semantik.cpp:432
+msgid ""
+"The file \"%1\" already exists.\n"
+"Overwrite it?"
+msgstr ""
+"Die Datei \"%1\" existiert bereits.\n"
+"Diese überschreiben?"
+
+#: fig/box_view.cpp:1736 semantik.cpp:433
+msgid "Overwrite existing file"
+msgstr "Überschreibe existierende Datei"
+
+#: fig/box_view.cpp:1758 fig/box_view.cpp:1776 semantik.cpp:444
+#: semantik.cpp:466
+msgid "Saved '%1'"
+msgstr "Gesichert '%1'"
+
+#: fig/matrix_dialog.cpp:32 table_dialog.cpp:32
+msgid "Rows"
+msgstr "Zeilen"
+
+#: fig/matrix_dialog.cpp:36 table_dialog.cpp:36
+msgid "Columns"
+msgstr "Spalten"
+
+#: fig/semantik_d_win.cpp:64 semantik.cpp:202
+msgid "Ctrl+H"
+msgstr "Strg+H"
+
+#: fig/semantik_d_win.cpp:68
+msgid "Files"
+msgstr "&Dateien"
+
+#: fig/semantik_d_win.cpp:80
+msgid "This is Semantik-d"
+msgstr "Semantik"
+
+#: fig/semantik_d_win.cpp:185
+msgid "[Untitled]"
+msgstr "[Unbenannt]"
+
+#: fig/semantik_d_win.cpp:246 semantik.cpp:548
+msgid "Untitled"
+msgstr "Unbenannt"
+
+#: fig/semantik_d_win.cpp:249 semantik.cpp:551
+msgid ""
+"The document \"%1\" has been modified.\n"
+"Do you want to save your changes or discard them?"
+msgstr ""
+"Das Dokument \"%1\" wurde geändert.\n"
+"Sollen die Änderungen gesichert werden oder verfallen?"
+
+#: fig/semantik_d_win.cpp:250 semantik.cpp:552
+msgid "Close Document"
+msgstr "Dokument schließen"
+
+#: fig/semantik_d_win.cpp:385 semantik.cpp:492
+msgid " [Modified] "
+msgstr " [Geändert] "
+
+#: fig/semantik_d_win.cpp:390
+msgid "Semantik Diagram %1"
+msgstr "Semantik Diagramm %1"
+
+#: fig/semantik_d_win.cpp:394
+msgid "%1 %2 - Semantik Diagram"
+msgstr "%1 %2 - Semantik Diagramm"
+
+#: fig/semd.cpp:26
+msgid "A tool for editing and organizing Semantik diagrams"
+msgstr "Tool zum Ändern und Organisieren von Semantik Diagrammen"
+
+#: fig/semd.cpp:42 main.cpp:34
+msgid "A file to open on startup"
+msgstr "Datei beim Start öffnen"
+
+#: fig/semd.cpp:43
+msgid "An output file for exporting the diagram"
+msgstr "Eine Ausgabedatei zum Export des Diagrammes"
+
+#: fig/semd.cpp:44
+msgid "Diagram width for printing"
+msgstr "Diagrammbreite zum Druck"
+
+#: fig/semd.cpp:45
+msgid "Diagram height for printing"
+msgstr "Diagrammhöhe zum Druck"
+
+#: fig/semd.cpp:47
+msgid "Semantik-d"
+msgstr "Semantik-d"
+
+#: fig/semd.cpp:47
+msgid "(C) 2013-2015 Thomas Nagy"
+msgstr "(C) 2007-2015 Thomas Nagy"
+
+#: fig/semd.cpp:49 main.cpp:40
+msgid "Thomas Nagy"
+msgstr "Thomas Nagy"
+
+#: generator_dialog.cpp:30
+msgid "Generate documents"
+msgstr "Dokument erstellen"
+
+#: generator_dialog.cpp:36
+msgid "Generators"
+msgstr "Erstellungsart"
+
+#: generator_dialog.cpp:39
+msgid "Description"
+msgstr "Beschreibung"
+
+#: generator_dialog.cpp:63
+msgid "Location"
+msgstr "Ort"
+
+#: generator_dialog.cpp:114
+msgid "No document generator chosen."
+msgstr "Keine Erstellungsart gewählt."
+
+#: generator_dialog.cpp:114
+msgid "Missing data"
+msgstr "Fehlende Daten"
+
+#: generator_dialog.cpp:120
+msgid "Invalid output directory %1"
+msgstr "Ungültiger Ausgabeordner %1"
+
+#: generator_dialog.cpp:120
+msgid "Missing location"
+msgstr "Fehlender Ort"
+
+#: image_view.cpp:37
+msgid "Change picture"
+msgstr "Bild ändern"
+
+#: image_view.cpp:41
+msgid "Clear picture"
+msgstr "Bild löschen"
+
+#: image_view.cpp:66
+msgid "Click to set a picture"
+msgstr "Klicken um ein Bild zu setzen"
+
+#: image_view.cpp:70
+msgid "Select an item on the map"
+msgstr "Element der Map auswählen"
+
+#: image_view.cpp:166
+msgid "*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"
+msgstr "*.png *.jpg *.jpeg *.gif|Bilddatei (*.png *.jpg *.jpeg *.gif)"
+
+#: image_view.cpp:167
+msgid "Choose a picture"
+msgstr "Bild wählen"
+
+#: image_view.cpp:179
+msgid "Could not load the picture"
+msgstr "Bild kann nicht geladen wählen"
+
+#: main.cpp:24
+msgid ""
+"A mind-mapping tool for KDE\n"
+"Available exclusively for open systems such as OpenSuse, Gentoo or Fedora."
+msgstr ""
+"Ein Mind Map Tool für KDE\n"
+"exklusiv für offene Systeme wie OpenSuse, Gentoo oder Fedora verfügbar."
+
+#: main.cpp:35
+msgid "An output file for printing the map"
+msgstr "Ausgabedatei zum Drucken der Map"
+
+#: main.cpp:37
+msgid "Semantik"
+msgstr "Semantik"
+
+#: main.cpp:38
+msgid "(C) 2007-2015 Thomas Nagy"
+msgstr "(C) 2007-2015 Thomas Nagy"
+
+#. i18n: file: data/semantik-dui.rc:5
+#. i18n: ectx: Menu (file)
+#. i18n: file: data/semantikui.rc:5
+#. i18n: ectx: Menu (file)
+#. i18n: file: data/semantik-dui.rc:5
+#. i18n: ectx: Menu (file)
+#. i18n: file: data/semantikui.rc:5
+#. i18n: ectx: Menu (file)
+#: po/rc.cpp:3 po/rc.cpp:21 rc.cpp:3 rc.cpp:21
+msgid "&File"
+msgstr "&Datei"
+
+#. i18n: file: data/semantik-dui.rc:25
+#. i18n: ectx: Menu (edit)
+#. i18n: file: data/semantikui.rc:8
+#. i18n: ectx: Menu (edit)
+#. i18n: file: data/semantik-dui.rc:25
+#. i18n: ectx: Menu (edit)
+#. i18n: file: data/semantikui.rc:8
+#. i18n: ectx: Menu (edit)
+#: po/rc.cpp:6 po/rc.cpp:24 rc.cpp:6 rc.cpp:24
+msgid "&Edit"
+msgstr "&Bearbeiten"
+
+#. i18n: file: data/semantik-dui.rc:28
+#. i18n: ectx: Menu (view)
+#. i18n: file: data/semantikui.rc:13
+#. i18n: ectx: Menu (view)
+#. i18n: file: data/semantik-dui.rc:28
+#. i18n: ectx: Menu (view)
+#. i18n: file: data/semantikui.rc:13
+#. i18n: ectx: Menu (view)
+#: po/rc.cpp:9 po/rc.cpp:27 rc.cpp:9 rc.cpp:27
+msgid "&View"
+msgstr "&Ansicht"
+
+#. i18n: file: data/semantik-dui.rc:33
+#. i18n: ectx: Menu (tools)
+#. i18n: file: data/semantikui.rc:21
+#. i18n: ectx: Menu (tools)
+#. i18n: file: data/semantik-dui.rc:33
+#. i18n: ectx: Menu (tools)
+#. i18n: file: data/semantikui.rc:21
+#. i18n: ectx: Menu (tools)
+#: po/rc.cpp:12 po/rc.cpp:30 rc.cpp:12 rc.cpp:30
+msgid "&Tools"
+msgstr "&Tools"
+
+#. i18n: file: data/semantik-dui.rc:36
+#. i18n: ectx: Menu (settings)
+#. i18n: file: data/semantikui.rc:24
+#. i18n: ectx: Menu (settings)
+#. i18n: file: data/semantik-dui.rc:36
+#. i18n: ectx: Menu (settings)
+#. i18n: file: data/semantikui.rc:24
+#. i18n: ectx: Menu (settings)
+#: po/rc.cpp:15 po/rc.cpp:33 rc.cpp:15 rc.cpp:33
+msgid "&Settings"
+msgstr "&Einstellungen"
+
+#. i18n: file: data/semantik-dui.rc:39
+#. i18n: ectx: Menu (help)
+#. i18n: file: data/semantikui.rc:27
+#. i18n: ectx: Menu (help)
+#. i18n: file: data/semantik-dui.rc:39
+#. i18n: ectx: Menu (help)
+#. i18n: file: data/semantikui.rc:27
+#. i18n: ectx: Menu (help)
+#: po/rc.cpp:18 po/rc.cpp:36 rc.cpp:18 rc.cpp:36
+msgid "&Help"
+msgstr "&Hilfe"
+
+#. i18n: file: data/semantikui.rc:41
+#. i18n: ectx: ToolBar (colorsToolBar)
+#: po/rc.cpp:39 rc.cpp:39
+msgid "Colors Toolbar"
+msgstr "Toolbar für Farben"
+
+#. i18n: file: data/semantikui.rc:45
+#. i18n: ectx: ToolBar (flagsToolBar)
+#: po/rc.cpp:42 rc.cpp:42
+msgid "Flags Toolbar"
+msgstr "Toolbar für Kennzeichnungen"
+
+#: po/rc.cpp:43 rc.cpp:43
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "St. Briest"
+
+#: po/rc.cpp:44 rc.cpp:44
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr " "
+
+#: pre_view.cpp:23
+msgid "<p align='center'>No preview available<br/>at this time</p>"
+msgstr "<p align='center'>Zur Zeit keine Vorschau verfügbar</p>"
+
+#: semantik.cpp:46
+msgid ""
+"The map is empty, Semantik\n"
+"cannot create documents from it"
+msgstr ""
+"Die Map ist leer, Semantik\n"
+"Daraus kann kein Dokument erstellt werden"
+
+#: semantik.cpp:46
+msgid "Empty map"
+msgstr "Leere Map"
+
+#: semantik.cpp:53
+msgid "Template folder %1 is not readable"
+msgstr "Vorlagenordner %1 ist nicht lesbar"
+
+#: semantik.cpp:167
+msgid "&Reorganize the map"
+msgstr "Map &reorganisieren"
+
+#: semantik.cpp:169
+msgid "Ctrl+R"
+msgstr "Strg+R"
+
+#: semantik.cpp:172
+msgid "&Export the map..."
+msgstr "Map &exportieren..."
+
+#: semantik.cpp:174
+msgid "Ctrl+Shift+E"
+msgstr "Strg+Shift+E"
+
+#: semantik.cpp:179
+msgid "&Generate..."
+msgstr "&Erstellen..."
+
+#: semantik.cpp:182
+msgid "Ctrl+G"
+msgstr "Strg+G"
+
+#: semantik.cpp:188
+msgid "CustomColor"
+msgstr "Benutzerdefinierte Farbe"
+
+#: semantik.cpp:211
+msgid "Data"
+msgstr "Daten"
+
+#: semantik.cpp:235
+msgid "Variables"
+msgstr "Variablen"
+
+#: semantik.cpp:244
+msgid "Preview"
+msgstr "Vorschau"
+
+#: semantik.cpp:256
+msgid "Linear view"
+msgstr "Struktur-Ansicht"
+
+#: semantik.cpp:350
+msgid "Welcome to Semantik"
+msgstr "Willkommen bei Semantik"
+
+#: semantik.cpp:418
+msgid "*.sem|Semantik file (*.sem)"
+msgstr "*.sem|Semantikdateien (*.sem)"
+
+#: semantik.cpp:480
+msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
+msgstr "*.sem *.kdi *.mm *.vym|unterstützte Dateien (*.sem *.kdi *.mm *.vym)"
+
+#: semantik.cpp:497
+msgid "Semantik %1"
+msgstr "Semantik %1"
+
+#: semantik.cpp:501
+msgid "%1 %2 - Semantik"
+msgstr "%1 %2 - Semantik"
+
+#: table_view.cpp:26 table_view.cpp:80
+msgid "Add Row"
+msgstr "Zeile hinzufügen"
+
+#: table_view.cpp:27
+msgid "Add a row"
+msgstr "Eine Zeile hinzufügen"
+
+#: table_view.cpp:31 table_view.cpp:81
+msgid "Add Column"
+msgstr "Spalte hinzufügen"
+
+#: table_view.cpp:32
+msgid "Add a column"
+msgstr "Eine Spalte hinzufügen"
+
+#: table_view.cpp:37 table_view.cpp:82
+msgid "Remove Row"
+msgstr "Zeile entfernen"
+
+#: table_view.cpp:38
+msgid "Remove a row"
+msgstr "Eine Zeile entfernen"
+
+#: table_view.cpp:42 table_view.cpp:83
+msgid "Remove Column"
+msgstr "Spalte entfernen"
+
+#: table_view.cpp:43
+msgid "Remove a column"
+msgstr "Eine Spalte entfernen"
+
+#: table_view.cpp:47
+msgid "Redimension"
+msgstr "Zeile/Spalte ändern"
+
+#: table_view.cpp:48
+msgid "Change table dimensions"
+msgstr "Zeilen und Spalten ändern"
+
+#: text_view.cpp:41
+msgid "&Bold"
+msgstr "&Fett"
+
+#: text_view.cpp:42
+msgid "Ctrl+B"
+msgstr "Strg+B"
+
+#: text_view.cpp:45
+msgid "&Italic"
+msgstr "&Kursiv"
+
+#: text_view.cpp:46
+msgid "Ctrl+I"
+msgstr "Strg+I"
+
+#: text_view.cpp:49
+msgid "&Underline"
+msgstr "&Unterstrichen"
+
+#: text_view.cpp:50
+msgid "Ctrl+U"
+msgstr "Strg+U"
+
+#~ msgid "Data type"
+#~ msgstr "Datentyp"
+
+#~ msgid "sl"
+#~ msgstr "sl"
+
+#~ msgid "wl"
+#~ msgstr "wl"
+
+#~ msgid "Ready"
+#~ msgstr "Bereit"
+
+#~ msgid "Insert child"
+#~ msgstr "Kind einfügen"
+
+#~ msgid "dirty"
+#~ msgstr "schlecht"
+
+#~ msgid "Add Box"
+#~ msgstr "Box einfügen"
+
+#~ msgid "Connection width"
+#~ msgstr "Verbindungsbreite"
+
+#~ msgid "1px"
+#~ msgstr "1px"
+
+#~ msgid "2px"
+#~ msgstr "2px"
+
+#~ msgid "3px"
+#~ msgstr "3px"
+
+#~ msgid "Connection style"
+#~ msgstr "Verbindungsart"
+
+#~ msgid "dot line"
+#~ msgstr "Punktlinie"
+
+#~ msgid "exclude the table"
+#~ msgstr "Tabelle ausschließen"
+
+#~ msgid "fit the item on one slide"
+#~ msgstr "Element auf Folie einpassen"
+
+#~ msgid "picture caption"
+#~ msgstr "Bildbezeichnung"
+
+#~ msgid "picture dimension in pdf files"
+#~ msgstr "Bildmaße in PDF Datei"
+
+#~ msgid "html div style: style=\"width: 99px;\""
+#~ msgstr "html div style: style=\"width: 99px;\""
+
+#~ msgid "html picture style: style=\"width: 99px;\""
+#~ msgstr "html picture style: style=\"width: 99px;\""
+
+#~ msgid "do not use this item for generating slides"
+#~ msgstr "Dieses Element nicht für Folienerstellung"
+
+#~ msgid "command to launch (%s is the resulting file)"
+#~ msgstr "Befehl zum Aufruf (%s ist die Ergebnisdatei)"
+
+#~ msgid "cd `echo %s | sed s/main.tex//` && ./waf configure && waf --view"
+#~ msgstr "cd `echo %s | sed s/main.tex//` && ./waf configure && waf --view"
+
+#~ msgid "firefox %s"
+#~ msgstr "firefox %s"
+
+#~ msgid "ooimpress %s"
+#~ msgstr "ooimpress %s"
+
+#~ msgid "oowriter %s"
+#~ msgstr "oowriter %s"
+
+#~ msgid "document author"
+#~ msgstr "Dokumentenautor"
+
+#~ msgid "turn off the document author (latex)"
+#~ msgstr "Dokumentenautor entfernen (latex)"
+
+#~ msgid "document class (latex: a4, report, book)"
+#~ msgstr "Dokumentenklasse (latex: a4, report, book)"
+
+#~ msgid "company"
+#~ msgstr "Firma"
+
+#~ msgid "document date"
+#~ msgstr "Dokumentendatum"
+
+#~ msgid "turn of the document date (latex)"
+#~ msgstr "Dokumentendatum entfernen (latex)"
+
+#~ msgid "location of the presentation"
+#~ msgstr "Ort der Presentation"
+
+#~ msgid "turn off the document title (latex)"
+#~ msgstr "Dokumententitel entfernen (latex)"
+
+#~ msgid "footer center (pdflatex)"
+#~ msgstr "Fuß zentriert (pdflatex)"
+
+#~ msgid "footer left (pdflatex)"
+#~ msgstr "Fuß linksbündig (pdflatex)"
+
+#~ msgid "turn off the fancy output"
+#~ msgstr "turn off the fancy output"
+
+#~ msgid "footer right"
+#~ msgstr "Fuß rechtsbündig"
+
+#~ msgid "header center (pdflatex)"
+#~ msgstr "Kopf zentriert (pdflatex)"
+
+#~ msgid "header left"
+#~ msgstr "Kopf linksbündig"
+
+#~ msgid "header right"
+#~ msgstr "Kopf rechtsbündig"
+
+#~ msgid "openoffice.org language (fr_FR)"
+#~ msgstr "Sprache openoffice.org (fr_FR)"
+
+#~ msgid "openoffice.org presentation language"
+#~ msgstr "Präsentationssprache openoffice.org"
+
+#~ msgid "openoffice.org text language"
+#~ msgstr "Textsprache openoffice.org"
+
+#~ msgid "Warsaw (JuanLesPins, Montpellier, )"
+#~ msgstr "Warsaw (JuanLesPins, Montpellier, )"
+
+#~ msgid "Generator dialog"
+#~ msgstr "Erstellungsdialog"
+
+#~ msgid "&Ok"
+#~ msgstr "&OK"
+
+#~ msgid "File %1 does not exist"
+#~ msgstr "Datei %1 existiert nicht"
+
+#~ msgid "File %1 could not be opened"
+#~ msgstr "Datei %1 kann nicht geöffnet werden"
+
+#~ msgid "something bad happened"
+#~ msgstr "Etwas schlechtes ist passiert"
+
+#~ msgid "something worse happened"
+#~ msgstr "Etwas schlimmes ist passiert"
+
+#~ msgid "&Select"
+#~ msgstr "&Auswahl"
+
+#~ msgid "&Sort"
+#~ msgstr "&Sortieren"
+
+#~ msgid "exclude the picture"
+#~ msgstr "Bild ausschließen"
+
+#~ msgid "latex language: english (frenchb, )"
+#~ msgstr "latex Sprache: english (frenchb, )"
