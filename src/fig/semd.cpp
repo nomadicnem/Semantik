@@ -12,8 +12,6 @@
 #include <QPair>
 #include <KGlobal>
 
-#include <X11/Xlib.h>
-
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
