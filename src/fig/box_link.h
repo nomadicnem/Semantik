@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 
 #ifndef BOX_LINK_H
@@ -9,12 +9,12 @@
 #include <QPair>
 #include <QSet>
 #include <QPainterPath>
+#include "data_item.h"
 #include "ed:table.h"
 #include "con.h"
 
 class box_view;
 class box_item;
-class data_link;
 class box_control_point;
 class box_link : public QGraphicsRectItem, public editable
 {

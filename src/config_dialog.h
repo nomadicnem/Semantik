@@ -1,9 +1,9 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef CONFIG_DIALOG_H
 #define CONFIG_DIALOG_H
 
-#include <KDialog>
+#include <KDE/KDialog>
 #include <con.h>
 
 class QComboBox;

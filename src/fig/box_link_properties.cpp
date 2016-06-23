@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QSpinBox>
 #include <QComboBox>
@@ -122,6 +122,4 @@ void box_link_properties::apply() {
 	mem->apply();
 	enableButtonApply(false);
 }
-
-#include "box_link_properties.moc"
 

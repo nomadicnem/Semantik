@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef TEXT_VIEW_H
 #define TEXT_VIEW_H
@@ -11,15 +11,17 @@ n.h"
 #include <QToolBar>
 #include <QList>
 
-class KTextEdit;
+class QTextCharFormat;
+class QTextEdit;
 class semantik_win;
+class sem_mediator;
 class text_view : public QWidget
 {
 	Q_OBJECT
 	public:
 		text_view(QWidget *i_oParent, sem_mediator *i_oControl);
 		sem_mediator *m_oMediator;
-		KTextEdit *m_oEdit;
+		QTextEdit *m_oEdit;
 
 		int m_iId;
 

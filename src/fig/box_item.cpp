@@ -1,8 +1,8 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
-#include <KInputDialog>
+#include <KDE/KInputDialog>
 #include <QTextDocument>
 #include <QTextDocumentFragment>
 #include <QAbstractTextDocumentLayout>

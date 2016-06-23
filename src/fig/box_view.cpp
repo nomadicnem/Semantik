@@ -1,12 +1,12 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
-#include <KFileDialog>
+#include <KDE/KFileDialog>
 #include <KMessageBox>
-#include <KMenuBar>
-#include <KApplication>
+#include <KDE/KMenuBar>
+#include <KDE/KApplication>
 #include <KStandardAction>
 #include <KRecentFilesAction>
-#include <KActionCollection>
+#include <KDE/KActionCollection>
 
 #include <QClipboard>
 #include <QMouseEvent>
@@ -33,7 +33,7 @@
 #include <QStandardItemModel>
 #include <QPrinter>
  #include <QSvgGenerator>
-#include <QX11Info>
+#include <QDesktopWidget>
 
 #include "aux.h"
 #include "con.h"
@@ -585,7 +585,7 @@ void box_view::notify_export_item(int id)
 	l_oGenerator.setFileName(QString(m_oMediator->m_sTempDir + QString("/") + QString("diag-%1.svg")).arg(QString::number(m_iId)));
 	l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 	l_oGenerator.setViewBox(l_oR);
-	l_oGenerator.setResolution(QX11Info().appDpiX());
+	l_oGenerator.setResolution(QApplication::desktop()->physicalDpiX());
 	l_oGenerator.setTitle(trUtf8("Semantik diagram"));
 
 	QPainter l_oSvg;
@@ -1465,7 +1465,7 @@ void box_view::mousePressEvent(QMouseEvent *i_oEv)
 		return;
 	}
 
-	QGraphicsItem *l_oItem = scene()->itemAt(mapToScene(i_oEv->pos()));
+	QGraphicsItem *l_oItem = itemAt(i_oEv->pos());
 
 	box_chain* kk;
 	if (l_oItem && (kk = dynamic_cast<box_chain*>(l_oItem)))
@@ -1681,13 +1681,13 @@ void box_view::message(const QString &s, int d)
 }
 
 bool box_view::slot_import_from_file() {
-	KUrl l_o = KFileDialog::getOpenUrl(KUrl(notr("kfiledialog:///document")),
+	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///document")),
 		trUtf8("*.semd|Semantik diagram (*.semd)"), this,
 		trUtf8("Choose a file to open"));
 	return import_from_file(l_o);
 }
 
-bool box_view::import_from_file(const KUrl& l_o)
+bool box_view::import_from_file(const QUrl& l_o)
 {
 	if (l_o.path().isEmpty()) {
 		return false;
@@ -1717,14 +1717,14 @@ bool box_view::import_from_file(const KUrl& l_o)
 
 bool box_view::slot_export_to_file() {
 	choose_export:
-	KUrl l_o = KFileDialog::getSaveUrl(KUrl(notr("kfiledialog:///document")),
+	QUrl l_o = KFileDialog::getSaveUrl(QUrl(notr("kfiledialog:///document")),
 		trUtf8("*.semd|Semantik diagram (*.semd)"), this,
 		trUtf8("Choose a file name"));
 
 	if (l_o.path().isEmpty()) return false;
 	if (!l_o.path().endsWith(notr(".semd")))
 	{
-		l_o = KUrl(l_o.path()+notr(".semd"));
+		l_o = QUrl(l_o.path()+notr(".semd"));
 	}
 
 	// TODO?
@@ -1847,7 +1847,7 @@ int box_view::batch_print_map(const QString& url, QPair<int, int> & p)
 		}
 		else
 		{
-			l_oPrinter.setOutputFormat(QPrinter::PostScriptFormat);
+			l_oPrinter.setOutputFormat(QPrinter::NativeFormat);
 			l_oPrinter.setResolution(QPrinter::HighResolution);
 		}
 		l_oPrinter.setPaperSize(l_oR.size(), QPrinter::DevicePixel);
@@ -1870,7 +1870,7 @@ int box_view::batch_print_map(const QString& url, QPair<int, int> & p)
 		l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 		l_oGenerator.setViewBox(l_oR);
 		l_oGenerator.setTitle(trUtf8("Semantik diagram"));
-		l_oGenerator.setResolution(QX11Info().appDpiX());
+		l_oGenerator.setResolution(QApplication::desktop()->physicalDpiX());
 
 		QPainter l_oP;
 		l_oP.begin(&l_oGenerator);
@@ -1995,6 +1995,4 @@ void box_view::notify_change_properties(void *)
 		}
 	}
 }
-
-#include "box_view.moc"
 

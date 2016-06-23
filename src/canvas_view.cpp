@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include "canvas_flag.h"
 #include "data_item.h"
@@ -6,16 +6,16 @@
 #include "sem_mediator.h"
 #include "canvas_view.h"
 #include <QPrinter>
+#include <QDesktopWidget>
 #include  <QMenu> 
 #include <QToolTip>
 #include <QSvgGenerator>
 #include  <QColorDialog> 
 #include<KToolBar> 
 #include<KMessageBox>
-#include <KDialog>
-#include <KUrl>
+#include <QDialog>
+#include <QUrl>
 #include  <QActionGroup> 
-#include <QX11Info>
 #include "canvas_item.h"
 #include "canvas_link.h"
 #include<QCoreApplication>
@@ -29,13 +29,12 @@
 #include  <QApplication> 
 #include "canvas_chain.h"
 #include <QtDebug>
-#include  <QX11Info>
 #include <QScrollBar>
 #include  <QGraphicsScene>
 #include <QWheelEvent>
 #include  <QMatrix>
 #include <QPointF>
-#include <KFileDialog>
+#include <KDE/KFileDialog>
 #include <QSpinBox>
 #include "export_map_dialog.h"
 #include "kurlrequester.h"
@@ -824,7 +823,7 @@ void canvas_view::mousePressEvent(QMouseEvent *i_oEv)
 
 		// select the item under the cursor if available and show the popup menu
 		m_oLastPoint = mapToScene(i_oEv->pos());
-		QGraphicsItem *l_oItem = scene()->itemAt(mapToScene(i_oEv->pos()));
+		QGraphicsItem *l_oItem = itemAt(i_oEv->pos());
 		if (l_oItem && l_oItem->type() == CANVAS_ITEM_T)
 		{
 			if (!l_oItem->isSelected())
@@ -847,7 +846,7 @@ void canvas_view::mousePressEvent(QMouseEvent *i_oEv)
 		return;
 	}
 
-	QGraphicsItem *l_oItem = scene()->itemAt(mapToScene(i_oEv->pos()));
+	QGraphicsItem *l_oItem = itemAt(i_oEv->pos());
 	QList<canvas_item*> sel = selection();
 	if (sel.size() == 1 && QApplication::keyboardModifiers() & Qt::ShiftModifier)
 	{
@@ -907,7 +906,7 @@ void canvas_view::mousePressEvent(QMouseEvent *i_oEv)
 		return;
 	}
 
-        canvas_sort *l_oSort = dynamic_cast<canvas_sort*>(scene()->itemAt(mapToScene(i_oEv->pos())));
+        canvas_sort *l_oSort = dynamic_cast<canvas_sort*>(itemAt(i_oEv->pos()));
 	if (l_oSort)
 		return;
 	canvas_sort_toggle *l_oToggle = dynamic_cast<canvas_sort_toggle*>(l_oItem);
@@ -958,7 +957,7 @@ void canvas_view::mouseReleaseEvent(QMouseEvent *i_oEv)
 		setDragMode(QGraphicsView::RubberBandDrag);
 	}
 
-	QGraphicsItem *l_oItem = scene()->itemAt(mapToScene(i_oEv->pos()));
+	QGraphicsItem *l_oItem = itemAt(i_oEv->pos());
 	canvas_sort *l_oSort = dynamic_cast<canvas_sort*>(l_oItem);
 	if (l_oSort)
 	{
@@ -1325,7 +1324,7 @@ void canvas_view::export_map_size()
 	exp->kurlrequester->setMode(KFile::File | KFile::LocalOnly);
 	exp->kurlrequester->setFilter(trUtf8("*.png|PNG Files (*.png)"));
 
-	exp->kurlrequester->setUrl(KUrl(m_oMediator->m_sExportUrl));
+	exp->kurlrequester->setUrl(QUrl(m_oMediator->m_sExportUrl));
 	exp->m_oWidthC->setChecked(m_oMediator->m_bExportIsWidth);
 	exp->m_iBaseWidth = l_oRect.width();
 	exp->m_iBaseHeight = l_oRect.height();
@@ -1345,7 +1344,7 @@ void canvas_view::export_map_size()
 			exp->m_oHeight->setValue(l_oRect.height());
 	}
 
-	if (exp->exec() == KDialog::Accepted)
+	if (exp->exec() == QDialog::Accepted)
 	{
 		if (m_oMediator->m_iExportWidth != exp->m_oWidth->value())
 		{
@@ -1608,9 +1607,6 @@ void canvas_view::focusOutEvent(QFocusEvent *i_oEv)
 	edit_off();
 }
 
-%: include  	"canvas_view.moc" 
-
-
 void recurse_add(int id, QList<int>& sel, const QList<QPoint>& m_oLinks)
 {
 	sel.append(id);
@@ -1631,7 +1627,7 @@ void canvas_view::slot_select_subtree()
 	sel->apply();
 }
 
-int canvas_view::batch_print_map(const KUrl& i_oUrl, QPair<int, int> & p) {
+int canvas_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p) {
 
 	QRectF l_oRect;
 	foreach (QGraphicsItem*it, scene()->items())
@@ -1707,7 +1703,7 @@ int canvas_view::batch_print_map(const KUrl& i_oUrl, QPair<int, int> & p) {
 		l_oGenerator.setFileName(url);
 		l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 		l_oGenerator.setViewBox(l_oR);
-		l_oGenerator.setResolution(QX11Info().appDpiX());
+		l_oGenerator.setResolution(QApplication::desktop()->physicalDpiX());
 		l_oGenerator.setTitle(trUtf8("Semantik map"));
 
 		QPainter l_oP;

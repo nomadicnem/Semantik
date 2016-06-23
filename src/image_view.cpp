@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QPainter>
 #include  <QToolTip>
@@ -8,6 +8,7 @@
 #include <QMenu>
 #include <QList>
 #include <QFile>
+#include <QMimeData>
 #include   <QFileInfo>
 #include <QUrl>
 #include <QFileDialog>
@@ -17,7 +18,7 @@
 #include <QDirModel>
 #include <QGridLayout>
 #include <QCoreApplication>
-#include  <KFileDialog>
+#include  <KDE/KFileDialog>
 
 #include "con.h"
 #include "data_item.h"
@@ -121,7 +122,6 @@ void image_view::clear_pic()
 	mem->apply();
 }
 
-#include "image_view.moc"
 
 bool image_view::event(QEvent *i_oEvent)
 {
@@ -162,13 +162,13 @@ void image_view::mouseReleaseEvent(QMouseEvent *i_o)
 
 void image_view::change_pic()
 {
-	KUrl l_o = KFileDialog::getOpenUrl(KUrl(notr("kfiledialog:///image")),
+	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///image")),
                 trUtf8("*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"),
                 this, trUtf8("Choose a picture"));
 	do_change_pic(l_o);
 }
 
-void image_view::do_change_pic(const KUrl& l_sText)
+void image_view::do_change_pic(const QUrl& l_sText)
 {
 	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
 	int id = m_oMediator->next_pic_seq();

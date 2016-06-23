@@ -1,10 +1,10 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QVariant>
 #include <QAction>
 #include <QApplication>
 #include <QButtonGroup>
-#include <KDialog>
+#include <KDE/KDialog>
 #include <QGridLayout>
 #include<QPushButton>
 #include <QLabel>
@@ -139,4 +139,3 @@ void generator_dialog::activate_from_name(const QString &i_s)
 	}
 }
 
-#include "generator_dialog.moc"

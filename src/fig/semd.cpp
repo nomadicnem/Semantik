@@ -1,27 +1,22 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <fstream>
 #include <QCoreApplication>
 #include <QtGui>
-#include  <QX11Info>
 #include <QTranslator>
 #include "con.h"
 #include <stdlib.h>
 #include <iostream>
 
 #include <QPair>
-#include <KGlobal>
 
-#include <KApplication>
-#include <KAboutData>
-#include <KCmdLineArgs>
-#include <KLocale>
-#include <KDebug>
-#include <KGlobal>
+#include <KDE/KCmdLineOptions>
+#include <KDE/KApplication>
+#include <KDE/K4AboutData>
 
 #include "semantik_d_win.h"
 
-static const char description[] = I18N_NOOP("A tool for editing and organizing Semantik diagrams");
+static const char description[] = "A tool for editing and organizing Semantik diagrams";
 static const char version[] = VERSION;
 
 int grid_int(int x) {
@@ -30,19 +25,13 @@ int grid_int(int x) {
 
 int main(int i_iArgc, char **i_iArgv)
 {
-	int l_iSeed;
-	std::ifstream l_oInfile("/dev/urandom", std::ios::binary | std::ios::in);
-	l_oInfile.read(reinterpret_cast<char *>(&l_iSeed), sizeof(int));
-	l_oInfile.close();
-	srandom(l_iSeed);
-
 	KCmdLineOptions options;
 	options.add("+[url]", ki18n("A file to open on startup"));
 	options.add("o <file>", ki18n("An output file for exporting the diagram"));
 	options.add("width <width>", ki18n("Diagram width for printing"), "0");
 	options.add("height <height>", ki18n("Diagram height for printing"), "0");
 
-	KAboutData l_o("semantik-d", "semantik", ki18n("Semantik-d"), version, ki18n(description), KAboutData::License_GPL_V3, ki18n("(C) 2013-2015 Thomas Nagy"), KLocalizedString());
+	K4AboutData l_o("semantik-d", "semantik", ki18n("Semantik-d"), version, ki18n(description), K4AboutData::License_GPL_V3, ki18n("(C) 2013-2016 Thomas Nagy"), KLocalizedString());
 	l_o.setBugAddress("https://github.com/ita1024/semantik/issues");
 	l_o.addAuthor(ki18n("Thomas Nagy"), KLocalizedString());
 
@@ -51,8 +40,9 @@ int main(int i_iArgc, char **i_iArgv)
 
 	KApplication l_oApp;
 
-	KGlobal::locale()->insertCatalog("libkdeedu");
-	KGlobal::locale()->insertCatalog("semantik");
+	// FIXME
+	//KGlobal::locale()->insertCatalog("libkdeedu");
+	//KGlobal::locale()->insertCatalog("semantik");
 
 	semantik_d_win *l_oMainWin = new semantik_d_win;
 
@@ -65,7 +55,7 @@ int main(int i_iArgc, char **i_iArgv)
 		}
 		else
 		{
-			KUrl url(args->getOption("o"));
+			QUrl url(args->getOption("o"));
 			if (!url.isValid()) {
 				return 2;
 			}

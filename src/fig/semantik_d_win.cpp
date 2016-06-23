@@ -1,25 +1,27 @@
-// Thomas Nagy 2013-2015 GPLV3
+// Thomas Nagy 2013-2016 GPLV3
 
 #include <QtGui>
 #include <QFile>
 #include <QTextBrowser>
 #include <QProgressDialog>
-#include <KStatusBar>
-#include <KFileDialog>
+#include <KDE/KStatusBar>
+#include <KDE/KFileDialog>
 #include <KConfigGroup>
-#include <KMenuBar>
-#include <KApplication>
+#include <KDE/KMenuBar>
+#include <KDE/KApplication>
+#include <KDE/KIcon>
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include<KToolBar>
-#include <KAction>
-#include <KMenu>
+#include <QAction>
+#include <KDE/KMenu>
+#include <QDir>
 #include <QDockWidget>
 #include <KMessageBox>
 #include <ktip.h>
 #include <QFrame>
-#include <KTabWidget>
+#include <KDE/KTabWidget>
 #include <KDirModel>
 
 #include "semantik_d_win.h"
@@ -59,11 +61,11 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oRedoAct = KStandardAction::redo(this, NULL, actionCollection());
 	m_oRedoAct->setEnabled(false);
 
-	KAction *l_oFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
+	QAction *l_oFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
 	l_oFitZoom->setIcon(KIcon(notr("zoom-best-fit")));
 	l_oFitZoom->setShortcut(trUtf8("Ctrl+H"));
 
-	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const KUrl&)), actionCollection());
+	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const QUrl&)), actionCollection());
 
 	QDockWidget *l_oDock = new QDockWidget(trUtf8("Files"), this);
 	l_oDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
@@ -73,16 +75,16 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oFileTree = new filetree(l_oDock);
 	l_oDock->setWidget(m_oFileTree);
 
-	setupGUI(QSize(1000, 800), Default, notr("semantik/semantik-dui.rc"));
+	setupGUI(QSize(1000, 800), Default, notr("semantik-dui.rc"));
 
 	read_config();
 	setAutoSaveSettings();
 	statusBar()->showMessage(trUtf8("This is Semantik-d"), 2000);
 
-	connect(m_oFileTree, SIGNAL(url_selected(const KUrl&)), this, SLOT(slot_recent(const KUrl&)));
-	connect(this, SIGNAL(url_opened(const KUrl&)), this, SLOT(record_open_url(const KUrl&)));
+	connect(m_oFileTree, SIGNAL(url_selected(const QUrl&)), this, SLOT(slot_recent(const QUrl&)));
+	connect(this, SIGNAL(url_opened(const QUrl&)), this, SLOT(record_open_url(const QUrl&)));
 
-	m_oFileTree->m_oModel->expandToUrl(KUrl("~"));
+	m_oFileTree->m_oModel->expandToUrl(QUrl::fromLocalFile(QDir::homePath()));
 }
 
 void semantik_d_win::wire_actions()
@@ -162,7 +164,7 @@ void semantik_d_win::wire_actions()
 	if (m_oActiveDocument)
 	{
 		connect(m_oActiveDocument->m_oDiagramView, SIGNAL(sig_message(const QString&, int)), statusBar(), SLOT(showMessage(const QString&, int)));
-		connect(m_oActiveDocument, SIGNAL(sig_tab_name(diagram_document*, const KUrl&)), this, SLOT(slot_update_tab_text(diagram_document*, const KUrl&)));
+		connect(m_oActiveDocument, SIGNAL(sig_tab_name(diagram_document*, const QUrl&)), this, SLOT(slot_update_tab_text(diagram_document*, const QUrl&)));
 		connect(m_oActiveDocument->m_oMediator, SIGNAL(enable_undo(bool, bool)), this, SLOT(slot_enable_undo(bool, bool)));
 
 		m_oActiveDocument->m_oMediator->check_undo(true);
@@ -210,8 +212,12 @@ void semantik_d_win::slot_tab_changed(int i_iIndex)
 
 void semantik_d_win::read_config()
 {
-	KConfigGroup l_oConfig(KGlobal::config(), notr("General Options"));
-	m_oRecentFilesAct->loadEntries(KGlobal::config()->group(notr("Recent Files")));
+	KConfig l_oCfg("semantik-d");
+	KConfigGroup l_oConfig(&l_oCfg, notr("General Options"));
+
+	KConfigGroup l_oSaveConfig(&l_oCfg, notr("Recent Files"));
+	m_oRecentFilesAct->loadEntries(l_oSaveConfig);
+
 	move(l_oConfig.readEntry(notr("winpos"), QPoint(0, 0)));
 	//m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), notr("/tmp/"));
 	//bind_node::set_var(notr("outdir"), m_oMediator->m_sOutDir);
@@ -219,11 +225,14 @@ void semantik_d_win::read_config()
 
 void semantik_d_win::write_config()
 {
-	KConfigGroup l_oConfig(KGlobal::config(), notr("General Options"));
-	m_oRecentFilesAct->saveEntries(KGlobal::config()->group(notr("Recent Files")));
+	KConfig l_oCfg("semantik-d");
+	KConfigGroup l_oConfig(&l_oCfg, notr("General Options"));
 	l_oConfig.writeEntry(notr("winpos"), pos());
-	//l_oConfig.writeEntry(notr("outdir"), bind_node::get_var(notr("outdir")));
 	l_oConfig.sync();
+
+	KConfigGroup l_oSaveConfig(&l_oCfg, notr("Recent Files"));
+	m_oRecentFilesAct->saveEntries(l_oSaveConfig);
+	l_oSaveConfig.sync();
 }
 
 bool semantik_d_win::queryClose()
@@ -265,7 +274,7 @@ bool semantik_d_win::save_tab(QWidget *i_oWidget) {
 	return true;
 }
 
-void semantik_d_win::slot_update_tab_text(diagram_document* i_oDoc, const KUrl & i_oUrl) {
+void semantik_d_win::slot_update_tab_text(diagram_document* i_oDoc, const QUrl & i_oUrl) {
 	int l_iIndex = m_oTabWidget->indexOf(i_oDoc);
 	if (l_iIndex > -1)
 	{
@@ -276,7 +285,7 @@ void semantik_d_win::slot_update_tab_text(diagram_document* i_oDoc, const KUrl &
 
 void semantik_d_win::slot_open()
 {
-	KUrl l_o = KFileDialog::getOpenUrl(KUrl(notr("kfiledialog:///document")),
+	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///document")),
                 trUtf8("*.semd|Semantik diagram (*.semd)"), this,
                 trUtf8("Choose a file to open"));
 	if (l_o.isEmpty()) return;
@@ -285,7 +294,7 @@ void semantik_d_win::slot_open()
 	for (int i = 0; i < m_oTabWidget->count(); ++i)
 	{
 		diagram_document *l_oDoc = static_cast<diagram_document*>(m_oTabWidget->widget(i));
-		if (l_oDoc->m_oDiagramView->m_oCurrentUrl.equals(l_o))
+		if (l_oDoc->m_oDiagramView->m_oCurrentUrl == l_o)
 		{
 			m_oTabWidget->setCurrentWidget(l_oDoc);
 			emit url_opened(m_oActiveDocument->m_oDiagramView->m_oCurrentUrl);
@@ -320,7 +329,7 @@ void semantik_d_win::fit_zoom()
 	}
 }
 
-void semantik_d_win::slot_recent(const KUrl& i_oUrl)
+void semantik_d_win::slot_recent(const QUrl& i_oUrl)
 {
 	if (i_oUrl.isEmpty()) return;
 
@@ -328,7 +337,7 @@ void semantik_d_win::slot_recent(const KUrl& i_oUrl)
 	for (int i = 0; i < m_oTabWidget->count(); ++i)
 	{
 		diagram_document *l_oDoc = static_cast<diagram_document*>(m_oTabWidget->widget(i));
-		if (l_oDoc->m_oDiagramView->m_oCurrentUrl.equals(i_oUrl))
+		if (l_oDoc->m_oDiagramView->m_oCurrentUrl == i_oUrl)
 		{
 			m_oTabWidget->setCurrentWidget(l_oDoc);
 			emit url_opened(m_oActiveDocument->m_oDiagramView->m_oCurrentUrl);
@@ -356,7 +365,7 @@ void semantik_d_win::slot_recent(const KUrl& i_oUrl)
 	}
 }
 
-void semantik_d_win::record_open_url(const KUrl & i_oUrl)
+void semantik_d_win::record_open_url(const QUrl & i_oUrl)
 {
 	if (!i_oUrl.isValid()) return;
 	m_oRecentFilesAct->addUrl(i_oUrl);
@@ -372,7 +381,7 @@ void semantik_d_win::slot_generate() {
 void semantik_d_win::slot_tip_of_day() {
 }
 
-void semantik_d_win::print_current(KUrl i_oUrl, QPair<int, int> i_oP)
+void semantik_d_win::print_current(QUrl i_oUrl, QPair<int, int> i_oP)
 {
 	if (m_oActiveDocument != NULL)
 	{
@@ -396,7 +405,4 @@ void semantik_d_win::update_title() {
 	}
 	setWindowTitle(txt);
 }
-
-#include "semantik_d_win.moc"
-
 

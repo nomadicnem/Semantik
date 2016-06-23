@@ -1,13 +1,13 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QVariant>
 #include <QCoreApplication>
 #include <QAction>
 #include <QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGridLayout>
+#include <QButtonGroup>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QSpacerItem>
@@ -75,4 +75,3 @@ doc_dialog::doc_dialog(QWidget *i_oParent):
 	resize(size);
 }
 
-#include "doc_dialog.moc"

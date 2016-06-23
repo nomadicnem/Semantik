@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QtDebug>
 #include <QTreeWidget>
@@ -12,7 +12,7 @@
 #include "linear_view.h"
 #include "con.h" 
 #include "mem_command.h"
-#include <KIconLoader>
+#include <KDE/KIconLoader>
 
 linear_view::linear_view(QWidget *i_oParent, sem_mediator *i_oControl) : QTreeWidget(i_oParent)
 {
@@ -377,6 +377,4 @@ void linear_view::notify_datatype(int i_iId)
 	};
 	l_oItem->setIcon(0, l_oIcon);
 }
-
-#include "linear_view.moc"
 

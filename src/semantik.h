@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 %: ifndef SEMANTIK_H
 #define SEMANTIK_H
@@ -10,11 +10,10 @@ h"
 #inc\
 lude <KXmlGuiWindow>
 
- %: include<KUrl>
+ %: include<QUrl>
 #include <QUuid>
 class KRecentFilesAction;
 class KToolBar;
-class KAction;
 class QAction;
 class QActionGroup;
 class QListWidget;
@@ -48,7 +47,7 @@ class semantik_win : public KXmlGuiWindow
 		QUuid m_oQUuid;
 		void read_config();
 		void write_config();
-		int print_to_file(const KUrl&, QPair<int, int> p);
+		int print_to_file(const QUrl&, QPair<int, int> p);
 
 		canvas_view *m_oCanvas;
 		image_view *m_oImageView;
@@ -66,15 +65,15 @@ class semantik_win : public KXmlGuiWindow
 
 		//void update_color_scheme();
 
-		KAction *m_oReorgAct;
-		KAction *m_oExportSizeAct;
+		QAction *m_oReorgAct;
+		QAction *m_oExportSizeAct;
 
-		KAction *m_oDocPropsAct;
-		KAction *m_oConfPropsAct;
-		KAction *m_oGenerateAct;
-		KAction *m_oCanvasFitZoom;
-		KAction *m_oUndoAct;
-		KAction *m_oRedoAct;
+		QAction *m_oDocPropsAct;
+		QAction *m_oConfPropsAct;
+		QAction *m_oGenerateAct;
+		QAction *m_oCanvasFitZoom;
+		QAction *m_oUndoAct;
+		QAction *m_oRedoAct;
 		KToolBar *m_oEditToolBar;
 		KToolBar *m_oColorsToolBar;
 		KToolBar *m_oFlagsToolBar;
@@ -109,7 +108,7 @@ class semantik_win : public KXmlGuiWindow
 		bool slot_save();
 		bool slot_save_as();
 
-		void slot_recent(const KUrl &);
+		void slot_recent(const QUrl &);
 
 		void slot_enable_undo(bool, bool);
 

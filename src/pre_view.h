@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef PRE_VIEW_H
 #define PRE_VIEW_H
@@ -9,6 +9,7 @@
 class browser;
 class QLabel;
 class QWebView;
+class sem_mediator;
 class pre_view : public QStackedWidget
 {
 	Q_OBJECT

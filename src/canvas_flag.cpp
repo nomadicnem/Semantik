@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 
 #include <QGraphicsScene>
@@ -56,9 +56,4 @@ void canvas_flag::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_
 		}
 	}
 }
-
-#ifdef WAF
-#else
-#include "canvas_view.moc"
-#endif
 

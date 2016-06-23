@@ -1,4 +1,4 @@
-Semantik 0.9.5, Thomas Nagy
+Semantik 1.0.0, Thomas Nagy
 contact:       tnagy at waf.io
 Project page:  https://waf.io/semantik.html
 Source code:   https://github.com/ita1024/semantik
@@ -6,11 +6,10 @@ Source code:   https://github.com/ita1024/semantik
 
 1. Compilation and installation:
 
-First, make sure that you have a Linux(tm) system (a *BSD system should do it too)
-* the KDE4 development packages must be installed (KDE4 >= beta4)
-* the Qt development packages must be installed (Qt >= 4.3)
+KDE4 is deprecated so we have to use the kde frameworks for the project now.
+A few dependencies may be tricky to install, for example libkf5kdelibs4support-dev
 
-To compile, run:
+To build the project, run:
 ./waf configure build
 
 A few systems may require different options such as:
@@ -76,6 +75,4 @@ semantik-d diag.semd -o foo.pdf
 4. License:
 
 GPL V3
-
-
 

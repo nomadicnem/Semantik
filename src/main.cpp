@@ -1,23 +1,19 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <fstream>
 #include <QCoreApplication>
 #include <QtGui>
-#include  <QX11Info>
 #include <QTranslator>
+#include <QCommandLineParser>
 #include "con.h"
 #include "semantik.h"
 #include <stdlib.h>
 #include <iostream>
 
-#include <KGlobal>
-
-#include <KApplication>
+#include <KDE/KCmdLineOptions>
+#include <KDE/K4AboutData>
+#include <KDE/KApplication>
 #include <KAboutData>
-#include <KCmdLineArgs>
-#include <KLocale>
-#include <KDebug>
-#include <KGlobal>
 
 static const char description[] = I18N_NOOP("A mind-mapping tool for KDE\nAvailable exclusively for open systems such as OpenSuse, Gentoo or Fedora.");
 static const char version[] = VERSION;
@@ -28,21 +24,19 @@ int grid_int(int x) {
 
 int main(int i_iArgc, char **i_iArgv)
 {
+	QCommandLineParser l_oParser;
+
 	KCmdLineOptions options;
 	options.add("+[url]", ki18n("A file to open on startup"));
 	options.add("o <file>", ki18n("An output file for printing the map"));
-
-	KAboutData l_o("semantik", 0, ki18n("Semantik"), version, ki18n(description),
-			KAboutData::License_GPL_V3, ki18n("(C) 2007-2015 Thomas Nagy"), KLocalizedString());
+	K4AboutData l_o("semantik", 0, ki18n("Semantik"), version, ki18n(description),
+			K4AboutData::License_GPL_V3, ki18n("(C) 2007-2016 Thomas Nagy"), KLocalizedString());
 	l_o.setBugAddress("https://github.com/ita1024/semantik/issues");
 	l_o.addAuthor(ki18n("Thomas Nagy"), KLocalizedString());
 
 	KCmdLineArgs::init(i_iArgc, i_iArgv, &l_o);
 	KCmdLineArgs::addCmdLineOptions(options);
-
 	KApplication l_oApp;
-
-	KGlobal::locale()->insertCatalog("libkdeedu");
 
 	semantik_win *l_oMainWin = new semantik_win;
 
@@ -53,7 +47,7 @@ int main(int i_iArgc, char **i_iArgv)
 				qDebug()<<"a file requires a url";
 				return 1;
 			} else {
-				KUrl l_oUrl(args->getOption("o"));
+				QUrl l_oUrl(args->getOption("o"));
 				if (!l_oUrl.isValid()) return 2;
 
 				l_oMainWin->slot_recent(args->url(0));

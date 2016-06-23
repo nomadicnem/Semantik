@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef DATA_VIEW_H
 #define DATA_VIEW_H
@@ -7,6 +7,7 @@
 #include  	"con.h"
 
 class QLabel;
+class sem_mediator;
 class data_view : public QStackedWidget
 {
 	Q_OBJECT

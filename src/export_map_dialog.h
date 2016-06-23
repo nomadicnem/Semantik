@@ -3,7 +3,7 @@
 #ifndef EXPORT_MAP_DIALOG_H
 #define EXPORT_MAP_DIALOG_H
 
-#include <KDialog>
+#include <KDE/KDialog>
 
 class QSpinBox;
 class QRadioButton;

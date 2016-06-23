@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef DATA_CONTROL_H
 #define DATA_CONTROL_H
@@ -6,8 +6,9 @@
 #include <QObject>
 #include <QStack>
 #include <QXmlDefaultHandler>
-#include<KUrl> 
-#include <kio/netaccess.h>
+#include<QUrl> 
+// FIXME
+// #include <kio/netaccess.h>
 
 #include "aux.h"
 #include "con.h"
@@ -169,7 +170,7 @@ class sem_mediator: public QObject
 
 	public:
 
-		KUrl m_oCurrentUrl;
+		QUrl m_oCurrentUrl;
 
 		QHash<int, data_item*> m_oItems;
 		QList<QPoint> m_oLinks;
@@ -188,7 +189,7 @@ class sem_mediator: public QObject
 		QPixmap getPix(int id);
 		QPixmap getThumb(int id);
 		bool load_picture(const QString&, int);
-		bool save_and_load_picture(const KUrl& i_sPath, int id);
+		bool save_and_load_picture(const QUrl& i_sPath, int id);
 
 
 		void generate_docs(const QString &i_oFile, const QString &i_sName, const QString &i_sLocation);

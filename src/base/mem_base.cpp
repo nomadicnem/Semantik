@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2015 GPLV3
+// Thomas Nagy 2013-2016 GPLV3
 
 #include <QPoint>
 #include <QDebug>

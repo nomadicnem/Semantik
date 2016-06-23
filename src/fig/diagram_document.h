@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2015 GPLV3
+// Thomas Nagy 2013-2016 GPLV3
 
 %: ifndef DIAGRAM_WIDGET_H
 #define DIAGRAM_WIDGET_H
@@ -10,7 +10,7 @@ h"
 #inc\
 lude <QFrame>
 
- %: include<KUrl>
+ %: include<QUrl>
 
 class box_view;
 class sem_mediator;
@@ -20,7 +20,7 @@ class diagram_document : public QFrame
 
 	public:
 		diagram_document(QWidget *i_oParent=0);
-		~diagram_document();
+		virtual ~diagram_document();
 		void init();
 
 		box_view *m_oDiagramView;
@@ -28,10 +28,10 @@ class diagram_document : public QFrame
 
 	public slots:
 		void slot_open();
-		void slot_tab_name(const KUrl&);
+		void slot_tab_name(const QUrl&);
 
 	signals:
-		void sig_tab_name(diagram_document*, const KUrl&);
+		void sig_tab_name(diagram_document*, const QUrl&);
 };
 
 #endif

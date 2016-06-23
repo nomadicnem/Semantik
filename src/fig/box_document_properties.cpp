@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QSpinBox>
 #include <QComboBox>
@@ -9,10 +9,11 @@
 #include <QHeaderView>
 #include <QDirModel>
 #include <QCompleter>
-#include <kfontdialog.h>
+#include <KDE/KDialog>
+#include <kfontchooser.h>
 #include "mem_box.h"
 #include "box_view.h"
-#include "kiconloader.h"
+//#include "kiconloader.h"
 
 #include <QtDebug>
 
@@ -24,8 +25,9 @@ box_document_properties::box_document_properties(box_view *i_oParent):
 {
 	m_oView = i_oParent;
 
-	setCaption(trUtf8("Diagram properties"));
-	setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel);
+	setWindowTitle(trUtf8("Diagram properties"));
+	// FIXME
+	//setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel);
 	//enableButtonApply(false);
 
 	setFaceType(List);
@@ -35,10 +37,12 @@ box_document_properties::box_document_properties(box_view *i_oParent):
 	m_oFontChooser = new KFontChooser(this, KFontChooser::NoDisplayFlags, QStringList(), 0);
 	m_oFontChooser->setFont(l_oItem->m_oDiagramFont);
 	KPageWidgetItem* l_oPage = new KPageWidgetItem(m_oFontChooser, trUtf8("Font"));
+	// FIXME
+/*
 	l_oPage->setIcon(KIcon(DesktopIcon(notr("preferences-desktop-font"))));
+*/
 	l_oPage->setHeader(trUtf8("Font for diagram objects"));
 	addPage(l_oPage);
-
 	connect(this, SIGNAL(applyClicked()), this, SLOT(apply()));
 	connect(this, SIGNAL(okClicked()), this, SLOT(apply()));
 
@@ -54,11 +58,10 @@ void box_document_properties::apply()
 	mem->m_oNewFont = m_oFontChooser->font();
 	mem->apply();
 
-	/*if (!isButtonEnabled(KDialog::Apply)) {
+	/*
+	if (!isButtonEnabled(KDialog::Apply)) {
 		return;
 	}
 	enableButtonApply(false);*/
 }
-
-#include "box_document_properties.moc"
 

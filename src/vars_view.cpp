@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QtDebug>
 #include <QTextEdit>
@@ -45,8 +45,8 @@ void vars_view::init_completer()
 	m_oCompleterItem->setCaseSensitivity(Qt::CaseInsensitive);
 	l_oTreeView->header()->hide();
 	l_oTreeView->header()->setStretchLastSection(false);
-	l_oTreeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
-	l_oTreeView->header()->setResizeMode(1, QHeaderView::Stretch);
+	l_oTreeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+	l_oTreeView->header()->setSectionResizeMode(1, QHeaderView::Stretch);
 	l_oTreeView->setRootIsDecorated(false);
 	QObject::connect(m_oCompleterItem, SIGNAL(activated(const QString&)), this, SLOT(do_complete(const QString&)));
 
@@ -64,8 +64,8 @@ void vars_view::init_completer()
 	m_oCompleterAll->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
 	m_oCompleterAll->setCaseSensitivity(Qt::CaseInsensitive);
 	l_oTreeView->header()->setStretchLastSection(false);
-	l_oTreeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
-	l_oTreeView->header()->setResizeMode(1, QHeaderView::Stretch);
+	l_oTreeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+	l_oTreeView->header()->setSectionResizeMode(1, QHeaderView::Stretch);
 	l_oTreeView->setRootIsDecorated(false);
 	l_oTreeView->header()->hide();
 	QObject::connect(m_oCompleterAll, SIGNAL(activated(const QString&)), this, SLOT(do_complete(const QString&)));
@@ -313,6 +313,4 @@ void vars_view::try_complete()
 	l_oTreeView->resizeColumnToContents(1);
 	m_oCompleter->complete(l_oRect);
 }
-
-#include "vars_view.moc"
 

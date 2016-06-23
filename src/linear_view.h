@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef LINEAR_VIEW_H
 #define LINEAR_VIEW_H
@@ -11,7 +11,7 @@ class QDragMoveEvent;
 class QDropEvent;
 class QMouseEvent;
 class QMimeData;
-
+class sem_mediator;
 class linear_view : public QTreeWidget
 {
 	Q_OBJECT

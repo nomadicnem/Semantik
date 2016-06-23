@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QIcon>
 #include <QSvgRenderer>
@@ -56,4 +56,3 @@ const QIcon flag_scheme::_icon()
 	return l_oIcon;
 }
 
-#include "flag_scheme.moc"

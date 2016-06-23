@@ -1,6 +1,6 @@
-// Thomas Nagy 2013-2015 GPLV3
+// Thomas Nagy 2013-2016 GPLV3
 
-#include <KUrl>
+#include <QUrl>
 #include <QTreeView>
 #include <QSortFilterProxyModel>
 
@@ -26,13 +26,14 @@ class filetree : public QTreeView
 		filetree(QWidget*);
 		KDirModel *m_oModel;
 		fileproxy *m_oProxy;
+		Qt::DropActions supportedDragActions() const;
 
 	public slots:
 		void reclick(const QModelIndex& i_oModelIndex);
 		void slot_expand(const QModelIndex& i_oIndex);
 
 	signals:
-		void url_selected(const KUrl&);
+		void url_selected(const QUrl&);
 };
 
 #endif

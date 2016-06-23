@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef CON
 #define CON
@@ -36,9 +36,9 @@
 #define VIEW_TABLE 6
 
 
-#define notr(x) QString(x)
-#define xp(a, b, d) a->setItem(b, 0, new QStandardItem(d));
-#define yp(a, b, d) a->setItem(b, 1, new QStandardItem(d));
+#define notr(x) (QString(x))
+#define xxp(a, b, d) a->setItem(b, 0, new QStandardItem(d));
+#define yyp(a, b, d) a->setItem(b, 1, new QStandardItem(d));
 
 
 #define GRID 10

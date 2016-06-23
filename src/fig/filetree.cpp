@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2015 GPLV3
+// Thomas Nagy 2013-2016 GPLV3
 
 # include <filetree.h>
 #include <QFileSystemModel>
@@ -12,7 +12,6 @@ fileproxy::fileproxy(QObject* i_oParent) : QSortFilterProxyModel(i_oParent)
 	setDynamicSortFilter(true);
 	setSortCaseSensitivity(Qt::CaseSensitive);
 	sort(KDirModel::Name, Qt::AscendingOrder);
-	setSupportedDragActions(Qt::CopyAction | Qt::MoveAction | Qt::LinkAction | Qt::IgnoreAction);
 }
 
 bool fileproxy::filterAcceptsRow(int i_iRow, const QModelIndex& i_oParent) const
@@ -61,7 +60,7 @@ filetree::filetree(QWidget *i_oWidget) : QTreeView(i_oWidget)
 	m_oProxy->setDynamicSortFilter(true);
 	setModel(m_oProxy);
 
-	m_oModel->dirLister()->openUrl(KUrl("/"), KDirLister::Keep);
+	m_oModel->dirLister()->openUrl(QUrl("file:///"), KDirLister::Keep);
 
 	setSortingEnabled(true);
 	sortByColumn(0, Qt::AscendingOrder);
@@ -86,5 +85,7 @@ void filetree::reclick(const QModelIndex& i_oModelIndex)
 	}
 }
 
-#include "filetree.moc"
+Qt::DropActions filetree::supportedDragActions() const {
+	return Qt::CopyAction | Qt::MoveAction | Qt::LinkAction | Qt::IgnoreAction;
+}
 

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QtDebug>
 #include <QLabel>
@@ -44,6 +44,4 @@ void data_view::notify_datatype(int id) {
 			break;
 	}
 }
-
-#include "data_view.moc"
 

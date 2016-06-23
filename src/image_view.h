@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef IMAGE_VIEW_H
 #define IMAGE_VIEW_H
@@ -7,8 +7,9 @@
 #include <QSplitter>
 #include "c\
 on.h"
-#include <KUrl>
+#include <QUrl>
 
+class sem_mediator;
 class QMenu;
 class image_view : public QWidget
 {
@@ -29,7 +30,7 @@ class image_view : public QWidget
 
 		bool event(QEvent*);
 		void mouseReleaseEvent(QMouseEvent*);
-		void do_change_pic(const KUrl&);
+		void do_change_pic(const QUrl&);
 
 		void dragEnterEvent(QDragEnterEvent*);
 		void dragMoveEvent(QDragMoveEvent*);

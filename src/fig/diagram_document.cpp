@@ -1,20 +1,20 @@
-// Thomas Nagy 2013-2015 GPLV3
+// Thomas Nagy 2013-2016 GPLV3
 
 #include <QtGui>
 #include <QFile>
 #include <QTextBrowser>
+#include <QGridLayout>
 #include <QProgressDialog>
-#include <KStatusBar>
-#include <KFileDialog>
+#include <KDE/KStatusBar>
+#include <KDE/KFileDialog>
 #include <KConfigGroup>
-#include <KMenuBar>
-#include <KApplication>
+#include <KDE/KMenuBar>
+#include <KDE/KApplication>
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include<KToolBar>
-#include <KAction>
-#include <KMenu>
+#include <KDE/KMenu>
 #include <KMessageBox>
 #include <ktip.h>
 #include <QFrame>
@@ -54,7 +54,7 @@ void diagram_document::init()
 	connect(m_oMediator, SIGNAL(sig_focus(void *)), m_oDiagramView, SLOT(notify_focus(void *)));
 	connect(m_oMediator, SIGNAL(sig_change_properties(void *)), m_oDiagramView, SLOT(notify_change_properties(void *)));
 
-	connect(m_oDiagramView, SIGNAL(sig_Url(const KUrl&)), this, SLOT(slot_tab_name(const KUrl&)));
+	connect(m_oDiagramView, SIGNAL(sig_Url(const QUrl&)), this, SLOT(slot_tab_name(const QUrl&)));
 
 	mem_add *add = new mem_add(m_oMediator);
 	add->init();
@@ -79,14 +79,11 @@ diagram_document::~diagram_document()
 	delete m_oDiagramView;
 }
 
-void diagram_document::slot_tab_name(const KUrl& i_oUrl)
+void diagram_document::slot_tab_name(const QUrl& i_oUrl)
 {
 	emit sig_tab_name(this, i_oUrl);
 }
 
 void diagram_document::slot_open() {
 }
-
-#include "diagram_document.moc"
-
 

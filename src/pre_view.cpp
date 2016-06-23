@@ -1,8 +1,6 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
-#include <khtml_part.h>
-#include <khtmlview.h>
-#include <KUrl>
+#include <QUrl>
 #include <QtDebug>
 #include <QLabel>
 #include <QTextBrowser>
@@ -48,7 +46,7 @@ void pre_view::notify_preview()
 	}
 	else if (l_s.endsWith(notr(".tex")))
 	{
-		//m_oBrowser->openUrl(KUrl(l_s));
+		//m_oBrowser->openUrl(QUrl(l_s));
 		//setCurrentWidget(m_oBrowser);
 	}
 	else
@@ -57,6 +55,4 @@ void pre_view::notify_preview()
 	}
 
 }
-
-#include "pre_view.moc"
 

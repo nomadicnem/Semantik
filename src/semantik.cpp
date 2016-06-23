@@ -1,23 +1,24 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QtGui>
 #include <QFile>
 #include <QTextBrowser>
 #include <QProgressDialog>
-#include <KStatusBar>
-#include <KFileDialog>
+#include <KDE/KStatusBar>
+#include <KDE/KFileDialog>
 #include <KConfigGroup>
-#include <KMenuBar>
-#include <KApplication>
+#include <KDE/KMenuBar>
+#include <KDE/KApplication>
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include<KToolBar>
-#include <KAction>
-#include <KMenu>
+#include <KDE/KMenu>
+#include <KDE/KIcon>
 #include <KMessageBox>
 #include <ktip.h>
 #include <QFrame>
+#include <QtWidgets>
  #include <QUuid>
 
 #include "box_view.h"
@@ -162,21 +163,21 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oRedoAct = KStandardAction::redo(m_oMediator, SLOT(slot_redo()), actionCollection());
 	m_oRedoAct->setEnabled(false);
 
-	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const KUrl&)), actionCollection());
+	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const QUrl&)), actionCollection());
 
-	m_oReorgAct = new KAction(trUtf8("&Reorganize the map"), this);
+	m_oReorgAct = new QAction(trUtf8("&Reorganize the map"), this);
 	actionCollection()->addAction(notr("reorganize_map"), m_oReorgAct);
 	m_oReorgAct->setShortcut(trUtf8("Ctrl+R"));
 	connect(m_oReorgAct, SIGNAL(triggered(bool)), m_oCanvas, SLOT(reorganize()));
 
-	m_oExportSizeAct = new KAction(trUtf8("&Export the map..."), this);
+	m_oExportSizeAct = new QAction(trUtf8("&Export the map..."), this);
 	actionCollection()->addAction(notr("export_map_size"), m_oExportSizeAct);
 	m_oExportSizeAct->setShortcut(trUtf8("Ctrl+Shift+E"));
 	connect(m_oExportSizeAct, SIGNAL(triggered(bool)), m_oCanvas, SLOT(export_map_size()));
 
 	KStandardAction::preferences(this, SLOT(slot_properties()), actionCollection());
 
-	m_oGenerateAct = new KAction(trUtf8("&Generate..."), this);
+	m_oGenerateAct = new QAction(trUtf8("&Generate..."), this);
 	actionCollection()->addAction(notr("generate_doc"), m_oGenerateAct);
 	m_oGenerateAct->setIcon(KIcon(notr("run-build-file")));
 	m_oGenerateAct->setShortcut(trUtf8("Ctrl+G"));
@@ -193,7 +194,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oFlagGroup->setExclusive(false);
 	connect(m_oFlagGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_flags(QAction*)));
 
-	//m_oCanvasFitZoom = new KAction(trUtf8("Fit zoom"), this);
+	//m_oCanvasFitZoom = new QAction(trUtf8("Fit zoom"), this);
 	//actionCollection()->addAction(notr("zoom_map"), m_oCanvasFitZoom);
 	//m_oCanvasFitZoom->setIcon(KIcon(notr("zoom-best-fit")));
 	//connect(m_oCanvasFitZoom, SIGNAL(triggered(bool)), m_oCanvas, SLOT(fit_zoom()));
@@ -263,7 +264,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	setupGUI(QSize(800, 800), Default, notr("semantikui.rc"));
 
-	m_oMediator->m_oCurrentUrl = KUrl();
+	m_oMediator->m_oCurrentUrl = QUrl();
 	update_title();
 
 	m_oColorsToolBar = toolBar(notr("colorsToolBar"));
@@ -368,8 +369,12 @@ void semantik_win::fit_zoom()
 
 void semantik_win::read_config()
 {
-	KConfigGroup l_oConfig(KGlobal::config(), notr("General Options"));
-	m_oRecentFilesAct->loadEntries(KGlobal::config()->group(notr("Recent Files")));
+	KConfig l_oCfg("semantik");
+	KConfigGroup l_oConfig(&l_oCfg, notr("General Options"));
+
+	KConfigGroup l_oSaveConfig(&l_oCfg, notr("Recent Files"));
+	m_oRecentFilesAct->loadEntries(l_oSaveConfig);
+
 	move(l_oConfig.readEntry(notr("winpos"), QPoint(0, 0)));
 	m_oCanvas->setBackgroundBrush(QColor(l_oConfig.readEntry(notr("bgcolor"), notr("#FFFDE8"))));
 	m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), notr("/tmp/"));
@@ -393,12 +398,16 @@ void semantik_win::read_config()
 
 void semantik_win::write_config()
 {
-	KConfigGroup l_oConfig(KGlobal::config(), notr("General Options"));
-	m_oRecentFilesAct->saveEntries(KGlobal::config()->group(notr("Recent Files")));
+	KConfig l_oCfg("semantik");
+	KConfigGroup l_oConfig(&l_oCfg, notr("General Options"));
 	l_oConfig.writeEntry(notr("winpos"), pos());
 	l_oConfig.writeEntry(notr("outdir"), bind_node::get_var(notr("outdir")));
 	l_oConfig.writeEntry(notr("guid"), m_oQUuid.toString());
 	l_oConfig.sync();
+
+	KConfigGroup l_oSaveConfig(&l_oCfg, notr("Recent Files"));
+	m_oRecentFilesAct->saveEntries(l_oSaveConfig);
+	l_oSaveConfig.sync();
 }
 
 semantik_win::~semantik_win()
@@ -406,7 +415,7 @@ semantik_win::~semantik_win()
 
 }
 
-int semantik_win::print_to_file(const KUrl & url, QPair<int, int> p)
+int semantik_win::print_to_file(const QUrl & url, QPair<int, int> p)
 {
 	return m_oCanvas->batch_print_map(url, p);
 }
@@ -414,14 +423,14 @@ int semantik_win::print_to_file(const KUrl & url, QPair<int, int> p)
 bool semantik_win::slot_save_as()
 {
 	choose:
-	KUrl l_o = KFileDialog::getSaveUrl(KUrl(notr("kfiledialog:///document")),
+	QUrl l_o = KFileDialog::getSaveUrl(QUrl(notr("kfiledialog:///document")),
 		trUtf8("*.sem|Semantik file (*.sem)"), this,
 		trUtf8("Choose a file name"));
 
 	if (l_o.path().isEmpty()) return false;
 	if (!l_o.path().endsWith(notr(".sem")))
 	{
-		l_o = KUrl(l_o.path()+notr(".sem"));
+		l_o = QUrl(l_o.path()+notr(".sem"));
 	}
 
 	if (m_oMediator->m_sLastSaved != l_o.path())
@@ -448,7 +457,7 @@ bool semantik_win::slot_save_as()
 	}
 	else
 	{
-		m_oMediator->m_oCurrentUrl = KUrl();
+		m_oMediator->m_oCurrentUrl = QUrl();
 		update_title();
 	}
 
@@ -476,7 +485,7 @@ void semantik_win::slot_open()
 		if (!proceed_save()) return;
 	}
 
-	KUrl l_o = KFileDialog::getOpenUrl(KUrl(notr("kfiledialog:///document")),
+	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///document")),
 		trUtf8("*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"),
 		this, trUtf8("Choose a file name"));
 	if (l_o.isValid() && m_oMediator->open_file(l_o.path()))
@@ -509,7 +518,8 @@ void semantik_win::slot_properties()
 {
 	config_dialog l_oGen(this);
 
-	KConfigGroup l_oSettings(KGlobal::config(), notr("General Options"));
+	KConfig l_oCfg("semantik");
+	KConfigGroup l_oSettings(&l_oCfg, notr("General Options"));
 	l_oGen.m_oConnType->setCurrentIndex(l_oSettings.readEntry(notr("conn"), 0));
 	l_oGen.m_oReorgType->setCurrentIndex(l_oSettings.readEntry(notr("reorg"), 0));
 	l_oGen.m_oAutoSave->setValue(l_oSettings.readEntry(notr("auto"), 5));
@@ -566,10 +576,10 @@ bool semantik_win::proceed_save()
 	return false;
 }
 
-void semantik_win::slot_recent(const KUrl& i_oBadUrl)
+void semantik_win::slot_recent(const QUrl& i_oBadUrl)
 {
 	// deep copy or it will crash
-	KUrl i_oUrl = i_oBadUrl;
+	QUrl i_oUrl = i_oBadUrl;
 
 	if (i_oUrl.path().isEmpty()) return;
 	if (m_oMediator->m_bDirty)
@@ -598,6 +608,4 @@ void semantik_win::slot_enable_undo(bool undo, bool redo) {
 	m_oUndoAct->setEnabled(undo);
 	m_oRedoAct->setEnabled(redo);
 }
-
-#include "semantik.moc"
 

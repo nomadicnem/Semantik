@@ -1,10 +1,10 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
-#include <KIcon>
+#include <KDE/KIcon>
 #include <QtDebug>
 #include <QTreeView>
 #include <QGridLayout>
-#include <KPushButton>
+#include <KDE/KPushButton>
 #include <QLineEdit>
 #include <QSizePolicy>
 

@@ -1,11 +1,10 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QVariant>
 #include <QAction>
 #include <QSpinBox>
 #include <QApplication>
 #include <QButtonGroup>
-#include <KDialog>
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -93,6 +92,4 @@ void config_dialog::select_color()
 	l_oPalette.setBrush(QPalette::Active, QPalette::Button, m_oColor);
 	m_oColorWidget->setPalette(l_oPalette);
 }
-
-#include "config_dialog.moc"
 

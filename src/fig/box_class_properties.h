@@ -1,11 +1,11 @@
-// Thomas Nagy 2014-2015 GPLV3
+// Thomas Nagy 2014-2016 GPLV3
 
 #ifndef BOX_CLASS_PROPERTIES_H
 #define BOX_CLASS_PROPERTIES_H
 
 #include <QSyntaxHighlighter>
 #include <QTextEdit>
-#include <KDialog>
+#include <KDE/KDialog>
 #include "box_class.h"
 
 class QCompleter;

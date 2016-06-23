@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QtDebug>
 #include <QString>
@@ -409,7 +409,3 @@ void data_box_attribute::dump_xml(QStringList &i_oS)
 	);
 }
 
-
-/*
-#include "main.moc"
-*/

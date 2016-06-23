@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2015 GPLV3
+// Thomas Nagy 2013-2016 GPLV3
 
 %: ifndef SEMANTIKD_H
 #define SEMANTIKD_H
@@ -11,11 +11,10 @@ h"
 #inc\
 lude <KXmlGuiWindow>
 
- %: include<KUrl>
+ %: include<QUrl>
 
 class KRecentFilesAction;
 class KToolBar;
-class KAction;
 class QAction;
 class QActionGroup;
 class QListWidget;
@@ -34,8 +33,8 @@ class semantik_d_win : public KXmlGuiWindow
 		semantik_d_win(QWidget *i_oParent=0);
 
 		diagram_document *m_oActiveDocument;
-		KAction *m_oUndoAct;
-		KAction *m_oRedoAct;
+		QAction *m_oUndoAct;
+		QAction *m_oRedoAct;
 
 		KRecentFilesAction* m_oRecentFilesAct;
 		KTabWidget *m_oTabWidget;
@@ -46,12 +45,12 @@ class semantik_d_win : public KXmlGuiWindow
 		bool queryClose();
 
 		void wire_actions();
-		void print_current(KUrl i_oUrl, QPair<int, int>);
+		void print_current(QUrl i_oUrl, QPair<int, int>);
 
 	public slots:
 		void slot_open();
 		void slot_enable_undo(bool, bool);
-		void slot_recent(const KUrl &);
+		void slot_recent(const QUrl &);
 
 		void slot_properties();
 
@@ -62,13 +61,13 @@ class semantik_d_win : public KXmlGuiWindow
 		void slot_add_tab();
 		void slot_tab_changed(int);
 		void slot_remove_tab(QWidget*);
-		void slot_update_tab_text(diagram_document*, const KUrl &);
+		void slot_update_tab_text(diagram_document*, const QUrl &);
 
 		void fit_zoom();
-		void record_open_url(const KUrl&);
+		void record_open_url(const QUrl&);
 		void update_title();
 	signals:
-		void url_opened(const KUrl&);
+		void url_opened(const QUrl&);
 };
 
 #endif

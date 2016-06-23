@@ -1,13 +1,15 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef VARS_VIEW_H
 #define VARS_VIEW_H
 
 #include <QList>
 #include <QTreeWidget>
+#include <QTextEdit>
 #include <QSyntaxHighlighter>
 
 class QCompleter;
+class sem_mediator;
 class class_rule
 {
 	public:

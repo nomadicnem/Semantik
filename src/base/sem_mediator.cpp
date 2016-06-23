@@ -1,8 +1,8 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <sys/time.h>
 
-#include<KUrl>
+#include<QUrl>
 
 #if defined(_POSIX_C_SOURCE)
 	#undef _POSIX_C_SOURCE
@@ -19,17 +19,14 @@
  #include <QtDebug>
   %:	include<QCoreApplication>
   #include <QXmlDefaultHandler>
-#include<KConfigGroup>
-%:include\
-<KGlobal>
 #include<KConfig>
+#include <KConfigGroup>
  #include <QProcess>   
   #include <QDir>
  #include<QStack>
 /*
  */ #include <sys/ioctl.h>
   #include <termios.h>
-#include <sonnet/dialog.h>
 /*
   */ %: include "con.h"  
         #include <stdlib.h> 
@@ -37,6 +34,7 @@
   #include "data_item.h"	
   %: include "sem_mediator.h" 
 #include <KMessageBox>
+#include "kio/job.h"
 
 class semantik_reader : public QXmlDefaultHandler
 {
@@ -306,7 +304,8 @@ void sem_mediator::init_colors()
 		++i;
 	}
 
-	KConfigGroup l_oSettings(KGlobal::config(), notr("General Options"));
+	KConfig l_oCfg("semantik");
+	KConfigGroup l_oSettings( &l_oCfg, notr("General Options"));
         m_iConnType = l_oSettings.readEntry(notr("conn"), 0);
         m_iReorgType = l_oSettings.readEntry(notr("reorg"), 0);
 	m_dTriSize = l_oSettings.readEntry(notr("trisize"), (double) 4.5);
@@ -1194,7 +1193,7 @@ QPair<int, int> sem_mediator::hint_size_diagram(int id)
 		{
 			bind_node::s_oResults.clear();
 			QString s = QString("compute_hints(%1)").arg(id);
-			QByteArray ba = s.toAscii();
+			QByteArray ba = s.toLatin1();
 			PyRun_SimpleString(ba.constData());
 
 			width = bind_node::s_oResults.value("diagram_width").toInt();
@@ -1348,24 +1347,29 @@ QPixmap sem_mediator::getThumb(int id)
 	return QPixmap();
 }
 
-bool sem_mediator::save_and_load_picture(const KUrl& i_sPath, int id)
+bool sem_mediator::save_and_load_picture(const QUrl& i_sPath, int id)
 {
 	QStringList sp = i_sPath.path().split(".");
 	if (sp.size() < 2) return false;
 	QString dest = QString(m_sTempDir+"/img-%1.%2").arg(QString::number(id)).arg(sp[sp.size()-1]);
 
-	bool ok = KIO::NetAccess::file_copy(i_sPath, KUrl(dest), NULL);
-	if (!ok)
-		goto cleanup;
 
-	ok = load_picture(dest, id);
-	if (!ok)
+	KJob *l_oJob = KIO::file_copy(i_sPath, QUrl(dest), KIO::Overwrite);
+	bool l_bOk = l_oJob->exec();
+	if (l_bOk) {
 		goto cleanup;
+	}
+
+	l_bOk = load_picture(dest, id);
+	if (!l_bOk) {
+		goto cleanup;
+	}
 
 	return true;
 
 	cleanup:
-		KIO::NetAccess::del(KUrl(dest), NULL);
+		KJob *l_oDelJob = KIO::file_delete(QUrl(dest));
+		l_oDelJob->exec();
 		return false;
 }
 
@@ -1534,6 +1538,4 @@ void sem_mediator::notify_change_properties(void* i_o)
 {
 	emit sig_change_properties(i_o);
 }
-
-#include "sem_mediator.moc"
 

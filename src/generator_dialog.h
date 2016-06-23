@@ -1,9 +1,9 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef GENERATOR_DIALOG_H
 #define GENERATOR_DIALOG_H
 
-#include <KDialog>
+#include <KDE/KDialog>
 
 #include "con.h"
 #include "template_entry.h"
@@ -11,6 +11,7 @@
 class QLineEdit;
 class QTextEdit;
 class QTreeWidgetItem;
+class QTreeWidget;
 class generator_dialog : public KDialog
 {
 	Q_OBJECT

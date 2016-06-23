@@ -3,7 +3,7 @@
 #ifndef BOX_LINK_PROPERTIES_H
 #define BOX_LINK_PROPERTIES_H
 
-#include <KDialog>
+#include <KDE/KDialog>
 #include "box_link.h"
 
 class QSpinBox;

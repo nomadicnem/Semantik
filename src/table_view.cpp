@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QtDebug>
 #include <QAction>
@@ -308,6 +308,4 @@ void table_view::notify_select(const QList<int>& unsel, const QList<int>& sel)
 	repaint();
 	m_bFreeze = false;
 }
-
-#include "table_view.moc"
 

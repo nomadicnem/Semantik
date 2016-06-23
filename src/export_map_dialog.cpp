@@ -1,10 +1,10 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #include <QVariant>
 #include <QAction>
 #include <QApplication>
 #include <QButtonGroup>
-#include <KDialog>
+#include <KDE/KDialog>
 #include <QGridLayout>
 #include<QPushButton>
 #include <QLabel>
@@ -107,6 +107,4 @@ void export_map_dialog::heightChanged(int v)
 		return;
 	m_oWidth->setValue((v * m_iBaseWidth) / m_iBaseHeight);
 }
-
-#include "export_map_dialog.moc"
 

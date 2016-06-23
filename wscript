@@ -1,47 +1,73 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2007-2015 (ita)
+# Thomas Nagy, 2007-2016 (ita)
 
 APPNAME = 'semantik'
-VERSION = '0.9.5'
+VERSION = '1.0.0'
 
 top = '.'
 
 import os, sys, re, time
 from waflib import Options, Logs, Configure, Errors, Utils
 
+default_prefix = '/usr'
+
 def build(bld):
-
-	os.environ['LD_LIBRARY_PATH'] = ':'.join(bld.env['LIBPATH_KDECORE'] + [os.environ.get('LD_LIBRARY_PATH', '')])
 	bld.targets = '*' # build all targets by default
-
 	lst = 'src/fig/semd.cpp src/fig/semantik_d_win.cpp src/fig/diagram_document.cpp src/fig/filetree.cpp'
 
 	tg = bld(
-		features = 'cxx qt4 cxxshlib',
+		features = 'cxx qt5 cxxshlib',
 		source = bld.path.ant_glob('src/fig/*.cpp src/base/*.cpp', excl=lst),
 		target = 'semantik',
+		moc = '''src/base/flag_scheme.h src/base/sem_mediator.h
+src/fig/box_class_properties.h
+src/fig/box_link_properties.h
+src/fig/box_view.h
+src/fig/matrix_dialog.h
+src/fig/box_document_properties.h
+''',
 		name = 'semlib',
 		vnum = VERSION,
-		use = 'QTCORE QTGUI QTWEBKIT QTXML PYEMBED QTSVG KDECORE KIO KDEUI KHTML',
-		includes='. src src/fig src/base',
-		install_path = '${KDE4_LIB_INSTALL_DIR}/')
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBKIT QT5XML QT5PRINTSUPPORT QT5SVG PYEMBED',
+		includes='. src src/fig src/base')
 
-	bld(features='cxx qt4 cxxprogram pyembed',
+	bld(features='cxx qt5 cxxprogram pyembed',
 		source = bld.path.ant_glob('src/*.cpp'),
-		use = 'QTCORE QTGUI QTWEBKIT QTXML QTSVG KDECORE KIO KDEUI KHTML semlib',
+		moc = '''
+src/browser.h
+src/canvas_view.h
+src/config_dialog.h
+src/data_view.h
+src/doc_dialog.h
+src/export_map_dialog.h
+src/generator_dialog.h
+src/image_view.h
+src/linear_view.h
+src/pre_view.h
+src/semantik.h
+src/table_dialog.h
+src/table_view.h
+src/text_view.h
+src/vars_view.h
+''',
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBKIT QT5WEBKITWIDGETS QT5XML QT5PRINTSUPPORT QT5SVG semlib',
 		target = 'src/semantik',
-		install_path = '${KDE4_BIN_INSTALL_DIR}/',
 		includes = '. src src/fig src/base')
 
-	bld(features='cxx qt4 cxxprogram pyembed',
+	bld(features='cxx qt5 cxxprogram pyembed',
 		source = lst,
-		use = 'QTCORE QTGUI QTWEBKIT QTXML QTSVG KDECORE KIO KDEUI KHTML semlib',
+		moc = '''
+src/fig/semantik_d_win.h
+src/fig/filetree.h
+src/fig/diagram_document.h
+''',
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBKIT QT5XML QT5PRINTSUPPORT QT5SVG semlib',
 		target = 'src/semantik-d',
-		install_path = '${KDE4_BIN_INSTALL_DIR}/',
 		includes = '. src src/fig src/base')
 
 	bld.install_files('${SEMANTIK_DIR}', 'src/sembind.py')
+
 
 	rt = 'src/templates/'
 
@@ -62,7 +88,7 @@ def build(bld):
 
 	obj = bld(features='msgfmt', appname = 'semantik', langs=[x.path_from(bld.path).replace('.po', '') for x in bld.path.ant_glob('src/po/*.po')])
 	for x in bld.path.ant_glob('src/po/*.po'):
-		bld.symlink_as('${KDE4_LOCALE_INSTALL_DIR}/%s/LC_MESSAGES/semantik-d.mo' % x.name.strip('.po'), 'semantik.mo')
+		bld.symlink_as('${LOCALEDIR}/%s/LC_MESSAGES/semantik-d.mo' % x.name.strip('.po'), 'semantik.mo')
 
 	bld.install_files('${TEMPLATE_DIR}/beamer/beamermindist/art/', glob(rt+'beamer/beamermindist/art/*'))
 	bld.install_files('${TEMPLATE_DIR}/beamer/beamermindist/', glob(rt+'beamer/beamermindist/*'))
@@ -74,21 +100,23 @@ def build(bld):
 	bld.install_files('${SEMANTIK_DIR}/images', glob('src/images/*.svg'))
 	bld.install_files('${FILTER_DIR}/', glob('src/filters/*'))
 
-	bld.install_files('${KDE4_XDG_APPS_INSTALL_DIR}/', 'src/data/semantik.desktop src/data/semantik-d.desktop')
+	bld.install_files('${DESKTOPDIR}/', 'src/data/semantik.desktop src/data/semantik-d.desktop')
 	bld.install_files('${MIME_DIR}/', 'src/data/semantik.xml')
 
 	for x in ('', '-d'):
-		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/128x128/apps/semantik%s.png' % x, 'src/data/hi128-app-semantik%s.png'%x)
-		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/64x64/apps/semantik%s.png'% x, 'src/data/hi64-app-semantik%s.png'%x)
-		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/48x48/apps/semantik%s.png'% x, 'src/data/hi48-app-semantik%s.png'%x)
-		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/32x32/apps/semantik%s.png'% x, 'src/data/hi32-app-semantik%s.png'%x)
-		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/22x22/apps/semantik%s.png'% x, 'src/data/hi22-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/oxygen/128x128/apps/semantik%s.png' % x, 'src/data/hi128-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/oxygen/64x64/apps/semantik%s.png'% x, 'src/data/hi64-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/oxygen/48x48/apps/semantik%s.png'% x, 'src/data/hi48-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/oxygen/32x32/apps/semantik%s.png'% x, 'src/data/hi32-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/oxygen/22x22/apps/semantik%s.png'% x, 'src/data/hi22-app-semantik%s.png'%x)
 
 		#bld(rule="${GZIP} -c ${SRC} > ${TGT}", source='src/data/semantik%s.svg'%x, target='src/data/semantik%s.svgz'%x)
-		bld.install_as('${KDE4_ICON_INSTALL_DIR}/oxygen/scalable/apps/semantik%s.svg'%x, 'src/data/semantik%s.svg'%x)
+		bld.install_as('${ICONDIR}/oxygen/scalable/apps/semantik%s.svg'%x, 'src/data/semantik%s.svg'%x)
 
 
-	bld.install_files('${KDE4_DATA_INSTALL_DIR}/semantik', 'src/data/semantikui.rc src/data/semantik-dui.rc src/data/tips')
+	bld.install_files('${XMLGUIDIR}/semantik', 'src/data/semantikui.rc')
+	bld.install_files('${XMLGUIDIR}/semantik', 'src/data/semantik-dui.rc')
+	bld.install_files('${DATAROOTDIR}/semantik', 'src/data/tips')
 
 	bld.add_post_fun(post_build)
 	# update-mime-database /usr/share/mime ?
@@ -111,51 +139,50 @@ def configure(conf):
 	elif (test('solaris') or test('sunos')):
 		conf.fatal(err % "Sun systems")
 
-	kde_config = os.popen("which kde-config").read().strip()
-	if kde_config:
-		icons = os.popen('%s --path icon' % kde_config).read().strip()
-	else:
-		icons = '/usr/share/icons:/usr:/etc/opt/kde3/share/icons/:/opt/kde3/share/icons/:/var/lib/mandriva/kde-profiles/powerpackplus/share/icons/:/usr/share/icons/'
-		if not Options.options.icons:
-			Logs.warn("For now Semantik uses a few kde icons - if you have problems seeing the icons install kdebase")
-
+	icons = '/usr/share/icons:/usr:/etc/opt/kde3/share/icons/:/opt/kde3/share/icons/:/var/lib/mandriva/kde-profiles/powerpackplus/share/icons/:/usr/share/icons/'
 	if Options.options.icons:
 		icons = Options.options.icons
 
-	conf.load('compiler_c compiler_cxx qt4')
+	conf.load('compiler_c compiler_cxx qt5')
 	if not conf.env.CXX: conf.fatal('Semantik requires g++ (compilation only)')
 	if not conf.env.QT_LRELEASE: conf.fatal('Semantik requires the program lrelease (from the Qt linguist package? - compilation only)')
 	conf.load('python')
-	if not conf.env.LIB_QTWEBKIT: conf.fatal('QtWebKit not found - Semantik requires Qt >= 4.4')
+	if not conf.env.LIB_QT5WEBKIT: conf.fatal('QtWebKit not found - Semantik requires Qt >= 5')
 	if not conf.env.PYTHON: conf.fatal('Semantik requires Python >= 2.5 (development package for the compilation)')
 	conf.check_python_version((2,4,2))
 	conf.check_python_headers()
 	if not conf.env.PYTHON_VERSION in "2.4 2.5 2.6 2.7".split(): Logs.warn('Bad Python version %s ' % str(conf.env.PYTHON_VERSION))
 	#ret = ctx.cmd_output('python-config --cflags').strip().split()
 
-	try:
-		conf.load('kde4')
-		Logs.pprint('GREEN', "And you even have kde4! we will use it")
-	except Errors.ConfigurationError:
-		raise
-		#Logs.pprint('YELLOW', "kde4 is disabled (missing)")
-		conf.fatal('Compiling Semantik requires kde4 -devel')
+	conf.env.DATAROOTDIR = os.path.join(conf.env.PREFIX, 'share')
+	conf.env.DESKTOPDIR = os.path.join(conf.env.DATAROOTDIR, 'applications')
+	conf.env.XMLGUIDIR = os.path.join(conf.env.DATAROOTDIR, 'kxmlgui5')
+	conf.env.ICONDIR = os.path.join(conf.env.DATAROOTDIR, 'icons')
+	conf.env.PICDIR = conf.env.DATAROOTDIR + '/share/pixmaps/'
+	conf.env.LOCALEDIR = os.path.join(conf.env.DATAROOTDIR, 'locale/')
 
 	conf.env.DEFINES = 'WAF'
 	conf.define('ICONS', icons)
 	conf.define('VERSION', VERSION)
 
-	kdeconfig = conf.find_program('kde4-config')
-	prefix = conf.cmd_and_log(Utils.to_list(kdeconfig) + ['--prefix']).strip()
-	conf.env.SEMANTIK_DIR = conf.env.KDE4_DATA_INSTALL_DIR + '/semantik'
+	#kdeconfig = conf.find_program('kde4-config')
+	prefix = Options.options.prefix # conf.cmd_and_log(Utils.to_list(kdeconfig) + ['--prefix']).strip()
+	conf.env.SEMANTIK_DIR = conf.env.DATAROOTDIR + '/semantik'
 	conf.env.MIME_DIR = prefix + '/share/mime/packages'
 	conf.define('SEMANTIK_DIR', conf.env.SEMANTIK_DIR)
 
-	conf.env.TEMPLATE_DIR = conf.env.KDE4_DATA_INSTALL_DIR + '/semantik/templates/'
+	conf.env.TEMPLATE_DIR = conf.env.DATAROOTDIR + '/semantik/templates/'
 	conf.define('TEMPLATE_DIR', conf.env.TEMPLATE_DIR)
-	conf.env.FILTER_DIR = conf.env.KDE4_DATA_INSTALL_DIR +'/semantik/filters/'
+	conf.env.FILTER_DIR = conf.env.DATAROOTDIR +'/semantik/filters/'
 	conf.define('FILTER_DIR', conf.env.FILTER_DIR)
-	conf.env.PICDIR = conf.env.KDE4_ICON_INSTALL_DIR #j('share/pixmaps/')
+
+	# FIXME hard-coded for kubuntu 16
+	conf.env.INCLUDES_KDECORE = ['/usr/include/KF5/KConfigCore', '/usr/include/KF5/KWidgetsAddons', '/usr/include/KF5/KDELibs4Support',
+		'/usr/include/KF5/KIOWidgets', '/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/', '/usr/include/KF5/KCoreAddons',
+		'/usr/include/KF5/KConfigWidgets', '/usr/include/KF5/KConfigGui', '/usr/include/KF5/KXmlGui', '/usr/include/KF5/KAuth', '/usr/include/KF5/KIconThemes', '/usr/include/KF5/KIOCore', '/usr/include/KF5/KI18n']
+	conf.env.LIBPATH_KDECORE = ['/usr/lib/x86_64-linux-gnu']
+	conf.env.LIB_KDECORE = ['KF5KIOCore', 'KF5KDELibs4Support', 'KF5Auth', 'KF5KIOWidgets', 'KF5IconThemes', 'KF5ConfigWidgets', 'KF5XmlGui', 'KF5CoreAddons', 'KF5ConfigGui', 'KF5ConfigCore', 'KF5WidgetsAddons', 'KF5I18n']
+
 	conf.define('cmd_add_item', 0)
 	conf.define('cmd_update_item', 1)
 	conf.define('data_root', os.sep)
@@ -178,7 +205,7 @@ def configure(conf):
 	for x in lst:
 		if not x: continue
 		t = x.split('\t')
-		buf.append("""xp(x,%d,"%s");yp(x,%d,trUtf8("%s"));""" % (len(buf), t[0], len(buf), t[1].replace('"', '\\"')))
+		buf.append("""xxp(x,%d,"%s");yyp(x,%d,trUtf8("%s"));""" % (len(buf), t[0], len(buf), t[1].replace('"', '\\"')))
 	conf.define('fillglo(x)', ''.join(buf), quote=False)
 
 	lst = [x for x in conf.path.find_node('src/styles_local.txt').read().splitlines()]
@@ -186,7 +213,7 @@ def configure(conf):
 	for x in lst:
 		if not x: continue
 		t = x.split('\t')
-		buf.append("""xp(x,%d,"%s");yp(x,%d,trUtf8("%s"));""" % (len(buf), t[0], len(buf), t[1].replace('"', '\\"')))
+		buf.append("""xxp(x,%d,"%s");yyp(x,%d,trUtf8("%s"));""" % (len(buf), t[0], len(buf), t[1].replace('"', '\\"')))
 	conf.define('fillloc(x)', ''.join(buf), quote=False)
 
 
@@ -207,14 +234,13 @@ def configure(conf):
 
 def options(opt):
 	opt.load('compiler_c compiler_cxx')
-	opt.load('kde4')
-	opt.load('qt4')
+	opt.load('qt5')
 	opt.load('python ')
 	opt.add_option('--exe', action='store_true', default=False, help='execute semantik after the compilation (developers)')
 	opt.add_option('--ddd', action='store_true', default=False, help='execute semantik-d after the compilation (developers)')
 	opt.add_option('--icons', action='store', default='', help='icon dirs where to look for kde icons (configuration)')
-	opt.add_option('--nomimes', action='store_true', default=False, help='do not run update-mime-database when installing')
-	opt.add_option('--noldconfig', action='store_true', default=False, help='do not run lconfig when installing')
+	opt.add_option('--nomimes', action='store_true', default=False, help='do not run update-mime-database during installation')
+	opt.add_option('--noldconfig', action='store_true', default=False, help='do not run lconfig during installation')
 
 def post_build(bld):
 	if bld.cmd == 'install':
@@ -226,8 +252,7 @@ def post_build(bld):
 			except Exception: pass
 
 	if Options.options.exe:
-		#os.popen('export LD_LIBRARY_PATH=out/default/:$LD_LIBRARY_PATH; PATH=plugins:$PATH out/default/src/semantik')
-		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik --style plastique', stdout=None, stderr=None)
+		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik', stdout=None, stderr=None)
 	if Options.options.ddd:
-		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik-d --style plastique', stdout=None, stderr=None)
+		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik-d', stdout=None, stderr=None)
 

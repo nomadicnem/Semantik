@@ -1,16 +1,17 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 
 #ifndef BOX_VIEW_H
 #define BOX_VIEW_H
 
-#include <KUrl>
+#include <QUrl>
 #include <QGraphicsView>
 #include <QList>
 #include <QPoint>
 #include "con.h"
 
 class QActionGroup;
+class QMenu;
 class connectable;
 class box_item;
 class box_link;
@@ -114,10 +115,10 @@ class box_view : public QGraphicsView
 		bool m_bDisableGradient;
 		bool m_bShowFileMenu;
 		void init_menu();
-		KUrl m_oCurrentUrl;
+		QUrl m_oCurrentUrl;
 
 		int batch_print_map(const QString& url, QPair<int, int> & p);
-		bool import_from_file(const KUrl& l_o);
+		bool import_from_file(const QUrl& l_o);
 
 	public slots:
 		void change_colors(QAction* i_oAct);
@@ -162,7 +163,7 @@ class box_view : public QGraphicsView
 
 	signals:
 		void sig_message(const QString &, int);
-		void sig_Url(const KUrl&);
+		void sig_Url(const QUrl&);
 };
 
 #endif

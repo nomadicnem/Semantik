@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2015 GPLV3
+// Thomas Nagy 2007-2016 GPLV3
 
 #ifndef TABLE_VIEW_H
 #define TABLE_VIEW_H
@@ -10,6 +10,8 @@ clude "con.h"
 
 #include <QAction>
 #include <QList>
+
+class sem_mediator;
 
 class numbered_action : public QAction
 {
