@@ -4,12 +4,14 @@
 #include <QAbstractTextDocumentLayout>
 #include <QTextDocument>
 #include <QTextDocumentFragment>
+#include <QGraphicsTextItem>
 #include <QTextList>
 #include <QClipboard>
 #include <QPainter>
 #include <QtDebug>
 #include <QAction>
 #include <QTextDocument>
+#include <KDE/KInputDialog>
 #include "box_actor.h"
 #include "data_item.h"
  #include "res:zable.h"
@@ -28,6 +30,13 @@ box_actor::box_actor(box_view* view, int id) : box_item(view, id)
 	QFont font = doc.defaultFont();
 	font.setPointSize(font.pointSize() - 2);
 	doc.setDefaultFont(font);
+	m_oCaption = new QGraphicsTextItem();
+	m_oCaption->setParentItem(this);
+	m_oCaption->setPos(0, 0);
+}
+
+box_actor::~box_actor() {
+	delete m_oCaption;
 }
 
 void box_actor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -68,5 +77,34 @@ void box_actor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	}
 
 	painter->restore();
+}
+
+void box_actor::properties()
+{
+	bool ok = false;
+	QString text = KInputDialog::getText(m_oView->trUtf8("Actor properties"),
+			m_oView->trUtf8("Caption:"), m_oBox->m_sText, &ok);
+	if (ok && text != m_oBox->m_sText)
+	{
+		mem_edit_box *ed = new mem_edit_box(m_oView->m_oMediator, m_oView->m_iId, m_iId);
+		ed->newText = text;
+		m_oCaption->setPlainText(text);
+		ed->apply();
+	}
+}
+
+void box_actor::update_size() {
+	m_iWW = m_oBox->m_iWW;
+	m_iHH = m_oBox->m_iHH;
+
+	setRect(0, 0, m_iWW, m_iHH);
+	m_oChain->setPos(m_iWW + 3, 0);
+
+	update_links();
+}
+
+void box_actor::update_links() {
+	m_oCaption->setPos((m_iWW - m_oCaption->boundingRect().width()) / 2., m_iHH);
+	box_item::update_links();
 }
 

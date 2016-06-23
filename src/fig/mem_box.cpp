@@ -82,7 +82,7 @@ mem_edit_box::mem_edit_box(sem_mediator* mod, int id, int bid) : mem_command(mod
 	item = model->m_oItems[id];
 	box = item->m_oBoxes[bid];
 	oldText = box->m_sText;
-	oldHeight = box->m_iHH;
+	newHeight = oldHeight = box->m_iHH;
 }
 
 void mem_edit_box::redo()
