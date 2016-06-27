@@ -88,7 +88,6 @@ void box_actor::properties()
 	{
 		mem_edit_box *ed = new mem_edit_box(m_oView->m_oMediator, m_oView->m_iId, m_iId);
 		ed->newText = text;
-		m_oCaption->setPlainText(text);
 		ed->apply();
 	}
 }
@@ -104,6 +103,7 @@ void box_actor::update_size() {
 }
 
 void box_actor::update_links() {
+	m_oCaption->setPlainText(m_oBox->m_sText);
 	m_oCaption->setPos((m_iWW - m_oCaption->boundingRect().width()) / 2., m_iHH);
 	box_item::update_links();
 }

@@ -7,7 +7,11 @@ Source code:   https://github.com/ita1024/semantik
 1. Compilation and installation:
 
 KDE4 is deprecated so we have to use the kde frameworks for the project now.
-A few dependencies may be tricky to install, for example libkf5kdelibs4support-dev
+A few dependencies may be tricky to install, for example
+Ubuntu: apt install libkf5kdelibs4support-dev
+Gentoo: emerge --ask kde-frameworks/kdelibs4support
+check that the system has the file libKF5KDELibs4Support.so somewhere
+
 
 To build the project, run:
 ./waf configure build
