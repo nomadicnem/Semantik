@@ -176,12 +176,47 @@ def configure(conf):
 	conf.env.FILTER_DIR = conf.env.DATAROOTDIR +'/semantik/filters/'
 	conf.define('FILTER_DIR', conf.env.FILTER_DIR)
 
-	# FIXME hard-coded for kubuntu 16
-	conf.env.INCLUDES_KDECORE = ['/usr/include/KF5/KConfigCore', '/usr/include/KF5/KWidgetsAddons', '/usr/include/KF5/KDELibs4Support',
-		'/usr/include/KF5/KIOWidgets', '/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/', '/usr/include/KF5/KCoreAddons',
-		'/usr/include/KF5/KConfigWidgets', '/usr/include/KF5/KConfigGui', '/usr/include/KF5/KXmlGui', '/usr/include/KF5/KAuth', '/usr/include/KF5/KIconThemes', '/usr/include/KF5/KIOCore', '/usr/include/KF5/KI18n']
-	conf.env.LIBPATH_KDECORE = ['/usr/lib/x86_64-linux-gnu']
-	conf.env.LIB_KDECORE = ['KF5KIOCore', 'KF5KDELibs4Support', 'KF5Auth', 'KF5KIOWidgets', 'KF5IconThemes', 'KF5ConfigWidgets', 'KF5XmlGui', 'KF5CoreAddons', 'KF5ConfigGui', 'KF5ConfigCore', 'KF5WidgetsAddons', 'KF5I18n']
+	path = conf.cmd_and_log(conf.env.QMAKE + ['-query', 'QT_HOST_DATA'], quiet=0, stdout=True)
+
+	path = path.strip()
+	if not path:
+		raise ValueError('Could not find QT_HOST_DATA')
+
+	specpath = conf.cmd_and_log(conf.env.QMAKE + ['-query', 'QMAKE_SPEC'], quiet=0, stdout=True)
+	specpath = os.path.join(path, 'mkspecs', specpath.strip())
+	if not os.path.exists(specpath):
+		raise ValueError('No spec path, cannot build')
+
+	path = os.path.join(path, 'mkspecs/modules')
+	if not os.path.exists(path):
+		raise ValueError('Missing path to configuration files? %r' % path)
+
+	conf.env.append_value('INCLUDES_KDECORE', specpath)
+
+	libs = ['KF5KIOCore', 'KF5Auth', 'KF5KIOWidgets',
+		'KF5IconThemes', 'KF5ConfigWidgets', 'KF5XmlGui',
+		'KF5CoreAddons', 'KF5ConfigGui', 'KF5ConfigCore',
+		'KF5WidgetsAddons', 'KF5I18n']
+
+	for lib in libs:
+		name = lib[3:]
+		if not name.startswith('K'):
+			name = 'K' + name
+
+		p = '%s/qt_%s.pri' % (path, name)
+		for line in Utils.readf(p).splitlines():
+			lst = line.strip().split(' = ')
+			if lst[0].endswith('.name'):
+				conf.env.append_value('LIB_KDECORE', lst[1])
+			elif lst[0].endswith('.includes'):
+				conf.env.append_value('INCLUDES_KDECORE', lst[1])
+			elif lst[0].endswith('.lib'):
+				conf.env.append_value('LIBPATH_KDECORE', lst[1])
+			elif lst[0].endswith('.defines'):
+				conf.env.append_value('DEFINES_KDECORE', lst[1])
+
+	conf.env.append_value('INCLUDES_KDECORE', '/usr/include/KF5/KDELibs4Support')
+	conf.env.append_value('LIB_KDECORE', 'KF5KDELibs4Support')
 
 	conf.define('cmd_add_item', 0)
 	conf.define('cmd_update_item', 1)
