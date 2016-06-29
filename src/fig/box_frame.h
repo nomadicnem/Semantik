@@ -18,6 +18,8 @@ class box_frame : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_frame(box_view*, int i_iId);
+		void update_links();
+		QGraphicsTextItem *m_oCaption;
 };
 
 #endif // BOX_FRAME_H
