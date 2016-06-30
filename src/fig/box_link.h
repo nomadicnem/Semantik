@@ -13,6 +13,7 @@
 #include "ed:table.h"
 #include "con.h"
 
+class QGraphicsTextItem;
 class box_view;
 class box_item;
 class box_control_point;
@@ -40,6 +41,8 @@ class box_link : public QGraphicsRectItem, public editable
 		QList<box_control_point*> m_oControlPoints;
 		box_control_point* m_oStartPoint;
 		box_control_point* m_oEndPoint;
+		QGraphicsTextItem *m_oStartCaption;
+		QGraphicsTextItem *m_oEndCaption;
 
 		QList<QPoint> m_oGood;
 		QList<QPoint> m_oLst;

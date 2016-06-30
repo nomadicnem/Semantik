@@ -18,6 +18,7 @@ class box_link_properties : public KDialog
 		QComboBox *m_oStyle;
 		QComboBox *m_oLeftArrow;
 		QComboBox *m_oRightArrow;
+
 		box_link *m_oLink;
 
 	public slots:

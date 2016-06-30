@@ -569,24 +569,28 @@ QString sem_mediator::doc_to_xml()
 
 		foreach (data_link *link, l_oItem->m_oLinks)
 		{
-			l_oS<<notr("<linkbox parent=\"%1\" parentpos=\"%2\" child=\"%3\" childpos=\"%4\" color=\"%5\" border_width=\"%6\" pen_style=\"%7\" %8>\n").arg(
+			l_oS<<notr("<linkbox parent=\"%1\" parentpos=\"%2\" child=\"%3\" childpos=\"%4\" color=\"%5\" border_width=\"%6\" %7 %8>\n").arg(
 				QString::number(link->m_iParent),
 				QString::number(link->m_iParentPos),
 				QString::number(link->m_iChild),
 				QString::number(link->m_iChildPos),
 				link->color.name(),
 				QString::number(link->border_width),
-				QString::number(link->pen_style),
-				QString("\n    startx=\"%1\" starty=\"%2\" endx=\"%3\" endy=\"%4\" leftarrow=\"%5\" rightarrow=\"%6\" line_type=\"%7\"").arg(
+				QString("\n  pen_style=\"%1\" startx=\"%2\" starty=\"%3\" endx=\"%4\" endy=\"%5\" leftarrow=\"%6\"").arg(
+					QString::number(link->pen_style),
 					QString::number(link->m_oStartPoint.x()),
 					QString::number(link->m_oStartPoint.y()),
 					QString::number(link->m_oEndPoint.x()),
 					QString::number(link->m_oEndPoint.y()),
-					QString::number(link->m_iLeftArrow),
+					QString::number(link->m_iLeftArrow)
+				),
+				QString("\n  rightarrow=\"%1\" line_type=\"%2\" child_caption=\"%3\" parent_caption=\"%4\"").arg(
 					QString::number(link->m_iRightArrow),
-					QString::number(link->m_iLineType)
-					)
-				);
+					QString::number(link->m_iLineType),
+					bind_node::protectXML(link->m_sChildCaption),
+					bind_node::protectXML(link->m_sParentCaption)
+				)
+			);
 			foreach (QPoint p, link->m_oOffsets) {
 				l_oS<<notr("    <linkbox_offset x=\"%1\" y=\"%2\"/>\n").arg(QString::number(p.x()), QString::number(p.y()));
 			}

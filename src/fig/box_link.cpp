@@ -46,6 +46,15 @@ box_link::box_link(box_view* i_oParent) : QGraphicsRectItem(), editable()
 	m_oEndPoint->m_oLink = this;
 	m_oEndPoint->setZValue(117);
 
+	m_oStartCaption = new QGraphicsTextItem();
+	i_oParent->scene()->addItem(m_oStartCaption);
+
+	m_oEndCaption = new QGraphicsTextItem();
+	i_oParent->scene()->addItem(m_oEndCaption);
+
+	//m_oStartCaption->setPlainText("1..*");
+	//m_oEndCaption->setPlainText("1..*");
+
 	for (int i=0; i < 7; ++i)
 	{
 		box_control_point* b = new box_control_point(m_oView);
@@ -63,6 +72,8 @@ box_link::~box_link()
 	}
 	delete m_oStartPoint;
 	delete m_oEndPoint;
+	delete m_oStartCaption;
+	delete m_oEndCaption;
 }
 
 #define xw 5.
@@ -369,6 +380,7 @@ void box_link::update_pos()
 	}
 
 	m_oStartPoint->force_position(m_oInnerLink.m_oStartPoint);
+	m_oStartCaption->setPos(m_oInnerLink.m_oStartPoint);
 
 	if (connectable *end = m_oView->m_oItems.value(m_oInnerLink.m_iChild))
 	{
@@ -398,6 +410,7 @@ void box_link::update_pos()
 
 	}
 	m_oEndPoint->force_position(m_oInnerLink.m_oEndPoint);
+	m_oEndCaption->setPos(m_oInnerLink.m_oEndPoint);
 
 	/*
 	int ax1 = (int) l_oR1.x();
@@ -628,5 +641,4 @@ void box_link::properties()
 	props.m_oRightArrow->setCurrentIndex(m_oInnerLink.m_iRightArrow);
 	props.exec();
 }
-
 
