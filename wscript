@@ -8,7 +8,7 @@ VERSION = '1.0.0'
 top = '.'
 
 import os, sys, re, time
-from waflib import Options, Logs, Configure, Errors, Utils
+from waflib import Options, Logs, Configure, Errors, Utils, TaskGen, Task
 
 default_prefix = '/usr'
 
@@ -122,6 +122,7 @@ src/fig/diagram_document.h
 	# update-mime-database /usr/share/mime ?
 
 def configure(conf):
+	conf.find_program('msgfmt')
 	def test(system):
 		return (sys.platform.lower().rfind(system) > -1)
 
@@ -290,4 +291,25 @@ def post_build(bld):
 		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik', stdout=None, stderr=None)
 	if Options.options.ddd:
 		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik-d', stdout=None, stderr=None)
+
+
+@TaskGen.feature('msgfmt')
+def apply_msgfmt(self):
+	for lang in self.to_list(self.langs):
+		node = self.path.find_resource(lang+'.po')
+		task = self.create_task('msgfmt', node, node.change_ext('.mo'))
+
+		langname = lang.split('/')
+		langname = langname[-1]
+
+		inst = getattr(self, 'install_path', '${LOCALEDIR}')
+
+		self.add_install_as(
+			install_to = os.path.join(inst, langname, 'LC_MESSAGES', getattr(self, 'appname', 'set_your_appname') + '.mo'),
+			install_from = task.outputs[0],
+			chmod = getattr(self, 'chmod', Utils.O644))
+
+class msgfmt(Task.Task):
+	color   = 'BLUE'
+	run_str = '${MSGFMT} ${SRC} -o ${TGT}'
 
