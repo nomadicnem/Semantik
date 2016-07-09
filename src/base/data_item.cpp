@@ -322,6 +322,8 @@ void data_link::copy_from(const data_link& i_oLink)
 	m_sCaption    = i_oLink.m_sCaption;
 	m_iParent     = i_oLink.m_iParent;
 	m_iChild      = i_oLink.m_iChild;
+	m_sParentCaption = i_oLink.m_sParentCaption;
+	m_sChildCaption  = i_oLink.m_sChildCaption;
 	m_iParentPos  = i_oLink.m_iParentPos;
 	m_iChildPos   = i_oLink.m_iChildPos;
 	m_iLineType   = i_oLink.m_iLineType;

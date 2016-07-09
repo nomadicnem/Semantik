@@ -130,6 +130,7 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 		if (link->m_iParentPos == 2) link->m_iParentPos = data_link::SOUTH;
 		if (link->m_iParentPos == 3) link->m_iParentPos = data_link::EAST;
 
+		link->m_sCaption = i_oAttrs.value(QObject::trUtf8("caption"));
 		link->m_sParentCaption = i_oAttrs.value(QObject::trUtf8("parent_caption"));
 		link->m_sChildCaption = i_oAttrs.value(QObject::trUtf8("child_caption"));
 

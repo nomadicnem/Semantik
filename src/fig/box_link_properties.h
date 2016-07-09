@@ -8,6 +8,7 @@
 
 class QSpinBox;
 class QComboBox;
+class QLineEdit;
 class box_link_properties : public KDialog
 {
 	Q_OBJECT
@@ -18,12 +19,16 @@ class box_link_properties : public KDialog
 		QComboBox *m_oStyle;
 		QComboBox *m_oLeftArrow;
 		QComboBox *m_oRightArrow;
+		QLineEdit *m_oArrowEdit;
+		QLineEdit *m_oLeftArrowEdit;
+		QLineEdit *m_oRightArrowEdit;
 
 		box_link *m_oLink;
 
 	public slots:
 		void apply();
 		void enable_apply(int);
+		void enable_apply(const QString &);
 };
 
 #endif

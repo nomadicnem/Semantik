@@ -213,8 +213,6 @@ void box_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *optio
 			}
 		}
 	}
-
-
 }
 
 void box_link::set_rectangles(int ax1, int ax2, int ay1, int ay2, int ap, QPoint& apos, int bx1, int bx2, int by1, int by2, int bp, QPoint& bpos)
@@ -639,6 +637,9 @@ void box_link::properties()
 	props.m_oStyle->setCurrentIndex((int) m_oInnerLink.pen_style);
 	props.m_oLeftArrow->setCurrentIndex(m_oInnerLink.m_iLeftArrow);
 	props.m_oRightArrow->setCurrentIndex(m_oInnerLink.m_iRightArrow);
+	props.m_oArrowEdit->setText(m_oInnerLink.m_sCaption);
+	props.m_oLeftArrowEdit->setText(m_oInnerLink.m_sParentCaption);
+	props.m_oRightArrowEdit->setText(m_oInnerLink.m_sChildCaption);
 	props.exec();
 }
 

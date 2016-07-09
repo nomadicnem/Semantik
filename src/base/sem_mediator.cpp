@@ -584,11 +584,12 @@ QString sem_mediator::doc_to_xml()
 					QString::number(link->m_oEndPoint.y()),
 					QString::number(link->m_iLeftArrow)
 				),
-				QString("\n  rightarrow=\"%1\" line_type=\"%2\" child_caption=\"%3\" parent_caption=\"%4\"").arg(
+				QString("\n  rightarrow=\"%1\" line_type=\"%2\" child_caption=\"%3\" parent_caption=\"%4\" caption=\"%5\"").arg(
 					QString::number(link->m_iRightArrow),
 					QString::number(link->m_iLineType),
 					bind_node::protectXML(link->m_sChildCaption),
-					bind_node::protectXML(link->m_sParentCaption)
+					bind_node::protectXML(link->m_sParentCaption),
+					bind_node::protectXML(link->m_sCaption)
 				)
 			);
 			foreach (QPoint p, link->m_oOffsets) {
