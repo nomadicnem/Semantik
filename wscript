@@ -115,7 +115,7 @@ src/fig/diagram_document.h
 
 
 	bld.install_files('${XMLGUIDIR}/semantik', 'src/data/semantikui.rc')
-	bld.install_files('${XMLGUIDIR}/semantik', 'src/data/semantik-dui.rc')
+	bld.install_files('${XMLGUIDIR}/semantik-d', 'src/data/semantik-dui.rc')
 	bld.install_files('${DATAROOTDIR}/semantik', 'src/data/tips')
 
 	bld.add_post_fun(post_build)
