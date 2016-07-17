@@ -1874,7 +1874,7 @@ int box_view::batch_print_map(const QString& url, QPair<int, int> & p)
 		l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 		l_oGenerator.setViewBox(l_oR);
 		l_oGenerator.setTitle(trUtf8("Semantik diagram"));
-		l_oGenerator.setResolution(QApplication::desktop()->physicalDpiX());
+		l_oGenerator.setResolution(96); //QApplication::desktop()->physicalDpiX());
 
 		QPainter l_oP;
 		l_oP.begin(&l_oGenerator);
