@@ -38,6 +38,7 @@ int main(int i_iArgc, char **i_iArgv)
 	KCmdLineArgs::init(i_iArgc, i_iArgv, &l_o);
 	KCmdLineArgs::addCmdLineOptions(options);
 
+	QCoreApplication::setAttribute(Qt::AA_Use96Dpi, true);
 	KApplication l_oApp;
 
 	// FIXME
