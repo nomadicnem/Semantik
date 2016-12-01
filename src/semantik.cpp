@@ -7,14 +7,14 @@
 #include <KDE/KStatusBar>
 #include <KDE/KFileDialog>
 #include <KConfigGroup>
-#include <KDE/KMenuBar>
+#include <QMenuBar>
 #include <KDE/KApplication>
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include<KToolBar>
-#include <KDE/KMenu>
-#include <KDE/KIcon>
+#include <QMenu>
+#include <QIcon>
 #include <KMessageBox>
 #include <ktip.h>
 #include <QFrame>
@@ -134,7 +134,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 {
 	setObjectName("semantik_win");
 
-	setWindowIcon(KIcon("semantik"));
+	setWindowIcon(QIcon("semantik"));
 
 	m_oMediator = new sem_mediator(this);
 	connect(m_oMediator, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
@@ -179,7 +179,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	m_oGenerateAct = new QAction(trUtf8("&Generate..."), this);
 	actionCollection()->addAction(notr("generate_doc"), m_oGenerateAct);
-	m_oGenerateAct->setIcon(KIcon(notr("run-build-file")));
+	m_oGenerateAct->setIcon(QIcon(notr("run-build-file")));
 	m_oGenerateAct->setShortcut(trUtf8("Ctrl+G"));
 	connect(m_oGenerateAct, SIGNAL(triggered(bool)), SLOT(slot_generate()));
 
@@ -196,10 +196,10 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	//m_oCanvasFitZoom = new QAction(trUtf8("Fit zoom"), this);
 	//actionCollection()->addAction(notr("zoom_map"), m_oCanvasFitZoom);
-	//m_oCanvasFitZoom->setIcon(KIcon(notr("zoom-best-fit")));
+	//m_oCanvasFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
 	//connect(m_oCanvasFitZoom, SIGNAL(triggered(bool)), m_oCanvas, SLOT(fit_zoom()));
 	m_oCanvasFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
-	m_oCanvasFitZoom->setIcon(KIcon(notr("zoom-best-fit")));
+	m_oCanvasFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
 	m_oCanvasFitZoom->setShortcut(trUtf8("Ctrl+H"));
 
 	KStandardAction::zoomIn(m_oCanvas, SLOT(zoom_in()), actionCollection());

@@ -7,15 +7,15 @@
 #include <KDE/KStatusBar>
 #include <KDE/KFileDialog>
 #include <KConfigGroup>
-#include <KDE/KMenuBar>
+#include <QMenuBar>
 #include <KDE/KApplication>
-#include <KDE/KIcon>
+#include <QIcon>
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
-#include<KToolBar>
+#include <KToolBar>
 #include <QAction>
-#include <KDE/KMenu>
+#include <QMenu>
 #include <QDir>
 #include <QDockWidget>
 #include <KMessageBox>
@@ -28,14 +28,14 @@
 #include "diagram_document.h"
 #include "sem_mediator.h"
 #include "box_view.h"
-# include  "sembind.h"
+#include  "sembind.h"
 #include  "filetree.h"
 
 semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 {
 	setObjectName("semantik_d_win");
 
-	setWindowIcon(KIcon("semantik"));
+	setWindowIcon(QIcon("semantik"));
 
 	m_oTabWidget = new KTabWidget(this);
 	m_oTabWidget->setCloseButtonEnabled(true);
@@ -62,7 +62,7 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oRedoAct->setEnabled(false);
 
 	QAction *l_oFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
-	l_oFitZoom->setIcon(KIcon(notr("zoom-best-fit")));
+	l_oFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
 	l_oFitZoom->setShortcut(trUtf8("Ctrl+H"));
 
 	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const QUrl&)), actionCollection());
