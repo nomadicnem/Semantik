@@ -2,7 +2,7 @@
 
 #include <KDE/KFileDialog>
 #include <KMessageBox>
-#include <KDE/KMenuBar>
+#include <QMenuBar>
 #include <KDE/KApplication>
 #include <KStandardAction>
 #include <KRecentFilesAction>

@@ -8,13 +8,13 @@
 #include <KDE/KStatusBar>
 #include <KDE/KFileDialog>
 #include <KConfigGroup>
-#include <KDE/KMenuBar>
+#include <QMenuBar>
 #include <KDE/KApplication>
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include<KToolBar>
-#include <KDE/KMenu>
+#include <QMenu>
 #include <KMessageBox>
 #include <ktip.h>
 #include <QFrame>

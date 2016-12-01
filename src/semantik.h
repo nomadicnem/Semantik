@@ -17,7 +17,7 @@ class KToolBar;
 class QAction;
 class QActionGroup;
 class QListWidget;
-class KMenu;
+class QMenu;
 class QTextEdit;
 
 class QCloseEvent;
@@ -78,7 +78,7 @@ class semantik_win : public KXmlGuiWindow
 		KToolBar *m_oColorsToolBar;
 		KToolBar *m_oFlagsToolBar;
 
-		KMenu *m_oToolsMenu;
+		QMenu *m_oToolsMenu;
 		QAction *m_oSelectAct;
 		QAction *m_oSortAct;
 		QAction *m_oScrollAct;

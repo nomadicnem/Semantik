@@ -18,7 +18,7 @@ class KToolBar;
 class QAction;
 class QActionGroup;
 class QListWidget;
-class KMenu;
+class QMenu;
 class QTextEdit;
 class KTabWidget;
 class filetree;

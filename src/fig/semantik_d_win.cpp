@@ -7,7 +7,7 @@
 #include <KDE/KStatusBar>
 #include <KDE/KFileDialog>
 #include <KConfigGroup>
-#include <KDE/KMenuBar>
+#include <QMenuBar>
 #include <KDE/KApplication>
 #include <QIcon>
 #include <KStandardAction>
@@ -15,7 +15,7 @@
 #include <KActionCollection>
 #include <KToolBar>
 #include <QAction>
-#include <KDE/KMenu>
+#include <QMenu>
 #include <QDir>
 #include <QDockWidget>
 #include <KMessageBox>
