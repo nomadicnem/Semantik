@@ -1,6 +1,6 @@
 // Thomas Nagy 2007-2016 GPLV3
 
-#include <KDE/KIcon>
+#include <QIcon>
 #include <QtDebug>
 #include <QTreeView>
 #include <QGridLayout>
@@ -20,7 +20,7 @@ linear_container::linear_container(QWidget *i_oParent, sem_mediator *i_oControl)
 	m_oView = new linear_view(this, i_oControl);
 
 	KPushButton *l_oButton = new KPushButton(this);
-	l_oButton->setIcon(KIcon(notr("edit-clear-locationbar")));
+	l_oButton->setIcon(QIcon(notr("edit-clear-locationbar")));
 	l_oButton->setIconSize(QSize(22, 22));
 	l_oButton->setFlat(true);
 	l_oButton->setFocusPolicy(Qt::NoFocus);
