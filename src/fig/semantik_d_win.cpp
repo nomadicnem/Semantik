@@ -48,17 +48,17 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	KStandardAction::openNew(this, SLOT(slot_add_tab()), actionCollection());
 	KStandardAction::quit(this, SLOT(close()), actionCollection());
-	KStandardAction::save(this, NULL, actionCollection());
-	KStandardAction::saveAs(this, NULL, actionCollection());
-	KStandardAction::print(this, NULL, actionCollection());
+	KStandardAction::save(this, SLOT(NULL), actionCollection());
+	KStandardAction::saveAs(this, SLOT(NULL), actionCollection());
+	KStandardAction::print(this, SLOT(NULL), actionCollection());
 
-	KStandardAction::copy(this, NULL, actionCollection());
+	KStandardAction::copy(this, SLOT(NULL), actionCollection());
 
 	KStandardAction::open(this, SLOT(slot_open()), actionCollection());
 	KStandardAction::tipOfDay(this, SLOT(slot_tip_of_day()), actionCollection());
-	m_oUndoAct = KStandardAction::undo(this, NULL, actionCollection());
+	m_oUndoAct = KStandardAction::undo(this, SLOT(NULL), actionCollection());
 	m_oUndoAct->setEnabled(false);
-	m_oRedoAct = KStandardAction::redo(this, NULL, actionCollection());
+	m_oRedoAct = KStandardAction::redo(this, SLOT(NULL), actionCollection());
 	m_oRedoAct->setEnabled(false);
 
 	QAction *l_oFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
