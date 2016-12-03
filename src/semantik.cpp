@@ -5,21 +5,22 @@
 #include <QTextBrowser>
 #include <QProgressDialog>
 #include <KDE/KStatusBar>
-#include <KDE/KFileDialog>
+#include <QFileDialog>
 #include <KConfigGroup>
 #include <QMenuBar>
 #include <KDE/KApplication>
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
-#include<KToolBar>
+#include <KToolBar>
 #include <QMenu>
 #include <QIcon>
 #include <KMessageBox>
 #include <ktip.h>
 #include <QFrame>
 #include <QtWidgets>
- #include <QUuid>
+#include <QUuid>
+#include <QStandardPaths>
 
 #include "box_view.h"
 #include  "sembind.h"
@@ -423,9 +424,9 @@ int semantik_win::print_to_file(const QUrl & url, QPair<int, int> p)
 bool semantik_win::slot_save_as()
 {
 	choose:
-	QUrl l_o = KFileDialog::getSaveUrl(QUrl(notr("kfiledialog:///document")),
-		trUtf8("*.sem|Semantik file (*.sem)"), this,
-		trUtf8("Choose a file name"));
+	QUrl l_o = QFileDialog::getSaveFileUrl(this, trUtf8("Choose a file name"), 
+                QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
+		trUtf8("*.sem|Semantik file (*.sem)"));
 
 	if (l_o.path().isEmpty()) return false;
 	if (!l_o.path().endsWith(notr(".sem")))
@@ -485,9 +486,9 @@ void semantik_win::slot_open()
 		if (!proceed_save()) return;
 	}
 
-	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///document")),
-		trUtf8("*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"),
-		this, trUtf8("Choose a file name"));
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a file name"),
+                QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
+		trUtf8("*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"));
 	if (l_o.isValid() && m_oMediator->open_file(l_o.path()))
 	{
 		m_oMediator->m_oCurrentUrl = l_o;

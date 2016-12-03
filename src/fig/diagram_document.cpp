@@ -6,7 +6,7 @@
 #include <QGridLayout>
 #include <QProgressDialog>
 #include <KDE/KStatusBar>
-#include <KDE/KFileDialog>
+#include <QFileDialog>
 #include <KConfigGroup>
 #include <QMenuBar>
 #include <KDE/KApplication>

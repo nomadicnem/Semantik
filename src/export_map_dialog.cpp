@@ -6,11 +6,11 @@
 #include <QButtonGroup>
 #include <KDE/KDialog>
 #include <QGridLayout>
-#include<QPushButton>
+#include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
 #include <QSpacerItem>
-#include<QCoreApplication>
+#include <QCoreApplication>
 #include <QTreeWidget>
 #include <QTextEdit>
 #include <QHeaderView>

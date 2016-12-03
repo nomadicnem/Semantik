@@ -5,7 +5,7 @@
 #include <QTextBrowser>
 #include <QProgressDialog>
 #include <KDE/KStatusBar>
-#include <KDE/KFileDialog>
+#include <QFileDialog>
 #include <KConfigGroup>
 #include <QMenuBar>
 #include <KDE/KApplication>
@@ -23,13 +23,14 @@
 #include <QFrame>
 #include <KDE/KTabWidget>
 #include <KDirModel>
+#include <QStandardPaths>
 
 #include "semantik_d_win.h"
 #include "diagram_document.h"
 #include "sem_mediator.h"
 #include "box_view.h"
-#include  "sembind.h"
-#include  "filetree.h"
+#include "sembind.h"
+#include "filetree.h"
 
 semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 {
@@ -285,9 +286,9 @@ void semantik_d_win::slot_update_tab_text(diagram_document* i_oDoc, const QUrl &
 
 void semantik_d_win::slot_open()
 {
-	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///document")),
-                trUtf8("*.semd|Semantik diagram (*.semd)"), this,
-                trUtf8("Choose a file to open"));
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a file to open"),
+                QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
+                trUtf8("*.semd|Semantik diagram (*.semd)"));
 	if (l_o.isEmpty()) return;
 
 	// file already open in a tab

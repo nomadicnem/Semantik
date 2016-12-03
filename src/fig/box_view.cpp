@@ -1,6 +1,6 @@
 // Thomas Nagy 2007-2016 GPLV3
 
-#include <KDE/KFileDialog>
+#include <QFileDialog>
 #include <KMessageBox>
 #include <QMenuBar>
 #include <KDE/KApplication>
@@ -32,8 +32,9 @@
 #include <QAction>
 #include <QStandardItemModel>
 #include <QPrinter>
- #include <QSvgGenerator>
+#include <QSvgGenerator>
 #include <QDesktopWidget>
+#include <QStandardPaths>
 
 #include "aux.h"
 #include "con.h"
@@ -1685,9 +1686,9 @@ void box_view::message(const QString &s, int d)
 }
 
 bool box_view::slot_import_from_file() {
-	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///document")),
-		trUtf8("*.semd|Semantik diagram (*.semd)"), this,
-		trUtf8("Choose a file to open"));
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a file to open"),
+                QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
+		trUtf8("*.semd|Semantik diagram (*.semd)"));
 	return import_from_file(l_o);
 }
 
@@ -1721,9 +1722,9 @@ bool box_view::import_from_file(const QUrl& l_o)
 
 bool box_view::slot_export_to_file() {
 	choose_export:
-	QUrl l_o = KFileDialog::getSaveUrl(QUrl(notr("kfiledialog:///document")),
-		trUtf8("*.semd|Semantik diagram (*.semd)"), this,
-		trUtf8("Choose a file name"));
+	QUrl l_o = QFileDialog::getSaveFileUrl(this, trUtf8("Choose a file name"),
+                QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
+		trUtf8("*.semd|Semantik diagram (*.semd)"));
 
 	if (l_o.path().isEmpty()) return false;
 	if (!l_o.path().endsWith(notr(".semd")))
