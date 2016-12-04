@@ -129,6 +129,9 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		cur_link->border_width = i_oAttrs.value(notr("border_width")).toInt();
 		cur_link->pen_style = (Qt::PenStyle) i_oAttrs.value(notr("pen_style")).toInt();
 		cur_link->m_iLineType = (data_link::LineType) i_oAttrs.value(notr("line_type")).toInt();
+		cur_link->m_sCaption = i_oAttrs.value(notr("caption"));
+		cur_link->m_sParentCaption = i_oAttrs.value(notr("parent_caption"));
+		cur_link->m_sChildCaption = i_oAttrs.value(notr("child_caption"));;
 	}
 	else if (i_sName == notr("linkbox_offset")) {
 		Q_ASSERT(cur_link);
