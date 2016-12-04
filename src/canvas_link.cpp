@@ -94,7 +94,7 @@ void canvas_link::update_triangle()
 	if (_Y1*_Y1>_X1*_X1) _coeff = _Y1*_Y1/(_Y1*_Y1+_X1*_X1);
 	else _coeff = 1 - _X1*_X1/(_Y1*_Y1+_X1*_X1);
 
-	if (isnan(_coeff))
+	if (std::isnan(_coeff))
 	{
 		QPolygonF _polygon;
 		_polygon
@@ -151,7 +151,7 @@ void canvas_link::update_spline()
 	if (_Y1*_Y1>_X1*_X1) _coeff = _Y1*_Y1/(_Y1*_Y1+_X1*_X1);
 	else _coeff = 1 - _X1*_X1/(_Y1*_Y1+_X1*_X1);
 
-	if (isnan(_coeff))
+	if (std::isnan(_coeff))
 	{
 		QPolygonF _polygon;
 		_polygon

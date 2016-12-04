@@ -145,6 +145,7 @@ def configure(conf):
 		icons = Options.options.icons
 
 	conf.load('compiler_c compiler_cxx qt5')
+	conf.check_cxx(fragment='int main() { return 0; }', cxxflags='-std=c++11', uselib_store='cxx')
 	if not conf.env.CXX: conf.fatal('Semantik requires g++ (compilation only)')
 	if not conf.env.QT_LRELEASE: conf.fatal('Semantik requires the program lrelease (from the Qt linguist package? - compilation only)')
 	conf.load('python')
