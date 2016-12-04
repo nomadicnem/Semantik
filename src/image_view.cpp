@@ -1,15 +1,15 @@
 // Thomas Nagy 2007-2016 GPLV3
 
 #include <QPainter>
-#include  <QToolTip>
+#include <QToolTip>
 #include <QtDebug>
-#include	<QHelpEvent>
+#include <QHelpEvent>
 #include <QLabel>
 #include <QMenu>
 #include <QList>
 #include <QFile>
 #include <QMimeData>
-#include   <QFileInfo>
+#include <QFileInfo>
 #include <QUrl>
 #include <QFileDialog>
 #include <QLineEdit>
@@ -18,7 +18,8 @@
 #include <QDirModel>
 #include <QGridLayout>
 #include <QCoreApplication>
-#include  <KDE/KFileDialog>
+#include <QFileDialog>
+#include <QStandardPaths>
 
 #include "con.h"
 #include "data_item.h"
@@ -162,9 +163,9 @@ void image_view::mouseReleaseEvent(QMouseEvent *i_o)
 
 void image_view::change_pic()
 {
-	QUrl l_o = KFileDialog::getOpenUrl(QUrl(notr("kfiledialog:///image")),
-                trUtf8("*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"),
-                this, trUtf8("Choose a picture"));
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a picture"), 
+                QUrl(QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)),
+                trUtf8("*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"));
 	do_change_pic(l_o);
 }
 

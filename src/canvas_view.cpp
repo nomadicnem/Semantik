@@ -34,7 +34,7 @@
 #include <QWheelEvent>
 #include  <QMatrix>
 #include <QPointF>
-#include <KDE/KFileDialog>
+#include <QFileDialog>
 #include <QSpinBox>
 #include "export_map_dialog.h"
 #include "kurlrequester.h"
