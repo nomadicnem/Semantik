@@ -49,6 +49,8 @@
 #include "box_chain.h"
 #include "box_link.h"
 #include "box_component.h"
+#include "box_rectangle.h"
+#include "box_pipe.h"
 #include "box_node.h"
 #include "box_decision.h"
 #include "box_actor.h"
@@ -218,12 +220,16 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	connect(m_oAddLabel, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddComponent = new QAction(QObject::trUtf8("Component"), this);
 	connect(m_oAddComponent, SIGNAL(triggered()), this, SLOT(slot_add_element()));
+	m_oAddRectangle = new QAction(QObject::trUtf8("Rectangle"), this);
+	connect(m_oAddRectangle, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddNode = new QAction(QObject::trUtf8("Node"), this);
 	connect(m_oAddNode, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddDecision = new QAction(QObject::trUtf8("Decision"), this);
 	connect(m_oAddDecision, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddDatabase = new QAction(QObject::trUtf8("Database"), this);
 	connect(m_oAddDatabase, SIGNAL(triggered()), this, SLOT(slot_add_element()));
+	m_oAddPipe = new QAction(QObject::trUtf8("Pipe"), this);
+	connect(m_oAddPipe, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddDotStart = new QAction(QObject::trUtf8("Activity start"), this);
 	connect(m_oAddDotStart, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddDotEnd = new QAction(QObject::trUtf8("Activity end"), this);
@@ -291,7 +297,9 @@ void box_view::init_menu()
 	m_oAddBoxMenu->addAction(m_oAddUsecase);
 	m_oAddBoxMenu->addAction(m_oAddMatrix);
 	m_oAddBoxMenu->addAction(m_oAddFrame);
+	m_oAddBoxMenu->addAction(m_oAddRectangle);
 	m_oAddBoxMenu->addAction(m_oAddClass);
+	m_oAddBoxMenu->addAction(m_oAddPipe);
 	m_oAddBoxMenu->addAction(m_oAddDatabase);
 
 	//m_oMenu->addAction(m_oEditAction);
@@ -449,6 +457,10 @@ void box_view::sync_view()
 		else if (box->m_iType == data_box::COMPONENT)
 		{
 			l_o = new box_component(this, box->m_iId);
+		}
+		else if (box->m_iType == data_box::RECTANGLE)
+		{
+			l_o = new box_rectangle(this, box->m_iId);
 		}
 		else if (box->m_iType == data_box::NODE)
 		{
@@ -850,6 +862,13 @@ void box_view::slot_add_element()
 		add->box->m_iHH = 60;
 		add->box->color = QColor("#FFFFCC");
 	}
+	else if (sender == m_oAddRectangle)
+	{
+		add->box->m_iType = data_box::RECTANGLE;
+		add->box->m_iWW = 100;
+		add->box->m_iHH = 40;
+		add->box->color = QColor("#FFFFCC");
+	}
 	else if (sender == m_oAddNode)
 	{
 		add->box->m_iType = data_box::NODE;
@@ -884,6 +903,13 @@ void box_view::slot_add_element()
 		add->box->color = QColor("#FCF2E2");
 		add->box->m_iWW = 60;
 		add->box->m_iHH = 90;
+	}
+	else if (sender == m_oAddPipe)
+	{
+		add->box->m_iType = data_box::PIPE;
+		add->box->color = QColor("#FCF2E2");
+		add->box->m_iWW = 90;
+		add->box->m_iHH = 30;
 	}
 	else if (sender == m_oAddClass)
 	{
@@ -1153,6 +1179,10 @@ void box_view::notify_add_box(int id, int box)
 	{
 		l_o = new box_component(this, box);
 	}
+	else if (db->m_iType == data_box::RECTANGLE)
+	{
+		l_o = new box_rectangle(this, box);
+	}
 	else if (db->m_iType == data_box::NODE)
 	{
 		l_o = new box_node(this, box);
@@ -1184,6 +1214,10 @@ void box_view::notify_add_box(int id, int box)
 	else if (db->m_iType == data_box::DATABASE)
 	{
 		l_o = new box_database(this, box);
+	}
+	else if (db->m_iType == data_box::PIPE)
+	{
+		l_o = new box_pipe(this, box);
 	}
 	Q_ASSERT(l_o != NULL);
 	m_oItems[box] = l_o;

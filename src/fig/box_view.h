@@ -53,6 +53,7 @@ class box_view : public QGraphicsView
 		QAction *m_oAddItemAction;
 		QAction *m_oAddLabel;
 		QAction *m_oAddComponent;
+		QAction *m_oAddRectangle;
 		QAction *m_oAddActor;
 		QAction *m_oAddUsecase;
 		QAction *m_oAddNode;
@@ -65,6 +66,7 @@ class box_view : public QGraphicsView
 		QAction *m_oAddFrame;
 		QAction *m_oAddClass;
 		QAction *m_oAddDatabase;
+		QAction *m_oAddPipe;
 		QAction *m_oFileExport;
 		QAction *m_oFileImport;
 		QAction *m_oCopyToClipboard;
