@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QTextBrowser>
 #include <QCoreApplication>
-#include <QWebView>
+#include <QWebEngineView>
 #include "data_item.h"
 #include "sem_mediator.h"
 #include "pre_view.h"

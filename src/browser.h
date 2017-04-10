@@ -1,12 +1,12 @@
 // Thomas Nagy 2007-2016 GPLV3
 
-#include <QWebView>
+#include <QWebEngineView>
 
 #ifndef _BROWSER_H
 #define _BROWSER_H
 
 class QMenu;
-class browser: public QWebView
+class browser: public QWebEngineView
 {
 	Q_OBJECT
 	public:

@@ -29,7 +29,7 @@ src/fig/box_document_properties.h
 ''',
 		name = 'semlib',
 		vnum = VERSION,
-		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBKIT QT5XML QT5PRINTSUPPORT QT5SVG PYEMBED',
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBENGINEWIDGETS QT5XML QT5PRINTSUPPORT QT5SVG PYEMBED',
 		includes='. src src/fig src/base')
 
 	bld(features='cxx qt5 cxxprogram pyembed',
@@ -51,7 +51,7 @@ src/table_view.h
 src/text_view.h
 src/vars_view.h
 ''',
-		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBKIT QT5WEBKITWIDGETS QT5XML QT5PRINTSUPPORT QT5SVG semlib',
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBENGINEWIDGETS QT5XML QT5PRINTSUPPORT QT5SVG semlib',
 		target = 'src/semantik',
 		includes = '. src src/fig src/base')
 
@@ -62,7 +62,7 @@ src/fig/semantik_d_win.h
 src/fig/filetree.h
 src/fig/diagram_document.h
 ''',
-		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBKIT QT5XML QT5PRINTSUPPORT QT5SVG semlib',
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5XML QT5PRINTSUPPORT QT5SVG semlib',
 		target = 'src/semantik-d',
 		includes = '. src src/fig src/base')
 
@@ -149,7 +149,7 @@ def configure(conf):
 	if not conf.env.CXX: conf.fatal('Semantik requires g++ (compilation only)')
 	if not conf.env.QT_LRELEASE: conf.fatal('Semantik requires the program lrelease (from the Qt linguist package? - compilation only)')
 	conf.load('python')
-	if not conf.env.LIB_QT5WEBKIT: conf.fatal('QtWebKit not found - Semantik requires Qt >= 5')
+	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Qt5WebEngieWidgets not found - Semantik requires Qt >= 5')
 	if not conf.env.PYTHON: conf.fatal('Semantik requires Python >= 2.5 (development package for the compilation)')
 	conf.check_python_version((2,4,2))
 	conf.check_python_headers()

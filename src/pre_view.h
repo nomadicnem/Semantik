@@ -8,7 +8,7 @@
 
 class browser;
 class QLabel;
-class QWebView;
+class QWebEngineView;
 class sem_mediator;
 class pre_view : public QStackedWidget
 {
