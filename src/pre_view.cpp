@@ -39,7 +39,7 @@ void pre_view::notify_preview()
 		}
 		else
 		{
-			m_oBrowser->load(QUrl(l_s));
+				m_oBrowser->load(QUrl("file://" + l_s));
 			m_oBrowser->show();
 		}
 		setCurrentWidget(m_oBrowser);

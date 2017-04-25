@@ -149,7 +149,7 @@ def configure(conf):
 	if not conf.env.CXX: conf.fatal('Semantik requires g++ (compilation only)')
 	if not conf.env.QT_LRELEASE: conf.fatal('Semantik requires the program lrelease (from the Qt linguist package? - compilation only)')
 	conf.load('python')
-	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Qt5WebEngieWidgets not found - Semantik requires Qt >= 5')
+	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Qt5WebEngineWidgets not found - Semantik requires Qt >= 5')
 	if not conf.env.PYTHON: conf.fatal('Semantik requires Python >= 2.5 (development package for the compilation)')
 	conf.check_python_version((2,4,2))
 	conf.check_python_headers()
