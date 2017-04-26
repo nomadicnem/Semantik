@@ -39,6 +39,7 @@ class semantik_d_win : public KXmlGuiWindow
 		KRecentFilesAction* m_oRecentFilesAct;
 		KTabWidget *m_oTabWidget;
 		filetree *m_oFileTree;
+		QAction *m_oExportSizeAct;
 
 		void read_config();
 		void write_config();
@@ -51,6 +52,7 @@ class semantik_d_win : public KXmlGuiWindow
 		void slot_open();
 		void slot_enable_undo(bool, bool);
 		void slot_recent(const QUrl &);
+		void slot_export_fig_size();
 
 		void slot_properties();
 

@@ -1322,7 +1322,7 @@ void canvas_view::export_map_size()
 	export_map_dialog* exp = new export_map_dialog(this);
 
 	exp->kurlrequester->setMode(KFile::File | KFile::LocalOnly);
-	exp->kurlrequester->setFilter(trUtf8("*.png|PNG Files (*.png)"));
+	exp->kurlrequester->setFilter(trUtf8("*.png|PNG Files (*.png)\n*.svg|SVG Files (*.svg)\n*.pdf|PDF Files (*.pdf)"));
 
 	exp->kurlrequester->setUrl(QUrl(m_oMediator->m_sExportUrl));
 	exp->m_oWidthC->setChecked(m_oMediator->m_bExportIsWidth);
@@ -1370,34 +1370,23 @@ void canvas_view::export_map_size()
 			m_oMediator->set_dirty();
 		}
 
-		QImage l_oImage((int) l_oRect.width(), (int) l_oRect.height(), QImage::Format_RGB32);
-		if (exp->m_oWidthC->isChecked())
-		{
-			l_oImage = l_oImage.scaledToWidth(exp->m_oWidth->value());
+		QPair<int, int> p;
+		if (exp->m_oWidthC->isChecked()) {
+			p.first = exp->m_oWidth->value();
+		} else {
+			p.second = exp->m_oHeight->value();
 		}
-		else
-		{
-			l_oImage = l_oImage.scaledToHeight(exp->m_oHeight->value());
-		}
-		l_oImage.fill(qRgb(255,255,255));
 
-		QPainter l_oP;
-		l_oP.begin(&l_oImage);
-		l_oP.setRenderHints(QPainter::Antialiasing);
-		scene()->render(&l_oP, l_oImage.rect(), l_oRect);
-		l_oP.end();
-
-		// TODO upload remote files
-		QString path = exp->kurlrequester->url().toLocalFile();
-		if (exp->kurlrequester->url().isRelative())
-		{
-			path = QDir::homePath() + notr("/") + path;
+		// TODO upload remote files?
+		QUrl url = exp->kurlrequester->url();
+		if (url.isRelative()) {
+			url.setPath(QDir::homePath() + notr("/") + url.toLocalFile());
 		}
-		bool isOk = l_oImage.save(path);
-		if (isOk)
-			m_oMediator->notify_message(trUtf8("Exported '%1'").arg(path), 2000);
+		int status = batch_print_map(url, p);
+		if (status == 0)
+			m_oMediator->notify_message(trUtf8("Exported '%1'").arg(url.fileName()), 2000);
 		else
-			KMessageBox::sorry(this, trUtf8("Could not save to %1").arg(path), trUtf8("Missing picture"));
+			KMessageBox::sorry(this, trUtf8("Could not save to %1").arg(url.fileName()), trUtf8("Missing picture"));
 	}
 }
 

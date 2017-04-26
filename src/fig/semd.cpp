@@ -27,11 +27,11 @@ int main(int i_iArgc, char **i_iArgv)
 {
 	KCmdLineOptions options;
 	options.add("+[url]", ki18n("A file to open on startup"));
-	options.add("o <file>", ki18n("An output file for exporting the diagram"));
+	options.add("o <file>", ki18n("Batch export as svg/pdf/png"));
 	options.add("width <width>", ki18n("Diagram width for printing"), "0");
 	options.add("height <height>", ki18n("Diagram height for printing"), "0");
 
-	K4AboutData l_o("semantik-d", "semantik", ki18n("Semantik-d"), version, ki18n(description), K4AboutData::License_GPL_V3, ki18n("(C) 2013-2016 Thomas Nagy"), KLocalizedString());
+	K4AboutData l_o("semantik-d", "semantik", ki18n("Semantik-d"), version, ki18n(description), K4AboutData::License_GPL_V3, ki18n("(C) 2013-2017 Thomas Nagy"), KLocalizedString());
 	l_o.setBugAddress("https://github.com/ita1024/semantik/issues");
 	l_o.addAuthor(ki18n("Thomas Nagy"), KLocalizedString());
 

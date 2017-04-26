@@ -28,9 +28,9 @@ int main(int i_iArgc, char **i_iArgv)
 
 	KCmdLineOptions options;
 	options.add("+[url]", ki18n("A file to open on startup"));
-	options.add("o <file>", ki18n("An output file for printing the map"));
+	options.add("o <file>", ki18n("Batch export as svg/pdf/png"));
 	K4AboutData l_o("semantik", 0, ki18n("Semantik"), version, ki18n(description),
-			K4AboutData::License_GPL_V3, ki18n("(C) 2007-2016 Thomas Nagy"), KLocalizedString());
+			K4AboutData::License_GPL_V3, ki18n("(C) 2007-2017 Thomas Nagy"), KLocalizedString());
 	l_o.setBugAddress("https://github.com/ita1024/semantik/issues");
 	l_o.addAuthor(ki18n("Thomas Nagy"), KLocalizedString());
 

@@ -35,11 +35,12 @@
 #include <QSvgGenerator>
 #include <QDesktopWidget>
 #include <QStandardPaths>
-
 #include "aux.h"
+#include <QRadioButton>
+#include <QSpinBox>
 #include "con.h"
-
 #include <math.h>
+#include "kurlrequester.h"
 #include "sem_mediator.h"
 #include "box_item.h"
 #include "box_dot.h"
@@ -62,6 +63,7 @@
 #include "box_view.h"
 #include "sembind.h"
  #include "mem_box.h"
+	#include "export_fig_dialog.h"
 #include "box_document_properties.h"
 
 #define ALIGN_LEFT 22
@@ -1824,8 +1826,9 @@ bool box_view::slot_save() {
 	return false;
 }
 
-int box_view::batch_print_map(const QString& url, QPair<int, int> & p)
+int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 {
+	QString url = i_oUrl.path();
 	QRectF l_oRect;
 	foreach (QGraphicsItem*it, scene()->items())
 	{
@@ -2034,4 +2037,81 @@ void box_view::notify_change_properties(void *)
 		}
 	}
 }
+
+void box_view::export_fig_size()
+{
+	QRectF l_oRect = scene()->itemsBoundingRect();
+	l_oRect = QRectF(l_oRect.topLeft() - QPointF(PIPAD, PIPAD), l_oRect.bottomRight() + QPointF(PIPAD, PIPAD));
+
+	export_fig_dialog* exp = new export_fig_dialog(this);
+
+	exp->kurlrequester->setMode(KFile::File | KFile::LocalOnly);
+	exp->kurlrequester->setFilter(trUtf8("*.png|PNG Files (*.png)\n*.svg|SVG Files (*.svg)\n*.pdf|PDF Files (*.pdf)"));
+
+	exp->kurlrequester->setUrl(QUrl(m_oMediator->m_sExportUrl));
+	exp->m_oWidthC->setChecked(m_oMediator->m_bExportIsWidth);
+	exp->m_iBaseWidth = l_oRect.width();
+	exp->m_iBaseHeight = l_oRect.height();
+
+	if (m_oMediator->m_bExportIsWidth)
+	{
+		if (m_oMediator->m_iExportWidth > 0)
+			exp->m_oWidth->setValue(m_oMediator->m_iExportWidth);
+		else
+			exp->m_oWidth->setValue(l_oRect.width());
+	}
+	else
+	{
+		if (m_oMediator->m_iExportHeight > 0)
+			exp->m_oHeight->setValue(m_oMediator->m_iExportHeight);
+		else
+			exp->m_oHeight->setValue(l_oRect.height());
+	}
+
+	if (exp->exec() == QDialog::Accepted)
+	{
+		if (m_oMediator->m_iExportWidth != exp->m_oWidth->value())
+		{
+			m_oMediator->m_iExportWidth = exp->m_oWidth->value();
+			m_oMediator->set_dirty();
+		}
+
+		if (m_oMediator->m_iExportHeight != exp->m_oHeight->value())
+		{
+			m_oMediator->m_iExportHeight = exp->m_oHeight->value();
+			m_oMediator->set_dirty();
+		}
+
+		if (!exp->kurlrequester->url().isValid() || exp->kurlrequester->url().isEmpty())
+		{
+			m_oMediator->notify_message(trUtf8("No destination file selected"), 5000);
+			return;
+		}
+
+		if (m_oMediator->m_sExportUrl != exp->kurlrequester->url().url())
+		{
+			m_oMediator->m_sExportUrl = exp->kurlrequester->url().url();
+			m_oMediator->set_dirty();
+		}
+
+		QPair<int, int> p;
+		if (exp->m_oWidthC->isChecked()) {
+			p.first = exp->m_oWidth->value();
+		} else {
+			p.second = exp->m_oHeight->value();
+		}
+
+		// TODO upload remote files?
+		QUrl url = exp->kurlrequester->url();
+		if (url.isRelative()) {
+			url.setPath(QDir::homePath() + notr("/") + url.toLocalFile());
+		}
+		int status = batch_print_map(url, p);
+		if (status == 0)
+			m_oMediator->notify_message(trUtf8("Exported '%1'").arg(url.fileName()), 2000);
+		else
+			KMessageBox::sorry(this, trUtf8("Could not save to %1").arg(url.fileName()), trUtf8("Missing picture"));
+	}
+}
+
 

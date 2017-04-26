@@ -119,8 +119,9 @@ class box_view : public QGraphicsView
 		void init_menu();
 		QUrl m_oCurrentUrl;
 
-		int batch_print_map(const QString& url, QPair<int, int> & p);
+		int batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p);
 		bool import_from_file(const QUrl& l_o);
+		void export_fig_size();
 
 	public slots:
 		void change_colors(QAction* i_oAct);

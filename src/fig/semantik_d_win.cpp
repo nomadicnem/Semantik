@@ -62,6 +62,11 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oRedoAct = KStandardAction::redo(this, SLOT(NULL), actionCollection());
 	m_oRedoAct->setEnabled(false);
 
+	m_oExportSizeAct = new QAction(trUtf8("&Export the diagram..."), this);
+        actionCollection()->addAction(notr("export_fig_size"), m_oExportSizeAct);
+	m_oExportSizeAct->setShortcut(trUtf8("Ctrl+Shift+E"));
+        connect(m_oExportSizeAct, SIGNAL(triggered(bool)), this, SLOT(slot_export_fig_size()));
+
 	QAction *l_oFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
 	l_oFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
 	l_oFitZoom->setShortcut(trUtf8("Ctrl+H"));
@@ -405,5 +410,13 @@ void semantik_d_win::update_title() {
 		//m_oRecentFilesAct->addUrl(m_oMediator->m_oCurrentUrl); // TODO
 	}
 	setWindowTitle(txt);
+}
+
+void semantik_d_win::slot_export_fig_size()
+{
+	if (m_oActiveDocument != NULL)
+	{
+		m_oActiveDocument->m_oDiagramView->export_fig_size();
+	}
 }
 
