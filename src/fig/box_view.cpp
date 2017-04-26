@@ -2084,7 +2084,7 @@ void box_view::export_fig_size()
 
 		if (!exp->kurlrequester->url().isValid() || exp->kurlrequester->url().isEmpty())
 		{
-			m_oMediator->notify_message(trUtf8("No destination file selected"), 5000);
+			emit sig_message(trUtf8("No destination file selected"), 5000);
 			return;
 		}
 
@@ -2108,7 +2108,7 @@ void box_view::export_fig_size()
 		}
 		int status = batch_print_map(url, p);
 		if (status == 0)
-			m_oMediator->notify_message(trUtf8("Exported '%1'").arg(url.fileName()), 2000);
+			emit sig_message(trUtf8("Exported '%1'").arg(url.fileName()), 2000);
 		else
 			KMessageBox::sorry(this, trUtf8("Could not save to %1").arg(url.fileName()), trUtf8("Missing picture"));
 	}
