@@ -146,11 +146,13 @@ def configure(conf):
 		icons = Options.options.icons
 
 	conf.load('compiler_c compiler_cxx qt5')
+
 	conf.check_cxx(fragment='int main() { return 0; }', cxxflags='-std=c++11', uselib_store='cxx')
 	if not conf.env.CXX: conf.fatal('Semantik requires g++ (compilation only)')
 	if not conf.env.QT_LRELEASE: conf.fatal('Semantik requires the program lrelease (from the Qt linguist package? - compilation only)')
 	conf.load('python')
-	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Qt5WebEngineWidgets not found - Semantik requires Qt >= 5')
+	if not conf.env.LIB_QT5SVG: conf.fatal('Could not find Qt5Svg - Semantik requires Qt >= 5')
+	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Could not find Qt5WebEngineWidgets - Semantik requires Qt >= 5')
 	if not conf.env.PYTHON: conf.fatal('Semantik requires Python >= 2.5 (development package for the compilation)')
 	conf.check_python_version((2,4,2))
 	conf.check_python_headers()
@@ -220,6 +222,8 @@ def configure(conf):
 
 	conf.env.append_value('INCLUDES_KDECORE', '/usr/include/KF5/KDELibs4Support')
 	conf.env.append_value('LIB_KDECORE', 'KF5KDELibs4Support')
+	conf.check(fragment='#include <kio/job.h>\n', features='cxx qt5',
+		msg='Checking for kdelibs4support', use='KF5KDELibs4Support QT5CORE')
 
 	conf.define('cmd_add_item', 0)
 	conf.define('cmd_update_item', 1)
