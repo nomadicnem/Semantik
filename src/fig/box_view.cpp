@@ -496,6 +496,14 @@ void box_view::sync_view()
 		{
 			l_o = new box_database(this, box->m_iId);
 		}
+		else if (box->m_iType == data_box::PIPE)
+		{
+			l_o = new box_pipe(this, box->m_iId);
+		}
+		else if (box->m_iType == data_box::RECTANGLE)
+		{
+			l_o = new box_rectangle(this, box->m_iId);
+		}
 		else
 		{
 			Q_ASSERT(false);
