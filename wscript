@@ -223,7 +223,7 @@ def configure(conf):
 	conf.env.append_value('INCLUDES_KDECORE', '/usr/include/KF5/KDELibs4Support')
 	conf.env.append_value('LIB_KDECORE', 'KF5KDELibs4Support')
 	conf.check(fragment='#include <kio/job.h>\n', features='cxx qt5',
-		msg='Checking for kdelibs4support', use='KF5KDELibs4Support QT5CORE')
+		msg='Checking for kdelibs4support', use='KDECORE QT5CORE')
 
 	conf.define('cmd_add_item', 0)
 	conf.define('cmd_update_item', 1)
