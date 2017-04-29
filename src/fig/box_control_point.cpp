@@ -250,9 +250,11 @@ void box_control_point::init_pos()
 	if (m_oLink->m_oGood.at(i+2).x() == p.x()) {
 		p.setY((p.y() + m_oLink->m_oGood.at(i+2).y()) / 2);
 		m_bMoveX = true;
+		setCursor(Qt::SplitHCursor);
 	} else {
 		p.setX((p.x() + m_oLink->m_oGood.at(i+2).x()) / 2);
 		m_bMoveX = false;
+		setCursor(Qt::SplitVCursor);
 	}
 	setPos(p);
 }

@@ -40,6 +40,7 @@ box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connec
 
 	update_size();
 	setZValue(100);
+	//setCursor(Qt::SizeFDiagCursor);
 	setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
 }
 
@@ -130,6 +131,7 @@ void box_item::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 		m_iHH = grid_int(m_iHH);
 
 		doc.setTextWidth(m_iWW - 2 * OFF);
+		prepareGeometryChange();
 		setRect(0, 0, m_iWW, m_iHH);
 		m_oChain->setPos(m_iWW + 3, 0);
 
@@ -180,6 +182,7 @@ void box_item::update_size() {
 	doc.setHtml(QString("<div align='center'>%1</div>").arg(m_oBox->m_sText));
 	doc.setTextWidth(m_iWW - 2 * OFF);
 
+	prepareGeometryChange();
 	setRect(0, 0, m_iWW, m_iHH);
 	m_oChain->setPos(m_iWW + 3, 0);
 

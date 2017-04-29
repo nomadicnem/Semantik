@@ -270,6 +270,7 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
 	m_oMenu = NULL;
+	setMouseTracking(true);
 }
 
 void box_view::init_menu()
@@ -1588,12 +1589,7 @@ void box_view::mouseMoveEvent(QMouseEvent *i_oEv)
 		return;
 	}
 
-	if (!m_bPressed)
-	{
-		return;
-	}
-
-	m_oLastMovePoint = mapToScene(i_oEv->pos());
+	if (m_bPressed) m_oLastMovePoint = mapToScene(i_oEv->pos());
 	QGraphicsView::mouseMoveEvent(i_oEv);
 }
 

@@ -177,6 +177,7 @@ void box_matrix::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 				m_iHH = l_iHeight + 2 * GRID;
 			}
 
+			prepareGeometryChange();
 			setRect(0, 0, m_iWW + 2*PAD, m_iHH + 2*PAD);
 			m_oView->message(m_oView->trUtf8("Last row: %2px, last column: %3px (size: %4 x %5)").arg(
 				QString::number(m_iHH - l_iHeight),
