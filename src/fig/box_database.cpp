@@ -93,7 +93,7 @@ void box_database::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 		l_oPen.setStyle(Qt::SolidLine);
 		painter->setPen(l_oPen);
 		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(m_iWW - 8, m_iHH - 8, 6, 6);
+		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
 		painter->drawRect(l_oR2);
 	}
 

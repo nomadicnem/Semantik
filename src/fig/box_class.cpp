@@ -47,7 +47,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 {
 	i_oPainter->save();
 
-	QRectF l_oRect = boundingRect().adjusted(1, 1, -1, -1);
+	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen;
 	l_oPen.setCosmetic(false);
@@ -278,7 +278,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 		l_oPen.setStyle(Qt::SolidLine);
 		i_oPainter->setPen(l_oPen);
 		i_oPainter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(m_iWW - 8, m_iHH - 8, 6, 6);
+		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
 		i_oPainter->drawRect(l_oR2);
 	}
 	i_oPainter->restore();
