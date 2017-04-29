@@ -33,6 +33,7 @@ box_control_point::box_control_point(box_view* i_oParent) : QGraphicsRectItem(),
 	setZValue(110);
 	m_bChanged = false;
 	m_bForced = false;
+	setCursor(Qt::SizeAllCursor);
 	setFlags(ItemIsMovable | ItemSendsGeometryChanges);
 }
 
