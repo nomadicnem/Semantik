@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -45,8 +45,6 @@ void box_class::force_size()
 
 void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	i_oPainter->save();
-
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen;
@@ -272,16 +270,6 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 		i_oPainter->drawText(l_oR, Qt::AlignCenter | Qt::TextSingleLine | Qt::AlignTop, l_sVis);
 		l_fHpos += l_oR.height();
 	}
-
-	if (isSelected())
-	{
-		l_oPen.setStyle(Qt::SolidLine);
-		i_oPainter->setPen(l_oPen);
-		i_oPainter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		i_oPainter->drawRect(l_oR2);
-	}
-	i_oPainter->restore();
 }
 
 qreal box_class::minVisibility(const QFontMetricsF i_oFm)

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -37,8 +37,6 @@ box_decision::box_decision(box_view* view, int id) : box_item(view, id)
 
 void box_decision::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
-
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QColor bc(m_oBox->color);
@@ -72,25 +70,13 @@ void box_decision::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	pts[3] = topLeft + QPointF(0,                 l_oRect.height()/2);
 
 	painter->drawPolygon(pts, 4);
-
-	if (isSelected())
-	{
-		l_oPen.setStyle(Qt::SolidLine);
-		painter->setPen(l_oPen);
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
-	}
-	painter->restore();
 }
 
-void box_decision::update_size() {
-	m_iWW = m_oBox->m_iWW;
-	m_iHH = m_oBox->m_iHH;
-
-	doc.setHtml(QString("<div align='center'>%1</div>").arg(m_oBox->m_sText));
-	doc.setTextWidth(m_iWW - 2 * OFF - 20);
-
-	setRect(0, 0, m_iWW, m_iHH);
+QSize box_decision::best_size(const QPointF &dims)
+{
+	int x = dims.x();
+	x = GRID * (x / GRID);
+	if (x < 2 * GRID) x = 2 * GRID;
+	return QSize(x, x);
 }
 

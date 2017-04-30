@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -23,7 +23,7 @@
 
 #define PAD 2
 
-box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), editable(), m_oView(i_oParent)
+box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), editable(), resizable(), m_oView(i_oParent)
 {
 	m_iId = i_iId;
 	m_bMoving = false;
@@ -38,15 +38,25 @@ box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connec
 
 	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 
+	m_oResize = new box_resize_point(m_oView, this);
+	m_oResize->setRect(-CTRLSIZE - 1, -CTRLSIZE - 1, CTRLSIZE, CTRLSIZE);
+	m_oResize->setCursor(Qt::SizeFDiagCursor);
+	m_oResize->hide();
+	m_oResize->setParentItem(this);
+
 	update_size();
+	update_sizers();
 	setZValue(100);
 	//setCursor(Qt::SizeFDiagCursor);
 	setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
+	x_text_off = 2 * OFF;
+	y_text_off = 2 * OFF;
 }
 
 box_item::~box_item()
 {
 	delete m_oChain;
+	delete m_oResize;
 }
 
 void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -79,19 +89,6 @@ void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 
 	painter->drawRoundRect(l_oRect, 20, 20);
-	if (isSelected())
-	{
-		l_oPen.setStyle(Qt::SolidLine);
-		painter->setPen(l_oPen);
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
-
-		/*painter->setBrush(Qt::green);
-		l_oR2.setY(PAD);
-		l_oR2.setHeight(6);
-		painter->drawRect(l_oR2);*/
-	}
 
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
@@ -99,7 +96,7 @@ void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	QAbstractTextDocumentLayout * lay = doc.documentLayout();
 	qreal yoff = lay->documentSize().height();
 
-	painter->translate(OFF, OFF + (m_iHH - 2 * OFF - yoff) / 2.);
+	painter->translate(OFF, OFF + (rect().height() - 2 * OFF - yoff) / 2.);
 	lay->draw(painter, ctx);
 }
 
@@ -114,56 +111,9 @@ void box_item::mousePressEvent(QGraphicsSceneMouseEvent* e)
 	QGraphicsRectItem::mousePressEvent(e);
 }
 
-void box_item::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
-{
-	if (m_bMoving)
-	{
-		QPointF np = e->pos();
-		int x = np.x() - m_oLastPressPoint.x();
-		int y = np.y() - m_oLastPressPoint.y();
-
-		m_iWW = m_oBox->m_iWW + x;
-		if (m_iWW < 2 * GRID) m_iWW = 2 * GRID;
-		m_iWW = grid_int(m_iWW);
-
-		m_iHH = m_oBox->m_iHH + y;
-		if (m_iHH < 2 * GRID) m_iHH = 2 * GRID;
-		m_iHH = grid_int(m_iHH);
-
-		doc.setTextWidth(m_iWW - 2 * OFF);
-		prepareGeometryChange();
-		setRect(0, 0, m_iWW, m_iHH);
-		m_oChain->setPos(m_iWW + 3, 0);
-
-		m_oView->message(m_oView->trUtf8("%1 x %2").arg(QString::number(m_iWW), QString::number(m_iHH)), 1000);
-
-		update();
-		update_links();
-	}
-	else
-	{
-		QGraphicsRectItem::mouseMoveEvent(e);
-	}
-}
-
 void box_item::mouseReleaseEvent(QGraphicsSceneMouseEvent* e) {
-	if (m_bMoving)
-	{
-		m_bMoving = false;
-		setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
-
-		if (m_iWW != m_oBox->m_iWW || m_iHH != m_oBox->m_iHH)	
-		{
-			mem_size_box *mem = new mem_size_box(m_oView->m_oMediator, m_oView->m_iId);
-			mem->prev_values[m_oBox] = QRect(m_oBox->m_iXX, m_oBox->m_iYY, m_oBox->m_iWW, m_oBox->m_iHH);
-			mem->next_values[m_oBox] = QRect(m_oBox->m_iXX, m_oBox->m_iYY, m_iWW, m_iHH);
-			mem->apply();
-		}
-	}
-	else
-	{
-		QGraphicsRectItem::mouseReleaseEvent(e);
-	}
+	QGraphicsRectItem::mouseReleaseEvent(e);
+	update_sizers();
 }
 
 void box_item::update_data() {
@@ -173,6 +123,7 @@ void box_item::update_data() {
 		update_size();
 	}
 	update();
+	update_sizers();
 }
 
 void box_item::update_size() {
@@ -180,13 +131,13 @@ void box_item::update_size() {
 	m_iHH = m_oBox->m_iHH;
 
 	doc.setHtml(QString("<div align='center'>%1</div>").arg(m_oBox->m_sText));
-	doc.setTextWidth(m_iWW - 2 * OFF);
+	doc.setTextWidth(m_iWW - x_text_off);
 
 	prepareGeometryChange();
 	setRect(0, 0, m_iWW, m_iHH);
 	m_oChain->setPos(m_iWW + 3, 0);
-
 	update_links();
+	update_sizers();
 }
 
 void box_item::properties()
@@ -224,10 +175,12 @@ QVariant box_item::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oV
 		else if (i_oChange == ItemPositionHasChanged)
 		{
 			update_links();
+			update_sizers();
 		}
 		else if (i_oChange == ItemSelectedHasChanged)
 		{
 			m_oChain->setVisible(isSelected());
+			m_oResize->setVisible(isSelected());
 		}
 	}
 
@@ -308,5 +261,77 @@ QPoint box_item::get_point(int i_oP)
 	}
 	Q_ASSERT(false);
 	return QPoint(0, 0);
+}
+
+QSize box_item::best_size(const QPointF &dims)
+{
+	int x = dims.x();
+	x = GRID * (x / GRID);
+	if (x < GRID) x = GRID;
+
+	while (true) {
+		int l_oWantedW = x - x_text_off;
+		doc.setTextWidth(l_oWantedW);
+		if (doc.size().width() <= l_oWantedW)
+			break;
+		x += GRID;
+	}
+
+	int y = dims.y();
+	y = GRID * (y / GRID);
+	if (y < GRID) y = GRID;
+	while (y - y_text_off < doc.size().height())
+	{
+		y += GRID;
+	}
+	return QSize(x, y);
+}
+
+QPointF box_item::validate_point(box_resize_point *p, const QPointF & orig)
+{
+	QSize s = best_size(orig);
+	m_iLastStretchX = s.width();
+	m_iLastStretchY = s.height();
+	m_oChain->setPos(m_iLastStretchX + 3, 0);
+
+	prepareGeometryChange();
+	setRect(0, 0, m_iLastStretchX, m_iLastStretchY);
+	update();
+	update_links();
+	m_oView->message(m_oView->trUtf8("%1 x %2").arg(QString::number(m_iLastStretchX), QString::number(m_iLastStretchY)), 1000);
+	return QPointF(m_iLastStretchX, m_iLastStretchY);
+}
+
+void box_item::commit_size(box_resize_point *p)
+{
+	QRect r_orig(m_oBox->m_iXX, m_oBox->m_iYY, m_oBox->m_iWW, m_oBox->m_iHH);
+	QRect r_dest(m_oBox->m_iXX, m_oBox->m_iYY, m_iLastStretchX, m_iLastStretchY);
+
+	if (r_orig != r_dest)
+	{
+		mem_size_box *mem = new mem_size_box(m_oView->m_oMediator, m_oView->m_iId);
+		mem->prev_values[m_oBox] = r_orig;
+		mem->next_values[m_oBox] = r_dest;
+		mem->apply();
+	}
+}
+
+void box_item::freeze(bool b)
+{
+	if (b)
+	{
+		setFlags(ItemIsSelectable);
+		m_iLastStretchX = 0;
+		m_iLastStretchY = 0;
+	}
+	else
+	{
+		setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
+	}
+}
+
+void box_item::update_sizers()
+{
+	m_oResize->setPos(m_oBox->m_iWW, m_oBox->m_iHH);
 }
 

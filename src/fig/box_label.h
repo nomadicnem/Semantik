@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #ifndef BOX_LABEL_H
 #define BOX_LABEL_H
@@ -18,7 +18,7 @@ class box_label : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_label(box_view*, int i_iId);
-		QVariant itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue);
+		//QVariant itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue);
 };
 
 #endif // BOX_LABEL_H

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #ifndef BOX_DECISION_H
 #define BOX_DECISION_H
@@ -18,7 +18,7 @@ class box_decision : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_decision(box_view*, int i_iId);
-		void update_size();
+		QSize best_size(const QPointF &dims);
 };
 
 #endif // BOX_DECISION_H

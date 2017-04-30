@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -41,8 +41,6 @@ box_actor::~box_actor() {
 
 void box_actor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
-
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
@@ -68,15 +66,6 @@ void box_actor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 		cir = ycoord;
 	}
 	painter->drawEllipse(QRectF(xcoord - cir, ytop + 2 * ycoord - 2 * cir, 2 * cir, 2 * cir));
-
-	if (isSelected())
-	{
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
-	}
-
-	painter->restore();
 }
 
 void box_actor::properties()
@@ -96,10 +85,12 @@ void box_actor::update_size() {
 	m_iWW = m_oBox->m_iWW;
 	m_iHH = m_oBox->m_iHH;
 
+	prepareGeometryChange();
 	setRect(0, 0, m_iWW, m_iHH);
 	m_oChain->setPos(m_iWW + 3, 0);
 
 	update_links();
+	update_sizers();
 }
 
 void box_actor::update_links() {

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 
 #ifndef BOX_ITEM_H
@@ -20,11 +20,13 @@ class QTextDocument;
 class box_view;
 class data_item;
 class data_box;
-class box_item : public QGraphicsRectItem, public connectable, public editable
+class box_item : public QGraphicsRectItem, public connectable, public editable, public resizable
 {
 	public:
 		box_item(box_view*, int i_iId);
 		~box_item();
+		int y_text_off;
+		int x_text_off;
 
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 
@@ -37,7 +39,7 @@ class box_item : public QGraphicsRectItem, public connectable, public editable
 		data_item *m_oItem;
 
 		void mousePressEvent(QGraphicsSceneMouseEvent* e);
-		void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
+		//void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
 		void mouseReleaseEvent(QGraphicsSceneMouseEvent* e);
 		virtual void properties();
 
@@ -55,6 +57,15 @@ class box_item : public QGraphicsRectItem, public connectable, public editable
 		int m_iHH;
 		bool m_bMoving;
 
+		box_resize_point *m_oResize;
+		virtual QSize best_size(const QPointF & orig);
+
+		void update_sizers();
+		int m_iLastStretchX;
+		int m_iLastStretchY;
+		QPointF validate_point(box_resize_point *p, const QPointF & orig);
+                void freeze(bool b);
+                void commit_size(box_resize_point *p);
 };
 
 #endif // BOX_ITEM_H

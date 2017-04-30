@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -78,8 +78,6 @@ box_fork::~box_fork()
 
 void box_fork::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
-
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
@@ -89,8 +87,6 @@ void box_fork::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	l_oPen.setWidth(1);
 	painter->setBrush(m_oBox->color);
 	painter->drawRect(l_oRect);
-
-	painter->restore();
 }
 
 void box_fork::mousePressEvent(QGraphicsSceneMouseEvent* e) {
@@ -369,10 +365,13 @@ void box_fork::commit_size(box_resize_point *p)
 		r_dest.setWidth(m_iLastStretch);
 	}
 
-	mem_size_box *mem = new mem_size_box(m_oView->m_oMediator, m_oView->m_iId);
-	mem->prev_values[m_oBox] = r_orig;
-	mem->next_values[m_oBox] = r_dest;
-	mem->apply();
+	if (r_orig != r_dest)
+	{
+		mem_size_box *mem = new mem_size_box(m_oView->m_oMediator, m_oView->m_iId);
+		mem->prev_values[m_oBox] = r_orig;
+		mem->next_values[m_oBox] = r_dest;
+		mem->apply();
+	}
 }
 
 void box_fork::freeze(bool b)

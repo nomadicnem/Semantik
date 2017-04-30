@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #ifndef BOX_NODE_H
 #define BOX_NODE_H
@@ -18,7 +18,6 @@ class box_node : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_node(box_view*, int i_iId);
-		void update_size();
 		void mousePressEvent(QGraphicsSceneMouseEvent* e);
 };
 

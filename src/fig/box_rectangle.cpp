@@ -30,7 +30,6 @@ box_rectangle::box_rectangle(box_view* view, int id) : box_item(view, id)
 
 void box_rectangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
 	doc.setDefaultFont(scene()->font());
 	//painter->setFont(scene()->font());
 
@@ -63,21 +62,10 @@ void box_rectangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	painter->setPen(l_oPen);
 	painter->drawRect(l_oRect);
 
-	if (isSelected())
-	{
-		l_oPen.setStyle(Qt::SolidLine);
-		painter->setPen(l_oPen);
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
-	}
-
 	painter->translate(OFF, OFF + 15);
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, Qt::black); // white on black kde themes
 	doc.documentLayout()->draw(painter, ctx);
-
-	painter->restore();
 }
 

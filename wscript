@@ -262,7 +262,7 @@ def configure(conf):
 	conf.env.CXXFLAGS_PYEMBED = [x for x in conf.env.CXXFLAGS_PYEMBED if x != '-g']
 
 	if not 'CXXFLAGS' in os.environ:
-		conf.env.CXXFLAGS = '-O2 -pipe -Wall'.split()# -DDEBUG=1 -g'
+		conf.env.CXXFLAGS = '-O2 -pipe -Wno-deprecated-declarations -Wall'.split()# -DDEBUG=1 -g'
 		#conf.env.CXXFLAGS = ['-g', '-Wall']
 	conf.write_config_header('aux.h')
 

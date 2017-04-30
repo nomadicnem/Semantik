@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -25,14 +25,16 @@
 
 box_component::box_component(box_view* view, int id) : box_item(view, id)
 {
+	y_text_off = 2 * OFF + 20;
+	x_text_off = 2 * OFF + 10;
 	setZValue(95);
 }
 
 void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
 	doc.setDefaultFont(scene()->font());
 	//painter->setFont(scene()->font());
+
 
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
@@ -63,23 +65,15 @@ void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	painter->setPen(l_oPen);
 	painter->drawRect(l_oRect);
 
-	if (isSelected())
-	{
-		l_oPen.setStyle(Qt::SolidLine);
-		painter->setPen(l_oPen);
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
-	}
-
+	int w = rect().width();
 	l_oPen.setStyle(Qt::SolidLine);
 	painter->setPen(l_oPen);
 	painter->setBrush(bc);
-	QRectF l_o(m_iWW - 20, 6, 12, 14);
+	QRectF l_o(w - 20, 6, 12, 14);
 	painter->drawRect(l_o);
-	QRectF l_o2(m_iWW - 24, 9, 8, 3);
+	QRectF l_o2(w - 24, 9, 8, 3);
 	painter->drawRect(l_o2);
-	QRectF l_o3(m_iWW - 24, 14, 8, 3);
+	QRectF l_o3(w - 24, 14, 8, 3);
 	painter->drawRect(l_o3);
 
 
@@ -88,7 +82,5 @@ void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, Qt::black); // white on black kde themes
 	doc.documentLayout()->draw(painter, ctx);
-
-	painter->restore();
 }
 

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -38,8 +38,6 @@ box_matrix::box_matrix(box_view* view, int id) : box_item(view, id)
 
 void box_matrix::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
-
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
@@ -86,8 +84,6 @@ void box_matrix::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 		painter->drawRect(l_oR.translated(l_oX, l_oY));
 	}
-
-	painter->restore();
 }
 
 void box_matrix::mousePressEvent(QGraphicsSceneMouseEvent* e)

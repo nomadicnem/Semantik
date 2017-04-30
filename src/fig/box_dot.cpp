@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -47,8 +47,6 @@ box_dot::~box_dot()
 
 void box_dot::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
-
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
@@ -67,7 +65,6 @@ void box_dot::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 		painter->setBrush(m_oBox->color);
 		painter->drawEllipse(l_oRect);
 	}
-	painter->restore();
 }
 
 void box_dot::mousePressEvent(QGraphicsSceneMouseEvent* e) {

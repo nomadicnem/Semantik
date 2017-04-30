@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -33,7 +33,6 @@ box_label::box_label(box_view* view, int id) : box_item(view, id)
 
 void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
 	doc.setDefaultFont(scene()->font());
 	//painter->setFont(scene()->font());
 
@@ -47,23 +46,15 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 		l_oPen.setWidth(1);
 		painter->setPen(l_oPen);
 		painter->drawRoundRect(l_oRect, 20, 20);
-
-		l_oPen.setStyle(Qt::SolidLine);
-		painter->setPen(l_oPen);
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
 	}
 
 	painter->translate(OFF, OFF);
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
 	doc.documentLayout()->draw(painter, ctx);
-
-	painter->restore();
 }
 
-QVariant box_label::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue)
+/*QVariant box_label::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue)
 {
 	if (scene())
 	{
@@ -78,6 +69,6 @@ QVariant box_label::itemChange(GraphicsItemChange i_oChange, const QVariant &i_o
 	}
 
 	return QGraphicsItem::itemChange(i_oChange, i_oValue);
-}
+}*/
 
 

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -32,12 +32,14 @@ box_node::box_node(box_view* view, int id) : box_item(view, id)
 	font.setBold(true);
 	doc.setDefaultFont(font);
 
+	// FIXME move the resize handle by x-10
 	setZValue(90);
+	x_text_off = 2 * OFF + 20;
+	y_text_off = 2 * OFF + 30;
 }
 
 void box_node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
 	doc.setDefaultFont(scene()->font());
 
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
@@ -78,32 +80,12 @@ void box_node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 	painter->drawPolygon(pts, 4);
 
-	if (isSelected())
-	{
-		l_oPen.setStyle(Qt::SolidLine);
-		painter->setPen(l_oPen);
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(16, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
-	}
-
-	painter->translate(OFF, OFF + 10);
+	painter->translate((rect().width() - 10 - doc.size().width())/2, OFF + 10);
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, Qt::black); // white on black kde themes
+
 	doc.documentLayout()->draw(painter, ctx);
-
-	painter->restore();
-}
-
-void box_node::update_size() {
-	m_iWW = m_oBox->m_iWW;
-	m_iHH = m_oBox->m_iHH;
-
-	doc.setHtml(QString("<div align='center'>%1</div>").arg(m_oBox->m_sText));
-	doc.setTextWidth(m_iWW - 2 * OFF - 20);
-
-	setRect(0, 0, m_iWW, m_iHH);
 }
 
 void box_node::mousePressEvent(QGraphicsSceneMouseEvent* e)

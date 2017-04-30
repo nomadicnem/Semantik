@@ -33,8 +33,6 @@ box_pipe::box_pipe(box_view* view, int id) : box_item(view, id)
 
 void box_pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
-
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
@@ -86,17 +84,5 @@ void box_pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 	painter->setBrush(bc);
 	painter->drawEllipse(l_oRect2);
-
-
-	if (isSelected())
-	{
-		l_oPen.setStyle(Qt::SolidLine);
-		painter->setPen(l_oPen);
-		painter->setBrush(QColor("#FFFF00"));
-		QRectF l_oR2(l_oRect.bottomRight() - QPointF(6, 6), l_oRect.bottomRight());
-		painter->drawRect(l_oR2);
-	}
-
-	painter->restore();
 }
 

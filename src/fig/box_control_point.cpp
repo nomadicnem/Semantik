@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -39,7 +39,6 @@ box_control_point::box_control_point(box_view* i_oParent) : QGraphicsRectItem(),
 
 void box_control_point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
@@ -64,7 +63,6 @@ void box_control_point::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 			painter->setBrush(QColor(Qt::red));
 	}
 	painter->drawRect(l_oRect);
-	painter->restore();
 }
 
 void box_control_point::mousePressEvent(QGraphicsSceneMouseEvent* e) {

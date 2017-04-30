@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2016 GPLV3
+// Thomas Nagy 2007-2017 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -37,7 +37,6 @@ box_resize_point::box_resize_point(box_view* i_oView, resizable *i_oR) : QGraphi
 
 void box_resize_point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
@@ -47,7 +46,6 @@ void box_resize_point::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 	painter->setPen(l_oPen);
 	painter->setBrush(QColor("#FFFF00"));
 	painter->drawRect(l_oRect);
-	painter->restore();
 }
 
 void box_resize_point::mousePressEvent(QGraphicsSceneMouseEvent* e) {
