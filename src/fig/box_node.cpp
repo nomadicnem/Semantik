@@ -94,7 +94,6 @@ void box_node::mousePressEvent(QGraphicsSceneMouseEvent* e)
 	if (m_oLastPressPoint.x() > m_iWW - GRID - 10 && m_oLastPressPoint.x() < m_iWW - 10 && m_oLastPressPoint.y() > m_iHH - GRID)
 	{
 		setFlags(ItemIsSelectable | ItemSendsGeometryChanges);
-		m_bMoving = true;
 	}
 	QGraphicsRectItem::mousePressEvent(e);
 }

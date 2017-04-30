@@ -24,7 +24,6 @@
 #include <QFont>
 
 #define PAD 2
-#define MIN_FORK_SIZE 30
 
 box_matrix::box_matrix(box_view* view, int id) : box_item(view, id)
 {
@@ -45,225 +44,30 @@ void box_matrix::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 	l_oPen.setWidth(1);
 	painter->setPen(l_oPen);
 
-
-	qreal l_iHref = l_oRect.top();
-	foreach (int l_iHoff, m_oBox->m_oRowSizes)
+	int l_iPos = 0;
+	foreach (box_resize_point *l_oTmp, m_oRowSizers)
 	{
-		l_iHref += l_iHoff;
-		painter->drawLine(l_oRect.left(), l_iHref, l_oRect.right(), l_iHref);
+		l_iPos += l_oTmp->m_iPosition;
+		painter->drawLine(l_oRect.left(), l_iPos, l_oRect.right(), l_iPos);
 	}
-	l_iHref = l_oRect.left();
-	foreach (int l_iHoff, m_oBox->m_oColSizes)
+	l_iPos = 0;
+	foreach (box_resize_point *l_oTmp, m_oColSizers)
 	{
-		l_iHref += l_iHoff;
-		painter->drawLine(l_iHref, l_oRect.top(), l_iHref, l_oRect.bottom());
+		l_iPos += l_oTmp->m_iPosition;
+		painter->drawLine(l_iPos, l_oRect.top(), l_iPos, l_oRect.bottom());
 	}
-
 	painter->drawRect(l_oRect);
-
-	QRectF l_oR2 = boundingRect();
-	qreal l_oX = l_oR2.right();
-	qreal l_oY = l_oR2.bottom();
-
-	if (isSelected())
-	{
-		QRectF l_oR(-8, -8, 6, 6);
-		painter->setBrush(QColor("#FFFF00"));
-
-		qreal l_i = 6 - PAD;
-		foreach (int l_iSize, m_oBox->m_oRowSizes) {
-			l_i += l_iSize;
-			painter->drawRect(l_oR.translated(l_oX, l_i));
-		}
-
-		l_i = 6 - PAD;
-		foreach (int l_iSize, m_oBox->m_oColSizes) {
-			l_i += l_iSize;
-			painter->drawRect(l_oR.translated(l_i, l_oY));
-		}
-
-		painter->drawRect(l_oR.translated(l_oX, l_oY));
-	}
-}
-
-void box_matrix::mousePressEvent(QGraphicsSceneMouseEvent* e)
-{
-	m_oLastPressPoint = e->pos();
-	QRectF l_oR(-10, -10, 8, 8);
-
-	QRectF l_oR2 = boundingRect();
-	qreal l_oX = l_oR2.right();
-	qreal l_oY = l_oR2.bottom();
-
-	qreal l_i = 6 - PAD;
-	int i = 0;
-	foreach (int l_iSize, m_oBox->m_oRowSizes) {
-		l_i += l_iSize;
-		if (l_oR.translated(l_oX, l_i).contains(m_oLastPressPoint))
-		{
-			m_iLastSize = l_iSize;
-			m_iMovingRow = i;
-			m_iMovingCol = -1;
-			setFlags(ItemIsSelectable | ItemSendsGeometryChanges);
-			m_bMoving = true;
-			QGraphicsRectItem::mousePressEvent(e);
-			return;
-		}
-		i += 1;
-	}
-
-	i = 0;
-	l_i = 6 - PAD;
-	foreach (int l_iSize, m_oBox->m_oColSizes) {
-		l_i += l_iSize;
-		if (l_oR.translated(l_i, l_oY).contains(m_oLastPressPoint))
-		{
-			m_iLastSize = l_iSize;
-			m_iMovingRow = -1;
-			m_iMovingCol = i;
-			setFlags(ItemIsSelectable | ItemSendsGeometryChanges);
-			m_bMoving = true;
-			QGraphicsRectItem::mousePressEvent(e);
-			return;
-		}
-		i += 1;
-	}
-
-	if (l_oR.translated(l_oX, l_oY).contains(m_oLastPressPoint))
-	{
-		m_iMovingRow = m_iMovingCol = -1;
-		setFlags(ItemIsSelectable | ItemSendsGeometryChanges);
-		m_bMoving = true;
-		QGraphicsRectItem::mousePressEvent(e);
-		return;
-	}
-	QGraphicsRectItem::mousePressEvent(e);
-}
-
-void box_matrix::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
-{
-	if (m_bMoving)
-	{
-		QPointF np = e->pos();
-		int x = np.x() - m_oLastPressPoint.x();
-		int y = np.y() - m_oLastPressPoint.y();
-
-		if (m_iMovingRow == -1 && m_iMovingCol == -1) {
-			m_iWW = m_oBox->m_iWW + x;
-			if (m_iWW < 2 * GRID) m_iWW = 2 * GRID;
-			m_iWW = grid_int(m_iWW);
-
-			int l_iWidth = 0;
-			foreach (int l_iSize, m_oBox->m_oColSizes) {
-				l_iWidth += l_iSize;
-			}
-			if (m_iWW < l_iWidth + 2 * GRID) {
-				m_iWW = l_iWidth + 2 * GRID;
-			}
-
-			m_iHH = m_oBox->m_iHH + y;
-			if (m_iHH < 2 * GRID) m_iHH = 2 * GRID;
-			m_iHH = grid_int(m_iHH);
-
-			int l_iHeight = 0;
-			foreach (int l_iSize, m_oBox->m_oRowSizes) {
-				l_iHeight += l_iSize;
-			}
-			if (m_iHH < l_iHeight + 2 * GRID) {
-				m_iHH = l_iHeight + 2 * GRID;
-			}
-
-			prepareGeometryChange();
-			setRect(0, 0, m_iWW + 2*PAD, m_iHH + 2*PAD);
-			m_oView->message(m_oView->trUtf8("Last row: %2px, last column: %3px (size: %4 x %5)").arg(
-				QString::number(m_iHH - l_iHeight),
-				QString::number(m_iWW - l_iWidth),
-				QString::number(m_iWW),
-				QString::number(m_iHH)
-			), 5000);
-		}
-		else if (m_iMovingRow > -1)
-		{
-			int l_iSize = grid_int(m_iLastSize + y);
-			if (l_iSize < 2 * GRID) {
-				l_iSize = 2 * GRID;
-			}
-			m_oBox->m_oRowSizes[m_iMovingRow] = l_iSize;
-			int l_iNewHeight = m_oBox->m_iHH + l_iSize - m_iLastSize;
-			setRect(0, 0, m_oBox->m_iWW + 2 * PAD, l_iNewHeight + 2 * PAD);
-			m_oView->message(m_oView->trUtf8("Row %1: %2px (size: %3 x %4)").arg(
-				QString::number(m_iMovingRow + 1),
-				QString::number(l_iSize),
-				QString::number(m_iWW),
-				QString::number(l_iNewHeight)
-			), 5000);
-		}
-		else if (m_iMovingCol > -1)
-		{
-			int l_iSize = grid_int(m_iLastSize + x);
-			if (l_iSize < 2 * GRID) {
-				l_iSize = 2 * GRID;
-			}
-			m_oBox->m_oColSizes[m_iMovingCol] = l_iSize;
-			int l_iNewWidth = m_oBox->m_iWW + l_iSize - m_iLastSize;
-			setRect(0, 0, l_iNewWidth +  2 * PAD, m_oBox->m_iHH +  2 * PAD);
-			m_oView->message(m_oView->trUtf8("Column %1: %2px (size: %3 x %4)").arg(
-				QString::number(m_iMovingCol + 1),
-				QString::number(l_iSize),
-				QString::number(l_iNewWidth),
-				QString::number(m_iHH)
-			), 5000);
-		}
-
-		m_oChain->setPos(boundingRect().right() + 3, 0);
-		update();
-		update_links();
-	}
-	else
-	{
-		QGraphicsRectItem::mouseMoveEvent(e);
-	}
-}
-
-void box_matrix::mouseReleaseEvent(QGraphicsSceneMouseEvent* e) {
-	if (m_bMoving)
-	{
-		m_bMoving = false;
-		setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
-		if (m_iWW != m_oBox->m_iWW || m_iHH != m_oBox->m_iHH)
-		{
-			mem_size_box *mem = new mem_size_box(m_oView->m_oMediator, m_oView->m_iId);
-			mem->prev_values[m_oBox] = QRect(m_oBox->m_iXX, m_oBox->m_iYY, m_oBox->m_iWW, m_oBox->m_iHH);
-			mem->next_values[m_oBox] = QRect(m_oBox->m_iXX, m_oBox->m_iYY, m_iWW, m_iHH);
-			mem->apply();
-		} else if (m_iMovingRow > -1) {
-			mem_matrix *mem = new mem_matrix(m_oView->m_oMediator, m_oView->m_iId);
-			mem->init(m_oBox);
-			mem->m_oOldRowSizes[m_iMovingRow] = m_iLastSize;
-			mem->m_iNewHH += m_oBox->m_oRowSizes[m_iMovingRow] - m_iLastSize;
-			mem->apply();
-		} else if (m_iMovingCol > -1) {
-			mem_matrix *mem = new mem_matrix(m_oView->m_oMediator, m_oView->m_iId);
-			mem->init(m_oBox);
-			mem->m_oOldColSizes[m_iMovingCol] = m_iLastSize;
-			mem->m_iNewWW += m_oBox->m_oColSizes[m_iMovingCol] - m_iLastSize;
-			mem->apply();
-		}
-	}
-	else
-	{
-		QGraphicsRectItem::mouseReleaseEvent(e);
-	}
 }
 
 void box_matrix::update_size() {
 	m_iWW = m_oBox->m_iWW;
 	m_iHH = m_oBox->m_iHH;
 
-	setRect(0, 0, m_iWW + 2*PAD, m_iHH + 2*PAD);
+	prepareGeometryChange();
+	setRect(0, 0, m_iWW, m_iHH);
 	m_oChain->setPos(boundingRect().right() + 3, 0);
-
 	update_links();
+	update_sizers();
 }
 
 void box_matrix::properties()
@@ -315,4 +119,286 @@ void box_matrix::properties()
 	}
 }
 
+QPointF box_matrix::validate_point(box_resize_point *p, const QPointF & orig)
+{
+	if (p == m_oResize)
+	{
+		int l_iMinX = 2 * GRID;
+		for (int i = 0; i < m_oColSizers.size(); ++i)
+		{
+			l_iMinX += m_oColSizers.at(i)->m_iPosition;
+		}
+		int l_iMinY = 2 * GRID;
+		for (int i = 0; i < m_oRowSizers.size(); ++i)
+		{
+			l_iMinY += m_oRowSizers.at(i)->m_iPosition;
+		}
+		m_iLastStretchX = int_val(orig.x());
+		if (m_iLastStretchX < l_iMinX) m_iLastStretchX = l_iMinX;
+		m_iLastStretchY = int_val(orig.y());
+		if (m_iLastStretchY < l_iMinY) m_iLastStretchY = l_iMinY;
+
+		m_oChain->setPos(m_iLastStretchX + 3, 0);
+		prepareGeometryChange();
+		setRect(0, 0, m_iLastStretchX, m_iLastStretchY);
+		update();
+		update_links();
+
+		int l_iYY = 0;
+		for (int i = 0; i < m_oBox->m_oRowSizes.size(); ++i)
+		{
+			box_resize_point *l_oTmp = m_oRowSizers.at(i);
+			l_iYY += l_oTmp->m_iPosition;
+			l_oTmp->setPos(m_iLastStretchX, l_iYY);
+		}
+
+		int l_iXX = 0;
+		for (int i = 0; i < m_oBox->m_oColSizes.size(); ++i)
+		{
+			box_resize_point *l_oTmp = m_oColSizers.at(i);
+			l_iXX += l_oTmp->m_iPosition;
+			l_oTmp->setPos(l_iXX, m_iLastStretchY);
+		}
+
+		m_oView->message(m_oView->trUtf8("Last colunn: %1px, last row: %2px (size: %3 x %4)").arg(
+			QString::number(m_iLastStretchY - l_iYY),
+			QString::number(m_iLastStretchX - l_iXX),
+			QString::number(m_iLastStretchX),
+			QString::number(m_iLastStretchY)
+		), 5000);
+
+		return QPointF(m_iLastStretchX, m_iLastStretchY);
+	}
+	else
+	{
+		int l_iColIdx = m_oColSizers.indexOf(p);
+		int l_iRowIdx = m_oRowSizers.indexOf(p);
+		int l_iPrev = 0;
+		if (l_iColIdx >= 0)
+		{
+			for (int i = 0; i < l_iColIdx; ++i)
+			{
+				l_iPrev += m_oColSizers.at(i)->m_iPosition;
+			}
+			m_iLastStretchX = int_val(orig.x());
+			if (m_iLastStretchX < l_iPrev + 2 * GRID) m_iLastStretchX = l_iPrev + 2 * GRID;
+
+			p->m_iPosition = m_iLastStretchX - l_iPrev;
+
+			int l_iAcc = m_iLastStretchX;
+			for (int i = l_iColIdx + 1; i < m_oColSizers.size(); ++i)
+			{
+				box_resize_point *l_oNext = m_oColSizers.at(i);
+				l_iAcc += l_oNext->m_iPosition;
+				l_oNext->setPos(l_iAcc, m_oBox->m_iHH);
+			}
+			int l_iNewW = m_oBox->m_iWW + p->m_iPosition - m_oBox->m_oColSizes.at(l_iColIdx);
+			m_oResize->setPos(l_iNewW, m_oBox->m_iHH);
+			m_oResize->m_iPosition = l_iNewW;
+
+			m_oView->message(m_oView->trUtf8("Column %1: %2px (size: %3 x %4)").arg(
+				QString::number(l_iColIdx + 1),
+				QString::number(p->m_iPosition),
+				QString::number(l_iNewW),
+				QString::number(m_oBox->m_iHH)
+			), 5000);
+
+			prepareGeometryChange();
+			setRect(0, 0, l_iNewW, m_oBox->m_iHH);
+
+			int l_iOff = 0;
+			for (int i = 0; i < m_oBox->m_oRowSizes.size(); ++i)
+			{
+				box_resize_point *l_oTmp = m_oRowSizers.at(i);
+				l_iOff += l_oTmp->m_iPosition;
+				l_oTmp->setPos(l_iNewW, l_iOff);
+			}
+
+			m_oChain->setPos(l_iNewW + 3, 0);
+			update();
+			update_links();
+			return QPointF(m_iLastStretchX, m_oBox->m_iHH);
+		}
+		else if (l_iRowIdx >= 0)
+		{
+			for (int i = 0; i < l_iRowIdx; ++i)
+			{
+				l_iPrev += m_oRowSizers.at(i)->m_iPosition;
+			}
+			m_iLastStretchY = int_val(orig.y());
+			if (m_iLastStretchY < l_iPrev + 2 * GRID) m_iLastStretchY = l_iPrev + 2 * GRID;
+
+			p->m_iPosition = m_iLastStretchY - l_iPrev;
+
+			int l_iAcc = m_iLastStretchY;
+			for (int i = l_iRowIdx + 1; i < m_oRowSizers.size(); ++i)
+			{
+				box_resize_point *l_oNext = m_oRowSizers.at(i);
+				l_iAcc += l_oNext->m_iPosition;
+				l_oNext->setPos(m_oBox->m_iWW, l_iAcc);
+			}
+
+			int l_iNewH = m_oBox->m_iHH + p->m_iPosition - m_oBox->m_oRowSizes.at(l_iRowIdx);
+			m_oResize->setPos(m_oBox->m_iWW, l_iNewH);
+			m_oResize->m_iPosition = l_iNewH;
+
+			m_oView->message(m_oView->trUtf8("Row %1: %2px (size: %3 x %4)").arg(
+				QString::number(l_iRowIdx + 1),
+				QString::number(p->m_iPosition),
+				QString::number(m_oBox->m_iWW),
+				QString::number(l_iNewH)
+			), 5000);
+
+			prepareGeometryChange();
+			setRect(0, 0, m_oBox->m_iWW, l_iNewH);
+
+			int l_iOff = 0;
+			for (int i = 0; i < m_oBox->m_oColSizes.size(); ++i)
+			{
+				box_resize_point *l_oTmp = m_oColSizers.at(i);
+				l_iOff += l_oTmp->m_iPosition;
+				l_oTmp->setPos(l_iOff, l_iNewH);
+			}
+
+			update();
+			update_links();
+			return QPointF(m_oBox->m_iWW, m_iLastStretchY);
+		}
+	}
+	return orig;
+}
+
+void box_matrix::commit_size(box_resize_point *p)
+{
+	if (p == m_oResize)
+	{
+		QRect r_orig(m_oBox->m_iXX, m_oBox->m_iYY, m_oBox->m_iWW, m_oBox->m_iHH);
+		QRect r_dest(m_oBox->m_iXX, m_oBox->m_iYY, m_iLastStretchX, m_iLastStretchY);
+		if (r_orig != r_dest)
+		{
+			mem_size_box *mem = new mem_size_box(m_oView->m_oMediator, m_oView->m_iId);
+			mem->prev_values[m_oBox] = r_orig;
+			mem->next_values[m_oBox] = r_dest;
+			mem->apply();
+		}
+	}
+	else
+	{
+		int l_iColIdx = m_oColSizers.indexOf(p);
+		int l_iRowIdx = m_oRowSizers.indexOf(p);
+		if (l_iColIdx >= 0)
+		{
+			if (m_oColSizers.at(l_iColIdx)->m_iPosition != m_oBox->m_oColSizes.at(l_iColIdx))
+			{
+				mem_matrix *mem = new mem_matrix(m_oView->m_oMediator, m_oView->m_iId);
+				mem->init(m_oBox);
+				mem->m_oNewColSizes[l_iColIdx] = m_oColSizers.at(l_iColIdx)->m_iPosition;
+				mem->m_iNewWW = m_oResize->m_iPosition;
+				mem->apply();
+			}
+		}
+		else if (l_iRowIdx >= 0)
+		{
+			if (m_oRowSizers.at(l_iRowIdx)->m_iPosition != m_oBox->m_oRowSizes.at(l_iRowIdx))
+			{
+				mem_matrix *mem = new mem_matrix(m_oView->m_oMediator, m_oView->m_iId);
+				mem->init(m_oBox);
+				mem->m_oNewRowSizes[l_iRowIdx] = m_oRowSizers.at(l_iRowIdx)->m_iPosition;
+				mem->m_iNewHH = m_oResize->m_iPosition;
+				mem->apply();
+			}
+		}
+		else
+		{
+			Q_ASSERT(false);
+		}
+	}
+}
+
+void box_matrix::freeze(bool b)
+{
+	if (b)
+	{
+		setFlags(ItemIsSelectable);
+		m_iLastStretchX = 0;
+		m_iLastStretchY = 0;
+	}
+	else
+	{
+		setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
+	}
+}
+
+void box_matrix::allocate_sizers()
+{
+	while (m_oRowSizers.size() < m_oBox->m_oRowSizes.size())
+	{
+		box_resize_point *l_oTmp = new box_resize_point(m_oView, this);
+		l_oTmp->setCursor(Qt::SizeVerCursor);
+		l_oTmp->setRect(-1-CTRLSIZE, 0.5-CTRLSIZE, CTRLSIZE, CTRLSIZE);
+		l_oTmp->setParentItem(this);
+		m_oRowSizers.append(l_oTmp);
+	}
+	while (m_oRowSizers.size() > m_oBox->m_oRowSizes.size())
+	{
+		delete m_oRowSizers.takeLast();
+	}
+	while (m_oColSizers.size() < m_oBox->m_oColSizes.size())
+	{
+		box_resize_point *l_oTmp = new box_resize_point(m_oView, this);
+		l_oTmp->setCursor(Qt::SizeHorCursor);
+		l_oTmp->setRect(0.5-CTRLSIZE, -CTRLSIZE-1, CTRLSIZE, CTRLSIZE);
+		l_oTmp->setParentItem(this);
+		m_oColSizers.append(l_oTmp);
+	}
+	while (m_oColSizers.size() > m_oBox->m_oColSizes.size())
+	{
+		delete m_oColSizers.takeLast();
+	}
+}
+
+void box_matrix::fix_sizers_visibility()
+{
+	bool l_bSelected = isSelected();
+	foreach(box_resize_point *l_oTmp, m_oRowSizers)
+	{
+		l_oTmp->setVisible(l_bSelected);
+	}
+	foreach(box_resize_point *l_oTmp, m_oColSizers)
+	{
+		l_oTmp->setVisible(l_bSelected);
+	}
+}
+
+void box_matrix::update_sizers()
+{
+	allocate_sizers();
+	m_oResize->setPos(m_oBox->m_iWW, m_oBox->m_iHH);
+
+	int l_iOff = 0;
+	for (int i = 0; i < m_oBox->m_oRowSizes.size(); ++i)
+	{
+		box_resize_point *l_oTmp = m_oRowSizers.at(i);
+		l_oTmp->m_iPosition = m_oBox->m_oRowSizes.at(i);
+		l_iOff += l_oTmp->m_iPosition;
+		l_oTmp->setPos(m_oBox->m_iWW, l_iOff);
+	}
+
+	l_iOff = 0;
+	for (int i = 0; i < m_oBox->m_oColSizes.size(); ++i)
+	{
+		box_resize_point *l_oTmp = m_oColSizers.at(i);
+		l_oTmp->m_iPosition = m_oBox->m_oColSizes.at(i);
+		l_iOff += l_oTmp->m_iPosition;
+		l_oTmp->setPos(l_iOff, m_oBox->m_iHH);
+	}
+}
+
+void box_matrix::update_selection()
+{
+	allocate_sizers();
+	fix_sizers_visibility();
+	m_oResize->setVisible(isSelected());
+	m_oChain->setVisible(isSelected());
+}
 

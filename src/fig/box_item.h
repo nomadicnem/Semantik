@@ -38,14 +38,12 @@ class box_item : public QGraphicsRectItem, public connectable, public editable, 
 		box_view *m_oView;
 		data_item *m_oItem;
 
-		void mousePressEvent(QGraphicsSceneMouseEvent* e);
-		//void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
-		void mouseReleaseEvent(QGraphicsSceneMouseEvent* e);
 		virtual void properties();
 
 		virtual void update_data();
 		virtual void update_size();
 		virtual void update_links();
+		virtual void update_selection();
 
 		QVariant itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue);
 
@@ -55,12 +53,11 @@ class box_item : public QGraphicsRectItem, public connectable, public editable, 
 
 		int m_iWW;
 		int m_iHH;
-		bool m_bMoving;
 
 		box_resize_point *m_oResize;
 		virtual QSize best_size(const QPointF & orig);
 
-		void update_sizers();
+		virtual void update_sizers();
 		int m_iLastStretchX;
 		int m_iLastStretchY;
 		QPointF validate_point(box_resize_point *p, const QPointF & orig);

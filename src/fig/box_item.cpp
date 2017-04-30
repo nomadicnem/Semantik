@@ -26,7 +26,6 @@
 box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), editable(), resizable(), m_oView(i_oParent)
 {
 	m_iId = i_iId;
-	m_bMoving = false;
 
 	m_oItem = m_oView->m_oMediator->m_oItems[m_oView->m_iId];
 	m_oBox = m_oItem->m_oBoxes[m_iId];
@@ -100,22 +99,6 @@ void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	lay->draw(painter, ctx);
 }
 
-void box_item::mousePressEvent(QGraphicsSceneMouseEvent* e)
-{
-	m_oLastPressPoint = e->pos();
-	if (m_oLastPressPoint.x() > m_iWW - GRID && m_oLastPressPoint.y() > m_iHH - GRID )
-	{
-		setFlags(ItemIsSelectable | ItemSendsGeometryChanges);
-		m_bMoving = true;
-	}
-	QGraphicsRectItem::mousePressEvent(e);
-}
-
-void box_item::mouseReleaseEvent(QGraphicsSceneMouseEvent* e) {
-	QGraphicsRectItem::mouseReleaseEvent(e);
-	update_sizers();
-}
-
 void box_item::update_data() {
 	setPos(QPointF(m_oBox->m_iXX, m_oBox->m_iYY));
 	if (m_oBox->m_iWW != m_iWW || m_oBox->m_iHH != m_iHH || doc.toPlainText() != m_oBox->m_sText)
@@ -179,12 +162,17 @@ QVariant box_item::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oV
 		}
 		else if (i_oChange == ItemSelectedHasChanged)
 		{
-			m_oChain->setVisible(isSelected());
-			m_oResize->setVisible(isSelected());
+			update_selection();
 		}
 	}
 
 	return QGraphicsItem::itemChange(i_oChange, i_oValue);
+}
+
+void box_item::update_selection()
+{
+	m_oChain->setVisible(isSelected());
+	m_oResize->setVisible(isSelected());
 }
 
 void box_item::update_links()
