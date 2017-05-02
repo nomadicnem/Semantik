@@ -101,7 +101,7 @@ void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 void box_item::update_data() {
 	setPos(QPointF(m_oBox->m_iXX, m_oBox->m_iYY));
-	if (m_oBox->m_iWW != m_iWW || m_oBox->m_iHH != m_iHH || doc.toPlainText() != m_oBox->m_sText)
+	if (m_oBox->m_iWW != m_iWW || m_oBox->m_iHH != m_iHH || doc.toPlainText() != m_oBox->m_sText || doc.textWidth() != m_oBox->m_iWW - x_text_off)
 	{
 		update_size();
 	}
