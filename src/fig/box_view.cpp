@@ -1805,6 +1805,22 @@ bool box_view::slot_export_to_file() {
 		m_oMediator->set_dirty(false);
 		return true;
 	}
+	else
+	{
+		int mu = KMessageBox::questionYesNo(NULL, //this,
+		trUtf8("The file \"%1\" could not be saved because an error happened.\nTry again?").arg(l_o.path()),
+		trUtf8("Try again?"),
+		KStandardGuiItem::yes(),
+		KStandardGuiItem::no(),
+		notr("ContinueSaveAs"));
+		if (!mu) {
+			goto choose_export;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	return false;
 }
 

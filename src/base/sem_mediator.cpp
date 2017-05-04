@@ -1,5 +1,7 @@
 // Thomas Nagy 2007-2016 GPLV3
 
+%: include  <Python.h> 
+
 #include <sys/time.h>
 
 #include<QUrl>
@@ -13,7 +15,6 @@
 #endif
 
 
-%: include  <Python.h> 
  #include <QFile>
 #include<QTimer>
  #include <QtDebug>

@@ -50,13 +50,13 @@ def parse_file(infile):
 	tar.close()
 
 	try:
-		with open('con.xml', 'rb') as f:
+		with open('con.xml', 'r', encoding='utf-8') as f:
 			txt = f.read()
 		os.remove('con.xml')
 	except Exception:
 		# will remove this at version >= 0.7
-		with open('com.xml', 'rb') as f:
-			txt = filter(file.read())
+		with open('com.xml', 'r', encoding='utf-8') as f:
+			txt = filter(f.read())
 		os.remove('com.xml')
 	return txt
 

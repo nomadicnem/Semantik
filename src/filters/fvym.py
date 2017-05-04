@@ -122,7 +122,7 @@ def parse_file(infile):
 	truc = None
 	for filename in zut.namelist():
 		if filename.endswith('.xml'):
-			truc = zut.read(filename)
+			truc = zut.read(filename, encoding='utf-8')
 
 	truc = truc.replace('<?xml version="1.0" encoding="utf8"?>', '<?xml version="1.0" encoding="UTF-8"?>')
 	truc = parse_string(truc)
@@ -132,5 +132,5 @@ def parse_file(infile):
 	#file.close()
 	#debug(truc.encode('utf-8'))
 
-	return truc.encode('utf-8')
+	return truc
 

@@ -1,15 +1,15 @@
 #sem:name: semantik document generator
 #sem:tip: used for saving semantik documents
 
-# Thomas Nagy, 2007-2015
+# Thomas Nagy, 2007-2017
 
 import os, tarfile
-from cStringIO import StringIO
+import io
 
 tar = tarfile.open(sembind.get_var('outfile'), 'w:gz')
 
 doc = sembind.get_var('fulldoc')
-stuff = StringIO(doc)
+stuff = io.BytesIO(doc.encode('utf-8'))
 tarinfo = tarfile.TarInfo('con.xml')
 tarinfo.size = len(doc)
 tar.addfile(tarinfo, stuff)

@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2007-2016 (ita)
+# Thomas Nagy, 2007-2017 (ita)
 
 import os, sys, tarfile
 
@@ -11,8 +11,8 @@ tmpdir = sembind.get_var('temp_dir')
 infile = sembind.get_var('pname')
 
 def debug(s):
-	sys.stderr.write(s)
-	sys.stderr.write('\n')
+	txt = '%s\n' % s
+	sys.stderr.write(txt.encode())
 	sys.stderr.flush()
 
 os.chdir(tmpdir)

@@ -1,9 +1,9 @@
 #sem:name: Beamer presentation
 #sem:tip: Generates a LaTeX presentation using Beamer
 
-# Thomas Nagy, 2007-2015
+# Thomas Nagy, 2007-2017
 
-import os, shutil, time, StringIO, sys
+import os, shutil, time, sys
 import getpass
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
@@ -72,7 +72,6 @@ def print_slide(node, niv):
 	txt = tex_convert(node.get_val('summary'))
 
 	if niv == 0:
-		
 		num = node.child_count()
 
 		out('%-------------------------------------------------------------------\n')
@@ -229,14 +228,14 @@ os.popen('cp -Rf %s %s' % (template_dir()+'/beamer/beamermindist/', outdir)).rea
 # anciliary files
 shutil.copy2(template_dir()+'/beamer/wscript', outdir+'/wscript')
 shutil.copy2(template_dir()+'/waf', outdir+'/waf')
-os.chmod(outdir+'/waf', 0755)
+os.chmod(outdir+'/waf', 0o755)
 
-f = open(outdir + '/run.sh', 'w')
+f = open(outdir + '/run.sh', 'w', encoding='utf-8')
 try:
 	f.write('#! /bin/sh\npython waf configure build --view\n')
 finally:
 	f.close()
-os.chmod(outdir + '/run.sh', 0755)
+os.chmod(outdir + '/run.sh', 0o755)
 
 # load the preview on main.tex
 visualize('beamer', outdir+'/main.tex')

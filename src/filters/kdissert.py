@@ -135,9 +135,8 @@ def parse_file(infile):
 
 	tar.close()
 
-	file = open('maindoc.xml', 'rb')
-	txt = file.read()
-	file.close()
+	with open('maindoc.xml', 'r', encoding='utf-8') as f:
+		txt = f.read()
 	os.remove('maindoc.xml')
 
 	truc = txt.replace('<?xml version="1.0" encoding="utf8"?>', '<?xml version="1.0" encoding="UTF-8"?>')
@@ -148,5 +147,5 @@ def parse_file(infile):
 	#file.close()
 	#debug(str(type(truc)))
 
-	return truc.encode('utf-8')
+	return truc
 

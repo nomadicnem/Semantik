@@ -1,9 +1,8 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2007-2016
+# Thomas Nagy, 2007-2017
 
-from sgmllib import SGMLParser
-import htmlentitydefs
+from html.parser import HTMLParser
 import os, sys, sembind, re
 
 protectXML = sembind.protectXML
@@ -38,15 +37,15 @@ def read_properties(code):
 		tmp[lst[0]] = "=".join(lst[1:])
 	return tmp
 
-class TrucProcessor(SGMLParser):
+class TrucProcessor(HTMLParser):
 	def reset(self):
 		self.pieces = []
 		self.state = ""
 		self.buf = []
 		self.inli = 0
-		SGMLParser.reset(self)
+		HTMLParser.reset(self)
 
-	def unknown_starttag(self, tag, attrs):
+	def handle_starttag(self, tag, attrs):
 		if tag == 'ul':
 			if self.inli and self.buf:
 				self.pieces.append('\\item ')
@@ -56,7 +55,7 @@ class TrucProcessor(SGMLParser):
 		elif tag == 'li':
 			self.inli += 1
 
-	def unknown_endtag(self, tag):
+	def handle_endtag(self, tag):
 		if tag == 'p':
 			self.pieces.append(tex_convert(''.join(self.buf)))
 			self.pieces.append('\n')
@@ -87,19 +86,19 @@ def parse_string(s):
 	parser.close()
 	return parser.output()
 
-class RichProcessor(SGMLParser):
+class RichProcessor(HTMLParser):
 	def reset(self):
 		self.pieces = []
 		self.state = ""
 		self.buf = []
 		self.inli = 0
-		SGMLParser.reset(self)
+		HTMLParser.reset(self)
 
-	def unknown_starttag(self, tag, attrs):
+	def handle_starttag(self, tag, attrs):
 		if tag == 'ul':
 			self.inli += 1
 
-	def unknown_endtag(self, tag):
+	def handle_endtag(self, tag):
 		if tag == 'p':
 			self.pieces.extend(self.buf)
 			self.pieces.append('\n')
@@ -141,7 +140,7 @@ def template_dir():
 
 def post_process(txt, defines):
 	nested = 0
-	nested_lst = range(30)
+	nested_lst = list(range(30))
 	nested_lst[0]=1
 
 	lst = txt.split('\n')
@@ -197,14 +196,12 @@ def post_process(txt, defines):
 
 def write_to_file(name, content):
 	if sys.platform.rfind('32') > -1: return
-	file = open(name, 'wb')
-	file.write(content)
-	file.close()
+	with open(name, 'w', encoding='utf-8') as f:
+		f.write(content)
 
 def read_file(name):
-	file = open(name, 'r')
-	doc = file.read()
-	file.close()
+	with open(name, 'r', encoding='utf-8') as f:
+		doc = f.read()
 	return doc
 
 def add_globals(table):
@@ -224,11 +221,8 @@ def transform(template, outfile, map):
 	write_to_file(outfile, doc)
 
 def debug(x):
-	try:
-		#sys.stderr.write(x.__repr__())
-		sys.stderr.write("%s\n" % x)
-	except:
-		debug("erreur d'encodage utf8 ? :-/")
+	msg = "%s\n" % x
+	sys.stderr.write(msg.encode())
 
 def protect_tex(s):
 	lst = []
@@ -255,7 +249,6 @@ def compute_hints(x):
 		m = read_properties(sembind.get_val(item, "hints"))
 		sembind.set_result("diagram_width", m.get('diagram_width', '0'))
 		sembind.set_result("diagram_height", m.get('diagram_height', '0'))
-		
 
 class Node(object):
 	def __init__(self, bind):

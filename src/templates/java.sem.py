@@ -2,7 +2,7 @@
 #sem:tip: Generates a web applet in java (requires java)
 #sem:picture
 
-# Thomas Nagy, 2007-2015
+# Thomas Nagy, 2007-2017
 
 import os, shutil, time, sys
 
@@ -85,10 +85,6 @@ print_rec(root, x - 25, y - 25)
 out("return \"\";\n")
 out("}\n}\n")
 
-file = open(outdir+'/TextCoord.java', 'w')
-try:
-	file.write(''.join(code))
-finally:
-	file.close()
-
+with open(outdir+'/TextCoord.java', 'w', encoding='utf-8') as f:
+	f.write(''.join(code))
 

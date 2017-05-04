@@ -104,9 +104,8 @@ def parse_string(s):
 	return "".join(curHandler.out)
 
 def parse_file(infile):
-	file = open(infile, 'rb')
-	txt = file.read()
-	file.close()
+	with open(infile, 'r', encoding='utf-8') as f:
+		txt = f.read()
 
 	truc = txt.replace('<?xml version="1.0" encoding="utf8"?>', '<?xml version="1.0" encoding="UTF-8"?>')
 	truc = parse_string(truc)
@@ -116,5 +115,5 @@ def parse_file(infile):
 	#file.close()
 	#debug(truc.encode('utf-8'))
 
-	return truc.encode('utf-8')
+	return truc
 
