@@ -651,7 +651,11 @@ bool sem_mediator::save_file(QString i_sUrl)
 		emit sig_message(trUtf8("Missing bindings for opening files"), 5000);
 		return false;
 	}
-	PyRun_SimpleString(l_oBa.constData());
+	int ret = PyRun_SimpleString(l_oBa.constData());
+	if (ret != 0)
+	{
+		return false;
+	}
 
 	m_sLastSaved = i_sUrl;
 	set_dirty(false);
@@ -718,7 +722,11 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 		undo_purge();
 		return false;
 	}
-	PyRun_SimpleString(l_oBa.constData());
+	int ret = PyRun_SimpleString(l_oBa.constData());
+	if (ret != 0)
+	{
+		return false;
+	}
 
 	//qDebug()<<"full text "<<bind_node::get_var(notr("fulldoc"))<<endl;
 
@@ -1156,7 +1164,12 @@ void sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNa
 		emit sig_message(trUtf8("Missing bindings for opening files"), 5000);
 		return;
 	}
-	PyRun_SimpleString(l_oBa.constData());
+	int ret = PyRun_SimpleString(l_oBa.constData());
+	if (ret != 0)
+	{
+		emit sig_message(trUtf8("Document generation failed, check the output folder"), 50000);
+		return;
+	}
 
 	emit sig_message(trUtf8("Document generation completed successfully"), 5000);
 	emit sig_preview();
