@@ -460,6 +460,20 @@ bool semantik_win::slot_save_as()
 	{
 		m_oMediator->m_oCurrentUrl = QUrl();
 		update_title();
+
+		int mu = KMessageBox::questionYesNo(NULL, //this,
+		trUtf8("The file \"%1\" could not be saved because an error happened.\nTry again?").arg(l_o.path()),
+		trUtf8("Try again?"),
+		KStandardGuiItem::yes(),
+		KStandardGuiItem::no(),
+		notr("ContinueSaveAs"));
+		if (!mu) {
+			goto choose;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	return false;
@@ -475,6 +489,22 @@ bool semantik_win::slot_save()
 	{
 		statusBar()->showMessage(trUtf8("Saved '%1'").arg(m_oMediator->m_sLastSaved), 2000);
 		return true;
+	}
+	else
+	{
+		int mu = KMessageBox::questionYesNo(NULL, //this,
+		trUtf8("The file \"%1\" could not be saved because an error happened.\nTry again?").arg(m_oMediator->m_sLastSaved),
+		trUtf8("Try again?"),
+		KStandardGuiItem::yes(),
+		KStandardGuiItem::no(),
+		notr("ContinueSaveAs"));
+		if (!mu) {
+			return slot_save_as();
+		}
+		else
+		{
+			return false;
+		}
 	}
 	return false;
 }
