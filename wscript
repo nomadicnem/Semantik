@@ -153,7 +153,7 @@ def configure(conf):
 	conf.find_program('python3', var='PYTHON')
 	conf.load('python')
 	if not conf.env.LIB_QT5SVG: conf.fatal('Could not find Qt5Svg - Semantik requires Qt >= 5')
-	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Could not find Qt5WebEngineWidgets - Semantik requires Qt >= 5')
+	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Could not find Qt5WebEngineWidgets - check `pkg-config --libs Qt5WebEngineWidgets`')
 	if not conf.env.PYTHON: conf.fatal('Semantik requires Python >= 3.2 (development package for the compilation)')
 	conf.check_python_version((3,2,0))
 	conf.check_python_headers()
@@ -222,8 +222,8 @@ def configure(conf):
 
 	conf.env.append_value('INCLUDES_KDECORE', '/usr/include/KF5/KDELibs4Support')
 	conf.env.append_value('LIB_KDECORE', 'KF5KDELibs4Support')
-	conf.check(fragment='#include <kio/job.h>\n', features='cxx qt5',
-		msg='Checking for kdelibs4support', use='KDECORE QT5CORE')
+	conf.check(fragment='#include <kio/job.h>\n#include <KDE/KDialog>\n', features='cxx qt5',
+		msg='Checking for kdelibs4support', use='KDECORE QT5CORE QT5GUI QT5WIDGETS')
 
 	conf.define('cmd_add_item', 0)
 	conf.define('cmd_update_item', 1)
