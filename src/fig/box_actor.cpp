@@ -94,8 +94,9 @@ void box_actor::update_size() {
 }
 
 void box_actor::update_links() {
+	QRectF r = boundingRect();
 	m_oCaption->setPlainText(m_oBox->m_sText);
-	m_oCaption->setPos((m_iWW - m_oCaption->boundingRect().width()) / 2., m_iHH);
+	m_oCaption->setPos((r.width() - m_oCaption->boundingRect().width()) / 2., r.height());
 	box_item::update_links();
 }
 
