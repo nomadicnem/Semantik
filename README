@@ -8,7 +8,7 @@ Source code:   https://github.com/ita1024/semantik
 
 A few dependencies may be tricky to install, for example:
 Ubuntu: apt install libkf5kdelibs4support-dev libqt5svg5-dev qtwebengine5-dev qtpositioning5-dev python3-dev kio-dev
-Gentoo: emerge --ask kde-frameworks/kdelibs4support
+Gentoo: emerge --ask kde-frameworks/kdelibs4support dev-qt/qtwebengine
 check that the system has the file libKF5KDELibs4Support.so somewhere
 
 To build the project, run:
