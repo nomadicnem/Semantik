@@ -155,7 +155,7 @@ def configure(conf):
 	if not conf.env.LIB_QT5SVG: conf.fatal('Could not find Qt5Svg - Semantik requires Qt >= 5')
 	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Could not find Qt5WebEngineWidgets - check `pkg-config --libs Qt5WebEngineWidgets`')
 	if not conf.env.PYTHON: conf.fatal('Semantik requires Python >= 3.2 (development package for the compilation)')
-	conf.check_python_version((3,2,0))
+	conf.check_python_version((3, 2, 0))
 	conf.check_python_headers()
 	#ret = ctx.cmd_output('python-config --cflags').strip().split()
 

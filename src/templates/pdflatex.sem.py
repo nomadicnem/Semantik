@@ -189,7 +189,7 @@ os.chmod(outdir+'/waf', 0o755)
 
 f = open(outdir + '/run.sh', 'w')
 try:
-	f.write('#! /bin/sh\npython2 waf configure build --view\n')
+	f.write('#! /bin/sh\npython waf configure build --view\n')
 finally:
 	f.close()
 os.chmod(outdir + '/run.sh', 0o755)

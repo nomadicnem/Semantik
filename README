@@ -6,7 +6,9 @@ Source code:   https://github.com/ita1024/semantik
 
 1. Compilation and installation:
 
-A few dependencies may be tricky to install, for example:
+The main dependencies are Qt webengine, KDE 5 and Python 3.
+
+A few dependencies may be tricky to find, for example:
 Ubuntu: apt install libkf5kdelibs4support-dev libqt5svg5-dev qtwebengine5-dev qtpositioning5-dev python3-dev kio-dev
 Gentoo: emerge --ask kde-frameworks/kdelibs4support dev-qt/qtwebengine
 check that the system has the file libKF5KDELibs4Support.so somewhere
@@ -15,7 +17,7 @@ To build the project, run:
 ./waf configure build
 
 A few systems may require different options such as:
-PYTHON=python2 PYTHON_VERSION=2.7 waf configure build
+PYTHON=python3 PYTHON_VERSION=3.5 waf configure build
 
 Then run the following installation command as root (important - Semantik will only work if installed):
 ./waf install
