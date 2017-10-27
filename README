@@ -11,6 +11,7 @@ The main dependencies are Qt webengine, KDE 5 and Python 3.
 A few dependencies may be tricky to find, for example:
 Ubuntu: apt install libkf5kdelibs4support-dev libqt5svg5-dev qtwebengine5-dev qtpositioning5-dev python3-dev kio-dev
 Gentoo: emerge --ask kde-frameworks/kdelibs4support dev-qt/qtwebengine
+Suse: zypper install python3-devel kio-devel kiconthemes-devel ki18n-devel kdelibs4support-devel
 check that the system has the file libKF5KDELibs4Support.so somewhere
 
 To build the project, run:
