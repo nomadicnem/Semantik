@@ -203,7 +203,7 @@ void data_box::dump_xml(QStringList & i_oS)
 		QString::number(m_iHH),
 		color.name(),
 		QString::number((int) m_iType),
-		QString(" v=\"%1\" e=\"%2\"").arg( // ugly
+		QString(" v=\"%1\" e=\"%2\" version=\"1\"").arg(
 			QString::number((int) m_bIsVertical),
 			QString::number((int) m_bIsEnd)
 		)
@@ -247,6 +247,11 @@ void data_box::read_data(const QString& i_sTag, const QXmlAttributes& i_oAttrs)
 	m_bIsVertical = i_oAttrs.value(notr("v")).toInt();
 	m_bIsEnd = i_oAttrs.value(notr("e")).toInt();
 	color = QColor(i_oAttrs.value(notr("color")));
+	int l_iVersion = i_oAttrs.value(notr("version")).toInt();
+	if (l_iVersion < 1 && m_iType == data_box::LABEL)
+	{
+		color = Qt::black;
+	}
 
 	// TODO remove in the future...
 	if (m_iType == data_box::ACTIVITY_START)
