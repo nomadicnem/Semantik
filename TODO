@@ -1,9 +1,12 @@
-Arbitrary SVG shapes
-
+line label and cardinalities
+misplaced pixels
+font sizing issues
+bounding boxes
+arbitrary SVG shapes
+predefined colors for diagram objects
 z-index in diagrams
 crossing diagram arrows for the one with higher z-index
 s5 default picture size?
-crash: resize a box, unselect the diagram, then undo?
 display pictures on the map...
 Import kdissert weak links
 Serialize undo operations

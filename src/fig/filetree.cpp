@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2016 GPLV3
+// Thomas Nagy 2013-2017 GPLV3
 
 # include <filetree.h>
 #include <QFileSystemModel>

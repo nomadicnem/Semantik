@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2007-2017 (ita)
+# Thomas Nagy, 2007-2017 GPLV3
 
 import os, sys, tarfile
 

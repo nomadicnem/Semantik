@@ -742,7 +742,7 @@ msgid "Semantik-d"
 msgstr "Semantik"
 
 #: fig/semd.cpp:47
-msgid "(C) 2013-2016 Thomas Nagy"
+msgid "(C) 2013-2017 Thomas Nagy"
 msgstr ""
 
 #: fig/semd.cpp:49 main.cpp:40
@@ -828,7 +828,7 @@ msgid "Semantik"
 msgstr "Semantik"
 
 #: main.cpp:38
-msgid "(C) 2007-2016 Thomas Nagy"
+msgid "(C) 2007-2017 Thomas Nagy"
 msgstr ""
 
 #. i18n: file: data/semantik-dui.rc:5
