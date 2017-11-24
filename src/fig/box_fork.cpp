@@ -43,7 +43,7 @@ box_fork::box_fork(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connec
 	{
 		m_oTop = new box_resize_point(m_oView, this);
 		m_oTop->setRect(-CTRLSIZE/2., 0, CTRLSIZE, CTRLSIZE);
-		m_oTop->setCursor(Qt::SizeVerCursor); // FIXME if someone has a solution for this
+		m_oTop->setCursor(Qt::SizeVerCursor);
 		m_oTop->hide();
 		m_oDown = new box_resize_point(m_oView, this);
 		m_oDown->setRect(-CTRLSIZE/2., -CTRLSIZE, CTRLSIZE, CTRLSIZE);
@@ -129,6 +129,7 @@ void box_fork::update_data()
 	m_oChain->setPos(m_oBox->m_iWW + 3, 0);
 
 	update_sizers();
+	update_links();
 }
 
 QVariant box_fork::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue)
@@ -329,6 +330,7 @@ QPointF box_fork::validate_point(box_resize_point *p, const QPointF & orig)
 	}
 	setRect(QRectF(QPointF(0, 0), s));
 	m_oView->message(m_oView->trUtf8("%1 x %2").arg(QString::number(s.width()), QString::number(s.height())), 1000);
+	update_links();
 	return pf;
 }
 
