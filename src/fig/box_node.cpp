@@ -23,7 +23,6 @@
 
 #include <QFont>
 
-#define PAD 2
 #define MIN_FORK_SIZE 30
 
 box_node::box_node(box_view* view, int id) : box_item(view, id)
@@ -42,8 +41,6 @@ void box_node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 {
 	doc.setDefaultFont(scene()->font());
 
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-
 	QColor bc(m_oBox->color);
 	painter->setBrush(bc);
 
@@ -51,6 +48,10 @@ void box_node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidth(1);
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+
+
 	if (isSelected())
 	{
 		l_oPen.setStyle(Qt::DotLine);

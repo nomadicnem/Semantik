@@ -21,8 +21,6 @@
 #include "sem_mediator.h"
 #include "mem_box.h"
 
-#define PAD 2
-
 box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), editable(), resizable(), m_oView(i_oParent)
 {
 	m_iId = i_iId;
@@ -38,7 +36,7 @@ box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connec
 	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 
 	m_oResize = new box_resize_point(m_oView, this);
-	m_oResize->setRect(-CTRLSIZE - 1, -CTRLSIZE - 1, CTRLSIZE, CTRLSIZE);
+	m_oResize->setRect(-CTRLSIZE, -CTRLSIZE, CTRLSIZE, CTRLSIZE);
 	m_oResize->setCursor(Qt::SizeFDiagCursor);
 	m_oResize->hide();
 	m_oResize->setParentItem(this);
@@ -60,16 +58,17 @@ box_item::~box_item()
 
 void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 	painter->setFont(scene()->font());
 	doc.setDefaultFont(scene()->font());
-
 	QPen l_oPen = QPen(Qt::SolidLine);
 
 	l_oPen.setColor(Qt::black);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidth(1);
+
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	painter->setPen(l_oPen);
 
@@ -188,7 +187,7 @@ static int RATIO[] = {333, 500, 667, 0};
 
 int box_item::choose_position(const QPointF& i_oP, int id)
 {
-	QRectF r = rect();
+	QRectF r = rectPos();
 	QPointF l_o = pos() - i_oP + QPointF(r.width()/2, r.height()/2);
 	double c_x = l_o.x() * r.height();
 	double c_y = l_o.y() * r.width();
@@ -233,7 +232,7 @@ int box_item::choose_position(const QPointF& i_oP, int id)
 
 QPoint box_item::get_point(int i_oP)
 {
-	QRectF r = rect();
+	QRectF r = rectPos();
 	int ratio = i_oP / MUL;
 
 	if (ratio >= 1000 || ratio <= 0) ratio = 500;

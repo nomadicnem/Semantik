@@ -17,7 +17,7 @@ class connectable
 		connectable() { m_oBox = NULL; };
 		virtual ~connectable() {};
 		int m_iId;
-		virtual QRectF rect() const { return QRectF(); }
+		virtual QRectF rectPos() const { return QRectF(); }
 		virtual void update_data() {};
 		virtual void update_size() {};
 		virtual int choose_position(const QPointF&p, int id=-1) { Q_ASSERT(false); return 0; };
@@ -37,10 +37,10 @@ class connectable
 				return (i_oP.x() < 0) ? data_link::EAST : data_link::WEST;
 				break;
 			case data_link::SOUTH:
-				return (i_oP.y() < rect().height()) ? data_link::SOUTH : data_link::NORTH;
+				return (i_oP.y() < rectPos().height()) ? data_link::SOUTH : data_link::NORTH;
 				break;
 			case data_link::EAST:
-				return (i_oP.x() > rect().width()) ? data_link::WEST : data_link::EAST;
+				return (i_oP.x() > rectPos().width()) ? data_link::WEST : data_link::EAST;
 				break;
 			default:
 				break;

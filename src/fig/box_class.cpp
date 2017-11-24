@@ -23,7 +23,7 @@
 
 #include <QFont>
 
-#define PAD 2
+#define PAD 0.5
 #define MIN_FORK_SIZE 30
 
 //#define DEBUG
@@ -45,14 +45,16 @@ void box_class::force_size()
 
 void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-
 	QPen l_oPen;
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidth(1);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	else l_oPen.setStyle(Qt::SolidLine);
 	i_oPainter->setPen(l_oPen);
+
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+
 
 	QColor bc(m_oBox->color);
 	i_oPainter->setBrush(bc);

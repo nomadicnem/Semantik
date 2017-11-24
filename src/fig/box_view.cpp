@@ -1373,7 +1373,7 @@ void box_view::slot_size()
 	{
 		if (connectable* c = dynamic_cast<connectable*>(l_oItem))
 		{
-			QRectF r = c->rect();
+			QRectF r = c->rectPos();
 			if ((l_i == SAME_WIDTH || l_i == SAME_WIDTH_HEIGHT) && r.width() > w)
 			{
 				w = r.width();
@@ -1413,7 +1413,7 @@ void box_view::slot_align()
 		if (connectable* c = dynamic_cast<connectable*>(l_oItem))
 		{
 			n++;
-			QRectF r = c->rect();
+			QRectF r = c->rectPos();
 			if (l_i == ALIGN_LEFT)
 				best = qMin(r.x(), best);
 			if (l_i == ALIGN_RIGHT)

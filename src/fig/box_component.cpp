@@ -20,7 +20,6 @@
 #include "sem_mediator.h"
 #include "mem_box.h"
 
-#define PAD 2
 #define MIN_FORK_SIZE 30
 
 box_component::box_component(box_view* view, int id) : box_item(view, id)
@@ -35,8 +34,14 @@ void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	doc.setDefaultFont(scene()->font());
 	//painter->setFont(scene()->font());
 
+	QPen l_oPen = QPen(Qt::SolidLine);
+	l_oPen.setColor(Qt::black);
+	l_oPen.setCosmetic(false);
+	l_oPen.setWidth(1);
 
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+
 
 	QColor bc(m_oBox->color);
 	if (m_oView->m_bDisableGradient)
@@ -50,12 +55,6 @@ void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 		linearGradient.setColorAt(1.0, bc.darker(GRADVAL));
 		painter->setBrush(linearGradient);
 	}
-
-	QPen l_oPen = QPen(Qt::SolidLine);
-	l_oPen.setColor(Qt::black);
-	l_oPen.setCosmetic(false);
-	l_oPen.setWidth(1);
-
 
 	if (isSelected())
 	{

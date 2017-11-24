@@ -17,7 +17,7 @@
 #include "data_item.h"
 #include "sem_mediator.h"
 
-#define PAD 2
+#define PAD 0.5
 
 box_dot::box_dot(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), m_oView(i_oParent)
 {
@@ -47,13 +47,15 @@ box_dot::~box_dot()
 
 void box_dot::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidth(1);
+
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+
 
 	painter->setPen(l_oPen);
 	if (m_oBox->m_bIsEnd) {
@@ -132,7 +134,7 @@ void box_dot::update_links()
 
 int box_dot::choose_position(const QPointF& i_oP, int id)
 {
-	QRectF r = rect();
+	QRectF r = rectPos();
 	QPointF l_o = pos() - i_oP + QPointF(r.width()/2, r.height()/2);
 	double c_x = l_o.x() * r.height();
 	double c_y = l_o.y() * r.width();
@@ -149,7 +151,7 @@ int box_dot::choose_position(const QPointF& i_oP, int id)
 
 QPoint box_dot::get_point(int i_oP)
 {
-	QRectF r = rect();
+	QRectF r = rectPos();
 	switch (i_oP & data_link::COORD) {
 		case data_link::NORTH:
 			return QPoint(r.x() + r.width() / 2., r.y());

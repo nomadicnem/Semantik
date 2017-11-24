@@ -22,7 +22,6 @@
 
 #include <QFont>
 
-#define PAD 2
 #define MIN_FORK_SIZE 30
 
 box_actor::box_actor(box_view* view, int id) : box_item(view, id)
@@ -41,14 +40,14 @@ box_actor::~box_actor() {
 
 void box_actor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidth(1);
 	painter->setPen(l_oPen);
 
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	qreal xtop = l_oRect.x();
 	qreal ytop = l_oRect.y();

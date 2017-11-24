@@ -353,7 +353,7 @@ void box_link::update_pos()
 	if (connectable *start = m_oView->m_oItems.value(m_oInnerLink.m_iParent))
 	{
 		m_oInnerLink.m_oStartPoint = apos = start->get_point(m_oInnerLink.m_iParentPos);
-		l_oR1 = start->rect();
+		l_oR1 = start->rectPos();
 	}
 	else
 	{
@@ -383,7 +383,7 @@ void box_link::update_pos()
 	if (connectable *end = m_oView->m_oItems.value(m_oInnerLink.m_iChild))
 	{
 		m_oInnerLink.m_oEndPoint = bpos = end->get_point(m_oInnerLink.m_iChildPos);
-		l_oR2 = end->rect();
+		l_oR2 = end->rectPos();
 	}
 	else
 	{

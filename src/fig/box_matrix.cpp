@@ -23,8 +23,6 @@
 
 #include <QFont>
 
-#define PAD 2
-
 box_matrix::box_matrix(box_view* view, int id) : box_item(view, id)
 {
 	QFont font = doc.defaultFont();
@@ -37,24 +35,26 @@ box_matrix::box_matrix(box_view* view, int id) : box_item(view, id)
 
 void box_matrix::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setWidth(1);
 	painter->setPen(l_oPen);
 
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+
+
 	int l_iPos = 0;
 	foreach (box_resize_point *l_oTmp, m_oRowSizers)
 	{
 		l_iPos += l_oTmp->m_iPosition;
-		painter->drawLine(l_oRect.left(), l_iPos, l_oRect.right(), l_iPos);
+		painter->drawLine(l_oRect.left()+pad, l_iPos, l_oRect.right()-pad, l_iPos);
 	}
 	l_iPos = 0;
 	foreach (box_resize_point *l_oTmp, m_oColSizers)
 	{
 		l_iPos += l_oTmp->m_iPosition;
-		painter->drawLine(l_iPos, l_oRect.top(), l_iPos, l_oRect.bottom());
+		painter->drawLine(l_iPos, l_oRect.top()+pad, l_iPos, l_oRect.bottom()-pad);
 	}
 	painter->drawRect(l_oRect);
 }
@@ -335,7 +335,7 @@ void box_matrix::allocate_sizers()
 	{
 		box_resize_point *l_oTmp = new box_resize_point(m_oView, this);
 		l_oTmp->setCursor(Qt::SizeVerCursor);
-		l_oTmp->setRect(-1-CTRLSIZE, 0.5-CTRLSIZE, CTRLSIZE, CTRLSIZE);
+		l_oTmp->setRect(-CTRLSIZE, 0.5-CTRLSIZE, CTRLSIZE, CTRLSIZE);
 		l_oTmp->setParentItem(this);
 		m_oRowSizers.append(l_oTmp);
 	}
@@ -347,7 +347,7 @@ void box_matrix::allocate_sizers()
 	{
 		box_resize_point *l_oTmp = new box_resize_point(m_oView, this);
 		l_oTmp->setCursor(Qt::SizeHorCursor);
-		l_oTmp->setRect(0.5-CTRLSIZE, -CTRLSIZE-1, CTRLSIZE, CTRLSIZE);
+		l_oTmp->setRect(0.5-CTRLSIZE, -CTRLSIZE, CTRLSIZE, CTRLSIZE);
 		l_oTmp->setParentItem(this);
 		m_oColSizers.append(l_oTmp);
 	}

@@ -25,7 +25,7 @@ class box_fork : public QGraphicsRectItem, public connectable, public resizable
 
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 
-		QRectF rect() const { return boundingRect().translated(pos()).adjusted(JUST, JUST, -JUST, -JUST); };
+		QRectF rectPos() const { return QGraphicsRectItem::rect().translated(pos()); };
 
 		box_view *m_oView;
 		data_item *m_oItem;

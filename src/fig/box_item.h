@@ -30,7 +30,7 @@ class box_item : public QGraphicsRectItem, public connectable, public editable, 
 
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 
-		QRectF rect() const { return boundingRect().translated(pos()).adjusted(JUST, JUST, -JUST, -JUST); };
+		QRectF rectPos() const { return QGraphicsRectItem::rect().translated(pos()); }
 		//void setRect(int, int, int, int) { }
 
 		QTextDocument doc;

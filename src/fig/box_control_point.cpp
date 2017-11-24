@@ -19,7 +19,6 @@
 #include "data_item.h"
 #include "sem_mediator.h"
 
-#define PAD 1
 #define CTRLSIZE 8
 
 box_control_point::box_control_point(box_view* i_oParent) : QGraphicsRectItem(), m_oView(i_oParent)
@@ -39,13 +38,15 @@ box_control_point::box_control_point(box_view* i_oParent) : QGraphicsRectItem(),
 
 void box_control_point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidth(1);
 	painter->setPen(l_oPen);
+
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+
 	if (m_bIsSegment)
 	{
 		painter->setBrush(QColor("#FFFF00"));
@@ -98,7 +99,7 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 			if (m_oView->m_oCurrent && this == m_oLink->m_oEndPoint)
 			{
 				connectable *start = m_oView->m_oItems.value(m_oView->m_oCurrent->m_oInnerLink.m_iParent);
-				QRectF r = start->rect();
+				QRectF r = start->rectPos();
 				QPointF l_o1 = r.topLeft() - l_o + QPointF(r.width()/2, r.height()/2);
 				double c_x = l_o1.x() * r.height();
 				double c_y = l_o1.y() * r.width();
@@ -195,7 +196,7 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 				{
 					if (connectable* con = m_oView->m_oItems.value(m_oLink->m_oInnerLink.m_iChild))
 					{
-						QPointF bot = con->rect().bottomLeft();
+						QPointF bot = con->rectPos().bottomLeft();
 						m_oLink->m_oInnerLink.m_iParentPos = con->pos_heuristic(np - QPoint(bot.x(), bot.y()), m_oLink->m_oInnerLink.m_iChildPos);
 					}
 					m_oLink->m_oInnerLink.m_iParent = NO_ITEM;
@@ -205,7 +206,7 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 				{
 					if (connectable* con = m_oView->m_oItems.value(m_oLink->m_oInnerLink.m_iParent))
 					{
-						QPointF bot = con->rect().bottomLeft();
+						QPointF bot = con->rectPos().bottomLeft();
 						m_oLink->m_oInnerLink.m_iChildPos = con->pos_heuristic(np - QPoint(bot.x(), bot.y()), m_oLink->m_oInnerLink.m_iParentPos);
 					}
 					m_oLink->m_oInnerLink.m_iChild = NO_ITEM;

@@ -21,7 +21,6 @@
 
 #include <QFont>
 
-#define PAD 2
 #define MIN_FORK_SIZE 30
 
 box_label::box_label(box_view* view, int id) : box_item(view, id)
@@ -36,7 +35,8 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	doc.setDefaultFont(scene()->font());
 	//painter->setFont(scene()->font());
 
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
+	qreal pad = 0.5;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	if (isSelected())
 	{

@@ -21,7 +21,6 @@
 
 #include <QFont>
 
-#define PAD 2
 #define MIN_FORK_SIZE 30
 
 box_pipe::box_pipe(box_view* view, int id) : box_item(view, id)
@@ -33,8 +32,6 @@ box_pipe::box_pipe(box_view* view, int id) : box_item(view, id)
 
 void box_pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
@@ -44,6 +41,10 @@ void box_pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 		l_oPen.setStyle(Qt::DotLine);
 	}
 	painter->setPen(l_oPen);
+
+	qreal pad = l_oPen.width() / 2.;
+	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+
 
 	QRectF l_oRect2(l_oRect);
 	qreal l_fRat = l_oRect2.height()/2.2;
