@@ -134,6 +134,7 @@ void box_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *optio
 	QPen l_oPen(m_oInnerLink.pen_style);
 	l_oPen.setWidth(m_oInnerLink.border_width);
 	l_oPen.setColor(m_oInnerLink.color);
+	l_oPen.setCosmetic(false);
 	i_oPainter->setPen(l_oPen);
 
 	if (m_oInnerLink.m_iLineType)

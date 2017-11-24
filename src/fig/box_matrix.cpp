@@ -38,6 +38,7 @@ void box_matrix::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setWidth(1);
+	l_oPen.setCosmetic(false);
 	painter->setPen(l_oPen);
 
 	qreal pad = l_oPen.width() / 2.;
