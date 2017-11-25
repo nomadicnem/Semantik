@@ -43,10 +43,13 @@ class box_link : public QGraphicsRectItem, public editable
 		box_control_point* m_oEndPoint;
 		QGraphicsTextItem *m_oStartCaption;
 		QGraphicsTextItem *m_oEndCaption;
+		QGraphicsTextItem *m_oMidCaption;
 
 		QList<QPoint> m_oGood;
 		QList<QPoint> m_oLst;
 
+		void update_text();
+		void update_text_pos();
 		void update_offset(const QPointF& i_oP, int i_iIdx);
 		void update_ratio();
 

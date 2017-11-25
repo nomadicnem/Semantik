@@ -39,6 +39,7 @@ box_link::box_link(box_view* i_oParent) : QGraphicsRectItem(), editable()
 	m_oStartPoint->hide();
 	m_oStartPoint->m_bIsSegment = false;
 	m_oStartPoint->m_oLink = this;
+	m_oStartPoint->setZValue(117);
 
 	m_oEndPoint = new box_control_point(m_oView);
 	m_oEndPoint->hide();
@@ -47,10 +48,19 @@ box_link::box_link(box_view* i_oParent) : QGraphicsRectItem(), editable()
 	m_oEndPoint->setZValue(117);
 
 	m_oStartCaption = new QGraphicsTextItem();
+	m_oStartCaption->setFlags(0);
+	m_oStartCaption->setZValue(116);
 	i_oParent->scene()->addItem(m_oStartCaption);
 
 	m_oEndCaption = new QGraphicsTextItem();
+	m_oEndCaption->setFlags(0);
+	m_oEndCaption->setZValue(116);
 	i_oParent->scene()->addItem(m_oEndCaption);
+
+	m_oMidCaption = new QGraphicsTextItem();
+	m_oMidCaption->setFlags(0);
+	m_oMidCaption->setZValue(116);
+	i_oParent->scene()->addItem(m_oMidCaption);
 
 	//m_oStartCaption->setPlainText("1..*");
 	//m_oEndCaption->setPlainText("1..*");
@@ -70,10 +80,11 @@ box_link::~box_link()
 	foreach (box_control_point *b, m_oControlPoints) {
 		delete b;
 	}
-	delete m_oStartPoint;
-	delete m_oEndPoint;
 	delete m_oStartCaption;
 	delete m_oEndCaption;
+	delete m_oMidCaption;
+	delete m_oStartPoint;
+	delete m_oEndPoint;
 }
 
 #define xw 5.
@@ -379,7 +390,6 @@ void box_link::update_pos()
 	}
 
 	m_oStartPoint->force_position(m_oInnerLink.m_oStartPoint);
-	m_oStartCaption->setPos(m_oInnerLink.m_oStartPoint);
 
 	if (connectable *end = m_oView->m_oItems.value(m_oInnerLink.m_iChild))
 	{
@@ -409,7 +419,6 @@ void box_link::update_pos()
 
 	}
 	m_oEndPoint->force_position(m_oInnerLink.m_oEndPoint);
-	m_oEndCaption->setPos(m_oInnerLink.m_oEndPoint);
 
 	/*
 	int ax1 = (int) l_oR1.x();
@@ -449,6 +458,7 @@ void box_link::update_pos()
 
 	update_ratio();
 	update();
+	update_text_pos();
 }
 
 void box_link::update_offset(const QPointF& i_oP, int i_iIdx)
@@ -628,6 +638,89 @@ QVariant box_link::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oV
 	}
 
 	return QGraphicsItem::itemChange(i_oChange, i_oValue);
+}
+
+void box_link::update_text_pos() {
+	const QRectF m_oStartRect = m_oStartCaption->boundingRect();
+	QPointF m_oStartPos = m_oStartPoint->pos();
+
+	const QRectF m_oEndRect = m_oEndCaption->boundingRect();
+	QPointF m_oEndPos = m_oEndPoint->pos();
+
+	switch (m_oInnerLink.m_iParentPos & data_link::COORD) {
+		case data_link::NORTH:
+			if (m_oStartPos.x() < m_oEndPos.x()) {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 5, - m_oStartRect.height()));
+			} else {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(5, - m_oStartRect.height()));
+			}
+			break;
+		case data_link::WEST:
+			if (m_oStartPos.y() < m_oEndPos.y()) {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 2, - m_oStartRect.height() - 3));
+			} else {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 2, 2));
+			}
+			break;
+		case data_link::SOUTH:
+			if (m_oStartPos.x() < m_oEndPos.x()) {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 5, 0));
+			} else {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(5, 0));
+			}
+			break;
+		case data_link::EAST:
+			if (m_oStartPos.y() < m_oEndPos.y()) {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(- 2, - m_oStartRect.height() - 3));
+			} else {
+				m_oStartCaption->setPos(m_oStartPos + QPointF(- 2, 2));
+			}
+			break;
+		default:
+			Q_ASSERT(false);
+	}
+
+	switch (m_oInnerLink.m_iChildPos & data_link::COORD) {
+		case data_link::NORTH:
+			if (m_oStartPos.x() > m_oEndPos.x()) {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 5, - m_oEndRect.height()));
+			} else {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(5, - m_oEndRect.height()));
+			}
+			break;
+		case data_link::WEST:
+			if (m_oStartPos.y() > m_oEndPos.y()) {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 2, - m_oEndRect.height() - 3));
+			} else {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 2, 2));
+			}
+			break;
+		case data_link::SOUTH:
+			if (m_oStartPos.x() > m_oEndPos.x()) {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 5, 0));
+			} else {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(5, 0));
+			}
+			break;
+		case data_link::EAST:
+			if (m_oStartPos.y() > m_oEndPos.y()) {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(2, - m_oEndRect.height() - 3));
+			} else {
+				m_oEndCaption->setPos(m_oEndPos + QPointF(2, 2));
+			}
+			break;
+		default:
+			Q_ASSERT(false);
+	}
+
+	m_oMidCaption->setPos((m_oStartPos + m_oEndPos)/2.);
+}
+
+void box_link::update_text()
+{
+	m_oMidCaption->setPlainText(m_oInnerLink.m_sCaption);
+	m_oStartCaption->setPlainText(m_oInnerLink.m_sParentCaption);
+	m_oEndCaption->setPlainText(m_oInnerLink.m_sChildCaption);
 }
 
 void box_link::properties()

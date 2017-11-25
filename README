@@ -12,7 +12,8 @@ A few dependencies may be tricky to find, for example:
 Ubuntu: apt install libkf5kdelibs4support-dev libqt5svg5-dev qtwebengine5-dev qtpositioning5-dev python3-dev kio-dev
 Gentoo: emerge --ask kde-frameworks/kdelibs4support dev-qt/qtwebengine
 Suse: zypper install python3-devel kio-devel kiconthemes-devel ki18n-devel kdelibs4support-devel
-check that the system has the file libKF5KDELibs4Support.so somewhere
+
+For troubleshooting, make sure that the file libKF5KDELibs4Support.so is present on the system
 
 To build the project, run:
 ./waf configure build
@@ -53,7 +54,7 @@ More information can be found in about->help
 
 3. Document generators:
 
-* Be careful with documents that you have not created yourself, there are no security restrictions at the moment
+* Do not open documents that you have not created yourself, there are no security restrictions at the moment
 * The document generation is performed in two steps: variable substitution and preprocessing
 * Variables in the form @var_name@ are replaced by the corresponding document variables
 * The core of the document is a variable itself

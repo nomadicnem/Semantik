@@ -518,6 +518,7 @@ void box_view::sync_view()
 		box_link *l_o = new box_link(this);
 		l_o->m_oInnerLink.copy_from(*link);
 		l_o->m_oLink = link;
+		l_o->update_text();
 		l_o->update_pos();
 		m_oLinks.append(l_o);
 	}
@@ -1255,6 +1256,7 @@ void box_view::notify_link_box(int id, data_link* link)
 	m_oLinks.push_back(l_o);
 	l_o->m_oInnerLink.copy_from(*link);
 	l_o->m_oLink = link;
+	l_o->update_text();
 	l_o->update_pos();
 }
 
@@ -1669,6 +1671,8 @@ void box_view::notify_box_props(int id, const QList<diagram_item*>& items)
 			if (lnk->m_oLink == it) {
 				data_link* dat = static_cast<data_link*>(it);
 				lnk->m_oInnerLink.copy_from(*dat);
+				lnk->update_text();
+				lnk->update_pos();
 				lnk->update();
 				goto end;
 			}
