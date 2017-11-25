@@ -647,7 +647,9 @@ void box_link::update_text_pos() {
 	const QRectF m_oEndRect = m_oEndCaption->boundingRect();
 	QPointF m_oEndPos = m_oEndPoint->pos();
 
-	switch (m_oInnerLink.m_iParentPos & data_link::COORD) {
+	int m_iStartDir = m_oInnerLink.m_iParentPos & data_link::COORD;
+	int m_iEndDir = m_oInnerLink.m_iChildPos & data_link::COORD;
+	switch (m_iStartDir) {
 		case data_link::NORTH:
 			if (m_oStartPos.x() < m_oEndPos.x()) {
 				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 5, - m_oStartRect.height()));
@@ -673,14 +675,14 @@ void box_link::update_text_pos() {
 			if (m_oStartPos.y() < m_oEndPos.y()) {
 				m_oStartCaption->setPos(m_oStartPos + QPointF(- 2, - m_oStartRect.height() - 3));
 			} else {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(- 2, 2));
+				m_oStartCaption->setPos(m_oStartPos + QPointF(2, 2));
 			}
 			break;
 		default:
 			Q_ASSERT(false);
 	}
 
-	switch (m_oInnerLink.m_iChildPos & data_link::COORD) {
+	switch (m_iEndDir) {
 		case data_link::NORTH:
 			if (m_oStartPos.x() > m_oEndPos.x()) {
 				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 5, - m_oEndRect.height()));
@@ -713,7 +715,22 @@ void box_link::update_text_pos() {
 			Q_ASSERT(false);
 	}
 
-	m_oMidCaption->setPos((m_oStartPos + m_oEndPos)/2.);
+	if ((m_oStartPos.x() == m_oEndPos.x()) && (
+		(m_iStartDir == data_link::NORTH && m_iEndDir == data_link::SOUTH) || (m_iStartDir == data_link::SOUTH && m_iEndDir == data_link::NORTH)))
+	{
+		QPointF mid = (m_oStartPos + m_oEndPos)/2. + QPointF(5, - m_oEndRect.height() / 2.);
+		m_oMidCaption->setPos(mid);
+	}
+	else if ((m_oStartPos.y() == m_oEndPos.y()) && (
+		(m_iStartDir == data_link::EAST && m_iEndDir == data_link::WEST) || (m_iStartDir == data_link::WEST && m_iEndDir == data_link::EAST)))
+	{
+		QPointF mid = (m_oStartPos + m_oEndPos)/2. + QPointF(- m_oEndRect.width() / 2., 2);
+		m_oMidCaption->setPos(mid);
+	}
+	else
+	{
+		m_oMidCaption->setPos((m_oStartPos + m_oEndPos)/2.);
+	}
 }
 
 void box_link::update_text()
