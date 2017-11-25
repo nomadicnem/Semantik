@@ -58,7 +58,6 @@ box_item::~box_item()
 
 void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->setFont(scene()->font());
 	doc.setDefaultFont(scene()->font());
 	QPen l_oPen = QPen(Qt::SolidLine);
 

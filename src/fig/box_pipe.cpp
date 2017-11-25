@@ -30,10 +30,6 @@ box_pipe::~box_pipe()
 
 box_pipe::box_pipe(box_view* view, int id) : box_item(view, id)
 {
-	QFont font = doc.defaultFont();
-	font.setPointSize(font.pointSize() - 2);
-	doc.setDefaultFont(font);
-
 	m_oCaption = new QGraphicsTextItem();
 	m_oCaption->setParentItem(this);
 	m_oCaption->setPos(0, 0);
@@ -98,6 +94,7 @@ void box_pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 void box_pipe::update_links() {
 	QRectF r = boundingRect();
+	m_oCaption->setFont(scene()->font());
 	m_oCaption->setPlainText(m_oBox->m_sText);
 	m_oCaption->setPos((r.width() - m_oCaption->boundingRect().width()) / 2., r.height());
 	box_item::update_links();

@@ -25,15 +25,12 @@
 
 box_label::box_label(box_view* view, int id) : box_item(view, id)
 {
-	QFont font = doc.defaultFont();
-	font.setPointSize(font.pointSize() - 2);
-	doc.setDefaultFont(font);
+	doc.setDefaultFont(scene()->font());
 }
 
 void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	doc.setDefaultFont(scene()->font());
-	//painter->setFont(scene()->font());
 
 	qreal pad = 0.5;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);

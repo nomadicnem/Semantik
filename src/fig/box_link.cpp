@@ -718,9 +718,12 @@ void box_link::update_text_pos() {
 
 void box_link::update_text()
 {
+	m_oMidCaption->setFont(scene()->font());
 	m_oMidCaption->setPlainText(m_oInnerLink.m_sCaption);
+	m_oStartCaption->setFont(scene()->font());
 	m_oStartCaption->setPlainText(m_oInnerLink.m_sParentCaption);
 	m_oEndCaption->setPlainText(m_oInnerLink.m_sChildCaption);
+	m_oEndCaption->setFont(scene()->font());
 }
 
 void box_link::properties()

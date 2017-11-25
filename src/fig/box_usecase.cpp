@@ -25,13 +25,12 @@
 
 box_usecase::box_usecase(box_view* view, int id) : box_item(view, id)
 {
-	QFont font = doc.defaultFont();
-	font.setPointSize(font.pointSize() - 2);
-	doc.setDefaultFont(font);
 }
 
 void box_usecase::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+	doc.setDefaultFont(scene()->font());
+
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);

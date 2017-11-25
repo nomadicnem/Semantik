@@ -24,10 +24,6 @@
 
 box_frame::box_frame(box_view* view, int id) : box_item(view, id)
 {
-	QFont font = doc.defaultFont();
-	font.setPointSize(font.pointSize() - 2);
-	doc.setDefaultFont(font);
-
 	m_oCaption = new QGraphicsTextItem();
 	m_oCaption->setParentItem(this);
 	m_oCaption->setPos(0, 0);
@@ -51,6 +47,7 @@ void box_frame::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 }
 
 void box_frame::update_links() {
+	m_oCaption->setFont(scene()->font());
 	m_oCaption->setPlainText(m_oBox->m_sText);
 	m_oCaption->setPos((m_iWW - m_oCaption->boundingRect().width()) / 2., 0);
 	//m_oCaption->setPos((m_iWW - m_oCaption->boundingRect().width()) / 2., m_iHH - m_oCaption->boundingRect().height());

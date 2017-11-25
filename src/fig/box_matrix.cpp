@@ -25,10 +25,6 @@
 
 box_matrix::box_matrix(box_view* view, int id) : box_item(view, id)
 {
-	QFont font = doc.defaultFont();
-	font.setPointSize(font.pointSize() - 2);
-	doc.setDefaultFont(font);
-
 	setZValue(80);
 	update_size();
 }

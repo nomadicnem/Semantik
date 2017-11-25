@@ -2058,6 +2058,11 @@ void box_view::notify_change_properties(void *)
 			{
 				t->update_size();
 			}
+			else if (box_link *t = dynamic_cast<box_link*>(l_o))
+			{
+				t->update_text();
+				t->update_pos();
+			}
 			l_o->update();
 		}
 	}

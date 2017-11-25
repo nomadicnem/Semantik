@@ -23,7 +23,7 @@ box_document_properties::box_document_properties(box_view *i_oParent):
 {
 	m_oView = i_oParent;
 
-	setWindowTitle(trUtf8("Diagram properties"));
+	setWindowTitle(trUtf8("Font properties"));
 
 	data_item *l_oItem = m_oView->m_oMediator->m_oItems.value(m_oView->m_iId);
 	setCurrentFont(l_oItem->m_oDiagramFont);
