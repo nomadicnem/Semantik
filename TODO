@@ -1,11 +1,8 @@
-font sizing issues
-bounding boxes
-arbitrary SVG shapes
-predefined colors for diagram objects
-z-index in diagrams
-crossing diagram arrows for the one with higher z-index
-s5 default picture size?
-display pictures on the map...
-Import kdissert weak links
+Arbitrary SVG shapes
+Predefined colors for diagram objects
+Z-index in diagrams
+Crossing diagram arrows for the one with higher z-index
+S5 default picture size?
+Display pictures on the map...
 Serialize undo operations
 

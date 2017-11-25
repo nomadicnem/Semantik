@@ -1518,10 +1518,29 @@ void box_view::mousePressEvent(QMouseEvent *i_oEv)
 		return;
 	}
 
-	QGraphicsItem *l_oItem = itemAt(i_oEv->pos());
+	box_item *k = NULL;
+	box_chain *kk = NULL;
+	foreach (QGraphicsItem *l_oTmp, items(i_oEv->pos()))
+	{
+		if (!kk)
+		{
+			kk = dynamic_cast<box_chain*>(l_oTmp);
+			if (kk)
+			{
+				break;
+			}
+		}
+		if (!k)
+		{
+			k = dynamic_cast<box_item*>(l_oTmp);
+			if (k )
+			{
+				break;
+			}
+		}
+	}
 
-	box_chain* kk;
-	if (l_oItem && (kk = dynamic_cast<box_chain*>(l_oItem)))
+	if (kk)
 	{
 		Q_ASSERT(!m_oCurrent);
 
@@ -1556,11 +1575,9 @@ void box_view::mousePressEvent(QMouseEvent *i_oEv)
 
 		m_oCurrent->setSelected(true);
 	}
-
-	box_item *k;
-	if (l_oItem && (k = dynamic_cast<box_item*>(l_oItem)))
+	else if (k)
 	{
-		QPointF l_o = l_oItem->pos();
+		QPointF l_o = k->pos();
 		// TODO used by the handle for resizing the boxes - check that the click was on the handle
 		if (m_oLastPoint.x() + m_oLastPoint.y() - l_o.x() - l_o.y() >
 			k->rect().width() + k->rect().height() - 2*GRID)
