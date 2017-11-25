@@ -18,7 +18,10 @@ class box_database : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_database(box_view*, int i_iId);
+		~box_database();
+		QGraphicsTextItem *m_oCaption;
+		void update_links();
 };
 
-#endif // BOX_ACTOR_H
+#endif // BOX_DATABASE_H
 

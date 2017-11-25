@@ -18,6 +18,9 @@ class box_pipe : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_pipe(box_view*, int i_iId);
+		~box_pipe();
+		void update_links();
+		QGraphicsTextItem *m_oCaption;
 };
 
 #endif // BOX_PIPE_H

@@ -23,11 +23,20 @@
 
 #define MIN_FORK_SIZE 30
 
+box_database::~box_database()
+{
+	delete m_oCaption;
+}
+
 box_database::box_database(box_view* view, int id) : box_item(view, id)
 {
 	QFont font = doc.defaultFont();
 	font.setPointSize(font.pointSize() - 2);
 	doc.setDefaultFont(font);
+
+	m_oCaption = new QGraphicsTextItem();
+	m_oCaption->setParentItem(this);
+	m_oCaption->setPos(0, 0);
 }
 
 void box_database::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -84,5 +93,12 @@ void box_database::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 	painter->setBrush(bc);
 	painter->drawEllipse(l_oRect2);
+}
+
+void box_database::update_links() {
+	QRectF r = boundingRect();
+	m_oCaption->setPlainText(m_oBox->m_sText);
+	m_oCaption->setPos((r.width() - m_oCaption->boundingRect().width()) / 2., r.height());
+	box_item::update_links();
 }
 
