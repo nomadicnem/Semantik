@@ -222,6 +222,7 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 			if (m_bIsSegment && m_bChanged && m_oLink->m_oLst.size() > m_iOffset)
 			{
 				m_oLink->update_offset(pos(), m_iOffset);
+				m_oLink->update_text_label_pos();
 				m_bChanged = false;
 			}
 			else if (!m_bIsSegment && !m_bForced)
@@ -268,5 +269,11 @@ void box_control_point::force_position(const QPoint& i_oP)
 	}
 	setPos(i_oP);
 	m_bForced = false;
+}
+
+int box_control_point::h_length()
+{
+	int l_iVal = m_oLink->m_oGood.at(m_iOffset + 2).x() - m_oLink->m_oGood.at(m_iOffset + 1).x();
+	return qAbs(l_iVal);
 }
 

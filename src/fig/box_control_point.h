@@ -32,6 +32,7 @@ class box_control_point : public QGraphicsRectItem
 		void mouseReleaseEvent(QGraphicsSceneMouseEvent* e);
 
 		void force_position(const QPoint&);
+		int h_length();
 
 	private:
 		bool m_bChanged;

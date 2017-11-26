@@ -641,96 +641,171 @@ QVariant box_link::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oV
 }
 
 void box_link::update_text_pos() {
+	const QPointF l_oStartPos = m_oStartPoint->pos();
+	const QPointF l_oEndPos = m_oEndPoint->pos();
+
 	const QRectF m_oStartRect = m_oStartCaption->boundingRect();
-	QPointF m_oStartPos = m_oStartPoint->pos();
-
 	const QRectF m_oEndRect = m_oEndCaption->boundingRect();
-	QPointF m_oEndPos = m_oEndPoint->pos();
 
-	int m_iStartDir = m_oInnerLink.m_iParentPos & data_link::COORD;
-	int m_iEndDir = m_oInnerLink.m_iChildPos & data_link::COORD;
-	switch (m_iStartDir) {
+	const int l_iStartDir = m_oInnerLink.m_iParentPos & data_link::COORD;
+	const int l_iEndDir = m_oInnerLink.m_iChildPos & data_link::COORD;
+	switch (l_iStartDir) {
 		case data_link::NORTH:
-			if (m_oStartPos.x() < m_oEndPos.x()) {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 5, - m_oStartRect.height()));
+			if (l_oStartPos.x() < l_oEndPos.x()) {
+				m_oStartCaption->setPos(l_oStartPos + QPointF(- m_oStartRect.width() - 5, - m_oStartRect.height()));
 			} else {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(5, - m_oStartRect.height()));
+				m_oStartCaption->setPos(l_oStartPos + QPointF(5, - m_oStartRect.height()));
 			}
 			break;
 		case data_link::WEST:
-			if (m_oStartPos.y() < m_oEndPos.y()) {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 2, - m_oStartRect.height() - 3));
+			if (l_oStartPos.y() < l_oEndPos.y()) {
+				m_oStartCaption->setPos(l_oStartPos + QPointF(- m_oStartRect.width() - 2, - m_oStartRect.height() - 3));
 			} else {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 2, 2));
+				m_oStartCaption->setPos(l_oStartPos + QPointF(- m_oStartRect.width() - 2, 2));
 			}
 			break;
 		case data_link::SOUTH:
-			if (m_oStartPos.x() < m_oEndPos.x()) {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(- m_oStartRect.width() - 5, 0));
+			if (l_oStartPos.x() < l_oEndPos.x()) {
+				m_oStartCaption->setPos(l_oStartPos + QPointF(- m_oStartRect.width() - 5, 0));
 			} else {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(5, 0));
+				m_oStartCaption->setPos(l_oStartPos + QPointF(5, 0));
 			}
 			break;
 		case data_link::EAST:
-			if (m_oStartPos.y() < m_oEndPos.y()) {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(- 2, - m_oStartRect.height() - 3));
+			if (l_oStartPos.y() < l_oEndPos.y()) {
+				m_oStartCaption->setPos(l_oStartPos + QPointF(- 2, - m_oStartRect.height() - 3));
 			} else {
-				m_oStartCaption->setPos(m_oStartPos + QPointF(2, 2));
+				m_oStartCaption->setPos(l_oStartPos + QPointF(2, 2));
 			}
 			break;
 		default:
 			Q_ASSERT(false);
 	}
 
-	switch (m_iEndDir) {
+	switch (l_iEndDir) {
 		case data_link::NORTH:
-			if (m_oStartPos.x() > m_oEndPos.x()) {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 5, - m_oEndRect.height()));
+			if (l_oStartPos.x() > l_oEndPos.x()) {
+				m_oEndCaption->setPos(l_oEndPos + QPointF(- m_oEndRect.width() - 5, - m_oEndRect.height()));
 			} else {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(5, - m_oEndRect.height()));
+				m_oEndCaption->setPos(l_oEndPos + QPointF(5, - m_oEndRect.height()));
 			}
 			break;
 		case data_link::WEST:
-			if (m_oStartPos.y() > m_oEndPos.y()) {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 2, - m_oEndRect.height() - 3));
+			if (l_oStartPos.y() > l_oEndPos.y()) {
+				m_oEndCaption->setPos(l_oEndPos + QPointF(- m_oEndRect.width() - 2, - m_oEndRect.height() - 3));
 			} else {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 2, 2));
+				m_oEndCaption->setPos(l_oEndPos + QPointF(- m_oEndRect.width() - 2, 2));
 			}
 			break;
 		case data_link::SOUTH:
-			if (m_oStartPos.x() > m_oEndPos.x()) {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(- m_oEndRect.width() - 5, 0));
+			if (l_oStartPos.x() > l_oEndPos.x()) {
+				m_oEndCaption->setPos(l_oEndPos + QPointF(- m_oEndRect.width() - 5, 0));
 			} else {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(5, 0));
+				m_oEndCaption->setPos(l_oEndPos + QPointF(5, 0));
 			}
 			break;
 		case data_link::EAST:
-			if (m_oStartPos.y() > m_oEndPos.y()) {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(2, - m_oEndRect.height() - 3));
+			if (l_oStartPos.y() > l_oEndPos.y()) {
+				m_oEndCaption->setPos(l_oEndPos + QPointF(2, - m_oEndRect.height() - 3));
 			} else {
-				m_oEndCaption->setPos(m_oEndPos + QPointF(2, 2));
+				m_oEndCaption->setPos(l_oEndPos + QPointF(2, 2));
 			}
 			break;
 		default:
 			Q_ASSERT(false);
 	}
+	update_text_label_pos();
+}
 
-	if ((m_oStartPos.x() == m_oEndPos.x()) && (
-		(m_iStartDir == data_link::NORTH && m_iEndDir == data_link::SOUTH) || (m_iStartDir == data_link::SOUTH && m_iEndDir == data_link::NORTH)))
+void box_link::update_text_label_pos()
+{
+	const QPointF l_oStartPos = m_oStartPoint->pos();
+	const QPointF l_oEndPos = m_oEndPoint->pos();
+
+	const int l_iStartDir = m_oInnerLink.m_iParentPos & data_link::COORD;
+	const int l_iEndDir = m_oInnerLink.m_iChildPos & data_link::COORD;
+
+	const QRectF l_oMidRect = m_oMidCaption->boundingRect();
+	QPointF mid = (l_oStartPos + l_oEndPos)/2. + QPointF(5, 2);
+
+	if (m_oInnerLink.m_iLineType)
 	{
-		QPointF mid = (m_oStartPos + m_oEndPos)/2. + QPointF(5, - m_oEndRect.height() / 2.);
-		m_oMidCaption->setPos(mid);
-	}
-	else if ((m_oStartPos.y() == m_oEndPos.y()) && (
-		(m_iStartDir == data_link::EAST && m_iEndDir == data_link::WEST) || (m_iStartDir == data_link::WEST && m_iEndDir == data_link::EAST)))
-	{
-		QPointF mid = (m_oStartPos + m_oEndPos)/2. + QPointF(- m_oEndRect.width() / 2., 2);
-		m_oMidCaption->setPos(mid);
+		double d_r_x = (10 + l_oMidRect.width()) / 2.;
+		double d_r_y = (6 + l_oMidRect.height()) / 2.;
+		double d_r = sqrt(d_r_x * d_r_x + d_r_y * d_r_y);
+
+		double d_a_x = qAbs(l_oStartPos.x() - l_oEndPos.x());
+		double d_a_y = qAbs(l_oStartPos.y() - l_oEndPos.y());
+		double d_a = sqrt(d_a_x * d_a_x + d_a_y * d_a_y);
+
+		double cos_a = d_a_x / d_a;
+		double sin_a = d_a_y / d_a;
+
+		double cos_r = d_r_x / d_r;
+		double sin_r = d_r_y / d_r;
+
+		double d = d_r * (sin_a * cos_r + cos_a * sin_r);
+		double dx = d_r_x - d * sin_a;
+		double dy = d * cos_a;
+
+		double ddx = 5 - dx;
+		double ddy = - d_r_y + 3 - d * cos_a;
+
+		if ((l_oStartPos.x() < l_oEndPos.x() && l_oStartPos.y() > l_oEndPos.y()) || (l_oStartPos.x() > l_oEndPos.x() && l_oStartPos.y() < l_oEndPos.y()))
+		{
+			ddx = - l_oMidRect.width() - 5 + dx;
+		}
+
+		if (!isnan(dx) && !isnan(dy))
+		{
+			mid = (l_oStartPos + l_oEndPos)/2. + QPointF(ddx, ddy);
+		}
 	}
 	else
 	{
-		m_oMidCaption->setPos((m_oStartPos + m_oEndPos)/2.);
+		if ((l_oStartPos.x() == l_oEndPos.x()) && (
+			(l_iStartDir == data_link::NORTH && l_iEndDir == data_link::SOUTH) || (l_iStartDir == data_link::SOUTH && l_iEndDir == data_link::NORTH)))
+		{
+			mid = (l_oStartPos + l_oEndPos)/2. + QPointF(5, - l_oMidRect.height() / 2.);
+		}
+		else if ((l_oStartPos.y() == l_oEndPos.y()) && (
+			(l_iStartDir == data_link::EAST && l_iEndDir == data_link::WEST) || (l_iStartDir == data_link::WEST && l_iEndDir == data_link::EAST)))
+		{
+			mid = (l_oStartPos + l_oEndPos)/2. + QPointF(- l_oMidRect.width() / 2., 2);
+		}
+		else
+		{
+			if (m_oGood.size() == 4 && m_oControlPoints.at(0)->h_length() == 0)
+			{
+				mid = m_oControlPoints.at(0)->pos() + QPointF(5, - l_oMidRect.height() / 2.);
+			}
+			else
+			{
+				int l_iHlen = 0;
+				box_control_point *l_oCandidate = NULL;
+
+				foreach (box_control_point *b, m_oControlPoints)
+				{
+					if (b->m_iOffset >= m_oGood.size() - 3)
+					{
+						break;
+					}
+
+					const int l_iCurLen = b->h_length();
+					if (l_iCurLen >= l_iHlen)
+					{
+						l_iHlen = l_iCurLen;
+						l_oCandidate = b;
+					}
+				}
+				if (l_oCandidate)
+				{
+					mid = l_oCandidate->pos() + QPointF(- l_oMidRect.width() / 2., 2);
+				}
+			}
+		}
 	}
+	m_oMidCaption->setPos(mid);
 }
 
 void box_link::update_text()

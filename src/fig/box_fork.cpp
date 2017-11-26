@@ -190,10 +190,12 @@ QVariant box_fork::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oV
 
 void box_fork::update_links()
 {
-	// FIXME
 	foreach (box_link* l_oLink, m_oView->m_oLinks)
 	{
-		l_oLink->update_pos();
+		if (l_oLink->m_oInnerLink.m_iParent == m_iId || l_oLink->m_oInnerLink.m_iChild == m_iId)
+		{
+			l_oLink->update_pos();
+		}
 	}
 }
 
