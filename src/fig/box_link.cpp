@@ -73,6 +73,7 @@ box_link::box_link(box_view* i_oParent) : QGraphicsRectItem(), editable()
 		b->m_iOffset = i;
 		m_oControlPoints.append(b);
 	}
+	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 box_link::~box_link()
@@ -616,7 +617,6 @@ QPainterPath box_link::shape() const
 
 QVariant box_link::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue)
 {
-	QVariant l_oRet = QGraphicsItem::itemChange(i_oChange, i_oValue);
 	if (scene())
 	{
 		if (i_oChange == ItemSelectedHasChanged)
