@@ -1,9 +1,10 @@
 Semantik 1.0.0
 --------------
-* Update to KDE5
-* Port to Python3
-* SVG Export from the menus
-* Resize handles on diagram objects
+* Port to KDE5 and Python 3
+* Add SVG Export from the menus
+* Add new diagram shapes
+* Add resize handles to diagram objects
+* Add diagram link labels
 
 Semantik 0.9.5
 --------------
