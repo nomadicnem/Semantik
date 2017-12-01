@@ -534,23 +534,9 @@ void box_view::notify_export_item(int id)
 	m_iId = id;
 	sync_view();
 
-	QRectF l_oRect;
+	QRectF l_oRect = scene()->itemsBoundingRect();
 	foreach (QGraphicsItem*it, scene()->items())
 	{
-		if (it->isVisible())
-		{
-			if (l_oRect.width() < 1)
-			{
-				l_oRect = it->boundingRect();
-				l_oRect.translate(it->pos());
-			}
-			else
-			{
-				QRectF tmp = it->boundingRect();
-				tmp.translate(it->pos());
-				l_oRect = l_oRect.united(tmp);
-			}
-		}
 		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
 	}
 
@@ -1871,23 +1857,9 @@ bool box_view::slot_save() {
 int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 {
 	QString url = i_oUrl.path();
-	QRectF l_oRect;
+	QRectF l_oRect = scene()->itemsBoundingRect();
 	foreach (QGraphicsItem*it, scene()->items())
 	{
-		if (it->isVisible())
-		{
-			if (l_oRect.width() < 1)
-			{
-				l_oRect = it->boundingRect();
-				l_oRect.translate(it->pos());
-			}
-			else
-			{
-				QRectF tmp = it->boundingRect();
-				tmp.translate(it->pos());
-				l_oRect = l_oRect.united(tmp);
-			}
-		}
 		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
 	}
 
@@ -1972,23 +1944,9 @@ void box_view::slot_print()
 {
         QPrinter *l_oP = new QPrinter;
 
-	QRectF l_oRect;
+	QRectF l_oRect = scene()->itemsBoundingRect();
 	foreach (QGraphicsItem*it, scene()->items())
 	{
-		if (it->isVisible())
-		{
-			if (l_oRect.width() < 1)
-			{
-				l_oRect = it->boundingRect();
-				l_oRect.translate(it->pos());
-			}
-			else
-			{
-				QRectF tmp = it->boundingRect();
-				tmp.translate(it->pos());
-				l_oRect = l_oRect.united(tmp);
-			}
-		}
 		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
 	}
 
@@ -2025,23 +1983,9 @@ void box_view::slot_print()
 
 void box_view::slot_copy_picture()
 {
-	QRectF l_oRect;
+	QRectF l_oRect = scene()->itemsBoundingRect();
 	foreach (QGraphicsItem*it, scene()->items())
 	{
-		if (it->isVisible())
-		{
-			if (l_oRect.width() < 1)
-			{
-				l_oRect = it->boundingRect();
-				l_oRect.translate(it->pos());
-			}
-			else
-			{
-				QRectF tmp = it->boundingRect();
-				tmp.translate(it->pos());
-				l_oRect = l_oRect.united(tmp);
-			}
-		}
 		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
 	}
 
