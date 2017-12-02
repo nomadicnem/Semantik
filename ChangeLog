@@ -1,7 +1,8 @@
 Semantik 1.0.1
 --------------
 * Fix improper pdf document dimensions
-* Added installation notes for Fedora
+* Fix the configuration and build on FreeBSD
+* Add installation notes for Fedora
 
 Semantik 1.0.0
 --------------
