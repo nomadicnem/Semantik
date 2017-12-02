@@ -1,3 +1,8 @@
+Semantik 1.0.1
+--------------
+* Fix improper pdf document dimensions
+* Added installation notes for Fedora
+
 Semantik 1.0.0
 --------------
 * Port to KDE5 and Python 3

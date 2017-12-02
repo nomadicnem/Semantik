@@ -3,7 +3,7 @@
 # Thomas Nagy, 2007-2016 GPLV3
 
 APPNAME = 'semantik'
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 top = '.'
 
@@ -220,10 +220,37 @@ def configure(conf):
 			elif lst[0].endswith('.defines'):
 				conf.env.append_value('DEFINES_KDECORE', lst[1])
 
-	conf.env.append_value('INCLUDES_KDECORE', '/usr/include/KF5/KDELibs4Support')
 	conf.env.append_value('LIB_KDECORE', 'KF5KDELibs4Support')
-	conf.check(fragment='#include <kio/job.h>\n#include <KDE/KDialog>\n', features='cxx qt5',
-		msg='Checking for kdelibs4support', use='KDECORE QT5CORE QT5GUI QT5WIDGETS')
+
+	for x in ('', '/usr/include/KF5/KDELibs4Support', '/usr/local/include/KF5/KDELibs4Support'):
+		conf.env.stash()
+		if os.path.exists(x):
+			conf.env.append_value('INCLUDES_KDECORE', x)
+		try:
+			conf.check(fragment='#include <kio/job.h>\n#include <KDE/KDialog>\n',
+				features='cxx qt5',
+				msg='Checking for kdelibs4support %s' % x,
+				use='KDECORE QT5CORE QT5GUI QT5WIDGETS')
+			break
+		except conf.errors.ConfigurationError:
+			conf.env.revert()
+		else:
+			conf.fatal('kdelibs4support was not found, check the config.log file')
+
+	for x in ('', '/usr/local/include'):
+		conf.env.stash()
+		if os.path.exists(x):
+			conf.env.append_value('INCLUDES_QT5GUI', x)
+		try:
+			conf.check(fragment='#include <QtGui>\n',
+			features='cxx qt5',
+			msg='Checking for QT5GUI %s' % x,
+			use='QT5CORE QT5GUI')
+			break
+		except conf.errors.ConfigurationError:
+			conf.env.revert()
+		else:
+			conf.fatal('It seems that QtGui is not working properly, check the config.log')
 
 	conf.define('cmd_add_item', 0)
 	conf.define('cmd_update_item', 1)
