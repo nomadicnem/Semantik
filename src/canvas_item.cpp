@@ -140,6 +140,9 @@ void canvas_item::update_color()
 
 void canvas_item::update_links()
 {
+	#ifdef _DEBUG
+		return;
+	#endif
 	foreach (canvas_link* l_oLink, m_oLinks)
 	{
 		l_oLink->update_pos();

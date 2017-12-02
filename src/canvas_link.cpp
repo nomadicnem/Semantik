@@ -55,6 +55,10 @@ void canvas_link::rm_link()
 
 void canvas_link::update_pos()
 {
+	#ifdef _DEBUG
+		return;
+	#endif
+	prepareGeometryChange();
 	if (m_oFrom->m_oGraph->m_oMediator->m_iConnType == 0)
 	{
 		update_triangle();
@@ -63,6 +67,7 @@ void canvas_link::update_pos()
 	{
 		update_spline();
 	}
+	update();
 }
 
 void canvas_link::update_selected()
@@ -105,6 +110,7 @@ void canvas_link::update_triangle()
 
 		QPainterPath l_oPath;
 		l_oPath.addPolygon(_polygon);
+
 		setPath(l_oPath);
 		return;
 	}
@@ -127,6 +133,7 @@ void canvas_link::update_triangle()
 
 	QPainterPath l_oPath;
 	l_oPath.addPolygon(_polygon);
+
 	setPath(l_oPath);
 }
 
@@ -162,6 +169,7 @@ void canvas_link::update_spline()
 
 		QPainterPath l_oPath;
 		l_oPath.addPolygon(_polygon);
+
 		setPath(l_oPath);
 		return;
 	}

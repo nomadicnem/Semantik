@@ -203,9 +203,10 @@ void data_box::dump_xml(QStringList & i_oS)
 		QString::number(m_iHH),
 		color.name(),
 		QString::number((int) m_iType),
-		QString(" v=\"%1\" e=\"%2\" version=\"1\"").arg(
+		QString(" v=\"%1\" e=\"%2\" seq=\"%3\" version=\"2\"").arg(
 			QString::number((int) m_bIsVertical),
-			QString::number((int) m_bIsEnd)
+			QString::number((int) m_bIsEnd),
+			QString::number((int) m_iBoxHeight)
 		)
 	);
 
@@ -246,6 +247,11 @@ void data_box::read_data(const QString& i_sTag, const QXmlAttributes& i_oAttrs)
 	m_iType = (data_box::IType) i_oAttrs.value(notr("t")).toInt();
 	m_bIsVertical = i_oAttrs.value(notr("v")).toInt();
 	m_bIsEnd = i_oAttrs.value(notr("e")).toInt();
+	m_iBoxHeight = i_oAttrs.value(notr("seq")).toInt();
+	if (m_iBoxHeight < 5)
+	{
+		m_iBoxHeight = 20;
+	}
 	color = QColor(i_oAttrs.value(notr("color")));
 	int l_iVersion = i_oAttrs.value(notr("version")).toInt();
 	if (l_iVersion < 1 && m_iType == data_box::LABEL)

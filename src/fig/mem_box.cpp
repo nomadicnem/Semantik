@@ -471,3 +471,35 @@ void mem_diagram_properties::undo() {
 	model->notify_change_properties(NULL);
 }
 
+///////////////////////////////////////////////////////////////////
+
+mem_size_sequence::mem_size_sequence(sem_mediator* i_oMod, int i_iId, data_box* i_oBox) : mem_command(i_oMod), m_oPrevBox(i_iId), m_oNextBox(i_iId)
+{
+	m_iId = i_iId;
+	m_iBoxId = i_oBox->m_iId;
+	m_oPrevBox.m_iWW = i_oBox->m_iWW;
+	m_oPrevBox.m_iHH = i_oBox->m_iHH;
+	m_oPrevBox.m_iBoxHeight = i_oBox->m_iBoxHeight;
+}
+
+void mem_size_sequence::redo() {
+	data_item *item = model->m_oItems[m_iId];
+        data_box *l_oBox = item->m_oBoxes[m_iBoxId];
+	l_oBox->m_iWW = m_oNextBox.m_iWW;
+	l_oBox->m_iHH = m_oNextBox.m_iHH;
+	l_oBox->m_iBoxHeight = m_oNextBox.m_iBoxHeight;
+	model->notify_sequence_box(m_iId, m_iBoxId);
+	redo_dirty();
+}
+
+void mem_size_sequence::undo() {
+	data_item *item = model->m_oItems[m_iId];
+        data_box *l_oBox = item->m_oBoxes[m_iBoxId];
+	l_oBox->m_iWW = m_oPrevBox.m_iWW;
+	l_oBox->m_iHH = m_oPrevBox.m_iHH;
+	l_oBox->m_iBoxHeight = m_oPrevBox.m_iBoxHeight;
+	model->notify_sequence_box(m_iId, m_iBoxId);
+	undo_dirty();
+}
+
+

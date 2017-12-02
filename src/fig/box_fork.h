@@ -42,7 +42,7 @@ class box_fork : public QGraphicsRectItem, public connectable, public resizable
 		box_resize_point *m_oRight;
 
 		QVariant itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue);
-		int choose_position(const QPointF&p, int id=-1);
+		int choose_position(const QPointF&p, box_link*);
 		QPoint get_point(int position);
 
 		void update_sizers();

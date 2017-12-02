@@ -225,5 +225,20 @@ class mem_diagram_properties : public mem_command {
 		IType type() { return DIAGRAM_PROPERTIES; }
 };
 
+class mem_size_sequence : public mem_command {
+	public:
+		mem_size_sequence(sem_mediator*, int, data_box*);
+
+		int m_iId;
+		int m_iBoxId;
+
+		void undo();
+		void redo();
+
+		data_box m_oPrevBox;
+		data_box m_oNextBox;
+		IType type() { return SIZE_SEQUENCE; }
+};
+
 #endif
 

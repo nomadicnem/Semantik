@@ -201,7 +201,7 @@ void box_fork::update_links()
 
 static int RATIO[] = {250, 333, 500, 667, 750, 0};
 
-int box_fork::choose_position(const QPointF& i_oP, int id)
+int box_fork::choose_position(const QPointF& i_oP, box_link*)
 {
 	QRectF r = rectPos();
 	QPointF l_o = pos() - i_oP + QPointF(r.width()/2, r.height()/2);

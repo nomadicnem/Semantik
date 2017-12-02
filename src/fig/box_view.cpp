@@ -61,6 +61,7 @@
 #include "data_item.h"
 #include "box_usecase.h"
 #include "box_view.h"
+ #include"box_sequence.h"
 #include "sembind.h"
  #include "mem_box.h"
 	#include "export_fig_dialog.h"
@@ -104,6 +105,9 @@ box_reader::box_reader(box_view *i_oControl)
 
 bool box_reader::startElement(const QString&, const QString&, const QString& i_sName, const QXmlAttributes& i_oAttrs)
 {
+	#ifdef _DEBUG
+		return true;
+	#endif
 	if (i_sName == QObject::trUtf8("box_item"))
 	{
 		int id = i_oAttrs.value(QObject::trUtf8("id")).toInt();
@@ -232,6 +236,8 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	connect(m_oAddDatabase, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddPipe = new QAction(QObject::trUtf8("Pipe"), this);
 	connect(m_oAddPipe, SIGNAL(triggered()), this, SLOT(slot_add_element()));
+	m_oAddSequence = new QAction(QObject::trUtf8("Sequence"), this);
+	connect(m_oAddSequence, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddDotStart = new QAction(QObject::trUtf8("Activity start"), this);
 	connect(m_oAddDotStart, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddDotEnd = new QAction(QObject::trUtf8("Activity end"), this);
@@ -304,6 +310,7 @@ void box_view::init_menu()
 	m_oAddBoxMenu->addAction(m_oAddClass);
 	m_oAddBoxMenu->addAction(m_oAddPipe);
 	m_oAddBoxMenu->addAction(m_oAddDatabase);
+	m_oAddBoxMenu->addAction(m_oAddSequence);
 
 	//m_oMenu->addAction(m_oEditAction);
 	m_oMenu->addAction(m_oDeleteAction);
@@ -482,6 +489,10 @@ void box_view::sync_view()
 			l_o = new box_fork(this, box->m_iId);
 		}
 		else if (box->m_iType == data_box::MATRIX)
+		{
+			l_o = new box_matrix(this, box->m_iId);
+		}
+		else if (box->m_iType == data_box::SEQUENCE)
 		{
 			l_o = new box_matrix(this, box->m_iId);
 		}
@@ -890,6 +901,13 @@ void box_view::slot_add_element()
 		add->box->m_oColSizes.push_back(170);
 		add->box->m_oColSizes.push_back(170);
 	}
+	else if (sender == m_oAddSequence)
+	{
+		add->box->m_iType = data_box::SEQUENCE;
+		add->box->m_iWW = 80;
+		add->box->m_iHH = 280;
+		add->box->m_iBoxHeight = 40;
+	}
 	else if (sender == m_oAddFrame)
 	{
 		add->box->m_iType = data_box::FRAME;
@@ -1197,6 +1215,10 @@ void box_view::notify_add_box(int id, int box)
 	else if (db->m_iType == data_box::MATRIX)
 	{
 		l_o = new box_matrix(this, box);
+	}
+	else if (db->m_iType == data_box::SEQUENCE)
+	{
+		l_o = new box_sequence(this, box);
 	}
 	else if (db->m_iType == data_box::FRAME)
 	{
@@ -1542,7 +1564,7 @@ void box_view::mousePressEvent(QMouseEvent *i_oEv)
 
 		m_oCurrent = new box_link(this);
 		m_oCurrent->m_oInnerLink.m_iParent = l_oParent->m_iId;
-		m_oCurrent->m_oInnerLink.m_iParentPos = data_link::EAST + MUL * 500;
+		m_oCurrent->m_oInnerLink.m_iParentPos = l_oParent->optimize_position(p);
 		m_oCurrent->m_oInnerLink.m_iChild = NO_ITEM;
 		m_oCurrent->m_oInnerLink.m_iChildPos = data_link::NORTH;
 		m_oCurrent->m_oInnerLink.m_oStartPoint = m_oCurrent->m_oInnerLink.m_oEndPoint = p;
@@ -1551,6 +1573,11 @@ void box_view::mousePressEvent(QMouseEvent *i_oEv)
 			m_oCurrent->m_oInnerLink.pen_style = Qt::DotLine;
 			m_oCurrent->m_oInnerLink.m_iLeftArrow = data_link::NONE;
 			m_oCurrent->m_oInnerLink.m_iRightArrow = data_link::NONE;
+		}
+
+		if (dynamic_cast<box_sequence*>(l_oParent))
+		{
+			m_oCurrent->m_oInnerLink.m_iLineType = data_link::LINE;
 		}
 
 		if (dynamic_cast<box_node*>(l_oParent) || dynamic_cast<box_component*>(l_oParent))
@@ -1710,6 +1737,12 @@ void box_view::notify_size_box(int id, const QList<data_box*>& items)
 		Q_ASSERT(m_oItems.contains(box->m_iId));
 		m_oItems[box->m_iId]->update_size();
 	}
+}
+
+void box_view::notify_sequence_box(int i_iId, int i_iBoxId)
+{
+	Q_ASSERT(i_iId == m_iId);
+	m_oItems[i_iBoxId]->update_data();
 }
 
 int box_view::next_seq()

@@ -66,6 +66,7 @@ class box_view : public QGraphicsView
 		QAction *m_oAddFrame;
 		QAction *m_oAddClass;
 		QAction *m_oAddDatabase;
+		QAction *m_oAddSequence;
 		QAction *m_oAddPipe;
 		QAction *m_oFileExport;
 		QAction *m_oFileImport;
@@ -155,6 +156,7 @@ class box_view : public QGraphicsView
 		void notify_size_box(int, const QList<data_box*>&);
 		void notify_change_link_box(int id, data_link*link);
 		void notify_change_properties(void *);
+		void notify_sequence_box(int, int);
 
 		void notify_select(const QList<int>& unsel, const QList<int>& sel);
 		void notify_export_item(int);

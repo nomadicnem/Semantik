@@ -81,6 +81,7 @@ class sem_mediator: public QObject
 		void sig_pos_box(int id, const QList<data_box*>&);
 		void sig_change_link_box(int id, data_link*);
 		void sig_size_box(int id, const QList<data_box*>&);
+		void sig_sequence_box(int id, int);
 		void sig_change_properties(void*);
 
 		void enable_undo(bool, bool);
@@ -164,6 +165,7 @@ class sem_mediator: public QObject
 		void notify_pos_box(int id, const QList<data_box*>&);
 		void notify_change_link_box(int id, data_link*);
 		void notify_size_box(int id, const QList<data_box*>&);
+		void notify_sequence_box(int id, int);
 		void notify_change_properties(void*);
 
 		void notify_message(const QString& msg, int duration);

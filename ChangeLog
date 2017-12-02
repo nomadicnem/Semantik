@@ -1,5 +1,6 @@
 Semantik 1.0.1
 --------------
+* Add a diagram sequence element
 * Fix improper pdf document dimensions
 * Fix the configuration and build on FreeBSD
 * Add installation notes for Fedora

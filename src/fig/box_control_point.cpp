@@ -94,26 +94,13 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 		{
 			// TODO make sure items do not mess each other positions (crashes...)
 			QPointF l_o = i_oValue.toPointF();
+
 			QPoint np = QPoint(l_o.x(), l_o.y());
 
 			if (m_oView->m_oCurrent && this == m_oLink->m_oEndPoint)
 			{
 				connectable *start = m_oView->m_oItems.value(m_oView->m_oCurrent->m_oInnerLink.m_iParent);
-				QRectF r = start->rectPos();
-				QPointF l_o1 = r.topLeft() - l_o + QPointF(r.width()/2, r.height()/2);
-				double c_x = l_o1.x() * r.height();
-				double c_y = l_o1.y() * r.width();
-
-				int cand = 0;
-				if (qAbs(c_x) > qAbs(c_y))
-				{
-					cand = (c_x > 0) ? data_link::WEST : data_link::EAST;
-				}
-				else
-				{
-					cand = (c_y > 0) ? data_link::NORTH : data_link::SOUTH;
-				}
-				m_oView->m_oCurrent->m_oInnerLink.m_iParentPos = cand + MUL * 500;
+				m_oView->m_oCurrent->m_oInnerLink.m_iParentPos = start->optimize_position(m_oView->m_oCurrent->m_oInnerLink.m_oEndPoint);
 			}
 
 			if (m_bIsSegment)
@@ -158,7 +145,7 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 
 				if (l_oUnder)
 				{
-					int l_iPosition = (int) l_oUnder->choose_position(l_o);
+					int l_iPosition = (int) l_oUnder->choose_position(l_o, m_oLink);
 					if (l_oUnder)
 					{
 						if (m_oLink->m_oStartPoint == this)
@@ -219,6 +206,12 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 		}
 		else if (i_oChange == ItemPositionHasChanged)
 		{
+			if (m_oView->m_oCurrent && this == m_oLink->m_oEndPoint)
+			{
+				connectable *start = m_oView->m_oItems.value(m_oView->m_oCurrent->m_oInnerLink.m_iParent);
+				m_oView->m_oCurrent->m_oInnerLink.m_iParentPos = start->optimize_position(m_oView->m_oCurrent->m_oInnerLink.m_oEndPoint);
+			}
+
 			if (m_bIsSegment && m_bChanged && m_oLink->m_oLst.size() > m_iOffset)
 			{
 				m_oLink->update_offset(pos(), m_iOffset);

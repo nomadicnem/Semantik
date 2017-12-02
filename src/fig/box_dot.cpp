@@ -134,7 +134,7 @@ void box_dot::update_links()
 	}
 }
 
-int box_dot::choose_position(const QPointF& i_oP, int id)
+int box_dot::choose_position(const QPointF& i_oP, box_link*)
 {
 	QRectF r = rectPos();
 	QPointF l_o = pos() - i_oP + QPointF(r.width()/2, r.height()/2);

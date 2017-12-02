@@ -1556,6 +1556,11 @@ void sem_mediator::notify_size_box(int id, const QList<data_box*>& items)
 	emit sig_size_box(id, items);
 }
 
+void sem_mediator::notify_sequence_box(int i_iId, int i_iBoxId)
+{
+	emit sig_sequence_box(i_iId, i_iBoxId);
+}
+
 void sem_mediator::notify_change_properties(void* i_o)
 {
 	emit sig_change_properties(i_o);

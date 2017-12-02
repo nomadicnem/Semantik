@@ -136,7 +136,7 @@ class data_box : public diagram_item, public node
 	int m_iHH;
 	enum IType { ACTIVITY=1, ACTIVITY_START=2, ACTIVITY_PARALLEL=3, LABEL=4, COMPONENT=5, NODE=6, \
 		ACTOR=7, USECASE=8, DECISION=9, MATRIX=10, FRAME=11, CLASS=12, CAPTION=13, DATABASE=14,
-                RECTANGLE=15, PIPE=16};
+                RECTANGLE=15, PIPE=16, SEQUENCE=17};
 	data_box::IType m_iType;
 
 	node& make_node(const QString&, const QXmlAttributes&);
@@ -152,6 +152,8 @@ class data_box : public diagram_item, public node
 	// matrix
 	QList<int> m_oRowSizes;
 	QList<int> m_oColSizes;
+
+	int m_iBoxHeight;
 
 	// class
 	bool m_bStatic;
