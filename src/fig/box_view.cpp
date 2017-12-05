@@ -719,6 +719,11 @@ void box_view::slot_add_item()
 	add->box->m_iWW = 80;
 	add->apply();
 
+	foreach (QGraphicsItem *l_o, scene()->selectedItems())
+	{
+		l_o->setSelected(false);
+	}
+
 	box_item *l_o = (box_item*) m_oItems.value(add->box->m_iId);
 	l_o->setSelected(true);
 	// l_o->setPos(m_oLastPoint - QPointF(l_oRect.width()/2, l_oRect.height()/2)); // TODO
@@ -959,6 +964,11 @@ void box_view::slot_add_element()
 	}
 
 	add->apply();
+
+	foreach (QGraphicsItem *l_o, scene()->selectedItems())
+	{
+		l_o->setSelected(false);
+	}
 
 	QGraphicsItem *l_o = dynamic_cast<QGraphicsItem*>(m_oItems.value(add->box->m_iId));
 	l_o->setSelected(true);
