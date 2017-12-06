@@ -105,14 +105,14 @@ src/fig/diagram_document.h
 	bld.install_files('${MIME_DIR}/', 'src/data/semantik.xml')
 
 	for x in ('', '-d'):
-		bld.install_as('${ICONDIR}/oxygen/128x128/apps/semantik%s.png' % x, 'src/data/hi128-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/oxygen/64x64/apps/semantik%s.png'% x, 'src/data/hi64-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/oxygen/48x48/apps/semantik%s.png'% x, 'src/data/hi48-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/oxygen/32x32/apps/semantik%s.png'% x, 'src/data/hi32-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/oxygen/22x22/apps/semantik%s.png'% x, 'src/data/hi22-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/hicolor/128x128/apps/semantik%s.png' % x, 'src/data/hi128-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/hicolor/64x64/apps/semantik%s.png'% x, 'src/data/hi64-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/hicolor/48x48/apps/semantik%s.png'% x, 'src/data/hi48-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/hicolor/32x32/apps/semantik%s.png'% x, 'src/data/hi32-app-semantik%s.png'%x)
+		bld.install_as('${ICONDIR}/hicolor/22x22/apps/semantik%s.png'% x, 'src/data/hi22-app-semantik%s.png'%x)
 
 		#bld(rule="${GZIP} -c ${SRC} > ${TGT}", source='src/data/semantik%s.svg'%x, target='src/data/semantik%s.svgz'%x)
-		bld.install_as('${ICONDIR}/oxygen/scalable/apps/semantik%s.svg'%x, 'src/data/semantik%s.svg'%x)
+		bld.install_as('${ICONDIR}/hicolor/scalable/apps/semantik%s.svg'%x, 'src/data/semantik%s.svg'%x)
 
 
 	bld.install_files('${XMLGUIDIR}/semantik', 'src/data/semantikui.rc')
@@ -310,15 +310,25 @@ def options(opt):
 	opt.add_option('--icons', action='store', default='', help='icon dirs where to look for kde icons (configuration)')
 	opt.add_option('--nomimes', action='store_true', default=False, help='do not run update-mime-database during installation')
 	opt.add_option('--noldconfig', action='store_true', default=False, help='do not run lconfig during installation')
+	opt.add_option('--nogtkicons', action='store_true', default=False, help='do not try to update the hicolor icon cache during installation')
 
 def post_build(bld):
 	if bld.cmd == 'install':
 		if not Options.options.noldconfig:
-			try: bld.exec_command('/sbin/ldconfig 2> /dev/null')
-			except Exception: pass
+			try:
+				bld.exec_command('/sbin/ldconfig 2> /dev/null')
+			except Exception:
+				pass
 		if not Options.options.nomimes:
-			try: bld.exec_command('update-mime-database %s' % os.path.split(bld.env.MIME_DIR)[0])
-			except Exception: pass
+			try:
+				bld.exec_command('update-mime-database %s' % os.path.split(bld.env.MIME_DIR)[0])
+			except Exception:
+				pass
+		if not Options.options.nogtkicons:
+			try:
+				bld.exec_command('gtk-update-icon-cache -q -t -f %s/hicolor' % bld.env.ICONDIR)
+			except Exception:
+				pass
 
 	if Options.options.exe:
 		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik', stdout=None, stderr=None)
