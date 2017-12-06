@@ -8,7 +8,7 @@ VERSION = '1.0.2'
 top = '.'
 
 import os, sys, re, time
-from waflib import Options, Logs, Configure, Errors, Utils, TaskGen, Task
+from waflib import Options, Logs, Configure, Errors, Utils, TaskGen, Task, Node
 
 default_prefix = '/usr'
 
@@ -355,4 +355,7 @@ def apply_msgfmt(self):
 class msgfmt(Task.Task):
 	color   = 'BLUE'
 	run_str = '${MSGFMT} ${SRC} -o ${TGT}'
+
+def dist(ctx):
+	ctx.excl = Node.exclude_regs + ' build rpmbuild .waf* **/*.pyc **/*.pyo **/*.bak **/*.swp **/.lock-w*'
 
