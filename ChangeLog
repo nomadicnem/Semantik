@@ -1,3 +1,7 @@
+Semantik 1.0.2
+--------------
+* Deselect currently selected diagram elements after adding a new one
+
 Semantik 1.0.1
 --------------
 * Add a diagram sequence element
@@ -12,91 +16,4 @@ Semantik 1.0.0
 * Add new diagram shapes
 * Add resize handles to diagram objects
 * Add diagram link labels
-
-Semantik 0.9.5
---------------
-* Fix for adding new items with right-click (Issue 53)
-
-Semantik 0.9.4
---------------
-* Resize class elements
-* Remember window settings in semantik-d
-* Minor linear view bug fixes
-
-Semantik 0.9.3
---------------
-* Generated HTML documents no longer reference pdf files
-* Save Semantik diagrams on exit
-* Minor changes in pdflatex documents
-* New class element in diagrams
-* New database element in diagrams
-* Zoom improvements
-* A few bugfixes
-
-Semantik 0.9.2
---------------
-* New diagram items: matrix, boundary, class
-* OpenOffice.org template fixes (Issue 39)
-* Fix for null bytes inserted through copy-pasting
-* Removing an item from the linear view no longer causes an assertion (Issue 41)
-* Build script fix for Python 3 (Semantik still requires Python 2 though)
-
-Semantik 0.9.1
---------------
-* Svg export
-* Odt template fixes
-* Include svg pictures in odt documents
-* command-line svg export
-* More reasonable size for the actors head
-* Prevent the memory corruption when opening the same recent file again
-* Make the text visible in the odt document created (Issue 27)
-* fixed the diagram top/bottom alignment function
-* Copy diagram pictures to clipboard from main window
-* Copy diagrams to the clipboard
-
-Semantik 0.9.0
---------------
-* New application for editing and managing diagrams
-* Enhanced printing system from the menu
-* Print diagrams from the command-line
-* Fixed the jitter on the map/diagram areas
-
-Semantik 0.8.4
---------------
-* Export maps to pdf pictures from the command-line
-* Color scheme fixes #30
-* Null byte fix for text pasted from Chrome #26
-
-Semantik 0.8.3
---------------
-* New dialog for exporting the map as a picture with a specific size
-* More consistent gui elements (dialog buttons, menus)
-* New UML shapes
-* Straight arrows on the diagrams
-
-Semantik 0.8.2
---------------
-* Fixed several crashes
-* Fixe various LaTeX templates
-* New actor and usecase elements
-
-Semantik 0.8.1
---------------
-* Made the gui mode-less
-* Enabled diagram, image and table export in the beamer template
-* Fixed the Java applet generator
-
-Semantik 0.8.0
---------------
-
-* undo/redo actions
-* select subtrees
-
-Semantik 0.7.3
---------------
-
-* fixed a crash when reordering items in the linear view
-* enable fullscreen modes for presentation and map views (context menu)
-* translation to greek by kiolalis
-* translation to russian alexey kouznetsov
 

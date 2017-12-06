@@ -11,7 +11,7 @@ a few examples for typical setups:
 
 Ubuntu 17.10: apt install libkf5kdelibs4support-dev libqt5svg5-dev qtwebengine5-dev qtpositioning5-dev python3-dev kio-dev
 Gentoo: emerge --ask kde-frameworks/kdelibs4support dev-qt/qtwebengine
-Suse: zypper install python3-devel kio-devel kiconthemes-devel ki18n-devel kdelibs4support-devel
+Suse: zypper install python3-devel kio-devel kiconthemes-devel ki18n-devel kdelibs4support-devel libqt5-qtwebengine-devel
 Fedora 27: dnf install python3-devel kf5-kio-devel kf5-kdelibs4support-devel kf5-ki18n-devel kf5-kiconthemes-devel
         gcc-c++ qt5-linguist qt5-qtsvg-devel qt5-qtwebengine-devel
 FreeBSD 11: pkg add qt5-svg python36 qt5-webengine kf5-kio kf5-kdelibs4support kf5-ki18n kf5-kiconthemes
