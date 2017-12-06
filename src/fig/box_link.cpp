@@ -773,6 +773,31 @@ void box_link::update_text_label_pos()
 		{
 			mid = (l_oStartPos + l_oEndPos)/2. + QPointF(- l_oMidRect.width() / 2., 2);
 		}
+		else if (m_oGood.size() == 3)
+		{
+			if (m_oControlPoints.at(0)->h_length() == 0)
+			{
+				if (l_oStartPos.y() > l_oEndPos.y())
+				{
+					mid = QPointF(mid.x(), l_oStartPos.y()) + QPointF(- l_oMidRect.width() / 2., 0);
+				}
+				else
+				{
+					mid = QPointF(mid.x(), l_oStartPos.y()) + QPointF(- l_oMidRect.width() / 2., - l_oMidRect.height() - 3);
+				}
+			}
+			else
+			{
+				if (l_oStartPos.y() < l_oEndPos.y())
+				{
+					mid = QPointF(mid.x(), l_oEndPos.y()) + QPointF(- l_oMidRect.width() / 2., 0);
+				}
+				else
+				{
+					mid = QPointF(mid.x(), l_oEndPos.y()) + QPointF(- l_oMidRect.width() / 2., - l_oMidRect.height() - 3);
+				}
+			}
+		}
 		else
 		{
 			if (m_oGood.size() == 4 && m_oControlPoints.at(0)->h_length() == 0)
