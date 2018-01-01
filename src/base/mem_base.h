@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2017 GPLV3
+// Thomas Nagy 2013-2018 GPLV3
 
 #ifndef MEM_BASE
 #define MEM_BASE

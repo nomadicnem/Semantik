@@ -1,7 +1,7 @@
 #sem:name: OpenDocument Text
-#sem:tip: Generates text documents for Kword or OpenOffice.org Writer
+#sem:tip: Generates text documents OpenOffice.org Writer
 
-# Thomas Nagy, 2007-2017
+# Thomas Nagy, 2007-2018 GPLV3
 
 mimetype = "application/vnd.oasis.opendocument.text"
 

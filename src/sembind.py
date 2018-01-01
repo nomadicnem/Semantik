@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2007-2017
+# Thomas Nagy, 2007-2018 GPLV3
 
 from html.parser import HTMLParser
 import os, sys, sembind, re

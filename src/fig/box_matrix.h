@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2017 GPLV3
+// Thomas Nagy 2007-2018 GPLV3
 
 #ifndef BOX_MATRIX_H
 #define BOX_MATRIX_H

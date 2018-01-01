@@ -1,4 +1,4 @@
-// Thomas Nagy 2017 GPLV3
+// Thomas Nagy 2017-2018 GPLV3
 
 #ifndef EXPORT_FIG_DIALOG_H
 #define EXPORT_FIG_DIALOG_H

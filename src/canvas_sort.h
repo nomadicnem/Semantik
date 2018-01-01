@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2017 GPLV3
+// Thomas Nagy 2007-2018 GPLV3
 
 #ifndef CANVAS_SORT_H
 #define CANVAS_SORT_H

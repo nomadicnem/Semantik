@@ -1,4 +1,4 @@
-// Thomas Nagy 2017-2017 GPLV3
+// Thomas Nagy 2017-2018 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
