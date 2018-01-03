@@ -8,13 +8,13 @@ import io
 
 tar = tarfile.open(sembind.get_var('outfile'), 'w:gz')
 
-doc = sembind.get_var('fulldoc')
-stuff = io.BytesIO(doc.encode('utf-8'))
+doc = sembind.get_var('fulldoc').encode('utf-8')
+stuff = io.BytesIO(doc)
 tarinfo = tarfile.TarInfo('con.xml')
 tarinfo.size = len(doc)
 tar.addfile(tarinfo, stuff)
 
-#debug(doc.encode('utf-8'))
+#debug(doc)
 
 os.chdir(sembind.get_var('temp_dir'))
 lst = os.listdir('.')

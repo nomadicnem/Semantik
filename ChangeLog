@@ -1,3 +1,8 @@
+Semantik 1.0.3
+--------------
+* Fix truncated saved documents in combination with accentuated characters
+* Deply highcolor icons to force the application icon
+
 Semantik 1.0.2
 --------------
 * Deselect currently selected diagram elements after adding a new one
