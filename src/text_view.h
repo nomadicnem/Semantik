@@ -5,8 +5,7 @@
 
 #include <QTreeWidget>
 
-#include     "co\
-n.h"
+#include "con.h"
 
 #include <QToolBar>
 #include <QList>

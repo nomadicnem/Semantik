@@ -201,11 +201,11 @@ def configure(conf):
 	libs = ['KF5KIOCore', 'KF5Auth', 'KF5KIOWidgets',
 		'KF5IconThemes', 'KF5ConfigWidgets', 'KF5XmlGui',
 		'KF5CoreAddons', 'KF5ConfigGui', 'KF5ConfigCore',
-		'KF5WidgetsAddons', 'KF5I18n']
+		'KF5WidgetsAddons', 'KF5I18n', 'KF5SonnetUi']
 
 	for lib in libs:
 		name = lib[3:]
-		if not name.startswith('K'):
+		if not name.startswith('K') and name != 'SonnetUi':
 			name = 'K' + name
 
 		p = '%s/qt_%s.pri' % (path, name)
