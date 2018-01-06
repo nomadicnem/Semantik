@@ -3,6 +3,8 @@ Semantik 1.0.2
 * Fix truncated saved documents in combination with accentuated characters
 * Deply highcolor icons to force the application icon
 * Deselect currently selected diagram elements after adding a new one
+* Add spell checking to the text widget
+* Improve paragraph handling for generated OpenOffice.org text documents
 
 Semantik 1.0.1
 --------------
