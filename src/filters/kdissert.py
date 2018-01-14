@@ -2,7 +2,7 @@
 # encoding: utf-8
 # Thomas Nagy, 2007-2018 GPLV3
 
-import os, sys, tarfile, StringIO
+import os, sys, tarfile, io
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
@@ -110,7 +110,7 @@ def parse_string(s):
 	parser = make_parser()
 	curHandler = QTXMLHandler()
 	parser.setContentHandler(curHandler)
-	parser.parse(StringIO.StringIO(str(s)))
+	parser.parse(io.StringIO(str(s)))
 	return "".join(curHandler.out)
 
 def parse_file(infile):
@@ -125,7 +125,7 @@ def parse_file(infile):
 		if x[:4] != 'pic-': continue
 		y = (x[4:].split('.'))[0]
 		map[y] = x
-	k = map.keys()
+	k = list(map.keys())
 	k.sort()
 	k.reverse()
 	for u in k:

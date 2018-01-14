@@ -1,3 +1,7 @@
+Semantik 1.0.3
+--------------
+* Updated import filters to Python3 syntax #83
+
 Semantik 1.0.2
 --------------
 * Fix truncated saved documents in combination with accentuated characters

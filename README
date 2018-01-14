@@ -1,5 +1,4 @@
-Semantik 1.0.0, Thomas Nagy
-contact:       tnagy at waf.io
+Semantik 1.0.3, Thomas Nagy tnagy at waf.io
 Project page:  https://waf.io/semantik.html
 Source code:   https://github.com/ita1024/semantik
 -----------------------------------------------
@@ -82,4 +81,13 @@ semantik-d diag.semd -o foo.pdf
 4. License:
 
 GPL V3
+
+-----------------------------------------------
+
+5. Quirks:
+
+If you are getting screen artifacts when dragging and selecting elements,
+try changing the QtCurve Qt widget style to Breeze for example (Ubuntu 17.10).
+
+-----------------------------------------------
 
