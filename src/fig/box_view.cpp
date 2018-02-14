@@ -494,7 +494,7 @@ void box_view::sync_view()
 		}
 		else if (box->m_iType == data_box::SEQUENCE)
 		{
-			l_o = new box_matrix(this, box->m_iId);
+			l_o = new box_sequence(this, box->m_iId);
 		}
 		else if (box->m_iType == data_box::FRAME)
 		{
