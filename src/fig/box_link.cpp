@@ -245,22 +245,25 @@ void box_link::set_rectangles(int ax1, int ax2, int ay1, int ay2, int ap, QPoint
 	ver.append(bpos.y());
 	QPair<int, int> end_p(bpos.x(), bpos.y());
 
-	if (ap == data_link::WEST && bp == data_link::EAST && bx2 >= ax1 - pad)
+	int aap = ap & data_link::COORD;
+	int bbp = bp & data_link::COORD;
+
+	if (aap == data_link::WEST && bbp == data_link::EAST && bx2 >= ax1 - pad)
 	{
 		hor.append(ax1 - pad);
 		hor.append(bx2 + pad);
 	}
-	else if (ap == data_link::EAST && bp == data_link::WEST && ax2 >= bx1 - pad)
+	else if (aap == data_link::EAST && bbp == data_link::WEST && ax2 >= bx1 - pad)
 	{
 		hor.append(bx1 - pad);
 		hor.append(ax2 + pad);
 	}
-	else if (ap == data_link::NORTH && bp == data_link::SOUTH && by2 >= ay1 - pad)
+	else if (aap == data_link::NORTH && bbp == data_link::SOUTH && by2 >= ay1 - pad)
 	{
 		ver.append(ay1 - pad);
 		ver.append(by2 + pad);
 	}
-	else if (ap == data_link::SOUTH && bp == data_link::NORTH && ay2 >= by1 - pad)
+	else if (aap == data_link::SOUTH && bbp == data_link::NORTH && ay2 >= by1 - pad)
 	{
 		ver.append(by1 - pad);
 		ver.append(ay2 + pad);
