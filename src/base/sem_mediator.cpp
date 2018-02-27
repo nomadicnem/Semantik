@@ -763,6 +763,10 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 			if (load_picture(l_oInfo.absoluteFilePath(), seq))
 			{
 				data_item *l_oData = m_oItems.value(l_iVal);
+				if (l_oData == NULL) {
+					KMessageBox::sorry(NULL, trUtf8("Could not load the picture %1").arg(l_sName), trUtf8("Broken document"));
+					return false;
+				}
 				l_oData->m_iPicId = seq;
 
 				QFile f(l_oInfo.absoluteFilePath());
