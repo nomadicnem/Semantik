@@ -19,6 +19,27 @@ class connectable
 		virtual ~connectable() {};
 		int m_iId;
 		virtual QRectF rectPos() const { return QRectF(); }
+		virtual int may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB) const
+		{
+			return may_use(i_oA, i_oB, rectPos());
+		}
+		virtual int may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB, const QRectF l_oR) const
+		{
+			int cx1 = qMin(i_oA.first, i_oB.first);
+			int cx2 = qMax(i_oA.first, i_oB.first);
+			int cy1 = qMin(i_oA.second, i_oB.second);
+			int cy2 = qMax(i_oA.second, i_oB.second);
+
+			int ax1 = (int) l_oR.left();
+			int ax2 = (int) l_oR.right();
+			int ay1 = (int) l_oR.top();
+			int ay2 = (int) l_oR.bottom();
+			return \
+				(cx1 >= ax2 && cx2 > ax2) ||
+				(cx2 <= ax1 && cx1 < ax1) ||
+				(cy1 >= ay2 && cy2 > ay2) ||
+				(cy2 <= ay1 && cy1 < ay1);
+		}
 		virtual void update_data() {};
 		virtual void update_size() {};
 		virtual int choose_position(const QPointF&, box_link*) { Q_ASSERT(false); return 0; };

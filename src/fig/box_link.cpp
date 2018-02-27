@@ -228,148 +228,16 @@ void box_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *optio
 	}
 }
 
-void box_link::set_rectangles(int ax1, int ax2, int ay1, int ay2, int ap, QPoint& apos, int bx1, int bx2, int by1, int by2, int bp, QPoint& bpos)
-{
-	hor.clear();
-	ver.clear();
-	graph.clear();
-	prev.clear();
-	dist.clear();
-	m_oLst.clear();
-
-	hor.append(apos.x());
-	ver.append(apos.y());
-	QPair<int,int> init_p(apos.x(), apos.y());
-
-	hor.append(bpos.x());
-	ver.append(bpos.y());
-	QPair<int, int> end_p(bpos.x(), bpos.y());
-
-	int aap = ap & data_link::COORD;
-	int bbp = bp & data_link::COORD;
-
-	if (aap == data_link::WEST && bbp == data_link::EAST && bx2 >= ax1 - pad)
-	{
-		hor.append(ax1 - pad);
-		hor.append(bx2 + pad);
-	}
-	else if (aap == data_link::EAST && bbp == data_link::WEST && ax2 >= bx1 - pad)
-	{
-		hor.append(bx1 - pad);
-		hor.append(ax2 + pad);
-	}
-	else if (aap == data_link::NORTH && bbp == data_link::SOUTH && by2 >= ay1 - pad)
-	{
-		ver.append(ay1 - pad);
-		ver.append(by2 + pad);
-	}
-	else if (aap == data_link::SOUTH && bbp == data_link::NORTH && ay2 >= by1 - pad)
-	{
-		ver.append(by1 - pad);
-		ver.append(ay2 + pad);
-	}
-
-	hor.append(qMin(ax1, bx1) - pad);
-	hor.append(qMax(ax2, bx2) + pad);
-	ver.append(qMin(ay1, by1) - pad);
-	ver.append(qMax(ay2, by2) + pad);
-
-	if (ax1 > bx2) hor.append((ax1 + bx2) / 2);
-	if (bx1 > ax2) hor.append((bx1 + ax2) / 2);
-	if (ay1 > by2) ver.append((ay1 + by2) / 2);
-	if (by1 > ay2) ver.append((by1 + ay2) / 2);
-
-	foreach (int x, hor) {
-		foreach (int y, ver) {
-			QPair<int, int> p(x, y);
-
-			graph << p;
-			dist[p] = MAX;
-			prev[p] = init_p;
-		}
-	}
-	dist[init_p] = 0;
-
-	while (graph.size())
-	{
-
-		int mi = MAX;
-		QPair<int, int> cand;
-		QPair<int, int> p;
-		bool ok = false;
-		foreach (p, graph) {
-			if (dist[p] < mi) {
-				mi = dist[p];
-				cand = p;
-				ok = true;
-			}
-		}
-
-		if (!ok) {
-			m_oLst.clear();
-			m_oLst.append(QPoint(init_p.first, init_p.second));
-			m_oLst.append(QPoint(end_p.first, end_p.second));
-			break;
-		}
-
-		graph.remove(cand);
-		if (cand == end_p) {
-			QPair<int, int> cand = end_p;
-			while (cand != init_p) {
-				m_oLst.prepend(QPoint(cand.first, cand.second));
-				cand = prev[cand];
-			}
-			m_oLst.prepend(QPoint(cand.first, cand.second));
-			break;
-		}
-
-		foreach (p, graph) {
-			if (p.first == cand.first || p.second == cand.second)
-			{
-				if (may_use(cand, p, ax1, ax2, ay1, ay2, bx1, bx2, by1, by2))
-				{
-					int newdist = dist[cand] + qAbs(p.first - cand.first) + qAbs(p.second - cand.second) + DAMP;
-					if (newdist < dist[p])
-					{
-						dist[p] = newdist;
-						prev[p] = cand;
-					}
-				}
-			}
-		}
-	}
-}
-
-int box_link::may_use(QPair<int, int> cand, QPair<int, int> p, int ax1, int ax2, int ay1, int ay2, int bx1, int bx2, int by1, int by2)
-{
-	int cx1 = qMin(cand.first, p.first);
-	int cx2 = qMax(cand.first, p.first);
-	int cy1 = qMin(cand.second, p.second);
-	int cy2 = qMax(cand.second, p.second);
-
-	return 1 && (
-		(cx1 >= ax2 && cx2 > ax2) ||
-		(cx2 <= ax1 && cx1 < ax1) ||
-		(cy1 >= ay2 && cy2 > ay2) ||
-		(cy2 <= ay1 && cy1 < ay1)
-	) && (
-		(cx1 >= bx2 && cx2 > bx2) ||
-		(cx2 <= bx1 && cx1 < bx1) ||
-		(cy1 >= by2 && cy2 > by2) ||
-		(cy2 <= by1 && cy1 < by1)
-	);
-}
-
-
 void box_link::update_pos()
 {
 	QRectF l_oR1, l_oR2;
 	QPoint apos, bpos;
 
-	if (connectable *start = m_oView->m_oItems.value(m_oInnerLink.m_iParent))
+	connectable *l_oStart;
+	if (( l_oStart = m_oView->m_oItems.value(m_oInnerLink.m_iParent)	))
 	{
-		m_oInnerLink.m_oStartPoint = apos = start->get_point(m_oInnerLink.m_iParentPos);
-		l_oR1 = start->rectPos();
+		m_oInnerLink.m_oStartPoint = apos = l_oStart->get_point(m_oInnerLink.m_iParentPos);
+		l_oR1 = l_oStart->rectPos();
 	}
 	else
 	{
@@ -395,10 +263,11 @@ void box_link::update_pos()
 
 	m_oStartPoint->force_position(m_oInnerLink.m_oStartPoint);
 
-	if (connectable *end = m_oView->m_oItems.value(m_oInnerLink.m_iChild))
+	connectable *l_oEnd;
+	if ((l_oEnd = m_oView->m_oItems.value(m_oInnerLink.m_iChild))	)
 	{
-		m_oInnerLink.m_oEndPoint = bpos = end->get_point(m_oInnerLink.m_iChildPos);
-		l_oR2 = end->rectPos();
+		m_oInnerLink.m_oEndPoint = bpos = l_oEnd->get_point(m_oInnerLink.m_iChildPos);
+		l_oR2 = l_oEnd-> rectPos();
 	}
 	else
 	{
@@ -446,23 +315,141 @@ void box_link::update_pos()
 	int by1 = (int) l_oR2.top();
 	int by2 = (int) l_oR2.bottom();
 
-	set_rectangles(ax1, ax2, ay1, ay2, m_oInnerLink.m_iParentPos, apos, bx1, bx2, by1, by2, m_oInnerLink.m_iChildPos, bpos);
+	hor.clear();
+	ver.clear();
+	graph.clear();
+	prev.clear();
+	dist.clear();
+	m_oLst.clear();
 
-	/*
-	//qDebug()<<"begin dump";
-	for (int i=0; i<ret; ++i)
+	hor.append(apos.x());
+	ver.append(apos.y());
+	QPair<int,int> init_p(apos.x(), apos.y());
+
+	hor.append(bpos.x());
+	ver.append(bpos.y());
+	QPair<int, int> end_p(bpos.x(), bpos.y());
+
+	int aap = m_oInnerLink.m_iParentPos & data_link::COORD;
+	int bbp = m_oInnerLink.m_iChildPos & data_link::COORD;
+
+	if (aap == data_link::WEST && bbp == data_link::EAST && bx2 >= ax1 - pad)
 	{
-		int xx = get_vertex_x(i);
-		int yy = get_vertex_y(i);
-		m_oLst[i].setX(xx);
-		m_oLst[i].setY(yy);
-		//qDebug()<<xx<<yy;
-	}*/
-	//qDebug()<<"end dump";
+		hor.append(ax1 - pad);
+		hor.append(bx2 + pad);
+	}
+	else if (aap == data_link::EAST && bbp == data_link::WEST && ax2 >= bx1 - pad)
+	{
+		hor.append(bx1 - pad);
+		hor.append(ax2 + pad);
+	}
+	else if (aap == data_link::NORTH && bbp == data_link::SOUTH && by2 >= ay1 - pad)
+	{
+		ver.append(ay1 - pad);
+		ver.append(by2 + pad);
+	}
+	else if (aap == data_link::SOUTH && bbp == data_link::NORTH && ay2 >= by1 - pad)
+	{
+		ver.append(by1 - pad);
+		ver.append(ay2 + pad);
+	}
 
+	hor.append(qMin(ax1, bx1) - pad);
+	hor.append(qMax(ax2, bx2) + pad);
+	ver.append(qMin(ay1, by1) - pad);
+	ver.append(qMax(ay2, by2) + pad);
+
+	if (ax1 > bx2) hor.append((apos.x() + bpos.x()) / 2);
+	if (bx1 > ax2) hor.append((apos.x() + bpos.x()) / 2);
+	if (ay1 > by2) ver.append((apos.y() + bpos.y()) / 2);
+	if (by1 > ay2) ver.append((apos.y() + bpos.y()) / 2);
+
+	foreach (int x, hor) {
+		foreach (int y, ver) {
+			QPair<int, int> p(x, y);
+
+			graph << p;
+			dist[p] = MAX;
+			prev[p] = init_p;
+		}
+	}
+	dist[init_p] = 0;
+
+	while (graph.size())
+	{
+		int mi = MAX;
+		QPair<int, int> cand;
+		QPair<int, int> p;
+		bool ok = false;
+		foreach (p, graph) {
+			if (dist[p] < mi) {
+				mi = dist[p];
+				cand = p;
+				ok = true;
+			}
+		}
+
+		if (!ok) {
+			m_oLst.clear();
+			m_oLst.append(QPoint(init_p.first, init_p.second));
+			m_oLst.append(QPoint(end_p.first, end_p.second));
+			break;
+		}
+
+		graph.remove(cand);
+		if (cand == end_p) {
+			QPair<int, int> cand = end_p;
+			while (cand != init_p) {
+				m_oLst.prepend(QPoint(cand.first, cand.second));
+				cand = prev[cand];
+			}
+			m_oLst.prepend(QPoint(cand.first, cand.second));
+			break;
+		}
+
+		foreach (p, graph) {
+			if (p.first == cand.first || p.second == cand.second)
+			{
+				if (may_use(cand, p, l_oStart, l_oR1) && may_use(cand, p, l_oEnd, l_oR2))
+				{
+					int newdist = dist[cand] + qAbs(p.first - cand.first) + qAbs(p.second - cand.second) + DAMP;
+					if (newdist < dist[p])
+					{
+						dist[p] = newdist;
+						prev[p] = cand;
+					}
+				}
+			}
+		}
+	}
 	update_ratio();
 	update();
 	update_text_pos();
+}
+
+int box_link::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB, const connectable *con, const QRectF l_oR)
+{
+	if (con) {
+		int ret =  con->may_use(i_oA, i_oB);
+		return ret;
+	}
+	else
+	{
+		int cx1 = qMin(i_oA.first, i_oB.first);
+		int cx2 = qMax(i_oA.first, i_oB.first);
+		int cy1 = qMin(i_oA.second, i_oB.second);
+		int cy2 = qMax(i_oA.second, i_oB.second);
+
+		int ax1 = (int) l_oR.left();
+		int ax2 = (int) l_oR.right();
+		int ay1 = (int) l_oR.top();
+		int ay2 = (int) l_oR.bottom();
+		return \
+			(cx1 >= ax2 && cx2 > ax2) ||
+			(cx2 <= ax1 && cx1 < ax1) ||
+			(cy1 >= ay2 && cy2 > ay2) ||
+			(cy2 <= ay1 && cy1 < ay1);
+	}
 }
 
 void box_link::update_offset(const QPointF& i_oP, int i_iIdx)

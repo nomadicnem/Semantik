@@ -12,6 +12,7 @@
 #include "data_item.h"
 #include "ed:table.h"
 #include "con.h"
+#include "CON.h"
 
 class QGraphicsTextItem;
 class box_view;
@@ -64,8 +65,7 @@ class box_link : public QGraphicsRectItem, public editable
 		QSet<QPair<int, int> > graph;
 		QHash<QPair<int, int>, QPair<int, int> > prev;
 		QHash<QPair<int, int>, int> dist;
-		void set_rectangles(int ax1, int ax2, int ay1, int ay2, int ap, QPoint&, int bx1, int bx2, int by1, int by2, int bp, QPoint&);
-		int may_use(QPair<int, int> cand, QPair<int, int> p, int ax1, int ax2, int ay1, int ay2, int bx1, int bx2, int by1, int by2);
+		int may_use(const QPair<int, int>, const QPair<int, int>, const connectable*, const QRectF);
 };
 
 #endif // BOX_LINK_H
