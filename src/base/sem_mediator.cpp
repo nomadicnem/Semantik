@@ -764,6 +764,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 			{
 				data_item *l_oData = m_oItems.value(l_iVal);
 				if (l_oData == NULL) {
+					undo_purge();
 					KMessageBox::sorry(NULL, trUtf8("Could not load the picture %1").arg(l_sName), trUtf8("Broken document"));
 					return false;
 				}
@@ -1380,9 +1381,9 @@ bool sem_mediator::save_and_load_picture(const QUrl& i_sPath, int id)
 	QString dest = QString(m_sTempDir+"/img-%1.%2").arg(QString::number(id)).arg(sp[sp.size()-1]);
 
 
-	KJob *l_oJob = KIO::file_copy(i_sPath, QUrl(dest), KIO::Overwrite);
+	KJob *l_oJob = KIO::file_copy(i_sPath, QUrl(QString("file://") + dest), -1, KIO::Overwrite);
 	bool l_bOk = l_oJob->exec();
-	if (l_bOk) {
+	if (!l_bOk) {
 		goto cleanup;
 	}
 
