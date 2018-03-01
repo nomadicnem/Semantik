@@ -295,7 +295,7 @@ int box_sequence::optimize_position(const QPointF& i_oP)
 
 int box_sequence::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB) const
 {
-	QRectF l_oR1 = QRectF(rectPos().topLeft(), rectPos().topRight() - QPointF(0, m_iBoxHeight));
+	QRectF l_oR1 = QRectF(rectPos().topLeft(), rectPos().topRight() + QPointF(0, m_iBoxHeight));
 	if (!connectable::may_use(i_oA, i_oB, l_oR1))
 	{
 		return false;
@@ -306,7 +306,8 @@ int box_sequence::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB
 	{
 		return false;
 	}
-	if (i_oA.first == i_oB.first && i_oA.first >= l_oR1.left() - 2 && i_oA.first <= l_oR1.right() + 2) {
+	if (i_oA.first == i_oB.first && i_oA.first >= l_oR1.left() - 2 && i_oA.first <= l_oR1.right() + 2)
+	{
 		int l_oUp = qMax(i_oA.second, i_oB.second);
 		int l_oDown = qMin(i_oA.second, i_oB.second);
 		if (!(l_oDown > l_oR2.top() && l_oUp < l_oR2.bottom())) {

@@ -293,18 +293,6 @@ void box_link::update_pos()
 	}
 	m_oEndPoint->force_position(m_oInnerLink.m_oEndPoint);
 
-	/*
-	int ax1 = (int) l_oR1.x();
-	int ax2 = (int) (l_oR1.x()+l_oR1.width());
-	int ay1 = (int) l_oR1.y();
-	int ay2 = (int) (l_oR1.y()+l_oR1.height());
-
-	int bx1 = (int) l_oR2.x();
-	int bx2 = (int) (l_oR2.x()+l_oR2.width());
-	int by1 = (int) l_oR2.y();
-	int by2 = (int) (l_oR2.y()+l_oR2.height());
-	*/
-
 	int ax1 = (int) l_oR1.left();
 	int ax2 = (int) l_oR1.right();
 	int ay1 = (int) l_oR1.top();
