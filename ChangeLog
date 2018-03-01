@@ -1,6 +1,8 @@
 Semantik 1.0.3
 --------------
 * Updated import filters to Python3 syntax #83
+* Fix image imports #84
+* Improve zigzag lines routing for sequence elements
 
 Semantik 1.0.2
 --------------
