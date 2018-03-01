@@ -184,7 +184,6 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	num_seq = 1111;
 
 	QGraphicsScene *l_oScene = new QGraphicsScene(this);
-	l_oScene->setSceneRect(-400, -400, 400, 400);
 	setScene(l_oScene);
 
 	setDragMode(QGraphicsView::RubberBandDrag);

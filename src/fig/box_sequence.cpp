@@ -300,17 +300,18 @@ int box_sequence::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB
 	{
 		return false;
 	}
-	QRectF l_oR2 = QRectF((rectPos().bottomLeft() + rectPos().bottomRight()) / 2.,
-				(l_oR1.bottomLeft() + l_oR1.bottomRight()) / 2.);
+	QRectF l_oR2 = QRectF((l_oR1.bottomLeft() + l_oR1.bottomRight()) / 2.,
+			(rectPos().bottomLeft() + rectPos().bottomRight()) / 2.);
 	if (!connectable::may_use(i_oA, i_oB, l_oR2))
 	{
 		return false;
 	}
-	if (i_oA.first == i_oB.first && i_oA.first >= l_oR1.left() - 2 && i_oA.first <= l_oR1.right() + 2)
+	if (i_oA.first == i_oB.first && i_oA.first >= l_oR2.left() - 2 && i_oA.first <= l_oR2.right() + 2)
 	{
-		int l_oUp = qMax(i_oA.second, i_oB.second);
-		int l_oDown = qMin(i_oA.second, i_oB.second);
-		if (!(l_oDown > l_oR2.top() && l_oUp < l_oR2.bottom())) {
+		int l_oUp = qMin(i_oA.second, i_oB.second);
+		int l_oDown = qMax(i_oA.second, i_oB.second);
+		if (l_oDown <= l_oR2.top() && l_oUp >= l_oR2.bottom())
+		{
 			return false;
 		}
 	}
