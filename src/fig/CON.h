@@ -19,11 +19,11 @@ class connectable
 		virtual ~connectable() {};
 		int m_iId;
 		virtual QRectF rectPos() const { return QRectF(); }
-		virtual int may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB) const
+		virtual int may_use(const QPair<int, int>& i_oA, const QPair<int, int>& i_oB, const int i_iPos, const QPoint& i_oP) const
 		{
-			return may_use(i_oA, i_oB, rectPos());
+			return may_use(i_oA, i_oB, rectPos(), i_iPos, i_oP);
 		}
-		virtual int may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB, const QRectF l_oR) const
+		virtual int may_use(const QPair<int, int>& i_oA, const QPair<int, int>& i_oB, const QRectF& l_oR, const int i_iPos, const QPoint& i_oP) const
 		{
 			int cx1 = qMin(i_oA.first, i_oB.first);
 			int cx2 = qMax(i_oA.first, i_oB.first);

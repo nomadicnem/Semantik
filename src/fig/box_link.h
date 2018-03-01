@@ -65,7 +65,7 @@ class box_link : public QGraphicsRectItem, public editable
 		QSet<QPair<int, int> > graph;
 		QHash<QPair<int, int>, QPair<int, int> > prev;
 		QHash<QPair<int, int>, int> dist;
-		int may_use(const QPair<int, int>, const QPair<int, int>, const connectable*, const QRectF);
+		int may_use(const QPair<int, int>, const QPair<int, int>, const connectable*, const QRectF, const int, const QPoint);
 };
 
 #endif // BOX_LINK_H

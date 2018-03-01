@@ -39,7 +39,7 @@ class box_sequence : public box_item
 		int optimize_position(const QPointF& i_o);
 
 		int m_iBoxHeight;
-		virtual int may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB) const;
+		virtual int may_use(const QPair<int, int>&, const QPair<int, int>&, const int, const QPoint&) const;
 };
 
 #endif // BOX_SEQUENCE_H

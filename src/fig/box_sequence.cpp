@@ -293,16 +293,16 @@ int box_sequence::optimize_position(const QPointF& i_oP)
 	}
 }
 
-int box_sequence::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB) const
+int box_sequence::may_use(const QPair<int, int>& i_oA, const QPair<int, int>& i_oB, const int i_iPos, const QPoint& i_oP) const
 {
 	QRectF l_oR1 = QRectF(rectPos().topLeft(), rectPos().topRight() + QPointF(0, m_iBoxHeight));
-	if (!connectable::may_use(i_oA, i_oB, l_oR1))
+	if (!connectable::may_use(i_oA, i_oB, l_oR1, i_iPos, i_oP))
 	{
 		return false;
 	}
 	QRectF l_oR2 = QRectF((l_oR1.bottomLeft() + l_oR1.bottomRight()) / 2.,
 			(rectPos().bottomLeft() + rectPos().bottomRight()) / 2.);
-	if (!connectable::may_use(i_oA, i_oB, l_oR2))
+	if (!connectable::may_use(i_oA, i_oB, l_oR2, i_iPos, i_oP))
 	{
 		return false;
 	}
@@ -315,6 +315,26 @@ int box_sequence::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB
 			return false;
 		}
 	}
+
+	if (i_oA.second == i_oB.second && i_oA.second == i_oP.y())
+	{
+		int l_iDir = i_iPos & data_link::COORD;
+		if (l_iDir == data_link::WEST)
+		{
+			if (qMin(i_oA.first, i_oB.first) == l_oR2.right())
+			{
+				return false;
+			}
+		}
+		else if (l_iDir == data_link::EAST)
+		{
+			if (qMax(i_oA.first, i_oB.first) == l_oR2.left())
+			{
+				return false;
+			}
+		}
+	}
+
 	return true;
 }
 

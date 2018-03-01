@@ -398,7 +398,7 @@ void box_link::update_pos()
 		foreach (p, graph) {
 			if (p.first == cand.first || p.second == cand.second)
 			{
-				if (may_use(cand, p, l_oStart, l_oR1) && may_use(cand, p, l_oEnd, l_oR2))
+				if (may_use(cand, p, l_oStart, l_oR1, m_oInnerLink.m_iParentPos, apos) && may_use(cand, p, l_oEnd, l_oR2, m_oInnerLink.m_iChildPos, bpos))
 				{
 					int newdist = dist[cand] + qAbs(p.first - cand.first) + qAbs(p.second - cand.second) + DAMP;
 					if (newdist < dist[p])
@@ -415,10 +415,10 @@ void box_link::update_pos()
 	update_text_pos();
 }
 
-int box_link::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB, const connectable *con, const QRectF l_oR)
+int box_link::may_use(const QPair<int, int> i_oA, const QPair<int, int> i_oB, const connectable *con, const QRectF l_oR, const int i_iPos, const QPoint i_oP)
 {
 	if (con) {
-		int ret =  con->may_use(i_oA, i_oB);
+		int ret =  con->may_use(i_oA, i_oB, i_iPos, i_oP);
 		return ret;
 	}
 	else
