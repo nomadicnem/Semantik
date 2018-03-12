@@ -12,6 +12,7 @@
 #define GRADVAL 110
 #define JUST 1
 class box_link;
+class box_control_point;
 class connectable
 {
 	public:
@@ -42,7 +43,7 @@ class connectable
 		}
 		virtual void update_data() {};
 		virtual void update_size() {};
-		virtual int choose_position(const QPointF&, box_link*) { Q_ASSERT(false); return 0; };
+		virtual int choose_position(const QPointF&, box_link*, box_control_point*) { Q_ASSERT(false); return 0; };
 		virtual int optimize_position(const QPointF& i_o)
 		{
 			QRectF r = rectPos();

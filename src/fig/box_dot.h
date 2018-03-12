@@ -41,7 +41,7 @@ class box_dot : public QGraphicsRectItem, public connectable
 		void update_size();
 
 		QVariant itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue);
-		int choose_position(const QPointF&p, box_link*);
+		int choose_position(const QPointF&p, box_link*, box_control_point*);
 		QPoint get_point(int position);
 
 };

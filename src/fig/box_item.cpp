@@ -186,7 +186,7 @@ void box_item::update_links()
 
 static int RATIO[] = {333, 500, 667, 0};
 
-int box_item::choose_position(const QPointF& i_oP, box_link*)
+int box_item::choose_position(const QPointF& i_oP, box_link*, box_control_point*)
 {
 	QRectF r = rectPos();
 	QPointF l_o = pos() - i_oP + QPointF(r.width()/2, r.height()/2);

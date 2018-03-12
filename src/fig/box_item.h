@@ -47,7 +47,7 @@ class box_item : public QGraphicsRectItem, public connectable, public editable, 
 
 		QVariant itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue);
 
-		int choose_position(const QPointF&p, box_link*);
+		int choose_position(const QPointF&p, box_link*, box_control_point*);
 		QPoint get_point(int position);
 		QPointF m_oLastPressPoint;
 

@@ -241,12 +241,12 @@ QPoint box_sequence::get_point(int i_oP)
 	return QPoint(0, 0);
 }
 
-int box_sequence::choose_position(const QPointF& i_oP, box_link* i_oLink)
+int box_sequence::choose_position(const QPointF& i_oP, box_link* i_oLink, box_control_point* i_oControl)
 {
 	QRectF l_oR = rectPos();
 	if (i_oP.y() < l_oR.top() + m_iBoxHeight)
 	{
-		return box_item::choose_position(QPointF(i_oP.x(), l_oR.top()), i_oLink);
+		return box_item::choose_position(QPointF(i_oP.x(), l_oR.top()), i_oLink, i_oControl);
 	}
 	else
 	{
@@ -261,12 +261,31 @@ int box_sequence::choose_position(const QPointF& i_oP, box_link* i_oLink)
 			l_iRet = data_link::WEST;
 		}
 
+		if (i_oLink->m_oStartPoint == i_oControl && i_oLink->m_oInnerLink.m_iChild == m_iId)
+		{
+			int l_i = i_oLink->m_oInnerLink.m_iChildPos & data_link::COORD;
+			if (l_i == data_link::EAST || l_i == data_link::WEST)
+			{
+				l_iRet = l_i;
+			}
+		}
+		else if (i_oLink->m_oEndPoint == i_oControl && i_oLink->m_oInnerLink.m_iParent == m_iId)
+		{
+			int l_i = i_oLink->m_oInnerLink.m_iParentPos & data_link::COORD;
+			if (l_i == data_link::EAST || l_i == data_link::WEST)
+			{
+				l_iRet = l_i;
+			}
+		}
+
 		int l_iDiff = int_val(i_oP.y() - l_oR.top() - m_iBoxHeight);
 		if (l_iDiff < GRID)
 		{
 			l_iDiff = GRID;
 		}
-		return l_iRet + l_iDiff * MUL;
+
+		int l_iRet2 = l_iRet + l_iDiff * MUL;
+		return l_iRet2;
 	}
 }
 

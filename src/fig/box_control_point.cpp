@@ -145,7 +145,7 @@ QVariant box_control_point::itemChange(GraphicsItemChange i_oChange, const QVari
 
 				if (l_oUnder)
 				{
-					int l_iPosition = (int) l_oUnder->choose_position(l_o, m_oLink);
+					int l_iPosition = (int) l_oUnder->choose_position(l_o, m_oLink, this);
 					if (l_oUnder)
 					{
 						if (m_oLink->m_oStartPoint == this)

@@ -25,7 +25,7 @@ class box_sequence : public box_item
 		QPainterPath shape() const;
 		QPainterPath inner_shape;
 
-		int choose_position(const QPointF&, box_link*);
+		int choose_position(const QPointF&, box_link*, box_control_point*);
 		QPoint get_point(int);
 		void update_data();
 		void update_selection();

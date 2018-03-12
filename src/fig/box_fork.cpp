@@ -19,7 +19,6 @@
 #include "sem_mediator.h"
 #include "mem_box.h"
 
-
 #define MIN_FORK_SIZE 30
 
 box_fork::box_fork(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), resizable(), m_oView(i_oParent)
@@ -201,7 +200,7 @@ void box_fork::update_links()
 
 static int RATIO[] = {250, 333, 500, 667, 750, 0};
 
-int box_fork::choose_position(const QPointF& i_oP, box_link*)
+int box_fork::choose_position(const QPointF& i_oP, box_link*, box_control_point*)
 {
 	QRectF r = rectPos();
 	QPointF l_o = pos() - i_oP + QPointF(r.width()/2, r.height()/2);
