@@ -347,10 +347,22 @@ void box_link::update_pos()
 	ver.append(qMin(ay1, by1) - pad);
 	ver.append(qMax(ay2, by2) + pad);
 
-	if (ax1 > bx2) hor.append((apos.x() + bpos.x()) / 2);
-	if (bx1 > ax2) hor.append((apos.x() + bpos.x()) / 2);
-	if (ay1 > by2) ver.append((apos.y() + bpos.y()) / 2);
-	if (by1 > ay2) ver.append((apos.y() + bpos.y()) / 2);
+	if (ax1 > bx2 + pad)
+	{
+		hor.append((ax1 + bx2) / 2);
+	}
+	if (bx1 > ax2 + pad)
+	{
+		hor.append((ax2 + bx1) / 2);
+	}
+	if (ay1 > by2 + pad)
+	{
+		ver.append((ay1 + by2) / 2);
+	}
+	if (by1 > ay2 + pad)
+	{
+		ver.append((ay2 + by1) / 2);
+	}
 
 	foreach (int x, hor) {
 		foreach (int y, ver) {
@@ -651,7 +663,7 @@ void box_link::update_text_pos() {
 			break;
 		case data_link::EAST:
 			if (l_oStartPos.y() < l_oEndPos.y()) {
-				m_oStartCaption->setPos(l_oStartPos + QPointF(- 2, - m_oStartRect.height() - 3));
+				m_oStartCaption->setPos(l_oStartPos + QPointF(2, - m_oStartRect.height() - 3));
 			} else {
 				m_oStartCaption->setPos(l_oStartPos + QPointF(2, 2));
 			}
