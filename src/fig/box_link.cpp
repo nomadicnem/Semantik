@@ -792,7 +792,14 @@ void box_link::update_text_label_pos()
 		{
 			if (m_oGood.size() == 4 && m_oControlPoints.at(0)->h_length() == 0)
 			{
-				mid = m_oControlPoints.at(0)->pos() + QPointF(5, - l_oMidRect.height() / 2.);
+				if (l_iStartDir == data_link::WEST && l_iEndDir == data_link::WEST)
+				{
+					mid = m_oControlPoints.at(0)->pos() + QPointF(- l_oMidRect.width() - 3, - l_oMidRect.height() / 2.);
+				}
+				else
+				{
+					mid = m_oControlPoints.at(0)->pos() + QPointF(5, - l_oMidRect.height() / 2.);
+				}
 			}
 			else
 			{
