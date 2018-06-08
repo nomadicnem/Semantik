@@ -34,8 +34,12 @@ def configure(conf):
 	u = ":".join(lst)
 	conf.env.LATEX = "; export TEXINPUTS=%s:$TEXINPUTS; export GS_OPTIONS=\"-sPAPERSIZE=a4\"; %s" % (u, conf.env.LATEX)
 
-def build(bld) :
-	bld(features='tex', type='pdflatex', source='main.tex')
+def build(bld):
+	# such options are sometimes necessary
+	#bld.env.PDFLATEXFLAGS = ['--shell-escape', '-file-line-error']
+
+	# set prompt=0 to avoid prompting on errors
+	bld(features='tex', type='pdflatex', source='main.tex', prompt=1)
 
 	def view(ctx):
 		ctx.exec_command(ctx.env.VIEW + ['build/main.pdf'])

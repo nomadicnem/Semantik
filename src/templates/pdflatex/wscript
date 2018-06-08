@@ -31,8 +31,9 @@ def configure(conf):
 	conf.find_program(['okular', 'kpdf', 'xpdf', 'gnome-open'], var='VIEW', mandatory=False)
 
 
-def build(bld) :
-	bld(features='tex', type='pdflatex', source='main.tex')
+def build(bld):
+	# set prompt=0 to avoid prompting on errors
+	bld(features='tex', type='pdflatex', source='main.tex', prompt=1)
 
 	def view(ctx):
 		ctx.exec_command(ctx.env.VIEW + ['build/main.pdf'])
