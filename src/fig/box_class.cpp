@@ -47,7 +47,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 {
 	QPen l_oPen;
 	l_oPen.setCosmetic(false);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	else l_oPen.setStyle(Qt::SolidLine);
 	i_oPainter->setPen(l_oPen);

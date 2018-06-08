@@ -51,7 +51,7 @@ void box_dot::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 	l_oPen.setColor(Qt::black);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	l_oPen.setCosmetic(false);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 
 	qreal pad = l_oPen.width() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);

@@ -22,7 +22,7 @@ void canvas_chain::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *o
 {
         QPen l_oPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	i_oPainter->setPen(l_oPen);
 
 	i_oPainter->drawLine(QPoint(PAD, 5), QPoint(10-PAD, 5));

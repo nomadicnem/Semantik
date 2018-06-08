@@ -35,7 +35,7 @@ void box_rectangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	qreal pad = l_oPen.width() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 

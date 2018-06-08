@@ -37,7 +37,7 @@ void box_frame::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	painter->setPen(l_oPen);
 
 	qreal pad = l_oPen.width() / 2.;

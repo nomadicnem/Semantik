@@ -41,7 +41,7 @@ void box_control_point::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	painter->setPen(l_oPen);
 
 	qreal pad = l_oPen.width() / 2.;

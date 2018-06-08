@@ -39,7 +39,7 @@
 
 	/*
 	   QPen l_oPen;
-	   l_oPen.setWidth(5);
+	   l_oPen.setWidthF(0.01 + 5);
 	   setPen(l_oPen);
 	 */
 	i_oGraphWidget->scene()->addItem(this);

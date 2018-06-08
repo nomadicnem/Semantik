@@ -35,7 +35,7 @@ void box_usecase::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	l_oPen.setColor(Qt::black);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	l_oPen.setCosmetic(false);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	painter->setPen(l_oPen);
 
 	qreal pad = l_oPen.width() / 2.;

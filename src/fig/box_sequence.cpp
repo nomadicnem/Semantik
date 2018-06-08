@@ -41,7 +41,7 @@ void box_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 {
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	l_oPen.setCosmetic(false);
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	painter->setPen(l_oPen);

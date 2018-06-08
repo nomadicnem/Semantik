@@ -28,7 +28,7 @@ canvas_sort::canvas_sort(canvas_view *i_oGraphWidget, canvas_item *i_oFrom)
 
 	hide();
 	QPen l_oPen;
-	l_oPen.setWidth(1);
+	l_oPen.setWidthF(0.01 + 1);
 	setPen(l_oPen);
 
 	QRectF l_oRect;
