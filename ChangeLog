@@ -1,3 +1,7 @@
+Semantik 1.0.4
+--------------
+* Improve PDF diagram export
+
 Semantik 1.0.3
 --------------
 * Updated import filters to Python3 syntax #83
