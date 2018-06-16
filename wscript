@@ -52,7 +52,7 @@ src/table_view.h
 src/text_view.h
 src/vars_view.h
 ''',
-		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5WEBENGINEWIDGETS QT5XML QT5PRINTSUPPORT QT5SVG semlib',
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5DBUS QT5GUI QT5WEBENGINEWIDGETS QT5XML QT5PRINTSUPPORT QT5SVG semlib',
 		target = 'src/semantik',
 		includes = '. src src/fig src/base')
 
@@ -63,7 +63,7 @@ src/fig/semantik_d_win.h
 src/fig/filetree.h
 src/fig/diagram_document.h
 ''',
-		use = 'KDECORE QT5CORE QT5WIDGETS QT5GUI QT5XML QT5PRINTSUPPORT QT5SVG semlib',
+		use = 'KDECORE QT5CORE QT5WIDGETS QT5DBUS QT5GUI QT5XML QT5PRINTSUPPORT QT5SVG semlib',
 		target = 'src/semantik-d',
 		includes = '. src src/fig src/base')
 
@@ -154,6 +154,7 @@ def configure(conf):
 	conf.load('python')
 	if not conf.env.LIB_QT5SVG: conf.fatal('Could not find Qt5Svg - Semantik requires Qt >= 5')
 	if not conf.env.LIB_QT5WEBENGINEWIDGETS: conf.fatal('Could not find Qt5WebEngineWidgets - check `pkg-config --libs Qt5WebEngineWidgets`')
+	if not conf.env.LIB_QT5DBUS: conf.fatal('Install Qt Dbus')
 	if not conf.env.PYTHON: conf.fatal('Semantik requires Python >= 3.2 (development package for the compilation)')
 	conf.check_python_version((3, 2, 0))
 	conf.check_python_headers()
