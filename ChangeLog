@@ -1,6 +1,7 @@
 Semantik 1.0.4
 --------------
 * Improve PDF diagram export
+* Fix Qt Dbus compilation errors on some systems
 
 Semantik 1.0.3
 --------------
