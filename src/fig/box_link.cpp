@@ -12,7 +12,7 @@
 #include "box_view.h"
 #include "data_item.h"
 #include "mem_box.h"
-#include <math.h>
+#include <cmath>
 #include <box_control_point.h>
 #include "box_link_properties.h"
 
@@ -746,7 +746,7 @@ void box_link::update_text_label_pos()
 			ddx = - l_oMidRect.width() - 5 + dx;
 		}
 
-		if (!isnan(dx) && !isnan(dy))
+		if (!std::isnan(dx) && !std::isnan(dy))
 		{
 			mid = (l_oStartPos + l_oEndPos)/2. + QPointF(ddx, ddy);
 		}

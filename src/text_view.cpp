@@ -27,7 +27,7 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	m_oMediator = i_oControl;
 
 	m_oEdit = new QTextEdit(this);
-    Sonnet::SpellCheckDecorator *decorator = new Sonnet::SpellCheckDecorator(m_oEdit);
+	new Sonnet::SpellCheckDecorator(m_oEdit);
 	//m_oEdit->setCheckSpellingEnabled(true);
 	l_oLayout->addWidget(m_oEdit, 1, 0, 1, 4);
 	l_oLayout->setMargin(0);
