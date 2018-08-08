@@ -33,7 +33,7 @@ QString from_unicode(PyObject* i_o)
 	}
 
 	Py_ssize_t l_iSize = 0;
-	char * l_iChars = PyUnicode_AsUTF8AndSize(i_o, &l_iSize);
+	const char * l_iChars = const_cast<const char*>(PyUnicode_AsUTF8AndSize(i_o, &l_iSize));
 
 	QString l_s = QString::fromUtf8(l_iChars, l_iSize);
 	QChar * data = l_s.data();
