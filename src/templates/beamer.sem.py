@@ -10,7 +10,6 @@ outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 
 settings = {
 'all_latex': False,
-'doc_date':'',
 'doc_content':'',
 'doc_title':'',
 'doc_author':getpass.getuser(),
