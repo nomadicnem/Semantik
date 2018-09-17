@@ -1149,14 +1149,18 @@ void box_view::from_string(const QString &i_s)
 void box_view::clear_diagram()
 {
 	foreach (box_link *l_o, m_oLinks) {
+		l_o->hide();
 		scene()->removeItem(l_o);
 		delete l_o;
 	}
 	m_oLinks.clear();
 	foreach (connectable *l_o, m_oItems.values()) {
-		scene()->removeItem(dynamic_cast<QGraphicsItem*>(l_o));
+		QGraphicsItem* l_oTmp = dynamic_cast<QGraphicsItem*>(l_o);
+		l_oTmp->hide();
+		scene()->removeItem(l_oTmp);
 		delete l_o;
 	}
+	scene()->update();
 	m_oItems.clear();
 }
 
@@ -1257,10 +1261,13 @@ void box_view::notify_add_box(int id, int box)
 void box_view::notify_del_box(int id, int box)
 {
 	connectable *l_o = m_oItems.value(box);
-        Q_ASSERT(l_o!=NULL);
-        scene()->removeItem(dynamic_cast<QGraphicsItem*>(l_o));
+	Q_ASSERT(l_o!=NULL);
+	QGraphicsItem *l_oTmp = dynamic_cast<QGraphicsItem*>(l_o);
+	l_oTmp->hide();
+	scene()->removeItem(l_oTmp);
 	m_oItems.remove(box);
 	delete l_o;
+	scene()->update();
 }
 
 void box_view::notify_link_box(int id, data_link* link)

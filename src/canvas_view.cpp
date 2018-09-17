@@ -1487,6 +1487,7 @@ void canvas_view::notify_delete_item(int id) {
 	m_bDeleting = true;
 	canvas_item *l_oR1 = m_oItems.value(id);
 	Q_ASSERT(l_oR1!=NULL);
+	l_oR1->hide();
 	scene()->removeItem(l_oR1);
 	m_oItems.remove(id);
 	delete l_oR1;
