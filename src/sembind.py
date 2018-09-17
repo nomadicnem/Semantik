@@ -37,6 +37,54 @@ def read_properties(code):
 		tmp[lst[0]] = "=".join(lst[1:])
 	return tmp
 
+class RawProcessor(HTMLParser):
+	def reset(self):
+		self.pieces = []
+		self.state = ""
+		self.buf = []
+		self.inline_level = []
+		HTMLParser.reset(self)
+
+	def handle_starttag(self, tag, attrs):
+		if tag == 'ul':
+			self.inline_level.append(0)
+			if self.inli and self.buf:
+				self.pieces.append('  ' * len(self.inline_level))
+				self.pieces.append(''.join(self.buf))
+				self.pieces.append('\n')
+		elif tag == 'li':
+			self.inline_level[-1] += 1
+
+	def handle_endtag(self, tag):
+		if tag == 'p':
+			self.pieces.append(''.join(self.buf))
+		elif tag == 'li':
+			if self.buf:
+				self.pieces.append('  ' * len(self.inline_level))
+				self.pieces.append('%s. ' % self.inline_level[-1])
+				self.pieces.append(''.join(self.buf))
+				self.pieces.append('\n')
+		elif tag == 'ul':
+			self.inline_num.pop()
+		elif tag == 'style':
+			pass
+		else:
+			self.pieces.append(''.join(self.buf))
+
+		self.buf = []
+
+	def handle_data(self, text):
+		self.buf.append(text)
+
+	def output(self):
+		return "".join(self.pieces)
+
+def parse_raw(s):
+	parser = RawProcessor()
+	parser.feed(s)
+	parser.close()
+	return parser.output()
+
 class TrucProcessor(HTMLParser):
 	def reset(self):
 		self.pieces = []

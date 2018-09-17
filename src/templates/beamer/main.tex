@@ -24,8 +24,6 @@
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
 
-% or whatever
-
 \usepackage{times}
 %\usepackage[T1]{fontenc}
 % Or whatever. Note that the encoding and the font should match. If T1
@@ -35,6 +33,10 @@
 % math extension - one probably wants to use symbols like '[' (written as '$[$')
 \usepackage{lmodern,textcomp}
 
+#if @has_minted@
+\usepackage{tcolorbox}
+\usepackage{minted}
+#endif
 
 #ifdef @each_subsection_off@
 % Delete this, if you do not want the table of contents to pop up at

@@ -12,9 +12,10 @@ settings = {
 'all_latex': False,
 'doc_content':'',
 'doc_title':'',
-'doc_author':getpass.getuser(),
-'doc_place':'Los angeles',
-'doc_company':'World Company',
+'doc_author': getpass.getuser(),
+'doc_place': 'Stockholm',
+'doc_company': 'World Company',
+'doc_code_on': False,
 
 'theme':'Warsaw',
 'babel':'english', # frenchb
@@ -30,6 +31,7 @@ settings = {
 'doc_author':'',
 'doc_author_off':'None',
 'uncover_stepwise': '',
+'has_minted': 0, # optional
 
 'each_subsection_off':'None',
 'doc_tableofcontents_off':'None',
@@ -107,14 +109,33 @@ def print_slide(node, niv):
 
 diagrams_added = set([]) # prevent accidents
 def print_figure_slides(node, recurse=False):
-	typo = node.get_val('type')
-	if typo in ['table', 'diag', 'img'] and node.get_val("id") not in diagrams_added:
-		diagrams_added.add(node.get_val("id"))
-		# TODO what to do with the text?
-		#if typo == 'text':
-		#	y = node.get_val('text')
-		#	out(parse_string(y))
+	if node.get_val("id") in diagrams_added:
+		return
+	diagrams_added.add(node.get_val("id"))
 
+	typo = node.get_val('type')
+	if typo in ['text']:
+		body = parse_raw(node.get_val('text')).strip()
+		lang = node.get_var('minted_lang').strip()
+		if body and not lang:
+			sys.stderr.write('For code snippets, set the variable minted_lang\n')
+
+		if body and lang:
+			settings['has_minted'] = 1
+			filename = 'code-%s.minted' % node.get_val("id")
+			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
+				f.write(body)
+
+			title = tex_convert(node.get_val('summary'))
+			out('\\begin{frame}[fragile]\n')
+			out('\\frametitle{%s}\n\n' % title)
+			out('\\begin{tcolorbox}\n')
+			out('\\tiny\n')
+			out('\\ttfamily\n')
+			out('\\inputminted{%s}{%s}\n' % (lang, '../' + filename))
+			out('\\end{tcolorbox}\n')
+			out('\\end{frame}\n')
+	elif typo in ['table', 'diag', 'img']:
 		txt = tex_convert(node.get_val('summary'))
 		out('%-------------------------------------------------------------------\n')
 		out('\\begin{frame}\n')
@@ -215,29 +236,28 @@ root = Root()
 if not settings['doc_title']:
 	settings['doc_title'] = root.get_val('summary')
 print_nodes(root, 0);
-settings['doc_content'] = "".join(buf)
+settings['doc_content'] = ''.join(buf)
 
 # now write main.tex
 transform("/beamer/main.tex", outdir+'/main.tex', settings)
 
 # data files
-
 os.popen('cp -Rf %s %s' % (template_dir()+'/beamer/beamermindist/', outdir)).read()
 
-# anciliary files
-shutil.copy2(template_dir()+'/beamer/wscript', outdir+'/wscript')
+with open(template_dir()+'/beamer/wscript', encoding='utf-8') as f:
+	wscript_code = f.read()
+if settings['has_minted']:
+	wscript_code = wscript_code.replace('#minted: ', '')
+with open(outdir+'/wscript', 'w', encoding='utf-8') as f:
+	f.write(wscript_code)
+
 shutil.copy2(template_dir()+'/waf', outdir+'/waf')
 os.chmod(outdir+'/waf', 0o755)
 
-f = open(outdir + '/run.sh', 'w', encoding='utf-8')
-try:
+with open(outdir + '/run.sh', 'w', encoding='utf-8') as f:
 	f.write('#! /bin/sh\npython waf configure build --view\n')
-finally:
-	f.close()
 os.chmod(outdir + '/run.sh', 0o755)
 
 # load the preview on main.tex
 visualize('beamer', outdir+'/main.tex')
-
-
 

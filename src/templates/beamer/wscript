@@ -18,6 +18,21 @@ top = '.'
 
 import os
 
+PYGMENTS_WARNING = '''
+!IMPORTANT!
+
+This Pdflatex document uses Pygments for syntax highlighting, and
+this requires disabling the shell escaping options for Pdflatex.
+A maliciously creafted document might run arbitrary commands
+on your computer.
+
+Please set an environment variable to indicate that you understand
+the security implications, and only build Semantik documents that
+you have created yourself:
+
+export DISABLING_SHELL_ESCAPE_FOR_SEMANTIK=1
+'''
+
 def options(opt):
 	opt.add_option('--view', action='store_true', default=False, help='View the document')
 
@@ -26,6 +41,7 @@ def configure(conf):
 	cwd = os.getcwd()
 	cc = cwd + '/beamermindist/'
 
+	#minted: conf.find_program(['pygmentize', 'pygmentex'], var='pygments')
 	conf.find_program(['okular', 'kpdf', 'xpdf', 'gnome-open'], var='VIEW', mandatory=False)
 
 	lst = []
@@ -37,6 +53,11 @@ def configure(conf):
 def build(bld):
 	# such options are sometimes necessary
 	#bld.env.PDFLATEXFLAGS = ['--shell-escape', '-file-line-error']
+
+	#minted: if os.environ.get('DISABLING_SHELL_ESCAPE_FOR_SEMANTIK'):
+	#minted: 	bld.env.append_unique('PDFLATEXFLAGS', ['--shell-escape'])
+	#minted: else:
+	#minted: 	bld.fatal(PYGMENTS_WARNING)
 
 	# set prompt=0 to avoid prompting on errors
 	bld(features='tex', type='pdflatex', source='main.tex', prompt=1)
