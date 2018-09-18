@@ -41,7 +41,8 @@ def configure(conf):
 	cwd = os.getcwd()
 	cc = cwd + '/beamermindist/'
 
-	#minted: conf.find_program(['pygmentize', 'pygmentex'], var='pygments')
+	if conf.path.find_node('use_minted.txt'):
+		conf.find_program(['pygmentize', 'pygmentex'], var='pygments')
 	conf.find_program(['okular', 'kpdf', 'xpdf', 'gnome-open'], var='VIEW', mandatory=False)
 
 	lst = []
@@ -54,10 +55,11 @@ def build(bld):
 	# such options are sometimes necessary
 	#bld.env.PDFLATEXFLAGS = ['--shell-escape', '-file-line-error']
 
-	#minted: if os.environ.get('DISABLING_SHELL_ESCAPE_FOR_SEMANTIK'):
-	#minted: 	bld.env.append_unique('PDFLATEXFLAGS', ['--shell-escape'])
-	#minted: else:
-	#minted: 	bld.fatal(PYGMENTS_WARNING)
+	if bld.path.find_node('use_minted.txt'):
+		if os.environ.get('DISABLING_SHELL_ESCAPE_FOR_SEMANTIK'):
+			bld.env.append_unique('PDFLATEXFLAGS', ['--shell-escape'])
+		else:
+			bld.fatal(PYGMENTS_WARNING)
 
 	# set prompt=0 to avoid prompting on errors
 	bld(features='tex', type='pdflatex', source='main.tex', prompt=1)

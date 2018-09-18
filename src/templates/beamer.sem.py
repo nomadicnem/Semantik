@@ -31,10 +31,11 @@ settings = {
 'doc_author':'',
 'doc_author_off':'None',
 'uncover_stepwise': '',
-'has_minted': 0, # optional
 
 'each_subsection_off':'None',
 'doc_tableofcontents_off':'None',
+
+'use_minted': 0, # optional
 }
 add_globals(settings)
 
@@ -121,7 +122,7 @@ def print_figure_slides(node, recurse=False):
 			sys.stderr.write('For code snippets, set the variable minted_lang\n')
 
 		if body and lang:
-			settings['has_minted'] = 1
+			settings['use_minted'] = 1
 			filename = 'code-%s.minted' % node.get_val("id")
 			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
 				f.write(body)
@@ -244,15 +245,13 @@ transform("/beamer/main.tex", outdir+'/main.tex', settings)
 # data files
 os.popen('cp -Rf %s %s' % (template_dir()+'/beamer/beamermindist/', outdir)).read()
 
-with open(template_dir()+'/beamer/wscript', encoding='utf-8') as f:
-	wscript_code = f.read()
-if settings['has_minted']:
-	wscript_code = wscript_code.replace('#minted: ', '')
-with open(outdir+'/wscript', 'w', encoding='utf-8') as f:
-	f.write(wscript_code)
-
+shutil.copy2(template_dir()+'/beamer/wscript', outdir+'/wscript')
 shutil.copy2(template_dir()+'/waf', outdir+'/waf')
 os.chmod(outdir+'/waf', 0o755)
+
+if settings['use_minted']:
+	with open(outdir + '/use_minted.txt', 'w', encoding='utf-8') as f:
+		f.write('')
 
 with open(outdir + '/run.sh', 'w', encoding='utf-8') as f:
 	f.write('#! /bin/sh\npython waf configure build --view\n')

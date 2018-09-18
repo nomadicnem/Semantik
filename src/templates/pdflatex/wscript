@@ -20,6 +20,21 @@ APPNAME = 'pdf'
 top = '.'
 out = 'build'
 
+PYGMENTS_WARNING = '''
+!IMPORTANT!
+
+This Pdflatex document uses Pygments for syntax highlighting, and
+this requires disabling the shell escaping options for Pdflatex.
+A maliciously creafted document might run arbitrary commands
+on your computer.
+
+Please set an environment variable to indicate that you understand
+the security implications, and only build Semantik documents that
+you have created yourself:
+
+export DISABLING_SHELL_ESCAPE_FOR_SEMANTIK=1
+'''
+
 def options(opts):
 	opts.add_option('--view', action='store_true', default=False, help='View the document')
 
@@ -27,9 +42,9 @@ def configure(conf):
 	conf.load('tex')
 	if not conf.env['PDFLATEX']:
 		conf.fatal('install pdflatex!')
-
+	if conf.path.find_node('use_minted.txt'):
+		conf.find_program(['pygmentize', 'pygmentex'], var='pygments')
 	conf.find_program(['okular', 'kpdf', 'xpdf', 'gnome-open'], var='VIEW', mandatory=False)
-
 
 def build(bld):
 	# set prompt=0 to avoid prompting on errors
@@ -37,6 +52,12 @@ def build(bld):
 
 	def view(ctx):
 		ctx.exec_command(ctx.env.VIEW + ['build/main.pdf'])
+
+	if bld.path.find_node('use_minted.txt'):
+		if os.environ.get('DISABLING_SHELL_ESCAPE_FOR_SEMANTIK'):
+			bld.env.append_unique('PDFLATEXFLAGS', ['--shell-escape'])
+		else:
+			bld.fatal(PYGMENTS_WARNING)
 
 	if bld.env.VIEW and bld.options.view:
 		bld.add_post_fun(view)

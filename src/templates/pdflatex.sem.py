@@ -33,6 +33,8 @@ settings = {
 'doc_author_off':'None',
 
 'babel':'english', # frenchb
+
+'use_minted': 0, # optional
 }
 add_globals(settings)
 
@@ -97,8 +99,29 @@ def print_nodes(node, niv):
 
 	typo = node.get_val('type')
 	if typo == 'text':
-		y = node.get_val('text')
-		out(parse_string(y))
+		body = parse_raw(node.get_val('text')).strip()
+		lang = node.get_var('minted_lang').strip()
+		if body and not lang:
+			sys.stderr.write('For code snippets, set the variable minted_lang\n')
+
+		if lang:
+			settings['use_minted'] = 1
+			filename = 'code-%s.minted' % node.get_val("id")
+			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
+				f.write(body)
+
+			title = tex_convert(node.get_val('summary'))
+			out('\\begin{figure}[htbp]\n')
+			out('  \\begin{center}\n')
+			out('     \\begin{tcolorbox}\n')
+			out('       \\tiny\n')
+			out('       \\ttfamily\n')
+			out('       \\inputminted{%s}{%s}\n' % (lang, '../' + filename))
+			out('     \\end{tcolorbox}\n')
+			out('  \\end{center}\n')
+			out('\\end{figure}\n')
+		else:
+			out(parse_string(node.get_val('text')))
 
 	elif typo == 'table':
 		rows = node.num_rows()
@@ -182,19 +205,18 @@ settings['doc_content'] = "".join(buf)
 # now write main.tex
 transform("/pdflatex/main.tex", outdir+'/main.tex', settings)
 
-# anciliary files
 shutil.copy2(template_dir()+'/pdflatex/wscript', outdir+'/wscript')
 shutil.copy2(template_dir()+'/waf', outdir+'/waf')
 os.chmod(outdir+'/waf', 0o755)
 
-f = open(outdir + '/run.sh', 'w')
-try:
+if settings['use_minted']:
+	with open(outdir + '/use_minted.txt', 'w', encoding='utf-8') as f:
+		f.write('')
+
+with open(outdir + '/run.sh', 'w', encoding='utf-8') as f:
 	f.write('#! /bin/sh\npython waf configure build --view\n')
-finally:
-	f.close()
 os.chmod(outdir + '/run.sh', 0o755)
 
 # load the preview on main.tex
 visualize('pdflatex', outdir+'/main.tex')
-
 
