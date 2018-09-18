@@ -1,6 +1,6 @@
 Semantik 1.0.5
 --------------
-* Highlight code snippets in beamer presentations using Minted
+* Highlight code snippets in beamer presentations/pdflatex using Minted
 * Fix drawing artifacts when switching diagrams
 
 Semantik 1.0.4

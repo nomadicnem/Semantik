@@ -94,3 +94,14 @@ The options &quot;--width&quot; and &quot;--height&quot; can be used to change t
 </p>
 </html>
 </tip>
+
+<tip category="semantik">
+<html>
+<h3>9. Code snippets in LaTeX</h3>
+<p>
+Code snippets can be highlighted with Minted in pdflatex documents or Beamer presentations.
+Enable Minted by setting adding source code in the data box and adding the variable <i>minted_lang</i>
+to the variables box, for example: <pre>minted_lang=java</pre>
+</p>
+</html>
+</tip>
