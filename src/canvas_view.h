@@ -22,7 +22,7 @@ class canvas_view : public QGraphicsView
 {
 	Q_OBJECT
 	public:
-		canvas_view(QWidget *i_oWidget, sem_mediator* i_oControl);
+		canvas_view(QWidget *i_oWidget, sem_mediator* i_oControl, QMenu*);
 		void item_moved();
 
 		QMap<int, canvas_item*> m_oItems;
@@ -141,7 +141,6 @@ class canvas_view : public QGraphicsView
 		void notify_change_data(int id);
 		void notify_export_doc();
 		void sync_flags();
-		void sync_colors();
 
 		void slot_change_data();
 		void reorganize();

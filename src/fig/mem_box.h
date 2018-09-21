@@ -174,6 +174,8 @@ class mem_import_box : public mem_command {
 		QList<data_link*> old_links;
 		QFont m_iOldFont;
 		QFont m_iNewFont;
+		QList<color_scheme> m_oNewColorSchemes;
+		QList<color_scheme> m_oOldColorSchemes;
 
 		IType type() { return IMPORT_BOX; }
 };

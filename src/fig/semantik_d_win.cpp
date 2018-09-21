@@ -38,6 +38,8 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	setWindowIcon(QIcon("semantik"));
 
+	m_oColorMenu = new QMenu(trUtf8("Colors"), this);
+
 	m_oTabWidget = new KTabWidget(this);
 	m_oTabWidget->setCloseButtonEnabled(true);
 	m_oTabWidget->setAutomaticResizeTabs(true);
@@ -83,6 +85,25 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	setupGUI(QSize(1000, 800), Default, notr("semantik-dui.rc"));
 
+	m_oColorsToolBar = toolBar(notr("colorsToolBar"));
+
+	flag_scheme l_oScheme(this, notr("crsc-app-colors"), "");
+	m_oColorGroup = new QActionGroup(this);
+	for (int i = 0; i < 9; ++i)
+	{
+		QAction *l_oAct = new QAction(QIcon(), trUtf8("Color"), m_oColorGroup);
+		m_oColorGroup->addAction(l_oAct);
+		if (i != 0)
+		{
+			m_oColorsToolBar->addAction(l_oAct);
+			m_oColorMenu->addAction(l_oAct);
+		}
+	}
+	m_oCustomColorAct = new QAction(l_oScheme._icon(), trUtf8("Custom color"), m_oColorGroup);
+	m_oColorMenu->addAction(m_oCustomColorAct);
+	m_oColorsToolBar->addAction(m_oCustomColorAct);
+	m_oColorGroup->setExclusive(true);
+
 	read_config();
 	setAutoSaveSettings();
 	statusBar()->showMessage(trUtf8("This is Semantik-d"), 2000);
@@ -90,11 +111,18 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	connect(m_oFileTree, SIGNAL(url_selected(const QUrl&)), this, SLOT(slot_recent(const QUrl&)));
 	connect(this, SIGNAL(url_opened(const QUrl&)), this, SLOT(record_open_url(const QUrl&)));
 
+
 	m_oFileTree->m_oModel->expandToUrl(QUrl::fromLocalFile(QDir::homePath()));
 }
 
 void semantik_d_win::wire_actions()
 {
+	//m_oColorGroup->disconnect();
+	if (m_oActiveDocument)
+	{
+		connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oActiveDocument->m_oDiagramView, SLOT(change_colors(QAction*)));
+	}
+
 	QAction *l_oTmp = actionCollection()->action(KStandardAction::name(KStandardAction::Save));
 	l_oTmp->disconnect();
 	if (m_oActiveDocument)
@@ -189,6 +217,7 @@ void semantik_d_win::slot_enable_undo(bool i_bUndo, bool i_bRedo)
 void semantik_d_win::slot_add_tab()
 {
 	m_oActiveDocument = new diagram_document(m_oTabWidget);
+	m_oActiveDocument->m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oActiveDocument->init();
 	int l_iIndex = m_oTabWidget->addTab(m_oActiveDocument, trUtf8("[Untitled]"));
 	m_oTabWidget->setCurrentIndex(l_iIndex);
@@ -213,6 +242,7 @@ void semantik_d_win::slot_tab_changed(int i_iIndex)
 	{
 		emit url_opened(m_oActiveDocument->m_oDiagramView->m_oCurrentUrl);
 	}
+	sync_colors();
 	wire_actions();
 }
 
@@ -311,6 +341,7 @@ void semantik_d_win::slot_open()
 	// just open a new tab
 	diagram_document *l_oTmp = m_oActiveDocument;
 	m_oActiveDocument = new diagram_document(m_oTabWidget);
+	m_oActiveDocument->m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oActiveDocument->init();
 	if (m_oActiveDocument->m_oDiagramView->import_from_file(l_o))
 	{
@@ -353,6 +384,7 @@ void semantik_d_win::slot_recent(const QUrl& i_oUrl)
 
 	diagram_document *l_oTmp = m_oActiveDocument;
 	m_oActiveDocument = new diagram_document(m_oTabWidget);
+	m_oActiveDocument->m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oActiveDocument->init();
 	if (m_oActiveDocument->m_oDiagramView->import_from_file(i_oUrl))
 	{
@@ -417,6 +449,40 @@ void semantik_d_win::slot_export_fig_size()
 	if (m_oActiveDocument != NULL)
 	{
 		m_oActiveDocument->m_oDiagramView->export_fig_size();
+	}
+}
+
+void semantik_d_win::sync_colors()
+{
+	if (m_oActiveDocument != NULL)
+	{
+		for (int i=0; i<m_oActiveDocument->m_oMediator->m_oColorSchemes.size(); ++i)
+		{
+			color_scheme l_oScheme = m_oActiveDocument->m_oMediator->m_oColorSchemes[i];
+			QAction *l_oAction = m_oColorGroup->actions()[i];
+
+			QPixmap l_oPix(22, 22);
+			QPainter l_oP(&l_oPix);
+
+			l_oAction->setText(l_oScheme.m_sName);
+
+			l_oPix.fill(l_oScheme.m_oInnerColor);
+			l_oP.drawRect(0, 0, 21, 21);
+			l_oAction->setIcon(QIcon(l_oPix));
+		}
+		QList<QAction*> l_oActs = m_oColorGroup->actions();
+		for (int i=1; i < l_oActs.size(); ++i)
+		{
+			l_oActs[i]->setEnabled(true);
+		}
+	}
+	else
+	{
+		QList<QAction*> l_oActs = m_oColorGroup->actions();
+		for (int i=1; i < l_oActs.size(); ++i)
+		{
+			l_oActs[i]->setEnabled(false);
+		}
 	}
 }
 

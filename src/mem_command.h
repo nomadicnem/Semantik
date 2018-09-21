@@ -42,6 +42,8 @@ class mem_color : public mem_command {
 		void undo();
 		void redo();
 		QMap<int, int> prevColors;
+		QMap<int, color_scheme> m_oPrevCustomColors;
+		color_scheme m_oNewCustomColor;
 		int newColor;
 		IType type() { return COLOR; }
 };

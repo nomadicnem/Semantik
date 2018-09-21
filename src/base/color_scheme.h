@@ -16,6 +16,7 @@ class color_scheme // :
 		QColor m_oInnerColor;
 		QColor m_oBorderColor;
 		QColor m_oTextColor;
+		color_scheme& operator=(const color_scheme &);
 };
 
 

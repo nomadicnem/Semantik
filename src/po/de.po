@@ -978,7 +978,7 @@ msgid "Ctrl+G"
 msgstr "Strg+G"
 
 #: semantik.cpp:188
-msgid "CustomColor"
+msgid "Custom color"
 msgstr "Benutzerdefinierte Farbe"
 
 #: semantik.cpp:211

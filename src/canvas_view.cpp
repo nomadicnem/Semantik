@@ -47,7 +47,7 @@
 
 #define PIPAD 20
 
-canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView(i_oWidget)
+canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_oColorMenu) : QGraphicsView(i_oWidget)
 {
 	m_oSemantikWindow = i_oWidget;
 	m_bDisableGradient = false;
@@ -140,9 +140,9 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphi
 	connect(fullAction, SIGNAL(triggered()), this, SLOT(toggle_fullscreen())); addAction(l_o);
 	m_oMenu->addAction(fullAction);
 
-	m_oColorMenu = m_oMenu->addMenu(trUtf8("Colors"));
 	//m_oDataMenu = m_oMenu->addMenu(trUtf8("Data type"));
-
+	m_oColorMenu = i_oColorMenu;
+	m_oMenu->addMenu(m_oColorMenu);
 
 #define newAction(s, v, dest)  dest = l_o = new QAction(s, this); \
 	connect(l_o, SIGNAL(triggered()), this, SLOT(slot_change_data())); \
@@ -587,53 +587,6 @@ void canvas_view::notify_select(const QList<int>& unsel, const QList<int>& sel) 
 	}
 }
 
-void canvas_view::sync_colors() {
-	semantik_win *l_o = (semantik_win*) m_oSemantikWindow;
-	l_o->m_oColorsToolBar->clear();
-
-	while (l_o->m_oColorGroup->actions().size() > m_oMediator->m_oColorSchemes.size()+1)
-	{
-		QAction* l_oA = l_o->m_oColorGroup->actions().takeFirst();
-		l_o->m_oColorsToolBar->removeAction(l_oA);
-		m_oColorMenu->removeAction(l_oA);
-		delete l_oA;
-	}
-
-	while (l_o->m_oColorGroup->actions().size() < m_oMediator->m_oColorSchemes.size()+1)
-	{
-		new QAction(QIcon(), trUtf8("Color"), l_o->m_oColorGroup);
-	}
-
-	l_o->m_oColorGroup->removeAction(l_o->m_oCustomColorAct);
-	l_o->m_oColorGroup->addAction(l_o->m_oCustomColorAct);
-	m_oColorMenu->removeAction(l_o->m_oCustomColorAct);
-	m_oColorMenu->addAction(l_o->m_oCustomColorAct);
-
-	for (int i=0; i<m_oMediator->m_oColorSchemes.size(); ++i)
-	{
-		color_scheme l_oScheme = m_oMediator->m_oColorSchemes[i];
-		QAction *l_oAction = l_o->m_oColorGroup->actions()[i];
-
-		QPixmap l_oPix(22, 22);
-		QPainter l_oP(&l_oPix);
-
-		l_oAction->setText(l_oScheme.m_sName);
-
-		l_oPix.fill(l_oScheme.m_oInnerColor);
-		//TODO pen ?
-		l_oP.drawRect(0, 0, 21, 21);
-		l_oAction->setIcon(QIcon(l_oPix));
-	}
-
-	// la première action est pour la couleur de la racine
-	for (int i=1; i<l_o->m_oColorGroup->actions().size(); ++i)
-	{
-		QAction *l_oAct = l_o->m_oColorGroup->actions()[i];
-		l_o->m_oColorsToolBar->addAction(l_oAct);
-		m_oColorMenu->addAction(l_oAct);
-	}
-}
-
 void canvas_view::notify_pic(int id)
 {
 	qDebug()<<"canvas_view::notify_pic to be implemented";
@@ -686,7 +639,10 @@ void canvas_view::change_colors(QAction* i_oAct)
 			if (i==l_o->m_oColorGroup->actions().size()-1)
 			{
 				l_oColor = QColorDialog::getColor(l_oColor, this);
-				if (!l_oColor.isValid()) return;
+				if (!l_oColor.isValid())
+				{
+					return;
+				}
 			}
 			break;
 		}
@@ -694,6 +650,7 @@ void canvas_view::change_colors(QAction* i_oAct)
 
 	mem_color* col = new mem_color(m_oMediator);
 	col->newColor = l_iIdx;
+	col->m_oNewCustomColor.m_oInnerColor = l_oColor;
 	col->apply();
 }
 

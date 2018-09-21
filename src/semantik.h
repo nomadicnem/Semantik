@@ -56,7 +56,6 @@ class semantik_win : public KXmlGuiWindow
 
 		linear_container *m_oTree;
 		sem_mediator *m_oMediator;
-
 		vars_view *m_oVarsView;
 		pre_view *m_oPreView;
 		text_view *m_oTextView;
@@ -79,6 +78,7 @@ class semantik_win : public KXmlGuiWindow
 		KToolBar *m_oFlagsToolBar;
 
 		QMenu *m_oToolsMenu;
+		QMenu *m_oColorMenu;
 		QAction *m_oSelectAct;
 		QAction *m_oSortAct;
 		QAction *m_oScrollAct;
@@ -101,7 +101,7 @@ class semantik_win : public KXmlGuiWindow
 
 	public slots:
 		void update_title();
-
+		void sync_colors();
 
 		void fit_zoom();
 		void slot_open();

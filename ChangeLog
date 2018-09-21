@@ -2,6 +2,8 @@ Semantik 1.0.5
 --------------
 * Highlight code snippets in beamer presentations/pdflatex using Minted
 * Fix drawing artifacts when switching diagrams
+* Fix the inactive custom color buttons in semantik #88
+* Add a color toolbar to semantik-d
 
 Semantik 1.0.4
 --------------

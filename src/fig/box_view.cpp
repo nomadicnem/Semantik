@@ -206,11 +206,6 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	connect(m_oDeleteAction, SIGNAL(triggered()), this, SLOT(slot_delete()));
 	addAction(m_oDeleteAction);
 
-	m_oColorAction = new QAction(QObject::trUtf8("Color..."), this);
-	connect(m_oColorAction, SIGNAL(triggered()), this, SLOT(slot_color()));
-	addAction(m_oColorAction);
-
-
 	m_oMoveUpAction = new QAction(QObject::trUtf8("Raise"), this);
 	m_oMoveUpAction->setShortcut(QObject::trUtf8("PgUp"));
 	connect(m_oMoveUpAction, SIGNAL(triggered()), this, SLOT(slot_move_up()));
@@ -262,8 +257,6 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	connect(m_oFileExport, SIGNAL(triggered()), this, SLOT(slot_export_to_file()));
 	m_oCopyToClipboard = new QAction(QObject::trUtf8("Copy image to clipboard"), this);
 	connect(m_oCopyToClipboard, SIGNAL(triggered()), this, SLOT(slot_copy_picture()));
-
-	m_oColorAction->setEnabled(false);
 
 	m_oLastMovePoint = QPointF(-100, -100);
 
@@ -361,7 +354,7 @@ void box_view::init_menu()
 	//m_oMoveUpAction->setEnabled(false);
 	//m_oMoveDownAction->setEnabled(false);
 	m_oMenu->addSeparator();
-	m_oMenu->addAction(m_oColorAction);
+	m_oMenu->addMenu(m_oColorMenu);
 	m_oMenu->addAction(m_oPropertiesAction);
 }
 
@@ -668,7 +661,7 @@ void box_view::enable_menu_actions()
 
 	m_oAddItemAction->setEnabled(selected <= 1);
 	m_oDeleteAction->setEnabled(selected >= 1);
-	m_oColorAction->setEnabled(selected >= 1);
+	m_oColorMenu->setEnabled(selected >= 1);
 
 	m_oPropertiesAction->setEnabled(selected == 0 or (selected == 1 and dynamic_cast<editable*>(selection.at(0))));
 
@@ -736,11 +729,12 @@ void box_view::change_colors(QAction* i_oAct)
 	QColor l_oColor;
 	static QColor selected_color;
 
-	for (int i=1; i < i_oAct->actionGroup()->actions().size(); ++i)
+	QList<QAction*> l_oActs = i_oAct->actionGroup()->actions();
+	for (int i=1; i < l_oActs.size(); ++i)
 	{
-		if (i_oAct->actionGroup()->actions()[i] == i_oAct)
+		if (l_oActs[i] == i_oAct)
 		{
-			if (i == i_oAct->actionGroup()->actions().size()-1)
+			if (i == l_oActs.size()-1)
 			{
 				selected_color = QColorDialog::getColor(selected_color, this);
 				if (!selected_color.isValid())
@@ -752,7 +746,6 @@ void box_view::change_colors(QAction* i_oAct)
 			else
 			{
 				selected_color = l_oColor = m_oMediator->m_oColorSchemes[i].m_oInnerColor;
-
 			}
 			break;
 		}
@@ -1802,6 +1795,8 @@ bool box_view::import_from_file(const QUrl& l_o)
 		mem_import_box *imp = new mem_import_box(m_oMediator, m_iId);
 		imp->init(tmp->m_oBoxes.values(), tmp->m_oLinks);
 		imp->m_iNewFont = tmp->m_oDiagramFont;
+		imp->m_oOldColorSchemes = m_oMediator->m_oColorSchemes;
+		imp->m_oNewColorSchemes = x->m_oColorSchemes;
 		imp->apply();
 
 		m_oCurrentUrl = l_o;

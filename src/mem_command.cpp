@@ -68,6 +68,7 @@ mem_color::mem_color(sem_mediator* mod) : mem_command(mod) {
 	foreach (data_item* t, model->m_oItems.values()) {
 		if (t->m_bSelected) {
 			prevColors[t->m_iId] = t->m_iColor;
+			m_oPrevCustomColors[t->m_iId] = t->m_oCustom;
 		}
 	}
 }
@@ -78,6 +79,7 @@ void mem_color::redo() {
 	{
 		data_item *t = model->m_oItems.value(i.key());
 		t->m_iColor = newColor;
+		t->m_oCustom = m_oNewCustomColor;
 		model->notify_repaint(i.key());
 	}
 	redo_dirty();
@@ -85,10 +87,11 @@ void mem_color::redo() {
 
 void mem_color::undo() {
 	QMap<int, int>::iterator i;
- 	for (i = prevColors.begin(); i != prevColors.end(); ++i)
+	for (i = prevColors.begin(); i != prevColors.end(); ++i)
 	{
 		data_item *t = model->m_oItems.value(i.key());
 		t->m_iColor = i.value();
+		t->m_oCustom = m_oPrevCustomColors[i.key()];
 		model->notify_repaint(i.key());
 	}
 	undo_dirty();

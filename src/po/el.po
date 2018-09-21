@@ -1003,7 +1003,7 @@ msgid "Ctrl+G"
 msgstr ""
 
 #: semantik.cpp:188
-msgid "CustomColor"
+msgid "Custom color"
 msgstr "Προσαρμοσμένο χρώμα"
 
 #: semantik.cpp:211

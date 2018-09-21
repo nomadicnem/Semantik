@@ -39,6 +39,8 @@ diagram_document::diagram_document(QWidget *i_oParent) : QFrame(i_oParent)
 
 void diagram_document::init()
 {
+	m_oMediator->m_bIsDiagram = true;
+
 	connect(m_oMediator, SIGNAL(sig_add_item(int)), m_oDiagramView, SLOT(notify_add_item(int)));
 	connect(m_oMediator, SIGNAL(sig_select(const QList<int>&, const QList<int>&)), m_oDiagramView, SLOT(notify_select(const QList<int>&, const QList<int>&)));
 
@@ -69,6 +71,9 @@ void diagram_document::init()
 
 	m_oMediator->m_oUndoStack.clear();
 	m_oMediator->m_oRedoStack.clear();
+
+	m_oMediator->init_colors();
+
 	m_oMediator->set_dirty(false);
 }
 

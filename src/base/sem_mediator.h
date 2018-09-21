@@ -192,7 +192,7 @@ class sem_mediator: public QObject
 		QPixmap getThumb(int id);
 		bool load_picture(const QString&, int);
 		bool save_and_load_picture(const QUrl& i_sPath, int id);
-
+		bool m_bIsDiagram;
 
 		void generate_docs(const QString &i_oFile, const QString &i_sName, const QString &i_sLocation);
 

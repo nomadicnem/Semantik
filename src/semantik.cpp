@@ -141,10 +141,12 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	connect(m_oMediator, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 	connect(m_oMediator, SIGNAL(update_title()), this, SLOT(update_title()));
 
+	m_oColorMenu = new QMenu(trUtf8("Colors"), this);
+
 	QFrame *fr = new QFrame(this);
 	fr->setLineWidth(0);
 	fr->setFrameStyle(QFrame::NoFrame);
-	m_oCanvas = new canvas_view(fr, m_oMediator);
+	m_oCanvas = new canvas_view(fr, m_oMediator, m_oColorMenu);
 	setCentralWidget(fr);
 	QGridLayout *ll = new QGridLayout(fr);
 	ll->addWidget(m_oCanvas);
@@ -184,13 +186,6 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oGenerateAct->setShortcut(trUtf8("Ctrl+G"));
 	connect(m_oGenerateAct, SIGNAL(triggered(bool)), SLOT(slot_generate()));
 
-	flag_scheme l_oScheme(this, notr("crsc-app-colors"), "");
-
-	m_oColorGroup = new QActionGroup(this);
-	m_oCustomColorAct = new QAction(l_oScheme._icon(), trUtf8("CustomColor"), m_oColorGroup);
-	m_oColorGroup->setExclusive(true);
-	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_colors(QAction*)));
-
 	m_oFlagGroup = new QActionGroup(this);
 	m_oFlagGroup->setExclusive(false);
 	connect(m_oFlagGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_flags(QAction*)));
@@ -229,8 +224,8 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	m_oDiagramView = new box_view(m_oDataView, m_oMediator);
 	m_oDiagramView->m_bShowFileMenu = true;
+	m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oDataView->addWidget(m_oDiagramView);
-	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oDiagramView, SLOT(change_colors(QAction*)));
 	connect(m_oDiagramView, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 
 
@@ -262,14 +257,33 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	actionCollection()->addAction(notr("show_dock_linear"), l_oDock->toggleViewAction());
 	l_oDock->setObjectName(notr("LinearDock"));
 
-
 	setupGUI(QSize(800, 800), Default, notr("semantikui.rc"));
+
+	m_oFlagsToolBar = toolBar(notr("flagsToolBar"));
+	m_oColorsToolBar = toolBar(notr("colorsToolBar"));
+
+	flag_scheme l_oScheme(this, notr("crsc-app-colors"), "");
+	m_oColorGroup = new QActionGroup(this);
+	for (int i = 0; i < 9; ++i)
+	{
+		QAction *l_oAct = new QAction(QIcon(), trUtf8("Color"), m_oColorGroup);
+		m_oColorGroup->addAction(l_oAct);
+		if (i != 0)
+		{
+			m_oColorsToolBar->addAction(l_oAct);
+			m_oColorMenu->addAction(l_oAct);
+		}
+	}
+	m_oCustomColorAct = new QAction(l_oScheme._icon(), trUtf8("Custom color"), m_oColorGroup);
+	m_oColorMenu->addAction(m_oCustomColorAct);
+	m_oColorsToolBar->addAction(m_oCustomColorAct);
+	m_oColorGroup->setExclusive(true);
+	connect(m_oMediator, SIGNAL(sync_colors()), this, SLOT(sync_colors()));
+	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oDiagramView, SLOT(change_colors(QAction*)));
+	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_colors(QAction*)));
 
 	m_oMediator->m_oCurrentUrl = QUrl();
 	update_title();
-
-	m_oColorsToolBar = toolBar(notr("colorsToolBar"));
-	m_oFlagsToolBar = toolBar(notr("flagsToolBar"));
 
 	linear_view* ln = m_oTree->m_oView;
 	connect(m_oMediator, SIGNAL(sig_preview()), m_oPreView, SLOT(notify_preview()));
@@ -317,8 +331,6 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	connect(m_oMediator, SIGNAL(sig_move(const QList<int>&, const QList<QPointF>&)), m_oCanvas, SLOT(notify_move(const QList<int>&, const QList<QPointF>&)));
 
 	connect(m_oMediator, SIGNAL(sync_flags()), m_oCanvas, SLOT(sync_flags()));
-	connect(m_oMediator, SIGNAL(sync_colors()), m_oCanvas, SLOT(sync_colors()));
-
 	connect(m_oImageView, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 
 	connect(m_oMediator, SIGNAL(sig_open_map()), m_oCanvas, SLOT(notify_open_map()));
@@ -639,5 +651,23 @@ void semantik_win::slot_tip_of_day()
 void semantik_win::slot_enable_undo(bool undo, bool redo) {
 	m_oUndoAct->setEnabled(undo);
 	m_oRedoAct->setEnabled(redo);
+}
+
+void semantik_win::sync_colors()
+{
+	for (int i=0; i<m_oMediator->m_oColorSchemes.size(); ++i)
+	{
+		color_scheme l_oScheme = m_oMediator->m_oColorSchemes[i];
+		QAction *l_oAction = m_oColorGroup->actions()[i];
+
+		QPixmap l_oPix(22, 22);
+		QPainter l_oP(&l_oPix);
+
+		l_oAction->setText(l_oScheme.m_sName);
+
+		l_oPix.fill(l_oScheme.m_oInnerColor);
+		l_oP.drawRect(0, 0, 21, 21);
+		l_oAction->setIcon(QIcon(l_oPix));
+	}
 }
 

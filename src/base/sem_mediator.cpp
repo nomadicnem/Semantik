@@ -1295,6 +1295,8 @@ sem_mediator::sem_mediator(QObject* i_oParent) : QObject(i_oParent)
 	m_sOutTemplate = "";
 	init_temp_dir();
 
+	m_bIsDiagram = false;
+
 	if (!QFile::exists(SEMANTIK_DIR "/templates/waf")) {
 		qDebug()<<"Access denied ^ô^";
 		Q_ASSERT(false);

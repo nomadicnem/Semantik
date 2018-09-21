@@ -336,6 +336,10 @@ void mem_import_box::undo()
 		item->m_oLinks.append(k);
 		model->notify_link_box(m_iId, k);
 	}
+	if (model->m_bIsDiagram)
+	{
+		model->m_oColorSchemes = m_oOldColorSchemes;
+	}
 	undo_dirty();
 }
 
@@ -359,6 +363,10 @@ void mem_import_box::redo()
 	foreach (data_link *k, new_links) {
 		item->m_oLinks.append(k);
 		model->notify_link_box(m_iId, k);
+	}
+	if (model->m_bIsDiagram)
+	{
+		model->m_oColorSchemes = m_oNewColorSchemes;
 	}
 	redo_dirty();
 }

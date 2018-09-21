@@ -19,6 +19,7 @@ class QAction;
 class QActionGroup;
 class QListWidget;
 class QMenu;
+class QActionGroup;
 class QTextEdit;
 class KTabWidget;
 class filetree;
@@ -35,11 +36,15 @@ class semantik_d_win : public KXmlGuiWindow
 		diagram_document *m_oActiveDocument;
 		QAction *m_oUndoAct;
 		QAction *m_oRedoAct;
+		QAction *m_oCustomColorAct;
 
 		KRecentFilesAction* m_oRecentFilesAct;
+		KToolBar *m_oColorsToolBar;
 		KTabWidget *m_oTabWidget;
 		filetree *m_oFileTree;
 		QAction *m_oExportSizeAct;
+		QMenu *m_oColorMenu;
+		QActionGroup *m_oColorGroup;
 
 		void read_config();
 		void write_config();
@@ -53,6 +58,7 @@ class semantik_d_win : public KXmlGuiWindow
 		void slot_enable_undo(bool, bool);
 		void slot_recent(const QUrl &);
 		void slot_export_fig_size();
+		void sync_colors();
 
 		void slot_properties();
 

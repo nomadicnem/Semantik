@@ -49,6 +49,7 @@ class box_view : public QGraphicsView
 		QMenu* m_oAlignMenu;
 		QMenu* m_oSizeMenu;
 		QMenu* m_oFileMenu;
+		QMenu* m_oColorMenu;
 
 		QAction *m_oAddItemAction;
 		QAction *m_oAddLabel;

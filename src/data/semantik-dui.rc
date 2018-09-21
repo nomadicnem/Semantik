@@ -48,4 +48,7 @@
 
  </MenuBar>
 
+ <ToolBar name="colorsToolBar" iconText="icononly" position="right"><text>Colors Toolbar</text>
+	<Action name="tool_select" />
+ </ToolBar>
 </gui>
