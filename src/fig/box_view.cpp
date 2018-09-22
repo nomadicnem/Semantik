@@ -867,7 +867,7 @@ void box_view::slot_add_element()
 		add->box->m_iType = data_box::COMPONENT;
 		add->box->m_iWW = 120;
 		add->box->m_iHH = 60;
-		add->box->color = QColor("#FFFFCC");
+		add->box->color = QColor("#FCF2E2");
 	}
 	else if (sender == m_oAddRectangle)
 	{
@@ -881,7 +881,7 @@ void box_view::slot_add_element()
 		add->box->m_iType = data_box::NODE;
 		add->box->m_iWW = 180;
 		add->box->m_iHH = 180;
-		add->box->color = QColor("#FFFFCC");
+		add->box->color = QColor("#FCF2E2");
 	}
 	else if (sender == m_oAddDecision)
 	{
@@ -929,8 +929,8 @@ void box_view::slot_add_element()
 	{
 		add->box->m_iType = data_box::CLASS;
 		add->box->color = QColor("#FCF2E2");
-		add->box->m_iWW = 70;
-		add->box->m_iHH = 30;
+		add->box->m_iWW = 150;
+		add->box->m_iHH = 80;
 
 		add->box->m_sText = "MyClass";
 		add->box->m_sStereotype = "entity";

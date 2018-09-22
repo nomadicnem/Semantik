@@ -295,8 +295,7 @@ void sem_mediator::init_colors()
 	m_oColorSchemes.clear();
 
 	QStringList l_oS;
-	//l_oS<<"#FFFCD5"<<"#ABFBC7"<<"#FDE1E1"<<"#D2F1FF"<<"#EDDFFF"<<"#FFFFFF";
-	l_oS<<"#fffe8d"<<"#91ffab"<<"#9bfffe"<<"#b8bbff"<<"#e0aaff"<<"#ffa6a6"<<"#ffd8a6"<<"#FFFFFF"<<"#d3d7cf";
+	l_oS<<"#fffe8d"<<"#cafeba"<<"#bafefe"<<"#bad4fe"<<"#e0bafe"<<"#febaba"<<"#fefeba"<<"#ffffff"<<"#fcf2e2";
 
 	int i = 0;
 	foreach (QString l_s, l_oS)

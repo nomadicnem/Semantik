@@ -9,7 +9,7 @@
 #include "box_chain.h"
 
 #define MUL 64
-#define GRADVAL 110
+#define GRADVAL 108
 #define JUST 1
 class box_link;
 class box_control_point;
