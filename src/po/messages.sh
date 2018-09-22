@@ -4,7 +4,7 @@ set -e
 
 BASEDIR="../"	# root of translatable sources
 PROJECT="semantik"	# project name
-BUGADDR="https://github.com/ita1024/semantik/issues"	# MSGID-Bugs
+BUGADDR="https://gitlab.com/ita1024/semantik/issues"	# MSGID-Bugs
 WDIR=`pwd`		# working dir
 
 echo "Preparing rc files"

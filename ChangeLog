@@ -4,6 +4,7 @@ Semantik 1.0.5
 * Fix drawing artifacts when switching diagrams
 * Fix the inactive custom color buttons in semantik #88
 * Add a color toolbar to semantik-d
+* Improve the default colors for readability
 
 Semantik 1.0.4
 --------------
