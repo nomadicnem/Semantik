@@ -124,7 +124,8 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		cur_link->m_iRightArrow = (data_link::Arrow) i_oAttrs.value(notr("rightarrow")).toInt();
 		cur_link->m_iLeftArrow = (data_link::Arrow) i_oAttrs.value(notr("leftarrow")).toInt();
 		if (i_oAttrs.index("rightarrow") < 0) cur_link->m_iRightArrow = data_link::TRIANGLE; // legacy
-		cur_link->color = QColor(i_oAttrs.value(notr("color")));
+		cur_link->m_oCustom.m_oInnerColor = QColor(i_oAttrs.value(notr("color")));
+		cur_link->m_iColor = i_oAttrs.value(notr("color_id")).toInt();
 		cur_link->m_oStartPoint = QPoint(i_oAttrs.value(notr("startx")).toInt(), i_oAttrs.value(notr("starty")).toInt());
 		cur_link->m_oEndPoint = QPoint(i_oAttrs.value(notr("endx")).toInt(), i_oAttrs.value(notr("endy")).toInt());
 		cur_link->border_width = i_oAttrs.value(notr("border_width")).toInt();
@@ -577,15 +578,16 @@ QString sem_mediator::doc_to_xml()
 				QString::number(link->m_iParentPos),
 				QString::number(link->m_iChild),
 				QString::number(link->m_iChildPos),
-				link->color.name(),
+				link->m_oCustom.m_oInnerColor.name(),
 				QString::number(link->border_width),
-				QString("\n  pen_style=\"%1\" startx=\"%2\" starty=\"%3\" endx=\"%4\" endy=\"%5\" leftarrow=\"%6\"").arg(
+				QString("\n  pen_style=\"%1\" startx=\"%2\" starty=\"%3\" endx=\"%4\" endy=\"%5\" leftarrow=\"%6\" color_id=\"%7\"").arg(
 					QString::number(link->pen_style),
 					QString::number(link->m_oStartPoint.x()),
 					QString::number(link->m_oStartPoint.y()),
 					QString::number(link->m_oEndPoint.x()),
 					QString::number(link->m_oEndPoint.y()),
-					QString::number(link->m_iLeftArrow)
+					QString::number(link->m_iLeftArrow),
+					QString::number(link->m_iColor)
 				),
 				QString("\n  rightarrow=\"%1\" line_type=\"%2\" child_caption=\"%3\" parent_caption=\"%4\" caption=\"%5\"").arg(
 					QString::number(link->m_iRightArrow),

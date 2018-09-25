@@ -57,7 +57,8 @@ void box_database::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 		l_fRat = l_oRect.height() - 5;
 	}
 	l_oRect2.setHeight(l_fRat);
-	QColor bc(m_oBox->color);
+
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
 	{
 		painter->setBrush(bc);

@@ -51,7 +51,7 @@ void box_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	QPointF l_oMidBottom = (l_oRect.bottomLeft() + l_oRect.bottomRight()) / 2.;
 	l_oRect.setBottomLeft(l_oRect.topLeft() + QPointF(0, m_iBoxHeight));
 
-	QColor bc(m_oBox->color);
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
 	{
 		painter->setBrush(bc);

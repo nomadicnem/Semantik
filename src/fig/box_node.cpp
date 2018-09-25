@@ -41,7 +41,7 @@ void box_node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 {
 	doc.setDefaultFont(scene()->font());
 
-	QColor bc(m_oBox->color);
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	painter->setBrush(bc);
 
 	QPen l_oPen = QPen(Qt::SolidLine);

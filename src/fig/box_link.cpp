@@ -141,11 +141,11 @@ void compute_angles(bool i_bParent, data_link::LineType i_iType, data_link::Dire
 
 void box_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *option, QWidget * i_oW)
 {
-	i_oPainter->setBrush(m_oInnerLink.color);
+	i_oPainter->setBrush(m_oInnerLink.getColor(m_oView->m_oMediator));
 
 	QPen l_oPen(m_oInnerLink.pen_style);
 	l_oPen.setWidthF(0.01 + m_oInnerLink.border_width);
-	l_oPen.setColor(m_oInnerLink.color);
+	l_oPen.setColor(m_oInnerLink.getColor(m_oView->m_oMediator));
 	l_oPen.setCosmetic(false);
 	i_oPainter->setPen(l_oPen);
 

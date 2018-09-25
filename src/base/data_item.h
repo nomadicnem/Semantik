@@ -35,10 +35,14 @@ class diagram_item
 	void setBorderWidth(int);
 	void setPenStyle(Qt::PenStyle);
 	void setColor(QColor);
+	const QColor& getColor(sem_mediator*) const;
 
 	int border_width;
 	Qt::PenStyle pen_style;
-	QColor color;
+
+	color_scheme m_oCustom;
+	//QColor m_oCustomColor;
+	int m_iColor;
 };
 
 class data_link : public diagram_item

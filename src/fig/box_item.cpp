@@ -71,7 +71,7 @@ void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 	painter->setPen(l_oPen);
 
-	QColor bc(m_oBox->color);
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
 	{
 		painter->setBrush(bc);

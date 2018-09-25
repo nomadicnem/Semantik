@@ -85,7 +85,7 @@ void box_fork::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	qreal pad = l_oPen.width() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
-	painter->setBrush(m_oBox->color);
+	painter->setBrush(m_oBox->getColor(m_oView->m_oMediator));
 	painter->drawRect(l_oRect);
 }
 

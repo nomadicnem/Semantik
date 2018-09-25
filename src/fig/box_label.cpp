@@ -48,7 +48,7 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	painter->translate(OFF, OFF);
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
-	ctx.palette.setColor(QPalette::Text, m_oBox->color);
+	ctx.palette.setColor(QPalette::Text, m_oBox->getColor(m_oView->m_oMediator));
 	doc.documentLayout()->draw(painter, ctx);
 }
 

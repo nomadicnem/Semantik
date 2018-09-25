@@ -40,7 +40,7 @@ void box_rectangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 
-	QColor bc(m_oBox->color);
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
 	{
 		painter->setBrush(bc);

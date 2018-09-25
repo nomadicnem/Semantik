@@ -117,7 +117,7 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 void semantik_d_win::wire_actions()
 {
-	//m_oColorGroup->disconnect();
+	m_oColorGroup->disconnect();
 	if (m_oActiveDocument)
 	{
 		connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oActiveDocument->m_oDiagramView, SLOT(change_colors(QAction*)));

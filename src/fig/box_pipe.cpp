@@ -58,7 +58,8 @@ void box_pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 		l_fRat = l_oRect.width() - 5;
 	}
 	l_oRect2.setWidth(l_fRat);
-	QColor bc(m_oBox->color);
+
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
 	{
 		painter->setBrush(bc);

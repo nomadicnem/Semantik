@@ -131,7 +131,6 @@ class box_view : public QGraphicsView
 		void fit_zoom();
 		void slot_delete();
 		void slot_add_item();
-		void slot_color();
 		void slot_edit_properties();
 		void slot_align();
 		void slot_size();

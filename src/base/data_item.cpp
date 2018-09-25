@@ -141,6 +141,7 @@ diagram_item::diagram_item()
 {
 	pen_style = Qt::SolidLine;
 	border_width = 1;
+	m_iColor = -1;
 }
 
 data_box::data_box(int id) : diagram_item(), node()
@@ -151,7 +152,7 @@ data_box::data_box(int id) : diagram_item(), node()
 	m_iType = data_box::ACTIVITY;
 	m_iWW = 100;
 	m_iHH = 40;
-	color = QColor("#a7e89b");
+	m_oCustom.m_oInnerColor = QColor("#a7e89b");
 
 	m_bAbstract = false;
 	m_bStatic = false;
@@ -169,7 +170,7 @@ data_box& data_box::operator=(const data_box & i_o)
 	m_iType = i_o.m_iType;
 	m_iWW = i_o.m_iWW;
 	m_iHH = i_o.m_iHH;
-	color = i_o.color;
+	m_oCustom.m_oInnerColor = i_o.m_oCustom.m_oInnerColor;
 
 	m_oRowSizes = i_o.m_oRowSizes;
 	m_oColSizes = i_o.m_oColSizes;
@@ -201,12 +202,13 @@ void data_box::dump_xml(QStringList & i_oS)
 		QString::number(m_iYY),
 		QString::number(m_iWW),
 		QString::number(m_iHH),
-		color.name(),
+		m_oCustom.m_oInnerColor.name(),
 		QString::number((int) m_iType),
-		QString(" v=\"%1\" e=\"%2\" seq=\"%3\" version=\"2\"").arg(
+		QString(" v=\"%1\" e=\"%2\" seq=\"%3\" version=\"2\" color_id=\"%4\"").arg(
 			QString::number((int) m_bIsVertical),
 			QString::number((int) m_bIsEnd),
-			QString::number((int) m_iBoxHeight)
+			QString::number((int) m_iBoxHeight),
+			QString::number((int) m_iColor)
 		)
 	);
 
@@ -252,11 +254,12 @@ void data_box::read_data(const QString& i_sTag, const QXmlAttributes& i_oAttrs)
 	{
 		m_iBoxHeight = 20;
 	}
-	color = QColor(i_oAttrs.value(notr("color")));
+	m_oCustom.m_oInnerColor = QColor(i_oAttrs.value(notr("color")));
+	m_iColor = i_oAttrs.value(notr("color_id")).toInt();
 	int l_iVersion = i_oAttrs.value(notr("version")).toInt();
 	if (l_iVersion < 1 && m_iType == data_box::LABEL)
 	{
-		color = Qt::black;
+		m_oCustom.m_oInnerColor = Qt::black;
 	}
 
 	// TODO remove in the future...
@@ -314,12 +317,12 @@ void diagram_item::setPenStyle(Qt::PenStyle st)
 
 void diagram_item::setColor(QColor co)
 {
-	color = co;
+	m_oCustom.m_oInnerColor = co;
 }
 
 data_link::data_link() : diagram_item()
 {
-	color = QColor(Qt::black);
+	m_oCustom.m_oInnerColor = QColor(Qt::black);
 	m_iParentPos = NORTH;
 	m_iChildPos = NORTH;
 	m_iLeftArrow = NONE;
@@ -347,7 +350,7 @@ void data_link::copy_from(const data_link& i_oLink)
 
 	border_width  = i_oLink.border_width;
 	pen_style     = i_oLink.pen_style;
-	color         = i_oLink.color;
+	m_oCustom.m_oInnerColor = i_oLink.m_oCustom.m_oInnerColor;
 }
 
 bool data_link::equals(const data_link& i_oLink)
@@ -420,5 +423,17 @@ void data_box_attribute::dump_xml(QStringList &i_oS)
 		QString::number((int) m_oVisibility),
 		QString::number((int) m_bStatic)
 	);
+}
+
+const QColor & diagram_item::getColor(sem_mediator* i_oMediator) const
+{
+	if (m_iColor <= 0 || m_iColor >= i_oMediator->m_oColorSchemes.size())
+	{
+		return m_oCustom.m_oInnerColor;
+	}
+	else
+	{
+		return i_oMediator->m_oColorSchemes[m_iColor].m_oInnerColor;
+	}
 }
 

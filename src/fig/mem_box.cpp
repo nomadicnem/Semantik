@@ -59,7 +59,7 @@ mem_add_box::mem_add_box(sem_mediator* mod, int id, int boxid) : mem_command(mod
 	item = model->m_oItems.value(id);
 
 	box = new data_box(boxid);
-	box->color = QColor("#cafeba");
+	box->m_oCustom.m_oInnerColor = QColor("#cafeba");
 }
 
 void mem_add_box::redo()
@@ -164,14 +164,16 @@ void mem_prop_box::redo() {
 	{
 		diagram_item *cur = items.at(i);
 		diagram_item *it = new diagram_item();
-		it->color = cur->color;
+		it->m_oCustom = cur->m_oCustom;
+		it->m_iColor = cur->m_iColor;
 		it->pen_style = cur->pen_style;
 		it->border_width = cur->border_width;
 		prev_values[cur] = it;
 	}
 	foreach (diagram_item *cur, items) {
 		if (change_type & CH_COLOR) {
-			cur->color = new_props.color;
+			cur->m_oCustom = new_props.m_oCustom;
+			cur->m_iColor = new_props.m_iColor;
 		}
 		if (change_type & CH_BORDER) {
 			cur->border_width = new_props.border_width;
@@ -187,7 +189,8 @@ void mem_prop_box::redo() {
 void mem_prop_box::undo() {
 	foreach (diagram_item *cur, items) {
 		if (change_type & CH_COLOR) {
-			cur->color = prev_values[cur]->color;
+			cur->m_oCustom = prev_values[cur]->m_oCustom;
+			cur->m_iColor = prev_values[cur]->m_iColor;
 		}
 		if (change_type & CH_BORDER) {
 			cur->border_width = prev_values[cur]->border_width;

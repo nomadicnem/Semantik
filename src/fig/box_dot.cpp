@@ -60,11 +60,11 @@ void box_dot::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 	painter->setPen(l_oPen);
 	if (m_oBox->m_bIsEnd) {
 		painter->drawEllipse(l_oRect);
-		painter->setBrush(m_oBox->color);
+		painter->setBrush(m_oBox->getColor(m_oView->m_oMediator));
 		QRectF in = l_oRect.adjusted(PAD+1, PAD+1, -PAD-1, -PAD-1);
 		painter->drawEllipse(in);
 	} else {
-		painter->setBrush(m_oBox->color);
+		painter->setBrush(m_oBox->getColor(m_oView->m_oMediator));
 		painter->drawEllipse(l_oRect);
 	}
 }

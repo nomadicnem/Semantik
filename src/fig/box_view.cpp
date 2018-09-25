@@ -118,7 +118,7 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 		box->m_iXX = i_oAttrs.value(QObject::trUtf8("c1")).toFloat();
 		box->m_iYY = i_oAttrs.value(QObject::trUtf8("c2")).toFloat();
 		box->m_sText = i_oAttrs.value(QObject::trUtf8("text"));
-		box->color = i_oAttrs.value(QObject::trUtf8("col"));
+		box->m_oCustom.m_oInnerColor = i_oAttrs.value(QObject::trUtf8("col"));
 		//l_o->setRect(QRectF(0., 0., i_oAttrs.value(QObject::trUtf8("c3")).toDouble(), i_oAttrs.value(QObject::trUtf8("c4")).toDouble()));
 	}
 	else if (i_sName == QObject::trUtf8("box_link"))
@@ -726,6 +726,7 @@ void box_view::change_colors(QAction* i_oAct)
 	if (!hasFocus()) return;
 	if (scene()->selectedItems().size() < 1) return;
 
+	int l_iColor = -1;
 	QColor l_oColor;
 	static QColor selected_color;
 
@@ -747,6 +748,7 @@ void box_view::change_colors(QAction* i_oAct)
 			{
 				selected_color = l_oColor = m_oMediator->m_oColorSchemes[i].m_oInnerColor;
 			}
+			l_iColor = i;
 			break;
 		}
 	}
@@ -764,30 +766,8 @@ void box_view::change_colors(QAction* i_oAct)
 		}
 	}
 	mem->change_type = CH_COLOR;
-	mem->new_props.color = l_oColor;
-	mem->apply();
-}
-
-void box_view::slot_color()
-{
-	if (scene()->selectedItems().size() < 1) return;
-	QColor l_oColor = QColorDialog::getColor(Qt::white, this);
-
-	if (!l_oColor.isValid()) return;
-	mem_prop_box *mem = new mem_prop_box(m_oMediator, m_iId);
-	foreach (QGraphicsItem *l_o, scene()->selectedItems())
-	{
-		if (box_link *k = dynamic_cast<box_link*>(l_o))
-		{
-			mem->items.append(k->m_oLink);
-		}
-		else if (connectable *k = dynamic_cast<connectable*>(l_o))
-		{
-			mem->items.append(k->m_oBox);
-		}
-	}
-	mem->change_type = CH_COLOR;
-	mem->new_props.color = l_oColor;
+	mem->new_props.m_iColor = l_iColor;
+	mem->new_props.m_oCustom.m_oInnerColor = l_oColor;
 	mem->apply();
 }
 
@@ -836,18 +816,18 @@ void box_view::slot_add_element()
 
 	if (sender == m_oAddDotEnd || sender == m_oAddDotStart) {
 		add->box->m_iType = data_box::ACTIVITY_START;
-		add->box->color = QColor(Qt::black);
+		add->box->m_oCustom.m_oInnerColor = QColor(Qt::black);
 	}
 	if (sender == m_oAddParallelHorizontal || sender == m_oAddParallelVertical) {
 		add->box->m_iType = data_box::ACTIVITY_PARALLEL;
-		add->box->color = QColor(Qt::black);
+		add->box->m_oCustom.m_oInnerColor = QColor(Qt::black);
 	}
 	if (sender == m_oAddLabel)
 	{
 		add->box->m_iType = data_box::LABEL;
 		add->box->m_iWW = 60;
 		add->box->m_iHH = 30;
-		add->box->color = Qt::black;
+		add->box->m_oCustom.m_oInnerColor = Qt::black;
 		add->box->m_sText = QString("...");
 	}
 	else if (sender == m_oAddActor)
@@ -867,21 +847,21 @@ void box_view::slot_add_element()
 		add->box->m_iType = data_box::COMPONENT;
 		add->box->m_iWW = 120;
 		add->box->m_iHH = 60;
-		add->box->color = QColor("#FCF2E2");
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
 	}
 	else if (sender == m_oAddRectangle)
 	{
 		add->box->m_iType = data_box::RECTANGLE;
 		add->box->m_iWW = 100;
 		add->box->m_iHH = 40;
-		add->box->color = QColor("#FFFFCC");
+		add->box->m_oCustom.m_oInnerColor = QColor("#FFFFCC");
 	}
 	else if (sender == m_oAddNode)
 	{
 		add->box->m_iType = data_box::NODE;
 		add->box->m_iWW = 180;
 		add->box->m_iHH = 180;
-		add->box->color = QColor("#FCF2E2");
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
 	}
 	else if (sender == m_oAddDecision)
 	{
@@ -914,21 +894,21 @@ void box_view::slot_add_element()
 	else if (sender == m_oAddDatabase)
 	{
 		add->box->m_iType = data_box::DATABASE;
-		add->box->color = QColor("#FCF2E2");
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
 		add->box->m_iWW = 60;
 		add->box->m_iHH = 90;
 	}
 	else if (sender == m_oAddPipe)
 	{
 		add->box->m_iType = data_box::PIPE;
-		add->box->color = QColor("#FCF2E2");
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
 		add->box->m_iWW = 90;
 		add->box->m_iHH = 30;
 	}
 	else if (sender == m_oAddClass)
 	{
 		add->box->m_iType = data_box::CLASS;
-		add->box->color = QColor("#FCF2E2");
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
 		add->box->m_iWW = 150;
 		add->box->m_iHH = 80;
 

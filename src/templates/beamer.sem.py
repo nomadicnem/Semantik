@@ -218,7 +218,7 @@ def print_nodes(node, niv):
 		elif niv == 1 and num >= 1:
 			out('\\subsection{%s}\n' % sm)
 
-		if subtree.child_count() > 0:
+		if subtree.child_count() >= 0:
 			if int(subtree.get_val('tree_size')) < 16:
 				print_slide(subtree, 0);
 				print_figure_slides(subtree, True)

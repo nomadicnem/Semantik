@@ -41,8 +41,7 @@ void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	qreal pad = l_oPen.width() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
-
-	QColor bc(m_oBox->color);
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
 	{
 		painter->setBrush(bc);

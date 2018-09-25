@@ -56,7 +56,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 
-	QColor bc(m_oBox->color);
+	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	i_oPainter->setBrush(bc);
 	i_oPainter->drawRect(l_oRect);
 

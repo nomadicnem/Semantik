@@ -267,18 +267,26 @@ void canvas_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	}
 	else
 	{
-		if (m_oGraph->m_oMediator->parent_of(Id()) <= 0 && l_oItem->m_iColor > 1)
+		if (m_oGraph->m_bDisableGradient)
 		{
-			QLinearGradient l_oGradient(l_oRect.right()-40, 0, l_oRect.right()-10, 0);
-			l_oGradient.setColorAt(0., l_oColorScheme.m_oInnerColor);
-			l_oGradient.setColorAt(1., l_oItem->get_color_scheme_raw().m_oInnerColor);
-
-			QBrush l_oBrush(l_oGradient);
-			painter->setBrush(l_oBrush);
+			painter->setBrush(l_oColorScheme.m_oInnerColor);
 		}
 		else
 		{
-			painter->setBrush(l_oColorScheme.m_oInnerColor);
+			QLinearGradient l_oGradient(l_oRect.right()-40, 0, l_oRect.right()-10, 0);
+			l_oGradient.setColorAt(0., l_oColorScheme.m_oInnerColor);
+
+			if (m_oGraph->m_oMediator->parent_of(Id()) <= 0 && l_oItem->m_iColor > 1)
+			{
+				l_oGradient.setColorAt(1., l_oItem->get_color_scheme_raw().m_oInnerColor);
+			}
+			else
+			{
+				l_oGradient.setColorAt(1., l_oColorScheme.m_oInnerColor.darker(106));
+			}
+
+			QBrush l_oBrush(l_oGradient);
+			painter->setBrush(l_oBrush);
 		}
 	}
 
