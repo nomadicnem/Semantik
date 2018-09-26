@@ -1122,19 +1122,20 @@ int sem_mediator::num_children(int i_iParent)
 	return l_iCnt;
 }
 
-void sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirName, const QString &i_sLocation)
+int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirName, const QString &i_sLocation)
 {
 	if (choose_root() == NO_ITEM)
 	{
-		//qDebug()<<"root is -1";
-		return;
+		qDebug()<<"Missing root item";
+		emit sig_message(trUtf8("Code generation failed: no root item"), 5000);
+		return 21;
 	}
 
 	QFile l_o2(i_oFile);
 	if (!l_o2.open(QIODevice::ReadOnly))
 	{
 		emit sig_message(trUtf8("Code generation failed: missing file %1").arg(i_oFile), 5000);
-		return;
+		return 22;
 	}
 
 	QByteArray l_oBa = l_o2.readAll();
@@ -1168,17 +1169,18 @@ void sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNa
 	if (!init_py())
 	{
 		emit sig_message(trUtf8("Missing bindings for opening files"), 5000);
-		return;
+		return 23;
 	}
 	int ret = PyRun_SimpleString(l_oBa.constData());
 	if (ret != 0)
 	{
 		emit sig_message(trUtf8("Document generation failed, check the output folder"), 50000);
-		return;
+		return 24;
 	}
 
 	emit sig_message(trUtf8("Document generation completed successfully"), 5000);
 	emit sig_preview();
+	return 0;
 }
 
 int sem_mediator::choose_root()

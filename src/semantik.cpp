@@ -2,6 +2,7 @@
 
 #include <QtGui>
 #include <QFile>
+ # include <QDir>
 #include <QTextBrowser>
 #include <QProgressDialog>
 #include <KDE/KStatusBar>
@@ -391,7 +392,7 @@ void semantik_win::read_config()
 
 	move(l_oConfig.readEntry(notr("winpos"), QPoint(0, 0)));
 	m_oCanvas->setBackgroundBrush(QColor(l_oConfig.readEntry(notr("bgcolor"), notr("#FFFDE8"))));
-	m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), notr("/tmp/"));
+	m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), QDir::homePath());
 	bind_node::set_var(notr("outdir"), m_oMediator->m_sOutDir);
 
 	QString l_oGuidString = l_oConfig.readEntry(notr("guid"));

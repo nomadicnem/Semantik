@@ -1,3 +1,7 @@
+Semantik 1.0.6
+--------------
+* Improve the document export from the command-line
+
 Semantik 1.0.5
 --------------
 * Highlight code snippets in beamer presentations/pdflatex using Minted

@@ -204,19 +204,22 @@ def print_figure_slides(node, recurse=False):
 		print_figure_slides(node.child_num(i))
 	#print_figure_slides(root, recurse=False)
 
+# 0. all nodes result in some text being output
+# 1. unless explicitly stated, figures only result
+# 2. top-level nodes always make a section
 def print_nodes(node, niv):
-
 	num = node.child_count()
 	for i in range(num):
 		subtree = node.child_num(i)
-		#print_nodes(node.child_num(i), niv+1)
+		title = tex_convert(subtree.get_val('summary'))
 
-		sm = tex_convert(subtree.get_val('summary'))
 		num = subtree.child_count()
-		if niv == 0 and num >= 1:
-			out('\\section{%s}\n' % sm)
-		elif niv == 1 and num >= 1:
-			out('\\subsection{%s}\n' % sm)
+		if niv == 0:
+			out('%% %s\n' % ('=' * 79))
+			out('\\section{%s}\n' % title)
+
+		#elif niv == 1 and num >= 1:
+		#	out('\\subsection{%s}\n' % title)
 
 		if subtree.child_count() >= 0:
 			if int(subtree.get_val('tree_size')) < 16:

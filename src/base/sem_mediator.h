@@ -194,7 +194,7 @@ class sem_mediator: public QObject
 		bool save_and_load_picture(const QUrl& i_sPath, int id);
 		bool m_bIsDiagram;
 
-		void generate_docs(const QString &i_oFile, const QString &i_sName, const QString &i_sLocation);
+		int generate_docs(const QString &i_oFile, const QString &i_sName, const QString &i_sLocation);
 
 		int m_iTimerValue;
 		int parent_of(int i_iId);
