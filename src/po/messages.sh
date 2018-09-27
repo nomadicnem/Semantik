@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 
 set -e
 
@@ -7,8 +7,15 @@ PROJECT="semantik"	# project name
 BUGADDR="https://gitlab.com/ita1024/semantik/issues"	# MSGID-Bugs
 WDIR=`pwd`		# working dir
 
-echo "Preparing rc files"
 cd ${BASEDIR}
+pwd
+
+echo "Preparing the tips"
+cd data
+preparetips5 > tips.cpp
+cd ..
+
+echo "Preparing rc files"
 
 # we use simple sorting to make sure the lines do not jump around too much from system to system
 find . -name '*.rc' -o -name '*.ui' -o -name '*.kcfg' | sort > ${WDIR}/rcfiles.list
@@ -22,6 +29,7 @@ echo "Done preparing rc files"
 echo "Extracting messages"
 cd ${BASEDIR}
 # see above on sorting
+
 find . -name '*.cpp' -o -name '*.h' -o -name '*.c' | sort > ${WDIR}/infiles.list
 echo "rc.cpp" >> ${WDIR}/infiles.list
 cd ${WDIR}
@@ -29,6 +37,7 @@ xgettext --from-code=UTF-8 -C -kde -ci18n -ki18n:1 -ki18nc:1c,2 -ki18np:1,2 -ki1
 	-kI18N_NOOP:1 -kI18N_NOOP2:1c,2 -kaliasLocale -kki18n:1 -kki18nc:1c,2 -ktrUtf8 -kki18np:1,2 -kki18ncp:1c,2,3 \
 	--msgid-bugs-address="${BUGADDR}" \
 	--files-from=infiles.list -D ${BASEDIR} -D ${WDIR} -o ${PROJECT}.pot || { echo "error while calling xgettext. aborting."; exit 1; }
+
 echo "Done extracting messages"
 
 echo "Merging translations"
@@ -43,6 +52,6 @@ echo "Cleaning up"
 cd ${WDIR}
 rm rcfiles.list
 rm infiles.list
-rm rc.cpp
+rm -f rc.cpp src/data/tips.cpp
 echo "Done"
 

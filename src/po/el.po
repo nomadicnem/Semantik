@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-22 21:22+0200\n"
+"POT-Creation-Date: 2018-09-27 17:31+0200\n"
 "PO-Revision-Date: 2009-07-28 12:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ελληνικά <kde-i18n-doc@kde.org>\n"
@@ -23,63 +23,68 @@ msgstr "Κενό"
 msgid "Flag item(s) as..."
 msgstr "Σημείωση αντικειμένου(ων) ως..."
 
-#: base/sem_mediator.cpp:284
+#: base/sem_mediator.cpp:285
 msgid "Automatic save failed for file: %1"
 msgstr "Απέτυχε η αυτόματη αποθήκευση για το αρχείο: %1"
 
-#: base/sem_mediator.cpp:287
+#: base/sem_mediator.cpp:288
 msgid "%1 saved automatically"
 msgstr "%1 αποθηκεύτηκε αυτόματα"
 
-#: base/sem_mediator.cpp:305
+#: base/sem_mediator.cpp:306
 msgid "Color %1"
 msgstr "Χρώμα %1"
 
-#: base/sem_mediator.cpp:625
+#: base/sem_mediator.cpp:627
 msgid "File saving: missing file %1"
 msgstr "Αποθήκευση αρχείου: το αρχείο %1 λείπει"
 
-#: base/sem_mediator.cpp:650 base/sem_mediator.cpp:1168
-#: base/sem_mediator.cpp:1216
+#: base/sem_mediator.cpp:652 base/sem_mediator.cpp:1171
+#: base/sem_mediator.cpp:1220
 msgid "Missing bindings for opening files"
 msgstr "Ανυπαρξία δεσμών για το άνοιγμα των αρχείων"
 
-#: base/sem_mediator.cpp:705
+#: base/sem_mediator.cpp:707
 msgid "Missing filter file %1 for opening files"
 msgstr "Έλλειψη φίλτρου αρχείου %1 για το άνοιγμα των αρχείων"
 
-#: base/sem_mediator.cpp:705 base/sem_mediator.cpp:720
+#: base/sem_mediator.cpp:707 base/sem_mediator.cpp:722
 msgid "Broken installation"
 msgstr ""
 
-#: base/sem_mediator.cpp:720
+#: base/sem_mediator.cpp:722
 #, fuzzy
 msgid "Missing python bindings for opening files"
 msgstr "Ανυπαρξία δεσμών για το άνοιγμα των αρχείων"
 
-#: base/sem_mediator.cpp:740
+#: base/sem_mediator.cpp:742
 msgid "Could not load the document %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:740 base/sem_mediator.cpp:767
+#: base/sem_mediator.cpp:742 base/sem_mediator.cpp:769
 #, fuzzy
 msgid "Broken document"
 msgstr "Κλείσιμο εγγράφου"
 
-#: base/sem_mediator.cpp:767
+#: base/sem_mediator.cpp:769
 #, fuzzy
 msgid "Could not load the picture %1"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: base/sem_mediator.cpp:1134
+#: base/sem_mediator.cpp:1130
+#, fuzzy
+msgid "Code generation failed: no root item"
+msgstr "Η δημιουργία κώδικα απέτυχε: αρχείο που λείπει %1"
+
+#: base/sem_mediator.cpp:1137
 msgid "Code generation failed: missing file %1"
 msgstr "Η δημιουργία κώδικα απέτυχε: αρχείο που λείπει %1"
 
-#: base/sem_mediator.cpp:1174
+#: base/sem_mediator.cpp:1177
 msgid "Document generation failed, check the output folder"
 msgstr ""
 
-#: base/sem_mediator.cpp:1178
+#: base/sem_mediator.cpp:1181
 msgid "Document generation completed successfully"
 msgstr ""
 
@@ -175,28 +180,28 @@ msgstr "Σημαία"
 msgid "Click to set Item %1"
 msgstr "Κλικ για τον ορισμό αντικειμένου %1"
 
-#: canvas_view.cpp:1282 fig/box_view.cpp:2080
+#: canvas_view.cpp:1282 fig/box_view.cpp:2060
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2118
+#: canvas_view.cpp:1320 fig/box_view.cpp:2098
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1344 fig/box_view.cpp:2142
+#: canvas_view.cpp:1344 fig/box_view.cpp:2122
 #, fuzzy
 msgid "Exported '%1'"
 msgstr "Αποθηκεύτηκε '%1'"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2144
+#: canvas_view.cpp:1346 fig/box_view.cpp:2124
 #, fuzzy
 msgid "Could not save to %1"
 msgstr "Κλικ για τον ορισμό αντικειμένου %1"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2144
+#: canvas_view.cpp:1346 fig/box_view.cpp:2124
 #, fuzzy
 msgid "Missing picture"
 msgstr "Αλλαγή εικόνας"
@@ -206,15 +211,15 @@ msgstr "Αλλαγή εικόνας"
 msgid "Semantik map"
 msgstr "Semantik"
 
-#: canvas_view.cpp:1677 fig/box_view.cpp:2005
+#: canvas_view.cpp:1676 fig/box_view.cpp:1985
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1688 fig/box_view.cpp:2016
+#: canvas_view.cpp:1687 fig/box_view.cpp:1996
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1692 fig/box_view.cpp:2020
+#: canvas_view.cpp:1691 fig/box_view.cpp:2000
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -284,6 +289,137 @@ msgid ""
 msgstr ""
 "Χρονικό διάτημα σε λεπτά για την αυτόματη αποθήκευση του εγγράφου, 0 για  "
 "απενεργοποίηση αυτής της λειτουργίας."
+
+#. i18n: file: tips:2
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:3
+msgid ""
+"<h3>1. Essential commands</h3>\n"
+"<ul>\n"
+" <li>Double click to add a concept, type &quot;Enter&quot; to edit it</li>\n"
+" <li>Double click on a leaf or use the link mode to connect concepts</li>\n"
+" <li>Double click on a link to remove it</li>\n"
+" <li>Middle button + move to scroll on the map</li>\n"
+" <li>Scroll wheel for zooming</li>\n"
+" <li>When a concept is selected, press enter to start editing it</li>\n"
+" <li>Control+R to reorganize the map</li>\n"
+" <li>Control+H to center the zoom on selected objects</li>\n"
+" <li>When a map is ready, use Ctrl+G to generate a document</li>\n"
+"</ul>\n"
+msgstr ""
+
+#. i18n: file: tips:19
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:19
+msgid ""
+"<h3>2. Adding diagrams</h3>\n"
+"<ul>\n"
+" <li>right-click on a map item and select data type: diagram</li>\n"
+" <li>in the data view, double click to add a diagram item</li>\n"
+" <li>hold the control key pressed to drag connections between items</li>\n"
+" <li>to remove a connection, double click on it with the control key "
+"pressed</li>\n"
+" <li>right click on a connection or on an item to change the colors</li>\n"
+"</ul>\n"
+msgstr ""
+
+#. i18n: file: tips:32
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:31
+msgid ""
+"<h3>3. Advanced features</h3>\n"
+"<ul>\n"
+" <li>Control+Enter to add a child, Shift+Enter to add a sibling</li>\n"
+" <li>Up,Left,Down,Right arrows to navigate one item at a time</li>\n"
+" <li>PageUp/PageDown to cycle between trees</li>\n"
+" <li>Alt + Up,Left,Down,Right arrows to move items</li>\n"
+" <li>Control + left click on items to link them</li>\n"
+" <li>Add document generator hints using the 'Variables' dock widget, for "
+"example fancy_off=fancy_off (format is key=value)</li>\n"
+"</ul>\n"
+msgstr ""
+
+#. i18n: file: tips:46
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:44
+msgid ""
+"<h3>4. Data types</h3>\n"
+"<ul>\n"
+" <li>Right-click on a map item and set the data type</li>\n"
+" <li>Graphs can be created in the diagram panel</li>\n"
+" <li>Pictures can be added in the image panel</li>\n"
+"</ul>\n"
+msgstr ""
+
+#. i18n: file: tips:57
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:54
+msgid ""
+"<h3>5. Diagrams</h3>\n"
+"<ul>\n"
+" <li>To connect diagram elements, drag the pointer from one box to another "
+"while maintaining the shift key pressed</li>\n"
+" <li>Right-click on a link or on a box to change the properties</li>\n"
+" <li>Diagrams can be saved as individual files and edited with the "
+"<b>semantik-d</b> application</li>\n"
+"</ul>\n"
+msgstr ""
+
+#. i18n: file: tips:68
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:64
+msgid ""
+"<h3>6. LaTeX export</h3>\n"
+"<p>\n"
+"Set <b>all_latex=1</b> in the variables view to let the beamer and pdf "
+"templates use LaTeX commands.\n"
+"</p>\n"
+msgstr ""
+
+#. i18n: file: tips:76
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:72
+msgid ""
+"<h3>7. Diagram size</h3>\n"
+"<p>\n"
+"The size of the diagrams exported can be tuned by specific values in the "
+"variables view:<br>\n"
+"<b>diagram_width</b>=200<br>\n"
+"<b>diagram_height</b>=500<br>\n"
+"</p>\n"
+msgstr ""
+
+#. i18n: file: tips:87
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:82
+msgid ""
+"<h3>8. Diagram editor</h3>\n"
+"<p>\n"
+"The application called \"semantik-d\" can be used to create diagrams "
+"individually. The diagrams can be imported or exported from the diagram view "
+"of semantik.\n"
+"Additionally, the diagrams can be exported to a variety of formats by using "
+"the command-line. Just specify the extension, and a diagram will be produced "
+"if it is supported:\n"
+"<pre>semantik-d /tmp/foo.semd -o /tmp/foo.svg</pre>\n"
+"The options &quot;--width&quot; and &quot;--height&quot; can be used to "
+"change the size of png files.\n"
+"</p>\n"
+msgstr ""
+
+#. i18n: file: tips:99
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:93
+msgid ""
+"<h3>9. Code snippets in LaTeX</h3>\n"
+"<p>\n"
+"Code snippets can be highlighted with Minted in pdflatex documents or Beamer "
+"presentations.\n"
+"Enable Minted by setting adding source code in the data box and adding the "
+"variable <i>minted_lang</i>\n"
+"to the variables box, for example: <pre>minted_lang=java</pre>\n"
+"</p>\n"
+msgstr ""
 
 #: data_view.cpp:17
 msgid "<p align='center'>No item selected</p>"
@@ -713,47 +849,47 @@ msgstr "Επιλογή δεξιά"
 msgid "Same width and height"
 msgstr ""
 
-#: fig/box_view.cpp:607 fig/box_view.cpp:1968
+#: fig/box_view.cpp:607 fig/box_view.cpp:1948
 #, fuzzy
 msgid "Semantik diagram"
 msgstr "Semantik"
 
-#: fig/box_view.cpp:1775 fig/semantik_d_win.cpp:324
+#: fig/box_view.cpp:1755 fig/semantik_d_win.cpp:324
 #, fuzzy
 msgid "Choose a file to open"
 msgstr "Επιλέξτε ένα όνομα αρχείου"
 
-#: fig/box_view.cpp:1777 fig/box_view.cpp:1815 fig/semantik_d_win.cpp:326
+#: fig/box_view.cpp:1757 fig/box_view.cpp:1795 fig/semantik_d_win.cpp:326
 #, fuzzy
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.sem|Semantik file (*.sem)"
 
-#: fig/box_view.cpp:1813 semantik.cpp:440 semantik.cpp:532
+#: fig/box_view.cpp:1793 semantik.cpp:441 semantik.cpp:533
 msgid "Choose a file name"
 msgstr "Επιλέξτε ένα όνομα αρχείου"
 
-#: fig/box_view.cpp:1829 semantik.cpp:455
+#: fig/box_view.cpp:1809 semantik.cpp:456
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
 msgstr ""
 
-#: fig/box_view.cpp:1830 semantik.cpp:456
+#: fig/box_view.cpp:1810 semantik.cpp:457
 msgid "Overwrite existing file"
 msgstr ""
 
-#: fig/box_view.cpp:1852 fig/box_view.cpp:1886 semantik.cpp:467
-#: semantik.cpp:503
+#: fig/box_view.cpp:1832 fig/box_view.cpp:1866 semantik.cpp:468
+#: semantik.cpp:504
 msgid "Saved '%1'"
 msgstr "Αποθηκεύτηκε '%1'"
 
-#: fig/box_view.cpp:1859 semantik.cpp:478 semantik.cpp:509
+#: fig/box_view.cpp:1839 semantik.cpp:479 semantik.cpp:510
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1860 semantik.cpp:479 semantik.cpp:510
+#: fig/box_view.cpp:1840 semantik.cpp:480 semantik.cpp:511
 msgid "Try again?"
 msgstr ""
 
@@ -770,7 +906,7 @@ msgstr "Γραμμές"
 msgid "Columns"
 msgstr "Στήλες"
 
-#: fig/semantik_d_win.cpp:41 semantik.cpp:144
+#: fig/semantik_d_win.cpp:41 semantik.cpp:145
 msgid "Colors"
 msgstr "Χρώματα"
 
@@ -779,11 +915,11 @@ msgstr "Χρώματα"
 msgid "&Export the diagram..."
 msgstr "Κενός χάρτης"
 
-#: fig/semantik_d_win.cpp:69 semantik.cpp:178
+#: fig/semantik_d_win.cpp:69 semantik.cpp:179
 msgid "Ctrl+Shift+E"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:74 semantik.cpp:199
+#: fig/semantik_d_win.cpp:74 semantik.cpp:200
 msgid "Ctrl+H"
 msgstr ""
 
@@ -791,11 +927,11 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:94 semantik.cpp:269
+#: fig/semantik_d_win.cpp:94 semantik.cpp:270
 msgid "Color"
 msgstr "Χρώμα"
 
-#: fig/semantik_d_win.cpp:102 semantik.cpp:277
+#: fig/semantik_d_win.cpp:102 semantik.cpp:278
 msgid "Custom color"
 msgstr "Προσαρμοσμένο χρώμα"
 
@@ -809,11 +945,11 @@ msgstr "Semantik"
 msgid "[Untitled]"
 msgstr "Χωρίς τίτλο"
 
-#: fig/semantik_d_win.cpp:291 semantik.cpp:604
+#: fig/semantik_d_win.cpp:291 semantik.cpp:605
 msgid "Untitled"
 msgstr "Χωρίς τίτλο"
 
-#: fig/semantik_d_win.cpp:294 semantik.cpp:607
+#: fig/semantik_d_win.cpp:294 semantik.cpp:608
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -822,11 +958,11 @@ msgstr ""
 "Θέλετε να αποθηκεύσετε τις αλλαγές\n"
 "ή να τις απορρίψετε;"
 
-#: fig/semantik_d_win.cpp:295 semantik.cpp:608
+#: fig/semantik_d_win.cpp:295 semantik.cpp:609
 msgid "Close Document"
 msgstr "Κλείσιμο εγγράφου"
 
-#: fig/semantik_d_win.cpp:432 semantik.cpp:545
+#: fig/semantik_d_win.cpp:432 semantik.cpp:546
 msgid " [Modified] "
 msgstr ""
 
@@ -840,11 +976,11 @@ msgstr "Semantik"
 msgid "%1 %2 - Semantik Diagram"
 msgstr "%1 - Semantik"
 
-#: fig/semd.cpp:29 main.cpp:30
+#: fig/semd.cpp:29 main.cpp:32
 msgid "A file to open on startup"
 msgstr ""
 
-#: fig/semd.cpp:30 main.cpp:31
+#: fig/semd.cpp:30 main.cpp:33
 msgid "Batch export as svg/pdf/png"
 msgstr ""
 
@@ -865,7 +1001,7 @@ msgstr "Semantik"
 msgid "(C) 2013-2018 Thomas Nagy"
 msgstr ""
 
-#: fig/semd.cpp:36 main.cpp:35
+#: fig/semd.cpp:36 main.cpp:39
 msgid "Thomas Nagy"
 msgstr ""
 
@@ -933,17 +1069,25 @@ msgstr "Αρχεία εικόνων (*.png *.jpg *.jpeg *.gif)"
 msgid "Could not load the picture"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: main.cpp:18
+#: main.cpp:20
 msgid ""
 "A mind-mapping tool for KDE\n"
 "Available exclusively for open systems such as OpenSuse, Gentoo or Fedora."
 msgstr ""
 
-#: main.cpp:32
+#: main.cpp:34
+msgid "Batch document creation into the given folder (absolute path)"
+msgstr ""
+
+#: main.cpp:35
+msgid "Batch document creation template pdflatex/beamer/html/s5/odp/odt"
+msgstr ""
+
+#: main.cpp:36
 msgid "Semantik"
 msgstr "Semantik"
 
-#: main.cpp:33
+#: main.cpp:37
 msgid "(C) 2007-2018 Thomas Nagy"
 msgstr ""
 
@@ -1053,7 +1197,7 @@ msgid "<p align='center'>No preview available<br/>at this time</p>"
 msgstr ""
 "<p align='center'>Δεν υπάρχει διαθέσιμη προεπισκόπηση<br/>αυτή τη στιγμή</p>"
 
-#: semantik.cpp:48
+#: semantik.cpp:49
 msgid ""
 "The map is empty, Semantik\n"
 "cannot create documents from it"
@@ -1062,69 +1206,69 @@ msgstr ""
 "δεν μπορεί να δημιουργήσει έγγραφα\n"
 "από αυτόν."
 
-#: semantik.cpp:48
+#: semantik.cpp:49
 msgid "Empty map"
 msgstr "Κενός χάρτης"
 
-#: semantik.cpp:55
+#: semantik.cpp:56
 msgid "Template folder %1 is not readable"
 msgstr "Ο φάκελος των προτύπων %1 δεν είναι αναγνώσιμος"
 
-#: semantik.cpp:171
+#: semantik.cpp:172
 msgid "&Reorganize the map"
 msgstr "&Αναδιοργάνωση του χάρτη"
 
-#: semantik.cpp:173
+#: semantik.cpp:174
 msgid "Ctrl+R"
 msgstr ""
 
-#: semantik.cpp:176
+#: semantik.cpp:177
 msgid "&Export the map..."
 msgstr ""
 
-#: semantik.cpp:183
+#: semantik.cpp:184
 msgid "&Generate..."
 msgstr "&Δημιουργία"
 
-#: semantik.cpp:186
+#: semantik.cpp:187
 msgid "Ctrl+G"
 msgstr ""
 
-#: semantik.cpp:208
+#: semantik.cpp:209
 msgid "Data"
 msgstr "Δεδομένα"
 
-#: semantik.cpp:232
+#: semantik.cpp:233
 msgid "Variables"
 msgstr "Μεταβλητές"
 
-#: semantik.cpp:241
+#: semantik.cpp:242
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: semantik.cpp:253
+#: semantik.cpp:254
 msgid "Linear view"
 msgstr "Γραμμική προβολή"
 
-#: semantik.cpp:365
+#: semantik.cpp:366
 msgid "Welcome to Semantik"
 msgstr "Καλωσήρθατε στο Semantik"
 
-#: semantik.cpp:442
+#: semantik.cpp:443
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Semantik file (*.sem)"
 
-#: semantik.cpp:534
+#: semantik.cpp:535
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 "*.sem *.kdi *.mm *.vym|Όλα τα υποστηριζόμενα αρχεία (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:550
+#: semantik.cpp:551
 #, fuzzy
 msgid "Semantik %1"
 msgstr "Semantik"
 
-#: semantik.cpp:554
+#: semantik.cpp:555
 #, fuzzy
 msgid "%1 %2 - Semantik"
 msgstr "%1 - Semantik"
