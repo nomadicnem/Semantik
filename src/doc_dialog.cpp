@@ -27,19 +27,19 @@ doc_dialog::doc_dialog(QWidget *i_oParent):
 	QLabel *l_sLabel;
 
 	l_sLabel = new QLabel(this);
-	l_sLabel->setText(trUtf8("First Name"));
+	l_sLabel->setText(i18n("First Name"));
 	l_oGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
 
 	l_sLabel = new QLabel(this);
-	l_sLabel->setText(trUtf8("Name"));
+	l_sLabel->setText(i18n("Name"));
 	l_oGridLayout->addWidget(l_sLabel, 1, 0, 1, 1);
 
 	l_sLabel = new QLabel(this);
-	l_sLabel->setText(trUtf8("Organization"));
+	l_sLabel->setText(i18n("Organization"));
 	l_oGridLayout->addWidget(l_sLabel, 2, 0, 1, 1);
 
 	l_sLabel = new QLabel(this);
-	l_sLabel->setText(trUtf8("Email"));
+	l_sLabel->setText(i18n("Email"));
 	l_oGridLayout->addWidget(l_sLabel, 3, 0, 1, 1);
 
 

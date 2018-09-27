@@ -38,16 +38,16 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	connect(m_oEdit, SIGNAL(textChanged()), this, SLOT(update_edit()));
 	connect(m_oEdit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)), this, SLOT(char_format_changed(const QTextCharFormat &)));
 
-	m_oBoldAct = new QAction(fetch_icon(notr("text_bold")), trUtf8("&Bold"), this);
-	m_oBoldAct->setShortcut(trUtf8("Ctrl+B"));
+	m_oBoldAct = new QAction(fetch_icon(notr("text_bold")), i18n("&Bold"), this);
+	m_oBoldAct->setShortcut(i18n("Ctrl+B"));
 	m_oBoldAct->setCheckable(true);
 
-	m_oItalicAct = new QAction(fetch_icon(notr("text_italic")), trUtf8("&Italic"), this);
-	m_oItalicAct->setShortcut(trUtf8("Ctrl+I"));
+	m_oItalicAct = new QAction(fetch_icon(notr("text_italic")), i18n("&Italic"), this);
+	m_oItalicAct->setShortcut(i18n("Ctrl+I"));
 	m_oItalicAct->setCheckable(true);
 
-	m_oUnderLineAct = new QAction(fetch_icon(notr("text_under")), trUtf8("&Underline"), this);
-	m_oUnderLineAct->setShortcut(trUtf8("Ctrl+U"));
+	m_oUnderLineAct = new QAction(fetch_icon(notr("text_under")), i18n("&Underline"), this);
+	m_oUnderLineAct->setShortcut(i18n("Ctrl+U"));
 	m_oUnderLineAct->setCheckable(true);
 
 	QToolButton *l_o = NULL;

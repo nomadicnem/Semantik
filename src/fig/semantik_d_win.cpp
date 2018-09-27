@@ -38,7 +38,7 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	setWindowIcon(QIcon("semantik"));
 
-	m_oColorMenu = new QMenu(trUtf8("Colors"), this);
+	m_oColorMenu = new QMenu(i18n("Colors"), this);
 
 	m_oTabWidget = new KTabWidget(this);
 	m_oTabWidget->setCloseButtonEnabled(true);
@@ -64,18 +64,18 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oRedoAct = KStandardAction::redo(this, SLOT(NULL), actionCollection());
 	m_oRedoAct->setEnabled(false);
 
-	m_oExportSizeAct = new QAction(trUtf8("&Export the diagram..."), this);
+	m_oExportSizeAct = new QAction(i18n("&Export the diagram..."), this);
         actionCollection()->addAction(notr("export_fig_size"), m_oExportSizeAct);
-	m_oExportSizeAct->setShortcut(trUtf8("Ctrl+Shift+E"));
+	m_oExportSizeAct->setShortcut(i18n("Ctrl+Shift+E"));
         connect(m_oExportSizeAct, SIGNAL(triggered(bool)), this, SLOT(slot_export_fig_size()));
 
 	QAction *l_oFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
 	l_oFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
-	l_oFitZoom->setShortcut(trUtf8("Ctrl+H"));
+	l_oFitZoom->setShortcut(i18n("Ctrl+H"));
 
 	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const QUrl&)), actionCollection());
 
-	QDockWidget *l_oDock = new QDockWidget(trUtf8("Files"), this);
+	QDockWidget *l_oDock = new QDockWidget(i18n("Files"), this);
 	l_oDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
 	addDockWidget(Qt::LeftDockWidgetArea, l_oDock);
 	l_oDock->setObjectName(notr("VarsDock"));
@@ -91,7 +91,7 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oColorGroup = new QActionGroup(this);
 	for (int i = 0; i < 9; ++i)
 	{
-		QAction *l_oAct = new QAction(QIcon(), trUtf8("Color"), m_oColorGroup);
+		QAction *l_oAct = new QAction(QIcon(), i18n("Color"), m_oColorGroup);
 		m_oColorGroup->addAction(l_oAct);
 		if (i != 0)
 		{
@@ -99,14 +99,14 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 			m_oColorMenu->addAction(l_oAct);
 		}
 	}
-	m_oCustomColorAct = new QAction(l_oScheme._icon(), trUtf8("Custom color"), m_oColorGroup);
+	m_oCustomColorAct = new QAction(l_oScheme._icon(), i18n("Custom color"), m_oColorGroup);
 	m_oColorMenu->addAction(m_oCustomColorAct);
 	m_oColorsToolBar->addAction(m_oCustomColorAct);
 	m_oColorGroup->setExclusive(true);
 
 	read_config();
 	setAutoSaveSettings();
-	statusBar()->showMessage(trUtf8("This is Semantik-d"), 2000);
+	statusBar()->showMessage(i18n("This is Semantik-d"), 2000);
 
 	connect(m_oFileTree, SIGNAL(url_selected(const QUrl&)), this, SLOT(slot_recent(const QUrl&)));
 	connect(this, SIGNAL(url_opened(const QUrl&)), this, SLOT(record_open_url(const QUrl&)));
@@ -219,7 +219,7 @@ void semantik_d_win::slot_add_tab()
 	m_oActiveDocument = new diagram_document(m_oTabWidget);
 	m_oActiveDocument->m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oActiveDocument->init();
-	int l_iIndex = m_oTabWidget->addTab(m_oActiveDocument, trUtf8("[Untitled]"));
+	int l_iIndex = m_oTabWidget->addTab(m_oActiveDocument, i18n("[Untitled]"));
 	m_oTabWidget->setCurrentIndex(l_iIndex);
 	wire_actions();
 }
@@ -288,11 +288,11 @@ bool semantik_d_win::save_tab(QWidget *i_oWidget) {
 	if (l_oDoc->m_oMediator->m_bDirty)
 	{
 		QString l_oTitle = l_oDoc->m_oMediator->m_sLastSaved;
-		if (l_oTitle.isEmpty()) l_oTitle = trUtf8("Untitled");
+		if (l_oTitle.isEmpty()) l_oTitle = i18n("Untitled");
 
 		int l_o = KMessageBox::warningYesNoCancel(NULL, //this,
-			trUtf8("The document \"%1\" has been modified.\nDo you want to save your changes or discard them?").arg(l_oTitle),
-			trUtf8("Close Document"),
+			i18n("The document \"%1\" has been modified.\nDo you want to save your changes or discard them?", l_oTitle),
+			i18n("Close Document"),
 		KStandardGuiItem::save(), KStandardGuiItem::discard());
 
 		switch (l_o)
@@ -321,9 +321,9 @@ void semantik_d_win::slot_update_tab_text(diagram_document* i_oDoc, const QUrl &
 
 void semantik_d_win::slot_open()
 {
-	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a file to open"),
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, i18n("Choose a file to open"),
                 QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
-                trUtf8("*.semd|Semantik diagram (*.semd)"));
+                i18n("*.semd|Semantik diagram (*.semd)"));
 	if (l_o.isEmpty()) return;
 
 	// file already open in a tab
@@ -429,16 +429,16 @@ void semantik_d_win::print_current(QUrl i_oUrl, QPair<int, int> i_oP)
 
 void semantik_d_win::update_title() {
 	QString mod;
-	if (m_oActiveDocument->m_oMediator->m_bDirty) mod = trUtf8(" [Modified] ");
+	if (m_oActiveDocument->m_oMediator->m_bDirty) mod = i18n(" [Modified] ");
 
 	QString txt;
 	if (m_oActiveDocument->m_oMediator->m_oCurrentUrl.path().isEmpty())
 	{
-		txt = trUtf8("Semantik Diagram %1").arg(mod);
+		txt = i18n("Semantik Diagram %1", mod);
 	}
 	else
 	{
-		txt = trUtf8("%1 %2 - Semantik Diagram").arg(m_oActiveDocument->m_oMediator->m_oCurrentUrl.path(), mod);
+		txt = i18n("%1 %2 - Semantik Diagram", m_oActiveDocument->m_oMediator->m_oCurrentUrl.path(), mod);
 		//m_oRecentFilesAct->addUrl(m_oMediator->m_oCurrentUrl); // TODO
 	}
 	setWindowTitle(txt);

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-27 17:31+0200\n"
+"POT-Creation-Date: 2018-09-27 18:47+0200\n"
 "PO-Revision-Date: 2009-07-28 12:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ελληνικά <kde-i18n-doc@kde.org>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: base/data_item.cpp:60 canvas_view.cpp:242 canvas_view.cpp:294
-#: canvas_view.cpp:306
+#: base/data_item.cpp:60 canvas_view.cpp:243 canvas_view.cpp:295
+#: canvas_view.cpp:308 canvas_view.cpp:1385
 msgid "Empty"
 msgstr "Κενό"
 
@@ -58,8 +58,9 @@ msgid "Missing python bindings for opening files"
 msgstr "Ανυπαρξία δεσμών για το άνοιγμα των αρχείων"
 
 #: base/sem_mediator.cpp:742
+#, fuzzy
 msgid "Could not load the document %1"
-msgstr ""
+msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
 #: base/sem_mediator.cpp:742 base/sem_mediator.cpp:769
 #, fuzzy
@@ -88,138 +89,138 @@ msgstr ""
 msgid "Document generation completed successfully"
 msgstr ""
 
-#: browser.cpp:21 canvas_view.cpp:139
+#: browser.cpp:21 canvas_view.cpp:140
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: canvas_view.cpp:88
+#: canvas_view.cpp:89
 #, fuzzy
 msgid "Add an element"
 msgstr "Προσθήκη μιας στήλης"
 
-#: canvas_view.cpp:93 fig/box_view.cpp:204
+#: canvas_view.cpp:94 fig/box_view.cpp:204
 msgid "Delete selection"
 msgstr "Διαγραφή κόμβου"
 
-#: canvas_view.cpp:98
+#: canvas_view.cpp:99
 #, fuzzy
 msgid "Insert a sibling"
 msgstr "Εισαγωγή αδελφικού κόμβου"
 
-#: canvas_view.cpp:103
+#: canvas_view.cpp:104
 msgid "Move up"
 msgstr "Μετακίνηση πάνω"
 
-#: canvas_view.cpp:104
+#: canvas_view.cpp:105
 msgid "Move down"
 msgstr "Μετακίνηση κάτω"
 
-#: canvas_view.cpp:105
+#: canvas_view.cpp:106
 msgid "Move left"
 msgstr "Μετακίνηση αριστερά"
 
-#: canvas_view.cpp:106
+#: canvas_view.cpp:107
 msgid "Move right"
 msgstr "Μετακίνηση δεξιά"
 
-#: canvas_view.cpp:108
+#: canvas_view.cpp:109
 msgid "Select up"
 msgstr "Επιλογή πάνω"
 
-#: canvas_view.cpp:109
+#: canvas_view.cpp:110
 msgid "Select down"
 msgstr "Επιλογή κάτω"
 
-#: canvas_view.cpp:110
+#: canvas_view.cpp:111
 msgid "Select left"
 msgstr "Επιλογή αριστερά"
 
-#: canvas_view.cpp:111
+#: canvas_view.cpp:112
 msgid "Select right"
 msgstr "Επιλογή δεξιά"
 
-#: canvas_view.cpp:114
+#: canvas_view.cpp:115
 #, fuzzy
 msgid "Select subtree"
 msgstr "Επιλογή πάνω"
 
-#: canvas_view.cpp:119
+#: canvas_view.cpp:120
 msgid "Next root"
 msgstr "Επόμενος γονικός κόμβος"
 
-#: canvas_view.cpp:122
+#: canvas_view.cpp:123
 msgid "Toggle edit"
 msgstr "Επεξεργασία κόμβου"
 
-#: canvas_view.cpp:127
+#: canvas_view.cpp:128
 #, fuzzy
 msgid "Cancel edit"
 msgstr "&Ακύρωση"
 
-#: canvas_view.cpp:154
+#: canvas_view.cpp:155
 msgid "Text"
 msgstr "Κείμενο"
 
-#: canvas_view.cpp:155
+#: canvas_view.cpp:156
 msgid "Diagram"
 msgstr "Διάγραμμα"
 
-#: canvas_view.cpp:156
+#: canvas_view.cpp:157
 msgid "Table"
 msgstr "Πίνακας"
 
-#: canvas_view.cpp:157
+#: canvas_view.cpp:158
 msgid "Image"
 msgstr "Εικόνα"
 
-#: canvas_view.cpp:607
+#: canvas_view.cpp:609
 msgid "Flag"
 msgstr "Σημαία"
 
-#: canvas_view.cpp:934
+#: canvas_view.cpp:936
 msgid "Click to set Item %1"
 msgstr "Κλικ για τον ορισμό αντικειμένου %1"
 
-#: canvas_view.cpp:1282 fig/box_view.cpp:2060
+#: canvas_view.cpp:1284 fig/box_view.cpp:2060
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2098
+#: canvas_view.cpp:1322 fig/box_view.cpp:2098
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1344 fig/box_view.cpp:2122
+#: canvas_view.cpp:1346 fig/box_view.cpp:2122
 #, fuzzy
 msgid "Exported '%1'"
 msgstr "Αποθηκεύτηκε '%1'"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1348 fig/box_view.cpp:2124
 #, fuzzy
 msgid "Could not save to %1"
 msgstr "Κλικ για τον ορισμό αντικειμένου %1"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1348 fig/box_view.cpp:2124
 #, fuzzy
 msgid "Missing picture"
 msgstr "Αλλαγή εικόνας"
 
-#: canvas_view.cpp:1640
+#: canvas_view.cpp:1643
 #, fuzzy
 msgid "Semantik map"
 msgstr "Semantik"
 
-#: canvas_view.cpp:1676 fig/box_view.cpp:1985
+#: canvas_view.cpp:1679 fig/box_view.cpp:1985
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1687 fig/box_view.cpp:1996
+#: canvas_view.cpp:1690 fig/box_view.cpp:1996
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1691 fig/box_view.cpp:2000
+#: canvas_view.cpp:1694 fig/box_view.cpp:2000
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -533,8 +534,9 @@ msgid "Line Type"
 msgstr "Γραμμική προβολή"
 
 #: fig/box_link_properties.cpp:56
+#, fuzzy
 msgid "Line Style"
-msgstr ""
+msgstr "Γραμμική προβολή"
 
 #: fig/box_link_properties.cpp:60
 msgid "Origin arrow"
@@ -627,8 +629,9 @@ msgid "c2"
 msgstr ""
 
 #: fig/box_view.cpp:120
+#, fuzzy
 msgid "text"
-msgstr ""
+msgstr "&Σύνδεση"
 
 #: fig/box_view.cpp:121
 #, fuzzy
@@ -658,8 +661,9 @@ msgid "parent_caption"
 msgstr "λεζάντα εικόνας"
 
 #: fig/box_view.cpp:144
+#, fuzzy
 msgid "child_caption"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #: fig/box_view.cpp:146
 msgid "pen_style"
@@ -714,8 +718,9 @@ msgid "PgDown"
 msgstr ""
 
 #: fig/box_view.cpp:219
+#, fuzzy
 msgid "Floating text"
-msgstr ""
+msgstr "&Σύνδεση"
 
 #: fig/box_view.cpp:221
 msgid "Component"
@@ -784,12 +789,14 @@ msgid "Class"
 msgstr ""
 
 #: fig/box_view.cpp:254
+#, fuzzy
 msgid "Import from file..."
-msgstr ""
+msgstr "Κενός χάρτης"
 
 #: fig/box_view.cpp:256
+#, fuzzy
 msgid "Export to file..."
-msgstr ""
+msgstr "Κενός χάρτης"
 
 #: fig/box_view.cpp:258
 msgid "Copy image to clipboard"
@@ -804,16 +811,19 @@ msgid "More elements"
 msgstr ""
 
 #: fig/box_view.cpp:332
+#, fuzzy
 msgid "Alignment"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:334
+#, fuzzy
 msgid "Align left"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:335
+#, fuzzy
 msgid "Align center"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:336
 #, fuzzy
@@ -821,24 +831,28 @@ msgid "Align right"
 msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:338
+#, fuzzy
 msgid "Align top"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:339
+#, fuzzy
 msgid "Align middle"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:340
+#, fuzzy
 msgid "Align bottom"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:343
 msgid "Size"
 msgstr ""
 
 #: fig/box_view.cpp:345
+#, fuzzy
 msgid "Same width"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:346
 #, fuzzy
@@ -846,8 +860,9 @@ msgid "Same height"
 msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:347
+#, fuzzy
 msgid "Same width and height"
-msgstr ""
+msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:607 fig/box_view.cpp:1948
 #, fuzzy
@@ -1223,8 +1238,9 @@ msgid "Ctrl+R"
 msgstr ""
 
 #: semantik.cpp:177
+#, fuzzy
 msgid "&Export the map..."
-msgstr ""
+msgstr "Κενός χάρτης"
 
 #: semantik.cpp:184
 msgid "&Generate..."

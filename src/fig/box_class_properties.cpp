@@ -87,8 +87,8 @@ void class_editor::init_completer()
 	// initialize
 	m_oCompleter = m_oCompleterAll;
 
-	m_oCompleteAction = new QAction(trUtf8("Code complete"), this);
-	m_oCompleteAction->setShortcut(trUtf8("Ctrl+space"));
+	m_oCompleteAction = new QAction(i18n("Code complete"), this);
+	m_oCompleteAction->setShortcut(i18n("Ctrl+space"));
 	connect(m_oCompleteAction, SIGNAL(triggered()), this, SLOT(try_complete()));
 	addAction(m_oCompleteAction);
 
@@ -244,7 +244,7 @@ box_class_properties::box_class_properties(QWidget *i_oParent, box_class *i_oCla
 	KDialog(i_oParent), m_oClass(i_oClass)
 {
 	QWidget *widget = new QWidget(this);
-	setCaption(trUtf8("Class properties"));
+	setCaption(i18n("Class properties"));
         setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel);
 	enableButtonApply(false);
 	m_oClass = i_oClass;
@@ -281,7 +281,7 @@ void box_class_properties::apply() {
 	QStringList l_oTmp = m_oClassDefinition->toPlainText().split(notr("\n"));
 
 	if (l_oTmp.size() < 1) {
-		KMessageBox::sorry(this, trUtf8("No class name given"), trUtf8("Missing class name"));
+		KMessageBox::sorry(this, i18n("No class name given"), i18n("Missing class name"));
 		return;
 	}
 

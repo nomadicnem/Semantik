@@ -67,8 +67,8 @@ void box_actor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 void box_actor::properties()
 {
 	bool ok = false;
-	QString text = QInputDialog::getText(m_oView, m_oView->trUtf8("Actor properties"),
-			m_oView->trUtf8("Caption:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
+	QString text = QInputDialog::getText(m_oView, i18n("Actor properties"),
+			i18n("Caption:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
 	if (ok && text != m_oBox->m_sText)
 	{
 		mem_edit_box *ed = new mem_edit_box(m_oView->m_oMediator, m_oView->m_iId, m_iId);

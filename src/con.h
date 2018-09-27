@@ -3,6 +3,7 @@
 #ifndef CON
 #define CON
 
+#include <KLocalizedString>
 #include <QtGlobal>
 #include <QHash>
 #include <QVariant>

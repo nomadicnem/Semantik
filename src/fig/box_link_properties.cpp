@@ -21,7 +21,7 @@ box_link_properties::box_link_properties(QWidget *i_oParent, box_link *i_oLink):
 	KDialog(i_oParent)
 {
 	QWidget *widget = new QWidget(this);
-	setCaption(trUtf8("Link properties"));
+	setCaption(i18n("Link properties"));
         setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel);
 	enableButtonApply(false);
 	m_oLink = i_oLink;
@@ -32,36 +32,36 @@ box_link_properties::box_link_properties(QWidget *i_oParent, box_link *i_oLink):
 
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Link text"));
+	l_sLabel->setText(i18n("Link text"));
 	l_oGridLayout->addWidget(l_sLabel, 0, 0);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Origin cardinality"));
+	l_sLabel->setText(i18n("Origin cardinality"));
 	l_oGridLayout->addWidget(l_sLabel, 1, 0);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Target cardinality"));
+	l_sLabel->setText(i18n("Target cardinality"));
 	l_oGridLayout->addWidget(l_sLabel, 2, 0);
 
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Thickness"));
+	l_sLabel->setText(i18n("Thickness"));
 	l_oGridLayout->addWidget(l_sLabel, 3, 0);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Line Type"));
+	l_sLabel->setText(i18n("Line Type"));
 	l_oGridLayout->addWidget(l_sLabel, 4, 0);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Line Style"));
+	l_sLabel->setText(i18n("Line Style"));
 	l_oGridLayout->addWidget(l_sLabel, 5, 0);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Origin arrow"));
+	l_sLabel->setText(i18n("Origin arrow"));
 	l_oGridLayout->addWidget(l_sLabel, 6, 0);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Target arrow"));
+	l_sLabel->setText(i18n("Target arrow"));
 	l_oGridLayout->addWidget(l_sLabel, 7, 0);
 
 
@@ -80,31 +80,31 @@ box_link_properties::box_link_properties(QWidget *i_oParent, box_link *i_oLink):
 	l_oGridLayout->addWidget(m_oThickness, 3, 1);
 
 	m_oType = new QComboBox(widget);
-	m_oType->addItem(trUtf8("Zigzag"), 0);
-	m_oType->addItem(trUtf8("Straight"), 0);
+	m_oType->addItem(i18n("Zigzag"), 0);
+	m_oType->addItem(i18n("Straight"), 0);
 	l_oGridLayout->addWidget(m_oType, 4, 1);
 
 	m_oStyle = new QComboBox(widget);
-	m_oStyle->addItem(trUtf8("Invisible line"), (int) Qt::NoPen);
-	m_oStyle->addItem(trUtf8("Solid Line"), (int) Qt::SolidLine);
-	m_oStyle->addItem(trUtf8("Dash Line"),  (int) Qt::DashLine);
-	m_oStyle->addItem(trUtf8("Dot Line"),   (int) Qt::DotLine);
+	m_oStyle->addItem(i18n("Invisible line"), (int) Qt::NoPen);
+	m_oStyle->addItem(i18n("Solid Line"), (int) Qt::SolidLine);
+	m_oStyle->addItem(i18n("Dash Line"),  (int) Qt::DashLine);
+	m_oStyle->addItem(i18n("Dot Line"),   (int) Qt::DotLine);
 	l_oGridLayout->addWidget(m_oStyle, 5, 1);
 
 	m_oLeftArrow = new QComboBox(widget);
-	m_oLeftArrow->addItem(trUtf8("No arrow"), 0);
-	m_oLeftArrow->addItem(trUtf8("Triangle"), 0);
-	m_oLeftArrow->addItem(trUtf8("Link"), 0);
-	m_oLeftArrow->addItem(trUtf8("Inheritance"), 0);
-	m_oLeftArrow->addItem(trUtf8("Aggregation"), 0);
+	m_oLeftArrow->addItem(i18n("No arrow"), 0);
+	m_oLeftArrow->addItem(i18n("Triangle"), 0);
+	m_oLeftArrow->addItem(i18n("Link"), 0);
+	m_oLeftArrow->addItem(i18n("Inheritance"), 0);
+	m_oLeftArrow->addItem(i18n("Aggregation"), 0);
 	l_oGridLayout->addWidget(m_oLeftArrow, 6, 1);
 
 	m_oRightArrow = new QComboBox(widget);
-	m_oRightArrow->addItem(trUtf8("No arrow"), 0);
-	m_oRightArrow->addItem(trUtf8("Triangle"), 0);
-	m_oRightArrow->addItem(trUtf8("Link"), 0);
-	m_oRightArrow->addItem(trUtf8("Inheritance"), 0);
-	m_oRightArrow->addItem(trUtf8("Aggregation"), 0);
+	m_oRightArrow->addItem(i18n("No arrow"), 0);
+	m_oRightArrow->addItem(i18n("Triangle"), 0);
+	m_oRightArrow->addItem(i18n("Link"), 0);
+	m_oRightArrow->addItem(i18n("Inheritance"), 0);
+	m_oRightArrow->addItem(i18n("Aggregation"), 0);
 	l_oGridLayout->addWidget(m_oRightArrow, 7, 1);
 
 	setMainWidget(widget);

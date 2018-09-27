@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-27 17:31+0200\n"
+"POT-Creation-Date: 2018-09-27 18:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,8 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base/data_item.cpp:60 canvas_view.cpp:242 canvas_view.cpp:294
-#: canvas_view.cpp:306
+#: base/data_item.cpp:60 canvas_view.cpp:243 canvas_view.cpp:295
+#: canvas_view.cpp:308 canvas_view.cpp:1385
 msgid "Empty"
 msgstr "Vacio"
 
@@ -81,130 +81,130 @@ msgstr ""
 msgid "Document generation completed successfully"
 msgstr ""
 
-#: browser.cpp:21 canvas_view.cpp:139
+#: browser.cpp:21 canvas_view.cpp:140
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: canvas_view.cpp:88
+#: canvas_view.cpp:89
 msgid "Add an element"
 msgstr ""
 
-#: canvas_view.cpp:93 fig/box_view.cpp:204
+#: canvas_view.cpp:94 fig/box_view.cpp:204
 msgid "Delete selection"
 msgstr ""
 
-#: canvas_view.cpp:98
+#: canvas_view.cpp:99
 msgid "Insert a sibling"
 msgstr ""
 
-#: canvas_view.cpp:103
+#: canvas_view.cpp:104
 msgid "Move up"
 msgstr ""
 
-#: canvas_view.cpp:104
+#: canvas_view.cpp:105
 msgid "Move down"
 msgstr ""
 
-#: canvas_view.cpp:105
+#: canvas_view.cpp:106
 msgid "Move left"
 msgstr ""
 
-#: canvas_view.cpp:106
+#: canvas_view.cpp:107
 msgid "Move right"
 msgstr ""
 
-#: canvas_view.cpp:108
+#: canvas_view.cpp:109
 msgid "Select up"
 msgstr ""
 
-#: canvas_view.cpp:109
+#: canvas_view.cpp:110
 msgid "Select down"
 msgstr ""
 
-#: canvas_view.cpp:110
+#: canvas_view.cpp:111
 msgid "Select left"
 msgstr ""
 
-#: canvas_view.cpp:111
+#: canvas_view.cpp:112
 msgid "Select right"
 msgstr ""
 
-#: canvas_view.cpp:114
+#: canvas_view.cpp:115
 msgid "Select subtree"
 msgstr ""
 
-#: canvas_view.cpp:119
+#: canvas_view.cpp:120
 msgid "Next root"
 msgstr ""
 
-#: canvas_view.cpp:122
+#: canvas_view.cpp:123
 msgid "Toggle edit"
 msgstr ""
 
-#: canvas_view.cpp:127
+#: canvas_view.cpp:128
 msgid "Cancel edit"
 msgstr ""
 
-#: canvas_view.cpp:154
+#: canvas_view.cpp:155
 msgid "Text"
 msgstr ""
 
-#: canvas_view.cpp:155
+#: canvas_view.cpp:156
 msgid "Diagram"
 msgstr ""
 
-#: canvas_view.cpp:156
+#: canvas_view.cpp:157
 msgid "Table"
 msgstr ""
 
-#: canvas_view.cpp:157
+#: canvas_view.cpp:158
 msgid "Image"
 msgstr ""
 
-#: canvas_view.cpp:607
+#: canvas_view.cpp:609
 msgid "Flag"
 msgstr ""
 
-#: canvas_view.cpp:934
+#: canvas_view.cpp:936
 msgid "Click to set Item %1"
 msgstr ""
 
-#: canvas_view.cpp:1282 fig/box_view.cpp:2060
+#: canvas_view.cpp:1284 fig/box_view.cpp:2060
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2098
+#: canvas_view.cpp:1322 fig/box_view.cpp:2098
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1344 fig/box_view.cpp:2122
+#: canvas_view.cpp:1346 fig/box_view.cpp:2122
 msgid "Exported '%1'"
 msgstr ""
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1348 fig/box_view.cpp:2124
 msgid "Could not save to %1"
 msgstr ""
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1348 fig/box_view.cpp:2124
 msgid "Missing picture"
 msgstr ""
 
-#: canvas_view.cpp:1640
+#: canvas_view.cpp:1643
 msgid "Semantik map"
 msgstr ""
 
-#: canvas_view.cpp:1676 fig/box_view.cpp:1985
+#: canvas_view.cpp:1679 fig/box_view.cpp:1985
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1687 fig/box_view.cpp:1996
+#: canvas_view.cpp:1690 fig/box_view.cpp:1996
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1691 fig/box_view.cpp:2000
+#: canvas_view.cpp:1694 fig/box_view.cpp:2000
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -422,8 +422,9 @@ msgid "Email"
 msgstr ""
 
 #: export_map_dialog.cpp:31
+#, fuzzy
 msgid "Export the map"
-msgstr ""
+msgstr "Vacio"
 
 #: export_map_dialog.cpp:37 fig/export_fig_dialog.cpp:37
 msgid "File to write"
@@ -1145,8 +1146,9 @@ msgid ""
 msgstr ""
 
 #: semantik.cpp:49
+#, fuzzy
 msgid "Empty map"
-msgstr ""
+msgstr "Vacio"
 
 #: semantik.cpp:56
 msgid "Template folder %1 is not readable"

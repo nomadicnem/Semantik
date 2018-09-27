@@ -157,7 +157,7 @@ QPointF box_matrix::validate_point(box_resize_point *p, const QPointF & orig)
 			l_oTmp->setPos(l_iXX, m_iLastStretchY);
 		}
 
-		m_oView->message(m_oView->trUtf8("Last colunn: %1px, last row: %2px (size: %3 x %4)").arg(
+		m_oView->message(i18n("Last colunn: %1px, last row: %2px (size: %3 x %4)",
 			QString::number(m_iLastStretchY - l_iYY),
 			QString::number(m_iLastStretchX - l_iXX),
 			QString::number(m_iLastStretchX),
@@ -193,7 +193,7 @@ QPointF box_matrix::validate_point(box_resize_point *p, const QPointF & orig)
 			m_oResize->setPos(l_iNewW, m_oBox->m_iHH);
 			m_oResize->m_iPosition = l_iNewW;
 
-			m_oView->message(m_oView->trUtf8("Column %1: %2px (size: %3 x %4)").arg(
+			m_oView->message(i18n("Column %1: %2px (size: %3 x %4)",
 				QString::number(l_iColIdx + 1),
 				QString::number(p->m_iPosition),
 				QString::number(l_iNewW),
@@ -239,7 +239,7 @@ QPointF box_matrix::validate_point(box_resize_point *p, const QPointF & orig)
 			m_oResize->setPos(m_oBox->m_iWW, l_iNewH);
 			m_oResize->m_iPosition = l_iNewH;
 
-			m_oView->message(m_oView->trUtf8("Row %1: %2px (size: %3 x %4)").arg(
+			m_oView->message(i18n("Row %1: %2px (size: %3 x %4)",
 				QString::number(l_iRowIdx + 1),
 				QString::number(p->m_iPosition),
 				QString::number(m_oBox->m_iWW),

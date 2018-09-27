@@ -29,11 +29,11 @@ matrix_dialog::matrix_dialog(QWidget *i_oParent):
 	QLabel *l_sLabel;
 
 	l_sLabel = new QLabel(this);
-	l_sLabel->setText(trUtf8("Rows"));
+	l_sLabel->setText(i18n("Rows"));
 	l_oGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
 
 	l_sLabel = new QLabel(this);
-	l_sLabel->setText(trUtf8("Columns"));
+	l_sLabel->setText(i18n("Columns"));
 	l_oGridLayout->addWidget(l_sLabel, 1, 0, 1, 1);
 
 

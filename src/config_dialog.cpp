@@ -25,7 +25,7 @@ config_dialog::config_dialog(QWidget *i_oParent):
 	KDialog(i_oParent)
 {
 	QWidget *widget = new QWidget(this);
-	setCaption(trUtf8("Document settings"));
+	setCaption(i18n("Document settings"));
 	setButtons(KDialog::Ok | KDialog::Cancel);
 
 	QGridLayout *l_oGridLayout = new QGridLayout(widget);
@@ -33,43 +33,43 @@ config_dialog::config_dialog(QWidget *i_oParent):
 	QLabel *l_sLabel;
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Reorganization type"));
+	l_sLabel->setText(i18n("Reorganization type"));
 	l_oGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Item position after keyboard insertion"));
+	l_sLabel->setText(i18n("Item position after keyboard insertion"));
 	l_oGridLayout->addWidget(l_sLabel, 1, 0, 1, 1);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Connection type"));
+	l_sLabel->setText(i18n("Connection type"));
 	l_oGridLayout->addWidget(l_sLabel, 2, 0, 1, 1);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Save document automatically"));
+	l_sLabel->setText(i18n("Save document automatically"));
 	l_oGridLayout->addWidget(l_sLabel, 3, 0, 1, 1);
 
 	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(trUtf8("Background color"));
+	l_sLabel->setText(i18n("Background color"));
 	l_oGridLayout->addWidget(l_sLabel, 4, 0, 1, 1);
 
 
 	m_oReorgType = new QComboBox(widget);
-	m_oReorgType->addItems(QStringList()<<trUtf8("Fixed")<<trUtf8("Force-based")<<trUtf8("Incremental"));
+	m_oReorgType->addItems(QStringList()<<i18n("Fixed")<<i18n("Force-based")<<i18n("Incremental"));
 	l_oGridLayout->addWidget(m_oReorgType, 0, 1, 1, 1);
 
 	m_oAutoReorg = new QComboBox(widget);
-	m_oAutoReorg->addItems(QStringList()<<trUtf8("Close to parent")<<trUtf8("Reorganize map"));
+	m_oAutoReorg->addItems(QStringList()<<i18n("Close to parent")<<i18n("Reorganize map"));
 	l_oGridLayout->addWidget(m_oAutoReorg, 1, 1, 1, 1);
 
 	m_oConnType = new QComboBox(widget);
-	m_oConnType->addItems(QStringList()<<trUtf8("Lines")<<trUtf8("Splines"));
+	m_oConnType->addItems(QStringList()<<i18n("Lines")<<i18n("Splines"));
 	l_oGridLayout->addWidget(m_oConnType, 2, 1, 1, 1);
 
 	m_oAutoSave = new QSpinBox(widget);
-	m_oAutoSave->setSuffix(trUtf8(" min"));
+	m_oAutoSave->setSuffix(i18n(" min"));
 	m_oAutoSave->setRange(0, 69 /* 69 hmmm */);
 	l_oGridLayout->addWidget(m_oAutoSave, 3, 1, 1, 1);
-	m_oAutoSave->setToolTip(trUtf8("Interval in minutes for saving the document automatically, 0 for disabling this feature"));
+	m_oAutoSave->setToolTip(i18n("Interval in minutes for saving the document automatically, 0 for disabling this feature"));
 
 	m_oColorWidget = new QPushButton(widget);
 	l_oGridLayout->addWidget(m_oColorWidget, 4, 1, 1, 1);

@@ -282,10 +282,10 @@ void sem_mediator::slot_autosave()
 	qDebug()<<"autosave"<<m_sLastSaved;
 	if (m_sLastSaved.length() > 1)
 	{
-		QString o = trUtf8("Automatic save failed for file: %1").arg(m_sLastSaved);
+		QString o = i18n("Automatic save failed for file: %1", m_sLastSaved);
 		if (save_file(m_sLastSaved))
 		{
-			o = trUtf8("%1 saved automatically").arg(m_sLastSaved);
+			o = i18n("%1 saved automatically", m_sLastSaved);
 		}
 		emit sig_message(o, 5000);
 	}
@@ -303,7 +303,7 @@ void sem_mediator::init_colors()
 	{
 		color_scheme l_o;
 		l_o.m_oInnerColor = QColor(l_s);
-		l_o.m_sName = trUtf8("Color %1").arg(QString::number(i));
+		l_o.m_sName = i18n("Color %1", QString::number(i));
 		m_oColorSchemes.push_back(l_o);
 		++i;
 	}
@@ -624,7 +624,7 @@ bool sem_mediator::save_file(QString i_sUrl)
 	QFile l_o2(QString(TEMPLATE_DIR)+notr("/semantik.sem.py"));
 	if (!l_o2.open(QIODevice::ReadOnly))
 	{
-		emit sig_message(trUtf8("File saving: missing file %1").arg(l_o2.fileName()), 5000);
+		emit sig_message(i18n("File saving: missing file %1", l_o2.fileName()), 5000);
 		return false;
 	}
 
@@ -649,7 +649,7 @@ bool sem_mediator::save_file(QString i_sUrl)
 
 	if (!init_py())
 	{
-		emit sig_message(trUtf8("Missing bindings for opening files"), 5000);
+		emit sig_message(i18n("Missing bindings for opening files"), 5000);
 		return false;
 	}
 	int ret = PyRun_SimpleString(l_oBa.constData());
@@ -704,7 +704,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 	QFile l_o2(QString(FILTER_DIR)+"/main.py");
 	if (!l_o2.open(QIODevice::ReadOnly))
 	{
-		KMessageBox::sorry(NULL, trUtf8("Missing filter file %1 for opening files").arg(l_o2.fileName()), trUtf8("Broken installation"));
+		KMessageBox::sorry(NULL, i18n("Missing filter file %1 for opening files", l_o2.fileName()), i18n("Broken installation"));
 		undo_purge();
 		return false;
 	}
@@ -719,7 +719,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 
 	if (!init_py())
 	{
-		KMessageBox::sorry(NULL, trUtf8("Missing python bindings for opening files"), trUtf8("Broken installation"));
+		KMessageBox::sorry(NULL, i18n("Missing python bindings for opening files"), i18n("Broken installation"));
 		undo_purge();
 		return false;
 	}
@@ -739,7 +739,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 
 	if (!l_oReader.parse(l_oSource)) {
 		undo_purge();
-		KMessageBox::sorry(NULL, trUtf8("Could not load the document %1").arg(bind_node::get_var(notr("fulldoc"))), trUtf8("Broken document"));
+		KMessageBox::sorry(NULL, i18n("Could not load the document %1", bind_node::get_var(notr("fulldoc"))), i18n("Broken document"));
 		return false;
 	}
 	if (m_oColorSchemes.isEmpty()) {
@@ -766,7 +766,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 				data_item *l_oData = m_oItems.value(l_iVal);
 				if (l_oData == NULL) {
 					undo_purge();
-					KMessageBox::sorry(NULL, trUtf8("Could not load the picture %1").arg(l_sName), trUtf8("Broken document"));
+					KMessageBox::sorry(NULL, i18n("Could not load the picture %1", l_sName), i18n("Broken document"));
 					return false;
 				}
 				l_oData->m_iPicId = seq;
@@ -1094,7 +1094,7 @@ void sem_mediator::set_dirty(bool b)
 	if (b != m_bDirty)
 	{
 		m_bDirty = b;
-		//if (b) emit sig_message(trUtf8("dirty"), 1000); // CLEANUP
+		//if (b) emit sig_message(i18n("dirty"), 1000); // CLEANUP
 		emit(update_title());
 	}
 }
@@ -1127,14 +1127,14 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 	if (choose_root() == NO_ITEM)
 	{
 		qDebug()<<"Missing root item";
-		emit sig_message(trUtf8("Code generation failed: no root item"), 5000);
+		emit sig_message(i18n("Code generation failed: no root item"), 5000);
 		return 21;
 	}
 
 	QFile l_o2(i_oFile);
 	if (!l_o2.open(QIODevice::ReadOnly))
 	{
-		emit sig_message(trUtf8("Code generation failed: missing file %1").arg(i_oFile), 5000);
+		emit sig_message(i18n("Code generation failed: missing file %1", i_oFile), 5000);
 		return 22;
 	}
 
@@ -1168,17 +1168,17 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 
 	if (!init_py())
 	{
-		emit sig_message(trUtf8("Missing bindings for opening files"), 5000);
+		emit sig_message(i18n("Missing bindings for opening files"), 5000);
 		return 23;
 	}
 	int ret = PyRun_SimpleString(l_oBa.constData());
 	if (ret != 0)
 	{
-		emit sig_message(trUtf8("Document generation failed, check the output folder"), 50000);
+		emit sig_message(i18n("Document generation failed, check the output folder"), 50000);
 		return 24;
 	}
 
-	emit sig_message(trUtf8("Document generation completed successfully"), 5000);
+	emit sig_message(i18n("Document generation completed successfully"), 5000);
 	emit sig_preview();
 	return 0;
 }
@@ -1217,7 +1217,7 @@ QPair<int, int> sem_mediator::hint_size_diagram(int id)
 	{
 		if (!init_py())
 		{
-			emit sig_message(trUtf8("Missing bindings for opening files"), 5000);
+			emit sig_message(i18n("Missing bindings for opening files"), 5000);
 		}
 		else
 		{

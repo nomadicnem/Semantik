@@ -130,7 +130,7 @@ QPointF box_sequence::validate_point(box_resize_point *p, const QPointF & orig)
 
 		m_oResizeStick->setPos(m_iLastStretchX/2., m_iLastStretchY);
 
-		m_oView->message(m_oView->trUtf8("%1 x %2 (%3+%4)").arg(
+		m_oView->message(i18n("%1 x %2 (%3+%4)",
 			QString::number(m_iLastStretchX),
 			QString::number(m_iLastStretchY),
 			QString::number(m_iBoxHeight),
@@ -165,7 +165,7 @@ QPointF box_sequence::validate_point(box_resize_point *p, const QPointF & orig)
 		setRect(0, 0, m_oBox->m_iWW, m_iLastStretchY);
 		update();
 		update_links();
-		m_oView->message(m_oView->trUtf8("%1 x %2 (%3+%4)").arg(
+		m_oView->message(i18n("%1 x %2 (%3+%4)",
 			QString::number(m_oBox->m_iWW),
 			QString::number(m_iLastStretchY),
 			QString::number(m_iBoxHeight),

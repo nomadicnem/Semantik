@@ -14,7 +14,7 @@ data_view::data_view(QWidget *i_oParent, sem_mediator *i_oControl) : QStackedWid
 	m_oMediator = i_oControl;
 
 	m_oLabel = new QLabel(this);
-	m_oLabel->setText(trUtf8("<p align='center'>No item selected</p>"));
+	m_oLabel->setText(i18n("<p align='center'>No item selected</p>"));
 	addWidget(m_oLabel);
 }
 

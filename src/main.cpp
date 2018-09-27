@@ -42,8 +42,8 @@ int main(int i_iArgc, char **i_iArgv)
 	KCmdLineArgs::addCmdLineOptions(options);
 
 	QCoreApplication::setAttribute(Qt::AA_Use96Dpi, true);
+	KLocalizedString::setApplicationDomain("semantik");
 	KApplication l_oApp;
-
 	semantik_win *l_oMainWin = new semantik_win;
 
 	const KCmdLineArgs *args = KCmdLineArgs::parsedArgs();

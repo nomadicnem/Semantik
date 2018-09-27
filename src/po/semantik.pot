@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-27 17:31+0200\n"
+"Project-Id-Version: PACKAGE\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-09-27 19:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,268 +17,1351 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base/data_item.cpp:60 canvas_view.cpp:242 canvas_view.cpp:294
-#: canvas_view.cpp:306
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: src/base/data_item.cpp:60 src/canvas_view.cpp:242 src/canvas_view.cpp:294
+#: src/canvas_view.cpp:306
+#, kde-format
 msgid "Empty"
 msgstr ""
 
-#: base/flag_scheme.cpp:14
+#: src/base/flag_scheme.cpp:14
+#, kde-format
 msgid "Flag item(s) as..."
 msgstr ""
 
-#: base/sem_mediator.cpp:285
+#: src/base/sem_mediator.cpp:285
+#, kde-format
 msgid "Automatic save failed for file: %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:288
+#: src/base/sem_mediator.cpp:288
+#, kde-format
 msgid "%1 saved automatically"
 msgstr ""
 
-#: base/sem_mediator.cpp:306
+#: src/base/sem_mediator.cpp:306
+#, kde-format
 msgid "Color %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:627
+#: src/base/sem_mediator.cpp:627
+#, kde-format
 msgid "File saving: missing file %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:652 base/sem_mediator.cpp:1171
-#: base/sem_mediator.cpp:1220
+#: src/base/sem_mediator.cpp:652 src/base/sem_mediator.cpp:1171
+#: src/base/sem_mediator.cpp:1220
+#, kde-format
 msgid "Missing bindings for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:707
+#: src/base/sem_mediator.cpp:707
+#, kde-format
 msgid "Missing filter file %1 for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:707 base/sem_mediator.cpp:722
+#: src/base/sem_mediator.cpp:707 src/base/sem_mediator.cpp:722
+#, kde-format
 msgid "Broken installation"
 msgstr ""
 
-#: base/sem_mediator.cpp:722
+#: src/base/sem_mediator.cpp:722
+#, kde-format
 msgid "Missing python bindings for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:742
+#: src/base/sem_mediator.cpp:742
+#, kde-format
 msgid "Could not load the document %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:742 base/sem_mediator.cpp:769
+#: src/base/sem_mediator.cpp:742 src/base/sem_mediator.cpp:769
+#, kde-format
 msgid "Broken document"
 msgstr ""
 
-#: base/sem_mediator.cpp:769
+#: src/base/sem_mediator.cpp:769
+#, kde-format
 msgid "Could not load the picture %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1130
+#: src/base/sem_mediator.cpp:1130
+#, kde-format
 msgid "Code generation failed: no root item"
 msgstr ""
 
-#: base/sem_mediator.cpp:1137
+#: src/base/sem_mediator.cpp:1137
+#, kde-format
 msgid "Code generation failed: missing file %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1177
+#: src/base/sem_mediator.cpp:1177
+#, kde-format
 msgid "Document generation failed, check the output folder"
 msgstr ""
 
-#: base/sem_mediator.cpp:1181
+#: src/base/sem_mediator.cpp:1181
+#, kde-format
 msgid "Document generation completed successfully"
 msgstr ""
 
-#: browser.cpp:21 canvas_view.cpp:139
+#: src/browser.cpp:22 src/canvas_view.cpp:139
+#, kde-format
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: canvas_view.cpp:88
+#: src/canvas_view.cpp:88
+#, kde-format
 msgid "Add an element"
 msgstr ""
 
-#: canvas_view.cpp:93 fig/box_view.cpp:204
+#: src/canvas_view.cpp:93 src/fig/box_view.cpp:204
+#, kde-format
 msgid "Delete selection"
 msgstr ""
 
-#: canvas_view.cpp:98
+#: src/canvas_view.cpp:98
+#, kde-format
 msgid "Insert a sibling"
 msgstr ""
 
-#: canvas_view.cpp:103
+#: src/canvas_view.cpp:103
+#, kde-format
 msgid "Move up"
 msgstr ""
 
-#: canvas_view.cpp:104
+#: src/canvas_view.cpp:104
+#, kde-format
 msgid "Move down"
 msgstr ""
 
-#: canvas_view.cpp:105
+#: src/canvas_view.cpp:105
+#, kde-format
 msgid "Move left"
 msgstr ""
 
-#: canvas_view.cpp:106
+#: src/canvas_view.cpp:106
+#, kde-format
 msgid "Move right"
 msgstr ""
 
-#: canvas_view.cpp:108
+#: src/canvas_view.cpp:108
+#, kde-format
 msgid "Select up"
 msgstr ""
 
-#: canvas_view.cpp:109
+#: src/canvas_view.cpp:109
+#, kde-format
 msgid "Select down"
 msgstr ""
 
-#: canvas_view.cpp:110
+#: src/canvas_view.cpp:110
+#, kde-format
 msgid "Select left"
 msgstr ""
 
-#: canvas_view.cpp:111
+#: src/canvas_view.cpp:111
+#, kde-format
 msgid "Select right"
 msgstr ""
 
-#: canvas_view.cpp:114
+#: src/canvas_view.cpp:114
+#, kde-format
 msgid "Select subtree"
 msgstr ""
 
-#: canvas_view.cpp:119
+#: src/canvas_view.cpp:119
+#, kde-format
 msgid "Next root"
 msgstr ""
 
-#: canvas_view.cpp:122
+#: src/canvas_view.cpp:122
+#, kde-format
 msgid "Toggle edit"
 msgstr ""
 
-#: canvas_view.cpp:127
+#: src/canvas_view.cpp:127
+#, kde-format
 msgid "Cancel edit"
 msgstr ""
 
-#: canvas_view.cpp:154
+#: src/canvas_view.cpp:154
+#, kde-format
 msgid "Text"
 msgstr ""
 
-#: canvas_view.cpp:155
+#: src/canvas_view.cpp:155
+#, kde-format
 msgid "Diagram"
 msgstr ""
 
-#: canvas_view.cpp:156
+#: src/canvas_view.cpp:156
+#, kde-format
 msgid "Table"
 msgstr ""
 
-#: canvas_view.cpp:157
+#: src/canvas_view.cpp:157
+#, kde-format
 msgid "Image"
 msgstr ""
 
-#: canvas_view.cpp:607
+#: src/canvas_view.cpp:607
+#, kde-format
 msgid "Flag"
 msgstr ""
 
-#: canvas_view.cpp:934
+#: src/canvas_view.cpp:934
+#, kde-format
 msgid "Click to set Item %1"
 msgstr ""
 
-#: canvas_view.cpp:1282 fig/box_view.cpp:2060
+#: src/canvas_view.cpp:1282 src/fig/box_view.cpp:2060
+#, kde-format
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2098
+#: src/canvas_view.cpp:1320 src/fig/box_view.cpp:2098
+#, kde-format
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1344 fig/box_view.cpp:2122
+#: src/canvas_view.cpp:1344 src/fig/box_view.cpp:2122
+#, kde-format
 msgid "Exported '%1'"
 msgstr ""
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: src/canvas_view.cpp:1346 src/fig/box_view.cpp:2124
+#, kde-format
 msgid "Could not save to %1"
 msgstr ""
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: src/canvas_view.cpp:1346 src/fig/box_view.cpp:2124
+#, kde-format
 msgid "Missing picture"
 msgstr ""
 
-#: canvas_view.cpp:1640
+#: src/canvas_view.cpp:1640
+#, kde-format
 msgid "Semantik map"
 msgstr ""
 
-#: canvas_view.cpp:1676 fig/box_view.cpp:1985
+#: src/canvas_view.cpp:1676 src/fig/box_view.cpp:1985
+#, kde-format
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1687 fig/box_view.cpp:1996
+#: src/canvas_view.cpp:1687 src/fig/box_view.cpp:1996
+#, kde-format
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1691 fig/box_view.cpp:2000
+#: src/canvas_view.cpp:1691 src/fig/box_view.cpp:2000
+#, kde-format
 msgid "Problem during printing :-("
 msgstr ""
 
-#: config_dialog.cpp:28
+#: src/config_dialog.cpp:28
+#, kde-format
 msgid "Document settings"
 msgstr ""
 
-#: config_dialog.cpp:36
+#: src/config_dialog.cpp:36
+#, kde-format
 msgid "Reorganization type"
 msgstr ""
 
-#: config_dialog.cpp:40
+#: src/config_dialog.cpp:40
+#, kde-format
 msgid "Item position after keyboard insertion"
 msgstr ""
 
-#: config_dialog.cpp:44
+#: src/config_dialog.cpp:44
+#, kde-format
 msgid "Connection type"
 msgstr ""
 
-#: config_dialog.cpp:48
+#: src/config_dialog.cpp:48
+#, kde-format
 msgid "Save document automatically"
 msgstr ""
 
-#: config_dialog.cpp:52
+#: src/config_dialog.cpp:52
+#, kde-format
 msgid "Background color"
 msgstr ""
 
-#: config_dialog.cpp:57
+#: src/config_dialog.cpp:57
+#, kde-format
 msgid "Fixed"
 msgstr ""
 
-#: config_dialog.cpp:57
+#: src/config_dialog.cpp:57
+#, kde-format
 msgid "Force-based"
 msgstr ""
 
-#: config_dialog.cpp:57
+#: src/config_dialog.cpp:57
+#, kde-format
 msgid "Incremental"
 msgstr ""
 
-#: config_dialog.cpp:61
+#: src/config_dialog.cpp:61
+#, kde-format
 msgid "Close to parent"
 msgstr ""
 
-#: config_dialog.cpp:61
+#: src/config_dialog.cpp:61
+#, kde-format
 msgid "Reorganize map"
 msgstr ""
 
-#: config_dialog.cpp:65
+#: src/config_dialog.cpp:65
+#, kde-format
 msgid "Lines"
 msgstr ""
 
-#: config_dialog.cpp:65
+#: src/config_dialog.cpp:65
+#, kde-format
 msgid "Splines"
 msgstr ""
 
-#: config_dialog.cpp:69
+#: src/config_dialog.cpp:69
+#, kde-format
 msgid " min"
 msgstr ""
 
-#: config_dialog.cpp:72
+#: src/config_dialog.cpp:72
+#, kde-format
 msgid ""
 "Interval in minutes for saving the document automatically, 0 for disabling "
 "this feature"
 msgstr ""
 
-#. i18n: file: tips:2
+#. i18n: ectx: Menu (file)
+#: src/data/semantik-dui.rc:5 src/data/semantikui.rc:5
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#. i18n: ectx: Menu (edit)
+#: src/data/semantik-dui.rc:25 src/data/semantikui.rc:8
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: src/data/semantik-dui.rc:28 src/data/semantikui.rc:12
+#, kde-format
+msgid "&View"
+msgstr ""
+
+#. i18n: ectx: Menu (tools)
+#: src/data/semantik-dui.rc:33 src/data/semantikui.rc:20
+#, kde-format
+msgid "&Tools"
+msgstr ""
+
+#. i18n: ectx: Menu (settings)
+#: src/data/semantik-dui.rc:37 src/data/semantikui.rc:24
+#, kde-format
+msgid "&Settings"
+msgstr ""
+
+#. i18n: ectx: Menu (help)
+#: src/data/semantik-dui.rc:40 src/data/semantikui.rc:27
+#, kde-format
+msgid "&Help"
+msgstr ""
+
+#. i18n: ectx: ToolBar (colorsToolBar)
+#: src/data/semantik-dui.rc:51 src/data/semantikui.rc:41
+#, kde-format
+msgid "Colors Toolbar"
+msgstr ""
+
+#. i18n: ectx: ToolBar (flagsToolBar)
+#: src/data/semantikui.rc:45
+#, kde-format
+msgid "Flags Toolbar"
+msgstr ""
+
+#: src/data_view.cpp:17
+#, kde-format
+msgid "<p align='center'>No item selected</p>"
+msgstr ""
+
+#: src/doc_dialog.cpp:30
+#, kde-format
+msgid "First Name"
+msgstr ""
+
+#: src/doc_dialog.cpp:34 src/generator_dialog.cpp:56
+#, kde-format
+msgid "Name"
+msgstr ""
+
+#: src/doc_dialog.cpp:38
+#, kde-format
+msgid "Organization"
+msgstr ""
+
+#: src/doc_dialog.cpp:42
+#, kde-format
+msgid "Email"
+msgstr ""
+
+#: src/export_map_dialog.cpp:32
+#, kde-format
+msgid "Export the map"
+msgstr ""
+
+#: src/export_map_dialog.cpp:38 src/fig/export_fig_dialog.cpp:38
+#, kde-format
+msgid "File to write"
+msgstr ""
+
+#: src/export_map_dialog.cpp:44 src/fig/export_fig_dialog.cpp:44
+#, kde-format
+msgid "Width"
+msgstr ""
+
+#: src/export_map_dialog.cpp:52 src/fig/export_fig_dialog.cpp:52
+#, kde-format
+msgid "Height"
+msgstr ""
+
+#: src/fig/box_actor.cpp:70
+#, kde-format
+msgid "Actor properties"
+msgstr ""
+
+#: src/fig/box_actor.cpp:71
+#, kde-format
+msgid "Caption:"
+msgstr ""
+
+#: src/fig/box_class_properties.cpp:90 src/vars_view.cpp:77
+#, kde-format
+msgid "Code complete"
+msgstr ""
+
+#: src/fig/box_class_properties.cpp:91 src/vars_view.cpp:78
+#, kde-format
+msgid "Ctrl+space"
+msgstr ""
+
+#: src/fig/box_class_properties.cpp:247
+#, kde-format
+msgid "Class properties"
+msgstr ""
+
+#: src/fig/box_class_properties.cpp:284
+#, kde-format
+msgid "No class name given"
+msgstr ""
+
+#: src/fig/box_class_properties.cpp:284
+#, kde-format
+msgid "Missing class name"
+msgstr ""
+
+#: src/fig/box_document_properties.cpp:26
+#, kde-format
+msgid "Font properties"
+msgstr ""
+
+#: src/fig/box_fork.cpp:333 src/fig/box_item.cpp:289
+#, kde-format
+msgid "%1 x %2"
+msgstr ""
+
+#: src/fig/box_item.cpp:127
+#, kde-format
+msgid "Diagram box properties"
+msgstr ""
+
+#: src/fig/box_item.cpp:128
+#, kde-format
+msgid "Text:"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:24
+#, kde-format
+msgid "Link properties"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:35
+#, kde-format
+msgid "Link text"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:39
+#, kde-format
+msgid "Origin cardinality"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:43
+#, kde-format
+msgid "Target cardinality"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:48
+#, kde-format
+msgid "Thickness"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:52
+#, kde-format
+msgid "Line Type"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:56
+#, kde-format
+msgid "Line Style"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:60
+#, kde-format
+msgid "Origin arrow"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:64
+#, kde-format
+msgid "Target arrow"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:83
+#, kde-format
+msgid "Zigzag"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:84
+#, kde-format
+msgid "Straight"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:88
+#, kde-format
+msgid "Invisible line"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:89
+#, kde-format
+msgid "Solid Line"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:90
+#, kde-format
+msgid "Dash Line"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:91
+#, kde-format
+msgid "Dot Line"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:95 src/fig/box_link_properties.cpp:103
+#, kde-format
+msgid "No arrow"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:96 src/fig/box_link_properties.cpp:104
+#, kde-format
+msgid "Triangle"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:97 src/fig/box_link_properties.cpp:105
+#, kde-format
+msgid "Link"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:98 src/fig/box_link_properties.cpp:106
+#, kde-format
+msgid "Inheritance"
+msgstr ""
+
+#: src/fig/box_link_properties.cpp:99 src/fig/box_link_properties.cpp:107
+#, kde-format
+msgid "Aggregation"
+msgstr ""
+
+#: src/fig/box_matrix.cpp:160
+#, kde-format
+msgid "Last colunn: %1px, last row: %2px (size: %3 x %4)"
+msgstr ""
+
+#: src/fig/box_matrix.cpp:196
+#, kde-format
+msgid "Column %1: %2px (size: %3 x %4)"
+msgstr ""
+
+#: src/fig/box_matrix.cpp:242
+#, kde-format
+msgid "Row %1: %2px (size: %3 x %4)"
+msgstr ""
+
+#: src/fig/box_sequence.cpp:133 src/fig/box_sequence.cpp:168
+#, kde-format
+msgid "%1 x %2 (%3+%4)"
+msgstr ""
+
+#: src/fig/box_view.cpp:111
+#, kde-format
+msgid "box_item"
+msgstr ""
+
+#: src/fig/box_view.cpp:113
+#, kde-format
+msgid "id"
+msgstr ""
+
+#: src/fig/box_view.cpp:118 src/fig/box_view.cpp:128
+#, kde-format
+msgid "c1"
+msgstr ""
+
+#: src/fig/box_view.cpp:119 src/fig/box_view.cpp:130
+#, kde-format
+msgid "c2"
+msgstr ""
+
+#: src/fig/box_view.cpp:120
+#, kde-format
+msgid "text"
+msgstr ""
+
+#: src/fig/box_view.cpp:121
+#, kde-format
+msgid "col"
+msgstr ""
+
+#: src/fig/box_view.cpp:124 src/fig/box_view.cpp:164
+#, kde-format
+msgid "box_link"
+msgstr ""
+
+#: src/fig/box_view.cpp:127
+#, kde-format
+msgid "p1"
+msgstr ""
+
+#: src/fig/box_view.cpp:129
+#, kde-format
+msgid "p2"
+msgstr ""
+
+#: src/fig/box_view.cpp:142
+#, kde-format
+msgid "caption"
+msgstr ""
+
+#: src/fig/box_view.cpp:143
+#, kde-format
+msgid "parent_caption"
+msgstr ""
+
+#: src/fig/box_view.cpp:144
+#, kde-format
+msgid "child_caption"
+msgstr ""
+
+#: src/fig/box_view.cpp:146
+#, kde-format
+msgid "pen_style"
+msgstr ""
+
+#: src/fig/box_view.cpp:147
+#, kde-format
+msgid "border_width"
+msgstr ""
+
+#: src/fig/box_view.cpp:151
+#, kde-format
+msgid "box_link_offset"
+msgstr ""
+
+#: src/fig/box_view.cpp:155
+#, kde-format
+msgid "x"
+msgstr ""
+
+#: src/fig/box_view.cpp:155
+#, kde-format
+msgid "y"
+msgstr ""
+
+#: src/fig/box_view.cpp:194
+#, kde-format
+msgid "Properties..."
+msgstr ""
+
+#: src/fig/box_view.cpp:199
+#, kde-format
+msgid "Activity"
+msgstr ""
+
+#: src/fig/box_view.cpp:200
+#, kde-format
+msgid "Ctrl+Return"
+msgstr ""
+
+#: src/fig/box_view.cpp:205
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: src/fig/box_view.cpp:209
+#, kde-format
+msgid "Raise"
+msgstr ""
+
+#: src/fig/box_view.cpp:210
+#, kde-format
+msgid "PgUp"
+msgstr ""
+
+#: src/fig/box_view.cpp:214
+#, kde-format
+msgid "Send back"
+msgstr ""
+
+#: src/fig/box_view.cpp:215
+#, kde-format
+msgid "PgDown"
+msgstr ""
+
+#: src/fig/box_view.cpp:219
+#, kde-format
+msgid "Floating text"
+msgstr ""
+
+#: src/fig/box_view.cpp:221
+#, kde-format
+msgid "Component"
+msgstr ""
+
+#: src/fig/box_view.cpp:223
+#, kde-format
+msgid "Rectangle"
+msgstr ""
+
+#: src/fig/box_view.cpp:225
+#, kde-format
+msgid "Node"
+msgstr ""
+
+#: src/fig/box_view.cpp:227
+#, kde-format
+msgid "Decision"
+msgstr ""
+
+#: src/fig/box_view.cpp:229
+#, kde-format
+msgid "Database"
+msgstr ""
+
+#: src/fig/box_view.cpp:231
+#, kde-format
+msgid "Pipe"
+msgstr ""
+
+#: src/fig/box_view.cpp:233
+#, kde-format
+msgid "Sequence"
+msgstr ""
+
+#: src/fig/box_view.cpp:235
+#, kde-format
+msgid "Activity start"
+msgstr ""
+
+#: src/fig/box_view.cpp:237
+#, kde-format
+msgid "Activity end"
+msgstr ""
+
+#: src/fig/box_view.cpp:239
+#, kde-format
+msgid "Horizontal fork/join"
+msgstr ""
+
+#: src/fig/box_view.cpp:241
+#, kde-format
+msgid "Vertical fork/join"
+msgstr ""
+
+#: src/fig/box_view.cpp:243
+#, kde-format
+msgid "Actor"
+msgstr ""
+
+#: src/fig/box_view.cpp:245
+#, kde-format
+msgid "Usecase"
+msgstr ""
+
+#: src/fig/box_view.cpp:247
+#, kde-format
+msgid "Matrix"
+msgstr ""
+
+#: src/fig/box_view.cpp:249
+#, kde-format
+msgid "Boundary"
+msgstr ""
+
+#: src/fig/box_view.cpp:251
+#, kde-format
+msgid "Class"
+msgstr ""
+
+#: src/fig/box_view.cpp:254
+#, kde-format
+msgid "Import from file..."
+msgstr ""
+
+#: src/fig/box_view.cpp:256
+#, kde-format
+msgid "Export to file..."
+msgstr ""
+
+#: src/fig/box_view.cpp:258
+#, kde-format
+msgid "Copy image to clipboard"
+msgstr ""
+
+#: src/fig/box_view.cpp:279
+#, kde-format
+msgid "File operations"
+msgstr ""
+
+#: src/fig/box_view.cpp:291
+#, kde-format
+msgid "More elements"
+msgstr ""
+
+#: src/fig/box_view.cpp:332
+#, kde-format
+msgid "Alignment"
+msgstr ""
+
+#: src/fig/box_view.cpp:334
+#, kde-format
+msgid "Align left"
+msgstr ""
+
+#: src/fig/box_view.cpp:335
+#, kde-format
+msgid "Align center"
+msgstr ""
+
+#: src/fig/box_view.cpp:336
+#, kde-format
+msgid "Align right"
+msgstr ""
+
+#: src/fig/box_view.cpp:338
+#, kde-format
+msgid "Align top"
+msgstr ""
+
+#: src/fig/box_view.cpp:339
+#, kde-format
+msgid "Align middle"
+msgstr ""
+
+#: src/fig/box_view.cpp:340
+#, kde-format
+msgid "Align bottom"
+msgstr ""
+
+#: src/fig/box_view.cpp:343
+#, kde-format
+msgid "Size"
+msgstr ""
+
+#: src/fig/box_view.cpp:345
+#, kde-format
+msgid "Same width"
+msgstr ""
+
+#: src/fig/box_view.cpp:346
+#, kde-format
+msgid "Same height"
+msgstr ""
+
+#: src/fig/box_view.cpp:347
+#, kde-format
+msgid "Same width and height"
+msgstr ""
+
+#: src/fig/box_view.cpp:607 src/fig/box_view.cpp:1948
+#, kde-format
+msgid "Semantik diagram"
+msgstr ""
+
+#: src/fig/box_view.cpp:1755 src/fig/semantik_d_win.cpp:324
+#, kde-format
+msgid "Choose a file to open"
+msgstr ""
+
+#: src/fig/box_view.cpp:1757 src/fig/box_view.cpp:1795
+#: src/fig/semantik_d_win.cpp:326
+#, kde-format
+msgid "*.semd|Semantik diagram (*.semd)"
+msgstr ""
+
+#: src/fig/box_view.cpp:1793 src/semantik.cpp:441 src/semantik.cpp:533
+#, kde-format
+msgid "Choose a file name"
+msgstr ""
+
+#: src/fig/box_view.cpp:1809 src/semantik.cpp:456
+#, kde-format
+msgid ""
+"The file \"%1\" already exists.\n"
+"Overwrite it?"
+msgstr ""
+
+#: src/fig/box_view.cpp:1810 src/semantik.cpp:457
+#, kde-format
+msgid "Overwrite existing file"
+msgstr ""
+
+#: src/fig/box_view.cpp:1832 src/fig/box_view.cpp:1866
+#: src/semantik.cpp:468 src/semantik.cpp:504
+#, kde-format
+msgid "Saved '%1'"
+msgstr ""
+
+#: src/fig/box_view.cpp:1839 src/semantik.cpp:479 src/semantik.cpp:510
+#, kde-format
+msgid ""
+"The file \"%1\" could not be saved because an error happened.\n"
+"Try again?"
+msgstr ""
+
+#: src/fig/box_view.cpp:1840 src/semantik.cpp:480 src/semantik.cpp:511
+#, kde-format
+msgid "Try again?"
+msgstr ""
+
+#: src/fig/export_fig_dialog.cpp:32
+#, kde-format
+msgid "Export the diagram"
+msgstr ""
+
+#: src/fig/matrix_dialog.cpp:32 src/table_dialog.cpp:32
+#, kde-format
+msgid "Rows"
+msgstr ""
+
+#: src/fig/matrix_dialog.cpp:36 src/table_dialog.cpp:36
+#, kde-format
+msgid "Columns"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:41 src/semantik.cpp:145
+#, kde-format
+msgid "Colors"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:67
+#, kde-format
+msgid "&Export the diagram..."
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:69 src/semantik.cpp:179
+#, kde-format
+msgid "Ctrl+Shift+E"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:74 src/semantik.cpp:200
+#, kde-format
+msgid "Ctrl+H"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:78
+#, kde-format
+msgid "Files"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:94 src/semantik.cpp:270
+#, kde-format
+msgid "Color"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:102 src/semantik.cpp:278
+#, kde-format
+msgid "Custom color"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:109
+#, kde-format
+msgid "This is Semantik-d"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:222
+#, kde-format
+msgid "[Untitled]"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:291 src/semantik.cpp:605
+#, kde-format
+msgid "Untitled"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:294 src/semantik.cpp:608
+#, kde-format
+msgid ""
+"The document \"%1\" has been modified.\n"
+"Do you want to save your changes or discard them?"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:295 src/semantik.cpp:609
+#, kde-format
+msgid "Close Document"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:432 src/semantik.cpp:546
+#, kde-format
+msgid " [Modified] "
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:437
+#, kde-format
+msgid "Semantik Diagram %1"
+msgstr ""
+
+#: src/fig/semantik_d_win.cpp:441
+#, kde-format
+msgid "%1 %2 - Semantik Diagram"
+msgstr ""
+
+#: src/fig/semd.cpp:29 src/main.cpp:32
+#, kde-format
+msgid "A file to open on startup"
+msgstr ""
+
+#: src/fig/semd.cpp:30 src/main.cpp:33
+#, kde-format
+msgid "Batch export as svg/pdf/png"
+msgstr ""
+
+#: src/fig/semd.cpp:31
+#, kde-format
+msgid "Diagram width for printing"
+msgstr ""
+
+#: src/fig/semd.cpp:32
+#, kde-format
+msgid "Diagram height for printing"
+msgstr ""
+
+#: src/fig/semd.cpp:34
+#, kde-format
+msgid "Semantik-d"
+msgstr ""
+
+#: src/fig/semd.cpp:34
+#, kde-format
+msgid "(C) 2013-2018 Thomas Nagy"
+msgstr ""
+
+#: src/fig/semd.cpp:36 src/main.cpp:39
+#, kde-format
+msgid "Thomas Nagy"
+msgstr ""
+
+#: src/generator_dialog.cpp:30
+#, kde-format
+msgid "Generate documents"
+msgstr ""
+
+#: src/generator_dialog.cpp:36
+#, kde-format
+msgid "Generators"
+msgstr ""
+
+#: src/generator_dialog.cpp:39
+#, kde-format
+msgid "Description"
+msgstr ""
+
+#: src/generator_dialog.cpp:63
+#, kde-format
+msgid "Location"
+msgstr ""
+
+#: src/generator_dialog.cpp:114
+#, kde-format
+msgid "No document generator chosen."
+msgstr ""
+
+#: src/generator_dialog.cpp:114
+#, kde-format
+msgid "Missing data"
+msgstr ""
+
+#: src/generator_dialog.cpp:120
+#, kde-format
+msgid "Invalid output directory %1"
+msgstr ""
+
+#: src/generator_dialog.cpp:120
+#, kde-format
+msgid "Missing location"
+msgstr ""
+
+#: src/image_view.cpp:39
+#, kde-format
+msgid "Change picture"
+msgstr ""
+
+#: src/image_view.cpp:43
+#, kde-format
+msgid "Clear picture"
+msgstr ""
+
+#: src/image_view.cpp:68
+#, kde-format
+msgid "Click to set a picture"
+msgstr ""
+
+#: src/image_view.cpp:72
+#, kde-format
+msgid "Select an item on the map"
+msgstr ""
+
+#: src/image_view.cpp:166
+#, kde-format
+msgid "Choose a picture"
+msgstr ""
+
+#: src/image_view.cpp:168
+#, kde-format
+msgid "*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"
+msgstr ""
+
+#: src/image_view.cpp:180
+#, kde-format
+msgid "Could not load the picture"
+msgstr ""
+
+#: src/main.cpp:20
+#, kde-format
+msgid ""
+"A mind-mapping tool for KDE\n"
+"Available exclusively for open systems such as OpenSuse, Gentoo or Fedora."
+msgstr ""
+
+#: src/main.cpp:34
+#, kde-format
+msgid "Batch document creation into the given folder (absolute path)"
+msgstr ""
+
+#: src/main.cpp:35
+#, kde-format
+msgid "Batch document creation template pdflatex/beamer/html/s5/odp/odt"
+msgstr ""
+
+#: src/main.cpp:36
+#, kde-format
+msgid "Semantik"
+msgstr ""
+
+#: src/main.cpp:37
+#, kde-format
+msgid "(C) 2007-2018 Thomas Nagy"
+msgstr ""
+
+#: src/pre_view.cpp:21
+#, kde-format
+msgid "<p align='center'>No preview available<br/>at this time</p>"
+msgstr ""
+
+#: src/semantik.cpp:49
+#, kde-format
+msgid ""
+"The map is empty, Semantik\n"
+"cannot create documents from it"
+msgstr ""
+
+#: src/semantik.cpp:49
+#, kde-format
+msgid "Empty map"
+msgstr ""
+
+#: src/semantik.cpp:56
+#, kde-format
+msgid "Template folder %1 is not readable"
+msgstr ""
+
+#: src/semantik.cpp:172
+#, kde-format
+msgid "&Reorganize the map"
+msgstr ""
+
+#: src/semantik.cpp:174
+#, kde-format
+msgid "Ctrl+R"
+msgstr ""
+
+#: src/semantik.cpp:177
+#, kde-format
+msgid "&Export the map..."
+msgstr ""
+
+#: src/semantik.cpp:184
+#, kde-format
+msgid "&Generate..."
+msgstr ""
+
+#: src/semantik.cpp:187
+#, kde-format
+msgid "Ctrl+G"
+msgstr ""
+
+#: src/semantik.cpp:209
+#, kde-format
+msgid "Data"
+msgstr ""
+
+#: src/semantik.cpp:233
+#, kde-format
+msgid "Variables"
+msgstr ""
+
+#: src/semantik.cpp:242
+#, kde-format
+msgid "Preview"
+msgstr ""
+
+#: src/semantik.cpp:254
+#, kde-format
+msgid "Linear view"
+msgstr ""
+
+#: src/semantik.cpp:366
+#, kde-format
+msgid "Welcome to Semantik"
+msgstr ""
+
+#: src/semantik.cpp:443
+#, kde-format
+msgid "*.sem|Semantik file (*.sem)"
+msgstr ""
+
+#: src/semantik.cpp:535
+#, kde-format
+msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
+msgstr ""
+
+#: src/semantik.cpp:551
+#, kde-format
+msgid "Semantik %1"
+msgstr ""
+
+#: src/semantik.cpp:555
+#, kde-format
+msgid "%1 %2 - Semantik"
+msgstr ""
+
+#: src/table_view.cpp:26 src/table_view.cpp:80
+#, kde-format
+msgid "Add Row"
+msgstr ""
+
+#: src/table_view.cpp:27
+#, kde-format
+msgid "Add a row"
+msgstr ""
+
+#: src/table_view.cpp:31 src/table_view.cpp:81
+#, kde-format
+msgid "Add Column"
+msgstr ""
+
+#: src/table_view.cpp:32
+#, kde-format
+msgid "Add a column"
+msgstr ""
+
+#: src/table_view.cpp:37 src/table_view.cpp:82
+#, kde-format
+msgid "Remove Row"
+msgstr ""
+
+#: src/table_view.cpp:38
+#, kde-format
+msgid "Remove a row"
+msgstr ""
+
+#: src/table_view.cpp:42 src/table_view.cpp:83
+#, kde-format
+msgid "Remove Column"
+msgstr ""
+
+#: src/table_view.cpp:43
+#, kde-format
+msgid "Remove a column"
+msgstr ""
+
+#: src/table_view.cpp:47
+#, kde-format
+msgid "Redimension"
+msgstr ""
+
+#: src/table_view.cpp:48
+#, kde-format
+msgid "Change table dimensions"
+msgstr ""
+
+#: src/text_view.cpp:41
+#, kde-format
+msgid "&Bold"
+msgstr ""
+
+#: src/text_view.cpp:42
+#, kde-format
+msgid "Ctrl+B"
+msgstr ""
+
+#: src/text_view.cpp:45
+#, kde-format
+msgid "&Italic"
+msgstr ""
+
+#: src/text_view.cpp:46
+#, kde-format
+msgid "Ctrl+I"
+msgstr ""
+
+#: src/text_view.cpp:49
+#, kde-format
+msgid "&Underline"
+msgstr ""
+
+#: src/text_view.cpp:50
+#, kde-format
+msgid "Ctrl+U"
+msgstr ""
+
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:3
+#: tips:2
+#, kde-format
 msgid ""
 "<h3>1. Essential commands</h3>\n"
 "<ul>\n"
@@ -294,9 +1377,9 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:19
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:19
+#: tips:19
+#, kde-format
 msgid ""
 "<h3>2. Adding diagrams</h3>\n"
 "<ul>\n"
@@ -309,9 +1392,9 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:32
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:31
+#: tips:32
+#, kde-format
 msgid ""
 "<h3>3. Advanced features</h3>\n"
 "<ul>\n"
@@ -325,9 +1408,9 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:46
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:44
+#: tips:46
+#, kde-format
 msgid ""
 "<h3>4. Data types</h3>\n"
 "<ul>\n"
@@ -337,9 +1420,9 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:57
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:54
+#: tips:57
+#, kde-format
 msgid ""
 "<h3>5. Diagrams</h3>\n"
 "<ul>\n"
@@ -351,9 +1434,9 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:68
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:64
+#: tips:68
+#, kde-format
 msgid ""
 "<h3>6. LaTeX export</h3>\n"
 "<p>\n"
@@ -362,9 +1445,9 @@ msgid ""
 "</p>\n"
 msgstr ""
 
-#. i18n: file: tips:76
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:72
+#: tips:76
+#, kde-format
 msgid ""
 "<h3>7. Diagram size</h3>\n"
 "<p>\n"
@@ -375,9 +1458,9 @@ msgid ""
 "</p>\n"
 msgstr ""
 
-#. i18n: file: tips:87
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:82
+#: tips:87
+#, kde-format
 msgid ""
 "<h3>8. Diagram editor</h3>\n"
 "<p>\n"
@@ -393,9 +1476,9 @@ msgid ""
 "</p>\n"
 msgstr ""
 
-#. i18n: file: tips:99
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:93
+#: tips:99
+#, kde-format
 msgid ""
 "<h3>9. Code snippets in LaTeX</h3>\n"
 "<p>\n"
@@ -405,875 +1488,4 @@ msgid ""
 "variable <i>minted_lang</i>\n"
 "to the variables box, for example: <pre>minted_lang=java</pre>\n"
 "</p>\n"
-msgstr ""
-
-#: data_view.cpp:17
-msgid "<p align='center'>No item selected</p>"
-msgstr ""
-
-#: doc_dialog.cpp:30
-msgid "First Name"
-msgstr ""
-
-#: doc_dialog.cpp:34 generator_dialog.cpp:56
-msgid "Name"
-msgstr ""
-
-#: doc_dialog.cpp:38
-msgid "Organization"
-msgstr ""
-
-#: doc_dialog.cpp:42
-msgid "Email"
-msgstr ""
-
-#: export_map_dialog.cpp:31
-msgid "Export the map"
-msgstr ""
-
-#: export_map_dialog.cpp:37 fig/export_fig_dialog.cpp:37
-msgid "File to write"
-msgstr ""
-
-#: export_map_dialog.cpp:43 fig/export_fig_dialog.cpp:43
-msgid "Width"
-msgstr ""
-
-#: export_map_dialog.cpp:51 fig/export_fig_dialog.cpp:51
-msgid "Height"
-msgstr ""
-
-#: fig/box_actor.cpp:70
-msgid "Actor properties"
-msgstr ""
-
-#: fig/box_actor.cpp:71
-msgid "Caption:"
-msgstr ""
-
-#: fig/box_class_properties.cpp:90 vars_view.cpp:77
-msgid "Code complete"
-msgstr ""
-
-#: fig/box_class_properties.cpp:91 vars_view.cpp:78
-msgid "Ctrl+space"
-msgstr ""
-
-#: fig/box_class_properties.cpp:247
-msgid "Class properties"
-msgstr ""
-
-#: fig/box_class_properties.cpp:284
-msgid "No class name given"
-msgstr ""
-
-#: fig/box_class_properties.cpp:284
-msgid "Missing class name"
-msgstr ""
-
-#: fig/box_document_properties.cpp:26
-msgid "Font properties"
-msgstr ""
-
-#: fig/box_fork.cpp:333 fig/box_item.cpp:289
-msgid "%1 x %2"
-msgstr ""
-
-#: fig/box_item.cpp:127
-msgid "Diagram box properties"
-msgstr ""
-
-#: fig/box_item.cpp:128
-msgid "Text:"
-msgstr ""
-
-#: fig/box_link_properties.cpp:24
-msgid "Link properties"
-msgstr ""
-
-#: fig/box_link_properties.cpp:35
-msgid "Link text"
-msgstr ""
-
-#: fig/box_link_properties.cpp:39
-msgid "Origin cardinality"
-msgstr ""
-
-#: fig/box_link_properties.cpp:43
-msgid "Target cardinality"
-msgstr ""
-
-#: fig/box_link_properties.cpp:48
-msgid "Thickness"
-msgstr ""
-
-#: fig/box_link_properties.cpp:52
-msgid "Line Type"
-msgstr ""
-
-#: fig/box_link_properties.cpp:56
-msgid "Line Style"
-msgstr ""
-
-#: fig/box_link_properties.cpp:60
-msgid "Origin arrow"
-msgstr ""
-
-#: fig/box_link_properties.cpp:64
-msgid "Target arrow"
-msgstr ""
-
-#: fig/box_link_properties.cpp:83
-msgid "Zigzag"
-msgstr ""
-
-#: fig/box_link_properties.cpp:84
-msgid "Straight"
-msgstr ""
-
-#: fig/box_link_properties.cpp:88
-msgid "Invisible line"
-msgstr ""
-
-#: fig/box_link_properties.cpp:89
-msgid "Solid Line"
-msgstr ""
-
-#: fig/box_link_properties.cpp:90
-msgid "Dash Line"
-msgstr ""
-
-#: fig/box_link_properties.cpp:91
-msgid "Dot Line"
-msgstr ""
-
-#: fig/box_link_properties.cpp:95 fig/box_link_properties.cpp:103
-msgid "No arrow"
-msgstr ""
-
-#: fig/box_link_properties.cpp:96 fig/box_link_properties.cpp:104
-msgid "Triangle"
-msgstr ""
-
-#: fig/box_link_properties.cpp:97 fig/box_link_properties.cpp:105
-msgid "Link"
-msgstr ""
-
-#: fig/box_link_properties.cpp:98 fig/box_link_properties.cpp:106
-msgid "Inheritance"
-msgstr ""
-
-#: fig/box_link_properties.cpp:99 fig/box_link_properties.cpp:107
-msgid "Aggregation"
-msgstr ""
-
-#: fig/box_matrix.cpp:160
-msgid "Last colunn: %1px, last row: %2px (size: %3 x %4)"
-msgstr ""
-
-#: fig/box_matrix.cpp:196
-msgid "Column %1: %2px (size: %3 x %4)"
-msgstr ""
-
-#: fig/box_matrix.cpp:242
-msgid "Row %1: %2px (size: %3 x %4)"
-msgstr ""
-
-#: fig/box_sequence.cpp:133 fig/box_sequence.cpp:168
-msgid "%1 x %2 (%3+%4)"
-msgstr ""
-
-#: fig/box_view.cpp:111
-msgid "box_item"
-msgstr ""
-
-#: fig/box_view.cpp:113
-msgid "id"
-msgstr ""
-
-#: fig/box_view.cpp:118 fig/box_view.cpp:128
-msgid "c1"
-msgstr ""
-
-#: fig/box_view.cpp:119 fig/box_view.cpp:130
-msgid "c2"
-msgstr ""
-
-#: fig/box_view.cpp:120
-msgid "text"
-msgstr ""
-
-#: fig/box_view.cpp:121
-msgid "col"
-msgstr ""
-
-#: fig/box_view.cpp:124 fig/box_view.cpp:164
-msgid "box_link"
-msgstr ""
-
-#: fig/box_view.cpp:127
-msgid "p1"
-msgstr ""
-
-#: fig/box_view.cpp:129
-msgid "p2"
-msgstr ""
-
-#: fig/box_view.cpp:142
-msgid "caption"
-msgstr ""
-
-#: fig/box_view.cpp:143
-msgid "parent_caption"
-msgstr ""
-
-#: fig/box_view.cpp:144
-msgid "child_caption"
-msgstr ""
-
-#: fig/box_view.cpp:146
-msgid "pen_style"
-msgstr ""
-
-#: fig/box_view.cpp:147
-msgid "border_width"
-msgstr ""
-
-#: fig/box_view.cpp:151
-msgid "box_link_offset"
-msgstr ""
-
-#: fig/box_view.cpp:155
-msgid "x"
-msgstr ""
-
-#: fig/box_view.cpp:155
-msgid "y"
-msgstr ""
-
-#: fig/box_view.cpp:194
-msgid "Properties..."
-msgstr ""
-
-#: fig/box_view.cpp:199
-msgid "Activity"
-msgstr ""
-
-#: fig/box_view.cpp:200
-msgid "Ctrl+Return"
-msgstr ""
-
-#: fig/box_view.cpp:205
-msgid "Delete"
-msgstr ""
-
-#: fig/box_view.cpp:209
-msgid "Raise"
-msgstr ""
-
-#: fig/box_view.cpp:210
-msgid "PgUp"
-msgstr ""
-
-#: fig/box_view.cpp:214
-msgid "Send back"
-msgstr ""
-
-#: fig/box_view.cpp:215
-msgid "PgDown"
-msgstr ""
-
-#: fig/box_view.cpp:219
-msgid "Floating text"
-msgstr ""
-
-#: fig/box_view.cpp:221
-msgid "Component"
-msgstr ""
-
-#: fig/box_view.cpp:223
-msgid "Rectangle"
-msgstr ""
-
-#: fig/box_view.cpp:225
-msgid "Node"
-msgstr ""
-
-#: fig/box_view.cpp:227
-msgid "Decision"
-msgstr ""
-
-#: fig/box_view.cpp:229
-msgid "Database"
-msgstr ""
-
-#: fig/box_view.cpp:231
-msgid "Pipe"
-msgstr ""
-
-#: fig/box_view.cpp:233
-msgid "Sequence"
-msgstr ""
-
-#: fig/box_view.cpp:235
-msgid "Activity start"
-msgstr ""
-
-#: fig/box_view.cpp:237
-msgid "Activity end"
-msgstr ""
-
-#: fig/box_view.cpp:239
-msgid "Horizontal fork/join"
-msgstr ""
-
-#: fig/box_view.cpp:241
-msgid "Vertical fork/join"
-msgstr ""
-
-#: fig/box_view.cpp:243
-msgid "Actor"
-msgstr ""
-
-#: fig/box_view.cpp:245
-msgid "Usecase"
-msgstr ""
-
-#: fig/box_view.cpp:247
-msgid "Matrix"
-msgstr ""
-
-#: fig/box_view.cpp:249
-msgid "Boundary"
-msgstr ""
-
-#: fig/box_view.cpp:251
-msgid "Class"
-msgstr ""
-
-#: fig/box_view.cpp:254
-msgid "Import from file..."
-msgstr ""
-
-#: fig/box_view.cpp:256
-msgid "Export to file..."
-msgstr ""
-
-#: fig/box_view.cpp:258
-msgid "Copy image to clipboard"
-msgstr ""
-
-#: fig/box_view.cpp:279
-msgid "File operations"
-msgstr ""
-
-#: fig/box_view.cpp:291
-msgid "More elements"
-msgstr ""
-
-#: fig/box_view.cpp:332
-msgid "Alignment"
-msgstr ""
-
-#: fig/box_view.cpp:334
-msgid "Align left"
-msgstr ""
-
-#: fig/box_view.cpp:335
-msgid "Align center"
-msgstr ""
-
-#: fig/box_view.cpp:336
-msgid "Align right"
-msgstr ""
-
-#: fig/box_view.cpp:338
-msgid "Align top"
-msgstr ""
-
-#: fig/box_view.cpp:339
-msgid "Align middle"
-msgstr ""
-
-#: fig/box_view.cpp:340
-msgid "Align bottom"
-msgstr ""
-
-#: fig/box_view.cpp:343
-msgid "Size"
-msgstr ""
-
-#: fig/box_view.cpp:345
-msgid "Same width"
-msgstr ""
-
-#: fig/box_view.cpp:346
-msgid "Same height"
-msgstr ""
-
-#: fig/box_view.cpp:347
-msgid "Same width and height"
-msgstr ""
-
-#: fig/box_view.cpp:607 fig/box_view.cpp:1948
-msgid "Semantik diagram"
-msgstr ""
-
-#: fig/box_view.cpp:1755 fig/semantik_d_win.cpp:324
-msgid "Choose a file to open"
-msgstr ""
-
-#: fig/box_view.cpp:1757 fig/box_view.cpp:1795 fig/semantik_d_win.cpp:326
-msgid "*.semd|Semantik diagram (*.semd)"
-msgstr ""
-
-#: fig/box_view.cpp:1793 semantik.cpp:441 semantik.cpp:533
-msgid "Choose a file name"
-msgstr ""
-
-#: fig/box_view.cpp:1809 semantik.cpp:456
-msgid ""
-"The file \"%1\" already exists.\n"
-"Overwrite it?"
-msgstr ""
-
-#: fig/box_view.cpp:1810 semantik.cpp:457
-msgid "Overwrite existing file"
-msgstr ""
-
-#: fig/box_view.cpp:1832 fig/box_view.cpp:1866 semantik.cpp:468
-#: semantik.cpp:504
-msgid "Saved '%1'"
-msgstr ""
-
-#: fig/box_view.cpp:1839 semantik.cpp:479 semantik.cpp:510
-msgid ""
-"The file \"%1\" could not be saved because an error happened.\n"
-"Try again?"
-msgstr ""
-
-#: fig/box_view.cpp:1840 semantik.cpp:480 semantik.cpp:511
-msgid "Try again?"
-msgstr ""
-
-#: fig/export_fig_dialog.cpp:31
-msgid "Export the diagram"
-msgstr ""
-
-#: fig/matrix_dialog.cpp:32 table_dialog.cpp:32
-msgid "Rows"
-msgstr ""
-
-#: fig/matrix_dialog.cpp:36 table_dialog.cpp:36
-msgid "Columns"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:41 semantik.cpp:145
-msgid "Colors"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:67
-msgid "&Export the diagram..."
-msgstr ""
-
-#: fig/semantik_d_win.cpp:69 semantik.cpp:179
-msgid "Ctrl+Shift+E"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:74 semantik.cpp:200
-msgid "Ctrl+H"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:78
-msgid "Files"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:94 semantik.cpp:270
-msgid "Color"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:102 semantik.cpp:278
-msgid "Custom color"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:109
-msgid "This is Semantik-d"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:222
-msgid "[Untitled]"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:291 semantik.cpp:605
-msgid "Untitled"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:294 semantik.cpp:608
-msgid ""
-"The document \"%1\" has been modified.\n"
-"Do you want to save your changes or discard them?"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:295 semantik.cpp:609
-msgid "Close Document"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:432 semantik.cpp:546
-msgid " [Modified] "
-msgstr ""
-
-#: fig/semantik_d_win.cpp:437
-msgid "Semantik Diagram %1"
-msgstr ""
-
-#: fig/semantik_d_win.cpp:441
-msgid "%1 %2 - Semantik Diagram"
-msgstr ""
-
-#: fig/semd.cpp:29 main.cpp:32
-msgid "A file to open on startup"
-msgstr ""
-
-#: fig/semd.cpp:30 main.cpp:33
-msgid "Batch export as svg/pdf/png"
-msgstr ""
-
-#: fig/semd.cpp:31
-msgid "Diagram width for printing"
-msgstr ""
-
-#: fig/semd.cpp:32
-msgid "Diagram height for printing"
-msgstr ""
-
-#: fig/semd.cpp:34
-msgid "Semantik-d"
-msgstr ""
-
-#: fig/semd.cpp:34
-msgid "(C) 2013-2018 Thomas Nagy"
-msgstr ""
-
-#: fig/semd.cpp:36 main.cpp:39
-msgid "Thomas Nagy"
-msgstr ""
-
-#: generator_dialog.cpp:30
-msgid "Generate documents"
-msgstr ""
-
-#: generator_dialog.cpp:36
-msgid "Generators"
-msgstr ""
-
-#: generator_dialog.cpp:39
-msgid "Description"
-msgstr ""
-
-#: generator_dialog.cpp:63
-msgid "Location"
-msgstr ""
-
-#: generator_dialog.cpp:114
-msgid "No document generator chosen."
-msgstr ""
-
-#: generator_dialog.cpp:114
-msgid "Missing data"
-msgstr ""
-
-#: generator_dialog.cpp:120
-msgid "Invalid output directory %1"
-msgstr ""
-
-#: generator_dialog.cpp:120
-msgid "Missing location"
-msgstr ""
-
-#: image_view.cpp:39
-msgid "Change picture"
-msgstr ""
-
-#: image_view.cpp:43
-msgid "Clear picture"
-msgstr ""
-
-#: image_view.cpp:68
-msgid "Click to set a picture"
-msgstr ""
-
-#: image_view.cpp:72
-msgid "Select an item on the map"
-msgstr ""
-
-#: image_view.cpp:166
-msgid "Choose a picture"
-msgstr ""
-
-#: image_view.cpp:168
-msgid "*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"
-msgstr ""
-
-#: image_view.cpp:180
-msgid "Could not load the picture"
-msgstr ""
-
-#: main.cpp:20
-msgid ""
-"A mind-mapping tool for KDE\n"
-"Available exclusively for open systems such as OpenSuse, Gentoo or Fedora."
-msgstr ""
-
-#: main.cpp:34
-msgid "Batch document creation into the given folder (absolute path)"
-msgstr ""
-
-#: main.cpp:35
-msgid "Batch document creation template pdflatex/beamer/html/s5/odp/odt"
-msgstr ""
-
-#: main.cpp:36
-msgid "Semantik"
-msgstr ""
-
-#: main.cpp:37
-msgid "(C) 2007-2018 Thomas Nagy"
-msgstr ""
-
-#. i18n: file: data/semantik-dui.rc:5
-#. i18n: ectx: Menu (file)
-#. i18n: file: data/semantikui.rc:5
-#. i18n: ectx: Menu (file)
-#. i18n: file: data/semantik-dui.rc:5
-#. i18n: ectx: Menu (file)
-#. i18n: file: data/semantikui.rc:5
-#. i18n: ectx: Menu (file)
-#: po/rc.cpp:3 po/rc.cpp:24 rc.cpp:3 rc.cpp:24
-msgid "&File"
-msgstr ""
-
-#. i18n: file: data/semantik-dui.rc:25
-#. i18n: ectx: Menu (edit)
-#. i18n: file: data/semantikui.rc:8
-#. i18n: ectx: Menu (edit)
-#. i18n: file: data/semantik-dui.rc:25
-#. i18n: ectx: Menu (edit)
-#. i18n: file: data/semantikui.rc:8
-#. i18n: ectx: Menu (edit)
-#: po/rc.cpp:6 po/rc.cpp:27 rc.cpp:6 rc.cpp:27
-msgid "&Edit"
-msgstr ""
-
-#. i18n: file: data/semantik-dui.rc:28
-#. i18n: ectx: Menu (view)
-#. i18n: file: data/semantikui.rc:12
-#. i18n: ectx: Menu (view)
-#. i18n: file: data/semantik-dui.rc:28
-#. i18n: ectx: Menu (view)
-#. i18n: file: data/semantikui.rc:12
-#. i18n: ectx: Menu (view)
-#: po/rc.cpp:9 po/rc.cpp:30 rc.cpp:9 rc.cpp:30
-msgid "&View"
-msgstr ""
-
-#. i18n: file: data/semantik-dui.rc:33
-#. i18n: ectx: Menu (tools)
-#. i18n: file: data/semantikui.rc:20
-#. i18n: ectx: Menu (tools)
-#. i18n: file: data/semantik-dui.rc:33
-#. i18n: ectx: Menu (tools)
-#. i18n: file: data/semantikui.rc:20
-#. i18n: ectx: Menu (tools)
-#: po/rc.cpp:12 po/rc.cpp:33 rc.cpp:12 rc.cpp:33
-msgid "&Tools"
-msgstr ""
-
-#. i18n: file: data/semantik-dui.rc:37
-#. i18n: ectx: Menu (settings)
-#. i18n: file: data/semantikui.rc:24
-#. i18n: ectx: Menu (settings)
-#. i18n: file: data/semantik-dui.rc:37
-#. i18n: ectx: Menu (settings)
-#. i18n: file: data/semantikui.rc:24
-#. i18n: ectx: Menu (settings)
-#: po/rc.cpp:15 po/rc.cpp:36 rc.cpp:15 rc.cpp:36
-msgid "&Settings"
-msgstr ""
-
-#. i18n: file: data/semantik-dui.rc:40
-#. i18n: ectx: Menu (help)
-#. i18n: file: data/semantikui.rc:27
-#. i18n: ectx: Menu (help)
-#. i18n: file: data/semantik-dui.rc:40
-#. i18n: ectx: Menu (help)
-#. i18n: file: data/semantikui.rc:27
-#. i18n: ectx: Menu (help)
-#: po/rc.cpp:18 po/rc.cpp:39 rc.cpp:18 rc.cpp:39
-msgid "&Help"
-msgstr ""
-
-#. i18n: file: data/semantik-dui.rc:51
-#. i18n: ectx: ToolBar (colorsToolBar)
-#. i18n: file: data/semantikui.rc:41
-#. i18n: ectx: ToolBar (colorsToolBar)
-#. i18n: file: data/semantik-dui.rc:51
-#. i18n: ectx: ToolBar (colorsToolBar)
-#. i18n: file: data/semantikui.rc:41
-#. i18n: ectx: ToolBar (colorsToolBar)
-#: po/rc.cpp:21 po/rc.cpp:42 rc.cpp:21 rc.cpp:42
-msgid "Colors Toolbar"
-msgstr ""
-
-#. i18n: file: data/semantikui.rc:45
-#. i18n: ectx: ToolBar (flagsToolBar)
-#: po/rc.cpp:45 rc.cpp:45
-msgid "Flags Toolbar"
-msgstr ""
-
-#: po/rc.cpp:46 rc.cpp:46
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr ""
-
-#: po/rc.cpp:47 rc.cpp:47
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr ""
-
-#: pre_view.cpp:21
-msgid "<p align='center'>No preview available<br/>at this time</p>"
-msgstr ""
-
-#: semantik.cpp:49
-msgid ""
-"The map is empty, Semantik\n"
-"cannot create documents from it"
-msgstr ""
-
-#: semantik.cpp:49
-msgid "Empty map"
-msgstr ""
-
-#: semantik.cpp:56
-msgid "Template folder %1 is not readable"
-msgstr ""
-
-#: semantik.cpp:172
-msgid "&Reorganize the map"
-msgstr ""
-
-#: semantik.cpp:174
-msgid "Ctrl+R"
-msgstr ""
-
-#: semantik.cpp:177
-msgid "&Export the map..."
-msgstr ""
-
-#: semantik.cpp:184
-msgid "&Generate..."
-msgstr ""
-
-#: semantik.cpp:187
-msgid "Ctrl+G"
-msgstr ""
-
-#: semantik.cpp:209
-msgid "Data"
-msgstr ""
-
-#: semantik.cpp:233
-msgid "Variables"
-msgstr ""
-
-#: semantik.cpp:242
-msgid "Preview"
-msgstr ""
-
-#: semantik.cpp:254
-msgid "Linear view"
-msgstr ""
-
-#: semantik.cpp:366
-msgid "Welcome to Semantik"
-msgstr ""
-
-#: semantik.cpp:443
-msgid "*.sem|Semantik file (*.sem)"
-msgstr ""
-
-#: semantik.cpp:535
-msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
-msgstr ""
-
-#: semantik.cpp:551
-msgid "Semantik %1"
-msgstr ""
-
-#: semantik.cpp:555
-msgid "%1 %2 - Semantik"
-msgstr ""
-
-#: table_view.cpp:26 table_view.cpp:80
-msgid "Add Row"
-msgstr ""
-
-#: table_view.cpp:27
-msgid "Add a row"
-msgstr ""
-
-#: table_view.cpp:31 table_view.cpp:81
-msgid "Add Column"
-msgstr ""
-
-#: table_view.cpp:32
-msgid "Add a column"
-msgstr ""
-
-#: table_view.cpp:37 table_view.cpp:82
-msgid "Remove Row"
-msgstr ""
-
-#: table_view.cpp:38
-msgid "Remove a row"
-msgstr ""
-
-#: table_view.cpp:42 table_view.cpp:83
-msgid "Remove Column"
-msgstr ""
-
-#: table_view.cpp:43
-msgid "Remove a column"
-msgstr ""
-
-#: table_view.cpp:47
-msgid "Redimension"
-msgstr ""
-
-#: table_view.cpp:48
-msgid "Change table dimensions"
-msgstr ""
-
-#: text_view.cpp:41
-msgid "&Bold"
-msgstr ""
-
-#: text_view.cpp:42
-msgid "Ctrl+B"
-msgstr ""
-
-#: text_view.cpp:45
-msgid "&Italic"
-msgstr ""
-
-#: text_view.cpp:46
-msgid "Ctrl+I"
-msgstr ""
-
-#: text_view.cpp:49
-msgid "&Underline"
-msgstr ""
-
-#: text_view.cpp:50
-msgid "Ctrl+U"
 msgstr ""

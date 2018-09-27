@@ -46,14 +46,14 @@ void semantik_win::slot_generate()
 {
 	if (m_oMediator->choose_root() <= 0)
 	{
-		KMessageBox::sorry(this, trUtf8("The map is empty, Semantik\ncannot create documents from it"), trUtf8("Empty map"));
+		KMessageBox::sorry(this, i18n("The map is empty, Semantik\ncannot create documents from it"), i18n("Empty map"));
 		return;
 	}
 
 	QDir l_oDir(TEMPLATE_DIR);
 	if (!l_oDir.exists() || !l_oDir.isReadable())
 	{
-		slot_message(trUtf8("Template folder %1 is not readable").arg(TEMPLATE_DIR), 5000);
+		slot_message(i18n("Template folder %1 is not readable", TEMPLATE_DIR), 5000);
 		return;
 	}
 	QFileInfoList l_o = l_oDir.entryInfoList(QStringList()<<"*.py", QDir::Files, QDir::Name);
@@ -142,7 +142,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	connect(m_oMediator, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 	connect(m_oMediator, SIGNAL(update_title()), this, SLOT(update_title()));
 
-	m_oColorMenu = new QMenu(trUtf8("Colors"), this);
+	m_oColorMenu = new QMenu(i18n("Colors"), this);
 
 	QFrame *fr = new QFrame(this);
 	fr->setLineWidth(0);
@@ -169,35 +169,35 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const QUrl&)), actionCollection());
 
-	m_oReorgAct = new QAction(trUtf8("&Reorganize the map"), this);
+	m_oReorgAct = new QAction(i18n("&Reorganize the map"), this);
 	actionCollection()->addAction(notr("reorganize_map"), m_oReorgAct);
-	m_oReorgAct->setShortcut(trUtf8("Ctrl+R"));
+	m_oReorgAct->setShortcut(i18n("Ctrl+R"));
 	connect(m_oReorgAct, SIGNAL(triggered(bool)), m_oCanvas, SLOT(reorganize()));
 
-	m_oExportSizeAct = new QAction(trUtf8("&Export the map..."), this);
+	m_oExportSizeAct = new QAction(i18n("&Export the map..."), this);
 	actionCollection()->addAction(notr("export_map_size"), m_oExportSizeAct);
-	m_oExportSizeAct->setShortcut(trUtf8("Ctrl+Shift+E"));
+	m_oExportSizeAct->setShortcut(i18n("Ctrl+Shift+E"));
 	connect(m_oExportSizeAct, SIGNAL(triggered(bool)), m_oCanvas, SLOT(export_map_size()));
 
 	KStandardAction::preferences(this, SLOT(slot_properties()), actionCollection());
 
-	m_oGenerateAct = new QAction(trUtf8("&Generate..."), this);
+	m_oGenerateAct = new QAction(i18n("&Generate..."), this);
 	actionCollection()->addAction(notr("generate_doc"), m_oGenerateAct);
 	m_oGenerateAct->setIcon(QIcon(notr("run-build-file")));
-	m_oGenerateAct->setShortcut(trUtf8("Ctrl+G"));
+	m_oGenerateAct->setShortcut(i18n("Ctrl+G"));
 	connect(m_oGenerateAct, SIGNAL(triggered(bool)), SLOT(slot_generate()));
 
 	m_oFlagGroup = new QActionGroup(this);
 	m_oFlagGroup->setExclusive(false);
 	connect(m_oFlagGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_flags(QAction*)));
 
-	//m_oCanvasFitZoom = new QAction(trUtf8("Fit zoom"), this);
+	//m_oCanvasFitZoom = new QAction(i18n("Fit zoom"), this);
 	//actionCollection()->addAction(notr("zoom_map"), m_oCanvasFitZoom);
 	//m_oCanvasFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
 	//connect(m_oCanvasFitZoom, SIGNAL(triggered(bool)), m_oCanvas, SLOT(fit_zoom()));
 	m_oCanvasFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
 	m_oCanvasFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
-	m_oCanvasFitZoom->setShortcut(trUtf8("Ctrl+H"));
+	m_oCanvasFitZoom->setShortcut(i18n("Ctrl+H"));
 
 	KStandardAction::zoomIn(m_oCanvas, SLOT(zoom_in()), actionCollection());
 	KStandardAction::zoomOut(m_oCanvas, SLOT(zoom_out()), actionCollection());
@@ -206,7 +206,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	//setStandardToolBarMenuEnabled(true);
 
 
-	QDockWidget *l_oDockData = new QDockWidget(trUtf8("Data"), this);
+	QDockWidget *l_oDockData = new QDockWidget(i18n("Data"), this);
 	l_oDockData->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
 	m_oDataView = new data_view(l_oDockData, m_oMediator);
 	l_oDockData->setWidget(m_oDataView);
@@ -230,7 +230,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	connect(m_oDiagramView, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 
 
-	QDockWidget *l_oDockVars = new QDockWidget(trUtf8("Variables"), this);
+	QDockWidget *l_oDockVars = new QDockWidget(i18n("Variables"), this);
 	l_oDockVars->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
 	m_oVarsView = new vars_view(l_oDockVars, m_oMediator);
 	l_oDockVars->setWidget(m_oVarsView);
@@ -239,7 +239,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	actionCollection()->addAction(notr("show_dock_vars"), l_oDockVars->toggleViewAction());
 	m_oVarsView->init_completer();
 
-	QDockWidget *l_oDockPreview = new QDockWidget(trUtf8("Preview"), this);
+	QDockWidget *l_oDockPreview = new QDockWidget(i18n("Preview"), this);
 	l_oDockPreview->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
 	m_oPreView = new pre_view(l_oDockPreview, m_oMediator);
 	l_oDockPreview->setWidget(m_oPreView);
@@ -251,7 +251,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	tabifyDockWidget(l_oDockData, l_oDockVars);
 
 
-	QDockWidget *l_oDock = new QDockWidget(trUtf8("Linear view"), this);
+	QDockWidget *l_oDock = new QDockWidget(i18n("Linear view"), this);
 	m_oTree = new linear_container(l_oDock, m_oMediator);
 	l_oDock->setWidget(m_oTree);
 	addDockWidget(Qt::LeftDockWidgetArea, l_oDock);
@@ -267,7 +267,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oColorGroup = new QActionGroup(this);
 	for (int i = 0; i < 9; ++i)
 	{
-		QAction *l_oAct = new QAction(QIcon(), trUtf8("Color"), m_oColorGroup);
+		QAction *l_oAct = new QAction(QIcon(), i18n("Color"), m_oColorGroup);
 		m_oColorGroup->addAction(l_oAct);
 		if (i != 0)
 		{
@@ -275,7 +275,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 			m_oColorMenu->addAction(l_oAct);
 		}
 	}
-	m_oCustomColorAct = new QAction(l_oScheme._icon(), trUtf8("Custom color"), m_oColorGroup);
+	m_oCustomColorAct = new QAction(l_oScheme._icon(), i18n("Custom color"), m_oColorGroup);
 	m_oColorMenu->addAction(m_oCustomColorAct);
 	m_oColorsToolBar->addAction(m_oCustomColorAct);
 	m_oColorGroup->setExclusive(true);
@@ -363,7 +363,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oMediator->init_flags();
 
 	read_config();
-	statusBar()->showMessage(trUtf8("Welcome to Semantik"), 2000);
+	statusBar()->showMessage(i18n("Welcome to Semantik"), 2000);
 	setAutoSaveSettings();
 
 	connect(m_oMediator, SIGNAL(enable_undo(bool, bool)), this, SLOT(slot_enable_undo(bool, bool)));
@@ -438,9 +438,9 @@ int semantik_win::print_to_file(const QUrl & url, QPair<int, int> p)
 bool semantik_win::slot_save_as()
 {
 	choose:
-	QUrl l_o = QFileDialog::getSaveFileUrl(this, trUtf8("Choose a file name"), 
+	QUrl l_o = QFileDialog::getSaveFileUrl(this, i18n("Choose a file name"), 
                 QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
-		trUtf8("*.sem|Semantik file (*.sem)"));
+		i18n("*.sem|Semantik file (*.sem)"));
 
 	if (l_o.path().isEmpty()) return false;
 	if (!l_o.path().endsWith(notr(".sem")))
@@ -453,8 +453,8 @@ bool semantik_win::slot_save_as()
 		if (l_o.isLocalFile() && QFile::exists(l_o.path()))
 		{
 			int mu = KMessageBox::questionYesNo(NULL, //this,
-			trUtf8("The file \"%1\" already exists.\nOverwrite it?").arg(l_o.path()),
-			trUtf8("Overwrite existing file"),
+			i18n("The file \"%1\" already exists.\nOverwrite it?", l_o.path()),
+			i18n("Overwrite existing file"),
 			KStandardGuiItem::yes(),
 			KStandardGuiItem::no(),
 			notr("OverwriteExistingFile"));
@@ -465,7 +465,7 @@ bool semantik_win::slot_save_as()
 
 	if (m_oMediator->save_file(l_o.path()))
 	{
-		statusBar()->showMessage(trUtf8("Saved '%1'").arg(l_o.path()), 2000);
+		statusBar()->showMessage(i18n("Saved '%1'", l_o.path()), 2000);
 		m_oMediator->m_oCurrentUrl = l_o;
 		update_title();
 		return true;
@@ -476,8 +476,8 @@ bool semantik_win::slot_save_as()
 		update_title();
 
 		int mu = KMessageBox::questionYesNo(NULL, //this,
-		trUtf8("The file \"%1\" could not be saved because an error happened.\nTry again?").arg(l_o.path()),
-		trUtf8("Try again?"),
+		i18n("The file \"%1\" could not be saved because an error happened.\nTry again?", l_o.path()),
+		i18n("Try again?"),
 		KStandardGuiItem::yes(),
 		KStandardGuiItem::no(),
 		notr("ContinueSaveAs"));
@@ -501,14 +501,14 @@ bool semantik_win::slot_save()
 	}
 	if (m_oMediator->save_file(m_oMediator->m_sLastSaved))
 	{
-		statusBar()->showMessage(trUtf8("Saved '%1'").arg(m_oMediator->m_sLastSaved), 2000);
+		statusBar()->showMessage(i18n("Saved '%1'", m_oMediator->m_sLastSaved), 2000);
 		return true;
 	}
 	else
 	{
 		int mu = KMessageBox::questionYesNo(NULL, //this,
-		trUtf8("The file \"%1\" could not be saved because an error happened.\nTry again?").arg(m_oMediator->m_sLastSaved),
-		trUtf8("Try again?"),
+		i18n("The file \"%1\" could not be saved because an error happened.\nTry again?", m_oMediator->m_sLastSaved),
+		i18n("Try again?"),
 		KStandardGuiItem::yes(),
 		KStandardGuiItem::no(),
 		notr("ContinueSaveAs"));
@@ -530,9 +530,9 @@ void semantik_win::slot_open()
 		if (!proceed_save()) return;
 	}
 
-	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a file name"),
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, i18n("Choose a file name"),
                 QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
-		trUtf8("*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"));
+		i18n("*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"));
 	if (l_o.isValid() && m_oMediator->open_file(l_o.path()))
 	{
 		m_oMediator->m_oCurrentUrl = l_o;
@@ -543,16 +543,16 @@ void semantik_win::slot_open()
 void semantik_win::update_title()
 {
 	QString mod;
-	if (m_oMediator->m_bDirty) mod = trUtf8(" [Modified] ");
+	if (m_oMediator->m_bDirty) mod = i18n(" [Modified] ");
 
 	QString txt;
 	if (m_oMediator->m_oCurrentUrl.path().isEmpty())
 	{
-		txt = trUtf8("Semantik %1").arg(mod);
+		txt = i18n("Semantik %1", mod);
 	}
 	else
 	{
-		txt = trUtf8("%1 %2 - Semantik").arg(m_oMediator->m_oCurrentUrl.path(), mod);
+		txt = i18n("%1 %2 - Semantik", m_oMediator->m_oCurrentUrl.path(), mod);
 		m_oRecentFilesAct->addUrl(m_oMediator->m_oCurrentUrl); // TODO
 	}
 	setWindowTitle(txt);
@@ -602,11 +602,11 @@ bool semantik_win::queryClose()
 bool semantik_win::proceed_save()
 {
 	QString l_oTitle = m_oMediator->m_sLastSaved;
-	if (l_oTitle.isEmpty()) l_oTitle = trUtf8("Untitled");
+	if (l_oTitle.isEmpty()) l_oTitle = i18n("Untitled");
 
 	int l_o = KMessageBox::warningYesNoCancel(NULL, //this,
-	trUtf8("The document \"%1\" has been modified.\nDo you want to save your changes or discard them?").arg(l_oTitle),
-	trUtf8("Close Document"),
+	i18n("The document \"%1\" has been modified.\nDo you want to save your changes or discard them?", l_oTitle),
+	i18n("Close Document"),
 	KStandardGuiItem::save(), KStandardGuiItem::discard());
 
 	switch (l_o)

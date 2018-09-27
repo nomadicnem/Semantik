@@ -36,11 +36,11 @@ image_view::image_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i
 	setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(context_menu(const QPoint&)));
 
-	m_oChangePictureAction = new QAction(trUtf8("Change picture"), this);
+	m_oChangePictureAction = new QAction(i18n("Change picture"), this);
         connect(m_oChangePictureAction, SIGNAL(triggered()), this, SLOT(change_pic()));
 	addAction(m_oChangePictureAction);
 
-	m_oClearPictureAction = new QAction(trUtf8("Clear picture"), this);
+	m_oClearPictureAction = new QAction(i18n("Clear picture"), this);
         connect(m_oClearPictureAction, SIGNAL(triggered()), this, SLOT(clear_pic()));
 	addAction(m_oClearPictureAction);
 
@@ -65,11 +65,11 @@ void image_view::paintEvent(QPaintEvent*)
 	{
 		if (m_iId)
 		{
-			p.drawText(r, Qt::AlignCenter, trUtf8("Click to set a picture"));
+			p.drawText(r, Qt::AlignCenter, i18n("Click to set a picture"));
 		}
 		else
 		{
-			p.drawText(r, Qt::AlignCenter, trUtf8("Select an item on the map"));
+			p.drawText(r, Qt::AlignCenter, i18n("Select an item on the map"));
 		}
 		return;
 	}
@@ -163,9 +163,9 @@ void image_view::mouseReleaseEvent(QMouseEvent *i_o)
 
 void image_view::change_pic()
 {
-	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a picture"), 
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, i18n("Choose a picture"), 
                 QUrl(QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)),
-                trUtf8("*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"));
+                i18n("*.png *.jpg *.jpeg *.gif|Image Files (*.png *.jpg *.jpeg *.gif)"));
 	do_change_pic(l_o);
 }
 
@@ -177,7 +177,7 @@ void image_view::do_change_pic(const QUrl& l_sText)
 	bool l_bRet = m_oMediator->save_and_load_picture(l_sText, id);
 	if (!l_bRet)
 	{
-		emit sig_message(trUtf8("Could not load the picture"), 20000);
+		emit sig_message(i18n("Could not load the picture"), 20000);
 		return;
 	}
 

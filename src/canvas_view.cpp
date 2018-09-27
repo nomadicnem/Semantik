@@ -85,46 +85,46 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 
 	QAction *l_o = NULL;
 
-	m_oAddItemAction = new QAction(trUtf8("Add an element"), this);
+	m_oAddItemAction = new QAction(i18n("Add an element"), this);
 	m_oAddItemAction->setShortcut(notr("Ctrl+Return"));
 	connect(m_oAddItemAction, SIGNAL(triggered()), this, SLOT(slot_add_item()));
 	addAction(m_oAddItemAction);
 
-	m_oDeleteAction = new QAction(trUtf8("Delete selection"), this);
+	m_oDeleteAction = new QAction(i18n("Delete selection"), this);
 	m_oDeleteAction->setShortcut(notr("Del"));
 	connect(m_oDeleteAction, SIGNAL(triggered()), this, SLOT(slot_delete()));
 	addAction(m_oDeleteAction);
 
-	m_oInsertSiblingAction = l_o = new QAction(trUtf8("Insert a sibling"), this);
+	m_oInsertSiblingAction = l_o = new QAction(i18n("Insert a sibling"), this);
 	l_o->setShortcut(notr("Shift+Return"));
 	connect(l_o, SIGNAL(triggered()), this, SLOT(slot_add_sibling()));
 	addAction(l_o);
 
-	m_oMoveUpAction = l_o = new QAction(trUtf8("Move up"), this); l_o->setShortcut(notr("Alt+Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(0));
-	m_oMoveDownAction = l_o = new QAction(trUtf8("Move down"), this); l_o->setShortcut(notr("Alt+Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(1));
-	m_oMoveLeftAction = l_o = new QAction(trUtf8("Move left"), this); l_o->setShortcut(notr("Alt+Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(2));
-	m_oMoveRightAction = l_o = new QAction(trUtf8("Move right"), this); l_o->setShortcut(notr("Alt+Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(3));
+	m_oMoveUpAction = l_o = new QAction(i18n("Move up"), this); l_o->setShortcut(notr("Alt+Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(0));
+	m_oMoveDownAction = l_o = new QAction(i18n("Move down"), this); l_o->setShortcut(notr("Alt+Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(1));
+	m_oMoveLeftAction = l_o = new QAction(i18n("Move left"), this); l_o->setShortcut(notr("Alt+Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(2));
+	m_oMoveRightAction = l_o = new QAction(i18n("Move right"), this); l_o->setShortcut(notr("Alt+Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(3));
 
-	m_oSelectUpAction = l_o = new QAction(trUtf8("Select up"), this); l_o->setShortcut(notr("Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(0));
-	m_oSelectDownAction = l_o = new QAction(trUtf8("Select down"), this); l_o->setShortcut(notr("Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(1));
-	m_oSelectLeftAction = l_o = new QAction(trUtf8("Select left"), this); l_o->setShortcut(notr("Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(2));
-	m_oSelectRightAction = l_o = new QAction(trUtf8("Select right"), this); l_o->setShortcut(notr("Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(3));
+	m_oSelectUpAction = l_o = new QAction(i18n("Select up"), this); l_o->setShortcut(notr("Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(0));
+	m_oSelectDownAction = l_o = new QAction(i18n("Select down"), this); l_o->setShortcut(notr("Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(1));
+	m_oSelectLeftAction = l_o = new QAction(i18n("Select left"), this); l_o->setShortcut(notr("Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(2));
+	m_oSelectRightAction = l_o = new QAction(i18n("Select right"), this); l_o->setShortcut(notr("Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(3));
 
 
-	m_oSelectSubtreeAction = new QAction(trUtf8("Select subtree"), this);
+	m_oSelectSubtreeAction = new QAction(i18n("Select subtree"), this);
 	connect(m_oSelectSubtreeAction, SIGNAL(triggered()), this, SLOT(slot_select_subtree()));
 	addAction(m_oSelectSubtreeAction);
 
 
-	m_oNextRootAction = l_o = new QAction(trUtf8("Next root"), this); l_o->setShortcut(notr("PgDown")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_next_root())); addAction(l_o); l_o->setData(QVariant(1));
+	m_oNextRootAction = l_o = new QAction(i18n("Next root"), this); l_o->setShortcut(notr("PgDown")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_next_root())); addAction(l_o); l_o->setData(QVariant(1));
 
 
-	m_oEditAction = new QAction(trUtf8("Toggle edit"), this);
+	m_oEditAction = new QAction(i18n("Toggle edit"), this);
 	m_oEditAction->setShortcut(notr("Return"));
 	addAction(m_oEditAction);
 	connect(m_oEditAction, SIGNAL(triggered()), this, SLOT(slot_toggle_edit()));
 
-	m_oCancelEditAction = new QAction(trUtf8("Cancel edit"), this);
+	m_oCancelEditAction = new QAction(i18n("Cancel edit"), this);
 	m_oCancelEditAction->setShortcut(notr("Escape"));
 	addAction(m_oCancelEditAction);
 	connect(m_oCancelEditAction, SIGNAL(triggered()), this, SLOT(slot_cancel_edit()));
@@ -136,11 +136,11 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 	m_oMenu->addAction(m_oDeleteAction);
 	m_oMenu->addAction(m_oSelectSubtreeAction);
 
-	QAction *fullAction = new QAction(trUtf8("Toggle fullscreen"), this);
+	QAction *fullAction = new QAction(i18n("Toggle fullscreen"), this);
 	connect(fullAction, SIGNAL(triggered()), this, SLOT(toggle_fullscreen())); addAction(l_o);
 	m_oMenu->addAction(fullAction);
 
-	//m_oDataMenu = m_oMenu->addMenu(trUtf8("Data type"));
+	//m_oDataMenu = m_oMenu->addMenu(i18n("Data type"));
 	m_oColorMenu = i_oColorMenu;
 	m_oMenu->addMenu(m_oColorMenu);
 
@@ -151,10 +151,10 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 	l_o->setCheckable(true);
 
 	m_oMenu->addSeparator();
-	newAction(trUtf8("Text"), VIEW_TEXT, m_oTextType);
-	newAction(trUtf8("Diagram"), VIEW_DIAG, m_oDiagramType);
-	newAction(trUtf8("Table"), VIEW_TABLE, m_oTableType);
-	newAction(trUtf8("Image"), VIEW_IMG, m_oImageType);
+	newAction(i18n("Text"), VIEW_TEXT, m_oTextType);
+	newAction(i18n("Diagram"), VIEW_DIAG, m_oDiagramType);
+	newAction(i18n("Table"), VIEW_TABLE, m_oTableType);
+	newAction(i18n("Image"), VIEW_IMG, m_oImageType);
 
 	m_bDeleting = false;
 	//connect(scene(), SIGNAL(selectionChanged()), this, SLOT(selection_changed())); // TODO check with m_bPressed
@@ -239,7 +239,7 @@ void canvas_view::edit_off() {
 
 				sel->setTextInteractionFlags(Qt::NoTextInteraction);
 				if (sel->toPlainText() == notr("")) {
-					sel->setPlainText(QObject::trUtf8("Empty"));
+					sel->setPlainText(i18n("Empty"));
 					sel->update_links();
 				}
 
@@ -291,7 +291,7 @@ void canvas_view::slot_toggle_edit()
 		if (sel->textInteractionFlags() & Qt::TextEditorInteraction) {
 			sel->setTextInteractionFlags(Qt::NoTextInteraction);
 			if (sel->toPlainText() == notr("")) {
-				sel->setPlainText(QObject::trUtf8("Empty"));
+				sel->setPlainText(i18n("Empty"));
 				sel->update(); // seems to update faster
 				sel->update_links();
 
@@ -303,7 +303,7 @@ void canvas_view::slot_toggle_edit()
 			}
 		} else {
 			sel->setTextInteractionFlags(Qt::TextEditorInteraction);
-			if (sel->toPlainText() == QObject::trUtf8("Empty")) {
+			if (sel->toPlainText() == i18n("Empty")) {
 				sel->setPlainText("");
 				sel->update(); // seems to update faster
 				sel->update_links();
@@ -604,7 +604,7 @@ void canvas_view::sync_flags() {
 
 	while (l_o->m_oFlagGroup->actions().size() < m_oMediator->m_oFlagSchemes.size())
 	{
-		new QAction(QIcon(), trUtf8("Flag"), l_o->m_oFlagGroup);
+		new QAction(QIcon(), i18n("Flag"), l_o->m_oFlagGroup);
 	}
 
 	for (int i=0; i<m_oMediator->m_oFlagSchemes.size(); ++i)
@@ -931,7 +931,7 @@ void canvas_view::mouseReleaseEvent(QMouseEvent *i_oEv)
 			m_oMediator->m_iSortCursor = 0;
 		}
 
-		emit sig_message(trUtf8("Click to set Item %1").arg(QString::number(m_oMediator->m_iSortCursor+1)), -1);
+		emit sig_message(i18n("Click to set Item %1", QString::number(m_oMediator->m_iSortCursor+1)), -1);
 		return;
 	}
 
@@ -1279,7 +1279,7 @@ void canvas_view::export_map_size()
 	export_map_dialog* exp = new export_map_dialog(this);
 
 	exp->kurlrequester->setMode(KFile::File | KFile::LocalOnly);
-	exp->kurlrequester->setFilter(trUtf8("*.png|PNG Files (*.png)\n*.svg|SVG Files (*.svg)\n*.pdf|PDF Files (*.pdf)"));
+	exp->kurlrequester->setFilter(i18n("*.png|PNG Files (*.png)\n*.svg|SVG Files (*.svg)\n*.pdf|PDF Files (*.pdf)"));
 
 	exp->kurlrequester->setUrl(QUrl(m_oMediator->m_sExportUrl));
 	exp->m_oWidthC->setChecked(m_oMediator->m_bExportIsWidth);
@@ -1317,7 +1317,7 @@ void canvas_view::export_map_size()
 
 		if (!exp->kurlrequester->url().isValid() || exp->kurlrequester->url().isEmpty())
 		{
-			m_oMediator->notify_message(trUtf8("No destination file selected"), 5000);
+			m_oMediator->notify_message(i18n("No destination file selected"), 5000);
 			return;
 		}
 
@@ -1341,9 +1341,9 @@ void canvas_view::export_map_size()
 		}
 		int status = batch_print_map(url, p);
 		if (status == 0)
-			m_oMediator->notify_message(trUtf8("Exported '%1'").arg(url.fileName()), 2000);
+			m_oMediator->notify_message(i18n("Exported '%1'", url.fileName()), 2000);
 		else
-			KMessageBox::sorry(this, trUtf8("Could not save to %1").arg(url.fileName()), trUtf8("Missing picture"));
+			KMessageBox::sorry(this, i18n("Could not save to %1", url.fileName()), i18n("Missing picture"));
 	}
 }
 
@@ -1637,7 +1637,7 @@ int canvas_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p) {
 		l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 		l_oGenerator.setViewBox(l_oR);
 		l_oGenerator.setResolution(96);
-		l_oGenerator.setTitle(trUtf8("Semantik map"));
+		l_oGenerator.setTitle(i18n("Semantik map"));
 
 		QPainter l_oP;
 		l_oP.begin(&l_oGenerator);
@@ -1673,7 +1673,7 @@ void canvas_view::slot_print()
         QPrintDialog l_oD(l_oP, this);
         if (l_oD.exec() != QDialog::Accepted)
         {
-		emit sig_message(trUtf8("Printing cancelled"), 3000);
+		emit sig_message(i18n("Printing cancelled"), 3000);
 		return;
 	}
 
@@ -1684,11 +1684,11 @@ void canvas_view::slot_print()
 		scene()->render(&l_oPdf, QRectF(), l_oRect, Qt::KeepAspectRatio);
 		l_oPdf.end();
 		m_bDisableGradient = false;
-		emit sig_message(trUtf8("Printing completed"), 5000);
+		emit sig_message(i18n("Printing completed"), 5000);
 	}
 	else
 	{
-		emit sig_message(trUtf8("Problem during printing :-("), 5000);
+		emit sig_message(i18n("Problem during printing :-("), 5000);
 	}
 }
 

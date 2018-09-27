@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QSpacerItem>
+#include <KLocalizedString>
 #include <QCoreApplication>
 #include <QTreeWidget>
 #include <QTextEdit>
@@ -28,19 +29,19 @@ export_map_dialog::export_map_dialog(QWidget *i_oParent): KDialog(i_oParent)
 	setButtons(KDialog::Ok | KDialog::Cancel);
 
 	QWidget *widget = new QWidget(this);
-	setCaption(trUtf8("Export the map"));
+	setCaption(i18n("Export the map"));
 	setButtons(KDialog::Ok | KDialog::Cancel);
 
         QGridLayout * gridLayout = new QGridLayout(widget);
 
 	QLabel *label = new QLabel(widget);
-	label->setText(trUtf8("File to write"));
+	label->setText(i18n("File to write"));
 	gridLayout->addWidget(label, 0, 0);
 
         kurlrequester = new KUrlRequester(widget);
         gridLayout->addWidget(kurlrequester, 0, 1, 1, 1);
 
-        m_oWidthC = new QRadioButton(trUtf8("Width"), widget);
+        m_oWidthC = new QRadioButton(i18n("Width"), widget);
         gridLayout->addWidget(m_oWidthC, 1, 0, 1, 1);
 
         m_oWidth = new QSpinBox(widget);
@@ -48,7 +49,7 @@ export_map_dialog::export_map_dialog(QWidget *i_oParent): KDialog(i_oParent)
 	m_oWidth->setMaximum(20000);
         gridLayout->addWidget(m_oWidth, 1, 1, 1, 1);
 
-        m_oHeightC = new QRadioButton(trUtf8("Height"), widget);
+        m_oHeightC = new QRadioButton(i18n("Height"), widget);
         gridLayout->addWidget(m_oHeightC, 2, 0, 1, 1);
 
         m_oHeight = new QSpinBox(widget);

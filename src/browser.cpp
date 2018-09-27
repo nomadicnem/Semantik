@@ -2,6 +2,7 @@
 
 #include "browser.h"
 #include <QtDebug>
+#include <KLocalizedString>
 #include <QMenu>
 #include <QContextMenuEvent>
 
@@ -18,7 +19,7 @@ void browser::contextMenuEvent(QContextMenuEvent * event)
 		m_oMenu = new QMenu(this);
         m_oMenu->addAction(pageAction(QWebEnginePage::Reload));
 
-		QAction *toggle = new QAction(trUtf8("Toggle fullscreen"), this);
+		QAction *toggle = new QAction(i18n("Toggle fullscreen"), this);
 		connect(toggle, SIGNAL(triggered()), this, SLOT(toggleFullScreen()));
 		m_oMenu->addAction(toggle);
 	}

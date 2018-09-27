@@ -330,7 +330,7 @@ QPointF box_fork::validate_point(box_resize_point *p, const QPointF & orig)
 		m_oChain->setPos(m_iLastStretch + 3, 0);
 	}
 	setRect(QRectF(QPointF(0, 0), s));
-	m_oView->message(m_oView->trUtf8("%1 x %2").arg(QString::number(s.width()), QString::number(s.height())), 1000);
+	m_oView->message(i18n("%1 x %2", QString::number(s.width()), QString::number(s.height())), 1000);
 	update_links();
 	return pf;
 }

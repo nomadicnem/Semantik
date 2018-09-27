@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-27 17:31+0200\n"
+"POT-Creation-Date: 2018-09-27 18:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,8 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base/data_item.cpp:60 canvas_view.cpp:242 canvas_view.cpp:294
-#: canvas_view.cpp:306
+#: base/data_item.cpp:60 canvas_view.cpp:243 canvas_view.cpp:295
+#: canvas_view.cpp:308 canvas_view.cpp:1385
 msgid "Empty"
 msgstr "Vide"
 
@@ -84,130 +84,130 @@ msgstr "Génération de document complète"
 msgid "Document generation completed successfully"
 msgstr "Génération de document complète"
 
-#: browser.cpp:21 canvas_view.cpp:139
+#: browser.cpp:21 canvas_view.cpp:140
 msgid "Toggle fullscreen"
 msgstr "Basculer en plein écran"
 
-#: canvas_view.cpp:88
+#: canvas_view.cpp:89
 msgid "Add an element"
 msgstr "Ajouter un élément"
 
-#: canvas_view.cpp:93 fig/box_view.cpp:204
+#: canvas_view.cpp:94 fig/box_view.cpp:204
 msgid "Delete selection"
 msgstr "Effacer la sélection"
 
-#: canvas_view.cpp:98
+#: canvas_view.cpp:99
 msgid "Insert a sibling"
 msgstr "Insérer un frère"
 
-#: canvas_view.cpp:103
+#: canvas_view.cpp:104
 msgid "Move up"
 msgstr "Déplacer vers le haut"
 
-#: canvas_view.cpp:104
+#: canvas_view.cpp:105
 msgid "Move down"
 msgstr "Déplacer vers le bas"
 
-#: canvas_view.cpp:105
+#: canvas_view.cpp:106
 msgid "Move left"
 msgstr "Déplacer vers la gauche"
 
-#: canvas_view.cpp:106
+#: canvas_view.cpp:107
 msgid "Move right"
 msgstr "Déplacer vers la droite"
 
-#: canvas_view.cpp:108
+#: canvas_view.cpp:109
 msgid "Select up"
 msgstr "Sélectionner au dessus"
 
-#: canvas_view.cpp:109
+#: canvas_view.cpp:110
 msgid "Select down"
 msgstr "Sélectionner en dessous"
 
-#: canvas_view.cpp:110
+#: canvas_view.cpp:111
 msgid "Select left"
 msgstr "Sélectionner à gauche"
 
-#: canvas_view.cpp:111
+#: canvas_view.cpp:112
 msgid "Select right"
 msgstr "Sélectionner à droite"
 
-#: canvas_view.cpp:114
+#: canvas_view.cpp:115
 msgid "Select subtree"
 msgstr "Sélectionner le sous-arbre"
 
-#: canvas_view.cpp:119
+#: canvas_view.cpp:120
 msgid "Next root"
 msgstr "Racine suivante"
 
-#: canvas_view.cpp:122
+#: canvas_view.cpp:123
 msgid "Toggle edit"
 msgstr "Basculer l'édition"
 
-#: canvas_view.cpp:127
+#: canvas_view.cpp:128
 msgid "Cancel edit"
 msgstr "Annuler l'édition"
 
-#: canvas_view.cpp:154
+#: canvas_view.cpp:155
 msgid "Text"
 msgstr "Texte"
 
-#: canvas_view.cpp:155
+#: canvas_view.cpp:156
 msgid "Diagram"
 msgstr "Diagramme"
 
-#: canvas_view.cpp:156
+#: canvas_view.cpp:157
 msgid "Table"
 msgstr "Table"
 
-#: canvas_view.cpp:157
+#: canvas_view.cpp:158
 msgid "Image"
 msgstr "Image"
 
-#: canvas_view.cpp:607
+#: canvas_view.cpp:609
 msgid "Flag"
 msgstr "Drapeau"
 
-#: canvas_view.cpp:934
+#: canvas_view.cpp:936
 msgid "Click to set Item %1"
 msgstr "Cliquer pour mettre en place l'item %1"
 
-#: canvas_view.cpp:1282 fig/box_view.cpp:2060
+#: canvas_view.cpp:1284 fig/box_view.cpp:2060
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2098
+#: canvas_view.cpp:1322 fig/box_view.cpp:2098
 msgid "No destination file selected"
 msgstr "Aucun fichier de destination sélectionné"
 
-#: canvas_view.cpp:1344 fig/box_view.cpp:2122
+#: canvas_view.cpp:1346 fig/box_view.cpp:2122
 msgid "Exported '%1'"
 msgstr "'%1' Sauvegardé"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1348 fig/box_view.cpp:2124
 msgid "Could not save to %1"
 msgstr "Impossible de sauver %1"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1348 fig/box_view.cpp:2124
 msgid "Missing picture"
 msgstr "Image manquante"
 
-#: canvas_view.cpp:1640
+#: canvas_view.cpp:1643
 msgid "Semantik map"
 msgstr "Carte Semantik"
 
-#: canvas_view.cpp:1676 fig/box_view.cpp:1985
+#: canvas_view.cpp:1679 fig/box_view.cpp:1985
 msgid "Printing cancelled"
 msgstr "Impression annulée"
 
-#: canvas_view.cpp:1687 fig/box_view.cpp:1996
+#: canvas_view.cpp:1690 fig/box_view.cpp:1996
 msgid "Printing completed"
 msgstr "Impression complétée"
 
-#: canvas_view.cpp:1691 fig/box_view.cpp:2000
+#: canvas_view.cpp:1694 fig/box_view.cpp:2000
 msgid "Problem during printing :-("
 msgstr "Problème à l'impression"
 
@@ -297,13 +297,16 @@ msgstr ""
 "<h3>1. Commandes principales</h3>\n"
 "<ul>\n"
 " <li>Double clic pour ajouter un concept</li>\n"
-" <li>Double clic sur un concept, ou utiliser le mode lien pour connecter des concepts</li>\n"
+" <li>Double clic sur un concept, ou utiliser le mode lien pour connecter des "
+"concepts</li>\n"
 " <li>Double clic sur un lien pour l'&eacute;liminer</li>\n"
 " <li>Bouton du milieu pour se déplacer sur la carte</li>\n"
 " <li>D&eacute;filement de la souris pour zoomer</li>\n"
-" <li>Utiliser la touche entr&eacute;e pour &eacute;diter un concept sélectionné</li>\n"
+" <li>Utiliser la touche entr&eacute;e pour &eacute;diter un concept "
+"sélectionné</li>\n"
 " <li>Control+R pour r&eacute;organiser la carte</li>\n"
-" <li>Control+H pour centrer sur les concepts s&eacute;l&eacute;ctionnés</li>\n"
+" <li>Control+H pour centrer sur les concepts s&eacute;l&eacute;ctionnés</"
+"li>\n"
 " <li>Ctrl+G pour g&eacute;n&eacute;rer des documents</li>\n"
 "</ul>\n"
 
@@ -620,8 +623,9 @@ msgid "c2"
 msgstr ""
 
 #: fig/box_view.cpp:120
+#, fuzzy
 msgid "text"
-msgstr ""
+msgstr "Lien"
 
 #: fig/box_view.cpp:121
 msgid "col"
@@ -650,8 +654,9 @@ msgid "parent_caption"
 msgstr "légende pour l'image"
 
 #: fig/box_view.cpp:144
+#, fuzzy
 msgid "child_caption"
-msgstr ""
+msgstr "Lieu"
 
 #: fig/box_view.cpp:146
 msgid "pen_style"
@@ -706,8 +711,9 @@ msgid "PgDown"
 msgstr ""
 
 #: fig/box_view.cpp:219
+#, fuzzy
 msgid "Floating text"
-msgstr ""
+msgstr "Lien"
 
 #: fig/box_view.cpp:221
 msgid "Component"
@@ -740,12 +746,14 @@ msgid "Sequence"
 msgstr ""
 
 #: fig/box_view.cpp:235
+#, fuzzy
 msgid "Activity start"
-msgstr ""
+msgstr "Activité"
 
 #: fig/box_view.cpp:237
+#, fuzzy
 msgid "Activity end"
-msgstr ""
+msgstr "Activité"
 
 #: fig/box_view.cpp:239
 msgid "Horizontal fork/join"
@@ -776,36 +784,42 @@ msgid "Class"
 msgstr ""
 
 #: fig/box_view.cpp:254
+#, fuzzy
 msgid "Import from file..."
-msgstr ""
+msgstr "Exporter la carte"
 
 #: fig/box_view.cpp:256
+#, fuzzy
 msgid "Export to file..."
-msgstr ""
+msgstr "Exporter la carte"
 
 #: fig/box_view.cpp:258
 msgid "Copy image to clipboard"
 msgstr ""
 
 #: fig/box_view.cpp:279
+#, fuzzy
 msgid "File operations"
-msgstr ""
+msgstr "Propriétés du lien"
 
 #: fig/box_view.cpp:291
 msgid "More elements"
 msgstr ""
 
 #: fig/box_view.cpp:332
+#, fuzzy
 msgid "Alignment"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:334
+#, fuzzy
 msgid "Align left"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:335
+#, fuzzy
 msgid "Align center"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:336
 #, fuzzy
@@ -813,24 +827,28 @@ msgid "Align right"
 msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:338
+#, fuzzy
 msgid "Align top"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:339
+#, fuzzy
 msgid "Align middle"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:340
+#, fuzzy
 msgid "Align bottom"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:343
 msgid "Size"
 msgstr ""
 
 #: fig/box_view.cpp:345
+#, fuzzy
 msgid "Same width"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:346
 #, fuzzy
@@ -838,8 +856,9 @@ msgid "Same height"
 msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:347
+#, fuzzy
 msgid "Same width and height"
-msgstr ""
+msgstr "Sélectionner à droite"
 
 #: fig/box_view.cpp:607 fig/box_view.cpp:1948
 #, fuzzy
@@ -934,11 +953,11 @@ msgstr "Semantik"
 
 #: fig/semantik_d_win.cpp:222
 msgid "[Untitled]"
-msgstr ""
+msgstr "[Sans Titre]"
 
 #: fig/semantik_d_win.cpp:291 semantik.cpp:605
 msgid "Untitled"
-msgstr ""
+msgstr "Sans Titre"
 
 #: fig/semantik_d_win.cpp:294 semantik.cpp:608
 msgid ""
@@ -947,8 +966,9 @@ msgid ""
 msgstr ""
 
 #: fig/semantik_d_win.cpp:295 semantik.cpp:609
+#, fuzzy
 msgid "Close Document"
-msgstr ""
+msgstr "Document corrompu"
 
 #: fig/semantik_d_win.cpp:432 semantik.cpp:546
 msgid " [Modified] "
@@ -1209,8 +1229,9 @@ msgid "Ctrl+R"
 msgstr ""
 
 #: semantik.cpp:177
+#, fuzzy
 msgid "&Export the map..."
-msgstr ""
+msgstr "Exporter la carte"
 
 #: semantik.cpp:184
 msgid "&Generate..."

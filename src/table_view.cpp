@@ -23,29 +23,29 @@ table_view::table_view(QWidget *i_oParent, sem_mediator *i_oControl) : QTableWid
 	m_oMediator = i_oControl;
 	m_bFreeze = false;
 
-	m_oAddRowAct = new numbered_action(trUtf8("Add Row"), this);
-	m_oAddRowAct->setStatusTip(trUtf8("Add a row"));
+	m_oAddRowAct = new numbered_action(i18n("Add Row"), this);
+	m_oAddRowAct->setStatusTip(i18n("Add a row"));
         connect(m_oAddRowAct, SIGNAL(triggered()), this, SLOT(add_row()));
 	insertAction(0, m_oAddRowAct);
 
-	m_oAddColAct = new numbered_action(trUtf8("Add Column"), this);
-	m_oAddColAct->setStatusTip(trUtf8("Add a column"));
+	m_oAddColAct = new numbered_action(i18n("Add Column"), this);
+	m_oAddColAct->setStatusTip(i18n("Add a column"));
         connect(m_oAddColAct, SIGNAL(triggered()), this, SLOT(add_column()));
 	insertAction(0, m_oAddColAct);
 
 
-	m_oRmRowAct = new numbered_action(trUtf8("Remove Row"), this);
-	m_oRmRowAct->setStatusTip(trUtf8("Remove a row"));
+	m_oRmRowAct = new numbered_action(i18n("Remove Row"), this);
+	m_oRmRowAct->setStatusTip(i18n("Remove a row"));
         connect(m_oRmRowAct, SIGNAL(triggered()), this, SLOT(rm_row()));
 	insertAction(0, m_oRmRowAct);
 
-	m_oRmColAct = new numbered_action(trUtf8("Remove Column"), this);
-	m_oRmColAct->setStatusTip(trUtf8("Remove a column"));
+	m_oRmColAct = new numbered_action(i18n("Remove Column"), this);
+	m_oRmColAct->setStatusTip(i18n("Remove a column"));
         connect(m_oRmColAct, SIGNAL(triggered()), this, SLOT(rm_column()));
 	insertAction(0, m_oRmColAct);
 
-	QAction *m_oClearAct = new QAction(trUtf8("Redimension"), this);
-	m_oClearAct->setStatusTip(trUtf8("Change table dimensions"));
+	QAction *m_oClearAct = new QAction(i18n("Redimension"), this);
+	m_oClearAct->setStatusTip(i18n("Change table dimensions"));
         connect(m_oClearAct, SIGNAL(triggered()), this, SLOT(resize_table()));
 	insertAction(0, m_oClearAct);
 
@@ -77,10 +77,10 @@ void table_view::mousePressEvent(QMouseEvent *i_oEv)
 		m_oRmColAct->row = m_oRmRowAct->row = m_oAddRowAct->row = m_oAddColAct->row = i;
 		m_oRmColAct->col = m_oRmRowAct->col = m_oAddRowAct->col = m_oAddColAct->col = j;
 
-		m_oAddRowAct->setText(QString("%1 (%2)").arg(trUtf8("Add Row"), QString::number(i)));
-		m_oAddColAct->setText(QString("%1 (%2)").arg(trUtf8("Add Column"), QString::number(j)));
-		m_oRmRowAct->setText(QString("%1 (%2)").arg(trUtf8("Remove Row"), QString::number(i)));
-		m_oRmColAct->setText(QString("%1 (%2)").arg(trUtf8("Remove Column"), QString::number(j)));
+		m_oAddRowAct->setText(QString("%1 (%2)").arg(i18n("Add Row"), QString::number(i)));
+		m_oAddColAct->setText(QString("%1 (%2)").arg(i18n("Add Column"), QString::number(j)));
+		m_oRmRowAct->setText(QString("%1 (%2)").arg(i18n("Remove Row"), QString::number(i)));
+		m_oRmColAct->setText(QString("%1 (%2)").arg(i18n("Remove Column"), QString::number(j)));
 
 		QMenu::exec(actions(), i_oEv->globalPos());
 	}

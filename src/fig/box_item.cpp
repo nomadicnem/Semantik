@@ -124,8 +124,8 @@ void box_item::update_size() {
 void box_item::properties()
 {
 	bool ok = false;
-	QString text = QInputDialog::getText(m_oView, m_oView->trUtf8("Diagram box properties"),
-			m_oView->trUtf8("Text:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
+	QString text = QInputDialog::getText(m_oView, i18n("Diagram box properties"),
+			i18n("Text:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
 	if (ok && text != m_oBox->m_sText)
 	{
 		mem_edit_box *ed = new mem_edit_box(m_oView->m_oMediator, m_oView->m_iId, m_iId);
@@ -286,7 +286,7 @@ QPointF box_item::validate_point(box_resize_point *p, const QPointF & orig)
 	setRect(0, 0, m_iLastStretchX, m_iLastStretchY);
 	update();
 	update_links();
-	m_oView->message(m_oView->trUtf8("%1 x %2").arg(QString::number(m_iLastStretchX), QString::number(m_iLastStretchY)), 1000);
+	m_oView->message(i18n("%1 x %2", QString::number(m_iLastStretchX), QString::number(m_iLastStretchY)), 1000);
 	return QPointF(m_iLastStretchX, m_iLastStretchY);
 }
 

@@ -39,12 +39,9 @@ int main(int i_iArgc, char **i_iArgv)
 	KCmdLineArgs::addCmdLineOptions(options);
 
 	QCoreApplication::setAttribute(Qt::AA_Use96Dpi, true);
+
 	KApplication l_oApp;
-
-	// FIXME
-	//KGlobal::locale()->insertCatalog("libkdeedu");
-	//KGlobal::locale()->insertCatalog("semantik");
-
+	KLocalizedString::setApplicationDomain("semantik-d");
 	semantik_d_win *l_oMainWin = new semantik_d_win;
 
 	const KCmdLineArgs *args = KCmdLineArgs::parsedArgs();

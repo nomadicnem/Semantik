@@ -27,16 +27,16 @@ generator_dialog::generator_dialog(QWidget *i_oParent, QList<template_entry> i_o
 	m_oLst(i_oLst)
 {
 	QWidget *widget = new QWidget(this);
-	setCaption(trUtf8("Generate documents"));
+	setCaption(i18n("Generate documents"));
 	setButtons(KDialog::Ok | KDialog::Cancel);
 
 	QGridLayout *l_oGridLayout = new QGridLayout(widget);
 
 	QLabel *label = new QLabel(widget);
-	label->setText(trUtf8("Generators"));
+	label->setText(i18n("Generators"));
 
 	QLabel *label2 = new QLabel(widget);
-	label2->setText(trUtf8("Description"));
+	label2->setText(i18n("Description"));
 
 	l_oGridLayout->addWidget(label, 0, 0, 1, 2);
 	l_oGridLayout->addWidget(label2, 0, 2, 1, 1);
@@ -53,14 +53,14 @@ generator_dialog::generator_dialog(QWidget *i_oParent, QList<template_entry> i_o
 
 
 	label = new QLabel(widget);
-	label->setText(trUtf8("Name"));
+	label->setText(i18n("Name"));
 	l_oGridLayout->addWidget(label, 2, 0, 1, 1);
 
 	m_oName = new QLineEdit(widget);
 	l_oGridLayout->addWidget(m_oName, 2, 1, 1, 2);
 
 	label = new QLabel(widget);
-	label->setText(trUtf8("Location"));
+	label->setText(i18n("Location"));
 	l_oGridLayout->addWidget(label, 3, 0, 1, 1);
 
 	m_oLocation = new QLineEdit(widget);
@@ -111,13 +111,13 @@ void generator_dialog::slotButtonClicked(int button) {
 	{
 		if (m_sCurrent.length()<2)
 		{
-			KMessageBox::sorry(this, trUtf8("No document generator chosen."), trUtf8("Missing data"));
+			KMessageBox::sorry(this, i18n("No document generator chosen."), i18n("Missing data"));
 			return;
 		}
 		QFileInfo l_oFi(m_oLocation->text());
 		if (!l_oFi.isDir() || !l_oFi.isWritable())
 		{
-			KMessageBox::sorry(this, trUtf8("Invalid output directory %1").arg(m_oLocation->text()), trUtf8("Missing location"));
+			KMessageBox::sorry(this, i18n("Invalid output directory %1", m_oLocation->text()), i18n("Missing location"));
 			return;
 		}
 		accept();

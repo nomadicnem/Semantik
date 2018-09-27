@@ -57,7 +57,7 @@ data_item::data_item(sem_mediator *i_oControl, int i_iId)
 	m_iId = i_iId;
 	m_iColor = 0;
 	m_oMediator = i_oControl;
-	m_sSummary = QObject::trUtf8("Empty");
+	m_sSummary = i18n("Empty");
 	m_sText = "";
 	m_sComment = "";
 	m_sDiag = "";

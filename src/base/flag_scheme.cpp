@@ -11,7 +11,7 @@
 flag_scheme::flag_scheme(QObject *i_oParent) : QObject(i_oParent)
 {
 	//m_sId = "key";
-	m_sName = trUtf8("Flag item(s) as...");
+	m_sName = i18n("Flag item(s) as...");
 	m_sIconPath = ":/images/erase.png";
 	m_oRenderer = NULL;
 }

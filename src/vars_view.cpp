@@ -74,8 +74,8 @@ void vars_view::init_completer()
 	// initialize
 	m_oCompleter = m_oCompleterAll;
 
-	m_oCompleteAction = new QAction(trUtf8("Code complete"), this);
-	m_oCompleteAction->setShortcut(trUtf8("Ctrl+space"));
+	m_oCompleteAction = new QAction(i18n("Code complete"), this);
+	m_oCompleteAction->setShortcut(i18n("Ctrl+space"));
 	connect(m_oCompleteAction, SIGNAL(triggered()), this, SLOT(try_complete()));
 	addAction(m_oCompleteAction);
 

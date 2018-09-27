@@ -108,26 +108,26 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 	#ifdef _DEBUG
 		return true;
 	#endif
-	if (i_sName == QObject::trUtf8("box_item"))
+	if (i_sName == i18n("box_item"))
 	{
-		int id = i_oAttrs.value(QObject::trUtf8("id")).toInt();
+		int id = i_oAttrs.value(i18n("id")).toInt();
 
 		data_box *box = new data_box(id);
 		//data_item *item = m_oMediator->m_oMediator->m_oItems[m_iId];
 		m_oMediator->m_oMediator->m_oItems[m_iId]->m_oBoxes[id] = box;
-		box->m_iXX = i_oAttrs.value(QObject::trUtf8("c1")).toFloat();
-		box->m_iYY = i_oAttrs.value(QObject::trUtf8("c2")).toFloat();
-		box->m_sText = i_oAttrs.value(QObject::trUtf8("text"));
-		box->m_oCustom.m_oInnerColor = i_oAttrs.value(QObject::trUtf8("col"));
-		//l_o->setRect(QRectF(0., 0., i_oAttrs.value(QObject::trUtf8("c3")).toDouble(), i_oAttrs.value(QObject::trUtf8("c4")).toDouble()));
+		box->m_iXX = i_oAttrs.value(i18n("c1")).toFloat();
+		box->m_iYY = i_oAttrs.value(i18n("c2")).toFloat();
+		box->m_sText = i_oAttrs.value(i18n("text"));
+		box->m_oCustom.m_oInnerColor = i_oAttrs.value(i18n("col"));
+		//l_o->setRect(QRectF(0., 0., i_oAttrs.value(i18n("c3")).toDouble(), i_oAttrs.value(i18n("c4")).toDouble()));
 	}
-	else if (i_sName == QObject::trUtf8("box_link"))
+	else if (i_sName == i18n("box_link"))
 	{
 		data_link *link = new data_link();
-		link->m_iParentPos = i_oAttrs.value(QObject::trUtf8("p1")).toInt();
-		link->m_iParent    = i_oAttrs.value(QObject::trUtf8("c1")).toInt();
-		link->m_iChildPos  = i_oAttrs.value(QObject::trUtf8("p2")).toInt();
-		link->m_iChild     = i_oAttrs.value(QObject::trUtf8("c2")).toInt();
+		link->m_iParentPos = i_oAttrs.value(i18n("p1")).toInt();
+		link->m_iParent    = i_oAttrs.value(i18n("c1")).toInt();
+		link->m_iChildPos  = i_oAttrs.value(i18n("p2")).toInt();
+		link->m_iChild     = i_oAttrs.value(i18n("c2")).toInt();
 
 		if (link->m_iChildPos == 0) link->m_iChildPos = data_link::NORTH;
 		if (link->m_iChildPos == 1) link->m_iChildPos = data_link::WEST;
@@ -139,20 +139,20 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 		if (link->m_iParentPos == 2) link->m_iParentPos = data_link::SOUTH;
 		if (link->m_iParentPos == 3) link->m_iParentPos = data_link::EAST;
 
-		link->m_sCaption = i_oAttrs.value(QObject::trUtf8("caption"));
-		link->m_sParentCaption = i_oAttrs.value(QObject::trUtf8("parent_caption"));
-		link->m_sChildCaption = i_oAttrs.value(QObject::trUtf8("child_caption"));
+		link->m_sCaption = i_oAttrs.value(i18n("caption"));
+		link->m_sParentCaption = i_oAttrs.value(i18n("parent_caption"));
+		link->m_sChildCaption = i_oAttrs.value(i18n("child_caption"));
 
-		link->pen_style = (Qt::PenStyle) i_oAttrs.value(QObject::trUtf8("pen_style")).toInt();
-		link->border_width = i_oAttrs.value(QObject::trUtf8("border_width")).toInt();
+		link->pen_style = (Qt::PenStyle) i_oAttrs.value(i18n("pen_style")).toInt();
+		link->border_width = i_oAttrs.value(i18n("border_width")).toInt();
 		m_oCurrent = link;
 		m_oMediator->m_oMediator->m_oItems.value(m_iId)->m_oLinks.append(link);
 	}
-	else if (i_sName == QObject::trUtf8("box_link_offset"))
+	else if (i_sName == i18n("box_link_offset"))
 	{
 		if (m_oCurrent)
 		{
-			m_oCurrent->m_oOffsets.append(QPoint(i_oAttrs.value(QObject::trUtf8("x")).toInt(), i_oAttrs.value(QObject::trUtf8("y")).toInt()));
+			m_oCurrent->m_oOffsets.append(QPoint(i_oAttrs.value(i18n("x")).toInt(), i_oAttrs.value(i18n("y")).toInt()));
 		}
 	}
 
@@ -161,7 +161,7 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 
 bool box_reader::endElement(const QString&, const QString&, const QString& i_sName)
 {
-	if (i_sName == QObject::trUtf8("box_link"))
+	if (i_sName == i18n("box_link"))
 	{
 		m_oCurrent = NULL;
 	}
@@ -191,71 +191,71 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	//setCacheMode(CacheBackground);
 	setRenderHint(QPainter::Antialiasing);
 
-	m_oPropertiesAction = new QAction(QObject::trUtf8("Properties..."), this);
-	//m_oPropertiesAction->setShortcut(QObject::trUtf8("Return"));
+	m_oPropertiesAction = new QAction(i18n("Properties..."), this);
+	//m_oPropertiesAction->setShortcut(i18n("Return"));
 	connect(m_oPropertiesAction, SIGNAL(triggered()), this, SLOT(slot_edit_properties()));
 	addAction(m_oPropertiesAction);
 
-	m_oAddItemAction = new QAction(QObject::trUtf8("Activity"), this);
-	m_oAddItemAction->setShortcut(QObject::trUtf8("Ctrl+Return"));
+	m_oAddItemAction = new QAction(i18n("Activity"), this);
+	m_oAddItemAction->setShortcut(i18n("Ctrl+Return"));
 	connect(m_oAddItemAction, SIGNAL(triggered()), this, SLOT(slot_add_item()));
 	addAction(m_oAddItemAction);
 
-	m_oDeleteAction = new QAction(QObject::trUtf8("Delete selection"), this);
-	m_oDeleteAction->setShortcut(QObject::trUtf8("Delete"));
+	m_oDeleteAction = new QAction(i18n("Delete selection"), this);
+	m_oDeleteAction->setShortcut(i18n("Delete"));
 	connect(m_oDeleteAction, SIGNAL(triggered()), this, SLOT(slot_delete()));
 	addAction(m_oDeleteAction);
 
-	m_oMoveUpAction = new QAction(QObject::trUtf8("Raise"), this);
-	m_oMoveUpAction->setShortcut(QObject::trUtf8("PgUp"));
+	m_oMoveUpAction = new QAction(i18n("Raise"), this);
+	m_oMoveUpAction->setShortcut(i18n("PgUp"));
 	connect(m_oMoveUpAction, SIGNAL(triggered()), this, SLOT(slot_move_up()));
 	addAction(m_oMoveUpAction);
 
-	m_oMoveDownAction = new QAction(QObject::trUtf8("Send back"), this);
-	m_oMoveDownAction->setShortcut(QObject::trUtf8("PgDown"));
+	m_oMoveDownAction = new QAction(i18n("Send back"), this);
+	m_oMoveDownAction->setShortcut(i18n("PgDown"));
 	connect(m_oMoveDownAction, SIGNAL(triggered()), this, SLOT(slot_move_down()));
 	addAction(m_oMoveDownAction);
 
-	m_oAddLabel = new QAction(QObject::trUtf8("Floating text"), this);
+	m_oAddLabel = new QAction(i18n("Floating text"), this);
 	connect(m_oAddLabel, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddComponent = new QAction(QObject::trUtf8("Component"), this);
+	m_oAddComponent = new QAction(i18n("Component"), this);
 	connect(m_oAddComponent, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddRectangle = new QAction(QObject::trUtf8("Rectangle"), this);
+	m_oAddRectangle = new QAction(i18n("Rectangle"), this);
 	connect(m_oAddRectangle, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddNode = new QAction(QObject::trUtf8("Node"), this);
+	m_oAddNode = new QAction(i18n("Node"), this);
 	connect(m_oAddNode, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddDecision = new QAction(QObject::trUtf8("Decision"), this);
+	m_oAddDecision = new QAction(i18n("Decision"), this);
 	connect(m_oAddDecision, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddDatabase = new QAction(QObject::trUtf8("Database"), this);
+	m_oAddDatabase = new QAction(i18n("Database"), this);
 	connect(m_oAddDatabase, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddPipe = new QAction(QObject::trUtf8("Pipe"), this);
+	m_oAddPipe = new QAction(i18n("Pipe"), this);
 	connect(m_oAddPipe, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddSequence = new QAction(QObject::trUtf8("Sequence"), this);
+	m_oAddSequence = new QAction(i18n("Sequence"), this);
 	connect(m_oAddSequence, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddDotStart = new QAction(QObject::trUtf8("Activity start"), this);
+	m_oAddDotStart = new QAction(i18n("Activity start"), this);
 	connect(m_oAddDotStart, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddDotEnd = new QAction(QObject::trUtf8("Activity end"), this);
+	m_oAddDotEnd = new QAction(i18n("Activity end"), this);
 	connect(m_oAddDotEnd, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddParallelHorizontal = new QAction(QObject::trUtf8("Horizontal fork/join"), this);
+	m_oAddParallelHorizontal = new QAction(i18n("Horizontal fork/join"), this);
 	connect(m_oAddParallelHorizontal, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddParallelVertical = new QAction(QObject::trUtf8("Vertical fork/join"), this);
+	m_oAddParallelVertical = new QAction(i18n("Vertical fork/join"), this);
 	connect(m_oAddParallelVertical, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddActor = new QAction(QObject::trUtf8("Actor"), this);
+	m_oAddActor = new QAction(i18n("Actor"), this);
 	connect(m_oAddActor, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddUsecase = new QAction(QObject::trUtf8("Usecase"), this);
+	m_oAddUsecase = new QAction(i18n("Usecase"), this);
 	connect(m_oAddUsecase, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddMatrix = new QAction(QObject::trUtf8("Matrix"), this);
+	m_oAddMatrix = new QAction(i18n("Matrix"), this);
 	connect(m_oAddMatrix, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddFrame = new QAction(QObject::trUtf8("Boundary"), this);
+	m_oAddFrame = new QAction(i18n("Boundary"), this);
 	connect(m_oAddFrame, SIGNAL(triggered()), this, SLOT(slot_add_element()));
-	m_oAddClass = new QAction(QObject::trUtf8("Class"), this);
+	m_oAddClass = new QAction(i18n("Class"), this);
 	connect(m_oAddClass, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 
-	m_oFileImport = new QAction(QObject::trUtf8("Import from file..."), this);
+	m_oFileImport = new QAction(i18n("Import from file..."), this);
 	connect(m_oFileImport, SIGNAL(triggered()), this, SLOT(slot_import_from_file()));
-	m_oFileExport = new QAction(QObject::trUtf8("Export to file..."), this);
+	m_oFileExport = new QAction(i18n("Export to file..."), this);
 	connect(m_oFileExport, SIGNAL(triggered()), this, SLOT(slot_export_to_file()));
-	m_oCopyToClipboard = new QAction(QObject::trUtf8("Copy image to clipboard"), this);
+	m_oCopyToClipboard = new QAction(i18n("Copy image to clipboard"), this);
 	connect(m_oCopyToClipboard, SIGNAL(triggered()), this, SLOT(slot_copy_picture()));
 
 	m_oLastMovePoint = QPointF(-100, -100);
@@ -276,7 +276,7 @@ void box_view::init_menu()
 	m_oMenu = new QMenu(this);
 
 	if (m_bShowFileMenu) {
-		m_oFileMenu = m_oMenu->addMenu(QObject::trUtf8("File operations"));
+		m_oFileMenu = m_oMenu->addMenu(i18n("File operations"));
 		m_oFileMenu->addAction(m_oFileImport);
 		m_oFileMenu->addAction(m_oFileExport);
 		m_oFileMenu->addAction(m_oCopyToClipboard);
@@ -288,7 +288,7 @@ void box_view::init_menu()
 	m_oMenu->addAction(m_oAddComponent);
 	m_oMenu->addAction(m_oAddNode);
 
-	m_oAddBoxMenu = m_oMenu->addMenu(QObject::trUtf8("More elements"));
+	m_oAddBoxMenu = m_oMenu->addMenu(i18n("More elements"));
 	m_oAddBoxMenu->addAction(m_oAddDotStart);
 	m_oAddBoxMenu->addAction(m_oAddDotEnd);
 	m_oAddBoxMenu->addAction(m_oAddParallelHorizontal);
@@ -313,38 +313,38 @@ void box_view::init_menu()
 	QAction *l_o;
 
 	/*
-	m_oWidthMenu = m_oMenu->addMenu(QObject::trUtf8("Connection width"));
+	m_oWidthMenu = m_oMenu->addMenu(i18n("Connection width"));
 	m_oWidthGroup = new QActionGroup(this);
-	l_o = m_oWidthMenu->addAction(QObject::trUtf8("1px")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penwidth())); addAction(l_o); l_o->setData(QVariant(1)); m_oWidthGroup->addAction(l_o);
-	l_o = m_oWidthMenu->addAction(QObject::trUtf8("2px")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penwidth())); addAction(l_o); l_o->setData(QVariant(2)); m_oWidthGroup->addAction(l_o);
-	l_o = m_oWidthMenu->addAction(QObject::trUtf8("3px")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penwidth())); addAction(l_o); l_o->setData(QVariant(3)); m_oWidthGroup->addAction(l_o);
+	l_o = m_oWidthMenu->addAction(i18n("1px")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penwidth())); addAction(l_o); l_o->setData(QVariant(1)); m_oWidthGroup->addAction(l_o);
+	l_o = m_oWidthMenu->addAction(i18n("2px")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penwidth())); addAction(l_o); l_o->setData(QVariant(2)); m_oWidthGroup->addAction(l_o);
+	l_o = m_oWidthMenu->addAction(i18n("3px")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penwidth())); addAction(l_o); l_o->setData(QVariant(3)); m_oWidthGroup->addAction(l_o);
 
-	m_oStyleMenu = m_oMenu->addMenu(QObject::trUtf8("Connection style"));
+	m_oStyleMenu = m_oMenu->addMenu(i18n("Connection style"));
 	m_oStyleGroup = new QActionGroup(this);
-	l_o = m_oStyleMenu->addAction(QObject::trUtf8("solid line")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penstyle())); addAction(l_o); l_o->setData(QVariant(Qt::SolidLine)); m_oStyleGroup->addAction(l_o);
-	l_o = m_oStyleMenu->addAction(QObject::trUtf8("dot line")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penstyle())); addAction(l_o); l_o->setData(QVariant(Qt::DotLine)); m_oStyleGroup->addAction(l_o);
-	l_o = m_oStyleMenu->addAction(QObject::trUtf8("dash line")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penstyle())); addAction(l_o); l_o->setData(QVariant(Qt::DashLine)); m_oStyleGroup->addAction(l_o);
+	l_o = m_oStyleMenu->addAction(i18n("solid line")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penstyle())); addAction(l_o); l_o->setData(QVariant(Qt::SolidLine)); m_oStyleGroup->addAction(l_o);
+	l_o = m_oStyleMenu->addAction(i18n("dot line")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penstyle())); addAction(l_o); l_o->setData(QVariant(Qt::DotLine)); m_oStyleGroup->addAction(l_o);
+	l_o = m_oStyleMenu->addAction(i18n("dash line")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_penstyle())); addAction(l_o); l_o->setData(QVariant(Qt::DashLine)); m_oStyleGroup->addAction(l_o);
 
 	*/
 
 	m_oMenu->addSeparator();
 
-	m_oAlignMenu = m_oMenu->addMenu(QObject::trUtf8("Alignment"));
+	m_oAlignMenu = m_oMenu->addMenu(i18n("Alignment"));
 	m_oAlignGroup = new QActionGroup(this);
-	l_o = m_oAlignMenu->addAction(QObject::trUtf8("Align left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_LEFT)); m_oAlignGroup->addAction(l_o);
-	l_o = m_oAlignMenu->addAction(QObject::trUtf8("Align center")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_CENTER)); m_oAlignGroup->addAction(l_o);
-	l_o = m_oAlignMenu->addAction(QObject::trUtf8("Align right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_RIGHT)); m_oAlignGroup->addAction(l_o);
+	l_o = m_oAlignMenu->addAction(i18n("Align left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_LEFT)); m_oAlignGroup->addAction(l_o);
+	l_o = m_oAlignMenu->addAction(i18n("Align center")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_CENTER)); m_oAlignGroup->addAction(l_o);
+	l_o = m_oAlignMenu->addAction(i18n("Align right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_RIGHT)); m_oAlignGroup->addAction(l_o);
 
-	l_o = m_oAlignMenu->addAction(QObject::trUtf8("Align top")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_TOP)); m_oAlignGroup->addAction(l_o);
-	l_o = m_oAlignMenu->addAction(QObject::trUtf8("Align middle")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_MIDDLE)); m_oAlignGroup->addAction(l_o);
-	l_o = m_oAlignMenu->addAction(QObject::trUtf8("Align bottom")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_BOTTOM)); m_oAlignGroup->addAction(l_o);
+	l_o = m_oAlignMenu->addAction(i18n("Align top")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_TOP)); m_oAlignGroup->addAction(l_o);
+	l_o = m_oAlignMenu->addAction(i18n("Align middle")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_MIDDLE)); m_oAlignGroup->addAction(l_o);
+	l_o = m_oAlignMenu->addAction(i18n("Align bottom")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_BOTTOM)); m_oAlignGroup->addAction(l_o);
 
 
-	m_oSizeMenu = m_oMenu->addMenu(QObject::trUtf8("Size"));
+	m_oSizeMenu = m_oMenu->addMenu(i18n("Size"));
 	m_oSizeGroup = new QActionGroup(this);
-	l_o = m_oSizeMenu->addAction(QObject::trUtf8("Same width")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_size())); addAction(l_o); l_o->setData(QVariant(SAME_WIDTH)); m_oSizeGroup->addAction(l_o);
-	l_o = m_oSizeMenu->addAction(QObject::trUtf8("Same height")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_size())); addAction(l_o); l_o->setData(QVariant(SAME_HEIGHT)); m_oSizeGroup->addAction(l_o);
-	l_o = m_oSizeMenu->addAction(QObject::trUtf8("Same width and height")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_size())); addAction(l_o); l_o->setData(QVariant(SAME_WIDTH_HEIGHT)); m_oSizeGroup->addAction(l_o);
+	l_o = m_oSizeMenu->addAction(i18n("Same width")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_size())); addAction(l_o); l_o->setData(QVariant(SAME_WIDTH)); m_oSizeGroup->addAction(l_o);
+	l_o = m_oSizeMenu->addAction(i18n("Same height")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_size())); addAction(l_o); l_o->setData(QVariant(SAME_HEIGHT)); m_oSizeGroup->addAction(l_o);
+	l_o = m_oSizeMenu->addAction(i18n("Same width and height")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_size())); addAction(l_o); l_o->setData(QVariant(SAME_WIDTH_HEIGHT)); m_oSizeGroup->addAction(l_o);
 
 
 	m_oAddItemAction->setEnabled(false);
@@ -604,7 +604,7 @@ void box_view::notify_export_item(int id)
 	l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 	l_oGenerator.setViewBox(l_oR);
 	l_oGenerator.setResolution(96);
-	l_oGenerator.setTitle(trUtf8("Semantik diagram"));
+	l_oGenerator.setTitle(i18n("Semantik diagram"));
 
 	QPainter l_oSvg;
 	if (l_oSvg.begin(&l_oGenerator))
@@ -1004,8 +1004,8 @@ void box_view::slot_toggle_edit()
 	if (sel) {
 		if (sel->textInteractionFlags() & Qt::TextEditorInteraction) {
 			sel->setTextInteractionFlags(Qt::NoTextInteraction);
-			/*if (sel->toPlainText() == QObject::trUtf8("")) {
-				sel->setPlainText(QObject::trUtf8("Empty"));
+			/*if (sel->toPlainText() == i18n("")) {
+				sel->setPlainText(i18n("Empty"));
 				sel->update(); // seems to update faster
 				//sel->update_links();
 
@@ -1752,9 +1752,9 @@ void box_view::message(const QString &s, int d)
 }
 
 bool box_view::slot_import_from_file() {
-	QUrl l_o = QFileDialog::getOpenFileUrl(this, trUtf8("Choose a file to open"),
+	QUrl l_o = QFileDialog::getOpenFileUrl(this, i18n("Choose a file to open"),
                 QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
-		trUtf8("*.semd|Semantik diagram (*.semd)"));
+		i18n("*.semd|Semantik diagram (*.semd)"));
 	return import_from_file(l_o);
 }
 
@@ -1790,9 +1790,9 @@ bool box_view::import_from_file(const QUrl& l_o)
 
 bool box_view::slot_export_to_file() {
 	choose_export:
-	QUrl l_o = QFileDialog::getSaveFileUrl(this, trUtf8("Choose a file name"),
+	QUrl l_o = QFileDialog::getSaveFileUrl(this, i18n("Choose a file name"),
                 QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
-		trUtf8("*.semd|Semantik diagram (*.semd)"));
+		i18n("*.semd|Semantik diagram (*.semd)"));
 
 	if (l_o.path().isEmpty()) return false;
 	if (!l_o.path().endsWith(notr(".semd")))
@@ -1806,8 +1806,8 @@ bool box_view::slot_export_to_file() {
 		if (l_o.isLocalFile() && QFile::exists(l_o.path()))
 		{
 			int mu = KMessageBox::questionYesNo(NULL, //this,
-			trUtf8("The file \"%1\" already exists.\nOverwrite it?").arg(l_o.path()),
-			trUtf8("Overwrite existing file"),
+			i18n("The file \"%1\" already exists.\nOverwrite it?", l_o.path()),
+			i18n("Overwrite existing file"),
 			KStandardGuiItem::yes(),
 			KStandardGuiItem::no(),
 			notr("OverwriteExistingFile"));
@@ -1829,15 +1829,15 @@ bool box_view::slot_export_to_file() {
 
 	if (x->save_file(l_o.path()))
 	{
-		emit sig_message(trUtf8("Saved '%1'").arg(l_o.path()), 2000);
+		emit sig_message(i18n("Saved '%1'", l_o.path()), 2000);
 		m_oMediator->set_dirty(false);
 		return true;
 	}
 	else
 	{
 		int mu = KMessageBox::questionYesNo(NULL, //this,
-		trUtf8("The file \"%1\" could not be saved because an error happened.\nTry again?").arg(l_o.path()),
-		trUtf8("Try again?"),
+		i18n("The file \"%1\" could not be saved because an error happened.\nTry again?", l_o.path()),
+		i18n("Try again?"),
 		KStandardGuiItem::yes(),
 		KStandardGuiItem::no(),
 		notr("ContinueSaveAs"));
@@ -1863,7 +1863,7 @@ bool box_view::slot_save() {
 
 		if (x->save_file(m_oCurrentUrl.path())) {
 			m_oMediator->set_dirty(false);
-			emit sig_message(trUtf8("Saved '%1'").arg(m_oCurrentUrl.path()), 2000);
+			emit sig_message(i18n("Saved '%1'", m_oCurrentUrl.path()), 2000);
 			return true;
 		}
 	}
@@ -1945,7 +1945,7 @@ int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 		l_oGenerator.setFileName(url);
 		l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 		l_oGenerator.setViewBox(l_oR);
-		l_oGenerator.setTitle(trUtf8("Semantik diagram"));
+		l_oGenerator.setTitle(i18n("Semantik diagram"));
 		l_oGenerator.setResolution(96);
 
 		QPainter l_oP;
@@ -1982,7 +1982,7 @@ void box_view::slot_print()
         QPrintDialog l_oD(l_oP, this);
         if (l_oD.exec() != QDialog::Accepted)
         {
-		emit sig_message(trUtf8("Printing cancelled"), 3000);
+		emit sig_message(i18n("Printing cancelled"), 3000);
 		return;
 	}
 
@@ -1993,11 +1993,11 @@ void box_view::slot_print()
 		scene()->render(&l_oPdf, QRectF(), l_oRect, Qt::KeepAspectRatio);
 		l_oPdf.end();
 		m_bDisableGradient = false;
-		emit sig_message(trUtf8("Printing completed"), 5000);
+		emit sig_message(i18n("Printing completed"), 5000);
 	}
 	else
 	{
-		emit sig_message(trUtf8("Problem during printing :-("), 5000);
+		emit sig_message(i18n("Problem during printing :-("), 5000);
 	}
 }
 
@@ -2057,7 +2057,7 @@ void box_view::export_fig_size()
 	export_fig_dialog* exp = new export_fig_dialog(this);
 
 	exp->kurlrequester->setMode(KFile::File | KFile::LocalOnly);
-	exp->kurlrequester->setFilter(trUtf8("*.png|PNG Files (*.png)\n*.svg|SVG Files (*.svg)\n*.pdf|PDF Files (*.pdf)"));
+	exp->kurlrequester->setFilter(i18n("*.png|PNG Files (*.png)\n*.svg|SVG Files (*.svg)\n*.pdf|PDF Files (*.pdf)"));
 
 	exp->kurlrequester->setUrl(QUrl(m_oMediator->m_sExportUrl));
 	exp->m_oWidthC->setChecked(m_oMediator->m_bExportIsWidth);
@@ -2095,7 +2095,7 @@ void box_view::export_fig_size()
 
 		if (!exp->kurlrequester->url().isValid() || exp->kurlrequester->url().isEmpty())
 		{
-			emit sig_message(trUtf8("No destination file selected"), 5000);
+			emit sig_message(i18n("No destination file selected"), 5000);
 			return;
 		}
 
@@ -2119,9 +2119,9 @@ void box_view::export_fig_size()
 		}
 		int status = batch_print_map(url, p);
 		if (status == 0)
-			emit sig_message(trUtf8("Exported '%1'").arg(url.fileName()), 2000);
+			emit sig_message(i18n("Exported '%1'", url.fileName()), 2000);
 		else
-			KMessageBox::sorry(this, trUtf8("Could not save to %1").arg(url.fileName()), trUtf8("Missing picture"));
+			KMessageBox::sorry(this, i18n("Could not save to %1", url.fileName()), i18n("Missing picture"));
 	}
 }
 
