@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-27 18:47+0200\n"
+"POT-Creation-Date: 2018-09-27 19:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,8 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base/data_item.cpp:60 canvas_view.cpp:243 canvas_view.cpp:295
-#: canvas_view.cpp:308 canvas_view.cpp:1385
+#: base/data_item.cpp:60 canvas_view.cpp:242 canvas_view.cpp:294
+#: canvas_view.cpp:306
 msgid "Empty"
 msgstr "Vide"
 
@@ -84,130 +84,130 @@ msgstr "Génération de document complète"
 msgid "Document generation completed successfully"
 msgstr "Génération de document complète"
 
-#: browser.cpp:21 canvas_view.cpp:140
+#: browser.cpp:22 canvas_view.cpp:139
 msgid "Toggle fullscreen"
 msgstr "Basculer en plein écran"
 
-#: canvas_view.cpp:89
+#: canvas_view.cpp:88
 msgid "Add an element"
 msgstr "Ajouter un élément"
 
-#: canvas_view.cpp:94 fig/box_view.cpp:204
+#: canvas_view.cpp:93 fig/box_view.cpp:204
 msgid "Delete selection"
 msgstr "Effacer la sélection"
 
-#: canvas_view.cpp:99
+#: canvas_view.cpp:98
 msgid "Insert a sibling"
 msgstr "Insérer un frère"
 
-#: canvas_view.cpp:104
+#: canvas_view.cpp:103
 msgid "Move up"
 msgstr "Déplacer vers le haut"
 
-#: canvas_view.cpp:105
+#: canvas_view.cpp:104
 msgid "Move down"
 msgstr "Déplacer vers le bas"
 
-#: canvas_view.cpp:106
+#: canvas_view.cpp:105
 msgid "Move left"
 msgstr "Déplacer vers la gauche"
 
-#: canvas_view.cpp:107
+#: canvas_view.cpp:106
 msgid "Move right"
 msgstr "Déplacer vers la droite"
 
-#: canvas_view.cpp:109
+#: canvas_view.cpp:108
 msgid "Select up"
 msgstr "Sélectionner au dessus"
 
-#: canvas_view.cpp:110
+#: canvas_view.cpp:109
 msgid "Select down"
 msgstr "Sélectionner en dessous"
 
-#: canvas_view.cpp:111
+#: canvas_view.cpp:110
 msgid "Select left"
 msgstr "Sélectionner à gauche"
 
-#: canvas_view.cpp:112
+#: canvas_view.cpp:111
 msgid "Select right"
 msgstr "Sélectionner à droite"
 
-#: canvas_view.cpp:115
+#: canvas_view.cpp:114
 msgid "Select subtree"
 msgstr "Sélectionner le sous-arbre"
 
-#: canvas_view.cpp:120
+#: canvas_view.cpp:119
 msgid "Next root"
 msgstr "Racine suivante"
 
-#: canvas_view.cpp:123
+#: canvas_view.cpp:122
 msgid "Toggle edit"
 msgstr "Basculer l'édition"
 
-#: canvas_view.cpp:128
+#: canvas_view.cpp:127
 msgid "Cancel edit"
 msgstr "Annuler l'édition"
 
-#: canvas_view.cpp:155
+#: canvas_view.cpp:154
 msgid "Text"
 msgstr "Texte"
 
-#: canvas_view.cpp:156
+#: canvas_view.cpp:155
 msgid "Diagram"
 msgstr "Diagramme"
 
-#: canvas_view.cpp:157
+#: canvas_view.cpp:156
 msgid "Table"
 msgstr "Table"
 
-#: canvas_view.cpp:158
+#: canvas_view.cpp:157
 msgid "Image"
 msgstr "Image"
 
-#: canvas_view.cpp:609
+#: canvas_view.cpp:607
 msgid "Flag"
 msgstr "Drapeau"
 
-#: canvas_view.cpp:936
+#: canvas_view.cpp:934
 msgid "Click to set Item %1"
 msgstr "Cliquer pour mettre en place l'item %1"
 
-#: canvas_view.cpp:1284 fig/box_view.cpp:2060
+#: canvas_view.cpp:1282 fig/box_view.cpp:2060
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2098
+#: canvas_view.cpp:1320 fig/box_view.cpp:2098
 msgid "No destination file selected"
 msgstr "Aucun fichier de destination sélectionné"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2122
+#: canvas_view.cpp:1344 fig/box_view.cpp:2122
 msgid "Exported '%1'"
 msgstr "'%1' Sauvegardé"
 
-#: canvas_view.cpp:1348 fig/box_view.cpp:2124
+#: canvas_view.cpp:1346 fig/box_view.cpp:2124
 msgid "Could not save to %1"
 msgstr "Impossible de sauver %1"
 
-#: canvas_view.cpp:1348 fig/box_view.cpp:2124
+#: canvas_view.cpp:1346 fig/box_view.cpp:2124
 msgid "Missing picture"
 msgstr "Image manquante"
 
-#: canvas_view.cpp:1643
+#: canvas_view.cpp:1640
 msgid "Semantik map"
 msgstr "Carte Semantik"
 
-#: canvas_view.cpp:1679 fig/box_view.cpp:1985
+#: canvas_view.cpp:1676 fig/box_view.cpp:1985
 msgid "Printing cancelled"
 msgstr "Impression annulée"
 
-#: canvas_view.cpp:1690 fig/box_view.cpp:1996
+#: canvas_view.cpp:1687 fig/box_view.cpp:1996
 msgid "Printing completed"
 msgstr "Impression complétée"
 
-#: canvas_view.cpp:1694 fig/box_view.cpp:2000
+#: canvas_view.cpp:1691 fig/box_view.cpp:2000
 msgid "Problem during printing :-("
 msgstr "Problème à l'impression"
 
@@ -443,19 +443,19 @@ msgstr "Entreprise"
 msgid "Email"
 msgstr "Email"
 
-#: export_map_dialog.cpp:31
+#: export_map_dialog.cpp:32
 msgid "Export the map"
 msgstr "Exporter la carte"
 
-#: export_map_dialog.cpp:37 fig/export_fig_dialog.cpp:37
+#: export_map_dialog.cpp:38 fig/export_fig_dialog.cpp:38
 msgid "File to write"
 msgstr "Fichier selectionné"
 
-#: export_map_dialog.cpp:43 fig/export_fig_dialog.cpp:43
+#: export_map_dialog.cpp:44 fig/export_fig_dialog.cpp:44
 msgid "Width"
 msgstr "Largeur"
 
-#: export_map_dialog.cpp:51 fig/export_fig_dialog.cpp:51
+#: export_map_dialog.cpp:52 fig/export_fig_dialog.cpp:52
 msgid "Height"
 msgstr "Hauteur"
 
@@ -904,7 +904,7 @@ msgstr ""
 msgid "Try again?"
 msgstr ""
 
-#: fig/export_fig_dialog.cpp:31
+#: fig/export_fig_dialog.cpp:32
 #, fuzzy
 msgid "Export the diagram"
 msgstr "Exporter la carte"
