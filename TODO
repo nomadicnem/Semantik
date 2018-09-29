@@ -1,10 +1,11 @@
-Manual positioning of diagram link labels
-Source code snippets as data attachments
-Arbitrary SVG shapes
+Broken svg export with HighDPI settings
+Manual positioning of diagram link labels (and better default positioning)
+Source code snippets as data attachments (only in pdflatex/beamer at this time)
 Z-index in diagrams
 Crossing diagram arrows for the one with higher z-index
 S5 default picture size?
-Display pictures on the map...
+Display pictures on the map
+Half-broken diagram links routing with sequences
 Serialize undo operations
-Broken diagram links routing with sequences
+Arbitrary SVG shapes
 
