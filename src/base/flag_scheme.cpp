@@ -46,13 +46,6 @@ QSvgRenderer* flag_scheme::_renderer()
 
 const QIcon flag_scheme::_icon()
 {
-	QPixmap l_oPix(32, 32);
-	QPainter l_oP(&l_oPix);
-	l_oPix.fill();
-
-	_renderer()->render(&l_oP, l_oPix.rect());
-	QIcon l_oIcon;
-	l_oIcon.addPixmap(l_oPix);
-	return l_oIcon;
+	return QIcon(m_sIconPath);
 }
 
