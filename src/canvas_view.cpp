@@ -1637,6 +1637,7 @@ int canvas_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p) {
 		l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 		l_oGenerator.setViewBox(l_oR);
 		l_oGenerator.setTitle(i18n("Semantik map"));
+		l_oGenerator.setResolution(QApplication::desktop()->logicalDpiX());
 
 		QPainter l_oP;
 		l_oP.begin(&l_oGenerator);
