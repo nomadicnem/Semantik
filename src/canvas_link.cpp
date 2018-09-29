@@ -44,7 +44,6 @@
 	 */
 	i_oGraphWidget->scene()->addItem(this);
 	//setParentItem(m_oFrom);
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 void canvas_link::rm_link()

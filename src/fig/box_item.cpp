@@ -33,8 +33,6 @@ box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connec
 	m_oChain = new box_chain(i_oParent);
 	m_oChain->setParentItem(this);
 
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-
 	m_oResize = new box_resize_point(m_oView, this);
 	m_oResize->setRect(-CTRLSIZE, -CTRLSIZE, CTRLSIZE, CTRLSIZE);
 	m_oResize->setCursor(Qt::SizeFDiagCursor);

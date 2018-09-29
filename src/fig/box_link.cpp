@@ -73,7 +73,6 @@ box_link::box_link(box_view* i_oParent) : QGraphicsRectItem(), editable()
 		b->m_iOffset = i;
 		m_oControlPoints.append(b);
 	}
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 box_link::~box_link()

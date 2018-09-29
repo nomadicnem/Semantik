@@ -33,7 +33,6 @@ canvas_flag::canvas_flag(canvas_view *i_oGraphWidget, canvas_item *i_oFrom)
 
 	i_oGraphWidget->scene()->addItem(this);
 	setParentItem(m_oItem);
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 void canvas_flag::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_oOption, QWidget * i_oW)

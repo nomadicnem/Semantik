@@ -33,8 +33,6 @@ box_fork::box_fork(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connec
 
 	i_oParent->scene()->addItem(this);
 
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-
 	setZValue(100);
 	setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
 

@@ -23,7 +23,6 @@
 
 box_resize_point::box_resize_point(box_view* i_oView, resizable *i_oR) : QGraphicsRectItem(), m_oParent(i_oR)
 {
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 	m_oView = i_oView;
 	m_bHeld = false;
 	setZValue(110);

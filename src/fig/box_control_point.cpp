@@ -27,7 +27,6 @@ box_control_point::box_control_point(box_view* i_oParent) : QGraphicsRectItem(),
 	m_bIsSegment = true;
 	m_oLink = NULL;
 	i_oParent->scene()->addItem(this);
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 
 	setZValue(110);
 	m_bChanged = false;

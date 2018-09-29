@@ -72,8 +72,6 @@ canvas_item::canvas_item(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsText
 	m_oSortToggle->setPos(boundingRect().width() + 2, m_oChain->boundingRect().height() + 2);
 
 	update_flags();
-
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 // (i_oEv == QKeySequence::DeleteEndOfWord)
