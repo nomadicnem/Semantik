@@ -654,6 +654,15 @@ void semantik_win::slot_enable_undo(bool undo, bool redo) {
 	m_oRedoAct->setEnabled(redo);
 }
 
+void process_icon(QIcon* i_oIcon, const QColor& i_oColor, int i_iSize)
+{
+	QPixmap l_oPix(i_iSize, i_iSize);
+	QPainter l_oP(&l_oPix);
+	l_oPix.fill(i_oColor);
+	l_oP.drawRect(0, 0, i_iSize -1, i_iSize -1);
+	i_oIcon->addPixmap(l_oPix);
+}
+
 void semantik_win::sync_colors()
 {
 	for (int i=0; i<m_oMediator->m_oColorSchemes.size(); ++i)
@@ -661,14 +670,13 @@ void semantik_win::sync_colors()
 		color_scheme l_oScheme = m_oMediator->m_oColorSchemes[i];
 		QAction *l_oAction = m_oColorGroup->actions()[i];
 
-		QPixmap l_oPix(22, 22);
-		QPainter l_oP(&l_oPix);
-
+		QIcon l_oIcon;
+		process_icon(&l_oIcon, l_oScheme.m_oInnerColor, 22);
+		process_icon(&l_oIcon, l_oScheme.m_oInnerColor, 32);
+		process_icon(&l_oIcon, l_oScheme.m_oInnerColor, 64);
+		process_icon(&l_oIcon, l_oScheme.m_oInnerColor, 128);
 		l_oAction->setText(l_oScheme.m_sName);
-
-		l_oPix.fill(l_oScheme.m_oInnerColor);
-		l_oP.drawRect(0, 0, 21, 21);
-		l_oAction->setIcon(QIcon(l_oPix));
+		l_oAction->setIcon(l_oIcon);
 	}
 }
 
