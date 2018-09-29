@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-29 06:31+0200\n"
+"POT-Creation-Date: 2018-09-29 06:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -370,7 +370,6 @@ msgstr ""
 #. i18n: file: tips:46
 #. i18n: ectx: @info:tipoftheday
 #: data/tips.cpp:44
-#, fuzzy
 msgid ""
 "<h3>4. Data types</h3>\n"
 "<ul>\n"
@@ -385,9 +384,10 @@ msgstr ""
 "<ul>\n"
 " <li>Clic droit sur un élément de la carte pour définir son type :<br>− "
 "Texte ;<br>− Diagramme ;<br>− Tableau ;<br>− Image.</li>\n"
-" <li>Les données supplémentaires peuvent être créés depuis la fenêtre des données.</li>\n"
-" <li>Ces donnés ne sont pas visibles dans la vue principale, mais sont exportées"
-"dans les documents générés.</li>\n"
+" <li>Les données supplémentaires peuvent être créés depuis la fenêtre des "
+"données.</li>\n"
+" <li>Ces donnés ne sont pas visibles dans la vue principale, mais sont "
+"exportées dans les documents générés.</li>\n"
 "</ul>\n"
 
 #. i18n: file: tips:57
