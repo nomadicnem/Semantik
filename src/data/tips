@@ -46,9 +46,9 @@
 <html>
 <h3>4. Data types</h3>
 <ul>
- <li>Right-click on a map item and set the data type</li>
- <li>Graphs can be created in the diagram panel</li>
- <li>Pictures can be added in the image panel</li>
+ <li>Right-click on a map item to set its the data type such as text, table, graph or picture</li>
+ <li>Edit the item extra data in the data panel</li>
+ <li>Such extra data is not visible on the main map, but are exported in the resulting documents</li>
 </ul>
 </html>
 </tip>
