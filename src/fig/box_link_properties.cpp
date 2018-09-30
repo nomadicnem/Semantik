@@ -12,6 +12,7 @@
 #include <QCompleter>
 #include "mem_box.h"
 #include "box_view.h"
+#include "sem_mediator.h"
 
 #include <QtDebug>
 
@@ -151,6 +152,8 @@ void box_link_properties::apply() {
 	mem->next.m_sCaption = m_oArrowEdit->text();
 	mem->next.m_sParentCaption = m_oLeftArrowEdit->text();
 	mem->next.m_sChildCaption = m_oRightArrowEdit->text();
+
+	mem->m_oPrevLinkState.copy_from(m_oLink->m_oView->m_oMediator->m_oLinkState);
 
 	mem->apply();
 	enableButtonApply(false);

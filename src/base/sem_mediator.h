@@ -217,6 +217,8 @@ class sem_mediator: public QObject
 
 		int m_iSortId;
 		int m_iSortCursor;
+		data_link m_oLinkState;
+
 
 		friend class semantik_reader;
 

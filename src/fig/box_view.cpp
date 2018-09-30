@@ -1558,18 +1558,18 @@ void box_view::mousePressEvent(QMouseEvent *i_oEv)
 		m_oCurrent->m_oInnerLink.m_iChild = NO_ITEM;
 		m_oCurrent->m_oInnerLink.m_iChildPos = data_link::NORTH;
 		m_oCurrent->m_oInnerLink.m_oStartPoint = m_oCurrent->m_oInnerLink.m_oEndPoint = p;
+
+		m_oCurrent->m_oInnerLink.m_iLeftArrow = m_oMediator->m_oLinkState.m_iLeftArrow;
+		m_oCurrent->m_oInnerLink.m_iRightArrow = m_oMediator->m_oLinkState.m_iRightArrow;
+		m_oCurrent->m_oInnerLink.m_iLineType = m_oMediator->m_oLinkState.m_iLineType;
+		m_oCurrent->m_oInnerLink.pen_style = m_oMediator->m_oLinkState.pen_style;
+
 		if (dynamic_cast<box_label*>(l_oParent))
 		{
 			m_oCurrent->m_oInnerLink.pen_style = Qt::DotLine;
 			m_oCurrent->m_oInnerLink.m_iLeftArrow = data_link::NONE;
 			m_oCurrent->m_oInnerLink.m_iRightArrow = data_link::NONE;
 			m_oCurrent->m_oInnerLink.m_iLineType = data_link::LINE;
-		}
-
-		if (dynamic_cast<box_node*>(l_oParent) || dynamic_cast<box_component*>(l_oParent))
-		{
-			m_oCurrent->m_oInnerLink.m_iLeftArrow = data_link::NONE;
-			m_oCurrent->m_oInnerLink.m_iRightArrow = data_link::NONE;
 		}
 
 		m_oCurrent->setSelected(true);

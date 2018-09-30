@@ -287,6 +287,7 @@ void mem_edit_link::redo() {
 	link->copy_from(next);
 	QList<diagram_item*> items;
 	items.append(link);
+	model->m_oLinkState.copy_from(next);
 	model->notify_box_props(m_iId, items);
 	redo_dirty();
 }
@@ -295,6 +296,7 @@ void mem_edit_link::undo() {
 	link->copy_from(prev);
 	QList<diagram_item*> items;
 	items.append(link);
+	model->m_oLinkState.copy_from(m_oPrevLinkState);
 	model->notify_box_props(m_iId, items);
 	undo_dirty();
 }

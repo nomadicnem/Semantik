@@ -8,6 +8,7 @@
 #include <QGraphicsView>
 #include <QList>
 #include <QPoint>
+#include "data_item.h"
 #include "con.h"
 
 class QActionGroup;

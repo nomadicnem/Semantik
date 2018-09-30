@@ -151,6 +151,8 @@ class mem_edit_link: public mem_command {
 		void undo();
 		void redo();
 
+		data_link m_oPrevLinkState;
+
 		int m_iId;
 		data_link prev;
 		data_link next;
