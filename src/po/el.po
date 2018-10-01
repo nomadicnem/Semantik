@@ -1181,20 +1181,20 @@ msgid "&Help"
 msgstr ""
 
 #. i18n: file: data/semantik-dui.rc:51
-#. i18n: ectx: ToolBar (colorsToolBar)
+#. i18n: ectx: ToolBar (colorsBar)
 #. i18n: file: data/semantikui.rc:41
-#. i18n: ectx: ToolBar (colorsToolBar)
+#. i18n: ectx: ToolBar (colorsBar)
 #. i18n: file: data/semantik-dui.rc:51
-#. i18n: ectx: ToolBar (colorsToolBar)
+#. i18n: ectx: ToolBar (colorsBar)
 #. i18n: file: data/semantikui.rc:41
-#. i18n: ectx: ToolBar (colorsToolBar)
+#. i18n: ectx: ToolBar (colorsBar)
 #: po/rc.cpp:21 po/rc.cpp:42 rc.cpp:21 rc.cpp:42
 #, fuzzy
 msgid "Colors Toolbar"
 msgstr "Χρώματα"
 
 #. i18n: file: data/semantikui.rc:45
-#. i18n: ectx: ToolBar (flagsToolBar)
+#. i18n: ectx: ToolBar (flagsBar)
 #: po/rc.cpp:45 rc.cpp:45
 msgid "Flags Toolbar"
 msgstr ""

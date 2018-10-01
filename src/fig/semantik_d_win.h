@@ -14,7 +14,6 @@ lude <KXmlGuiWindow>
  %: include<QUrl>
 
 class KRecentFilesAction;
-class KToolBar;
 class QAction;
 class QActionGroup;
 class QListWidget;
@@ -39,7 +38,6 @@ class semantik_d_win : public KXmlGuiWindow
 		QAction *m_oCustomColorAct;
 
 		KRecentFilesAction* m_oRecentFilesAct;
-		KToolBar *m_oColorsToolBar;
 		KTabWidget *m_oTabWidget;
 		filetree *m_oFileTree;
 		QAction *m_oExportSizeAct;

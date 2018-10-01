@@ -38,11 +38,36 @@
 
  </MenuBar>
 
- <ToolBar name="colorsToolBar" iconText="icononly" position="right"><text>Colors Toolbar</text>
-	<Action name="tool_select" />
+ <ToolBar name="colorsBar" iconText="icononly" position="right"><text>Colors Toolbar</text>
+	<Action name="color_1" />
+	<Action name="color_2" />
+	<Action name="color_3" />
+	<Action name="color_4" />
+	<Action name="color_5" />
+	<Action name="color_6" />
+	<Action name="color_7" />
+	<Action name="color_8" />
+	<Action name="color_custom" />
  </ToolBar>
 
- <ToolBar name="flagsToolBar" iconText="icononly" position="right" noMerge="1"><text>Flags Toolbar</text>
-       <Action name="tool_select" />
+ <ToolBar name="flagsBar" iconText="icononly" position="right" noMerge="1"><text>Flags Toolbar</text>
+	<Action name="flag_0" />
+	<Action name="flag_1" />
+	<Action name="flag_2" />
+	<Action name="flag_3" />
+	<Action name="flag_4" />
+	<Action name="flag_5" />
+	<Action name="flag_6" />
+	<Action name="flag_7" />
+	<Action name="flag_8" />
+	<Action name="flag_9" />
+	<Action name="flag_10" />
+	<Action name="flag_11" />
+	<Action name="flag_12" />
+	<Action name="flag_13" />
+	<Action name="flag_14" />
+	<Action name="flag_15" />
+	<Action name="flag_16" />
+	<Action name="flag_17" />
  </ToolBar>
 </gui>

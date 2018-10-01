@@ -76,6 +76,11 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		m_iVersion = i_oAttrs.value(notr("version")).toInt();
 		m_oMediator->m_bExportIsWidth = i_oAttrs.value(notr("export_is_width")) != notr("false");
 
+		QString l_s = i_oAttrs.value(notr("font"));
+		if (!l_s.isEmpty()) {
+			m_oMediator->m_oFont.fromString(l_s);
+		}
+
 		if (i_oAttrs.index(notr("export_width")) > -1)
 			m_oMediator->m_iExportWidth = i_oAttrs.value(notr("export_width")).toInt();
 		else
@@ -491,6 +496,7 @@ QString sem_mediator::doc_to_xml()
 	l_oS<<notr(" export_height=\"%1\"").arg(QString::number(m_iExportHeight));
 	l_oS<<notr(" export_url=\"%1\"").arg(bind_node::protectXML(m_sExportUrl));
 	l_oS<<notr(" spelling_language=\"%1\"").arg(bind_node::protectXML(m_sSpellingLanguage));
+	l_oS<<notr(" font=\"%1\"").arg(m_oFont.toString());
 
 	l_oS<<notr("/>\n");
 
@@ -1299,6 +1305,8 @@ sem_mediator::sem_mediator(QObject* i_oParent) : QObject(i_oParent)
 	init_temp_dir();
 
 	m_bIsDiagram = false;
+
+	m_oFont.fromString("Monospace,10,-1,5,50,0,0,0,0,0");
 
 	if (!QFile::exists(SEMANTIK_DIR "/templates/waf")) {
 		qDebug()<<"Access denied ^ô^";

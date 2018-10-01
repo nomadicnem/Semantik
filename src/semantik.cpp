@@ -187,10 +187,6 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oGenerateAct->setShortcut(i18n("Ctrl+G"));
 	connect(m_oGenerateAct, SIGNAL(triggered(bool)), SLOT(slot_generate()));
 
-	m_oFlagGroup = new QActionGroup(this);
-	m_oFlagGroup->setExclusive(false);
-	connect(m_oFlagGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_flags(QAction*)));
-
 	//m_oCanvasFitZoom = new QAction(i18n("Fit zoom"), this);
 	//actionCollection()->addAction(notr("zoom_map"), m_oCanvasFitZoom);
 	//m_oCanvasFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
@@ -258,27 +254,38 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	actionCollection()->addAction(notr("show_dock_linear"), l_oDock->toggleViewAction());
 	l_oDock->setObjectName(notr("LinearDock"));
 
-	setupGUI(QSize(800, 800), Default, notr("semantikui.rc"));
-
-	m_oFlagsToolBar = toolBar(notr("flagsToolBar"));
-	m_oColorsToolBar = toolBar(notr("colorsToolBar"));
-
 	flag_scheme l_oScheme(this, notr("crsc-app-colors"), "");
 	m_oColorGroup = new QActionGroup(this);
 	for (int i = 0; i < 9; ++i)
 	{
 		QAction *l_oAct = new QAction(QIcon(), i18n("Color"), m_oColorGroup);
 		m_oColorGroup->addAction(l_oAct);
+		actionCollection()->addAction(QString("color_%1").arg(QString::number(i)), l_oAct);
 		if (i != 0)
 		{
-			m_oColorsToolBar->addAction(l_oAct);
 			m_oColorMenu->addAction(l_oAct);
 		}
 	}
+
 	m_oCustomColorAct = new QAction(l_oScheme._icon(), i18n("Custom color"), m_oColorGroup);
 	m_oColorMenu->addAction(m_oCustomColorAct);
-	m_oColorsToolBar->addAction(m_oCustomColorAct);
 	m_oColorGroup->setExclusive(true);
+	actionCollection()->addAction(notr("color_custom"), m_oCustomColorAct);
+
+	m_oFlagGroup = new QActionGroup(this);
+	m_oFlagGroup->setExclusive(false);
+	connect(m_oFlagGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_flags(QAction*)));
+
+	for (int i = 0; i < 16; ++i)
+	{
+		QAction *l_oAct = new QAction(QIcon(notr("crsc-app-colors")), i18n("flag"), m_oFlagGroup);
+		l_oAct->setCheckable(true);
+		m_oFlagGroup->addAction(l_oAct);
+		actionCollection()->addAction(QString("flag_%1").arg(QString::number(i)), l_oAct);
+	}
+
+	setupGUI(QSize(800, 800), Default, notr("semantikui.rc"));
+
 	connect(m_oMediator, SIGNAL(sync_colors()), this, SLOT(sync_colors()));
 	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oDiagramView, SLOT(change_colors(QAction*)));
 	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_colors(QAction*)));
@@ -331,7 +338,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	connect(m_oMediator, SIGNAL(sig_move(const QList<int>&, const QList<QPointF>&)), m_oCanvas, SLOT(notify_move(const QList<int>&, const QList<QPointF>&)));
 
-	connect(m_oMediator, SIGNAL(sync_flags()), m_oCanvas, SLOT(sync_flags()));
+	connect(m_oMediator, SIGNAL(sync_flags()), this, SLOT(sync_flags()));
 	connect(m_oImageView, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 
 	connect(m_oMediator, SIGNAL(sig_open_map()), m_oCanvas, SLOT(notify_open_map()));
@@ -677,6 +684,17 @@ void semantik_win::sync_colors()
 		process_icon(&l_oIcon, l_oScheme.m_oInnerColor, 128);
 		l_oAction->setText(l_oScheme.m_sName);
 		l_oAction->setIcon(l_oIcon);
+	}
+}
+
+void semantik_win::sync_flags()
+{
+	for (int i=0; i<m_oMediator->m_oFlagSchemes.size(); ++i)
+	{
+		flag_scheme *l_oScheme = m_oMediator->m_oFlagSchemes[i];
+		QAction *l_oAction = m_oFlagGroup->actions()[i];
+		l_oAction->setText(l_oScheme->m_sName);
+		l_oAction->setIcon(l_oScheme->_icon());
 	}
 }
 

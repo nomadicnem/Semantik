@@ -160,6 +160,8 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 	//connect(scene(), SIGNAL(selectionChanged()), this, SLOT(selection_changed())); // TODO check with m_bPressed
 
 	setDragMode(QGraphicsView::RubberBandDrag);
+
+	scene()->setFont(m_oMediator->m_oFont);
 }
 
 void canvas_view::resizeEvent(QResizeEvent* e)
@@ -562,7 +564,6 @@ void canvas_view::notify_open_map() {
 		scene()->setSceneRect(QRectF(mapToScene(l_oRect.topLeft()), mapToScene(l_oRect.bottomRight())));
 		return;
 	}
-
 	check_canvas_size();
 	fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
 }
@@ -590,37 +591,6 @@ void canvas_view::notify_select(const QList<int>& unsel, const QList<int>& sel) 
 void canvas_view::notify_pic(int id)
 {
 	qDebug()<<"canvas_view::notify_pic to be implemented";
-}
-
-void canvas_view::sync_flags() {
-	semantik_win *l_o = (semantik_win*) m_oSemantikWindow;
-	l_o->m_oFlagsToolBar->clear();
-
-	while (l_o->m_oFlagGroup->actions().size() > m_oMediator->m_oFlagSchemes.size())
-	{
-		QAction* l_oA = l_o->m_oFlagGroup->actions().takeFirst();
-		delete l_oA;
-	}
-
-	while (l_o->m_oFlagGroup->actions().size() < m_oMediator->m_oFlagSchemes.size())
-	{
-		new QAction(QIcon(), i18n("Flag"), l_o->m_oFlagGroup);
-	}
-
-	for (int i=0; i<m_oMediator->m_oFlagSchemes.size(); ++i)
-	{
-		flag_scheme* l_oScheme = m_oMediator->m_oFlagSchemes[i];
-		QAction *l_oAction = l_o->m_oFlagGroup->actions()[i];
-
-		l_oAction->setText(l_oScheme->m_sName);
-		l_oAction->setIcon(l_oScheme->_icon());
-	}
-
-	foreach(QAction* l_oAct, l_o->m_oFlagGroup->actions())
-	{
-		l_o->m_oFlagsToolBar->addAction(l_oAct);
-		l_oAct->setCheckable(true);
-	}
 }
 
 void canvas_view::change_colors(QAction* i_oAct)

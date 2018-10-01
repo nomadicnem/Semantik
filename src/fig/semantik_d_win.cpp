@@ -13,7 +13,6 @@
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KActionCollection>
-#include <KToolBar>
 #include <QAction>
 #include <QMenu>
 #include <QDir>
@@ -83,10 +82,6 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oFileTree = new filetree(l_oDock);
 	l_oDock->setWidget(m_oFileTree);
 
-	setupGUI(QSize(1000, 800), Default, notr("semantik-dui.rc"));
-
-	m_oColorsToolBar = toolBar(notr("colorsToolBar"));
-
 	flag_scheme l_oScheme(this, notr("crsc-app-colors"), "");
 	m_oColorGroup = new QActionGroup(this);
 	for (int i = 0; i < 9; ++i)
@@ -95,14 +90,16 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 		m_oColorGroup->addAction(l_oAct);
 		if (i != 0)
 		{
-			m_oColorsToolBar->addAction(l_oAct);
+			actionCollection()->addAction(QString("color_%1").arg(QString::number(i)), l_oAct);
 			m_oColorMenu->addAction(l_oAct);
 		}
 	}
 	m_oCustomColorAct = new QAction(l_oScheme._icon(), i18n("Custom color"), m_oColorGroup);
 	m_oColorMenu->addAction(m_oCustomColorAct);
-	m_oColorsToolBar->addAction(m_oCustomColorAct);
 	m_oColorGroup->setExclusive(true);
+	actionCollection()->addAction(notr("color_custom"), m_oCustomColorAct);
+
+	setupGUI(QSize(1000, 800), Default, notr("semantik-dui.rc"));
 
 	read_config();
 	setAutoSaveSettings();

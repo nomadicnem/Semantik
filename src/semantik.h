@@ -74,8 +74,6 @@ class semantik_win : public KXmlGuiWindow
 		QAction *m_oUndoAct;
 		QAction *m_oRedoAct;
 		KToolBar *m_oEditToolBar;
-		KToolBar *m_oColorsToolBar;
-		KToolBar *m_oFlagsToolBar;
 
 		QMenu *m_oToolsMenu;
 		QMenu *m_oColorMenu;
@@ -86,7 +84,6 @@ class semantik_win : public KXmlGuiWindow
 		QActionGroup *m_oGroup;
 
 		QActionGroup *m_oFlagGroup;
-
 		QActionGroup *m_oColorGroup;
 		QAction* m_oCustomColorAct;
 
@@ -102,6 +99,7 @@ class semantik_win : public KXmlGuiWindow
 	public slots:
 		void update_title();
 		void sync_colors();
+		void sync_flags();
 
 		void fit_zoom();
 		void slot_open();
