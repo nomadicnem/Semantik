@@ -58,18 +58,16 @@ def tex_convert(s):
 	return s
 if not settings.get('all_latex', 0): tex_convert = protect_tex
 
-# make the pictures available
-cwd = os.getcwd()
-os.chdir(sembind.get_var('temp_dir'))
+# copy the pictures
+temp_dir = sembind.get_var('temp_dir')
 pics = {} # map the id to the picture
-lst = os.listdir('.')
+lst = os.listdir(temp_dir)
 for x in lst:
 	if x.startswith('diag-'):
 		key = x.split('.')[0].replace('diag-', '')
 		if x.endswith('.pdf') or not key in pics:
 			pics[key] = x
-		shutil.copy2(x, outdir)
-os.chdir(cwd)
+		shutil.copy2(os.path.join(temp_dir, x), outdir)
 
 buf = []
 out = buf.append

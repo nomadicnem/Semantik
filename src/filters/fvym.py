@@ -2,7 +2,7 @@
 # encoding: utf-8
 # Thomas Nagy, 2007-2018 GPLV3
 
-import os, sys, tarfile, io
+import sys, io
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
@@ -116,7 +116,7 @@ def parse_string(s):
 	parser.parse(io.StringIO(str(s)))
 	return "".join(curHandler.out)
 
-def parse_file(infile):
+def parse_file(infile, tmpdir):
 	import zipfile
 	zut = zipfile.ZipFile(infile, "r")
 	truc = None

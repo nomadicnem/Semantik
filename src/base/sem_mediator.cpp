@@ -79,6 +79,8 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		QString l_s = i_oAttrs.value(notr("font"));
 		if (!l_s.isEmpty()) {
 			m_oMediator->m_oFont.fromString(l_s);
+		} else if (m_iVersion < 3) {
+			m_oMediator->m_oFont = QFont();
 		}
 
 		if (i_oAttrs.index(notr("export_width")) > -1)
@@ -480,7 +482,7 @@ QString sem_mediator::doc_to_xml()
 	QStringList l_oS;
 
 	l_oS<<notr("<?xml version=\"1.0\" encoding=\"utf8\"?>\n");
-	l_oS<<notr("<semantik version=\"2\">\n");
+	l_oS<<notr("<semantik version=\"3\">\n");
 	l_oS<<notr("\t<info");
 	//l_oS<<QString(" name=\"%1\"").arg(bind_node::protectXML(m_sName));
 	//l_oS<<QString(" fname=\"%1\"").arg(bind_node::protectXML(m_sFirstName));

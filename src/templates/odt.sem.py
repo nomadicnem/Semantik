@@ -5,7 +5,7 @@
 
 mimetype = "application/vnd.oasis.opendocument.text"
 
-import os, shutil, time, zipfile, sys
+import os, shutil, time, zipfile
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 
@@ -63,12 +63,21 @@ except OSError: debug("Cannot create folder " + outdir)
 # f** mimes
 MIMES = {'svg': 'image/svg', 'png': 'image/png', 'jpg': 'image/jpeg', 'jpeg':'image/jpeg', 'gif': 'image/gif'}
 
+def best_ext(lst):
+	if 'svg' in lst:
+		return 'svg'
+	if 'png' in lst:
+		return 'png'
+	if 'jpg' in lst:
+		return 'jpg'
+	return lst[0]
+
 # copy the pictures
 cwd = os.getcwd()
-os.chdir(sembind.get_var('temp_dir'))
 pics = {} # map the id to the picture
 tmp_pics = {}
-lst = os.listdir('.')
+temp_dir = sembind.get_var('temp_dir')
+lst = os.listdir(temp_dir)
 for x in lst:
 	if x.startswith('diag-') and not x.endswith('.pdf'):
 		tmplst = x.replace('diag-', '').split('.')
@@ -79,33 +88,18 @@ for x in lst:
 		except KeyError:
 			tmp_pics[k] = [ext]
 
-def best_ext(lst):
-	if 'svg' in lst:
-		return 'svg'
-	if 'png' in lst:
-		return 'png'
-	if 'jpg' in lst:
-		return 'jpg'
-	return lst[0]
-
 for key, val in tmp_pics.items():
 	x = best_ext(val)
 	name = 'diag-%s.%s' % (key, x)
-	shutil.copy2(name, outdir + '/Pictures')
+	shutil.copy2(os.path.join(temp_dir, name), outdir + '/Pictures')
 	pics[key] = x
 
-os.chdir(cwd)
-
-try: os.mkdir(outdir+'/META-INF')
-except: raise
-
+os.mkdir(outdir+'/META-INF')
 
 buf = []
 out = buf.append
 
 def print_nodes(node, niv, lbl_lst):
-
-	lbl = ".".join(lbl_lst)
 
 	typo = node.get_val('type')
 
@@ -230,17 +224,14 @@ for x in "content.xml settings.xml styles.xml meta.xml".split():
 	transform("/odt/"+x, outdir+'/'+x, settings)
 
 # add files to the zip
-file = zipfile.ZipFile(outdir+'/main.odt', mode='w')
-
-os.chdir(outdir)
-file.writestr('mimetype', mimetype)
-for x in "content.xml styles.xml meta.xml".split():
-	file.write(x)#, compress_type=zipfile.ZIP_DEFLATED)
-file.write('META-INF/manifest.xml')#, compress_type=zipfile.ZIP_DEFLATED)
-for x in settings['piclst']:
-	file.write('Pictures/%s' % x)
-
-file.close()
+with zipfile.ZipFile(outdir+'/main.odt', mode='w') as f:
+	f.writestr('mimetype', mimetype)
+	for x in "content.xml styles.xml meta.xml".split():
+		f.write(os.path.join(outdir, x), x)#, compress_type=zipfile.ZIP_DEFLATED)
+	f.write(os.path.join(outdir, 'META-INF/manifest.xml'), 'META-INF/manifest.xml')#, compress_type=zipfile.ZIP_DEFLATED)
+	for x in settings['piclst']:
+		pic = 'Pictures/%s' % x
+		f.write(os.path.join(outdir, pic), pic)
 
 # and remove the useless stuff
 os.popen('cd %s && rm -rf *.xml META-INF Pictures' % outdir)

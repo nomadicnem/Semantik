@@ -143,15 +143,11 @@ for x in "content.xml settings.xml styles.xml meta.xml".split():
 	transform("/odp/"+x, outdir+'/'+x, settings)
 
 # add files to the zip
-file = zipfile.ZipFile(outdir+'/main.odp', mode='w')
-
-os.chdir(outdir)
-file.writestr('mimetype', mimetype)
-for x in "content.xml styles.xml meta.xml".split():
-	file.write(x)#, compress_type=zipfile.ZIP_DEFLATED)
-file.write('META-INF/manifest.xml')#, compress_type=zipfile.ZIP_DEFLATED)
-
-file.close()
+with zipfile.ZipFile(outdir+'/main.odp', mode='w') as f:
+	f.writestr('mimetype', mimetype)
+	for x in "content.xml styles.xml meta.xml".split():
+		f.write(os.path.join(outdir, x), x)#, compress_type=zipfile.ZIP_DEFLATED)
+	f.write(os.path.join(outdir, 'META-INF/manifest.xml'), 'META-INF/manifest.xml')#, compress_type=zipfile.ZIP_DEFLATED)
 
 # and remove the useless stuff
 os.popen('cd %s && rm -rf *.xml META-INF' % outdir)

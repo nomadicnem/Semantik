@@ -26,18 +26,19 @@ try:
 except OSError:
 	sys.stderr.write("Cannot create the pics folder in %s" % outdir)
 
-for x in "Makefile main.html Kadapplet.java Mapview.java".split():
+for x in "run.sh Makefile main.html Kadapplet.java Mapview.java".split():
 	shutil.copy2(template_dir() + '/java/'+x, outdir)
+os.chmod(os.path.join(outdir, 'run.sh'), 0o755)
 
-cwd = os.getcwd()
-os.chdir(sembind.get_var('temp_dir'))
+# copy the pictures
+temp_dir = sembind.get_var('temp_dir')
 pics = {} # map the id to the picture
-lst = os.listdir('.')
+lst = os.listdir(temp_dir)
 for x in lst:
 	if x.startswith('diag-') or x.startswith('wholemap'):
-		pics[ x.replace('diag-', '').split('.')[0] ] = x
-		shutil.copy2(x, outdir + '/pics')
-os.chdir(cwd)
+		key = x.split('.')[0].replace('diag-', '')
+		pics[key] = x
+		shutil.copy2(os.path.join(temp_dir, x), outdir + '/pics')
 
 code = []
 def out(s):

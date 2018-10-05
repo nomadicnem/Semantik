@@ -2,7 +2,7 @@
 # encoding: utf-8
 # Thomas Nagy, 2007-2018 GPLV3
 
-import os, sys, tarfile, string
+import os, tarfile, string
 
 # parsing xml properly is less simple than it seems
 def filter(txt):
@@ -43,20 +43,18 @@ def filter(txt):
 
 	return ret
 
-def parse_file(infile):
+def parse_file(infile, tmpdir):
 	tar = tarfile.open(infile)
 	for tarinfo in tar:
-		tar.extract(tarinfo)
+		tar.extract(tarinfo, path=tmpdir)
 	tar.close()
 
-	try:
-		with open('con.xml', 'r', encoding='utf-8') as f:
-			txt = f.read()
-		os.remove('con.xml')
-	except Exception:
-		# will remove this at version >= 0.7
-		with open('com.xml', 'r', encoding='utf-8') as f:
-			txt = filter(f.read())
-		os.remove('com.xml')
+	fname = os.path.join(tmpdir, 'com.xml')
+	if not os.path.exists(fname):
+		fname = os.path.join(tmpdir, 'con.xml')
+
+	with open(fname, 'r', encoding='utf-8') as f:
+		txt = f.read()
+	os.remove(fname)
 	return txt
 

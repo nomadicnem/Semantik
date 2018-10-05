@@ -2,7 +2,7 @@
 # encoding: utf-8
 # Thomas Nagy, 2007-2018 GPLV3
 
-import os, sys, tarfile, io
+import sys, io
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
@@ -82,7 +82,6 @@ class FFHandler(ContentHandler):
 			self.out.append('<item id="%d" summary="%s"/>\n' % (id, text))
 
 	def endElement(self, name):
-		txt = "".join(self.buf)
 		if name == 'node':
 			#self.cur -= 1
 			#debug(str(self.cur))
@@ -103,7 +102,7 @@ def parse_string(s):
 	parser.parse(io.StringIO(str(s)))
 	return "".join(curHandler.out)
 
-def parse_file(infile):
+def parse_file(infile, tmpdir):
 	with open(infile, 'r', encoding='utf-8') as f:
 		txt = f.read()
 

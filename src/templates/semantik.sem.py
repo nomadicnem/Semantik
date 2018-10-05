@@ -16,8 +16,8 @@ tar.addfile(tarinfo, stuff)
 
 #debug(doc)
 
-os.chdir(sembind.get_var('temp_dir'))
-lst = os.listdir('.')
+temp_dir = sembind.get_var('temp_dir')
+lst = os.listdir(temp_dir)
 
 tmp = str(sembind.get_item_ids()).split(",")
 for x in tmp:
@@ -28,7 +28,7 @@ for x in tmp:
 		if pid != '0':
 			for pic in lst:
 				if pic.startswith(s):
-					tar.add(pic, pic)
+					tar.add(os.path.join(temp_dir, pic), pic)
 					break
 			else:
 				debug("Could not find the picture for item %r->%r in %r" % (x, pid, sembind.get_var('temp_dir')))

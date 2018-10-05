@@ -54,18 +54,15 @@ try: os.makedirs(outdir)
 except OSError: debug('Cannot create folder ' + outdir)
 
 # copy the pictures
-cwd = os.getcwd()
-os.chdir(sembind.get_var('temp_dir'))
+temp_dir = sembind.get_var('temp_dir')
 pics = {} # map the id to the picture
-lst = os.listdir('.')
+lst = os.listdir(temp_dir)
 for x in lst:
 	if x.startswith('diag-'):
 		key = x.split('.')[0].replace('diag-', '')
 		if x.endswith('.pdf') or not key in pics:
 			pics[key] = x
-		shutil.copy2(x, outdir)
-os.chdir(cwd)
-
+		shutil.copy2(os.path.join(temp_dir, x), outdir)
 
 buf = []
 out = buf.append

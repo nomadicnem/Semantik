@@ -113,10 +113,10 @@ def parse_string(s):
 	parser.parse(io.StringIO(str(s)))
 	return "".join(curHandler.out)
 
-def parse_file(infile):
+def parse_file(infile, tmpdir):
 	tar = tarfile.open(infile)
 	for tarinfo in tar:
-		tar.extract(tarinfo)
+		tar.extract(tarinfo, path=tmpdir)
 
 	# offset +1
 	lst = os.listdir('.')
