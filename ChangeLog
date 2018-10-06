@@ -1,6 +1,7 @@
 Semantik 1.0.6
 --------------
 * Improve the document export from the command-line
+* Fix annoying directory change behaviour
 
 Semantik 1.0.5
 --------------
