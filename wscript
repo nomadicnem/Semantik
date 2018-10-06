@@ -3,7 +3,7 @@
 # Thomas Nagy, 2007-2016 GPLV3
 
 APPNAME = 'semantik'
-VERSION = '1.0.5'
+VERSION = '1.0.6'
 
 top = '.'
 
@@ -291,7 +291,7 @@ def configure(conf):
 
 	if not 'CXXFLAGS' in os.environ:
 		conf.env.CXXFLAGS = '-O2 -pipe -Wno-deprecated-declarations -Wall'.split()# -DDEBUG=1 -g'
-		#conf.env.CXXFLAGS = ['-g', '-Wall']
+		#conf.env.CXXFLAGS = ['-g', '-Wall', '-Wno-deprecated-declarations']
 	conf.write_config_header('aux.h')
 
 	# the Debian packagers compile with --prefix=/usr and set /etc/ld.so.conf accordingly

@@ -3,6 +3,7 @@
 #ifndef MEM_BOX
 #define MEM_BOX
 
+#include <data_item.h>
 #include <QFont>
 #include "QHash"
 #include "QGraphicsItem"
@@ -32,7 +33,7 @@ class mem_add_box : public mem_command {
 		void redo();
 
 		int m_iId;
-		data_item* item;
+		data_item& item;
 		data_box* box;
 
 		double m_iXX;
@@ -47,7 +48,7 @@ class mem_edit_box: public mem_command {
 		void undo();
 		void redo();
 
-		data_item *item;
+		data_item& item;
 		data_box *box;
 
 		int oldHeight;

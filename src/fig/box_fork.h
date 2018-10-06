@@ -28,7 +28,7 @@ class box_fork : public QGraphicsRectItem, public connectable, public resizable
 		QRectF rectPos() const { return QGraphicsRectItem::rect().translated(pos()); };
 
 		box_view *m_oView;
-		data_item *m_oItem;
+		data_item& m_oItem;
 
 		void mousePressEvent(QGraphicsSceneMouseEvent* e);
 		void mouseReleaseEvent(QGraphicsSceneMouseEvent* e);

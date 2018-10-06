@@ -29,7 +29,7 @@ linear_view::linear_view(QWidget *i_oParent, sem_mediator *i_oControl) : QTreeWi
 void linear_view::notify_add_item(int id)
 {
 	QTreeWidgetItem *l_oItem = new QTreeWidgetItem(this);
-	l_oItem->setText(0, m_oMediator->m_oItems.value(id)->m_sSummary);
+	l_oItem->setText(0, m_oMediator->m_oItems[id].m_sSummary);
 	l_oItem->setData(0, Qt::UserRole, id);
 	//l_oItem->setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsDropEnabled);
 	addTopLevelItem(l_oItem);
@@ -87,8 +87,8 @@ void linear_view::notify_link_items(int id1, int id2)
 	l_oItem2->insertChild(l_iOffset, l_oItem1);
 	l_oItem2->setExpanded(true);
 
-	data_item *l_o = m_oMediator->m_oItems.value(id2);
-	l_oItem1->setBackgroundColor(0, l_o->get_color_scheme().m_oInnerColor);
+	data_item& l_o = m_oMediator->m_oItems[id2];
+	l_oItem1->setBackgroundColor(0, l_o.get_color_scheme(m_oMediator).m_oInnerColor);
 
 
 	foreach (QTreeWidgetItem* l_oIt, selectedItems())
@@ -120,8 +120,8 @@ void linear_view::notify_unlink_items(int id1, int id2)
 		l_oItem2->setExpanded(true);
 		addTopLevelItem(l_oItem1);
 
-		data_item *l_o = m_oMediator->m_oItems.value(id1);
-		l_oItem1->setBackgroundColor(0, l_o->get_color_scheme().m_oInnerColor);
+		data_item& l_o = m_oMediator->m_oItems[id1];
+		l_oItem1->setBackgroundColor(0, l_o.get_color_scheme(m_oMediator).m_oInnerColor);
 	}
 	else if (l_oItem2->parent() == l_oItem1)
 	{
@@ -129,8 +129,8 @@ void linear_view::notify_unlink_items(int id1, int id2)
 		l_oItem1->setExpanded(true);
 		addTopLevelItem(l_oItem2);
 
-		data_item *l_o = m_oMediator->m_oItems.value(id2);
-		l_oItem2->setBackgroundColor(0, l_o->get_color_scheme().m_oInnerColor);
+		data_item& l_o = m_oMediator->m_oItems[id2];
+		l_oItem2->setBackgroundColor(0, l_o.get_color_scheme(m_oMediator).m_oInnerColor);
 	}
 	else
 	{
@@ -305,8 +305,8 @@ void linear_view::notify_select(const QList<int>& unsel, const QList<int>& sel)
 void linear_view::notify_repaint(int id)
 {
 	QTreeWidgetItem *l_oItem = m_oItems.value(id);
-	data_item *l_o = m_oMediator->m_oItems.value(id);
-	l_oItem->setBackgroundColor(0, l_o->get_color_scheme().m_oInnerColor);
+	data_item& l_o = m_oMediator->m_oItems[id];
+	l_oItem->setBackgroundColor(0, l_o.get_color_scheme(m_oMediator).m_oInnerColor);
 }
 
 void linear_view::notify_sort(int l_iId, bool)
@@ -351,14 +351,14 @@ void linear_view::notify_sort(int l_iId, bool)
 void linear_view::notify_edit(int i_iId)
 {
 	QTreeWidgetItem *l_oItem = m_oItems.value(i_iId);
-	l_oItem->setText(0, m_oMediator->m_oItems.value(i_iId)->m_sSummary);
+	l_oItem->setText(0, m_oMediator->m_oItems[i_iId].m_sSummary);
 }
 
 void linear_view::notify_datatype(int i_iId)
 {
 	QTreeWidgetItem *l_oItem = m_oItems.value(i_iId);
 	QIcon l_oIcon;
-	switch (m_oMediator->m_oItems.value(i_iId)->m_iDataType)
+	switch (m_oMediator->m_oItems[i_iId].m_iDataType)
 	{
 		case VIEW_TEXT:
 			//l_oIcon = KIconLoader::global()->loadIconSet("text-plain", KIconLoader::Small);

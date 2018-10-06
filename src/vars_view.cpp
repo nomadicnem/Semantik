@@ -93,8 +93,8 @@ void vars_view::notify_vars(int id) {
 
 		QString text;
 		if (id != NO_ITEM) {
-			data_item *sel = *m_oMediator + id;
-			text = sel->m_sHints;
+			data_item& sel = *m_oMediator + id;
+			text = sel.m_sHints;
 		}
 		else
 		{
@@ -112,9 +112,9 @@ void vars_view::notify_select(const QList<int>& unsel, const QList<int>& sel) {
 	m_bLockEdit = true;
 	if (one) {
 		m_iId = sel.at(0);
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
 		m_oCompleter = m_oCompleterItem;
-		setText(l_oData->m_sHints);
+		setText(l_oData.m_sHints);
 	} else {
 		m_iId = NO_ITEM;
 		m_oCompleter = m_oCompleterAll;
@@ -153,8 +153,8 @@ void vars_view::update_edit()
 		tmp->m_iId = m_iId;
 		if (m_iId)
 		{
-			data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-			tmp->oldVars = l_oData->m_sHints;
+			data_item& l_oData = m_oMediator->m_oItems[m_iId];
+			tmp->oldVars = l_oData.m_sHints;
 		}
 		else
 		{
@@ -167,8 +167,8 @@ void vars_view::update_edit()
 
 	if (m_iId)
 	{
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-		l_oData->m_sHints = tmp->newVars;
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
+		l_oData.m_sHints = tmp->newVars;
 	}
 	else
 	{

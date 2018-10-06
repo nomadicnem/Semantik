@@ -287,6 +287,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	setupGUI(QSize(800, 800), Default, notr("semantikui.rc"));
 
 	connect(m_oMediator, SIGNAL(sync_colors()), this, SLOT(sync_colors()));
+	connect(m_oMediator, SIGNAL(sync_font()), m_oCanvas, SLOT(notify_font()));
 	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oDiagramView, SLOT(change_colors(QAction*)));
 	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_colors(QAction*)));
 
@@ -593,7 +594,7 @@ void semantik_win::slot_properties()
 		l_oSettings.writeEntry(notr("auto"), m_oMediator->m_iTimerValue = l_oGen.m_oAutoSave->value());
 		l_oSettings.writeEntry(notr("bgcolor"), l_oGen.m_oColor.name());
 		l_oSettings.writeEntry(notr("autoReorg"), m_oMediator->m_iAutoReorg = l_oGen.m_oAutoReorg->currentIndex());
-		m_oMediator->init_timer();
+		//m_oMediator->init_timer();
 
 		m_oCanvas->setBackgroundBrush(l_oGen.m_oColor);
 	}
@@ -632,13 +633,7 @@ void semantik_win::slot_recent(const QUrl& i_oBadUrl)
 {
 	// deep copy or it will crash
 	QUrl i_oUrl = i_oBadUrl;
-
 	if (i_oUrl.path().isEmpty()) return;
-	if (m_oMediator->m_bDirty)
-	{
-		if (!proceed_save()) return;
-	}
-
 	if (m_oMediator->open_file(i_oUrl.path()))
 	{
 		m_oMediator->m_oCurrentUrl = i_oUrl;

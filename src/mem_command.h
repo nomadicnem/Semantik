@@ -10,9 +10,6 @@
 #include <QList>
 #include <QString>
 
-#include "data_item.h"
-
-
 class mem_unlink : public mem_command {
 	public:
 		mem_unlink(sem_mediator*);
@@ -64,7 +61,7 @@ class mem_edit: public mem_command {
 		mem_edit(sem_mediator*);
 		void undo();
 		void redo();
-		data_item *sel;
+		int m_iId;
 		QString oldSummary;
 		QString newSummary;
 		IType type() { return EDIT; }
@@ -75,7 +72,7 @@ class mem_datatype: public mem_command {
 		mem_datatype(sem_mediator*);
 		void undo();
 		void redo();
-		data_item *sel;
+		int m_iId;
 		int oldDataType;
 		int newDataType;
 		IType type() { return DATATYPE; }
@@ -86,7 +83,7 @@ class mem_text: public mem_command {
 		mem_text(sem_mediator*);
 		void undo();
 		void redo();
-		data_item *sel;
+		int m_iId;
 		QString oldText;
 		QString newText;
 		IType type() { return TEXT; }
@@ -108,7 +105,7 @@ class mem_pic: public mem_command {
 		mem_pic(sem_mediator*);
 		void undo();
 		void redo();
-		data_item *sel;
+		int m_iId;
 		int m_iOldId;
 		int m_iNewId;
 		IType type() { return PIC; }

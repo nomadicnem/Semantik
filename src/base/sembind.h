@@ -6,8 +6,8 @@
 #include <QString>
 #include <QList>
 #include <QHash>
+#include <data_item.h>
 
-class data_item;
 class sem_mediator;
 class bind_node
 {
@@ -47,7 +47,7 @@ class bind_node
 
 		static void init(sem_mediator*);
 		static bind_node* create_tree(sem_mediator *model, int i_i);
-		bind_node();
+		bind_node(data_item&);
 		~bind_node();
 		static QMap<QString, QString> s_oVars;
 		static QMap<QString, QString> s_oResults;
@@ -55,7 +55,7 @@ class bind_node
 		static QHash<int, bind_node*> _cache;
 		static sem_mediator* _model;
 		QList<bind_node*> _children;
-		data_item *m_oItem;
+		data_item& m_oItem;
 };
 
 int init_py();

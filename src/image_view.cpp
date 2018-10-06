@@ -103,8 +103,8 @@ void image_view::notify_select(const QList<int>& unsel, const QList<int>& sel) {
 	bool one = (sel.size() == 1);
 	if (one) {
 		m_iId = sel.at(0);
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-		m_oPixmap = l_oData->getPix();
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
+		m_oPixmap = l_oData.getPix(m_oMediator);
 	} else {
 		m_oPixmap = QPixmap();
 		m_iId = NO_ITEM;
@@ -114,11 +114,11 @@ void image_view::notify_select(const QList<int>& unsel, const QList<int>& sel) {
 
 void image_view::clear_pic()
 {
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 
 	mem_pic *mem = new mem_pic(m_oMediator);
-	mem->sel = l_oData;
-	mem->m_iOldId = l_oData->m_iPicId;
+	mem->m_iId = m_iId;
+	mem->m_iOldId = l_oData.m_iPicId;
 	mem->m_iNewId = NO_ITEM;
 	mem->apply();
 }
@@ -131,8 +131,8 @@ bool image_view::event(QEvent *i_oEvent)
 		if (m_iId)
 		{
 			QHelpEvent *l_oEv = static_cast<QHelpEvent*>(i_oEvent);
-			data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-			QToolTip::showText(l_oEv->globalPos(), l_oData->m_sPicLocation);
+			data_item& l_oData = m_oMediator->m_oItems[m_iId];
+			QToolTip::showText(l_oEv->globalPos(), l_oData.m_sPicLocation);
 		}
         }
 	return QWidget::event(i_oEvent);
@@ -171,7 +171,7 @@ void image_view::change_pic()
 
 void image_view::do_change_pic(const QUrl& l_sText)
 {
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 	int id = m_oMediator->next_pic_seq();
 
 	bool l_bRet = m_oMediator->save_and_load_picture(l_sText, id);
@@ -182,8 +182,8 @@ void image_view::do_change_pic(const QUrl& l_sText)
 	}
 
 	mem_pic *mem = new mem_pic(m_oMediator);
-	mem->sel = l_oData;
-	mem->m_iOldId = l_oData->m_iPicId;
+	mem->m_iId = m_iId;
+	mem->m_iOldId = l_oData.m_iPicId;
 	mem->m_iNewId = id;
 	mem->apply();
 }
@@ -240,24 +240,24 @@ void image_view::notify_pic(int id)
 {
 	if (m_iId == id)
 	{
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-		m_oPixmap = l_oData->getPix();
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
+		m_oPixmap = l_oData.getPix(m_oMediator);
 		repaint();
 	}
 }
 
 void image_view::notify_export_item(int id)
 {
-	data_item *l_oData = m_oMediator->m_oItems.value(id);
-	if (l_oData->m_iDataType != VIEW_IMG)
+	data_item& l_oData = m_oMediator->m_oItems[id];
+	if (l_oData.m_iDataType != VIEW_IMG)
 		return;
-	if (l_oData->m_iPicId != NO_ITEM)
+	if (l_oData.m_iPicId != NO_ITEM)
 	{
 		QDir l_oDir(m_oMediator->m_sTempDir);
 		QFileInfoList l_oLst = l_oDir.entryInfoList();
 		foreach (QFileInfo l_oInfo, l_oLst) {
 			QString l_sName = l_oInfo.fileName();
-			if (l_sName.startsWith(notr("img-%1").arg(QString::number(l_oData->m_iPicId))))
+			if (l_sName.startsWith(notr("img-%1").arg(QString::number(l_oData.m_iPicId))))
 			{
 				QFile f(l_oInfo.absoluteFilePath());
 				QString newName = l_oInfo.fileName().replace(QRegExp("img-\\d+"), QString("diag-%1").arg(QString::number(id)));

@@ -59,13 +59,12 @@ void diagram_document::init()
 	connect(m_oDiagramView, SIGNAL(sig_Url(const QUrl&)), this, SLOT(slot_tab_name(const QUrl&)));
 
 	mem_add *add = new mem_add(m_oMediator);
-	add->init();
-	add->item->m_iXX = 0;
-	add->item->m_iYY = 0;
+	add->item.m_iXX = 0;
+	add->item.m_iYY = 0;
 	add->parent = NO_ITEM;
 	add->apply();
 
-	m_oDiagramView->scene()->setFont(add->item->m_oDiagramFont);
+	m_oDiagramView->scene()->setFont(add->item.m_oDiagramFont);
 
 	m_oMediator->notify_focus(m_oDiagramView);
 

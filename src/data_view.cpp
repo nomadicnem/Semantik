@@ -29,9 +29,9 @@ void data_view::notify_select(const QList<int>& unsel, const QList<int>& sel) {
 }
 
 void data_view::notify_datatype(int id) {
-	data_item *l_oItem = *m_oMediator + id;
+	data_item& l_oItem = *m_oMediator + id;
 	int j = 0;
-	switch (l_oItem->m_iDataType)
+	switch (l_oItem.m_iDataType)
 	{
 		// text image table diagram
 		case VIEW_DIAG: j++;

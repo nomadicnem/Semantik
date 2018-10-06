@@ -36,7 +36,7 @@ class box_item : public QGraphicsRectItem, public connectable, public editable, 
 		QTextDocument doc;
 
 		box_view *m_oView;
-		data_item *m_oItem;
+		data_item& m_oItem;
 
 		virtual void properties();
 

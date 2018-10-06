@@ -3,10 +3,11 @@
 #ifndef MEM_BASE
 #define MEM_BASE
 
+#include "data_item.h"
 #include <QSet>
 #include <QPoint>
 
-class data_item;
+class flag_scheme;
 class sem_mediator;
 class mem_command {
 	public:
@@ -23,7 +24,7 @@ class mem_command {
 		bool was_dirty;
 		enum IType {DELETE, ADD, LINK, UNLINK, SELECT, MOVE, COLOR, FLAG, EDIT, DATATYPE, TEXT, VARS, PIC, TABLE, SORT,
 			ADD_BOX, DEL_BOX, EDIT_BOX, LINK_BOX, UNLINK_BOX, PROP_BOX, POS_BOX, CHANGE_LINK_BOX, SIZE_BOX,
-			EDIT_LINK, IMPORT_BOX, SIZE_MATRIX, CHANGE_CLASS_BOX, DIAGRAM_PROPERTIES, SIZE_SEQUENCE};
+			EDIT_LINK, IMPORT_BOX, SIZE_MATRIX, CHANGE_CLASS_BOX, DIAGRAM_PROPERTIES, SIZE_SEQUENCE, DOC};
 		virtual IType type() = 0;
 };
 
@@ -34,7 +35,7 @@ class mem_delete : public mem_command {
 		void undo();
 		void redo();
 
-		QList<data_item*> items;
+		QList<data_item> items;
 		QSet<QPoint> links;
 
 		IType type() { return DELETE; }
@@ -68,11 +69,10 @@ class mem_link : public mem_command {
 class mem_add : public mem_command {
 	public:
 		mem_add(sem_mediator*);
-		void init();
 		void undo();
 		void redo();
 
-		data_item* item;
+		data_item item;
 		int parent;
 
 		mem_sel *sel;
@@ -80,5 +80,52 @@ class mem_add : public mem_command {
 		IType type() { return ADD; }
 };
 
-#endif
+class mem_doc_open : public mem_command {
+	public:
+		mem_doc_open(sem_mediator*);
+		void undo();
+		void redo();
 
+		mem_delete *m_oDelete;
+		mem_sel *m_oSel;
+
+		QString m_sOutDirNew;
+		QString m_sOutProjectNew;
+		QString m_sOutTemplateNew;
+		bool m_bExportIsWidthNew;
+		int m_iExportWidthNew;
+		int m_iExportHeightNew;
+		QString m_sExportUrlNew;
+		QColor m_oColorNew;
+		QString m_sSpellingLanguageNew;
+		QUrl m_oCurrentUrlNew;
+		QFont m_oFontNew;
+		QString m_sHintsNew;
+		QList<color_scheme> m_oColorSchemesNew;
+		QList<flag_scheme*> m_oFlagSchemesNew;
+		QHash<int, data_item> m_oItemsNew;
+		QList<QPoint> m_oLinksNew;
+
+		QString m_sOutDirOld;
+		QString m_sOutProjectOld;
+		QString m_sOutTemplateOld;
+		bool m_bExportIsWidthOld;
+		int m_iExportWidthOld;
+		int m_iExportHeightOld;
+		QString m_sExportUrlOld;
+		QColor m_oColorOld;
+		QString m_sSpellingLanguageOld;
+		QUrl m_oCurrentUrlOld;
+		QFont m_oFontOld;
+		QString m_sHintsOld;
+		QList<color_scheme> m_oColorSchemesOld;
+		QList<flag_scheme*> m_oFlagSchemesOld;
+		QHash<int, data_item> m_oItemsOld;
+		QList<QPoint> m_oLinksOld;
+
+		void init_data(sem_mediator*, sem_mediator*);
+
+		IType type() { return DOC; }
+};
+
+#endif

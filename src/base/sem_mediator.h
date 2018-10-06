@@ -43,7 +43,6 @@ class sem_mediator: public QObject
 
 	signals:
 		//void rectangle_changed(int i);
-
 		void sig_message(const QString&, int);
 		void dirty(bool);
 		void update_title();
@@ -54,6 +53,7 @@ class sem_mediator: public QObject
 		void sig_unlink_items(int id1, int id2);
 		void sync_flags();
 		void sync_colors();
+		void sync_font();
 		void sig_select(const QList<int>& unsel, const QList<int>& sel);
 		void sig_move(const QList<int>&sel, const QList<QPointF>&pos);
 		void sig_repaint(int id);
@@ -90,26 +90,56 @@ class sem_mediator: public QObject
 		sem_mediator(QObject *i_oParent);
 		~sem_mediator();
 
-		void undo_purge();
-
-		QString m_sTempDir;
 		QString m_sOutDir;
 		QString m_sOutProject;
 		QString m_sOutTemplate;
+
 		bool m_bExportIsWidth;
 		int m_iExportWidth;
 		int m_iExportHeight;
 		QString m_sExportUrl;
 
-		void set_dirty(bool b = true);
+		QColor m_oColor;
+		QString m_sSpellingLanguage;
+		QUrl m_oCurrentUrl;
+		QFont m_oFont;
+		QString m_sHints;
+
+		QHash<int, data_item> m_oItems;
+		QList<QPoint> m_oLinks;
+		QList<color_scheme> m_oColorSchemes;
+		QList<flag_scheme*> m_oFlagSchemes;
+
+		// settings
+		double m_dTriSize;
+		int m_iTimerValue;
+		int m_iConnType;
+		int m_iAutoReorg;
+		int m_iReorgType;
+
+		// operational
+		bool m_bIsDiagram;
+		data_link m_oLinkState;
+
+		QStack<mem_command*> m_oUndoStack;
+		QStack<mem_command*> m_oRedoStack;
+
+		int m_iSortId;
+		int m_iSortCursor;
+
+		QString m_sTempDir;
+		QHash<int, data_pic*> m_oPixCache;
+		QString m_sLastSaved;
 		bool m_bDirty;
+		///////////////////////////////////////////7
+		void set_dirty(bool b = true);
 
 		void init_temp_dir();
 		void clean_temp_dir();
 
 		bool save_file(QString);
 		bool open_file(const QString&);
-		void purge_document();
+		bool open_raw(const QString&);
 
 		void init_colors();
 		void init_flags();
@@ -119,23 +149,11 @@ class sem_mediator: public QObject
 		bool link_items(int id1, int id2);
 
 		int num_children(int i_iParent);
-		int m_iConnType;
-		int m_iAutoReorg;
-		int m_iReorgType;
 		void select_root_item(int);
 		QList<int> all_roots();
 		int root_of(int i_iId);
 		void next_root();
 		void prev_root();
-		double m_dTriSize;
-		QString m_sSpellingLanguage;
-
-		QColor m_oColor;
-		QString m_sHints;
-
-		QStack<mem_command*> m_oUndoStack;
-		QStack<mem_command*> m_oRedoStack;
-
 		void notify_add_item(int id);
 		void notify_delete_item(int id);
 		void notify_link_items(int id1, int id2);
@@ -167,37 +185,24 @@ class sem_mediator: public QObject
 		void notify_size_box(int id, const QList<data_box*>&);
 		void notify_sequence_box(int id, int);
 		void notify_change_properties(void*);
+		void notify_colors();
+		void notify_flags();
+		void notify_font();
+		void notify_open_map();
 
 		void notify_message(const QString& msg, int duration);
-
-	public:
-
-		QUrl m_oCurrentUrl;
-		QFont m_oFont;
-
-		QHash<int, data_item*> m_oItems;
-		QList<QPoint> m_oLinks;
-		QList<int> m_oImgs;
-
-		QList<color_scheme> m_oColorSchemes;
-		QList<flag_scheme*> m_oFlagSchemes;
 
 		int next_seq();
 		int next_pic_seq();
 
 		QPair<int, int> hint_size_diagram(int);
-		QHash<int, data_pic*> m_oPixCache;
 
-
-		QPixmap getPix(int id);
-		QPixmap getThumb(int id);
+		const QPixmap getPix(int id) const;
+		const QPixmap getThumb(int id) const;
 		bool load_picture(const QString&, int);
 		bool save_and_load_picture(const QUrl& i_sPath, int id);
-		bool m_bIsDiagram;
-
 		int generate_docs(const QString &i_oFile, const QString &i_sName, const QString &i_sLocation);
 
-		int m_iTimerValue;
 		int parent_of(int i_iId);
 		int size_of(int i_iId);
 		int choose_root();
@@ -206,20 +211,13 @@ class sem_mediator: public QObject
 		void destroy_timer();
 
 		QString doc_to_xml();
-		QString m_sLastSaved;
-
-		data_item* operator+(const int x);
+		data_item& operator+(const int x);
 
 		void select_item_keyboard(int, int);
 		void private_select_item(int i_oId);
 
 		void check_undo(bool); // check if the undo/redo actions can be enabled
 		int itemSelected();
-
-		int m_iSortId;
-		int m_iSortCursor;
-		data_link m_oLinkState;
-
 
 		friend class semantik_reader;
 

@@ -33,9 +33,9 @@ void mem_unlink::undo() {
 ///////////////////////////////////////////////////////////////////
 
 mem_move::mem_move(sem_mediator* mod) : mem_command(mod) {
-	foreach (data_item* t, model->m_oItems.values()) {
-		if (t->m_bSelected) {
-			sel.append(t->m_iId);
+	foreach (const data_item& t, model->m_oItems.values()) {
+		if (t.m_bSelected) {
+			sel.append(t.m_iId);
 		}
 	}
 }
@@ -43,9 +43,9 @@ mem_move::mem_move(sem_mediator* mod) : mem_command(mod) {
 void mem_move::redo() {
 	//qDebug()<<"redo mem_move"<<sel;
 	for (int i = 0; i < sel.size(); ++i) {
-		data_item *it = model->m_oItems.value(sel[i]);
-		it->m_iXX = newPos[i].x();
-		it->m_iYY = newPos[i].y();
+		data_item& it = model->m_oItems[sel[i]];
+		it.m_iXX = newPos[i].x();
+		it.m_iYY = newPos[i].y();
 	}
 	model->notify_move(sel, newPos);
 	redo_dirty();
@@ -54,9 +54,9 @@ void mem_move::redo() {
 void mem_move::undo() {
 	//qDebug()<<"undo mem_move"<<sel;
 	for (int i = 0; i < sel.size(); ++i) {
-		data_item *it = model->m_oItems.value(sel[i]);
-		it->m_iXX = oldPos[i].x();
-		it->m_iYY = oldPos[i].y();
+		data_item& it = model->m_oItems[sel[i]];
+		it.m_iXX = oldPos[i].x();
+		it.m_iYY = oldPos[i].y();
 	}
 	model->notify_move(sel, oldPos);
 	undo_dirty();
@@ -65,10 +65,10 @@ void mem_move::undo() {
 ///////////////////////////////////////////////////////////////////
 
 mem_color::mem_color(sem_mediator* mod) : mem_command(mod) {
-	foreach (data_item* t, model->m_oItems.values()) {
-		if (t->m_bSelected) {
-			prevColors[t->m_iId] = t->m_iColor;
-			m_oPrevCustomColors[t->m_iId] = t->m_oCustom;
+	foreach (const data_item& t, model->m_oItems.values()) {
+		if (t.m_bSelected) {
+			prevColors[t.m_iId] = t.m_iColor;
+			m_oPrevCustomColors[t.m_iId] = t.m_oCustom;
 		}
 	}
 }
@@ -77,9 +77,9 @@ void mem_color::redo() {
 	QMap<int, int>::iterator i;
  	for (i = prevColors.begin(); i != prevColors.end(); ++i)
 	{
-		data_item *t = model->m_oItems.value(i.key());
-		t->m_iColor = newColor;
-		t->m_oCustom = m_oNewCustomColor;
+		data_item& t = model->m_oItems[i.key()];
+		t.m_iColor = newColor;
+		t.m_oCustom = m_oNewCustomColor;
 		model->notify_repaint(i.key());
 	}
 	redo_dirty();
@@ -89,9 +89,9 @@ void mem_color::undo() {
 	QMap<int, int>::iterator i;
 	for (i = prevColors.begin(); i != prevColors.end(); ++i)
 	{
-		data_item *t = model->m_oItems.value(i.key());
-		t->m_iColor = i.value();
-		t->m_oCustom = m_oPrevCustomColors[i.key()];
+		data_item& t = model->m_oItems[i.key()];
+		t.m_iColor = i.value();
+		t.m_oCustom = m_oPrevCustomColors[i.key()];
 		model->notify_repaint(i.key());
 	}
 	undo_dirty();
@@ -101,9 +101,9 @@ void mem_color::undo() {
 
 mem_flag::mem_flag(sem_mediator* mod) : mem_command(mod) {
 	add = true;
-	foreach (data_item* t, model->m_oItems.values()) {
-		if (t->m_bSelected) {
-			prevFlags[t->m_iId] = t->m_oFlags;
+	foreach (const data_item& t, model->m_oItems.values()) {
+		if (t.m_bSelected) {
+			prevFlags[t.m_iId] = t.m_oFlags;
 		}
 	}
 }
@@ -112,14 +112,14 @@ void mem_flag::redo() {
 	QMap<int, QList<QString> >::iterator i;
  	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
 	{
-		data_item *t = model->m_oItems.value(i.key());
-		t->m_oFlags = QList<QString>(i.value());
+		data_item& t = model->m_oItems[i.key()];
+		t.m_oFlags = QList<QString>(i.value());
 		if (add) {
-			if (!t->m_oFlags.contains(flag)) {
-				t->m_oFlags.append(flag);
+			if (!t.m_oFlags.contains(flag)) {
+				t.m_oFlags.append(flag);
 			}
 		} else {
-			t->m_oFlags.removeAll(flag);
+			t.m_oFlags.removeAll(flag);
 		}
 		model->notify_flag(i.key());
 	}
@@ -130,8 +130,8 @@ void mem_flag::undo() {
 	QMap<int, QList<QString> >::iterator i;
  	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
 	{
-		data_item *t = model->m_oItems.value(i.key());
-		t->m_oFlags = i.value();
+		data_item& t = model->m_oItems[i.key()];
+		t.m_oFlags = i.value();
 		model->notify_flag(i.key());
 	}
 	undo_dirty();
@@ -140,48 +140,49 @@ void mem_flag::undo() {
 ///////////////////////////////////////////////////////////////////
 
 mem_edit::mem_edit(sem_mediator* mod) : mem_command(mod) {
-	foreach (data_item* t, model->m_oItems.values()) {
-		if (t->m_bSelected) {
-			sel = t;
+	foreach (const data_item& t, model->m_oItems.values()) {
+		if (t.m_bSelected) {
+			m_iId = t.m_iId;
+			oldSummary = t.m_sSummary;
+			break;
 		}
 	}
-	oldSummary = sel->m_sSummary;
 }
 
 void mem_edit::redo() {
-	sel->m_sSummary = newSummary;
-	model->notify_edit(sel->m_iId);
+	model->m_oItems[m_iId].m_sSummary = newSummary;
+	model->notify_edit(m_iId);
 	redo_dirty();
 }
 
 void mem_edit::undo() {
-	sel->m_sSummary = oldSummary;
-	model->notify_edit(sel->m_iId);
+	model->m_oItems[m_iId].m_sSummary = oldSummary;
+	model->notify_edit(m_iId);
 	undo_dirty();
 }
 
 ///////////////////////////////////////////////////////////////////
 
 mem_datatype::mem_datatype(sem_mediator* mod) : mem_command(mod) {
-	sel = NULL;
-	foreach (data_item* t, model->m_oItems.values()) {
-		if (t->m_bSelected) {
-			sel = t;
-			oldDataType = sel->m_iDataType;
+	m_iId = NO_ITEM;
+	foreach (const data_item& t, model->m_oItems.values()) {
+		if (t.m_bSelected) {
+			m_iId = t.m_iId;
+			oldDataType = t.m_iDataType;
 			break;
 		}
 	}
 }
 
 void mem_datatype::redo() {
-	sel->m_iDataType = newDataType;
-	model->notify_datatype(sel->m_iId);
+	model->m_oItems[m_iId].m_iDataType = newDataType;
+	model->notify_datatype(m_iId);
 	redo_dirty();
 }
 
 void mem_datatype::undo() {
-	sel->m_iDataType = oldDataType;
-	model->notify_datatype(sel->m_iId);
+	model->m_oItems[m_iId].m_iDataType = oldDataType;
+	model->notify_datatype(m_iId);
 	undo_dirty();
 }
 
@@ -192,15 +193,15 @@ mem_text::mem_text(sem_mediator* mod) : mem_command(mod) {
 
 void mem_text::redo()
 {
-	sel->m_sText = newText;
-	model->notify_text(sel->m_iId);
+	model->m_oItems[m_iId].m_sText = newText;
+	model->notify_text(m_iId);
 	redo_dirty();
 }
 
 void mem_text::undo()
 {
-	sel->m_sText = oldText;
-	model->notify_text(sel->m_iId);
+	model->m_oItems[m_iId].m_sText = oldText;
+	model->notify_text(m_iId);
 	undo_dirty();
 }
 
@@ -217,8 +218,7 @@ void mem_vars::redo()
 	}
 	else
 	{
-		data_item *item = model->m_oItems.value(m_iId);
-		item->m_sHints = newVars;
+		model->m_oItems[m_iId].m_sHints = newVars;
 	}
 	model->notify_vars(m_iId);
 	redo_dirty();
@@ -232,8 +232,7 @@ void mem_vars::undo()
 	}
 	else
 	{
-		data_item *item = model->m_oItems.value(m_iId);
-		item->m_sHints = oldVars;
+		model->m_oItems[m_iId].m_sHints = oldVars;
 	}
 	model->notify_vars(m_iId);
 	undo_dirty();
@@ -246,15 +245,15 @@ mem_pic::mem_pic(sem_mediator* mod) : mem_command(mod) {
 
 void mem_pic::redo()
 {
-	sel->m_iPicId = m_iNewId;
-	model->notify_pic(sel->m_iId);
+	model->m_oItems[m_iId].m_iPicId = m_iNewId;
+	model->notify_pic(m_iId);
 	redo_dirty();
 }
 
 void mem_pic::undo()
 {
-	sel->m_iPicId = m_iOldId;
-	model->notify_pic(sel->m_iId);
+	model->m_oItems[m_iId].m_iPicId = m_iOldId;
+	model->notify_pic(m_iId);
 	undo_dirty();
 }
 
@@ -265,10 +264,10 @@ mem_table::mem_table(sem_mediator* mod) : mem_command(mod) {
 
 void mem_table::redo()
 {
-	data_item *item = model->m_oItems.value(m_iId);
-	item->m_iNumRows = newNRows;
-	item->m_iNumCols = newNCols;
-	item->m_oTableData = newData;
+	data_item& item = model->m_oItems[m_iId];
+	item.m_iNumRows = newNRows;
+	item.m_iNumCols = newNCols;
+	item.m_oTableData = newData;
 
 	model->notify_table(m_iId);
 	redo_dirty();
@@ -276,10 +275,10 @@ void mem_table::redo()
 
 void mem_table::undo()
 {
-	data_item *item = model->m_oItems.value(m_iId);
-	item->m_iNumRows = oldNRows;
-	item->m_iNumCols = oldNCols;
-	item->m_oTableData = oldData;
+	data_item& item = model->m_oItems[m_iId];
+	item.m_iNumRows = oldNRows;
+	item.m_iNumCols = oldNCols;
+	item.m_oTableData = oldData;
 
 	model->notify_table(m_iId);
 	undo_dirty();

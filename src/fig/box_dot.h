@@ -29,7 +29,7 @@ class box_dot : public QGraphicsRectItem, public connectable
 		//void setRect(int, int, int, int) { }
 
 		box_view *m_oView;
-		data_item *m_oItem;
+		data_item& m_oItem;
 
 		void mousePressEvent(QGraphicsSceneMouseEvent* e);
 		void mouseReleaseEvent(QGraphicsSceneMouseEvent* e);

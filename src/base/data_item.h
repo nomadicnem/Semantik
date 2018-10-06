@@ -180,8 +180,8 @@ class data_pic
 class data_item
 {
 	public:
-		data_item(sem_mediator *i_oControl, int i_iId);
-		sem_mediator* m_oMediator;
+		data_item();
+		data_item(int i_iId);
 
 		QString m_sSummary;
 		QString m_sText;
@@ -197,8 +197,10 @@ class data_item
 
 		int m_iPicId; // references a data_pic
 
-		QPixmap getPix();
-		QPixmap getThumb();
+		const QPixmap getPix(sem_mediator* i_oMediator) const;
+		const QPixmap getThumb(sem_mediator* i_oMediator) const;
+		const color_scheme& get_color_scheme(sem_mediator* i_oMediator) const;
+		const color_scheme& get_color_scheme_raw(sem_mediator* i_oMediator) const;
 
 		int m_iId;
 		bool m_bSelected;
@@ -214,10 +216,6 @@ class data_item
 		int m_iColor;
 		int m_iDown; // item to use when going down (keyboard navigation)
 		color_scheme m_oCustom;
-
-		color_scheme& get_color_scheme();
-		color_scheme& get_color_scheme_raw();
-
 
 		QString m_sDiag;
 

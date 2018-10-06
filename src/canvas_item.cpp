@@ -49,7 +49,7 @@ canvas_item::canvas_item(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsText
 	m_bEdit = false;
 	m_iNum = 1;
 
-	setPlainText(m_oGraph->m_oMediator->m_oItems.value(Id())->m_sSummary);
+	setPlainText(m_oGraph->m_oMediator->m_oItems[Id()].m_sSummary);
 	//adjustSize();
 
 	m_oSort = new canvas_sort(i_oGraphWidget, this);
@@ -117,14 +117,14 @@ void canvas_item::rm_link(canvas_link* i_oLink2)
 
 void canvas_item::update_data()
 {
-	data_item *l_oItem = m_oGraph->m_oMediator->m_oItems.value(Id());
-	if (l_oItem->m_iXX < -10000.0) {
-		l_oItem->m_iXX = m_oGraph->m_oLastPoint.x();
-		l_oItem->m_iYY = m_oGraph->m_oLastPoint.y();
+	data_item& l_oItem = m_oGraph->m_oMediator->m_oItems[Id()];
+	if (l_oItem.m_iXX < -10000.0) {
+		l_oItem.m_iXX = m_oGraph->m_oLastPoint.x();
+		l_oItem.m_iYY = m_oGraph->m_oLastPoint.y();
 	}
 
-	setPos(QPointF(l_oItem->m_iXX, l_oItem->m_iYY));
-	setPlainText(l_oItem->m_sSummary);
+	setPos(QPointF(l_oItem.m_iXX, l_oItem.m_iYY));
+	setPlainText(l_oItem.m_sSummary);
 	adjustSize();
 	update_links();
 	update_flags();
@@ -151,8 +151,8 @@ void canvas_item::update_links()
 
 void canvas_item::update_flags()
 {
-	data_item *l_oItem = m_oGraph->m_oMediator->m_oItems.value(Id());
-	int l_iDiff = l_oItem->m_oFlags.size() - m_oFlags.size();
+	data_item& l_oItem = m_oGraph->m_oMediator->m_oItems[Id()];
+	int l_iDiff = l_oItem.m_oFlags.size() - m_oFlags.size();
 
 	while (l_iDiff > 0)
 	{
@@ -221,9 +221,9 @@ void canvas_item::adjustSize() {
 	m_oSortToggle->setPos(r.width() + 2, m_oChain->boundingRect().height() + 2);
 
 	// FIXME we do not really track the size of the item
-	data_item *l_oItem = m_oGraph->m_oMediator->m_oItems.value(Id());
-	l_oItem->m_iWW = r.width();
-	l_oItem->m_iHH = r.height();
+	data_item& l_oItem = m_oGraph->m_oMediator->m_oItems[Id()];
+	l_oItem.m_iWW = r.width();
+	l_oItem.m_iHH = r.height();
 }
 
 void canvas_item::keyReleaseEvent(QKeyEvent* e) {
@@ -250,8 +250,8 @@ void canvas_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	painter->save();
 
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
-	data_item *l_oItem = m_oGraph->m_oMediator->m_oItems.value(Id());
-	color_scheme l_oColorScheme = l_oItem->get_color_scheme();
+	data_item& l_oItem = m_oGraph->m_oMediator->m_oItems[Id()];
+	color_scheme l_oColorScheme = l_oItem.get_color_scheme(m_oGraph->m_oMediator);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
 
@@ -276,9 +276,9 @@ void canvas_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 			QLinearGradient l_oGradient(l_oRect.right()-40, 0, l_oRect.right()-10, 0);
 			l_oGradient.setColorAt(0., l_oColorScheme.m_oInnerColor);
 
-			if (m_oGraph->m_oMediator->parent_of(Id()) <= 0 && l_oItem->m_iColor > 1)
+			if (m_oGraph->m_oMediator->parent_of(Id()) <= 0 && l_oItem.m_iColor > 1)
 			{
-				l_oGradient.setColorAt(1., l_oItem->get_color_scheme_raw().m_oInnerColor);
+				l_oGradient.setColorAt(1., l_oItem.get_color_scheme_raw(m_oGraph->m_oMediator).m_oInnerColor);
 			}
 			else
 			{
@@ -293,7 +293,7 @@ void canvas_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	painter->drawRoundRect(l_oRect, 20, 20);
 
 	// if there is text, draw a triangle on the top-right corner
-	if (m_oGraph->m_oMediator->m_oItems.value(Id())->m_sText.length() > 0)
+	if (m_oGraph->m_oMediator->m_oItems[Id()].m_sText.length() > 0)
 	{
 		const QPointF points[4] =
 		{

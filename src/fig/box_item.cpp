@@ -21,12 +21,12 @@
 #include "sem_mediator.h"
 #include "mem_box.h"
 
-box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), editable(), resizable(), m_oView(i_oParent)
+box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), editable(), resizable(), m_oView(i_oParent),
+m_oItem(m_oView->m_oMediator->m_oItems[m_oView->m_iId])
 {
 	m_iId = i_iId;
 
-	m_oItem = m_oView->m_oMediator->m_oItems[m_oView->m_iId];
-	m_oBox = m_oItem->m_oBoxes[m_iId];
+	m_oBox = m_oItem.m_oBoxes[m_iId];
 	Q_ASSERT(m_oBox);
 
 	i_oParent->scene()->addItem(this);

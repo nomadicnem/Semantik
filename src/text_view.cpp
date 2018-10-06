@@ -72,7 +72,7 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 void text_view::update_edit()
 {
 	if (!m_iId) return;
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 
 	mem_text* tmp = NULL;
 
@@ -90,12 +90,12 @@ void text_view::update_edit()
 	tmp = (mem_text*) c;
 	if (!c) {
 		tmp = new mem_text(m_oMediator);
-		tmp->sel = l_oData;
-		tmp->oldText = l_oData->m_sText;
+		tmp->m_iId = l_oData.m_iId;
+		tmp->oldText = l_oData.m_sText;
 		tmp->add();
 	}
-	tmp->newText = tmp->sel->m_sText = m_oEdit->toHtml().replace(QChar(0), "");
-	tmp->sel->m_iTextLength = m_oEdit->toPlainText().length();
+	tmp->newText = m_oMediator->m_oItems[tmp->m_iId].m_sText = m_oEdit->toHtml().replace(QChar(0), "");
+	m_oMediator->m_oItems[m_iId].m_iTextLength = m_oEdit->toPlainText().length();
 }
 
 void text_view::text_bold()
@@ -143,8 +143,8 @@ void text_view::char_format_changed(const QTextCharFormat &i_oFormat)
 void text_view::notify_text(int id) {
 	if (id == m_iId) {
 		m_iId = NO_ITEM; // do not trigger the signal changed
-		data_item *sel = *m_oMediator + id;
-		m_oEdit->setHtml(sel->m_sText);
+		data_item& sel = *m_oMediator + id;
+		m_oEdit->setHtml(sel.m_sText);
 		m_iId = id;
 	}
 }
@@ -171,8 +171,8 @@ void text_view::notify_select(const QList<int>& unsel, const QList<int>& sel) {
 	m_oUnderLineAct->setEnabled(one);
 
 	if (one) {
-		data_item *l_oData = m_oMediator->m_oItems.value(sel.at(0));
-		m_oEdit->setHtml(l_oData->m_sText);
+		data_item& l_oData = m_oMediator->m_oItems[sel.at(0)];
+		m_oEdit->setHtml(l_oData.m_sText);
 		m_iId = sel.at(0);
 	} else {
 		m_oEdit->clear();

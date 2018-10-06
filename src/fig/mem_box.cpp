@@ -24,13 +24,13 @@ void mem_del_box::init(QList<data_box*> _items, QList<data_link*> _links)
 
 void mem_del_box::undo()
 {
-	data_item *item = model->m_oItems[m_iId];
+	data_item& item = model->m_oItems[m_iId];
 	foreach (data_box *k, items) {
-		item->m_oBoxes[k->m_iId] = k;
+		item.m_oBoxes[k->m_iId] = k;
 		model->notify_add_box(m_iId, k->m_iId);
 	}
 	foreach (data_link *k, links) {
-		item->m_oLinks.append(k);
+		item.m_oLinks.append(k);
 		model->notify_link_box(m_iId, k);
 	}
 	undo_dirty();
@@ -38,49 +38,48 @@ void mem_del_box::undo()
 
 void mem_del_box::redo()
 {
-	data_item *item = model->m_oItems[m_iId];
+	data_item& item = model->m_oItems[m_iId];
 	foreach (data_link *k, links) {
 		model->notify_unlink_box(m_iId, k);
-		item->m_oLinks.removeAll(k);
+		item.m_oLinks.removeAll(k);
 	}
 	foreach (data_box *k, items) {
 		model->notify_del_box(m_iId, k->m_iId);
-		item->m_oBoxes.remove(k->m_iId);
+		item.m_oBoxes.remove(k->m_iId);
 	}
 	redo_dirty();
 }
 
 ///////////////////////////////////////////////////////////////////
 
-mem_add_box::mem_add_box(sem_mediator* mod, int id, int boxid) : mem_command(mod)
+mem_add_box::mem_add_box(sem_mediator* mod, int id, int boxid) : mem_command(mod),
+item(model->m_oItems[id])
 {
-	item = NULL;
 	m_iId = id;
-	item = model->m_oItems.value(id);
-
 	box = new data_box(boxid);
 	box->m_oCustom.m_oInnerColor = QColor("#cafeba");
 }
 
 void mem_add_box::redo()
 {
-	item->m_oBoxes[box->m_iId] = box;
-	model->notify_add_box(item->m_iId, box->m_iId);
+	item.m_oBoxes[box->m_iId] = box;
+	model->notify_add_box(item.m_iId, box->m_iId);
 	redo_dirty();
 }
 
 void mem_add_box::undo()
 {
-	model->notify_del_box(item->m_iId, box->m_iId);
-	item->m_oBoxes.remove(box->m_iId);
+	model->notify_del_box(item.m_iId, box->m_iId);
+	item.m_oBoxes.remove(box->m_iId);
 	undo_dirty();
 }
 
 ///////////////////////////////////////////////////////////////////
 
-mem_edit_box::mem_edit_box(sem_mediator* mod, int id, int bid) : mem_command(mod) {
-	item = model->m_oItems[id];
-	box = item->m_oBoxes[bid];
+mem_edit_box::mem_edit_box(sem_mediator* mod, int id, int bid) : mem_command(mod),
+item(model->m_oItems[id])
+{
+	box = item.m_oBoxes[bid];
 	oldText = box->m_sText;
 	newHeight = oldHeight = box->m_iHH;
 }
@@ -89,7 +88,7 @@ void mem_edit_box::redo()
 {
 	box->m_sText = newText;
 	box->m_iHH = newHeight;
-	model->notify_edit_box(item->m_iId, box->m_iId);
+	model->notify_edit_box(item.m_iId, box->m_iId);
 	redo_dirty();
 }
 
@@ -97,7 +96,7 @@ void mem_edit_box::undo()
 {
 	box->m_sText = oldText;
 	box->m_iHH = oldHeight;
-	model->notify_edit_box(item->m_iId, box->m_iId);
+	model->notify_edit_box(item.m_iId, box->m_iId);
 	undo_dirty();
 }
 
@@ -117,7 +116,7 @@ void mem_link_box::init(int parent, int parentPos, int child, int childPos) {
 
 void mem_link_box::redo() {
 	//qDebug()<<"redo mem_link_box"<<link;
-	model->m_oItems[m_iId]->m_oLinks.append(link);
+	model->m_oItems[m_iId].m_oLinks.append(link);
 	model->notify_link_box(m_iId, link);
 	redo_dirty();
 }
@@ -125,7 +124,7 @@ void mem_link_box::redo() {
 void mem_link_box::undo() {
 	//qDebug()<<"undo mem_link_box"<<link;
 	model->notify_unlink_box(m_iId, link);
-	model->m_oItems[m_iId]->m_oLinks.removeAll(link);
+	model->m_oItems[m_iId].m_oLinks.removeAll(link);
 	undo_dirty();
 }
 
@@ -138,13 +137,13 @@ mem_unlink_box::mem_unlink_box(sem_mediator* mod, int id) : mem_command(mod) {
 void mem_unlink_box::redo() {
 	//qDebug()<<"redo mem_link_box"<<link;
 	model->notify_unlink_box(m_iId, link);
-	model->m_oItems[m_iId]->m_oLinks.removeAll(link);
+	model->m_oItems[m_iId].m_oLinks.removeAll(link);
 	redo_dirty();
 }
 
 void mem_unlink_box::undo() {
 	//qDebug()<<"undo mem_link_box"<<link;
-	model->m_oItems[m_iId]->m_oLinks.append(link);
+	model->m_oItems[m_iId].m_oLinks.append(link);
 	model->notify_link_box(m_iId, link);
 	undo_dirty();
 }
@@ -313,32 +312,32 @@ void mem_import_box::init(QList<data_box*> _items, QList<data_link*> _links)
 	new_items = _items;
 	new_links = _links;
 
-	data_item *item = model->m_oItems[m_iId];
-	old_items.append(item->m_oBoxes.values());
-	old_links.append(item->m_oLinks);
-	m_iOldFont = item->m_oDiagramFont;
+	data_item& item = model->m_oItems[m_iId];
+	old_items.append(item.m_oBoxes.values());
+	old_links.append(item.m_oLinks);
+	m_iOldFont = item.m_oDiagramFont;
 }
 
 
 void mem_import_box::undo()
 {
-	data_item *item = model->m_oItems[m_iId];
-	item->m_oDiagramFont = m_iOldFont;
+	data_item& item = model->m_oItems[m_iId];
+	item.m_oDiagramFont = m_iOldFont;
 	model->notify_change_properties(NULL);
 	foreach (data_link *k, new_links) {
 		model->notify_unlink_box(m_iId, k);
-		item->m_oLinks.removeAll(k);
+		item.m_oLinks.removeAll(k);
 	}
 	foreach (data_box *k, new_items) {
 		model->notify_del_box(m_iId, k->m_iId);
-		item->m_oBoxes.remove(k->m_iId);
+		item.m_oBoxes.remove(k->m_iId);
 	}
 	foreach (data_box *k, old_items) {
-		item->m_oBoxes[k->m_iId] = k;
+		item.m_oBoxes[k->m_iId] = k;
 		model->notify_add_box(m_iId, k->m_iId);
 	}
 	foreach (data_link *k, old_links) {
-		item->m_oLinks.append(k);
+		item.m_oLinks.append(k);
 		model->notify_link_box(m_iId, k);
 	}
 	if (model->m_bIsDiagram)
@@ -350,23 +349,23 @@ void mem_import_box::undo()
 
 void mem_import_box::redo()
 {
-	data_item *item = model->m_oItems[m_iId];
-	item->m_oDiagramFont = m_iNewFont;
+	data_item& item = model->m_oItems[m_iId];
+	item.m_oDiagramFont = m_iNewFont;
 	model->notify_change_properties(NULL);
 	foreach (data_link *k, old_links) {
 		model->notify_unlink_box(m_iId, k);
-		item->m_oLinks.removeAll(k);
+		item.m_oLinks.removeAll(k);
 	}
 	foreach (data_box *k, old_items) {
 		model->notify_del_box(m_iId, k->m_iId);
-		item->m_oBoxes.remove(k->m_iId);
+		item.m_oBoxes.remove(k->m_iId);
 	}
 	foreach (data_box *k, new_items) {
-		item->m_oBoxes[k->m_iId] = k;
+		item.m_oBoxes[k->m_iId] = k;
 		model->notify_add_box(m_iId, k->m_iId);
 	}
 	foreach (data_link *k, new_links) {
-		item->m_oLinks.append(k);
+		item.m_oLinks.append(k);
 		model->notify_link_box(m_iId, k);
 	}
 	if (model->m_bIsDiagram)
@@ -439,8 +438,8 @@ mem_class::mem_class(sem_mediator* mod, int id) : mem_command(mod),  m_oOldBox(i
 }
 
 void mem_class::redo() {
-	data_item *item = model->m_oItems[m_iId];
-	data_box *l_oBox = item->m_oBoxes[m_iBoxId];
+	data_item& item = model->m_oItems[m_iId];
+	data_box *l_oBox = item.m_oBoxes[m_iBoxId];
 	*l_oBox = m_oNewBox;
 
 	QList<data_box*> lst;
@@ -450,8 +449,8 @@ void mem_class::redo() {
 }
 
 void mem_class::undo() {
-	data_item *item = model->m_oItems[m_iId];
-	data_box *l_oBox = item->m_oBoxes[m_iBoxId];
+	data_item& item = model->m_oItems[m_iId];
+	data_box *l_oBox = item.m_oBoxes[m_iBoxId];
 	*l_oBox = m_oOldBox;
 
 	QList<data_box*> lst;
@@ -473,14 +472,14 @@ mem_diagram_properties::mem_diagram_properties(sem_mediator* mod, int id) : mem_
 }
 
 void mem_diagram_properties::redo() {
-	data_item *item = model->m_oItems[m_iId];
-	item->m_oDiagramFont = m_oNewFont;
+	data_item& item = model->m_oItems[m_iId];
+	item.m_oDiagramFont = m_oNewFont;
 	model->notify_change_properties(NULL);
 }
 
 void mem_diagram_properties::undo() {
-	data_item *item = model->m_oItems[m_iId];
-	item->m_oDiagramFont = m_oOldFont;
+	data_item& item = model->m_oItems[m_iId];
+	item.m_oDiagramFont = m_oOldFont;
 	model->notify_change_properties(NULL);
 }
 
@@ -496,8 +495,8 @@ mem_size_sequence::mem_size_sequence(sem_mediator* i_oMod, int i_iId, data_box* 
 }
 
 void mem_size_sequence::redo() {
-	data_item *item = model->m_oItems[m_iId];
-        data_box *l_oBox = item->m_oBoxes[m_iBoxId];
+	data_item& item = model->m_oItems[m_iId];
+        data_box *l_oBox = item.m_oBoxes[m_iBoxId];
 	l_oBox->m_iWW = m_oNextBox.m_iWW;
 	l_oBox->m_iHH = m_oNextBox.m_iHH;
 	l_oBox->m_iBoxHeight = m_oNextBox.m_iBoxHeight;
@@ -506,8 +505,8 @@ void mem_size_sequence::redo() {
 }
 
 void mem_size_sequence::undo() {
-	data_item *item = model->m_oItems[m_iId];
-        data_box *l_oBox = item->m_oBoxes[m_iBoxId];
+	data_item& item = model->m_oItems[m_iId];
+        data_box *l_oBox = item.m_oBoxes[m_iBoxId];
 	l_oBox->m_iWW = m_oPrevBox.m_iWW;
 	l_oBox->m_iHH = m_oPrevBox.m_iHH;
 	l_oBox->m_iBoxHeight = m_oPrevBox.m_iBoxHeight;

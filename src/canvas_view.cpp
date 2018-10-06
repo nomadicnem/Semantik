@@ -176,8 +176,8 @@ void canvas_view::resizeEvent(QResizeEvent* e)
 	scene()->setSceneRect(br);
 }
 
-void canvas_view::check_selection() {
-
+void canvas_view::check_selection()
+{
 	if (m_bDeleting) return;
 
 	QList<int> lst;
@@ -187,9 +187,9 @@ void canvas_view::check_selection() {
 
 	// stupid set intersection
 	QList<int> unlst;
-	foreach(data_item* x, m_oMediator->m_oItems.values()) {
-		if (x->m_bSelected) {
-			unlst.append(x->m_iId);
+	foreach(const data_item& x, m_oMediator->m_oItems.values()) {
+		if (x.m_bSelected) {
+			unlst.append(x.m_iId);
 		}
 	}
 
@@ -245,7 +245,7 @@ void canvas_view::edit_off() {
 					sel->update_links();
 				}
 
-				if (sel->toPlainText() != (*m_oMediator + sel->Id())->m_sSummary) {
+				if (sel->toPlainText() != (*m_oMediator + sel->Id()).m_sSummary) {
 					mem_edit *ed = new mem_edit(m_oMediator);
 					ed->newSummary = sel->toPlainText();
 					ed->apply();
@@ -298,7 +298,7 @@ void canvas_view::slot_toggle_edit()
 				sel->update_links();
 
 			}
-			if (sel->toPlainText() != (*m_oMediator + sel->Id())->m_sSummary) {
+			if (sel->toPlainText() != (*m_oMediator + sel->Id()).m_sSummary) {
 				mem_edit *ed = new mem_edit(m_oMediator);
 				ed->newSummary = sel->toPlainText();
 				ed->apply();
@@ -427,17 +427,20 @@ void canvas_view::slot_add_item()
 
 	deselect_all();
 
-	data_item *p = m_oMediator->m_oItems.value(l_iId);
 	mem_add *add = new mem_add(m_oMediator);
-	add->init();
 	add->parent = l_iId;
-	if (p) {
-		add->item->m_iXX = p->m_iXX + 30;
-		add->item->m_iYY = p->m_iYY + 30;
-	} else {
-		add->item->m_iXX = m_oLastPoint.x();
-		add->item->m_iYY = m_oLastPoint.y();
+	if (m_oMediator->m_oItems.contains(l_iId))
+	{
+		data_item& p = m_oMediator->m_oItems[l_iId];
+		add->item.m_iXX = p.m_iXX + 30;
+		add->item.m_iYY = p.m_iYY + 30;
 	}
+	else
+	{
+		add->item.m_iXX = m_oLastPoint.x();
+		add->item.m_iYY = m_oLastPoint.y();
+	}
+
 	add->apply();
 	if (m_oMediator->m_iAutoReorg)
 	{
@@ -453,12 +456,11 @@ void canvas_view::slot_add_sibling()
 	if (l_iId == NO_ITEM) return;
 	deselect_all();
 
-	data_item *p = m_oMediator->m_oItems[l_iId];
+	data_item& p = m_oMediator->m_oItems[l_iId];
 	mem_add *add = new mem_add(m_oMediator);
-	add->init();
 	add->parent = l_iId;
-	add->item->m_iXX = p->m_iXX + 30;
-	add->item->m_iYY = p->m_iYY + 30;
+	add->item.m_iXX = p.m_iXX + 30;
+	add->item.m_iYY = p.m_iYY + 30;
 	add->apply();
 	if (m_oMediator->m_iAutoReorg)
 	{
@@ -653,12 +655,6 @@ void canvas_view::check_selected()
 {
 	QList <canvas_item*> sel = selection();
 	semantik_win *l_o = (semantik_win*) m_oSemantikWindow;
-	data_item *l_oData = NULL;
-	if (sel.size() == 1)
-	{
-		l_oData = *m_oMediator + sel[0]->Id();
-	}
-
 	//foreach(QAction* l_oAct, l_o->m_oFlagGroup->actions())
 	for (int i=0; i<l_o->m_oFlagGroup->actions().size(); ++i)
 	{
@@ -668,7 +664,11 @@ void canvas_view::check_selected()
 		else
 		{
 			QString l_sName = m_oMediator->m_oFlagSchemes[i]->m_sId;
-			l_oAct->setChecked(l_oData->m_oFlags.contains(l_sName));
+			if (m_oMediator->m_oItems.contains(sel[0]->Id()))
+			{
+				data_item& l_oData = m_oMediator->m_oItems[sel[0]->Id()];
+				l_oAct->setChecked(l_oData.m_oFlags.contains(l_sName));
+			}
 		}
 		l_oAct->setEnabled(sel.size());
 	}
@@ -713,9 +713,9 @@ void canvas_view::enable_menu_actions()
 
 	if (sel.size() == 1)
 	{
-		data_item *l_oData = *m_oMediator + sel[0]->Id();
+		data_item& l_oData = *m_oMediator + sel[0]->Id();
 
-		#define fafa(v, t) v->setChecked(l_oData->m_iDataType == t);
+		#define fafa(v, t) v->setChecked(l_oData.m_iDataType == t);
 		fafa(m_oTextType, VIEW_TEXT);
 		fafa(m_oDiagramType, VIEW_DIAG);
 		fafa(m_oTableType, VIEW_TABLE);
@@ -939,14 +939,14 @@ void canvas_view::mouseReleaseEvent(QMouseEvent *i_oEv)
 		lst.append(t->Id());
 	}
 	if (lst.size()) {
-		data_item *p = m_oMediator->m_oItems[lst[0]];
+		data_item& p = m_oMediator->m_oItems[lst[0]];
 		canvas_item *v = m_oItems[lst[0]];
-		if (qAbs(p->m_iXX - v->pos().x()) + qAbs(p->m_iYY - v->pos().y()) > 0.1) {
+		if (qAbs(p.m_iXX - v->pos().x()) + qAbs(p.m_iYY - v->pos().y()) > 0.1) {
 			mem_move *mv = new mem_move(m_oMediator);
 			mv->sel = lst;
 			for (int i = 0; i < lst.size(); ++i) {
-				data_item *it = m_oMediator->m_oItems[lst[i]];
-				mv->oldPos.append(QPointF(it->m_iXX, it->m_iYY));
+				data_item& it = m_oMediator->m_oItems[lst[i]];
+				mv->oldPos.append(QPointF(it.m_iXX, it.m_iYY));
 				mv->newPos.append(m_oItems[lst[i]]->pos());
 			}
 			mv->apply();
@@ -970,9 +970,8 @@ void canvas_view::mouseDoubleClickEvent(QMouseEvent* i_oEv)
 			l_oR->setSelected(false);
 
 			mem_add *add = new mem_add(m_oMediator);
-			add->init();
-			add->item->m_iXX = m_oLastPoint.x();
-			add->item->m_iYY = m_oLastPoint.y();
+			add->item.m_iXX = m_oLastPoint.x();
+			add->item.m_iYY = m_oLastPoint.y();
 			add->parent = l_oR->Id();
 			add->apply();
 		} else if (l_oItem->type() == CANVAS_LINK_T) {
@@ -984,9 +983,8 @@ void canvas_view::mouseDoubleClickEvent(QMouseEvent* i_oEv)
 		}
 	} else if (i_oEv->modifiers() != Qt::ControlModifier) {
 		mem_add *add = new mem_add(m_oMediator);
-		add->init();
-		add->item->m_iXX = m_oLastPoint.x();
-		add->item->m_iYY = m_oLastPoint.y();
+		add->item.m_iXX = m_oLastPoint.x();
+		add->item.m_iYY = m_oLastPoint.y();
 		add->apply();
 	}
 }
@@ -1031,7 +1029,7 @@ void canvas_view::slot_change_data()
 {
 	mem_datatype* t = new mem_datatype(m_oMediator);
 	t->newDataType = ((QAction*) QObject::sender())->data().toInt();
-	if (t->sel != NULL && t->newDataType != t->oldDataType) t->apply();
+	if (t->m_iId != NO_ITEM && t->newDataType != t->oldDataType) t->apply();
 	else delete(t);
 }
 
@@ -1202,12 +1200,12 @@ void canvas_view::reorganize() {
 	// now apply the layout for undo/redo
 	mem_move *mv = new mem_move(m_oMediator);
 	mv->sel.clear();
-	foreach(data_item* x, m_oMediator->m_oItems.values()) {
-		canvas_item *v = m_oItems[x->m_iId];
+	foreach(const data_item& x, m_oMediator->m_oItems.values()) {
+		canvas_item *v = m_oItems[x.m_iId];
 		QPointF p = v->pos();
-		if (p.x() != x->m_iXX || p.y() != x->m_iYY) {
-			mv->sel.append(x->m_iId);
-			mv->oldPos.append(QPointF(x->m_iXX, x->m_iYY));
+		if (p.x() != x.m_iXX || p.y() != x.m_iYY) {
+			mv->sel.append(x.m_iId);
+			mv->oldPos.append(QPointF(x.m_iXX, x.m_iYY));
 			mv->newPos.append(v->pos());
 		}
 	}
@@ -1469,9 +1467,9 @@ void canvas_view::notify_repaint(int id) {
 }
 
 void canvas_view::notify_edit(int id) {
-	data_item *sel = *m_oMediator + id;
-	if (m_oItems[id]->toPlainText() != sel->m_sSummary) {
-		m_oItems[id]->setPlainText(sel->m_sSummary);
+	data_item& sel = *m_oMediator + id;
+	if (m_oItems[id]->toPlainText() != sel.m_sSummary) {
+		m_oItems[id]->setPlainText(sel.m_sSummary);
 		m_oItems[id]->adjustSize();
 		m_oItems[id]->update_links();
 	}
@@ -1663,4 +1661,7 @@ void canvas_view::slot_print()
 	}
 }
 
-
+void canvas_view::notify_font()
+{
+	scene()->setFont(m_oMediator->m_oFont);
+}

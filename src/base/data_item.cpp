@@ -50,13 +50,12 @@ void node::dump_xml(QStringList & other)
 	}
 }
 
-data_item::data_item(sem_mediator *i_oControl, int i_iId)
+data_item::data_item(int i_iId)
 {
 	m_iDataType = VIEW_TEXT;
 
 	m_iId = i_iId;
 	m_iColor = 0;
-	m_oMediator = i_oControl;
 	m_sSummary = i18n("Empty");
 	m_sText = "";
 	m_sComment = "";
@@ -81,59 +80,59 @@ data_item::data_item(sem_mediator *i_oControl, int i_iId)
 	m_oDiagramFont.fromString("Monospace,10,-1,5,50,0,0,0,0,0");
 }
 
-QPixmap data_item::getPix()
+const QPixmap data_item::getPix(sem_mediator* i_oMediator) const
 {
-	return m_oMediator->getPix(m_iPicId);
+	return i_oMediator->getPix(m_iPicId);
 }
 
-QPixmap data_item::getThumb()
+const QPixmap data_item::getThumb(sem_mediator* i_oMediator) const
 {
-	return m_oMediator->getThumb(m_iPicId);
+	return i_oMediator->getThumb(m_iPicId);
 }
 
 
-color_scheme& data_item::get_color_scheme()
+const color_scheme& data_item::get_color_scheme(sem_mediator* i_oMediator) const
 {
-	if (m_oMediator->parent_of(m_iId) <= 0)
+	if (i_oMediator->parent_of(m_iId) <= 0)
 	{
-		return m_oMediator->m_oColorSchemes[0];
+		return i_oMediator->m_oColorSchemes[0];
 	}
 	if (m_iColor < 0)
 	{
 		return m_oCustom;
 	}
-	if (m_iColor == m_oMediator->m_oColorSchemes.size())
+	if (m_iColor == i_oMediator->m_oColorSchemes.size())
 	{
 		return m_oCustom;
 	}
-	if (m_iColor > m_oMediator->m_oColorSchemes.size())
+	if (m_iColor > i_oMediator->m_oColorSchemes.size())
 	{
 		qDebug()<<"invalid index color scheme "<<m_iColor;
 		return m_oCustom;
 	}
 	if (m_iColor == 0)
 	{
-		return m_oMediator->m_oColorSchemes[1];
+		return i_oMediator->m_oColorSchemes[1];
 	}
-	return m_oMediator->m_oColorSchemes[m_iColor];
+	return i_oMediator->m_oColorSchemes[m_iColor];
 }
 
-color_scheme& data_item::get_color_scheme_raw()
+const color_scheme& data_item::get_color_scheme_raw(sem_mediator* i_oMediator) const
 {
 	if (m_iColor < 0)
 	{
 		return m_oCustom;
 	}
-	if (m_iColor == m_oMediator->m_oColorSchemes.size())
+	if (m_iColor == i_oMediator->m_oColorSchemes.size())
 	{
 		return m_oCustom;
 	}
-	if (m_iColor > m_oMediator->m_oColorSchemes.size())
+	if (m_iColor > i_oMediator->m_oColorSchemes.size())
 	{
 		qDebug()<<"invalid index color scheme "<<m_iColor;
 		return m_oCustom;
 	}
-	return m_oMediator->m_oColorSchemes[m_iColor];
+	return i_oMediator->m_oColorSchemes[m_iColor];
 }
 
 
@@ -435,5 +434,9 @@ const QColor & diagram_item::getColor(sem_mediator* i_oMediator) const
 	{
 		return i_oMediator->m_oColorSchemes[m_iColor].m_oInnerColor;
 	}
+}
+
+data_item::data_item()
+{
 }
 

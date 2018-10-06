@@ -18,9 +18,9 @@ QHash<int, bind_node*> bind_node::_cache = QHash<int, bind_node*>();
 QMap<QString, QString> bind_node::s_oResults = QMap<QString, QString>();
 QMap<QString, QString> bind_node::s_oVars = QMap<QString, QString>();
 
-bind_node::bind_node()
+bind_node::bind_node(data_item& i_oItem) : m_oItem(i_oItem)
 {
-	m_oItem = NULL;
+
 }
 
 bind_node::~bind_node()
@@ -69,90 +69,90 @@ QString bind_node::get_val(const QString & i_s)
 {
 	if (i_s == notr("id"))
 	{
-		return QString::number(m_oItem->m_iId);
+		return QString::number(m_oItem.m_iId);
 	}
 	else if (i_s == notr("summary"))
 	{
-		return m_oItem->m_sSummary;
+		return m_oItem.m_sSummary;
 	}
 	else if (i_s == notr("text"))
 	{
-		return m_oItem->m_sText;
+		return m_oItem.m_sText;
 	}
 	else if (i_s == notr("hints"))
 	{
-		return m_oItem->m_sHints;
+		return m_oItem.m_sHints;
 	}
 	else if (i_s == notr("comment"))
 	{
-		return m_oItem->m_sComment;
+		return m_oItem.m_sComment;
 	}
 	else if (i_s == notr("pic_location"))
 	{
-		return m_oItem->m_sPicLocation;
+		return m_oItem.m_sPicLocation;
 	}
 	else if (i_s == notr("tree_size"))
 	{
-		return QString::number(m_oItem->m_oMediator->size_of(m_oItem->m_iId));
+		return QString::number(_model->size_of(m_oItem.m_iId));
 	}
 	else if (i_s == notr("pic_w"))
 	{
-		return QString::number(m_oItem->getPix().width());
+		return QString::number(m_oItem.getPix(_model).width());
 	}
 	else if (i_s == notr("pic_h"))
 	{
-		return QString::number(m_oItem->getPix().height());
+		return QString::number(m_oItem.getPix(_model).height());
 	}
 	else if (i_s == notr("type"))
 	{
-		return QString::number(m_oItem->m_iDataType);
+		return QString::number(m_oItem.m_iDataType);
 	}
 	else if (i_s == notr("pic_id"))
 	{
-		return QString::number(m_oItem->m_iPicId);
+		return QString::number(m_oItem.m_iPicId);
 	}
 	else if (i_s == notr("x"))
 	{
-		return QString::number(m_oItem->m_iXX);
+		return QString::number(m_oItem.m_iXX);
 	}
 	else if (i_s == notr("y"))
 	{
-		return QString::number(m_oItem->m_iYY);
+		return QString::number(m_oItem.m_iYY);
 	}
 	else if (i_s == notr("w"))
 	{
-		return QString::number(m_oItem->m_iWW);
+		return QString::number(m_oItem.m_iWW);
 	}
 	else if (i_s == notr("h"))
 	{
-		return QString::number(m_oItem->m_iHH);
+		return QString::number(m_oItem.m_iHH);
 	}
 	else if (i_s == notr("widthHint"))
 	{
-		return QString::number(m_oItem->m_iObjectWidthHint);
+		return QString::number(m_oItem.m_iObjectWidthHint);
 	}
 	else if (i_s == notr("heightHint"))
 	{
-		return QString::number(m_oItem->m_iObjectHeightHint);
+		return QString::number(m_oItem.m_iObjectHeightHint);
 	}
 	return "";
 }
 
 int bind_node::num_rows()
 {
-	return m_oItem->m_iNumRows;
+	return m_oItem.m_iNumRows;
 }
 
 int bind_node::num_cols()
 {
-	return m_oItem->m_iNumCols;
+	return m_oItem.m_iNumCols;
 }
 
 QString bind_node::tbl_cell(int row, int col)
 {
 	QPair<int, int> l_o;
-	foreach(l_o, m_oItem->m_oTableData.keys()) {
-		if (l_o.first == row && l_o.second == col) return m_oItem->m_oTableData[l_o];
+	foreach(l_o, m_oItem.m_oTableData.keys()) {
+		if (l_o.first == row && l_o.second == col) return m_oItem.m_oTableData[l_o];
 	}
 	return "";
 }
@@ -215,8 +215,7 @@ bind_node* bind_node::get_item_by_id(int id)
 	Q_ASSERT(_model != NULL);
 	bind_node *l_oNode = _cache.value(id);
 	if (l_oNode) return l_oNode;
-	l_oNode = _cache[id] = new bind_node();
-	l_oNode->m_oItem = _model->m_oItems.value(id);
+	l_oNode = _cache[id] = new bind_node(_model->m_oItems[id]);
 	Q_ASSERT(l_oNode != NULL);
 	return l_oNode;
 }
@@ -225,8 +224,7 @@ bind_node* bind_node::get_item_by_id(int id)
 bind_node* bind_node::create_tree(sem_mediator *model, int i_i)
 {
 	Q_ASSERT(i_i!=0);
-	bind_node * l_oNode = new bind_node();
-	l_oNode->m_oItem = model->m_oItems.value(i_i);
+	bind_node * l_oNode = new bind_node(model->m_oItems[i_i]);
 
         for (int i=0; i < model->m_oLinks.size(); i++)
         {

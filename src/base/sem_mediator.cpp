@@ -115,15 +115,15 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 	}
 	else if (i_sName == notr("tblsettings"))
 	{
-		data_item *l_oItem = m_oMediator->m_oItems.value(m_iId);
-		l_oItem->m_iNumRows = i_oAttrs.value(notr("rows")).toInt();
-		l_oItem->m_iNumCols = i_oAttrs.value(notr("cols")).toInt();
+		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
+		l_oItem.m_iNumRows = i_oAttrs.value(notr("rows")).toInt();
+		l_oItem.m_iNumCols = i_oAttrs.value(notr("cols")).toInt();
 	}
 	else if (i_sName == notr("linkbox"))
 	{
-		data_item *l_oItem = m_oMediator->m_oItems.value(m_iId);
+		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		cur_link = new data_link();
-		l_oItem->m_oLinks.append(cur_link);
+		l_oItem.m_oLinks.append(cur_link);
 		cur_link->m_iParent = i_oAttrs.value(notr("parent")).toInt();
 		cur_link->m_iParentPos = i_oAttrs.value(notr("parentpos")).toInt();
 		cur_link->m_iChild = i_oAttrs.value(notr("child")).toInt();
@@ -148,57 +148,57 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 	}
 	else if (i_sName == notr("tbl"))
 	{
-		data_item *l_oItem = m_oMediator->m_oItems.value(m_iId);
+		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		int row = i_oAttrs.value(notr("row")).toInt();
 		int col = i_oAttrs.value(notr("col")).toInt();
 		QPair<int, int> p(row, col);
-		l_oItem->m_oTableData[p] = i_oAttrs.value(notr("text"));
+		l_oItem.m_oTableData[p] = i_oAttrs.value(notr("text"));
 	}
 	else if (i_sName == notr("item"))
 	{
 		m_iId = i_oAttrs.value(notr("id")).toInt();
 		if (!m_iId) return false;
 
-		data_item *l_oItem = new data_item(m_oMediator, m_iId);
-		m_oMediator->m_oItems[m_iId] = l_oItem;
+		data_item l_oItem(m_iId);
 
-		l_oItem->m_sSummary = i_oAttrs.value(notr("summary"));
-		l_oItem->m_sText = i_oAttrs.value(notr("text"));
-		l_oItem->m_iTextLength = i_oAttrs.value(notr("len")).toInt();
-		l_oItem->m_sComment = i_oAttrs.value(notr("comment"));
+		l_oItem.m_sSummary = i_oAttrs.value(notr("summary"));
+		l_oItem.m_sText = i_oAttrs.value(notr("text"));
+		l_oItem.m_iTextLength = i_oAttrs.value(notr("len")).toInt();
+		l_oItem.m_sComment = i_oAttrs.value(notr("comment"));
 
 		if (i_oAttrs.index(notr("pic_id")) != -1)
-			l_oItem->m_iPicId = i_oAttrs.value(notr("pic_id")).toInt();
+			l_oItem.m_iPicId = i_oAttrs.value(notr("pic_id")).toInt();
 		else
-			l_oItem->m_iPicId = NO_ITEM;
+			l_oItem.m_iPicId = NO_ITEM;
 
-		l_oItem->m_sPicLocation = i_oAttrs.value(notr("pic_location"));
-		l_oItem->m_sPicCaption = i_oAttrs.value(notr("pic_caption"));
-		l_oItem->m_sPicComment = i_oAttrs.value(notr("pic_comment"));
+		l_oItem.m_sPicLocation = i_oAttrs.value(notr("pic_location"));
+		l_oItem.m_sPicCaption = i_oAttrs.value(notr("pic_caption"));
+		l_oItem.m_sPicComment = i_oAttrs.value(notr("pic_comment"));
 
-		l_oItem->m_iDataType = i_oAttrs.value(notr("data")).toInt();
-		if (l_oItem->m_iDataType == 0) l_oItem->m_iDataType = VIEW_TEXT;
+		l_oItem.m_iDataType = i_oAttrs.value(notr("data")).toInt();
+		if (l_oItem.m_iDataType == 0) l_oItem.m_iDataType = VIEW_TEXT;
 
-		l_oItem->m_sHints = i_oAttrs.value(notr("hints"));
+		l_oItem.m_sHints = i_oAttrs.value(notr("hints"));
 
-		l_oItem->m_iNumRows = i_oAttrs.value(notr("tbl_rows")).toInt();
-		l_oItem->m_iNumCols = i_oAttrs.value(notr("tbl_cols")).toInt();
+		l_oItem.m_iNumRows = i_oAttrs.value(notr("tbl_rows")).toInt();
+		l_oItem.m_iNumCols = i_oAttrs.value(notr("tbl_cols")).toInt();
 
-		l_oItem->m_sDiag = i_oAttrs.value(notr("dg"));
+		l_oItem.m_sDiag = i_oAttrs.value(notr("dg"));
 
-		l_oItem->m_iXX = i_oAttrs.value(notr("c2")).toDouble();
-		l_oItem->m_iYY = i_oAttrs.value(notr("c1")).toDouble();
+		l_oItem.m_iXX = i_oAttrs.value(notr("c2")).toDouble();
+		l_oItem.m_iYY = i_oAttrs.value(notr("c1")).toDouble();
 
-		l_oItem->m_iColor = i_oAttrs.value(notr("color")).toInt();
-		l_oItem->m_oCustom.m_sName = i_oAttrs.value(notr("custom_name"));
-		l_oItem->m_oCustom.m_oInnerColor = QColor(i_oAttrs.value(notr("custom_inner")));
-		l_oItem->m_oCustom.m_oBorderColor = QColor(i_oAttrs.value(notr("custom_border")));
-		l_oItem->m_oCustom.m_oTextColor = QColor(i_oAttrs.value(notr("custom_text")));
+		l_oItem.m_iColor = i_oAttrs.value(notr("color")).toInt();
+		l_oItem.m_oCustom.m_sName = i_oAttrs.value(notr("custom_name"));
+		l_oItem.m_oCustom.m_oInnerColor = QColor(i_oAttrs.value(notr("custom_inner")));
+		l_oItem.m_oCustom.m_oBorderColor = QColor(i_oAttrs.value(notr("custom_border")));
+		l_oItem.m_oCustom.m_oTextColor = QColor(i_oAttrs.value(notr("custom_text")));
 
 		QString l_s = i_oAttrs.value(notr("diagram_font"));
 		if (!l_s.isEmpty()) {
-			l_oItem->m_oDiagramFont.fromString(l_s);
+			l_oItem.m_oDiagramFont.fromString(l_s);
 		}
+		m_oMediator->m_oItems.insert(m_iId, l_oItem);
 	}
 	else if (i_sName == notr("color_schemes"))
 	{
@@ -215,16 +215,16 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 	}
 	else if (i_sName == notr("flag"))
 	{
-		data_item *l_oItem = m_oMediator->m_oItems.value(m_iId);
-		l_oItem->m_oFlags.push_back(i_oAttrs.value(notr("id")));
+		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
+		l_oItem.m_oFlags.push_back(i_oAttrs.value(notr("id")));
 	}
 	else if (i_sName == notr("itembox"))
 	{
-		data_item *l_oItem = m_oMediator->m_oItems.value(m_iId);
+		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		int bid = i_oAttrs.value(notr("id")).toInt();
 		data_box *box = new data_box(bid);
 		m_oNodeStack.push(box);
-		l_oItem->m_oBoxes[bid] = box;
+		l_oItem.m_oBoxes[bid] = box;
 		box->read_data(i_sName, i_oAttrs);
 	}
 	else if (i_sName == notr("semantik"))
@@ -515,71 +515,71 @@ QString sem_mediator::doc_to_xml()
 	l_oS<<notr("</color_schemes>\n");
 
 
-	QList<data_item*> l_oLst = m_oItems.values();
+	QList<data_item> l_oLst = m_oItems.values();
 	for (int i=0; i<l_oLst.size(); i++)
 	{
-		data_item* l_oItem = l_oLst.at(i);
-		l_oS<<notr("<item id=\"%1\"").arg(QString::number(l_oItem->m_iId));
-		l_oS<<notr(" summary=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sSummary));
-		l_oS<<notr(" text=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sText));
-		l_oS<<notr(" len=\"%1\"").arg(QString::number(l_oItem->m_iTextLength));
-		l_oS<<notr(" comment=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sComment));
+		data_item l_oItem = l_oLst.at(i);
+		l_oS<<notr("<item id=\"%1\"").arg(QString::number(l_oItem.m_iId));
+		l_oS<<notr(" summary=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sSummary));
+		l_oS<<notr(" text=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sText));
+		l_oS<<notr(" len=\"%1\"").arg(QString::number(l_oItem.m_iTextLength));
+		l_oS<<notr(" comment=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sComment));
 
-		l_oS<<notr(" pic_id=\"%1\"").arg(QString::number(l_oItem->m_iPicId));
-		l_oS<<notr(" pic_location=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sPicLocation));
-		l_oS<<notr(" pic_caption=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sPicCaption));
-		l_oS<<notr(" pic_comment=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sPicComment));
+		l_oS<<notr(" pic_id=\"%1\"").arg(QString::number(l_oItem.m_iPicId));
+		l_oS<<notr(" pic_location=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sPicLocation));
+		l_oS<<notr(" pic_caption=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sPicCaption));
+		l_oS<<notr(" pic_comment=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sPicComment));
 
-		l_oS<<notr(" tbl_rows=\"%1\"").arg(QString::number(l_oItem->m_iNumRows));
-		l_oS<<notr(" tbl_cols=\"%1\"").arg(QString::number(l_oItem->m_iNumCols));
+		l_oS<<notr(" tbl_rows=\"%1\"").arg(QString::number(l_oItem.m_iNumRows));
+		l_oS<<notr(" tbl_cols=\"%1\"").arg(QString::number(l_oItem.m_iNumCols));
 
-		l_oS<<notr(" dg=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sDiag));
+		l_oS<<notr(" dg=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sDiag));
 
-		l_oS<<notr(" hints=\"%1\"").arg(bind_node::protectXML(l_oItem->m_sHints));
-		l_oS<<notr(" data=\"%1\"").arg(QString::number(l_oItem->m_iDataType));
+		l_oS<<notr(" hints=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sHints));
+		l_oS<<notr(" data=\"%1\"").arg(QString::number(l_oItem.m_iDataType));
 
-		l_oS<<notr(" c1=\"%1\"").arg(QString::number(l_oItem->m_iYY));
-		l_oS<<notr(" c2=\"%1\"").arg(QString::number(l_oItem->m_iXX));
+		l_oS<<notr(" c1=\"%1\"").arg(QString::number(l_oItem.m_iYY));
+		l_oS<<notr(" c2=\"%1\"").arg(QString::number(l_oItem.m_iXX));
 
-		l_oS<<notr(" color=\"%1\"").arg(QString::number(l_oItem->m_iColor));
+		l_oS<<notr(" color=\"%1\"").arg(QString::number(l_oItem.m_iColor));
 
-		color_scheme l_o = l_oItem->m_oCustom;
+		color_scheme l_o = l_oItem.m_oCustom;
 
 		l_oS<<notr(" custom_name=\"%1\"").arg(l_o.m_sName);
 		l_oS<<notr(" custom_border=\"%1\"").arg(l_o.m_oBorderColor.name());
 		l_oS<<notr(" custom_inner=\"%1\"").arg(l_o.m_oInnerColor.name());
 		l_oS<<notr(" custom_text=\"%1\"").arg(l_o.m_oTextColor.name());
 
-		l_oS<<notr(" diagram_font=\"%1\"").arg(l_oItem->m_oDiagramFont.toString());
+		l_oS<<notr(" diagram_font=\"%1\"").arg(l_oItem.m_oDiagramFont.toString());
 
 		l_oS<<notr(">\n");
 
 		l_oS<<notr("<tblsettings rows=\"%1\" cols=\"%2\"/>\n").arg(
-			QString::number(l_oItem->m_iNumRows), QString::number(l_oItem->m_iNumCols));
+			QString::number(l_oItem.m_iNumRows), QString::number(l_oItem.m_iNumCols));
 
 
 		QPair<int, int> p;
-		foreach (p, l_oItem->m_oTableData.keys())
+		foreach (p, l_oItem.m_oTableData.keys())
 		{
 			l_oS<<notr("<tbl");
 			l_oS<<notr(" row=\"%1\"").arg(QString::number(p.first));
 			l_oS<<notr(" col=\"%1\"").arg(QString::number(p.second));
-			l_oS<<notr(" text=\"%1\"").arg(bind_node::protectXML(l_oItem->m_oTableData[p]));
+			l_oS<<notr(" text=\"%1\"").arg(bind_node::protectXML(l_oItem.m_oTableData[p]));
 			l_oS<<notr("/>\n");
 		}
 
-		foreach (QString l_s, l_oItem->m_oFlags)
+		foreach (QString l_s, l_oItem.m_oFlags)
 		{
 			l_oS<<notr("<flag id=\"%1\"/>\n").arg(bind_node::protectXML(l_s));
 		}
 
 
-		foreach (data_box *box, l_oItem->m_oBoxes)
+		foreach (data_box *box, l_oItem.m_oBoxes)
 		{
 			box->dump_xml(l_oS);
 		}
 
-		foreach (data_link *link, l_oItem->m_oLinks)
+		foreach (data_link *link, l_oItem.m_oLinks)
 		{
 			l_oS<<notr("<linkbox parent=\"%1\" parentpos=\"%2\" child=\"%3\" childpos=\"%4\" color=\"%5\" border_width=\"%6\" %7 %8>\n").arg(
 				QString::number(link->m_iParent),
@@ -640,9 +640,9 @@ bool sem_mediator::save_file(QString i_sUrl)
 	l_o2.close();
 
 	QStringList lst;
-	foreach (data_item *d, m_oItems.values()) {
-		if (d->m_iPicId != NO_ITEM) {
-			lst << QString::number(d->m_iPicId);
+	foreach (const data_item& l_oItem, m_oItems.values()) {
+		if (l_oItem.m_iPicId != NO_ITEM) {
+			lst << QString::number(l_oItem.m_iPicId);
 		}
 	}
 
@@ -671,32 +671,6 @@ bool sem_mediator::save_file(QString i_sUrl)
 	return true;
 }
 
-void sem_mediator::purge_document()
-{
-	while (!m_oUndoStack.isEmpty())
-		delete m_oUndoStack.pop();
-	while (!m_oRedoStack.isEmpty())
-		delete m_oRedoStack.pop();
-
-	mem_sel *sel = new mem_sel(this);
-	sel->apply();
-
-	mem_delete* del = new mem_delete(this);
-	del->init(m_oItems.keys());
-	del->apply();
-}
-
-void sem_mediator::undo_purge() {
-	m_oItems.clear();
-	m_oLinks.clear();
-	while (!m_oUndoStack.isEmpty()) {
-		mem_command* c = m_oUndoStack.pop();
-		c->undo();
-	}
-	while (!m_oRedoStack.isEmpty())
-		delete m_oRedoStack.pop();
-}
-
 void sem_mediator::check_undo(bool enable) {
 	if (enable) {
 		emit enable_undo(!m_oUndoStack.isEmpty(), !m_oRedoStack.isEmpty());
@@ -705,15 +679,12 @@ void sem_mediator::check_undo(bool enable) {
 	}
 }
 
-bool sem_mediator::open_file(const QString& i_sUrl)
+bool sem_mediator::open_raw(const QString& i_sUrl)
 {
-	purge_document();
-
 	QFile l_o2(QString(FILTER_DIR)+"/main.py");
 	if (!l_o2.open(QIODevice::ReadOnly))
 	{
 		KMessageBox::sorry(NULL, i18n("Missing filter file %1 for opening files", l_o2.fileName()), i18n("Broken installation"));
-		undo_purge();
 		return false;
 	}
 	QByteArray l_oBa = l_o2.readAll();
@@ -728,17 +699,16 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 	if (!init_py())
 	{
 		KMessageBox::sorry(NULL, i18n("Missing python bindings for opening files"), i18n("Broken installation"));
-		undo_purge();
 		return false;
 	}
 	int ret = PyRun_SimpleString(l_oBa.constData());
 	if (ret != 0)
 	{
+		KMessageBox::sorry(NULL, i18n("Python execution failure"), i18n("Broken installation"));
 		return false;
 	}
 
 	//qDebug()<<"full text "<<bind_node::get_var(notr("fulldoc"))<<endl;
-
 	semantik_reader l_oHandler(this);
 	QXmlInputSource l_oSource;
 	l_oSource.setData(bind_node::get_var(notr("fulldoc")));
@@ -746,19 +716,11 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 	l_oReader.setContentHandler(&l_oHandler);
 
 	if (!l_oReader.parse(l_oSource)) {
-		undo_purge();
 		KMessageBox::sorry(NULL, i18n("Could not load the document %1", bind_node::get_var(notr("fulldoc"))), i18n("Broken document"));
 		return false;
 	}
-	if (m_oColorSchemes.isEmpty()) {
-		init_colors();
-	}
-	if (m_oFlagSchemes.isEmpty()) {
-		init_flags();
-	}
 
 	QDir l_oDir(m_sTempDir);
-
 	QFileInfoList l_oLst = l_oDir.entryInfoList();
 
 	// this is for the pictures
@@ -771,13 +733,13 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 			int seq = next_pic_seq();
 			if (load_picture(l_oInfo.absoluteFilePath(), seq))
 			{
-				data_item *l_oData = m_oItems.value(l_iVal);
-				if (l_oData == NULL) {
-					undo_purge();
+				if (!m_oItems.contains(l_iVal))
+				{
 					KMessageBox::sorry(NULL, i18n("Could not load the picture %1", l_sName), i18n("Broken document"));
 					return false;
 				}
-				l_oData->m_iPicId = seq;
+				data_item& l_oItem = m_oItems[l_iVal];
+				l_oItem.m_iPicId = seq;
 
 				QFile f(l_oInfo.absoluteFilePath());
 				QString name = f.fileName().replace(QRegExp(notr("/pic-\\d+")), QString("/img-%1").arg(QString::number(seq)));
@@ -788,41 +750,83 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 		{
 			l_sName = l_sName.section(QRegExp(notr("[.-]")), 1, 1);
 			int l_iVal = l_sName.toInt();
-			load_picture(l_oInfo.absoluteFilePath(), l_iVal);
+			if (!load_picture(l_oInfo.absoluteFilePath(), l_iVal))
+			{
+				KMessageBox::sorry(NULL, i18n("Could not load the picture %1", l_sName), i18n("Broken document"));
+				return false;
+			}
 		}
 	}
-
-	// now update all items created
-	foreach (int i, m_oItems.keys()) {
-		notify_add_item(i);
-	}
-
-	foreach (QPoint p, m_oLinks) {
-		notify_link_items(p.x(), p.y());
-	}
-
-	QList<int> lst;
-	mem_sel *sel = new mem_sel(this);
-	sel->sel = lst;
-	sel->apply();
-
-
-	// now tell all the views that a new map was loaded
-	emit sig_open_map();
-	emit sync_colors();
-
-	QRegExp r(notr(".kdi$"));
-	QString s(notr(".sem"));
-
-	m_sLastSaved = i_sUrl;
-	m_sLastSaved.replace(r, s);
-
-	sel = new mem_sel(this);
-	sel->sel = lst;
-	sel->apply();
-
-	set_dirty(false);
 	return true;
+}
+
+bool sem_mediator::open_file(const QString& i_sUrl)
+{
+	sem_mediator l_oMediator(this);
+	l_oMediator.num_seq = num_seq;
+	if (l_oMediator.open_raw(i_sUrl))
+	{
+		// first import the picture data
+		QHash<int, int> l_oTranslate;
+		foreach (int l_iVal, l_oMediator.m_oItems.keys())
+		{
+			int l_iOtherPicId = l_oMediator.m_oItems[l_iVal].m_iPicId;
+			if (l_iOtherPicId != NO_ITEM)
+			{
+				int l_iNewPicId = next_pic_seq();
+				l_oTranslate[l_iOtherPicId] = l_iNewPicId;
+				m_oPixCache[l_iNewPicId] = l_oMediator.m_oPixCache[l_iOtherPicId];
+				l_oMediator.m_oItems[l_iVal].m_iPicId = l_iNewPicId;
+			}
+		}
+		// now rename the files
+		QDir l_oDir(l_oMediator.m_sTempDir);
+		foreach (QFileInfo l_oInfo, l_oDir.entryInfoList())
+		{
+			QString l_sName = l_oInfo.fileName();
+			if (l_sName.startsWith(notr("img-")))
+			{
+				QStringList l_oS = l_sName.split(QRegExp(notr("[.-]")));
+				int l_iOtherPicId = l_oS.at(1).toInt();
+				if (!l_oTranslate.contains(l_iOtherPicId))
+				{
+					KMessageBox::sorry(NULL, i18n("Something is wrong with %1", l_sName), i18n("Broken document"));
+					return false;
+				}
+				QString l_oNum = QString::number(l_oTranslate[l_iOtherPicId]);
+				QString l_oDest = QString("file://%1/img-%2.%3").arg(m_sTempDir, l_oNum, l_oS.at(2));
+				KJob *l_oJob = KIO::file_move(QString("file://") + l_oInfo.absoluteFilePath(), QUrl(l_oDest), -1, KIO::Overwrite);
+				bool l_bOk = l_oJob->exec();
+				if (!l_bOk)
+				{
+					KMessageBox::sorry(NULL, i18n("Rename the picture %1 to %2 failed", l_oInfo.absoluteFilePath(), l_oDest), i18n("Broken document"));
+					return false;
+				}
+			}
+		}
+		// The pictures are loaded and the data is known to be correct, so no more failure is expected
+		mem_doc_open *l_oOpen = new mem_doc_open(this);
+		l_oOpen->init_data(this, &l_oMediator);
+		l_oOpen->apply();
+		set_dirty(false);
+		return true;
+	}
+	return false;
+}
+
+void sem_mediator::notify_open_map()
+{
+	emit sig_open_map();
+}
+
+void sem_mediator::notify_colors()
+{
+	emit sync_colors();
+}
+
+void sem_mediator::notify_flags()
+{
+	emit sync_flags();
 }
 
 bool sem_mediator::link_items(int i_iParent, int i_iChild)
@@ -896,7 +900,7 @@ int sem_mediator::root_of(int i_iId)
 int sem_mediator::itemSelected() {
 	foreach (int l_iVal, m_oItems.keys())
 	{
-		if (m_oItems[l_iVal]->m_bSelected)
+		if (m_oItems[l_iVal].m_bSelected)
 			return l_iVal;
 	}
 	return NO_ITEM;
@@ -1038,9 +1042,9 @@ void sem_mediator::select_item_keyboard(int l_iId, int l_iDirection)
 					QPoint l_oP = m_oLinks.at(i);
 					if (l_oP.y() == l_iId)
 					{
-						data_item *l_oItem = m_oItems.value(l_oP.x());
+						data_item& l_oItem = m_oItems[l_oP.x()];
 						// update the cache
-						l_oItem->m_iDown = l_iId;
+						l_oItem.m_iDown = l_iId;
 						private_select_item(l_oP.x());
 						return;
 					}
@@ -1050,9 +1054,9 @@ void sem_mediator::select_item_keyboard(int l_iId, int l_iDirection)
 		case 4: //bottom
 			{
 				// first try the cache
-				data_item *l_oItem = m_oItems.value(l_iId);
-				Q_ASSERT(l_oItem != NULL);
-				int l_iDown = l_oItem->m_iDown;
+				Q_ASSERT(m_oItems.contains(l_iId));
+				data_item& l_oItem = m_oItems[l_iId];
+				int l_iDown = l_oItem.m_iDown;
 
 				for (int i=0; i<m_oLinks.size(); i++)
 				{
@@ -1160,10 +1164,10 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 	notify_export_doc();
 	foreach (int l_iVal, m_oItems.keys())
 	{
-		data_item *l_oData = m_oItems.value(l_iVal);
+		data_item& l_oItem = m_oItems[l_iVal];
 		// the diagram view is the only one for now
-		if (l_oData->m_iDataType == VIEW_DIAG || l_oData->m_iDataType == VIEW_IMG)
-			notify_export_item(l_oData->m_iId);
+		if (l_oItem.m_iDataType == VIEW_DIAG || l_oItem.m_iDataType == VIEW_IMG)
+			notify_export_item(l_oItem.m_iId);
 	}
 
 	bind_node::set_var(notr("temp_dir"), m_sTempDir);
@@ -1219,9 +1223,9 @@ QPair<int, int> sem_mediator::hint_size_diagram(int id)
 	int width = 0;
 	int height = 0;
 
-	data_item *item = m_oItems.value(id);
-	Q_ASSERT(item);
-	if (item->m_sHints.size() > 4)
+	Q_ASSERT(m_oItems.contains(id));
+	data_item& l_oItem = m_oItems[id];
+	if (l_oItem.m_sHints.size() > 4)
 	{
 		if (!init_py())
 		{
@@ -1335,9 +1339,10 @@ bool html_converter::characters(const QString &i_s)
         return true;
 }
 
-data_item* sem_mediator::operator+(const int y)
+data_item& sem_mediator::operator+(const int y)
 {
-	return m_oItems.value(y);
+	Q_ASSERT(m_oItems.contains(y));
+	return m_oItems[y];
 }
 
 void sem_mediator::slot_undo()
@@ -1368,7 +1373,7 @@ void sem_mediator::private_select_item(int id)
 }
 
 
-QPixmap sem_mediator::getPix(int id)
+const QPixmap sem_mediator::getPix(int id) const
 {
 	if (id == NO_ITEM)
 		return QPixmap();
@@ -1379,7 +1384,7 @@ QPixmap sem_mediator::getPix(int id)
 	return QPixmap();
 }
 
-QPixmap sem_mediator::getThumb(int id)
+const QPixmap sem_mediator::getThumb(int id) const
 {
 	if (id == NO_ITEM)
 		return QPixmap();
@@ -1586,3 +1591,7 @@ void sem_mediator::notify_change_properties(void* i_o)
 	emit sig_change_properties(i_o);
 }
 
+void sem_mediator::notify_font()
+{
+	emit sync_font();
+}

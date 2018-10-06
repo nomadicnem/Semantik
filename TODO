@@ -1,4 +1,3 @@
-Broken svg export with HighDPI settings
 Manual positioning of diagram link labels (and better default positioning)
 Source code snippets as data attachments (only in pdflatex/beamer at this time)
 Z-index in diagrams

@@ -113,8 +113,7 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 		int id = i_oAttrs.value(i18n("id")).toInt();
 
 		data_box *box = new data_box(id);
-		//data_item *item = m_oMediator->m_oMediator->m_oItems[m_iId];
-		m_oMediator->m_oMediator->m_oItems[m_iId]->m_oBoxes[id] = box;
+		m_oMediator->m_oMediator->m_oItems[m_iId].m_oBoxes[id] = box;
 		box->m_iXX = i_oAttrs.value(i18n("c1")).toFloat();
 		box->m_iYY = i_oAttrs.value(i18n("c2")).toFloat();
 		box->m_sText = i_oAttrs.value(i18n("text"));
@@ -146,7 +145,8 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 		link->pen_style = (Qt::PenStyle) i_oAttrs.value(i18n("pen_style")).toInt();
 		link->border_width = i_oAttrs.value(i18n("border_width")).toInt();
 		m_oCurrent = link;
-		m_oMediator->m_oMediator->m_oItems.value(m_iId)->m_oLinks.append(link);
+		Q_ASSERT(m_oMediator->m_oMediator->m_oItems.contains(m_iId));
+		m_oMediator->m_oMediator->m_oItems[m_iId].m_oLinks.append(link);
 	}
 	else if (i_sName == i18n("box_link_offset"))
 	{
@@ -403,14 +403,14 @@ void box_view::notify_select(const QList<int>& unsel, const QList<int>& sel)
 	else
 	{
 		m_iId = sel.at(0);
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-		Q_ASSERT(l_oData);
-		if (l_oData and l_oData->m_iDataType == VIEW_DIAG)
+		Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
+		if (l_oData.m_iDataType == VIEW_DIAG)
 		{
-			if (!l_oData->m_sDiag.isEmpty())
+			if (!l_oData.m_sDiag.isEmpty())
 			{
-				from_string(l_oData->m_sDiag);
-				l_oData->m_sDiag = notr("");
+				from_string(l_oData.m_sDiag);
+				l_oData.m_sDiag = notr("");
 			}
 			sync_view();
 			check_canvas_size();
@@ -423,21 +423,21 @@ void box_view::sync_view()
 {
 	if (!m_iId) return;
 
-	data_item *item = m_oMediator->m_oItems.value(m_iId);
-	Q_ASSERT(item);
-	scene()->setFont(item->m_oDiagramFont);
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& item = m_oMediator->m_oItems[m_iId];
+	scene()->setFont(item.m_oDiagramFont);
 
-	if (item->m_iDataType != VIEW_DIAG)
+	if (item.m_iDataType != VIEW_DIAG)
 	{
 		return;
 	}
-	if (!item->m_sDiag.isEmpty())
+	if (!item.m_sDiag.isEmpty())
 	{
-		from_string(item->m_sDiag);
-		item->m_sDiag = "";
+		from_string(item.m_sDiag);
+		item.m_sDiag = "";
 	}
 
-	foreach (data_box *box, item->m_oBoxes.values())
+	foreach (data_box *box, item.m_oBoxes.values())
 	{
 		connectable *l_o = NULL;
 		if (box->m_iType == data_box::ACTIVITY)
@@ -517,7 +517,7 @@ void box_view::sync_view()
 		l_o->update_data();
 	}
 
-	foreach (data_link *link, item->m_oLinks) {
+	foreach (data_link *link, item.m_oLinks) {
 		box_link *l_o = new box_link(this);
 		l_o->m_oInnerLink.copy_from(*link);
 		l_o->m_oLink = link;
@@ -530,7 +530,7 @@ void box_view::sync_view()
 void box_view::notify_export_item(int id)
 {
 	int l_iOldId = m_iId;
-	if (m_oMediator->m_oItems.value(id)->m_iDataType != VIEW_DIAG)
+	if (m_oMediator->m_oItems[id].m_iDataType != VIEW_DIAG)
 		return;
 	clear_diagram();
 
@@ -562,9 +562,10 @@ void box_view::notify_export_item(int id)
 		}
 	}
 
-	data_item *item = m_oMediator->m_oItems.value(m_iId);
-	item->m_iObjectWidthHint = l_oR.width();
-	item->m_iObjectHeightHint = l_oR.height();
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& item = m_oMediator->m_oItems[m_iId];
+	item.m_iObjectWidthHint = l_oR.width();
+	item.m_iObjectHeightHint = l_oR.height();
 
 	// fill with white
 	QImage l_oImage((int) l_oR.width(), (int) l_oR.height(), QImage::Format_RGB32);
@@ -1160,8 +1161,8 @@ void box_view::focusOutEvent(QFocusEvent *i_oEv)
 void box_view::notify_add_box(int id, int box)
 {
 	Q_ASSERT(m_iId == id);
-	data_item *item = m_oMediator->m_oItems.value(m_iId);
-	data_box *db = item->m_oBoxes[box];
+	data_item& item = m_oMediator->m_oItems[m_iId];
+	data_box *db = item.m_oBoxes[box];
 	connectable *l_o = NULL;
 	if (db->m_iType == data_box::ACTIVITY)
 	{
@@ -1769,13 +1770,14 @@ bool box_view::import_from_file(const QUrl& l_o)
 	sem_mediator *x = new sem_mediator(this);
 
 	bool l_bOk = false;
-	if (x->open_file(l_o.path()) && x->m_oItems.size() == 1) {
+	if (x->open_raw(l_o.path()) && x->m_oItems.size() == 1) {
 		l_bOk = true;
-		data_item *tmp = x->m_oItems.values().at(0);
+		Q_ASSERT(x->m_oItems.contains(1));
+		data_item& tmp = x->m_oItems[1];
 
 		mem_import_box *imp = new mem_import_box(m_oMediator, m_iId);
-		imp->init(tmp->m_oBoxes.values(), tmp->m_oLinks);
-		imp->m_iNewFont = tmp->m_oDiagramFont;
+		imp->init(tmp.m_oBoxes.values(), tmp.m_oLinks);
+		imp->m_iNewFont = tmp.m_oDiagramFont;
 		imp->m_oOldColorSchemes = m_oMediator->m_oColorSchemes;
 		imp->m_oNewColorSchemes = x->m_oColorSchemes;
 		imp->apply();
@@ -1823,9 +1825,10 @@ bool box_view::slot_export_to_file() {
 
 	// now the magic
 	sem_mediator *x = new sem_mediator(this);
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-	l_oData->m_iDataType = VIEW_DIAG;
-	x->m_oItems[1] = l_oData;
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
+	l_oData.m_iDataType = VIEW_DIAG;
+	x->m_oItems.insert(1, l_oData);
 	x->m_oColorSchemes = m_oMediator->m_oColorSchemes;
 
 	if (x->save_file(l_o.path()))
@@ -1857,9 +1860,10 @@ bool box_view::slot_save() {
 	if (m_oCurrentUrl.isValid())
 	{
 		sem_mediator *x = new sem_mediator(this);
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-		l_oData->m_iDataType = VIEW_DIAG;
-		x->m_oItems[1] = l_oData;
+		Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
+		l_oData.m_iDataType = VIEW_DIAG;
+		x->m_oItems.insert(1, l_oData);
 		x->m_oColorSchemes = m_oMediator->m_oColorSchemes;
 
 		if (x->save_file(m_oCurrentUrl.path())) {
@@ -2032,9 +2036,10 @@ void box_view::slot_copy_picture()
 void box_view::notify_change_properties(void *)
 {
 	// this may be the wrong approach entirely
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
-	if (l_oData->m_oDiagramFont != font()) {
-		scene()->setFont(l_oData->m_oDiagramFont);
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
+	if (l_oData.m_oDiagramFont != font()) {
+		scene()->setFont(l_oData.m_oDiagramFont);
 		foreach (QGraphicsItem *l_o, scene()->items())
 		{
 			if (connectable* t = dynamic_cast<connectable*>(l_o))

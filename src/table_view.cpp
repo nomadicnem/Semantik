@@ -100,30 +100,30 @@ void table_view::cell_changed(int i_iRow, int i_iCol)
 	if (l_oItem) l_sText = l_oItem->text();
 	else l_sText = "";
 
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 	QHash<QPair<int, int>, QString> changed;
 
 	for (int i=0; i < rowCount(); ++i)
 	{
 		for (int j=0; j < columnCount(); ++j)
 		{
-			changed[QPair<int, int>(i, j)] = l_oData->m_oTableData[QPair<int, int>(i, j)];
+			changed[QPair<int, int>(i, j)] = l_oData.m_oTableData[QPair<int, int>(i, j)];
 		}
 	}
 	changed[QPair<int, int>(i_iRow, i_iCol)] = l_sText;
 
 	mem_table *tmp = new mem_table(m_oMediator);
 	tmp->m_iId = m_iId;
-	tmp->oldNRows = tmp->newNRows = l_oData->m_iNumRows;
-	tmp->oldNCols = tmp->newNCols = l_oData->m_iNumCols;
-	tmp->oldData = l_oData->m_oTableData;
+	tmp->oldNRows = tmp->newNRows = l_oData.m_iNumRows;
+	tmp->oldNCols = tmp->newNCols = l_oData.m_iNumCols;
+	tmp->oldData = l_oData.m_oTableData;
 	tmp->newData = changed;
 	tmp->apply();
 }
 
 void table_view::add_row()
 {
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 	QHash<QPair<int, int>, QString> changed;
 	for (int i=0; i < rowCount() + 1; ++i)
 	{
@@ -132,24 +132,24 @@ void table_view::add_row()
 		for (int j=0; j < columnCount(); ++j)
 		{
 			changed[QPair<int, int>(m_oAddRowAct->row, j)] = "";
-			changed[QPair<int, int>(ii, j)] = l_oData->m_oTableData[QPair<int, int>(i, j)];
+			changed[QPair<int, int>(ii, j)] = l_oData.m_oTableData[QPair<int, int>(i, j)];
 		}
 	}
 
 	mem_table *tmp = new mem_table(m_oMediator);
 	tmp->m_iId = m_iId;
-	tmp->oldNRows = l_oData->m_iNumRows;
-	tmp->oldNCols = l_oData->m_iNumCols;
+	tmp->oldNRows = l_oData.m_iNumRows;
+	tmp->oldNCols = l_oData.m_iNumCols;
 	tmp->newNRows = rowCount() + 1;
 	tmp->newNCols = columnCount();
-	tmp->oldData = l_oData->m_oTableData;
+	tmp->oldData = l_oData.m_oTableData;
 	tmp->newData = changed;
 	tmp->apply();
 }
 
 void table_view::add_column()
 {
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 	QHash<QPair<int, int>, QString> changed;
 	for (int i=0; i < rowCount(); ++i)
 	{
@@ -159,24 +159,24 @@ void table_view::add_column()
 			if (jj >= m_oAddRowAct->col) jj++;
 
 			changed[QPair<int, int>(i, m_oAddRowAct->col)] = "";
-			changed[QPair<int, int>(i, jj)] = l_oData->m_oTableData[QPair<int, int>(i, j)];
+			changed[QPair<int, int>(i, jj)] = l_oData.m_oTableData[QPair<int, int>(i, j)];
 		}
 	}
 
 	mem_table *tmp = new mem_table(m_oMediator);
 	tmp->m_iId = m_iId;
-	tmp->oldNRows = l_oData->m_iNumRows;
-	tmp->oldNCols = l_oData->m_iNumCols;
+	tmp->oldNRows = l_oData.m_iNumRows;
+	tmp->oldNCols = l_oData.m_iNumCols;
 	tmp->newNRows = rowCount();
 	tmp->newNCols = columnCount() + 1;
-	tmp->oldData = l_oData->m_oTableData;
+	tmp->oldData = l_oData.m_oTableData;
 	tmp->newData = changed;
 	tmp->apply();
 }
 
 void table_view::rm_row()
 {
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 	QHash<QPair<int, int>, QString> changed;
 	for (int i=0; i < rowCount(); ++i)
 	{
@@ -185,24 +185,24 @@ void table_view::rm_row()
 		if (ii > m_oRmRowAct->row) ii--;
 		for (int j=0; j < columnCount(); ++j)
 		{
-			changed[QPair<int, int>(ii, j)] = l_oData->m_oTableData[QPair<int, int>(i, j)];
+			changed[QPair<int, int>(ii, j)] = l_oData.m_oTableData[QPair<int, int>(i, j)];
 		}
 	}
 
 	mem_table *tmp = new mem_table(m_oMediator);
 	tmp->m_iId = m_iId;
-	tmp->oldNRows = l_oData->m_iNumRows;
-	tmp->oldNCols = l_oData->m_iNumCols;
+	tmp->oldNRows = l_oData.m_iNumRows;
+	tmp->oldNCols = l_oData.m_iNumCols;
 	tmp->newNRows = rowCount() - 1;
 	tmp->newNCols = columnCount();
-	tmp->oldData = l_oData->m_oTableData;
+	tmp->oldData = l_oData.m_oTableData;
 	tmp->newData = changed;
 	tmp->apply();
 }
 
 void table_view::rm_column()
 {
-	data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
 	QHash<QPair<int, int>, QString> changed;
 	for (int i=0; i < rowCount(); ++i)
 	{
@@ -212,17 +212,17 @@ void table_view::rm_column()
 			if (jj == m_oRmRowAct->col) continue;
 			if (jj > m_oAddRowAct->col) jj--;
 
-			changed[QPair<int, int>(i, jj)] = l_oData->m_oTableData[QPair<int, int>(i, j)];
+			changed[QPair<int, int>(i, jj)] = l_oData.m_oTableData[QPair<int, int>(i, j)];
 		}
 	}
 
 	mem_table *tmp = new mem_table(m_oMediator);
 	tmp->m_iId = m_iId;
-	tmp->oldNRows = l_oData->m_iNumRows;
-	tmp->oldNCols = l_oData->m_iNumCols;
+	tmp->oldNRows = l_oData.m_iNumRows;
+	tmp->oldNCols = l_oData.m_iNumCols;
 	tmp->newNRows = rowCount();
 	tmp->newNCols = columnCount() - 1;
-	tmp->oldData = l_oData->m_oTableData;
+	tmp->oldData = l_oData.m_oTableData;
 	tmp->newData = changed;
 	tmp->apply();
 }
@@ -234,14 +234,14 @@ void table_view::resize_table()
 	l_oGen.m_oCols->setValue(columnCount());
 	if (l_oGen.exec() == QDialog::Accepted)
 	{
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
 		mem_table *tmp = new mem_table(m_oMediator);
 		tmp->m_iId = m_iId;
-		tmp->oldNRows = l_oData->m_iNumRows;
-		tmp->oldNCols = l_oData->m_iNumCols;
+		tmp->oldNRows = l_oData.m_iNumRows;
+		tmp->oldNCols = l_oData.m_iNumCols;
 		tmp->newNRows = l_oGen.m_oRows->value();
 		tmp->newNCols = l_oGen.m_oCols->value();
-		tmp->oldData = tmp->newData = l_oData->m_oTableData;
+		tmp->oldData = tmp->newData = l_oData.m_oTableData;
 		tmp->apply();
 	}
 }
@@ -254,16 +254,16 @@ void table_view::notify_table(int id)
 	}
 	m_bFreeze = true;
 
-	data_item *l_oData = m_oMediator->m_oItems.value(id);
+	data_item& l_oData = m_oMediator->m_oItems[id];
 
-	if (l_oData->m_iNumRows != rowCount() || l_oData->m_iNumCols != columnCount())
+	if (l_oData.m_iNumRows != rowCount() || l_oData.m_iNumCols != columnCount())
 	{
-		setRowCount(l_oData->m_iNumRows);
-		setColumnCount(l_oData->m_iNumCols);
+		setRowCount(l_oData.m_iNumRows);
+		setColumnCount(l_oData.m_iNumCols);
 	}
 
 	QPair<int, int> t;
-	foreach (t, l_oData->m_oTableData.keys())
+	foreach (t, l_oData.m_oTableData.keys())
 	{
 		QTableWidgetItem *it = item(t.first, t.second);
 		if (!it)
@@ -271,7 +271,7 @@ void table_view::notify_table(int id)
 			it = new QTableWidgetItem();
 			setItem(t.first, t.second, it);
 		}
-		it->setText(l_oData->m_oTableData[t]);
+		it->setText(l_oData.m_oTableData[t]);
 	}
 	repaint();
 	m_bFreeze = false;
@@ -284,19 +284,18 @@ void table_view::notify_select(const QList<int>& unsel, const QList<int>& sel)
 	bool one = (sel.size() == 1);
 	if (one) {
 		m_iId = sel.at(0);
-		data_item *l_oData = m_oMediator->m_oItems.value(m_iId);
+		Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+		data_item& l_oData = m_oMediator->m_oItems[m_iId];
 
-		Q_ASSERT(l_oData!=NULL);
-
-		setRowCount(l_oData->m_iNumRows);
-		setColumnCount(l_oData->m_iNumCols);
+		setRowCount(l_oData.m_iNumRows);
+		setColumnCount(l_oData.m_iNumCols);
 
 		for (int i=0; i < rowCount(); ++i)
 		{
 			for (int j=0; j < columnCount(); ++j)
 			{
 				QTableWidgetItem *l_oItem = new QTableWidgetItem();
-				l_oItem->setText(l_oData->m_oTableData[QPair<int, int>(i, j)]);
+				l_oItem->setText(l_oData.m_oTableData[QPair<int, int>(i, j)]);
 				setItem(i, j, l_oItem);
 			}
 		}

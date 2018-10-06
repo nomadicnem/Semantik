@@ -21,11 +21,11 @@
 
 #define MIN_FORK_SIZE 30
 
-box_fork::box_fork(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), resizable(), m_oView(i_oParent)
+box_fork::box_fork(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), resizable(), m_oView(i_oParent),
+m_oItem(m_oView->m_oMediator->m_oItems[m_oView->m_iId])
 {
 	m_iId = i_iId;
-	m_oItem = m_oView->m_oMediator->m_oItems[m_oView->m_iId];
-	m_oBox = m_oItem->m_oBoxes[m_iId];
+	m_oBox = m_oItem.m_oBoxes[m_iId];
 	Q_ASSERT(m_oBox);
 
 	m_oChain = new box_chain(i_oParent);

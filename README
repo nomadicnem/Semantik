@@ -1,4 +1,4 @@
-Semantik 1.0.5, Thomas Nagy tnagy at waf.io
+Semantik 1.0.6, Thomas Nagy tnagy at waf.io
 Project page:  https://waf.io/semantik.html
 Source code:   https://gitlab.com/ita1024/semantik
 -----------------------------------------------
@@ -31,7 +31,7 @@ The generic command for creating a package is the following (packagers):
 
 2. Getting started:
 
-* double-click to add an item
+* double-click to add a leaf
 * when a leaf is selected, type 'enter' to start in-place editing, type 'enter' again to save
 * left,right,up,down keys to navigate in the tree
 * alt+left,right,up,down keys to move the selection around
@@ -88,6 +88,13 @@ GPL V3
 
 If you are getting screen artifacts when dragging and selecting elements,
 try changing the QtCurve Qt widget style to Breeze for example (Ubuntu 17.10).
+
+Documents created under specific font DPI settings in KDE may render
+improperly under other font DPI settings.
+
+Exported SVG document may render improperly if the fonts are not installed
+on the system; newer Semantik documents set "Monospace" as default
+font for this reason.
 
 -----------------------------------------------
 

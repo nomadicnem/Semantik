@@ -136,6 +136,7 @@ class canvas_view : public QGraphicsView
 		void notify_repaint(int id);
 		void notify_edit(int id);
 		void notify_flag(int id);
+		void notify_font();
 		void notify_sort(int, bool);
 		void notify_open_map();
 		void notify_change_data(int id);
@@ -143,7 +144,6 @@ class canvas_view : public QGraphicsView
 
 		void slot_change_data();
 		void reorganize();
-
 		void check_selection();
 
 	signals:
