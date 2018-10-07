@@ -1,7 +1,9 @@
 Semantik 1.0.6
 --------------
 * Improve the document export from the command-line
-* Fix annoying directory change behaviour
+* Fix some annoying with the base directory changing to /tmp
+* Persist font settings in documents
+* Update the French translation data
 
 Semantik 1.0.5
 --------------
