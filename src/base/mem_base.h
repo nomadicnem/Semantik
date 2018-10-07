@@ -105,6 +105,7 @@ class mem_doc_open : public mem_command {
 		QList<flag_scheme*> m_oFlagSchemesNew;
 		QHash<int, data_item> m_oItemsNew;
 		QList<QPoint> m_oLinksNew;
+		QString m_sLastSavedNew;
 
 		QString m_sOutDirOld;
 		QString m_sOutProjectOld;
@@ -122,6 +123,7 @@ class mem_doc_open : public mem_command {
 		QList<flag_scheme*> m_oFlagSchemesOld;
 		QHash<int, data_item> m_oItemsOld;
 		QList<QPoint> m_oLinksOld;
+		QString m_sLastSavedOld;
 
 		void init_data(sem_mediator*, sem_mediator*);
 

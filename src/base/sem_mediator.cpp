@@ -807,6 +807,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 		// The pictures are loaded and the data is known to be correct, so no more failure is expected
 		mem_doc_open *l_oOpen = new mem_doc_open(this);
 		l_oOpen->init_data(this, &l_oMediator);
+		l_oOpen->m_sLastSavedNew = i_sUrl;
 		l_oOpen->apply();
 		set_dirty(false);
 		return true;

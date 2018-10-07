@@ -313,6 +313,7 @@ void mem_doc_open::init_data(sem_mediator* i_oOld, sem_mediator* i_oNew)
 	m_oFlagSchemesOld = i_oOld->m_oFlagSchemes;
 	m_oItemsOld = i_oOld->m_oItems;
 	m_oLinksOld = i_oOld->m_oLinks;
+	m_sLastSavedOld = i_oOld->m_sLastSaved;
 }
 
 void mem_doc_open::redo()
@@ -336,6 +337,7 @@ void mem_doc_open::redo()
 	model->m_oFlagSchemes = m_oFlagSchemesNew;
 	model->m_oItems = m_oItemsNew;
 	model->m_oLinks = m_oLinksNew;
+	model->m_sLastSaved = m_sLastSavedNew;
 
 	model->notify_colors();
 	model->notify_flags();
@@ -381,6 +383,7 @@ void mem_doc_open::undo()
 	model->m_oFlagSchemes = m_oFlagSchemesOld;
 	model->m_oItems.clear();
 	model->m_oLinks.clear();
+	model->m_sLastSaved = m_sLastSavedOld;
 
 	model->notify_colors();
 	model->notify_flags();
