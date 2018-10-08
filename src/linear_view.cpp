@@ -12,7 +12,6 @@
 #include "linear_view.h"
 #include "con.h" 
 #include "mem_command.h"
-#include <KDE/KIconLoader>
 
 linear_view::linear_view(QWidget *i_oParent, sem_mediator *i_oControl) : QTreeWidget(i_oParent)
 {
@@ -361,16 +360,16 @@ void linear_view::notify_datatype(int i_iId)
 	switch (m_oMediator->m_oItems[i_iId].m_iDataType)
 	{
 		case VIEW_TEXT:
-			//l_oIcon = KIconLoader::global()->loadIconSet("text-plain", KIconLoader::Small);
+			//l_oIcon = QIcon::fromTheme("text-plain");
 			break;
 		case VIEW_IMG:
-			l_oIcon = KIconLoader::global()->loadIconSet("image-x-generic", KIconLoader::Small);
+			l_oIcon = QIcon::fromTheme("image-x-generic");
 			break;
 		case VIEW_DIAG:
-			l_oIcon = KIconLoader::global()->loadIconSet("semantik-d", KIconLoader::Small);
+			l_oIcon = QIcon::fromTheme("semantik-d");
 			break;
 		case VIEW_TABLE:
-			l_oIcon = KIconLoader::global()->loadIconSet("x-office-spreadsheet", KIconLoader::Small);
+			l_oIcon = QIcon::fromTheme("x-office-spreadsheet");
 			break;
 		default:
 			qDebug()<<"unknown datatype, this should not occur";
