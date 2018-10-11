@@ -258,7 +258,7 @@ bool semantik_reader::characters(const QString &i_s)
 
 sem_mediator::~sem_mediator()
 {
-	destroy_timer();
+	m_oTimer->disconnect();
 	clean_temp_dir();
 	while (!m_oFlagSchemes.empty())
 	{
@@ -266,35 +266,35 @@ sem_mediator::~sem_mediator()
 	}
 }
 
+void sem_mediator::stop_timer()
+{
+	m_oTimer->disconnect();
+}
+
 void sem_mediator::init_timer()
 {
-	destroy_timer();
-	if (m_iTimerValue<1) return;
-	m_oTimer = new QTimer(this);
+	if (m_iTimerValue < 1) return;
+	m_oTimer->disconnect();
 	m_oTimer->setInterval(m_iTimerValue * 60000);
 	connect(m_oTimer, SIGNAL(timeout()), this, SLOT(slot_autosave()));
 	m_oTimer->start();
 }
 
-void sem_mediator::destroy_timer()
-{
-	if (m_oTimer) m_oTimer->stop();
-	delete m_oTimer;
-	m_oTimer = NULL;
-}
-
 void sem_mediator::slot_autosave()
 {
 	// autosave for the last used save name
-	qDebug()<<"autosave"<<m_sLastSaved;
-	if (m_sLastSaved.length() > 1)
+	if (m_bDirty)
 	{
-		QString o = i18n("Automatic save failed for file: %1", m_sLastSaved);
-		if (save_file(m_sLastSaved))
+		qDebug()<<"autosave"<<m_sLastSaved;
+		if (m_sLastSaved.length() > 1)
 		{
-			o = i18n("%1 saved automatically", m_sLastSaved);
+			QString o = i18n("Automatic save failed for file: %1", m_sLastSaved);
+			if (save_file(m_sLastSaved))
+			{
+				o = i18n("%1 saved automatically", m_sLastSaved);
+			}
+			emit sig_message(o, 5000);
 		}
-		emit sig_message(o, 5000);
 	}
 }
 
@@ -322,8 +322,6 @@ void sem_mediator::init_colors()
 	m_dTriSize = l_oSettings.readEntry(notr("trisize"), (double) 4.5);
 	m_iTimerValue = l_oSettings.readEntry(notr("auto"), 0);
 	m_iAutoReorg = l_oSettings.readEntry(notr("autoReorg"), 1);
-
-	init_timer();
 
 	emit sync_colors();
 }
@@ -766,6 +764,8 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 	l_oMediator.num_seq = num_seq;
 	if (l_oMediator.open_raw(i_sUrl))
 	{
+		stop_timer();
+
 		// first import the picture data
 		QHash<int, int> l_oTranslate;
 		foreach (int l_iVal, l_oMediator.m_oItems.keys())
@@ -809,7 +809,6 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 		l_oOpen->init_data(this, &l_oMediator);
 		l_oOpen->m_sLastSavedNew = i_sUrl;
 		l_oOpen->apply();
-		set_dirty(false);
 		return true;
 	}
 	return false;
@@ -1319,6 +1318,8 @@ sem_mediator::sem_mediator(QObject* i_oParent) : QObject(i_oParent)
 		qDebug()<<"Access denied ^ô^";
 		Q_ASSERT(false);
 	}
+
+	m_oTimer = new QTimer(this);
 }
 
 bool html_converter::endElement(const QString&, const QString&, const QString& i_sName)

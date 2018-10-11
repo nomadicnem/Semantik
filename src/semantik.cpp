@@ -594,9 +594,8 @@ void semantik_win::slot_properties()
 		l_oSettings.writeEntry(notr("auto"), m_oMediator->m_iTimerValue = l_oGen.m_oAutoSave->value());
 		l_oSettings.writeEntry(notr("bgcolor"), l_oGen.m_oColor.name());
 		l_oSettings.writeEntry(notr("autoReorg"), m_oMediator->m_iAutoReorg = l_oGen.m_oAutoReorg->currentIndex());
-		//m_oMediator->init_timer();
-
 		m_oCanvas->setBackgroundBrush(l_oGen.m_oColor);
+		m_oMediator->init_timer();
 	}
 }
 

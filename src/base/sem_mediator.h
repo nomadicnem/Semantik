@@ -207,8 +207,8 @@ class sem_mediator: public QObject
 		int size_of(int i_iId);
 		int choose_root();
 
+		void stop_timer();
 		void init_timer();
-		void destroy_timer();
 
 		QString doc_to_xml();
 		data_item& operator+(const int x);

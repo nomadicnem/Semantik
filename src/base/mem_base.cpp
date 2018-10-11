@@ -318,6 +318,7 @@ void mem_doc_open::init_data(sem_mediator* i_oOld, sem_mediator* i_oNew)
 
 void mem_doc_open::redo()
 {
+	model->stop_timer();
 	m_oSel->redo();
 	m_oDelete->redo();
 
@@ -353,10 +354,13 @@ void mem_doc_open::redo()
 		model->notify_link_items(p.x(), p.y());
 	}
 	model->notify_open_map();
+	model->set_dirty(false);
+	model->init_timer();
 }
 
 void mem_doc_open::undo()
 {
+	model->stop_timer();
 	foreach (QPoint p, model->m_oLinks)
 	{
 		model->notify_unlink_items(p.x(), p.y());
@@ -391,4 +395,5 @@ void mem_doc_open::undo()
 
 	m_oDelete->undo();
 	m_oSel->undo();
+	model->init_timer();
 }
