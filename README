@@ -5,8 +5,8 @@ Source code:   https://gitlab.com/ita1024/semantik
 
 1. Compilation and installation:
 
-The main dependencies are Qt Webengine, KDE 5 and Python 3. Here are
-a few examples for typical setups:
+The main dependencies are Qt Webengine, KDE 5 and Python 3.
+Here are dependency examples for typical setups:
 
 Ubuntu 17.10: apt install libkf5kdelibs4support-dev libqt5svg5-dev qtwebengine5-dev qtpositioning5-dev python3-dev kio-dev
 Gentoo: emerge --ask kde-frameworks/kdelibs4support dev-qt/qtwebengine
@@ -16,65 +16,49 @@ Fedora 27: dnf install python3-devel kf5-kio-devel kf5-kdelibs4support-devel kf5
 FreeBSD 11: pkg add qt5-svg python36 qt5-webengine kf5-kio kf5-kdelibs4support kf5-ki18n kf5-kiconthemes
 
 To build the project, run:
-./waf configure build
+  ./waf configure build
 
 A few systems may require different options such as:
-PYTHON=python3 PYTHON_VERSION=3.5 waf configure build
+  PYTHON=python3 PYTHON_VERSION=3.5 waf configure build
 
-Then run the following installation command as root (important - Semantik will only work if installed):
-./waf install
+Semantik will only work if installed, so make sure to install
+after the configuration and builds are successful:
+  ./waf install
+
+Sometimes additional installation options may be necessary:
+  ./waf install --nomimes --noldconfig --nogtkicons
 
 The generic command for creating a package is the following (packagers):
-./waf configure clean build --prefix=/usr && DESTDIR=$fakeroot ./waf install
+  ./waf configure clean build --prefix=/usr && DESTDIR=$fakeroot ./waf install
 
 -----------------------------------------------
 
 2. Getting started:
 
-* double-click to add a leaf
-* when a leaf is selected, type 'enter' to start in-place editing, type 'enter' again to save
-* left,right,up,down keys to navigate in the tree
-* alt+left,right,up,down keys to move the selection around
-* double-click on a leaf to add a ramification
-* double-click on a link to disconnect
-
-Getting started with document generators:
-* look at the scripts in src/templates/
-* the naming is used for finding the files
-
-Getting started with the diagrams:
-* right-click to select a component to add
-* press enter to edit the properties
-* use the + to start dragging a connection
-* select a connection and move the points to change its dimensions
-
-More information can be found in about->help
+Consult the tips in the help menu!
 
 -----------------------------------------------
 
-3. Document generators:
+3. Document generators and pictures:
 
-* Do not open documents that you have not created yourself, there are no security restrictions at the moment
-* The document generation is performed in two steps: variable substitution and preprocessing
-* Variables in the form @var_name@ are replaced by the corresponding document variables
-* The core of the document is a variable itself
-* A c-like preprocessor is then run on the resulting document, using (nested) conditionals such as:
-  #if 0, #if !0, #ifdef var, #endif (the #elif construct is not supported yet)
-* External viewers can be used, from the 'variables' panel, add code in the form
+* For security reasons, only use documents that you have created yourself
+* Document generation is performed in two steps: variable substitution and preprocessing
+  - Variables in the form @var_name@ are replaced by the corresponding document variables
+    The core of the document is a variable itself
+  - A c-like preprocessor is then run on the resulting document, using (nested) conditionals such as:
+    #if 0, #if !0, #ifdef var, #endif (the #elif construct is not supported yet)
+* External viewers can be used, from the 'variables' panel, add code in the form:
   'command_'+template_name=command_line, for example:
-
-  command_html=kfmclient newTab %s
-  command_odt=oowriter %s
-  command_s5=firefox %s
-
+     command_html=kfmclient newTab %s
+     command_odt=oowriter %s
+     command_s5=firefox %s
   this is only necessary for documents that do not have a KDE mapping for opening them
 * LaTeX commands can be inserted by using all_latex=1
 
-It is also possible to export maps from the command-line (png or pdf):
-semantik foo.sem -o foo.pdf
-
+Maps picture can be exported from the command-line (png or pdf):
+  semantik foo.sem -o foo.pdf
 Diagrams can be exported in a similar fashion:
-semantik-d diag.semd -o foo.pdf
+  semantik-d diag.semd -o foo.pdf
 
 -----------------------------------------------
 
@@ -86,7 +70,7 @@ GPL V3
 
 5. Quirks:
 
-If you are getting screen artifacts when dragging and selecting elements,
+If screen artifacts are observed when dragging and selecting elements,
 try changing the QtCurve Qt widget style to Breeze for example (Ubuntu 17.10).
 
 Documents created under specific font DPI settings in KDE may render
