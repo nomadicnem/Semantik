@@ -35,6 +35,12 @@ for x in lst:
 		key = x.split('.')[0].replace('diag-', '')
 		pics[key] = x
 		shutil.copy2(os.path.join(temp_dir, x), outdir)
+	elif x.startswith('img-'):
+		key = x.split('.')[0].replace('img-', '')
+		if not key in pics:
+			pics[key] = x
+		shutil.copy2(os.path.join(temp_dir, x), outdir)
+
 
 buf = []
 out = buf.append
@@ -96,14 +102,14 @@ def print_figure_slides(node, niv):
 						else:
 							out('\t\t<th>%s</th>\n' % x(node.get_cell(i, j)))
 					out('\t</tr>\n')
-		
+
 				out('</tbody>\n')
 				out('</table>\n')
 				out('</div>\n')
 			out('\n')
 
 		elif typo == 'img' or typo == 'diag':
-			id = node.get_val('id')
+			id = node.get_val('id' if typo == 'diag' else 'pic_id')
 			if id in pics:
 
 				caption = node.get_var('caption')

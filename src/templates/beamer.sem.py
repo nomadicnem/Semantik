@@ -181,10 +181,10 @@ def print_figure_slides(node, recurse=False):
 				if not caption: caption = caption = node.get_val('summary')
 
 				restrict = node.get_var("picdim")
-				if not restrict:
-					w = int(node.get_val('pic_w'))
-					restrict = ""
-					if (w > 5*72): restrict = "[width=5in]"
+				#if not restrict:
+				#	w = int(node.get_val('pic_w'))
+				#	restrict = ""
+				#	if (w > 5*72): restrict = "[width=5in]"
 				if not restrict:
 					restrict = "[width=0.8\\textwidth,height=0.7\\textheight,keepaspectratio]"
 

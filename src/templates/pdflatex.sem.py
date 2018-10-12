@@ -163,12 +163,12 @@ def print_nodes(node, niv):
 			if not caption: caption = caption = node.get_val('summary')
 
 			restrict = node.get_var("picdim")
+			#if not restrict:
+			#	w = int(node.get_val('pic_w'))
+			#	restrict = ""
+			#	if (w > 5*72): restrict = "[width=5in]"
 			if not restrict:
-				w = int(node.get_val('pic_w'))
-				restrict = ""
-				if (w > 5*72): restrict = "[width=5in]"
-			if not restrict:
-				restrict = "[width=\\textwidth,height=\\textheight,keepaspectratio]"
+				restrict = "[width=0.95\\textwidth,height=0.95\\textheight,keepaspectratio]"
 
 			out('\\begin{figure}[htbp]\n')
 			out('  \\begin{center}\n')
