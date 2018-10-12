@@ -68,6 +68,11 @@ for x in lst:
 		if x.endswith('.pdf') or not key in pics:
 			pics[key] = x
 		shutil.copy2(os.path.join(temp_dir, x), outdir)
+	elif x.startswith('img-'):
+		key = x.split('.')[0].replace('img-', '')
+		if not key in pics:
+			pics[key] = x
+		shutil.copy2(os.path.join(temp_dir, x), outdir)
 
 buf = []
 out = buf.append
@@ -151,7 +156,7 @@ def print_nodes(node, niv):
 		out('\n')
 
 	elif typo == 'img' or typo == 'diag':
-		id = node.get_val('id')
+		id = node.get_val('id' if typo == 'diag' else 'pic_id')
 		if id in pics:
 
 			caption = node.get_var('caption')

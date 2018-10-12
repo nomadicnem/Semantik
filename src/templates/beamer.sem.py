@@ -57,10 +57,15 @@ except OSError: debug('Cannot create folder ' + outdir)
 temp_dir = sembind.get_var('temp_dir')
 pics = {} # map the id to the picture
 lst = os.listdir(temp_dir)
-for x in lst:
+for x in sorted(lst):
 	if x.startswith('diag-'):
 		key = x.split('.')[0].replace('diag-', '')
 		if x.endswith('.pdf') or not key in pics:
+			pics[key] = x
+		shutil.copy2(os.path.join(temp_dir, x), outdir)
+	elif x.startswith('img-'):
+		key = x.split('.')[0].replace('img-', '')
+		if not key in pics:
 			pics[key] = x
 		shutil.copy2(os.path.join(temp_dir, x), outdir)
 
@@ -169,7 +174,7 @@ def print_figure_slides(node, recurse=False):
 			out('\n')
 
 		elif typo == 'img' or typo == 'diag':
-			id = node.get_val('id')
+			id = node.get_val('id' if typo == 'diag' else 'pic_id')
 			if id in pics:
 
 				caption = node.get_var('caption')
