@@ -1772,8 +1772,7 @@ bool box_view::import_from_file(const QUrl& l_o)
 	bool l_bOk = false;
 	if (x->open_raw(l_o.path()) && x->m_oItems.size() == 1) {
 		l_bOk = true;
-		Q_ASSERT(x->m_oItems.contains(1));
-		data_item& tmp = x->m_oItems[1];
+		data_item& tmp = x->m_oItems[x->m_oItems.keys().at(0)];
 
 		mem_import_box *imp = new mem_import_box(m_oMediator, m_iId);
 		imp->init(tmp.m_oBoxes.values(), tmp.m_oLinks);
