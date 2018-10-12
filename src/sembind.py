@@ -68,6 +68,8 @@ class RawProcessor(HTMLParser):
 			self.inline_num.pop()
 		elif tag == 'style':
 			pass
+		elif tag == 'br':
+			self.buf.append('\n')
 		else:
 			self.pieces.append(''.join(self.buf))
 
