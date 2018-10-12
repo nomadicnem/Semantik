@@ -7,6 +7,7 @@
 #include <QStack>
 #include <QXmlDefaultHandler>
 #include<QUrl> 
+ #include   <QMutex> 
 // FIXME
 // #include <kio/netaccess.h>
 
@@ -207,6 +208,7 @@ class sem_mediator: public QObject
 		int size_of(int i_iId);
 		int choose_root();
 
+		QMutex m_oSaveMutex;
 		void stop_timer();
 		void init_timer();
 

@@ -14,7 +14,7 @@
 	#undef _XOPEN_SOURCE
 #endif
 
-
+#include<QMutexLocker>
  #include <QFile>
 #include<QTimer>
  #include <QtDebug>
@@ -626,7 +626,7 @@ QString sem_mediator::doc_to_xml()
 bool sem_mediator::save_file(QString i_sUrl)
 {
 	//Q_ASSERT(i_sUrl.endsWith(".sem"));
-
+	QMutexLocker l_oLocker(&m_oSaveMutex);
 	QFile l_o2(QString(TEMPLATE_DIR)+notr("/semantik.sem.py"));
 	if (!l_o2.open(QIODevice::ReadOnly))
 	{
@@ -760,6 +760,7 @@ bool sem_mediator::open_raw(const QString& i_sUrl)
 
 bool sem_mediator::open_file(const QString& i_sUrl)
 {
+	QMutexLocker l_oLocker(&m_oSaveMutex);
 	sem_mediator l_oMediator(this);
 	l_oMediator.num_seq = num_seq;
 	if (l_oMediator.open_raw(i_sUrl))
@@ -1136,6 +1137,7 @@ int sem_mediator::num_children(int i_iParent)
 
 int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirName, const QString &i_sLocation)
 {
+	QMutexLocker l_oLocker(&m_oSaveMutex);
 	if (choose_root() == NO_ITEM)
 	{
 		qDebug()<<"Missing root item";
