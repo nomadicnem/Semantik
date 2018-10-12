@@ -108,25 +108,25 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 	#ifdef _DEBUG
 		return true;
 	#endif
-	if (i_sName == i18n("box_item"))
+	if (i_sName == notr("box_item"))
 	{
-		int id = i_oAttrs.value(i18n("id")).toInt();
+		int id = i_oAttrs.value(notr("id")).toInt();
 
 		data_box *box = new data_box(id);
 		m_oMediator->m_oMediator->m_oItems[m_iId].m_oBoxes[id] = box;
-		box->m_iXX = i_oAttrs.value(i18n("c1")).toFloat();
-		box->m_iYY = i_oAttrs.value(i18n("c2")).toFloat();
-		box->m_sText = i_oAttrs.value(i18n("text"));
-		box->m_oCustom.m_oInnerColor = i_oAttrs.value(i18n("col"));
-		//l_o->setRect(QRectF(0., 0., i_oAttrs.value(i18n("c3")).toDouble(), i_oAttrs.value(i18n("c4")).toDouble()));
+		box->m_iXX = i_oAttrs.value(notr("c1")).toFloat();
+		box->m_iYY = i_oAttrs.value(notr("c2")).toFloat();
+		box->m_sText = i_oAttrs.value(notr("text"));
+		box->m_oCustom.m_oInnerColor = i_oAttrs.value(notr("col"));
+		//l_o->setRect(QRectF(0., 0., i_oAttrs.value(notr("c3")).toDouble(), i_oAttrs.value(notr("c4")).toDouble()));
 	}
-	else if (i_sName == i18n("box_link"))
+	else if (i_sName == notr("box_link"))
 	{
 		data_link *link = new data_link();
-		link->m_iParentPos = i_oAttrs.value(i18n("p1")).toInt();
-		link->m_iParent    = i_oAttrs.value(i18n("c1")).toInt();
-		link->m_iChildPos  = i_oAttrs.value(i18n("p2")).toInt();
-		link->m_iChild     = i_oAttrs.value(i18n("c2")).toInt();
+		link->m_iParentPos = i_oAttrs.value(notr("p1")).toInt();
+		link->m_iParent    = i_oAttrs.value(notr("c1")).toInt();
+		link->m_iChildPos  = i_oAttrs.value(notr("p2")).toInt();
+		link->m_iChild     = i_oAttrs.value(notr("c2")).toInt();
 
 		if (link->m_iChildPos == 0) link->m_iChildPos = data_link::NORTH;
 		if (link->m_iChildPos == 1) link->m_iChildPos = data_link::WEST;
@@ -138,21 +138,21 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 		if (link->m_iParentPos == 2) link->m_iParentPos = data_link::SOUTH;
 		if (link->m_iParentPos == 3) link->m_iParentPos = data_link::EAST;
 
-		link->m_sCaption = i_oAttrs.value(i18n("caption"));
-		link->m_sParentCaption = i_oAttrs.value(i18n("parent_caption"));
-		link->m_sChildCaption = i_oAttrs.value(i18n("child_caption"));
+		link->m_sCaption = i_oAttrs.value(notr("caption"));
+		link->m_sParentCaption = i_oAttrs.value(notr("parent_caption"));
+		link->m_sChildCaption = i_oAttrs.value(notr("child_caption"));
 
-		link->pen_style = (Qt::PenStyle) i_oAttrs.value(i18n("pen_style")).toInt();
-		link->border_width = i_oAttrs.value(i18n("border_width")).toInt();
+		link->pen_style = (Qt::PenStyle) i_oAttrs.value(notr("pen_style")).toInt();
+		link->border_width = i_oAttrs.value(notr("border_width")).toInt();
 		m_oCurrent = link;
 		Q_ASSERT(m_oMediator->m_oMediator->m_oItems.contains(m_iId));
 		m_oMediator->m_oMediator->m_oItems[m_iId].m_oLinks.append(link);
 	}
-	else if (i_sName == i18n("box_link_offset"))
+	else if (i_sName == notr("box_link_offset"))
 	{
 		if (m_oCurrent)
 		{
-			m_oCurrent->m_oOffsets.append(QPoint(i_oAttrs.value(i18n("x")).toInt(), i_oAttrs.value(i18n("y")).toInt()));
+			m_oCurrent->m_oOffsets.append(QPoint(i_oAttrs.value(notr("x")).toInt(), i_oAttrs.value(notr("y")).toInt()));
 		}
 	}
 
@@ -161,7 +161,7 @@ bool box_reader::startElement(const QString&, const QString&, const QString& i_s
 
 bool box_reader::endElement(const QString&, const QString&, const QString& i_sName)
 {
-	if (i_sName == i18n("box_link"))
+	if (i_sName == notr("box_link"))
 	{
 		m_oCurrent = NULL;
 	}

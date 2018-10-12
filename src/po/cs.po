@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-09-29 06:48+0200\n"
+"POT-Creation-Date: 2018-10-12 23:33+0200\n"
 "PO-Revision-Date: 2012-10-21 19:45+0200\n"
 "Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "X-Language: cs_CZ\n"
 "X-Source-Language: C\n"
 
-#: base/data_item.cpp:60 canvas_view.cpp:242 canvas_view.cpp:294
-#: canvas_view.cpp:306
+#: base/data_item.cpp:59 canvas_view.cpp:244 canvas_view.cpp:296
+#: canvas_view.cpp:308
 msgid "Empty"
 msgstr "Prázdné"
 
@@ -27,67 +27,82 @@ msgstr "Prázdné"
 msgid "Flag item(s) as..."
 msgstr "Označit položku(y) jako..."
 
-#: base/sem_mediator.cpp:285
+#: base/sem_mediator.cpp:291
 msgid "Automatic save failed for file: %1"
 msgstr "Automatické uložení se nepodařilo u souboru: %1"
 
-#: base/sem_mediator.cpp:288
+#: base/sem_mediator.cpp:294
 msgid "%1 saved automatically"
 msgstr "%1 uložen automaticky"
 
-#: base/sem_mediator.cpp:306
+#: base/sem_mediator.cpp:313
 msgid "Color %1"
 msgstr "Barva %1"
 
-#: base/sem_mediator.cpp:627
+#: base/sem_mediator.cpp:633
 msgid "File saving: missing file %1"
 msgstr "Ukládání souboru: chybí soubor %1"
 
-#: base/sem_mediator.cpp:652 base/sem_mediator.cpp:1171
-#: base/sem_mediator.cpp:1220
+#: base/sem_mediator.cpp:658 base/sem_mediator.cpp:1185
+#: base/sem_mediator.cpp:1234
 msgid "Missing bindings for opening files"
 msgstr "Chybí spojení pro otevření souborů"
 
-#: base/sem_mediator.cpp:707
+#: base/sem_mediator.cpp:685
 msgid "Missing filter file %1 for opening files"
 msgstr "Chybí soubor s filtrem %1 pro otevření souborů"
 
-#: base/sem_mediator.cpp:707 base/sem_mediator.cpp:722
+#: base/sem_mediator.cpp:685 base/sem_mediator.cpp:699
+#: base/sem_mediator.cpp:705
 msgid "Broken installation"
 msgstr "Poškozená instalace"
 
-#: base/sem_mediator.cpp:722
+#: base/sem_mediator.cpp:699
 msgid "Missing python bindings for opening files"
 msgstr "Chybí spojení python pro otevření souborů"
 
-#: base/sem_mediator.cpp:742
+#: base/sem_mediator.cpp:705
+msgid "Python execution failure"
+msgstr ""
+
+#: base/sem_mediator.cpp:717
 msgid "Could not load the document %1"
 msgstr "Nepodařilo se nahrát dokument %1"
 
-#: base/sem_mediator.cpp:742 base/sem_mediator.cpp:769
+#: base/sem_mediator.cpp:717 base/sem_mediator.cpp:736
+#: base/sem_mediator.cpp:753 base/sem_mediator.cpp:794
+#: base/sem_mediator.cpp:803
 msgid "Broken document"
 msgstr "Poškozený dokument"
 
-#: base/sem_mediator.cpp:769
+#: base/sem_mediator.cpp:736 base/sem_mediator.cpp:753
 #, fuzzy
 msgid "Could not load the picture %1"
 msgstr "Nepodařilo se nahrát obrázek"
 
-#: base/sem_mediator.cpp:1130
+#: base/sem_mediator.cpp:794
+msgid "Something is wrong with %1"
+msgstr ""
+
+#: base/sem_mediator.cpp:803
+msgid "Rename the picture %1 to %2 failed"
+msgstr ""
+
+#: base/sem_mediator.cpp:1144
 #, fuzzy
 msgid "Code generation failed: no root item"
 msgstr "Vytvoření kódu se nepodařilo: chybí soubor %1"
 
-#: base/sem_mediator.cpp:1137
+#: base/sem_mediator.cpp:1151
 msgid "Code generation failed: missing file %1"
 msgstr "Vytvoření kódu se nepodařilo: chybí soubor %1"
 
-#: base/sem_mediator.cpp:1177
+#: base/sem_mediator.cpp:1191
 #, fuzzy
 msgid "Document generation failed, check the output folder"
 msgstr "Vytvoření dokumentu úspěšně dokončeno"
 
-#: base/sem_mediator.cpp:1181
+#: base/sem_mediator.cpp:1195
 msgid "Document generation completed successfully"
 msgstr "Vytvoření dokumentu úspěšně dokončeno"
 
@@ -171,51 +186,47 @@ msgstr "Tabulka"
 msgid "Image"
 msgstr "Obrázek"
 
-#: canvas_view.cpp:607
-msgid "Flag"
-msgstr "Příznak"
-
-#: canvas_view.cpp:934
+#: canvas_view.cpp:904
 msgid "Click to set Item %1"
 msgstr "Klepněte pro umístění položky %1"
 
-#: canvas_view.cpp:1282 fig/box_view.cpp:2060
+#: canvas_view.cpp:1250 fig/box_view.cpp:2066
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2098
+#: canvas_view.cpp:1288 fig/box_view.cpp:2104
 msgid "No destination file selected"
 msgstr "Nevybrán žádný cílový soubor"
 
-#: canvas_view.cpp:1344 fig/box_view.cpp:2122
+#: canvas_view.cpp:1312 fig/box_view.cpp:2128
 msgid "Exported '%1'"
 msgstr "Vyvedeno '%1'"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1314 fig/box_view.cpp:2130
 msgid "Could not save to %1"
 msgstr "Nepodařilo se uložit do %1"
 
-#: canvas_view.cpp:1346 fig/box_view.cpp:2124
+#: canvas_view.cpp:1314 fig/box_view.cpp:2130
 msgid "Missing picture"
 msgstr "Chybí obrázek"
 
-#: canvas_view.cpp:1640
+#: canvas_view.cpp:1607
 #, fuzzy
 msgid "Semantik map"
 msgstr "Semantik"
 
-#: canvas_view.cpp:1676 fig/box_view.cpp:1985
+#: canvas_view.cpp:1645 fig/box_view.cpp:1990
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1687 fig/box_view.cpp:1996
+#: canvas_view.cpp:1656 fig/box_view.cpp:2001
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1691 fig/box_view.cpp:2000
+#: canvas_view.cpp:1660 fig/box_view.cpp:2005
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -491,104 +502,104 @@ msgstr "Chybí data"
 msgid "Font properties"
 msgstr "Vlastnosti odkazu"
 
-#: fig/box_fork.cpp:333 fig/box_item.cpp:289
+#: fig/box_fork.cpp:331 fig/box_item.cpp:287
 msgid "%1 x %2"
 msgstr "%1 x %2"
 
-#: fig/box_item.cpp:127
+#: fig/box_item.cpp:125
 #, fuzzy
 msgid "Diagram box properties"
 msgstr "Vlastnosti odkazu"
 
-#: fig/box_item.cpp:128
+#: fig/box_item.cpp:126
 msgid "Text:"
 msgstr "Text:"
 
-#: fig/box_link_properties.cpp:24
+#: fig/box_link_properties.cpp:25
 msgid "Link properties"
 msgstr "Vlastnosti odkazu"
 
-#: fig/box_link_properties.cpp:35
+#: fig/box_link_properties.cpp:36
 #, fuzzy
 msgid "Link text"
 msgstr "Plovoucí text"
 
-#: fig/box_link_properties.cpp:39
+#: fig/box_link_properties.cpp:40
 #, fuzzy
 msgid "Origin cardinality"
 msgstr "Šipka doprava"
 
-#: fig/box_link_properties.cpp:43
+#: fig/box_link_properties.cpp:44
 #, fuzzy
 msgid "Target cardinality"
 msgstr "Šipka doleva"
 
-#: fig/box_link_properties.cpp:48
+#: fig/box_link_properties.cpp:49
 msgid "Thickness"
 msgstr "Tloušťka"
 
-#: fig/box_link_properties.cpp:52
+#: fig/box_link_properties.cpp:53
 #, fuzzy
 msgid "Line Type"
 msgstr "Styl čáry"
 
-#: fig/box_link_properties.cpp:56
+#: fig/box_link_properties.cpp:57
 msgid "Line Style"
 msgstr "Styl čáry"
 
-#: fig/box_link_properties.cpp:60
+#: fig/box_link_properties.cpp:61
 #, fuzzy
 msgid "Origin arrow"
 msgstr "Šipka doprava"
 
-#: fig/box_link_properties.cpp:64
+#: fig/box_link_properties.cpp:65
 #, fuzzy
 msgid "Target arrow"
 msgstr "Šipka doleva"
 
-#: fig/box_link_properties.cpp:83
+#: fig/box_link_properties.cpp:84
 msgid "Zigzag"
 msgstr ""
 
-#: fig/box_link_properties.cpp:84
+#: fig/box_link_properties.cpp:85
 #, fuzzy
 msgid "Straight"
 msgstr "Vybrat doprava"
 
-#: fig/box_link_properties.cpp:88
+#: fig/box_link_properties.cpp:89
 msgid "Invisible line"
 msgstr "Neviditelná čára"
 
-#: fig/box_link_properties.cpp:89
+#: fig/box_link_properties.cpp:90
 msgid "Solid Line"
 msgstr "Plná čára"
 
-#: fig/box_link_properties.cpp:90
+#: fig/box_link_properties.cpp:91
 msgid "Dash Line"
 msgstr "Čárkovaná čára"
 
-#: fig/box_link_properties.cpp:91
+#: fig/box_link_properties.cpp:92
 msgid "Dot Line"
 msgstr "Tečkovaná čára"
 
-#: fig/box_link_properties.cpp:95 fig/box_link_properties.cpp:103
+#: fig/box_link_properties.cpp:96 fig/box_link_properties.cpp:104
 msgid "No arrow"
 msgstr "Žádná šipka"
 
-#: fig/box_link_properties.cpp:96 fig/box_link_properties.cpp:104
+#: fig/box_link_properties.cpp:97 fig/box_link_properties.cpp:105
 msgid "Triangle"
 msgstr "Trojúhelník"
 
-#: fig/box_link_properties.cpp:97 fig/box_link_properties.cpp:105
+#: fig/box_link_properties.cpp:98 fig/box_link_properties.cpp:106
 #, fuzzy
 msgid "Link"
 msgstr "&Spojit"
 
-#: fig/box_link_properties.cpp:98 fig/box_link_properties.cpp:106
+#: fig/box_link_properties.cpp:99 fig/box_link_properties.cpp:107
 msgid "Inheritance"
 msgstr ""
 
-#: fig/box_link_properties.cpp:99 fig/box_link_properties.cpp:107
+#: fig/box_link_properties.cpp:100 fig/box_link_properties.cpp:108
 #, fuzzy
 msgid "Aggregation"
 msgstr "Organizace"
@@ -609,77 +620,6 @@ msgstr ""
 #, fuzzy
 msgid "%1 x %2 (%3+%4)"
 msgstr "%1 x %2"
-
-#: fig/box_view.cpp:111
-msgid "box_item"
-msgstr "Položka okna"
-
-#: fig/box_view.cpp:113
-msgid "id"
-msgstr "ID"
-
-#: fig/box_view.cpp:118 fig/box_view.cpp:128
-msgid "c1"
-msgstr "c1"
-
-#: fig/box_view.cpp:119 fig/box_view.cpp:130
-msgid "c2"
-msgstr "c2"
-
-#: fig/box_view.cpp:120
-msgid "text"
-msgstr "text"
-
-#: fig/box_view.cpp:121
-msgid "col"
-msgstr "sloup"
-
-#: fig/box_view.cpp:124 fig/box_view.cpp:164
-msgid "box_link"
-msgstr "odkaz"
-
-#: fig/box_view.cpp:127
-msgid "p1"
-msgstr "p1"
-
-#: fig/box_view.cpp:129
-msgid "p2"
-msgstr "p2"
-
-#: fig/box_view.cpp:142
-#, fuzzy
-msgid "caption"
-msgstr "Umístění"
-
-#: fig/box_view.cpp:143
-#, fuzzy
-msgid "parent_caption"
-msgstr "Popisek obrázku"
-
-#: fig/box_view.cpp:144
-#, fuzzy
-msgid "child_caption"
-msgstr "Umístění"
-
-#: fig/box_view.cpp:146
-msgid "pen_style"
-msgstr ""
-
-#: fig/box_view.cpp:147
-msgid "border_width"
-msgstr ""
-
-#: fig/box_view.cpp:151
-msgid "box_link_offset"
-msgstr "posun_odkazu"
-
-#: fig/box_view.cpp:155
-msgid "x"
-msgstr "x"
-
-#: fig/box_view.cpp:155
-msgid "y"
-msgstr "y"
 
 #: fig/box_view.cpp:194
 msgid "Properties..."
@@ -850,26 +790,26 @@ msgstr "Stejná výška"
 msgid "Same width and height"
 msgstr "Stejná šířka a výška"
 
-#: fig/box_view.cpp:607 fig/box_view.cpp:1948
+#: fig/box_view.cpp:607 fig/box_view.cpp:1952
 #, fuzzy
 msgid "Semantik diagram"
 msgstr "Semantik %1"
 
-#: fig/box_view.cpp:1755 fig/semantik_d_win.cpp:324
+#: fig/box_view.cpp:1757 fig/semantik_d_win.cpp:321
 #, fuzzy
 msgid "Choose a file to open"
 msgstr "Vybrat název souboru"
 
-#: fig/box_view.cpp:1757 fig/box_view.cpp:1795 fig/semantik_d_win.cpp:326
+#: fig/box_view.cpp:1759 fig/box_view.cpp:1797 fig/semantik_d_win.cpp:323
 #, fuzzy
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.sem|Soubor pro Semantik (*.sem)"
 
-#: fig/box_view.cpp:1793 semantik.cpp:441 semantik.cpp:533
+#: fig/box_view.cpp:1795 semantik.cpp:449 semantik.cpp:541
 msgid "Choose a file name"
 msgstr "Vybrat název souboru"
 
-#: fig/box_view.cpp:1809 semantik.cpp:456
+#: fig/box_view.cpp:1811 semantik.cpp:464
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
@@ -877,22 +817,22 @@ msgstr ""
 "Soubor \"%1\" již existuje.\n"
 "Přepsat jej?"
 
-#: fig/box_view.cpp:1810 semantik.cpp:457
+#: fig/box_view.cpp:1812 semantik.cpp:465
 msgid "Overwrite existing file"
 msgstr "Přepsat stávající soubor"
 
-#: fig/box_view.cpp:1832 fig/box_view.cpp:1866 semantik.cpp:468
-#: semantik.cpp:504
+#: fig/box_view.cpp:1835 fig/box_view.cpp:1870 semantik.cpp:476
+#: semantik.cpp:512
 msgid "Saved '%1'"
 msgstr "Uloženo '%1'"
 
-#: fig/box_view.cpp:1839 semantik.cpp:479 semantik.cpp:510
+#: fig/box_view.cpp:1842 semantik.cpp:487 semantik.cpp:518
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1840 semantik.cpp:480 semantik.cpp:511
+#: fig/box_view.cpp:1843 semantik.cpp:488 semantik.cpp:519
 msgid "Try again?"
 msgstr ""
 
@@ -909,51 +849,51 @@ msgstr "Řádky"
 msgid "Columns"
 msgstr "Sloupce"
 
-#: fig/semantik_d_win.cpp:41 semantik.cpp:145
+#: fig/semantik_d_win.cpp:40 semantik.cpp:145
 msgid "Colors"
 msgstr "Barvy"
 
-#: fig/semantik_d_win.cpp:67
+#: fig/semantik_d_win.cpp:66
 #, fuzzy
 msgid "&Export the diagram..."
 msgstr "&Vyvést mapu..."
 
-#: fig/semantik_d_win.cpp:69 semantik.cpp:179
+#: fig/semantik_d_win.cpp:68 semantik.cpp:179
 msgid "Ctrl+Shift+E"
 msgstr "Ctrl+Shift+E"
 
-#: fig/semantik_d_win.cpp:74 semantik.cpp:200
+#: fig/semantik_d_win.cpp:73 semantik.cpp:196
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: fig/semantik_d_win.cpp:78
+#: fig/semantik_d_win.cpp:77
 #, fuzzy
 msgid "Files"
 msgstr "&Soubor"
 
-#: fig/semantik_d_win.cpp:94 semantik.cpp:270
+#: fig/semantik_d_win.cpp:89 semantik.cpp:261
 msgid "Color"
 msgstr "Barva"
 
-#: fig/semantik_d_win.cpp:102 semantik.cpp:278
+#: fig/semantik_d_win.cpp:97 semantik.cpp:270
 msgid "Custom color"
 msgstr "Vlastní barva"
 
-#: fig/semantik_d_win.cpp:109
+#: fig/semantik_d_win.cpp:106
 #, fuzzy
 msgid "This is Semantik-d"
 msgstr "Semantik"
 
-#: fig/semantik_d_win.cpp:222
+#: fig/semantik_d_win.cpp:219
 #, fuzzy
 msgid "[Untitled]"
 msgstr "Nepojmenovaný"
 
-#: fig/semantik_d_win.cpp:291 semantik.cpp:605
+#: fig/semantik_d_win.cpp:288 semantik.cpp:612
 msgid "Untitled"
 msgstr "Nepojmenovaný"
 
-#: fig/semantik_d_win.cpp:294 semantik.cpp:608
+#: fig/semantik_d_win.cpp:291 semantik.cpp:615
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -961,20 +901,20 @@ msgstr ""
 "Dokument \"%1\" byl změněn.\n"
 "Chcete svoje změny uložit nebo je vyhodit?"
 
-#: fig/semantik_d_win.cpp:295 semantik.cpp:609
+#: fig/semantik_d_win.cpp:292 semantik.cpp:616
 msgid "Close Document"
 msgstr "Zavřít dokument"
 
-#: fig/semantik_d_win.cpp:432 semantik.cpp:546
+#: fig/semantik_d_win.cpp:429 semantik.cpp:554
 msgid " [Modified] "
 msgstr " [Změněno] "
 
-#: fig/semantik_d_win.cpp:437
+#: fig/semantik_d_win.cpp:434
 #, fuzzy
 msgid "Semantik Diagram %1"
 msgstr "Semantik %1"
 
-#: fig/semantik_d_win.cpp:441
+#: fig/semantik_d_win.cpp:438
 #, fuzzy
 msgid "%1 %2 - Semantik Diagram"
 msgstr "%1 %2 - Semantik"
@@ -1178,7 +1118,7 @@ msgstr "Nápo&věda"
 msgid "Colors Toolbar"
 msgstr "Nástrojový pruh barev"
 
-#. i18n: file: data/semantikui.rc:45
+#. i18n: file: data/semantikui.rc:53
 #. i18n: ectx: ToolBar (flagsBar)
 #: po/rc.cpp:45 rc.cpp:45
 msgid "Flags Toolbar"
@@ -1234,40 +1174,44 @@ msgstr "&Vytvořit..."
 msgid "Ctrl+G"
 msgstr "Ctrl+G"
 
-#: semantik.cpp:209
+#: semantik.cpp:205
 msgid "Data"
 msgstr "Data"
 
-#: semantik.cpp:233
+#: semantik.cpp:229
 msgid "Variables"
 msgstr "Proměnné"
 
-#: semantik.cpp:242
+#: semantik.cpp:238
 msgid "Preview"
 msgstr "Náhled"
 
-#: semantik.cpp:254
+#: semantik.cpp:250
 msgid "Linear view"
 msgstr "Přímočarý pohled"
 
-#: semantik.cpp:366
+#: semantik.cpp:281
+msgid "flag"
+msgstr ""
+
+#: semantik.cpp:374
 msgid "Welcome to Semantik"
 msgstr "Vítejte v Semantiku"
 
-#: semantik.cpp:443
+#: semantik.cpp:451
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Soubor pro Semantik (*.sem)"
 
-#: semantik.cpp:535
+#: semantik.cpp:543
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 "*.sem *.kdi *.mm *.vym|Všechny podporované soubory (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:551
+#: semantik.cpp:559
 msgid "Semantik %1"
 msgstr "Semantik %1"
 
-#: semantik.cpp:555
+#: semantik.cpp:563
 msgid "%1 %2 - Semantik"
 msgstr "%1 %2 - Semantik"
 
@@ -1334,6 +1278,57 @@ msgstr "&Podtržení"
 #: text_view.cpp:50
 msgid "Ctrl+U"
 msgstr "CTRL+U"
+
+#~ msgid "Flag"
+#~ msgstr "Příznak"
+
+#~ msgid "box_item"
+#~ msgstr "Položka okna"
+
+#~ msgid "id"
+#~ msgstr "ID"
+
+#~ msgid "c1"
+#~ msgstr "c1"
+
+#~ msgid "c2"
+#~ msgstr "c2"
+
+#~ msgid "text"
+#~ msgstr "text"
+
+#~ msgid "col"
+#~ msgstr "sloup"
+
+#~ msgid "box_link"
+#~ msgstr "odkaz"
+
+#~ msgid "p1"
+#~ msgstr "p1"
+
+#~ msgid "p2"
+#~ msgstr "p2"
+
+#, fuzzy
+#~ msgid "caption"
+#~ msgstr "Umístění"
+
+#, fuzzy
+#~ msgid "parent_caption"
+#~ msgstr "Popisek obrázku"
+
+#, fuzzy
+#~ msgid "child_caption"
+#~ msgstr "Umístění"
+
+#~ msgid "box_link_offset"
+#~ msgstr "posun_odkazu"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "y"
+#~ msgstr "y"
 
 #~ msgid "*.png|PNG Files (*.png)"
 #~ msgstr "*.png|Soubory PNG (*.png)"
