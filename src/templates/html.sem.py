@@ -44,15 +44,27 @@ def print_nodes(node, niv, lbl_lst):
 	lbl = ".".join(lbl_lst)
 
 	typo = node.get_val('type')
-	if typo == 'text':
+	if typo in ['text']:
 		if niv == 0:
 			settings['doc_title'] = node.get_val('summary')
 		elif niv in range(5):
 			out('<h%d><span class="show_niv">%s</span>%s</h%d>\n' % \
 				(niv, lbl, node.get_val('summary'), niv))
 
-		y = node.get_val('text')
-		out(p(y))
+		body = parse_raw(node.get_val('text')).strip()
+		lang = node.get_var('minted_lang').strip()
+		if body:
+			if lang:
+				html_code = pygmentize(lang, body)
+				global pygments_css_data
+				if not pygments_css_data:
+					pygments_css_data = pygmentize_css()
+				out(html_code)
+			else:
+				debug('For code snippets, set the variable minted_lang\n')
+		else:
+			y = node.get_val('text')
+			out(p(y))
 
 	elif typo == 'table':
 		rows = node.num_rows()
@@ -113,6 +125,9 @@ transform("/html/index.html", outdir+'/index.html', settings)
 
 # css file
 shutil.copy2(template_dir()+'/html/def.css', outdir)
+
+with open(outdir + '/pygments.css', 'w') as f:
+	f.write(pygments_css_data)
 
 # okay, code generation has worked
 visualize('html', outdir+'/index.html')

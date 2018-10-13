@@ -6,6 +6,7 @@
 import os, shutil, time, getpass
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
+pygments_css_data = ''
 
 settings = {
 'doc_date':'',
@@ -68,7 +69,23 @@ def print_slide(node, niv):
 
 def print_figure_slides(node, niv):
 	typo = node.get_val('type')
-	if typo in ['table', 'diag', 'img']:
+	if typo in ['text']:
+		body = parse_raw(node.get_val('text')).strip()
+		lang = node.get_var('minted_lang').strip()
+		if body:
+			if lang:
+				html_code = pygmentize(lang, body)
+				global pygments_css_data
+				if not pygments_css_data:
+					pygments_css_data = pygmentize_css()
+				out('\n\n<div class="slide">\n')
+				out('<h1>%s</h1>\n' % node.get_val('summary'))
+				out(html_code)
+				out('</div>')
+			else:
+				debug('For code snippets, set the variable minted_lang\n')
+
+	elif typo in ['table', 'diag', 'img']:
 
 		out('\n\n<div class="slide">\n')
 		out('<h1>%s</h1>\n' % node.get_val('summary'))
@@ -178,6 +195,8 @@ shutil.copy2(template_dir()+'/s5/ui/default/blank.gif', outdir+'/ui/default/')
 for x in files_lst:
 	transform('/s5/ui/default/'+x, outdir+'/ui/default/'+x, settings)
 
-visualize('s5', outdir+'/index.html')
+with open(outdir + '/ui/default/pygments.css', 'w') as f:
+	f.write(pygments_css_data)
 
+visualize('s5', outdir+'/index.html')
 

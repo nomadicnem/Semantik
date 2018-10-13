@@ -334,6 +334,28 @@ def copy_pictures(temp_dir, out_dir, pic_prefs='svg,png,jpg,jpeg,gif'):
 			shutil.copy2(os.path.join(temp_dir, x), out_dir)
 	return diags, imgs
 
+def pygmentize(lang, code):
+	try:
+		from pygments import highlight
+		from pygments.lexers import get_lexer_by_name
+		from pygments.formatters import HtmlFormatter
+	except ImportError:
+		debug('Could not format code, please install the pygments package!')
+		return ''
+	else:
+		lexer = get_lexer_by_name(lang, stripall=True)
+		formatter = HtmlFormatter(linenos=False, cssclass="pygments_code")
+		result = highlight(code, lexer, formatter)
+		return result
+
+def pygmentize_css():
+	try:
+		from pygments.formatters import HtmlFormatter
+	except ImportError:
+		debug('Could not format code, please install the pygments package!')
+		return ''
+	else:
+		return HtmlFormatter().get_style_defs('.pygments_code')
 
 class Node(object):
 	def __init__(self, bind):
