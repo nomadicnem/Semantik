@@ -3,7 +3,7 @@
 
 # Thomas Nagy, 2007-2018 GPLV3
 
-import os, time, shutil, re, getpass
+import os, time, shutil, getpass
 
 # Additional variables:
 # exclude   1
@@ -58,21 +58,8 @@ def tex_convert(s):
 	return s
 if not settings.get('all_latex', 0): tex_convert = protect_tex
 
-# copy the pictures
 temp_dir = sembind.get_var('temp_dir')
-pics = {} # map the id to the picture
-lst = os.listdir(temp_dir)
-for x in lst:
-	if x.startswith('diag-'):
-		key = x.split('.')[0].replace('diag-', '')
-		if x.endswith('.pdf') or not key in pics:
-			pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
-	elif x.startswith('img-'):
-		key = x.split('.')[0].replace('img-', '')
-		if not key in pics:
-			pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
+pics, imgs = copy_pictures(temp_dir, outdir, pic_prefs='pdf,png,jpg,jpeg,gif')
 
 buf = []
 out = buf.append
@@ -100,6 +87,10 @@ def print_nodes(node, niv):
 		elif niv == 4:
 			out('\\paragraph{%s}\n' % sm)
 
+	caption = node.get_var('caption')
+	if not caption:
+		caption = node.get_val('summary')
+
 	typo = node.get_val('type')
 	if typo == 'text':
 		body = parse_raw(node.get_val('text')).strip()
@@ -113,7 +104,6 @@ def print_nodes(node, niv):
 			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
 				f.write(body)
 
-			title = tex_convert(node.get_val('summary'))
 			out('\\begin{figure}[htbp]\n')
 			out('  \\begin{center}\n')
 			out('     \\begin{tcolorbox}\n')
@@ -122,6 +112,8 @@ def print_nodes(node, niv):
 			out('       \\inputminted{%s}{%s}\n' % (lang, '../' + filename))
 			out('     \\end{tcolorbox}\n')
 			out('  \\end{center}\n')
+			if caption:
+				out('\\caption{%s}\n' % tex_convert(caption))
 			out('\\end{figure}\n')
 		else:
 			out(parse_string(node.get_val('text')))
@@ -130,9 +122,6 @@ def print_nodes(node, niv):
 		rows = node.num_rows()
 		cols = node.num_cols()
 		if rows>0 and cols>0:
-
-			caption = node.get_var('caption')
-			if not caption: caption = caption = node.get_val('summary')
 
 			out('\\begin{table}\n')
 
@@ -150,18 +139,19 @@ def print_nodes(node, niv):
 			out('\\end{tabular}\n')
 			out('\\end{center}\n')
 
-			out('\\caption{%s}\n' % tex_convert(caption))
+			if caption:
+				out('\\caption{%s}\n' % tex_convert(caption))
 			out('\\end{table}\n')
 
 		out('\n')
 
 	elif typo == 'img' or typo == 'diag':
-		id = node.get_val('id' if typo == 'diag' else 'pic_id')
-		if id in pics:
+		if typo == 'img':
+			the_pic = imgs.get(node.get_val('pic_id'))
+		else:
+			the_pic = pics.get(node.get_val('id'))
 
-			caption = node.get_var('caption')
-			if not caption: caption = caption = node.get_val('summary')
-
+		if the_pic and not node.get_var('exclude_pic'):
 			restrict = node.get_var("picdim")
 			#if not restrict:
 			#	w = int(node.get_val('pic_w'))
@@ -172,8 +162,9 @@ def print_nodes(node, niv):
 
 			out('\\begin{figure}[htbp]\n')
 			out('  \\begin{center}\n')
-			out('    \\includegraphics%s{%s}\n' % (restrict, pics[id]))
-			out('    \\caption{\\footnotesize{%s}}\n' % tex_convert(caption))
+			out('    \\includegraphics%s{%s}\n' % (restrict, the_pic))
+			if caption:
+				out('    \\caption{\\footnotesize{%s}}\n' % tex_convert(caption))
 			out('%% %s\n' % protect_tex(node.get_val('pic_location')))
 			out('%% %s\n' % node.get_val('pic_w'))
 			out('%% %s\n' % node.get_val('pic_h'))

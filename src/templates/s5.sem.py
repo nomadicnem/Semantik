@@ -23,38 +23,25 @@ try:
 except OSError:
 	pass
 
-try: os.makedirs(outdir+'/ui/default/')
-except OSError: debug('Cannot create folder ' + outdir + '/ui/default/')
+try:
+	os.makedirs(outdir+'/ui/default/')
+except OSError:
+	debug('Cannot create folder ' + outdir + '/ui/default/')
 
 # copy the pictures
 temp_dir = sembind.get_var('temp_dir')
-pics = {} # map the id to the picture
-lst = os.listdir(temp_dir)
-for x in lst:
-	if x.startswith('diag-') and not x.endswith('pdf'):
-		key = x.split('.')[0].replace('diag-', '')
-		pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
-	elif x.startswith('img-'):
-		key = x.split('.')[0].replace('img-', '')
-		if not key in pics:
-			pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
-
+pics, imgs = copy_pictures(temp_dir, outdir)
 
 buf = []
 out = buf.append
 
-def p(s):
-	return sembind.protectHTML(s)
-
-def x(s):
+def xml(s):
 	return sembind.protectXML(s)
 
 def print_bullet(node, indent):
 	out('<li>%s</li>\n' % node.get_val('summary'))
 	y = node.get_val('text')
-	out('<div class="handout">%s</div>\n' % p(y))
+	out('<div class="handout">%s</div>\n' % xml(y))
 
 	num = node.child_count()
 	if num:
@@ -67,7 +54,7 @@ def print_slide(node, niv):
 	out('\n\n<div class="slide">\n')
 
 	out('<h1>%s</h1>\n' % node.get_val('summary'))
-	out('<div class="handout">%s</div>\n' % p(node.get_val('text')))
+	out('<div class="handout">%s</div>\n' % xml(node.get_val('text')))
 
 	num = node.child_count()
 	if num:
@@ -98,9 +85,9 @@ def print_figure_slides(node, niv):
 					out('\t<tr>\n')
 					for j in range(cols):
 						if i>0 and j>0:
-							out('\t\t<td>%s</td>\n' % x(node.get_cell(i, j)))
+							out('\t\t<td>%s</td>\n' % xml(node.get_cell(i, j)))
 						else:
-							out('\t\t<th>%s</th>\n' % x(node.get_cell(i, j)))
+							out('\t\t<th>%s</th>\n' % xml(node.get_cell(i, j)))
 					out('\t</tr>\n')
 
 				out('</tbody>\n')
@@ -109,34 +96,18 @@ def print_figure_slides(node, niv):
 			out('\n')
 
 		elif typo == 'img' or typo == 'diag':
-			id = node.get_val('id' if typo == 'diag' else 'pic_id')
-			if id in pics:
+			if typo == 'img':
+				the_pic = imgs.get(node.get_val('pic_id'))
+			else:
+				the_pic = pics.get(node.get_val('id'))
 
+			if the_pic and not node.get_var('exclude_pic'):
 				caption = node.get_var('caption')
-				if not caption: caption = caption = node.get_val('summary')
+				if not caption:
+					caption = node.get_val('summary')
 				out('<div style="text-align: center; width: 100%;">\n')
-				out("<img src='%s'>\n" % pics[id])
+				out("<img src='%s'>\n" % the_pic)
 				out('</div>\n')
-
-				"""
-				restrict = node.get_var("picdim")
-				if not restrict:
-					w = int(node.get_val('pic_w'))
-					restrict = ""
-					if (w > 5*72): restrict = "[width=5in]"
-				if not restrict:
-					restrict = "[width=\\textwidth,height=\\textheight,keepaspectratio]"
-
-				out('\\begin{figure}[htbp]\n')
-				out('  \\begin{center}\n')
-				out('    \\includegraphics%s{%s}\n' % (restrict, pics[id]))
-				out('    \\caption{\\footnotesize{%s}}\n' % tex_convert(caption))
-				out('%% %s\n' % protect_tex(node.get_val('pic_location')))
-				out('%% %s\n' % node.get_val('pic_w'))
-				out('%% %s\n' % node.get_val('pic_h'))
-				out('    \\end{center}\n')
-				out('\\end{figure}\n')
-				"""
 
 		out("</div>\n")
 
@@ -162,7 +133,7 @@ def print_nodes(node, niv):
 		if not node.get_var('skip_slide'):
 			out('\n\n<div class="slide">\n')
 			out('<h1>%s</h1>\n' % node.get_val('summary'))
-			out('<div class="handout">%s</div>\n' % p(node.get_val('text')))
+			out('<div class="handout">%s</div>\n' % xml(node.get_val('text')))
 
 			# print the main titles
 			num = node.child_count()

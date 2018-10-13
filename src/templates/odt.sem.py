@@ -5,7 +5,7 @@
 
 mimetype = "application/vnd.oasis.opendocument.text"
 
-import os, shutil, time, zipfile
+import os, time, zipfile
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 
@@ -54,45 +54,20 @@ try:
 except OSError:
 	pass
 
-try: os.makedirs(outdir)
-except OSError: debug("Cannot create folder " + outdir)
+try:
+	os.makedirs(outdir)
+except OSError:
+	debug("Cannot create folder " + outdir)
 
-try: os.makedirs(outdir+'/Pictures')
-except OSError: debug("Cannot create folder " + outdir)
-
-# f** mimes
-MIMES = {'svg': 'image/svg', 'png': 'image/png', 'jpg': 'image/jpeg', 'jpeg':'image/jpeg', 'gif': 'image/gif'}
-
-def best_ext(lst):
-	if 'svg' in lst:
-		return 'svg'
-	if 'png' in lst:
-		return 'png'
-	if 'jpg' in lst:
-		return 'jpg'
-	return lst[0]
+pic_dir = outdir + '/Pictures'
+try:
+	os.makedirs(pic_dir)
+except OSError:
+	debug("Cannot create folder " + pic_dir)
 
 # copy the pictures
-cwd = os.getcwd()
-pics = {} # map the id to the picture
-tmp_pics = {}
 temp_dir = sembind.get_var('temp_dir')
-lst = os.listdir(temp_dir)
-for x in lst:
-	if x.startswith('diag-') and not x.endswith('.pdf'):
-		tmplst = x.replace('diag-', '').split('.')
-		k = tmplst[0]
-		ext = tmplst[-1]
-		try:
-			tmp_pics[k].append(ext)
-		except KeyError:
-			tmp_pics[k] = [ext]
-
-for key, val in tmp_pics.items():
-	x = best_ext(val)
-	name = 'diag-%s.%s' % (key, x)
-	shutil.copy2(os.path.join(temp_dir, name), outdir + '/Pictures')
-	pics[key] = x
+pics, imgs = copy_pictures(temp_dir, pic_dir, pic_prefs='svg,png,jpg,jpeg,gif')
 
 os.mkdir(outdir+'/META-INF')
 
@@ -129,10 +104,10 @@ def print_nodes(node, niv, lbl_lst):
 	if typo == 'text':
 		y = node.get_val('text')
 		if y:
-			for p in clear_html(y).split('\n\n'):
+			for line in clear_html(y).split('\n\n'):
 				out('<text:p text:style-name="P1">')
 				out('<text:span text:style-name="T1">')
-				out(p)
+				out(xml(line))
 				out('</text:span>')
 				out('</text:p>')
 
@@ -165,13 +140,15 @@ def print_nodes(node, niv, lbl_lst):
 		out('\n')
 
 	elif typo == 'pic' or typo == 'diag':
-		id = node.get_val('id')
-		if id in pics and not node.get_var('exclude_pic'):
+		if typo == 'img':
+			the_pic = imgs.get(node.get_val('pic_id'))
+		else:
+			the_pic = pics.get(node.get_val('id'))
 
+		if the_pic and not node.get_var('exclude_pic'):
 			caption = node.get_var('pic_caption')
-			if not caption: caption = '(TODO: set a caption for this picture!)'
-
-			ext = pics[id]
+			if not caption:
+				caption = '(TODO: set a caption for this picture! -> var pic_caption)'
 
 			#out('<draw:frame draw:style-name="fr1" text:anchor-type="paragraph" draw:z-index="0">\n')
 			#out('<draw:text-box min-height="3cm">\n')
@@ -198,17 +175,16 @@ def print_nodes(node, niv, lbl_lst):
 				h = (15 * h) / w
 				w = 15
 
-			name = 'diag-%s.%s' % (id, ext)
 			out('<text:p text:style-name="Standard">\n')
 			out('<draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="paragraph" ')
 			out(' svg:width="%fcm" svg:height="%fcm" ' % (w, h))
 			out(' draw:z-index="0">\n')
-			out('<draw:image xlink:href="Pictures/%s" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>\n' % name)
+			out('<draw:image xlink:href="Pictures/%s" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>\n' % the_pic)
 			out('</draw:frame>\n')
 			out('</text:p>\n')
 
-			settings['manif'] += '<manifest:file-entry manifest:media-type="%s" manifest:full-path="Pictures/%s"/>' % (MIMES[ext], name)
-			settings['piclst'].append(name)
+			settings['manif'] += '<manifest:file-entry manifest:media-type="%s" manifest:full-path="Pictures/%s"/>' % (name_to_mime(the_pic), the_pic)
+			settings['piclst'].append(the_pic)
 
 	num = node.child_count()
 	for i in range(num):

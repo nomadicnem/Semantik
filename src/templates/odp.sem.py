@@ -5,7 +5,7 @@
 
 mimetype = "application/vnd.oasis.opendocument.presentation"
 
-import os, shutil, time, zipfile, sys
+import os, time, zipfile, sys
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 
@@ -27,6 +27,15 @@ try:
 except OSError:
 	debug("Cannot create folder " + outdir)
 
+pic_dir = outdir + '/Pictures'
+try:
+	os.makedirs(pic_dir)
+except OSError:
+	debug("Cannot create folder " + pic_dir)
+
+temp_dir = sembind.get_var('temp_dir')
+pics, imgs = copy_pictures(temp_dir, pic_dir, pic_prefs='svg,png,jpg,jpeg,gif')
+
 try: os.mkdir(outdir+'/META-INF')
 except: raise
 
@@ -37,11 +46,11 @@ out = buf.append
 def p(s):
 	return sembind.protectHTML(s)
 
-def x(s):
+def xml(s):
 	return sembind.protectXML(s)
 
 def print_slide(node, niv):
-	txt = x(node.get_val('summary'))
+	txt = xml(node.get_val('summary'))
 	if niv == 0:
 		begin = """
       <draw:page draw:name="page1" draw:style-name="dp1" draw:master-page-name="lyt-cool" presentation:presentation-page-layout-name="AL1T1">
@@ -64,7 +73,7 @@ def print_slide(node, niv):
         </presentation:notes>
       </draw:page>
 """
-		out(begin % x(txt))
+		out(begin % xml(txt))
 
 		num = node.child_count()
 		if num:
@@ -117,7 +126,7 @@ def print_nodes(node, niv):
 		subtree = node.child_num(i)
 		#print_nodes(node.child_num(i), niv+1)
 
-		sm = x(subtree.get_val('summary'))
+		sm = xml(subtree.get_val('summary'))
 		num = subtree.child_count()
 		if niv == 0 and num >= 1:
 			out('<!-- %s -->\n' % sm)
@@ -150,7 +159,7 @@ with zipfile.ZipFile(outdir+'/main.odp', mode='w') as f:
 	f.write(os.path.join(outdir, 'META-INF/manifest.xml'), 'META-INF/manifest.xml')#, compress_type=zipfile.ZIP_DEFLATED)
 
 # and remove the useless stuff
-os.popen('cd %s && rm -rf *.xml META-INF' % outdir)
+os.popen('cd %s && rm -rf *.xml META-INF Pictures' % outdir)
 
 visualize('odp', outdir+'/main.odp')
 

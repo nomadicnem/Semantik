@@ -3,7 +3,7 @@
 # Thomas Nagy, 2007-2018 GPLV3
 
 from html.parser import HTMLParser
-import os, sys, sembind, re
+import os, re, sembind, shutil, sys
 
 protectXML = sembind.protectXML
 sys.path = [sembind.get_var('template_dir')]+sys.path
@@ -293,12 +293,47 @@ def protect_tex(s):
 	return "".join(lst)
 
 def compute_hints(x):
-	k = int(x)
 	item = sembind.get_item_by_id(int(x))
 	if item:
 		m = read_properties(sembind.get_val(item, "hints"))
 		sembind.set_result("diagram_width", m.get('diagram_width', '0'))
 		sembind.set_result("diagram_height", m.get('diagram_height', '0'))
+
+re_img = re.compile('^(diag|img)-(0|[1-9][0-9]*).([^.]+)$', re.I)
+MIMES = {'svg': 'image/svg', 'png': 'image/png', 'jpg': 'image/jpeg', 'jpeg':'image/jpeg', 'gif': 'image/gif', 'pdf': 'application/pdf'}
+
+def name_to_mime(filename):
+	default = 'application/octet-stream'
+	m = re_img.match(filename)
+	if m:
+		return MIMES.get(m.group(3), default)
+	return default
+
+def copy_pictures(temp_dir, out_dir, pic_prefs='svg,png,jpg,jpeg,gif'):
+	vals = {}
+	for i, x in enumerate(reversed(pic_prefs.split(','))):
+		vals[x] = i
+
+	def ext_to_value_key(filename):
+		ext = filename[-3:].lower()
+		return vals.get(ext, -1)
+
+	diags = {}
+	imgs = {}
+	lst = sorted(os.listdir(temp_dir))
+	lst = filter(lambda x: ext_to_value_key(x) >= 0, lst)
+	lst = sorted(lst, key=ext_to_value_key)
+	for x in lst:
+		m = re_img.match(x)
+		if m:
+			kind, key, ext = m.groups()
+			if kind == 'diag':
+				diags[key] = x
+			elif kind == 'img':
+				imgs[key] = x
+			shutil.copy2(os.path.join(temp_dir, x), out_dir)
+	return diags, imgs
+
 
 class Node(object):
 	def __init__(self, bind):

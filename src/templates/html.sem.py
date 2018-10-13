@@ -6,7 +6,7 @@
 # exclude
 # caption
 
-import os, shutil, time, sys
+import os, shutil, time
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 
@@ -27,21 +27,8 @@ try:
 except OSError:
 	debug("Cannot create folder " + outdir)
 
-# copy the pictures
 temp_dir = sembind.get_var('temp_dir')
-pics = {} # map the id to the picture
-lst = os.listdir(temp_dir)
-for x in lst:
-	if x.startswith('diag-') and not x.endswith('pdf'):
-		key = x.split('.')[0].replace('diag-', '')
-		pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
-	elif x.startswith('img-'):
-		key = x.split('.')[0].replace('img-', '')
-		if not key in pics:
-			pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
-
+pics, imgs = copy_pictures(temp_dir, outdir)
 
 buf = []
 out = buf.append
@@ -92,8 +79,12 @@ def print_nodes(node, niv, lbl_lst):
 		out('\n')
 
 	elif typo == 'img' or typo == 'diag':
-		id = node.get_val('id' if typo == 'diag' else 'pic_id')
-		if id in pics:
+		if typo == 'img':
+			the_pic = imgs.get(node.get_val('pic_id'))
+		else:
+			the_pic = pics.get(node.get_val('id'))
+
+		if the_pic and not node.get_var('exclude_pic'):
 			caption = node.get_var('caption')
 			if not caption: caption = node.get_val('summary')
 
@@ -106,9 +97,8 @@ def print_nodes(node, niv, lbl_lst):
 			divstyle = node.get_var('picdivstyle')
 			#captionstyle = node.get_var('piccaptionstyle')
 
-			src = pics[id]
 			out('<p><div class=\"img\" %s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s></div></p>\n'
-				% (divstyle, src, x(caption), x(caption), style))
+				% (divstyle, the_pic, x(caption), x(caption), style))
 
 	num = node.child_count()
 	for i in range(num):

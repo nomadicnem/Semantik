@@ -13,6 +13,7 @@ settings = {
 'doc_content':'',
 'doc_title':'',
 'doc_author': getpass.getuser(),
+'doc_author_off':'None',
 'doc_place': 'Stockholm',
 'doc_company': 'World Company',
 'doc_code_on': False,
@@ -28,8 +29,6 @@ settings = {
 'doc_date':r'\today',
 'doc_date_off':'None',
 
-'doc_author':'',
-'doc_author_off':'None',
 'uncover_stepwise': '',
 
 'each_subsection_off':'None',
@@ -50,24 +49,13 @@ try:
 except OSError:
 	pass
 
-try: os.makedirs(outdir)
-except OSError: debug('Cannot create folder ' + outdir)
+try:
+	os.makedirs(outdir)
+except OSError:
+	debug('Cannot create folder ' + outdir)
 
-# copy the pictures
 temp_dir = sembind.get_var('temp_dir')
-pics = {} # map the id to the picture
-lst = os.listdir(temp_dir)
-for x in sorted(lst):
-	if x.startswith('diag-'):
-		key = x.split('.')[0].replace('diag-', '')
-		if x.endswith('.pdf') or not key in pics:
-			pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
-	elif x.startswith('img-'):
-		key = x.split('.')[0].replace('img-', '')
-		if not key in pics:
-			pics[key] = x
-		shutil.copy2(os.path.join(temp_dir, x), outdir)
+pics, imgs = copy_pictures(temp_dir, outdir, pic_prefs='pdf,png,jpg,jpeg,gif')
 
 buf = []
 out = buf.append
@@ -116,6 +104,10 @@ def print_figure_slides(node, recurse=False):
 		return
 	diagrams_added.add(node.get_val("id"))
 
+	caption = node.get_var('caption')
+	if not caption:
+		caption = node.get_val('summary')
+
 	typo = node.get_val('type')
 	if typo in ['text']:
 		body = parse_raw(node.get_val('text')).strip()
@@ -149,9 +141,6 @@ def print_figure_slides(node, recurse=False):
 			cols = node.num_cols()
 			if rows>0 and cols>0:
 
-				caption = node.get_var('caption')
-				if not caption: caption = caption = node.get_val('summary')
-
 				out('\\begin{table}\n')
 
 				out('\\begin{center}\n')
@@ -168,18 +157,19 @@ def print_figure_slides(node, recurse=False):
 				out('\\end{tabular}\n')
 				out('\\end{center}\n')
 
-				out('\\caption{%s}\n' % tex_convert(caption))
+				if caption:
+					out('\\caption{%s}\n' % tex_convert(caption))
 				out('\\end{table}\n')
 
 			out('\n')
 
 		elif typo == 'img' or typo == 'diag':
-			id = node.get_val('id' if typo == 'diag' else 'pic_id')
-			if id in pics:
+			if typo == 'img':
+				the_pic = imgs.get(node.get_val('pic_id'))
+			else:
+				the_pic = pics.get(node.get_val('id'))
 
-				caption = node.get_var('caption')
-				if not caption: caption = caption = node.get_val('summary')
-
+			if the_pic and not node.get_var('exclude_pic'):
 				restrict = node.get_var("picdim")
 				#if not restrict:
 				#	w = int(node.get_val('pic_w'))
@@ -190,8 +180,9 @@ def print_figure_slides(node, recurse=False):
 
 				out('\\begin{figure}[htbp]\n')
 				out('  \\begin{center}\n')
-				out('    \\includegraphics%s{%s}\n' % (restrict, pics[id]))
-				out('    \\caption{\\footnotesize{%s}}\n' % tex_convert(caption))
+				out('    \\includegraphics%s{%s}\n' % (restrict, the_pic))
+				if caption:
+					out('    \\caption{\\footnotesize{%s}}\n' % tex_convert(caption))
 				out('%% %s\n' % protect_tex(node.get_val('pic_location')))
 				out('%% %s\n' % node.get_val('pic_w'))
 				out('%% %s\n' % node.get_val('pic_h'))

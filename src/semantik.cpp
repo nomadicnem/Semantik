@@ -669,7 +669,7 @@ void semantik_win::sync_colors()
 	for (int i=0; i<m_oMediator->m_oColorSchemes.size(); ++i)
 	{
 		color_scheme l_oScheme = m_oMediator->m_oColorSchemes[i];
-		QAction *l_oAction = m_oColorGroup->actions()[i];
+		QAction *l_oAction = m_oColorGroup->actions().at(i);
 
 		QIcon l_oIcon;
 		process_icon(&l_oIcon, l_oScheme.m_oInnerColor, 22);
@@ -686,7 +686,7 @@ void semantik_win::sync_flags()
 	for (int i=0; i<m_oMediator->m_oFlagSchemes.size(); ++i)
 	{
 		flag_scheme *l_oScheme = m_oMediator->m_oFlagSchemes[i];
-		QAction *l_oAction = m_oFlagGroup->actions()[i];
+		QAction *l_oAction = m_oFlagGroup->actions().at(i);
 		l_oAction->setText(l_oScheme->m_sName);
 		l_oAction->setIcon(l_oScheme->_icon());
 	}
