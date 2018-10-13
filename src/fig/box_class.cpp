@@ -142,6 +142,11 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 	l_oUnderlineFont.setUnderline(true);
 	QFontMetricsF l_oUnderlineFm(l_oUnderlineFont);
 
+	QFont l_oUnderlineItalicFont(l_oItalicFont);
+	l_oUnderlineItalicFont.setUnderline(true);
+	QFontMetricsF l_oUnderlineItalicFm(l_oUnderlineItalicFont);
+
+
 	if (m_oBox->m_oAttributes.size() > 0)
 	{
 		l_fHpos += PAD;
@@ -212,16 +217,27 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 		i_oPainter->drawLine(l_oRect.topLeft() + QPointF(0, l_fHpos + 1 + PAD), l_oRect.topRight() + QPointF(0, l_fHpos + 1 + PAD));
 		l_fHpos += 1 + PAD;
 	}
-	foreach (data_box_method l_o, m_oBox->m_oMethods) {
 
+	foreach (data_box_method l_o, m_oBox->m_oMethods)
+	{
 		QRectF l_oR;
-		if (l_o.m_bAbstract) {
+		if (l_o.m_bAbstract && l_o.m_bStatic)
+		{
+			l_oR = l_oUnderlineItalicFm.boundingRect(l_o.m_sText);
+			i_oPainter->setFont(l_oUnderlineItalicFont);
+		}
+		else if (l_o.m_bAbstract)
+		{
 			l_oR = l_oItalicFm.boundingRect(l_o.m_sText);
 			i_oPainter->setFont(l_oItalicFont);
-		} else if (l_o.m_bStatic) {
+		}
+		else if (l_o.m_bStatic)
+		{
 			l_oR = l_oUnderlineFm.boundingRect(l_o.m_sText);
 			i_oPainter->setFont(l_oUnderlineFont);
-		} else {
+		}
+		else
+		{
 			l_oR = l_oNormalFm.boundingRect(l_o.m_sText);
 			i_oPainter->setFont(l_oNormalFont);
 		}
@@ -291,9 +307,8 @@ qreal box_class::minVisibility(const QFontMetricsF i_oFm)
 	return l_iHVisibility;
 }
 
-QSizeF box_class::size() {
-	QSizeF l_oRet;
-
+QSizeF box_class::size()
+{
 	QFont l_oNormalFont(scene()->font());
 	QFontMetricsF l_oNormalFm(l_oNormalFont);
 	qreal l_iHVisibility = minVisibility(l_oNormalFm);
@@ -308,31 +323,31 @@ QSizeF box_class::size() {
 
 	QFont l_oUnderlineItalicFont(l_oUnderlineFont);
 	l_oUnderlineFont.setItalic(true);
-	QFontMetricsF l_oUnderlineItalicFm(l_oUnderlineFont);
+	QFontMetricsF l_oUnderlineItalicFm(l_oUnderlineItalicFont);
 
 	qreal l_iWW = 0, l_iHH = 2 * PAD;
 	if (m_oBox->m_oMethods.size() > 0)
 	{
 		l_iHH += 2 * PAD +  1; // 1 for the line
 	}
-	foreach (data_box_method l_o, m_oBox->m_oMethods) {
+	foreach (data_box_method l_o, m_oBox->m_oMethods)
+	{
 		QRectF l_oR;
 
-		// italic underline?
-		if (l_o.m_bAbstract)
+		if (l_o.m_bAbstract && l_o.m_bStatic)
 		{
-			if (l_o.m_bStatic)
-			{
-				l_oR = l_oUnderlineItalicFm.boundingRect(l_o.m_sText);
-			}
-			else
-			{
-				l_oR = l_oItalicFm.boundingRect(l_o.m_sText);
-			}
+			l_oR = l_oUnderlineItalicFm.boundingRect(l_o.m_sText);
 		}
-		else if (l_o.m_bStatic) {
+		else if (l_o.m_bAbstract)
+		{
+			l_oR = l_oItalicFm.boundingRect(l_o.m_sText);
+		}
+		else if (l_o.m_bStatic)
+		{
 			l_oR = l_oUnderlineFm.boundingRect(l_o.m_sText);
-		} else {
+		}
+		else
+		{
 			l_oR = l_oNormalFm.boundingRect(l_o.m_sText);
 		}
 		l_iWW = qMax(l_oR.width(), l_iWW);
