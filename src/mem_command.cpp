@@ -75,7 +75,7 @@ mem_color::mem_color(sem_mediator* mod) : mem_command(mod) {
 
 void mem_color::redo() {
 	QMap<int, int>::iterator i;
- 	for (i = prevColors.begin(); i != prevColors.end(); ++i)
+	for (i = prevColors.begin(); i != prevColors.end(); ++i)
 	{
 		data_item& t = model->m_oItems[i.key()];
 		t.m_iColor = newColor;
@@ -110,7 +110,7 @@ mem_flag::mem_flag(sem_mediator* mod) : mem_command(mod) {
 
 void mem_flag::redo() {
 	QMap<int, QList<QString> >::iterator i;
- 	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
+	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
 	{
 		data_item& t = model->m_oItems[i.key()];
 		t.m_oFlags = QList<QString>(i.value());
@@ -128,7 +128,7 @@ void mem_flag::redo() {
 
 void mem_flag::undo() {
 	QMap<int, QList<QString> >::iterator i;
- 	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
+	for (i = prevFlags.begin(); i != prevFlags.end(); ++i)
 	{
 		data_item& t = model->m_oItems[i.key()];
 		t.m_oFlags = i.value();

@@ -1085,9 +1085,9 @@ void rubber_line::setGeometry(const QRect& i_o)
 double canvas_view::compute_height(QMap<int, double> &map, QMap<int, QList<int> >&children, int id) {
 	double size = 0;
 
-	QMap<int, QList<int> >::const_iterator it = children.find(id);
-	if (it != children.end()) {
-		QList<int> tmp = it.value();
+	QMap<int, QList<int> >::const_iterator it = children.constFind(id);
+	if (it != children.cend()) {
+		const QList<int> &tmp = it.value();
 		size += (tmp.size() - 1) * HSPACER;
 		foreach (int k, tmp) {
 			size += compute_height(map, children, k);
@@ -1104,17 +1104,17 @@ double canvas_view::compute_height(QMap<int, double> &map, QMap<int, QList<int> 
 
 void canvas_view::compute_width(QMap<int, double> &map, QMap<int, QList<int> >&children, int id, int level) {
 	double w = m_oItems[id]->boundingRect().width();
-	QMap<int, double>::iterator jt = map.find(level);
-	if (jt != map.end()) {
-		double val = jt.value();
+	QMap<int, double>::const_iterator jt = map.constFind(level);
+	if (jt != map.cend()) {
+		const double &val = jt.value();
 		map[level] = val > w ? val : w;
 	} else {
 		map[level] = w;
 	}
 
-	QMap<int, QList<int> >::iterator it = children.find(id);
-	if (it != children.end()) {
-		QList<int> tmp = it.value();
+	QMap<int, QList<int> >::const_iterator it = children.constFind(id);
+	if (it != children.cend()) {
+		const QList<int> &tmp = it.value();
 		foreach (int sub, tmp) {
 			compute_width(map, children, sub, level+1);
 		}
@@ -1143,8 +1143,9 @@ void canvas_view::reorganize() {
 	foreach (int k, roots) {
 		double ref = compute_height(height, children, k);
 		QMap<int, QList<int> >::iterator it = children.find(k);
-		if (it != children.end()) {
-			QList<int> tmp = it.value();
+		if (it != children.end())
+		{
+			QList<int> &tmp = it.value();
 
 			ref -= (tmp.size() - 1) * HSPACER;
 			int mid = 0;
@@ -1221,7 +1222,7 @@ void canvas_view::reorganize() {
 void canvas_view::pack(QMap<int, double> &width, QMap<int, double> &height, QMap<int, QList<int> >&children, int id, int level, int left) {
 	QMap<int, QList<int> >::iterator it = children.find(id);
 	if (it != children.end()) {
-		QList<int> tmp = it.value();
+		QList<int> &tmp = it.value();
 		double acc_height = m_oItems[id]->y() + m_oItems[id]->boundingRect().height() / 2 - height[id] / 2;
 		foreach (int sub, tmp) {
 			double y = acc_height + height[sub] / 2 - m_oItems[sub]->boundingRect().height()/2;
