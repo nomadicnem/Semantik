@@ -1402,7 +1402,7 @@ bool sem_mediator::save_and_load_picture(const QUrl& i_sPath, int id)
 {
 	QStringList sp = i_sPath.path().split(".");
 	if (sp.size() < 2) return false;
-	QString dest = QString(m_sTempDir+"/img-%1.%2").arg(QString::number(id)).arg(sp[sp.size()-1]);
+	QString dest = QString(m_sTempDir+"/img-%1.%2").arg(QString::number(id), sp[sp.size()-1]);
 
 
 	KJob *l_oJob = KIO::file_copy(i_sPath, QUrl(QString("file://") + dest), -1, KIO::Overwrite);
