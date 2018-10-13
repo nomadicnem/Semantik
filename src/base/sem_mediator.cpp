@@ -1108,7 +1108,7 @@ void sem_mediator::set_dirty(bool b)
 	{
 		m_bDirty = b;
 		//if (b) emit sig_message(i18n("dirty"), 1000); // CLEANUP
-		emit(update_title());
+		emit(sig_update_title());
 	}
 }
 

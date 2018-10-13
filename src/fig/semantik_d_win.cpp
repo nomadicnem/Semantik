@@ -200,7 +200,7 @@ void semantik_d_win::wire_actions()
 
 		m_oActiveDocument->m_oMediator->check_undo(true);
 
-		connect(m_oActiveDocument->m_oMediator, SIGNAL(update_title()), this, SLOT(update_title()));
+		connect(m_oActiveDocument->m_oMediator, SIGNAL(sig_update_title()), this, SLOT(update_title()));
 		update_title();
 	}
 }

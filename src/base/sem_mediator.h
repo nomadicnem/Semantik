@@ -46,7 +46,7 @@ class sem_mediator: public QObject
 		//void rectangle_changed(int i);
 		void sig_message(const QString&, int);
 		void dirty(bool);
-		void update_title();
+		void sig_update_title();
 
 		void sig_add_item(int id);
 		void sig_delete_item(int id);

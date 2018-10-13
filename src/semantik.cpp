@@ -140,7 +140,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	m_oMediator = new sem_mediator(this);
 	connect(m_oMediator, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
-	connect(m_oMediator, SIGNAL(update_title()), this, SLOT(update_title()));
+	connect(m_oMediator, SIGNAL(sig_update_title()), this, SLOT(update_title()));
 
 	m_oColorMenu = new QMenu(i18n("Colors"), this);
 

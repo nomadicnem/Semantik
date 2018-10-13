@@ -1127,17 +1127,11 @@ void canvas_view::reorganize() {
 
 	QMap<int, QList<int> > children;
 
-	for (int i=0; i < m_oMediator->m_oLinks.size(); ++i) {
-		QPoint l_oP = m_oMediator->m_oLinks.at(i);
 
-		QMap<int, QList<int> >::iterator it = children.find(l_oP.x());
-		if (it != children.end()) {
-			it.value() << l_oP.y();
-		} else {
-			QList<int> tmp;
-			tmp << l_oP.y();
-			children[l_oP.x()] = tmp;
-		}
+	for (QList<QPoint>::const_iterator it = m_oMediator->m_oLinks.cbegin(); it != m_oMediator->m_oLinks.cend(); ++it)
+	{
+		const QPoint& l_oP = *it;
+		children[l_oP.x()] << l_oP.y();
 	}
 
 	foreach (int k, roots) {
