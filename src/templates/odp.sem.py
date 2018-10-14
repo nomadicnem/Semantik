@@ -16,25 +16,9 @@ settings = {
 }
 add_globals(settings)
 
-try:
-	tm = time.strftime('.%d-%b-%y--%H-%M-%S', time.gmtime(os.stat(outdir).st_mtime))
-	os.rename(outdir, outdir+tm)
-except OSError:
-	pass
-
-try:
-	os.makedirs(outdir)
-except OSError:
-	debug("Cannot create folder " + outdir)
-
-pic_dir = outdir + '/Pictures'
-try:
-	os.makedirs(pic_dir)
-except OSError:
-	debug("Cannot create folder " + pic_dir)
 
 temp_dir = sembind.get_var('temp_dir')
-pics, imgs = copy_pictures(temp_dir, pic_dir, pic_prefs='svg,png,jpg,jpeg,gif')
+pics = index_pictures(outdir, pic_prefs='svg,png,jpg,jpeg,gif')
 
 try: os.mkdir(outdir+'/META-INF')
 except: raise
@@ -159,7 +143,7 @@ with zipfile.ZipFile(outdir+'/main.odp', mode='w') as f:
 	f.write(os.path.join(outdir, 'META-INF/manifest.xml'), 'META-INF/manifest.xml')#, compress_type=zipfile.ZIP_DEFLATED)
 
 # and remove the useless stuff
-os.popen('cd %s && rm -rf *.xml META-INF Pictures' % outdir)
+os.popen('cd %s && rm -rf *.xml diag-* META-INF' % outdir)
 
 visualize('odp', outdir+'/main.odp')
 

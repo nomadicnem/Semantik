@@ -260,8 +260,9 @@ void image_view::notify_export_item(int id)
 			if (l_sName.startsWith(notr("img-%1").arg(QString::number(l_oData.m_iPicId))))
 			{
 				QFile f(l_oInfo.absoluteFilePath());
-				QString newName = l_oInfo.fileName().replace(QRegExp("img-\\d+"), QString("diag-%1").arg(QString::number(id)));
-				f.copy(newName); // TODO works for now
+				QString newName = l_oInfo.fileName().replace(QRegExp("img-\\d+"),
+					notr("%1/%2/diag-%3").arg(m_oMediator->m_sOutDir, m_oMediator->m_sOutProject, QString::number(id)));
+				f.copy(newName);
 				break;
 			}
 		}

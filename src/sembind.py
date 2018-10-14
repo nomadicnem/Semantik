@@ -309,7 +309,7 @@ def name_to_mime(filename):
 		return MIMES.get(m.group(3), default)
 	return default
 
-def copy_pictures(temp_dir, out_dir, pic_prefs='svg,png,jpg,jpeg,gif'):
+def index_pictures(out_dir, pic_prefs='svg,png,jpg,jpeg,gif'):
 	vals = {}
 	for i, x in enumerate(reversed(pic_prefs.split(','))):
 		vals[x] = i
@@ -318,21 +318,16 @@ def copy_pictures(temp_dir, out_dir, pic_prefs='svg,png,jpg,jpeg,gif'):
 		ext = filename[-3:].lower()
 		return vals.get(ext, -1)
 
-	diags = {}
 	imgs = {}
-	lst = sorted(os.listdir(temp_dir))
+	lst = sorted(os.listdir(out_dir))
 	lst = filter(lambda x: ext_to_value_key(x) >= 0, lst)
 	lst = sorted(lst, key=ext_to_value_key)
 	for x in lst:
 		m = re_img.match(x)
 		if m:
 			kind, key, ext = m.groups()
-			if kind == 'diag':
-				diags[key] = x
-			elif kind == 'img':
-				imgs[key] = x
-			shutil.copy2(os.path.join(temp_dir, x), out_dir)
-	return diags, imgs
+			imgs[key] = x
+	return imgs
 
 def pygmentize(lang, code):
 	try:

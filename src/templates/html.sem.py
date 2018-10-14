@@ -17,19 +17,8 @@ settings = {
 }
 add_globals(settings)
 
-try:
-	tm = time.strftime('.%d-%b-%y--%H-%M-%S', time.gmtime(os.stat(outdir).st_mtime))
-	os.rename(outdir, outdir+tm)
-except OSError:
-	pass
-
-try:
-	os.makedirs(outdir)
-except OSError:
-	debug("Cannot create folder " + outdir)
-
 temp_dir = sembind.get_var('temp_dir')
-pics, imgs = copy_pictures(temp_dir, outdir)
+pics = index_pictures(outdir)
 
 buf = []
 out = buf.append
@@ -92,11 +81,7 @@ def print_nodes(node, niv, lbl_lst):
 		out('\n')
 
 	elif typo == 'img' or typo == 'diag':
-		if typo == 'img':
-			the_pic = imgs.get(node.get_val('pic_id'))
-		else:
-			the_pic = pics.get(node.get_val('id'))
-
+		the_pic = pics.get(node.get_val('id'))
 		if the_pic and not node.get_var('exclude_pic'):
 			caption = node.get_var('caption')
 			if not caption: caption = node.get_val('summary')

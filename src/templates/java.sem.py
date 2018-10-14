@@ -11,17 +11,6 @@ import os, shutil, time, sys
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 
 try:
-	tm = time.strftime('.%d-%b-%y--%H-%M-%S', time.gmtime(os.stat(outdir).st_mtime))
-	os.rename(outdir, outdir+tm)
-except OSError:
-	pass
-
-try:
-	os.makedirs(outdir)
-except OSError:
-	sys.stderr.write("Cannot create folder " + outdir)
-
-try:
 	os.makedirs(outdir + '/pics')
 except OSError:
 	sys.stderr.write("Cannot create the pics folder in %s" % outdir)

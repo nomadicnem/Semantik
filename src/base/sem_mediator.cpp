@@ -14,6 +14,7 @@
 	#undef _XOPEN_SOURCE
 #endif
 
+#include <QDateTime>
 #include<QMutexLocker>
  #include <QFile>
 #include<QTimer>
@@ -1155,6 +1156,28 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 	QByteArray l_oBa = l_o2.readAll();
 	l_o2.close();
 
+	QDateTime l_oNow = QDateTime::currentDateTime();
+	QDir l_oDir(notr("%1/%2").arg(i_sLocation, i_sDirName));
+	QDir l_oBackup(l_oDir.absolutePath() + l_oNow.toString(notr(".yy-MM-dd--hh-mm-ss")));
+
+	if (l_oDir.exists())
+	{
+		KJob *l_oJob = KIO::rename(QUrl(notr("file://%1").arg(l_oDir.absolutePath())),
+			QUrl(notr("file://%1").arg(l_oBackup.absolutePath())));
+		bool l_bOk = l_oJob->exec();
+		if (!l_bOk)
+		{
+			emit sig_message(i18n("Could not rename the output folder %1").arg(l_oBackup.absolutePath()), 5000);
+			return 23;
+		}
+	}
+
+	if (!l_oDir.mkdir(l_oDir.absolutePath()))
+	{
+		emit sig_message(i18n("Could not create the output folder %1").arg(l_oDir.absolutePath()), 5000);
+		return 24;
+	}
+
 	m_sOutDir = i_sLocation;
 
 	mem_sel *sel = new mem_sel(this);
@@ -1172,9 +1195,9 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 			notify_export_item(l_oItem.m_iId);
 	}
 
-	bind_node::set_var(notr("temp_dir"), m_sTempDir);
 	bind_node::set_var(notr("outdir"), i_sLocation);
 	bind_node::set_var(notr("pname"), i_sDirName);
+	bind_node::set_var(notr("temp_dir"), m_sTempDir);
 	bind_node::set_var(notr("fulldoc"), doc_to_xml());
 	bind_node::set_var(notr("hints"), m_sHints);
 	bind_node::set_var(notr("namet"), i_oFile);

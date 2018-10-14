@@ -48,26 +48,9 @@ for a in settings.keys():
 			if nvar in settings: settings[a] = xml(settings[nvar])
 			else: settings[a] = globals.get(nvar, '')
 
-try:
-	tm = time.strftime('.%d-%b-%y--%H-%M-%S', time.gmtime(os.stat(outdir).st_mtime))
-	os.rename(outdir, outdir+tm)
-except OSError:
-	pass
-
-try:
-	os.makedirs(outdir)
-except OSError:
-	debug("Cannot create folder " + outdir)
-
-pic_dir = outdir + '/Pictures'
-try:
-	os.makedirs(pic_dir)
-except OSError:
-	debug("Cannot create folder " + pic_dir)
-
 # copy the pictures
 temp_dir = sembind.get_var('temp_dir')
-pics, imgs = copy_pictures(temp_dir, pic_dir, pic_prefs='svg,png,jpg,jpeg,gif')
+pics = index_pictures(outdir, pic_prefs='svg,png,jpg,jpeg,gif')
 
 os.mkdir(outdir+'/META-INF')
 
@@ -140,11 +123,7 @@ def print_nodes(node, niv, lbl_lst):
 		out('\n')
 
 	elif typo == 'pic' or typo == 'diag':
-		if typo == 'img':
-			the_pic = imgs.get(node.get_val('pic_id'))
-		else:
-			the_pic = pics.get(node.get_val('id'))
-
+		the_pic = pics.get(node.get_val('id'))
 		if the_pic and not node.get_var('exclude_pic'):
 			caption = node.get_var('pic_caption')
 			if not caption:
@@ -206,11 +185,10 @@ with zipfile.ZipFile(outdir+'/main.odt', mode='w') as f:
 		f.write(os.path.join(outdir, x), x)#, compress_type=zipfile.ZIP_DEFLATED)
 	f.write(os.path.join(outdir, 'META-INF/manifest.xml'), 'META-INF/manifest.xml')#, compress_type=zipfile.ZIP_DEFLATED)
 	for x in settings['piclst']:
-		pic = 'Pictures/%s' % x
-		f.write(os.path.join(outdir, pic), pic)
+		f.write(os.path.join(outdir, x), 'Pictures/%s' % x)
 
 # and remove the useless stuff
-os.popen('cd %s && rm -rf *.xml META-INF Pictures' % outdir)
+os.popen('cd %s && rm -rf *.xml diag-* META-INF' % outdir)
 
 visualize('odt', outdir+'/main.odt')
 

@@ -580,7 +580,7 @@ void box_view::notify_export_item(int id)
 		scene()->render(&l_oP, l_oR, l_oRect, rat);
 		l_oP.end();
 	}
-	l_oImage.save(QString(m_oMediator->m_sTempDir + QString("/") + QString("diag-%1.png")).arg(QString::number(m_iId)));
+	l_oImage.save(notr("%1/%2/diag-%3.png").arg(m_oMediator->m_sOutDir, m_oMediator->m_sOutProject, QString::number(m_iId)));
 
 	QPrinter l_oPrinter;
 	//l_oPrinter.setResolution(QPrinter::HighResolution);
@@ -588,7 +588,7 @@ void box_view::notify_export_item(int id)
 	l_oPrinter.setOutputFormat(QPrinter::PdfFormat);
 	l_oPrinter.setPaperSize(l_oR.size(), QPrinter::DevicePixel);
 	l_oPrinter.setPageMargins(0, 0, 0, 0, QPrinter::DevicePixel);
-	l_oPrinter.setOutputFileName(QString(m_oMediator->m_sTempDir + QString("/") + QString("diag-%1.pdf")).arg(QString::number(m_iId)));
+	l_oPrinter.setOutputFileName(notr("%1/%2/diag-%3.pdf").arg(m_oMediator->m_sOutDir, m_oMediator->m_sOutProject, QString::number(m_iId)));
 
 	QPainter l_oPdf;
 	if (l_oPdf.begin(&l_oPrinter))
@@ -601,7 +601,7 @@ void box_view::notify_export_item(int id)
 
 	// and the svg for html/openoffice
 	QSvgGenerator l_oGenerator;
-	l_oGenerator.setFileName(QString(m_oMediator->m_sTempDir + QString("/") + QString("diag-%1.svg")).arg(QString::number(m_iId)));
+	l_oGenerator.setFileName(notr("%1/%2/diag-%3.svg").arg(m_oMediator->m_sOutDir, m_oMediator->m_sOutProject, QString::number(m_iId)));
 	l_oGenerator.setSize(QSize(l_oR.width(), l_oR.height()));
 	l_oGenerator.setViewBox(l_oR);
 	l_oGenerator.setTitle(i18n("Semantik diagram"));
