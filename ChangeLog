@@ -4,7 +4,8 @@ Semantik 1.0.6
 * Fix some annoying with the base directory changing to /tmp
 * Persist font settings in documents
 * Update the French translation data
-* Export png files in httml and latex documents
+* Export png files in html and latex documents
+* Remove the Beamer files: most LaTeX distributions provide them nowadays
 
 Semantik 1.0.5
 --------------

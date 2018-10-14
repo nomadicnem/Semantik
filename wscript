@@ -83,16 +83,10 @@ src/fig/diagram_document.h
 	for x in 'html odt odp java'.split():
 		bld.install_files('${TEMPLATE_DIR}/' + x, glob(rt+'%s/*' % x))
 
-	for x in "color font inner outer theme".split():
-		k = 'beamer/beamermindist/themes/'
-		bld.install_files('${TEMPLATE_DIR}/' + k+x, bld.path.ant_glob(rt+k+x+'/*'))
-
 	obj = bld(features='msgfmt', appname = 'semantik', langs=[x.path_from(bld.path).replace('.po', '') for x in bld.path.ant_glob('src/po/*.po')])
 	for x in bld.path.ant_glob('src/po/*.po'):
 		bld.symlink_as('${LOCALEDIR}/%s/LC_MESSAGES/semantik-d.mo' % x.name.strip('.po'), 'semantik.mo')
 
-	bld.install_files('${TEMPLATE_DIR}/beamer/beamermindist/art/', glob(rt+'beamer/beamermindist/art/*'))
-	bld.install_files('${TEMPLATE_DIR}/beamer/beamermindist/', glob(rt+'beamer/beamermindist/*'))
 	bld.install_files('${TEMPLATE_DIR}/beamer/', rt+'beamer/main.tex')
 	bld.install_files('${TEMPLATE_DIR}/beamer/', rt+'beamer/wscript')
 
@@ -316,16 +310,19 @@ def options(opt):
 def post_build(bld):
 	if bld.cmd == 'install':
 		if not Options.options.noldconfig:
+			print('Calling ldconfig (set --noldconfig to disable)')
 			try:
 				bld.exec_command('/sbin/ldconfig 2> /dev/null')
 			except Exception:
 				pass
 		if not Options.options.nomimes:
+			print('Calling update-mime-database (set --nomimes to disable)')
 			try:
 				bld.exec_command('update-mime-database %s' % os.path.split(bld.env.MIME_DIR)[0])
 			except Exception:
 				pass
 		if not Options.options.nogtkicons:
+			print('Calling gtk-update-icon-cache (set --nogtkicons to disable)')
 			try:
 				bld.exec_command('gtk-update-icon-cache -q -t -f %s/hicolor' % bld.env.ICONDIR)
 			except Exception:

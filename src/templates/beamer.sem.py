@@ -111,24 +111,25 @@ def print_figure_slides(node, recurse=False):
 	typo = node.get_val('type')
 	if typo in ['text']:
 		body = parse_raw(node.get_val('text')).strip()
-		lang = node.get_var('minted_lang').strip()
+		lang = node.get_var('code_lang').strip() or node.get_var('minted_lang').strip()
 		if body and not lang:
-			sys.stderr.write('For code snippets, set the variable minted_lang\n')
+			sys.stderr.write('For code snippets, set the variable code_lang\n')
 
 		if body and lang:
 			settings['use_minted'] = 1
 			filename = 'code-%s.minted' % node.get_val("id")
+			minted_opts = node.get_var('minted_opts').strip() or 'linenos'
 			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
 				f.write(body)
 
 			title = tex_convert(node.get_val('summary'))
 			out('\\begin{frame}[fragile]\n')
 			out('\\frametitle{%s}\n\n' % title)
-			out('\\begin{tcolorbox}\n')
+			#out('\\begin{tcolorbox}\n')
 			out('\\tiny\n')
 			out('\\ttfamily\n')
-			out('\\inputminted{%s}{%s}\n' % (lang, '../' + filename))
-			out('\\end{tcolorbox}\n')
+			out('\\inputminted[%s]{%s}{%s}\n' % (minted_opts, lang, '../' + filename))
+			#out('\\end{tcolorbox}\n')
 			out('\\end{frame}\n')
 	elif typo in ['table', 'diag', 'img']:
 		txt = tex_convert(node.get_val('summary'))
@@ -237,9 +238,6 @@ settings['doc_content'] = ''.join(buf)
 
 # now write main.tex
 transform("/beamer/main.tex", outdir+'/main.tex', settings)
-
-# data files
-os.popen('cp -Rf %s %s' % (template_dir()+'/beamer/beamermindist/', outdir)).read()
 
 shutil.copy2(template_dir()+'/beamer/wscript', outdir+'/wscript')
 shutil.copy2(template_dir()+'/waf', outdir+'/waf')

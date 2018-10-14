@@ -9,6 +9,7 @@
 import os, shutil, time
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
+pygments_css_data = ''
 
 settings = {
 'doc_content':'',
@@ -52,7 +53,7 @@ def print_nodes(node, niv, lbl_lst):
 				(niv, lbl, node.get_val('summary'), niv))
 
 		body = parse_raw(node.get_val('text')).strip()
-		lang = node.get_var('minted_lang').strip()
+		lang = node.get_var('code_lang').strip()
 		if body:
 			if lang:
 				html_code = pygmentize(lang, body)
@@ -61,7 +62,7 @@ def print_nodes(node, niv, lbl_lst):
 					pygments_css_data = pygmentize_css()
 				out(html_code)
 			else:
-				debug('For code snippets, set the variable minted_lang\n')
+				debug('For code snippets, set the variable code_lang\n')
 		else:
 			y = node.get_val('text')
 			out(p(y))

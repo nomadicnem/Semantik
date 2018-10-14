@@ -39,17 +39,12 @@ def options(opt):
 def configure(conf):
 	conf.load('tex')
 	cwd = os.getcwd()
-	cc = cwd + '/beamermindist/'
 
 	if conf.path.find_node('use_minted.txt'):
 		conf.find_program(['pygmentize', 'pygmentex'], var='pygments')
 	conf.find_program(['okular', 'kpdf', 'xpdf', 'gnome-open'], var='VIEW', mandatory=False)
 
-	lst = []
-	for x in "themes/color themes/font themes/inner themes/outer themes/theme art".split():
-		lst.append(cc+x)
-	u = ":".join(lst)
-	conf.env.LATEX = "; export TEXINPUTS=%s:$TEXINPUTS; export GS_OPTIONS=\"-sPAPERSIZE=a4\"; %s" % (u, conf.env.LATEX)
+	conf.env.LATEX = "; export GS_OPTIONS=\"-sPAPERSIZE=a4\"; %s" % conf.env.LATEX
 
 def build(bld):
 	# such options are sometimes necessary

@@ -94,23 +94,24 @@ def print_nodes(node, niv):
 	typo = node.get_val('type')
 	if typo == 'text':
 		body = parse_raw(node.get_val('text')).strip()
-		lang = node.get_var('minted_lang').strip()
+		lang = node.get_var('code_lang').strip() or node.get_var('minted_lang').strip()
 		if body and not lang:
-			sys.stderr.write('For code snippets, set the variable minted_lang\n')
+			sys.stderr.write('For code snippets, set the variable code_lang\n')
 
 		if lang:
 			settings['use_minted'] = 1
 			filename = 'code-%s.minted' % node.get_val("id")
+			minted_opts = node.get_var('minted_opts').strip() or 'linenos'
 			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
 				f.write(body)
 
 			out('\\begin{figure}[htbp]\n')
 			out('  \\begin{center}\n')
-			out('     \\begin{tcolorbox}\n')
+			#out('     \\begin{tcolorbox}\n')
 			out('       \\tiny\n')
 			out('       \\ttfamily\n')
-			out('       \\inputminted{%s}{%s}\n' % (lang, '../' + filename))
-			out('     \\end{tcolorbox}\n')
+			out('       \\inputminted[%s]{%s}{%s}\n' % (minted_opts, lang, '../' + filename))
+			#out('     \\end{tcolorbox}\n')
 			out('  \\end{center}\n')
 			if caption:
 				out('\\caption{%s}\n' % tex_convert(caption))

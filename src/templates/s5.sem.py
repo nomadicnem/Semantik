@@ -71,7 +71,7 @@ def print_figure_slides(node, niv):
 	typo = node.get_val('type')
 	if typo in ['text']:
 		body = parse_raw(node.get_val('text')).strip()
-		lang = node.get_var('minted_lang').strip()
+		lang = node.get_var('code_lang').strip()
 		if body:
 			if lang:
 				html_code = pygmentize(lang, body)
@@ -83,7 +83,7 @@ def print_figure_slides(node, niv):
 				out(html_code)
 				out('</div>')
 			else:
-				debug('For code snippets, set the variable minted_lang\n')
+				debug('For code snippets, set the variable code_lang\n')
 
 	elif typo in ['table', 'diag', 'img']:
 
@@ -123,7 +123,7 @@ def print_figure_slides(node, niv):
 				if not caption:
 					caption = node.get_val('summary')
 				out('<div style="text-align: center; width: 100%;">\n')
-				out("<img src='%s'>\n" % the_pic)
+				out("<img src='%s' style='max-width:99%%;'>\n" % the_pic)
 				out('</div>\n')
 
 		out("</div>\n")

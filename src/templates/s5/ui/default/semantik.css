@@ -51,3 +51,6 @@ table.sem_table tbody tr td:hover, table.sem_table tbody tr td:hover
 	background: #c5e894;
 }
 
+.pygments_code {
+	font-size: 80%;
+}

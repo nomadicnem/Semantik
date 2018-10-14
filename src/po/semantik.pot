@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-10-12 23:33+0200\n"
+"POT-Creation-Date: 2018-10-14 11:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,42 +186,42 @@ msgstr ""
 msgid "Click to set Item %1"
 msgstr ""
 
-#: canvas_view.cpp:1250 fig/box_view.cpp:2066
+#: canvas_view.cpp:1245 fig/box_view.cpp:2066
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1288 fig/box_view.cpp:2104
+#: canvas_view.cpp:1283 fig/box_view.cpp:2104
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1312 fig/box_view.cpp:2128
+#: canvas_view.cpp:1307 fig/box_view.cpp:2128
 msgid "Exported '%1'"
 msgstr ""
 
-#: canvas_view.cpp:1314 fig/box_view.cpp:2130
+#: canvas_view.cpp:1309 fig/box_view.cpp:2130
 msgid "Could not save to %1"
 msgstr ""
 
-#: canvas_view.cpp:1314 fig/box_view.cpp:2130
+#: canvas_view.cpp:1309 fig/box_view.cpp:2130
 msgid "Missing picture"
 msgstr ""
 
-#: canvas_view.cpp:1607
+#: canvas_view.cpp:1602
 msgid "Semantik map"
 msgstr ""
 
-#: canvas_view.cpp:1645 fig/box_view.cpp:1990
+#: canvas_view.cpp:1640 fig/box_view.cpp:1990
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1656 fig/box_view.cpp:2001
+#: canvas_view.cpp:1651 fig/box_view.cpp:2001
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1660 fig/box_view.cpp:2005
+#: canvas_view.cpp:1655 fig/box_view.cpp:2005
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -410,13 +410,13 @@ msgstr ""
 #. i18n: ectx: @info:tipoftheday
 #: data/tips.cpp:93
 msgid ""
-"<h3>9. Code snippets in LaTeX</h3>\n"
+"<h3>9. Code snippets</h3>\n"
 "<p>\n"
-"Code snippets can be highlighted with Minted in pdflatex documents or Beamer "
-"presentations.\n"
-"Enable Minted by setting adding source code in the data box and adding the "
-"variable <i>minted_lang</i>\n"
-"to the variables box, for example: <pre>minted_lang=java</pre>\n"
+"Code snippets can be highlighted by Pygments in html, S5, Beamer, Pdflatex "
+"or html documents.\n"
+"Enable Pygments by setting adding source code in the data box and adding the "
+"variable <i>code_lang</i>\n"
+"to the variables box, for example: <pre>code_lang=java</pre>\n"
 "</p>\n"
 msgstr ""
 
