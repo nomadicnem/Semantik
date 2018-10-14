@@ -278,7 +278,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	for (int i = 0; i < 16; ++i)
 	{
-		QAction *l_oAct = new QAction(QIcon(notr("crsc-app-colors")), i18n("flag"), m_oFlagGroup);
+		QAction *l_oAct = new QAction(QIcon(notr("crsc-app-colors")), i18n("Flag"), m_oFlagGroup);
 		l_oAct->setCheckable(true);
 		m_oFlagGroup->addAction(l_oAct);
 		actionCollection()->addAction(QString("flag_%1").arg(QString::number(i)), l_oAct);

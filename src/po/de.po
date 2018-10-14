@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semantik\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-10-14 11:00+0200\n"
+"POT-Creation-Date: 2018-10-14 20:17+0200\n"
 "PO-Revision-Date: 2015-11-28 15:00+0100\n"
 "Last-Translator: St. Briest\n"
 "Language-Team:\n"
@@ -27,82 +27,92 @@ msgstr "Leer"
 msgid "Flag item(s) as..."
 msgstr "Kennzeichne als..."
 
-#: base/sem_mediator.cpp:291
+#: base/sem_mediator.cpp:292
 msgid "Automatic save failed for file: %1"
 msgstr "Automatische Sicherung für %1 fehlgeschagen"
 
-#: base/sem_mediator.cpp:294
+#: base/sem_mediator.cpp:295
 msgid "%1 saved automatically"
 msgstr "%1 automatisch gesichert"
 
-#: base/sem_mediator.cpp:313
+#: base/sem_mediator.cpp:314
 msgid "Color %1"
 msgstr "Farbe %1"
 
-#: base/sem_mediator.cpp:633
+#: base/sem_mediator.cpp:634
 msgid "File saving: missing file %1"
 msgstr "Dateisicherung: fehlende Datei %1"
 
-#: base/sem_mediator.cpp:658 base/sem_mediator.cpp:1185
-#: base/sem_mediator.cpp:1234
+#: base/sem_mediator.cpp:659 base/sem_mediator.cpp:1208
+#: base/sem_mediator.cpp:1257
 msgid "Missing bindings for opening files"
 msgstr "Fehlende Verknüpfung für geöffnete Datei"
 
-#: base/sem_mediator.cpp:685
+#: base/sem_mediator.cpp:686
 msgid "Missing filter file %1 for opening files"
 msgstr "Fehlende Filterdatei %1 für geöffnete Datei "
 
-#: base/sem_mediator.cpp:685 base/sem_mediator.cpp:699
-#: base/sem_mediator.cpp:705
+#: base/sem_mediator.cpp:686 base/sem_mediator.cpp:700
+#: base/sem_mediator.cpp:706
 msgid "Broken installation"
 msgstr "Fehlerhafte Installation"
 
-#: base/sem_mediator.cpp:699
+#: base/sem_mediator.cpp:700
 msgid "Missing python bindings for opening files"
 msgstr "Fehlende Python-Bindings für geöffnete Datei"
 
-#: base/sem_mediator.cpp:705
+#: base/sem_mediator.cpp:706
 msgid "Python execution failure"
 msgstr ""
 
-#: base/sem_mediator.cpp:717
+#: base/sem_mediator.cpp:718
 msgid "Could not load the document %1"
 msgstr "Dokument %1 kann nicht geladen wetden"
 
-#: base/sem_mediator.cpp:717 base/sem_mediator.cpp:736
-#: base/sem_mediator.cpp:753 base/sem_mediator.cpp:794
-#: base/sem_mediator.cpp:803
+#: base/sem_mediator.cpp:718 base/sem_mediator.cpp:737
+#: base/sem_mediator.cpp:754 base/sem_mediator.cpp:795
+#: base/sem_mediator.cpp:804
 msgid "Broken document"
 msgstr "Fehlerhaftes Dokument"
 
-#: base/sem_mediator.cpp:736 base/sem_mediator.cpp:753
+#: base/sem_mediator.cpp:737 base/sem_mediator.cpp:754
 #, fuzzy
 msgid "Could not load the picture %1"
 msgstr "Bild kann nicht geladen wählen"
 
-#: base/sem_mediator.cpp:794
+#: base/sem_mediator.cpp:795
 msgid "Something is wrong with %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:803
+#: base/sem_mediator.cpp:804
 msgid "Rename the picture %1 to %2 failed"
 msgstr ""
 
-#: base/sem_mediator.cpp:1144
+#: base/sem_mediator.cpp:1145
 #, fuzzy
 msgid "Code generation failed: no root item"
 msgstr "Code-Erstellung fehlgeschlagen: fehlende Datei %1"
 
-#: base/sem_mediator.cpp:1151
+#: base/sem_mediator.cpp:1152
 msgid "Code generation failed: missing file %1"
 msgstr "Code-Erstellung fehlgeschlagen: fehlende Datei %1"
 
-#: base/sem_mediator.cpp:1191
+#: base/sem_mediator.cpp:1170
+#, fuzzy
+msgid "Could not rename the output folder %1"
+msgstr "Bild kann nicht geladen wählen"
+
+#: base/sem_mediator.cpp:1177
+#, fuzzy
+msgid "Could not create the output folder %1"
+msgstr "Bild kann nicht geladen wählen"
+
+#: base/sem_mediator.cpp:1214
 #, fuzzy
 msgid "Document generation failed, check the output folder"
 msgstr "Dokument erfolgreich erstellt"
 
-#: base/sem_mediator.cpp:1195
+#: base/sem_mediator.cpp:1218
 msgid "Document generation completed successfully"
 msgstr "Dokument erfolgreich erstellt"
 
@@ -1166,8 +1176,8 @@ msgid "Linear view"
 msgstr "Struktur-Ansicht"
 
 #: semantik.cpp:281
-msgid "flag"
-msgstr ""
+msgid "Flag"
+msgstr "Kennzeichnung"
 
 #: semantik.cpp:374
 msgid "Welcome to Semantik"
@@ -1252,9 +1262,6 @@ msgstr "&Unterstrichen"
 #: text_view.cpp:50
 msgid "Ctrl+U"
 msgstr "Strg+U"
-
-#~ msgid "Flag"
-#~ msgstr "Kennzeichnung"
 
 #~ msgid "box_item"
 #~ msgstr "box item"
