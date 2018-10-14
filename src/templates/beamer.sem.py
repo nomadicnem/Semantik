@@ -118,18 +118,34 @@ def print_figure_slides(node, recurse=False):
 		if body and lang:
 			settings['use_minted'] = 1
 			filename = 'code-%s.minted' % node.get_val("id")
-			minted_opts = node.get_var('minted_opts').strip() or 'linenos'
+			minted_opts = node.get_var('minted_opts').strip() or 'autogobble,fontsize=\\tiny'
 			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
 				f.write(body)
 
 			title = tex_convert(node.get_val('summary'))
 			out('\\begin{frame}[fragile]\n')
 			out('\\frametitle{%s}\n\n' % title)
-			#out('\\begin{tcolorbox}\n')
-			out('\\tiny\n')
-			out('\\ttfamily\n')
-			out('\\inputminted[%s]{%s}{%s}\n' % (minted_opts, lang, '../' + filename))
-			#out('\\end{tcolorbox}\n')
+
+			if node.get_var('minted_raw'):
+				# \inputminted[autogobble,fontsize=\Large]{python}{../code-42.minted}
+				out('\\inputminted[%s]{%s}{%s}\n' % (minted_opts, lang, '../' + filename))
+			else:
+				out('\\begin{tcbinputlisting} {')
+				minted_caption = node.get_var('caption')
+				if minted_caption:
+					out('title=%s,\n' % protect_tex(caption))
+				out('colback=%s,\n' % node.get_var('minted_colback', 'blue!3'))
+				out('colframe=%s,\n' % node.get_var('minted_colframe', 'black'))
+				out('boxrule=%s,\n' % node.get_var('minted_boxrule', '0.3pt'))
+				out('fonttitle=%s,\n' % node.get_var('minted_fonttitle', '\\bfseries\\tiny'))
+				out('left=%s,\n' % node.get_var('minted_left', '5mm' if 'linenos' in minted_opts else '0mm'))
+				out('listing engine=minted,\n')
+				out('minted language=%s,\n' % lang)
+				out('listing file=../%s,\n' % filename)
+				out('minted options={%s},\n' % minted_opts)
+				out('listing only}\n')
+				out('\end{tcbinputlisting}\n')
+
 			out('\\end{frame}\n')
 	elif typo in ['table', 'diag', 'img']:
 		txt = tex_convert(node.get_val('summary'))

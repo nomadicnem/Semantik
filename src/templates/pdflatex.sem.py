@@ -101,21 +101,31 @@ def print_nodes(node, niv):
 		if lang:
 			settings['use_minted'] = 1
 			filename = 'code-%s.minted' % node.get_val("id")
-			minted_opts = node.get_var('minted_opts').strip() or 'linenos'
+			minted_opts = node.get_var('minted_opts').strip() or 'autogobble,fontsize=\\small'
 			with open(outdir + '/' + filename, 'w', encoding='utf-8') as f:
 				f.write(body)
 
-			out('\\begin{figure}[htbp]\n')
 			out('  \\begin{center}\n')
-			#out('     \\begin{tcolorbox}\n')
-			out('       \\tiny\n')
-			out('       \\ttfamily\n')
-			out('       \\inputminted[%s]{%s}{%s}\n' % (minted_opts, lang, '../' + filename))
-			#out('     \\end{tcolorbox}\n')
+			if node.get_var('minted_raw'):
+				# \inputminted[autogobble,fontsize=\Large]{python}{../code-42.minted}
+				out('\\inputminted[%s]{%s}{%s}\n' % (minted_opts, lang, '../' + filename))
+			else:
+				out('\\begin{tcbinputlisting} {')
+				minted_caption = node.get_var('caption')
+				if minted_caption:
+					out('title=%s,\n' % protect_tex(caption))
+				out('colback=%s,\n' % node.get_var('minted_colback', 'blue!3'))
+				out('colframe=%s,\n' % node.get_var('minted_colframe', 'black'))
+				out('boxrule=%s,\n' % node.get_var('minted_boxrule', '0.3pt'))
+				out('fonttitle=%s,\n' % node.get_var('minted_fonttitle', '\\bfseries\\small'))
+				out('left=%s,\n' % node.get_var('minted_left', '5mm' if 'linenos' in minted_opts else '0mm'))
+				out('listing engine=minted,\n')
+				out('minted language=%s,\n' % lang)
+				out('listing file=../%s,\n' % filename)
+				out('minted options={%s},\n' % minted_opts)
+				out('listing only}\n')
+				out('\end{tcbinputlisting}\n')
 			out('  \\end{center}\n')
-			if caption:
-				out('\\caption{%s}\n' % tex_convert(caption))
-			out('\\end{figure}\n')
 		else:
 			out(parse_string(node.get_val('text')))
 

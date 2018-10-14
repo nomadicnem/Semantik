@@ -376,11 +376,11 @@ class Node(object):
 			return ret
 		return sembind.get_val(self.ptr, s)
 
-	def get_var(self, s):
+	def get_var(self, s, default=''):
 		if not self.vars:
 			hints = sembind.get_val(self.ptr, "hints")
 			self.vars = read_properties(hints)
-		return self.vars.get(s, "")
+		return self.vars.get(s, default)
 
 	def child_count(self):
 		#debug(str(self.ptr))
