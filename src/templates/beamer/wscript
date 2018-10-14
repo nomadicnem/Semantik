@@ -21,7 +21,7 @@ import os
 PYGMENTS_WARNING = '''
 !IMPORTANT!
 
-This Pdflatex document uses Pygments for syntax highlighting, and
+This Pdflatex document uses Minted for syntax highlighting, and
 this requires disabling the shell escaping options for Pdflatex.
 A maliciously creafted document might run arbitrary commands
 on your computer.
@@ -62,7 +62,8 @@ def build(bld):
 			bld.fatal(PYGMENTS_WARNING)
 
 	# set prompt=0 to avoid prompting on errors
-	bld(features='tex', type='pdflatex', source='main.tex', prompt=1)
+	dep_files = bld.path.ant_glob(['*.minted', '*.png', '*.pdf'])
+	bld(features='tex', type='pdflatex', source='main.tex', prompt=1, deps=dep_files)
 
 	def view(ctx):
 		ctx.exec_command(ctx.env.VIEW + ['build/main.pdf'])
