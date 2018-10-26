@@ -272,7 +272,7 @@ def transform(template, outfile, map):
 
 def debug(x):
 	msg = "%s\n" % x
-	sys.stderr.write(msg.encode())
+	sys.stderr.write(msg)
 
 def protect_tex(s):
 	lst = []

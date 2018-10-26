@@ -10,11 +10,6 @@ sys.path = [filters]+sys.path
 tmpdir = sembind.get_var('temp_dir')
 infile = sembind.get_var('pname')
 
-def debug(s):
-	txt = '%s\n' % s
-	sys.stderr.write(txt.encode())
-	sys.stderr.flush()
-
 ret = ''
 name = infile.lower()
 if sys.platform == 'win32' or sys.platform == 'darwin':

@@ -8,77 +8,97 @@
  * derivated works of this file (def.css) without
  * any restrictions.
  */
-body
-{
-	font-family: verdana, arial, 'sans serif';
+html  {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	font-family: "DejaVu Sans", sans-serif;
+	font-size: 12px;
 	background-color: #e2eed7;
-	font-size: 11px;
+	margin: 0px;
+	padding: 0px;
 }
 
-span.show_niv
-{
+.contenu {
+	max-width: 1000px;
+	min-height: 100vh;
+	background-color: #fff;
+	padding: 2px 15px 50px 15px;
+	margin: 0px auto;
+	border-style: solid;
+	border-width : 0px 1px 0px 1px;
+	border-left-color : #3e8d21;
+	border-right-color : #3e8d21;
+}
+
+.show_niv {
 	margin: 7px;
+	color: #3e8d21;
 }
 
-h1 { font-size: 18px; margin-left: 0px; }
-h2 { font-size: 16px; margin-left: 7px;}
-h3 { font-size: 14px; margin-left: 14px;}
-h4 { font-size: 12px; margin-left: 28px;}
+h1 { font-size: 18px; margin-left: 0px; margin-top: 30px; }
+h2 { font-size: 16px; margin-left: 20px; margin-top: 20px;}
+h3 { font-size: 15px; margin-left: 54px;}
+h4 { font-size: 14px; margin-left: 100px;}
+p {
+	font-size: 14px;
+	margin-left: 62px;
+	margin-right: 62px;
+	text-align: justify;
+}
 
-table.sem_table {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-	font-size: 11px;
+.imgcenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.code {
+	font-family: monospace;
+	font-size: 14px;
+	margin: 30px 62px;
+	padding: 10px;
+}
+
+.sem_table {
+	font-family: "DejaVu Sans", sans-serif;
+	font-size: 1.2em;
 	border-collapse: collapse;
 	color: #212424;
-	margin: 3px;
+	margin: 30px auto;
 }
-table.sem_table td, table.sem_table th
+
+.sem_table td, .sem_table th
 {
 	border: 1px solid black; /*#c5e894;*/
-	padding: 3px;
-	padding-left: 5px;
-	padding-right: 5px;
-	cursor: default;
+	padding: 3px 8px;
 }
 
-table.sem_table th
-{
-	font-weight: bold;
-	background-color: #c5e894;
+.sem_table thead {
+	background: #7e6336;  /* #524123 */
+	color: #fff;
 }
 
-table.sem_table thead
-{
-	background: #524123;
-}
-
-table.sem_table tfoot
-{
-	color: #ffffff;
-	background: #524123;
-}
-
-table.sem_table tbody tr td
-{
+.sem_table tbody td {
 	background: #DDF0BD;
+	text-align: center;
 }
 
-table.sem_table tbody tr td:hover, table.sem_table tbody tr td:hover
-{
+.sem_table tbody th {
+	background: #bdefae;
+	text-align: left;
+	padding: 3px 8px;
+}
+
+.sem_table tbody td:hover {
 	background: #c5e894;
 }
 
-/*
-caption {
-	width: 100%;
-	height: 39px;
-	font-size: 0;
-	line-height: 0;
-	text-indent: -5000em;
-	background: url(caption.gif) no-repeat 98% 0;
+.sem_table caption {
+	caption-side: bottom;
 }
-caption:hover {
-	background-position: 98% 100%;
-}*/
-
 

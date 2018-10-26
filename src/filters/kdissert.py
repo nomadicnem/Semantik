@@ -6,9 +6,6 @@ import os, sys, tarfile, io
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
-def debug(s):
-	sys.stderr.write(s)
-
 def protect(t):
 	lst = t.split('&')
 	t = "&amp;".join(lst)
