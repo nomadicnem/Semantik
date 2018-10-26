@@ -1,8 +1,7 @@
 /*
  * html template
  * this file is part of the Semantik templates
- * http://freehackers.org/~tnagy/semantik.html
- * created by Thomas Nagy <tnagy2^8@yahoo.fr> in 2004 for Kdissert
+ * https://waf.io/semantik.html
  *
  * Permission is granted to redistribute copies and
  * derivated works of this file (def.css) without
@@ -16,7 +15,6 @@ body {
 	min-height: 100%;
 	font-family: "DejaVu Sans", sans-serif;
 	font-size: 12px;
-	background-color: #e2eed7;
 	margin: 0px;
 	padding: 0px;
 }
@@ -24,7 +22,6 @@ body {
 .contenu {
 	max-width: 1000px;
 	min-height: 100vh;
-	background-color: #fff;
 	padding: 2px 15px 50px 15px;
 	margin: 0px auto;
 	border-style: solid;
@@ -72,13 +69,12 @@ p {
 	margin: 30px auto;
 }
 
-.sem_table td, .sem_table th
-{
+.sem_table td, .sem_table th {
 	border: 1px solid black; /*#c5e894;*/
 	padding: 3px 8px;
 }
 
-.sem_table thead {
+.sem_table tr:first-child th {
 	background: #7e6336;  /* #524123 */
 	color: #fff;
 }

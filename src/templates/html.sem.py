@@ -6,7 +6,7 @@
 # exclude
 # caption
 
-import os, shutil, time
+import getpass, shutil
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 pygments_css_data = ''
@@ -14,6 +14,7 @@ pygments_css_data = ''
 settings = {
 'doc_content':'',
 'doc_title':'',
+'doc_author': getpass.getuser(),
 }
 add_globals(settings)
 
@@ -92,11 +93,8 @@ def print_nodes(node, niv, lbl_lst):
 				h = int(node.get_val('pic_h'))
 				if w > 800: style = " style='width:800px;'"
 
-			divstyle = node.get_var('picdivstyle')
-			#captionstyle = node.get_var('piccaptionstyle')
-
-			out('<p><div class=\"img\" %s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s></div></p>\n'
-				% (divstyle, the_pic, x(caption), x(caption), style))
+			out('<img src=\"%s\" alt=\"%s\" title=\"%s\" %s class=\"imgcenter\">\n'
+				% (the_pic, x(caption), x(caption), style))
 
 	num = node.child_count()
 	for i in range(num):

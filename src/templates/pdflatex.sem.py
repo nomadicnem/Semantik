@@ -3,7 +3,7 @@
 
 # Thomas Nagy, 2007-2018 GPLV3
 
-import os, time, shutil, getpass
+import getpass, os, shutil, time
 
 # Additional variables:
 # exclude   1

@@ -3,8 +3,7 @@
 
 # Thomas Nagy, 2007-2018 GPLV3
 
-import os, shutil, time, sys
-import getpass
+import getpass, os, shutil, sys, time
 
 outdir = sembind.get_var('outdir')+'/'+sembind.get_var('pname')
 
