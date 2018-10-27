@@ -87,7 +87,7 @@ def print_slide(node, niv):
 			print_slide(node.child_num(i), niv+1)
 
 diagrams_added = set([]) # prevent accidents
-def print_figure_slides(node, recurse=False):
+def print_figure_slides(node):
 	if node.get_val("id") in diagrams_added:
 		return
 	diagrams_added.add(node.get_val("id"))
@@ -196,7 +196,6 @@ def print_figure_slides(node, recurse=False):
 	num = node.child_count()
 	for i in range(num):
 		print_figure_slides(node.child_num(i))
-	#print_figure_slides(root, recurse=False)
 
 # 0. all nodes result in some text being output
 # 1. unless explicitly stated, figures only result
@@ -218,7 +217,7 @@ def print_nodes(node, niv):
 		if subtree.child_count() >= 0:
 			if int(subtree.get_val('tree_size')) < 16:
 				print_slide(subtree, 0);
-				print_figure_slides(subtree, True)
+				print_figure_slides(subtree)
 			elif niv == 0:
 				print_nodes(subtree, 1)
 				print_figure_slides(subtree)
@@ -226,7 +225,7 @@ def print_nodes(node, niv):
 				print_nodes(subtree, 2)
 				print_figure_slides(subtree)
 			else:
-				print_figure_slides(subtree, True)
+				print_figure_slides(subtree)
 				sys.stderr.write("transforming this map into slides makes kitten cry")
 
 # the main document

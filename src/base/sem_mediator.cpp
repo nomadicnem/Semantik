@@ -1167,7 +1167,9 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 		bool l_bOk = l_oJob->exec();
 		if (!l_bOk)
 		{
-			emit sig_message(i18n("Could not rename the output folder %1").arg(l_oBackup.absolutePath()), 5000);
+			QString msg = i18n("Could not rename the output folder %1").arg(l_oBackup.absolutePath());
+			qDebug()<<msg;
+			emit sig_message(msg, 5000);
 			return 23;
 		}
 	}
@@ -1205,7 +1207,9 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 
 	if (!init_py())
 	{
-		emit sig_message(i18n("Missing bindings for opening files"), 5000);
+		QString msg = i18n("Missing bindings for opening files");
+		qDebug()<<msg;
+		emit sig_message(msg, 5000);
 		return 23;
 	}
 	int ret = PyRun_SimpleString(l_oBa.constData());

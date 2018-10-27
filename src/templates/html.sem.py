@@ -53,9 +53,7 @@ def print_nodes(node, niv, lbl_lst):
 				out(html_code)
 			else:
 				debug('For code snippets, set the variable code_lang\n')
-		else:
-			y = node.get_val('text')
-			out(p(y))
+				out(truncate_html(node.get_val('text')))
 
 	elif typo == 'table':
 		rows = node.num_rows()

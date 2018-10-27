@@ -181,6 +181,40 @@ def clear_html(s):
 	parser.close()
 	return parser.output()
 
+class KeepProcessor(HTMLParser):
+	def reset(self):
+		self.keep = False
+		self.pieces = []
+		HTMLParser.reset(self)
+
+	def handle_starttag(self, tag, attrs):
+		if tag == 'body':
+			self.keep = True
+		elif self.keep:
+			vals = ' '.join('%s="%s"' % (x, y.replace('"', '\\"')) for (x, y) in attrs)
+			self.pieces.append('<%s %s>' % (tag, vals))
+
+	def handle_endtag(self, tag):
+		if tag == 'body':
+			self.keep = False
+		elif self.keep:
+			self.pieces.append('</%s>' %tag)
+
+	def convert_entityref(self, name):
+		return '&%s;' % name
+
+	def handle_data(self, text):
+		if self.keep:
+			self.pieces.append(text)
+
+	def output(self):
+		return "".join(self.pieces)
+
+def truncate_html(s):
+	parser = KeepProcessor()
+	parser.feed(s)
+	parser.close()
+	return parser.output()
 
 def template_dir():
 	return sembind.get_var('template_dir')

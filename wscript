@@ -306,6 +306,7 @@ def options(opt):
 	opt.add_option('--nomimes', action='store_true', default=False, help='do not run update-mime-database during installation')
 	opt.add_option('--noldconfig', action='store_true', default=False, help='do not run lconfig during installation')
 	opt.add_option('--nogtkicons', action='store_true', default=False, help='do not try to update the hicolor icon cache during installation')
+	opt.add_option('--test', action='store_true', default=False, help='run some tests')
 
 def post_build(bld):
 	if bld.cmd == 'install':
@@ -332,7 +333,18 @@ def post_build(bld):
 		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik', stdout=None, stderr=None)
 	if Options.options.ddd:
 		bld.exec_command('LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik-d', stdout=None, stderr=None)
-
+	if Options.options.test:
+		example = bld.path.find_node('example.sem')
+		for x in bld.path.find_dir('src/templates').ant_glob('*.sem.py', excl='semantik.sem.py'):
+			template = x.name.replace('.sem.py', '')
+			tmpdir = bld.bldnode.make_node('tmp-tests-%s' % template)
+			tmpdir.delete(evict=False)
+			tmpdir.mkdir()
+			cmd = 'LD_LIBRARY_PATH=build/:$LD_LIBRARY_PATH build/src/semantik -d %s -t %s %s' % (tmpdir.abspath(), template, example.abspath())
+			ret = bld.exec_command(cmd, stdout=None, stderr=None)
+			if ret:
+				bld.fatal('Test: %r failed %r: %r' % (template, ret, cmd))
+		Logs.pprint('GREEN', "Tests succeeded")
 
 @TaskGen.feature('msgfmt')
 def apply_msgfmt(self):
