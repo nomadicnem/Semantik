@@ -88,11 +88,6 @@ def print_nodes(node, niv, lbl_lst):
 			if not caption: caption = node.get_val('summary')
 
 			style = node.get_var('picstyle')
-			if not style:
-				w = int(node.get_val('pic_w'))
-				h = int(node.get_val('pic_h'))
-				if w > 800: style = " style='width:800px;'"
-
 			out('<img src=\"%s\" alt=\"%s\" title=\"%s\" %s class=\"imgcenter\">\n'
 				% (the_pic, x(caption), x(caption), style))
 
