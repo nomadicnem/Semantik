@@ -191,10 +191,13 @@ class KeepProcessor(HTMLParser):
 		if tag == 'body':
 			self.keep = True
 		elif self.keep:
-			vals = ' '.join('%s="%s"' % (x, y.replace('"', '\\"')) for (x, y) in attrs)
-			if tag == 'p':
-				vals = ''
-			self.pieces.append('<%s %s>' % (tag, vals))
+			if tag == 'br':
+				self.pieces.append('<br />')
+			else:
+				vals = ' '.join('%s="%s"' % (x, y.replace('"', '\\"')) for (x, y) in attrs)
+				if tag == 'p':
+					vals = ''
+				self.pieces.append('<%s %s>' % (tag, vals))
 
 	def handle_endtag(self, tag):
 		if tag == 'body':

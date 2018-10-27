@@ -78,7 +78,10 @@ def print_figure_slides(node, niv):
 				out('</div>')
 			else:
 				debug('For code snippets, set the variable code_lang\n')
+				out('\n\n<div class="slide">\n')
+				out('<h1>%s</h1>\n' % node.get_val('summary'))
 				out(truncate_html(node.get_val('text')))
+				out('</div>')
 
 	elif typo in ['table', 'diag', 'img']:
 
