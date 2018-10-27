@@ -192,13 +192,16 @@ class KeepProcessor(HTMLParser):
 			self.keep = True
 		elif self.keep:
 			vals = ' '.join('%s="%s"' % (x, y.replace('"', '\\"')) for (x, y) in attrs)
+			if tag == 'p':
+				vals = ''
 			self.pieces.append('<%s %s>' % (tag, vals))
 
 	def handle_endtag(self, tag):
 		if tag == 'body':
 			self.keep = False
 		elif self.keep:
-			self.pieces.append('</%s>' %tag)
+			if tag != 'br':
+				self.pieces.append('</%s>' %tag)
 
 	def convert_entityref(self, name):
 		return '&%s;' % name
