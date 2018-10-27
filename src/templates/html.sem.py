@@ -63,7 +63,7 @@ def print_nodes(node, niv, lbl_lst):
 			if not caption: caption = node.get_val('summary')
 
 			out('\n')
-			out('<table class="sem_table" cellspacing="0px" cellpadding="0px">\n')
+			out('<table class="sem_table">\n')
 			out('<caption>%s</caption>\n' % x(caption))
 			out('<tbody>\n')
 			for i in range(rows):

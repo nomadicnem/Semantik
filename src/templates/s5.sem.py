@@ -91,7 +91,7 @@ def print_figure_slides(node, niv):
 			if rows>0 and cols>0:
 				out('\n')
 				out('<div style="text-align: center; width: 100%;">\n')
-				out('<table class="sem_table" cellspacing="0px" cellpadding="0px" style="width: 100%;">\n')
+				out('<table class="sem_table">\n')
 				out('<tbody>\n')
 				for i in range(rows):
 					out('\t<tr>\n')
