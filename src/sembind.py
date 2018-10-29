@@ -48,7 +48,7 @@ class RawProcessor(HTMLParser):
 	def handle_starttag(self, tag, attrs):
 		if tag == 'ul':
 			self.inline_level.append(0)
-			if self.inli and self.buf:
+			if self.inline_level and self.buf:
 				self.pieces.append('  ' * len(self.inline_level))
 				self.pieces.append(''.join(self.buf))
 				self.pieces.append('\n')
@@ -65,7 +65,7 @@ class RawProcessor(HTMLParser):
 				self.pieces.append(''.join(self.buf))
 				self.pieces.append('\n')
 		elif tag == 'ul':
-			self.inline_num.pop()
+			self.inline_level.pop()
 		elif tag == 'style':
 			pass
 		elif tag == 'br':
@@ -195,10 +195,10 @@ class KeepProcessor(HTMLParser):
 				self.pieces.append('<br>\n')
 			else:
 				vals = ' '.join('%s="%s"' % (x, y.replace('"', '\\"')) for (x, y) in attrs)
-				if tag == 'p':
-					self.pieces.append('<p>')
+				if tag in ('p', 'ul', 'ol', 'li'):
+					self.pieces.append('<%s>' % tag)
 				else:
-				    self.pieces.append('<%s %s>' % (tag, vals))
+					self.pieces.append('<%s %s>' % (tag, vals))
 
 	def handle_endtag(self, tag):
 		if tag == 'body':
