@@ -1,3 +1,7 @@
+Semantik 1.0.7
+--------------
+* Export rich text in html/s5 document generators
+
 Semantik 1.0.6
 --------------
 * Improve the document export from the command-line
