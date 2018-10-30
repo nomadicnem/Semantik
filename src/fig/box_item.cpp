@@ -109,7 +109,11 @@ void box_item::update_size() {
 	m_iWW = m_oBox->m_iWW;
 	m_iHH = m_oBox->m_iHH;
 
-	doc.setHtml(QString("<div align='center'>%1</div>").arg(m_oBox->m_sText));
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	doc.setDefaultTextOption(l_oOption);
+	doc.setPlainText(m_oBox->m_sText);
+
 	doc.setTextWidth(m_iWW - x_text_off);
 
 	prepareGeometryChange();
@@ -130,7 +134,12 @@ void box_item::properties()
 		ed->newText = text;
 
 		QTextDocument doc;
-		doc.setHtml(QString("<div align='center'>%1</div>").arg(text));
+		QTextOption l_oOption = doc.defaultTextOption();
+		l_oOption.setAlignment(m_oBox->m_iAlign);
+		doc.setDefaultTextOption(l_oOption);
+		doc.setPlainText(m_oBox->m_sText);
+
+
 		doc.setTextWidth(m_oBox->m_iWW - 2 * OFF);
 		ed->newHeight = GRID * (((int) (doc.size().height() + 2 * OFF + GRID - 1)) / GRID);
 		if (ed->newHeight < m_oBox->m_iHH)

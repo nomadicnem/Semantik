@@ -151,6 +151,7 @@ data_box::data_box(int id) : diagram_item(), node()
 	m_iType = data_box::ACTIVITY;
 	m_iWW = 100;
 	m_iHH = 40;
+	m_iAlign = Qt::AlignHCenter;
 	m_oCustom.m_oInnerColor = QColor("#a7e89b");
 
 	m_bAbstract = false;
@@ -162,6 +163,7 @@ data_box& data_box::operator=(const data_box & i_o)
 	m_iType = i_o.m_iType;
 	m_iId = i_o.m_iId;
 	m_sText = i_o.m_sText;
+	m_iAlign = i_o.m_iAlign;
 
 	m_bIsEnd = i_o.m_bIsEnd;
 	m_bIsEnd = i_o.m_bIsEnd;
@@ -203,11 +205,12 @@ void data_box::dump_xml(QStringList & i_oS)
 		QString::number(m_iHH),
 		m_oCustom.m_oInnerColor.name(),
 		QString::number((int) m_iType),
-		QString(" v=\"%1\" e=\"%2\" seq=\"%3\" version=\"2\" color_id=\"%4\"").arg(
+		QString(" v=\"%1\" e=\"%2\" seq=\"%3\" version=\"2\" color_id=\"%4\" align=\"%5\"").arg(
 			QString::number((int) m_bIsVertical),
 			QString::number((int) m_bIsEnd),
 			QString::number((int) m_iBoxHeight),
-			QString::number((int) m_iColor)
+			QString::number((int) m_iColor),
+			QString::number((int) m_iAlign)
 		)
 	);
 
@@ -249,6 +252,27 @@ void data_box::read_data(const QString& i_sTag, const QXmlAttributes& i_oAttrs)
 	m_bIsVertical = i_oAttrs.value(notr("v")).toInt();
 	m_bIsEnd = i_oAttrs.value(notr("e")).toInt();
 	m_iBoxHeight = i_oAttrs.value(notr("seq")).toInt();
+	QString l_oAlignVal = i_oAttrs.value(notr("align"));
+	if (l_oAlignVal.isEmpty())
+	{
+		m_iAlign = Qt::AlignHCenter;
+	}
+	else
+	{
+		switch (l_oAlignVal.toInt())
+		{
+			case Qt::AlignLeft:
+				m_iAlign = Qt::AlignLeft;
+			case Qt::AlignRight:
+				m_iAlign = Qt::AlignRight;
+			case Qt::AlignHCenter:
+				m_iAlign = Qt::AlignHCenter;
+			case Qt::AlignJustify:
+				m_iAlign = Qt::AlignJustify;
+			default:
+				m_iAlign = Qt::AlignHCenter;
+		}
+	}
 	if (m_iBoxHeight < 5)
 	{
 		m_iBoxHeight = 20;

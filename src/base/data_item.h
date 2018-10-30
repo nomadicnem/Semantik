@@ -133,6 +133,7 @@ class data_box : public diagram_item, public node
 	data_box& operator=(const data_box &);
 
 	int m_iId;
+	Qt::AlignmentFlag m_iAlign;
 	QString m_sText;
 	int m_iXX;
 	int m_iYY;

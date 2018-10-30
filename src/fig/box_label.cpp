@@ -6,6 +6,7 @@
 #include <QTextDocumentFragment>
 #include <QAbstractTextDocumentLayout>
 #include <QTextList>
+#include <QTextOption>
 #include <QClipboard>
 #include <QPainter>
 #include <QtDebug>
@@ -31,6 +32,10 @@ box_label::box_label(box_view* view, int id) : box_item(view, id)
 void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	doc.setDefaultFont(scene()->font());
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	doc.setDefaultTextOption(l_oOption);
+	doc.setPlainText(m_oBox->m_sText);
 
 	qreal pad = 0.5;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
@@ -50,6 +55,14 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, m_oBox->getColor(m_oView->m_oMediator));
 	doc.documentLayout()->draw(painter, ctx);
+}
+
+void box_label::properties()
+{
+	box_item::properties();
+	// TODO
+	//box_class_properties props(m_oView, this);
+	//props.exec();
 }
 
 /*QVariant box_label::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue)

@@ -481,7 +481,7 @@ QString sem_mediator::doc_to_xml()
 	QStringList l_oS;
 
 	l_oS<<notr("<?xml version=\"1.0\" encoding=\"utf8\"?>\n");
-	l_oS<<notr("<semantik version=\"3\">\n");
+	l_oS<<notr("<semantik version=\"4\">\n");
 	l_oS<<notr("\t<info");
 	//l_oS<<QString(" name=\"%1\"").arg(bind_node::protectXML(m_sName));
 	//l_oS<<QString(" fname=\"%1\"").arg(bind_node::protectXML(m_sFirstName));

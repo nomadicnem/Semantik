@@ -85,7 +85,10 @@ void box_sequence::update_size()
 	m_iHH = m_oBox->m_iHH;
 	m_iBoxHeight = m_oBox->m_iBoxHeight;
 
-	doc.setHtml(QString("<div align='center'>%1</div>").arg(m_oBox->m_sText));
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	doc.setDefaultTextOption(l_oOption);
+	doc.setPlainText(m_oBox->m_sText);
 	doc.setTextWidth(m_iWW - 2 * OFF);
 
 	prepareGeometryChange();
