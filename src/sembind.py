@@ -46,7 +46,7 @@ class RawProcessor(HTMLParser):
 		HTMLParser.reset(self)
 
 	def handle_starttag(self, tag, attrs):
-		if tag == 'ul':
+		if tag in ('ul', 'ol'):
 			self.inline_level.append(0)
 			if self.inline_level and self.buf:
 				self.pieces.append('  ' * len(self.inline_level))
@@ -64,7 +64,7 @@ class RawProcessor(HTMLParser):
 				self.pieces.append('%s. ' % self.inline_level[-1])
 				self.pieces.append(''.join(self.buf))
 				self.pieces.append('\n')
-		elif tag == 'ul':
+		elif tag in ('ul', 'ol'):
 			self.inline_level.pop()
 		elif tag == 'style':
 			pass
@@ -96,7 +96,7 @@ class TrucProcessor(HTMLParser):
 		HTMLParser.reset(self)
 
 	def handle_starttag(self, tag, attrs):
-		if tag == 'ul':
+		if tag in ('ul', 'ol'):
 			if self.inli and self.buf:
 				self.pieces.append('\\item ')
 				self.pieces.append(tex_convert(''.join(self.buf)))
@@ -115,7 +115,7 @@ class TrucProcessor(HTMLParser):
 				self.pieces.append(tex_convert(''.join(self.buf)))
 				self.pieces.append('\n')
 			self.inli -= 1
-		elif tag == 'ul':
+		elif tag in ('ul', 'ol'):
 			self.pieces.append('\\end{itemize}\n')
 		elif tag == 'style':
 			pass
@@ -145,7 +145,7 @@ class RichProcessor(HTMLParser):
 		HTMLParser.reset(self)
 
 	def handle_starttag(self, tag, attrs):
-		if tag == 'ul':
+		if tag in ('ul', 'ol'):
 			self.inli += 1
 
 	def handle_endtag(self, tag):
@@ -157,7 +157,7 @@ class RichProcessor(HTMLParser):
 				self.pieces.append(' ' * self.inli)
 				self.pieces.extend(self.buf)
 				self.pieces.append('\n')
-		elif tag == 'ul':
+		elif tag in ('ul', 'ol'):
 			self.inli -= 1
 		elif tag == 'style':
 			pass
