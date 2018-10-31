@@ -103,6 +103,7 @@ transform("/html/index.html", outdir+'/index.html', settings)
 
 # css file
 shutil.copy2(template_dir()+'/html/def.css', outdir)
+shutil.copy2(template_dir()+'/html/doc_icon.png', outdir+'/doc_icon.png')
 
 with open(outdir + '/pygments.css', 'w') as f:
 	f.write(pygments_css_data)
