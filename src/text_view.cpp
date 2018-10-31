@@ -38,15 +38,15 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	connect(m_oEdit, SIGNAL(textChanged()), this, SLOT(update_edit()));
 	connect(m_oEdit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)), this, SLOT(char_format_changed(const QTextCharFormat &)));
 
-	m_oBoldAct = new QAction(fetch_icon(notr("text_bold")), i18n("&Bold"), this);
+	m_oBoldAct = new QAction(QIcon::fromTheme(notr("format-text-bold")), i18n("&Bold"), this);
 	m_oBoldAct->setShortcut(i18n("Ctrl+B"));
 	m_oBoldAct->setCheckable(true);
 
-	m_oItalicAct = new QAction(fetch_icon(notr("text_italic")), i18n("&Italic"), this);
+	m_oItalicAct = new QAction(QIcon::fromTheme(notr("format-text-italic")), i18n("&Italic"), this);
 	m_oItalicAct->setShortcut(i18n("Ctrl+I"));
 	m_oItalicAct->setCheckable(true);
 
-	m_oUnderLineAct = new QAction(fetch_icon(notr("text_under")), i18n("&Underline"), this);
+	m_oUnderLineAct = new QAction(QIcon::fromTheme(notr("format-text-underline")), i18n("&Underline"), this);
 	m_oUnderLineAct->setShortcut(i18n("Ctrl+U"));
 	m_oUnderLineAct->setCheckable(true);
 
