@@ -66,6 +66,7 @@ p {
 }
 
 .sem_table {
+	min-width: 50%;
 	font-family: "DejaVu Sans", sans-serif;
 	font-size: 1.2em;
 	border-collapse: collapse;
