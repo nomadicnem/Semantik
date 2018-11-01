@@ -14,7 +14,7 @@ html  {
 body {
 	min-height: 100%;
 	font-family: "DejaVu Sans", sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 	margin: 0px;
 	background-color: #e2eed7;
 	padding: 0px;
@@ -41,11 +41,45 @@ h1 { font-size: 18px; margin-left: 0px; margin-top: 30px; }
 h2 { font-size: 16px; margin-left: 20px; margin-top: 20px;}
 h3 { font-size: 15px; margin-left: 54px;}
 h4 { font-size: 14px; margin-left: 100px;}
+
 p {
-	font-size: 14px;
 	margin-left: 62px;
 	margin-right: 62px;
 	text-align: justify;
+}
+
+ul {
+	margin-left: 35px;
+	margin-right: 62px;
+}
+
+ol {
+	margin-left: 38px;
+	margin-right: 62px;
+}
+
+a:link {
+	color: #000;
+	background-color: #f3f3f3;
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #000;
+	background-color: #f3f3f3;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #000;
+	background-color: #e2eed7;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #000;
+	background-color: #e2eed7;
+	text-decoration: underline;
 }
 
 .imgcenter {
@@ -58,17 +92,22 @@ p {
 	margin-bottom: 10px;
 }
 
-.code {
+.head_code {
+	margin: 30px 62px 0px;
+	background: #cdcdcd;
+	padding: 8px 10px;
+}
+
+.pygments_code {
 	font-family: monospace;
-	font-size: 14px;
-	margin: 30px 62px;
-	padding: 10px;
+	margin: 0px 62px 30px;
+	padding: 8px 10px;
+	border: 1px solid #cdcdcd;
 }
 
 .sem_table {
 	min-width: 50%;
 	font-family: "DejaVu Sans", sans-serif;
-	font-size: 1.2em;
 	border-collapse: collapse;
 	color: #212424;
 	margin: 30px auto;
@@ -80,6 +119,7 @@ p {
 }
 
 .sem_table tr:first-child th {
+	text-align: center;
 	background: #7e6336;  /* #524123 */
 	color: #fff;
 }
@@ -102,4 +142,3 @@ p {
 .sem_table caption {
 	caption-side: bottom;
 }
-
