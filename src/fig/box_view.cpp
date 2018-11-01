@@ -329,6 +329,12 @@ void box_view::init_menu()
 
 	m_oMenu->addSeparator();
 
+	m_oTextAlignMenu = m_oMenu->addMenu(i18n("Text Alignment"));
+	m_oTextAlignGroup = new QActionGroup(this);
+	l_o = m_oTextAlignMenu->addAction(i18n("Align left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_text_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_LEFT)); m_oTextAlignGroup->addAction(l_o);
+	l_o = m_oTextAlignMenu->addAction(i18n("Align center")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_text_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_CENTER)); m_oTextAlignGroup->addAction(l_o);
+	l_o = m_oTextAlignMenu->addAction(i18n("Align right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_text_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_RIGHT)); m_oTextAlignGroup->addAction(l_o);
+
 	m_oAlignMenu = m_oMenu->addMenu(i18n("Alignment"));
 	m_oAlignGroup = new QActionGroup(this);
 	l_o = m_oAlignMenu->addAction(i18n("Align left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_align())); addAction(l_o); l_o->setData(QVariant(ALIGN_LEFT)); m_oAlignGroup->addAction(l_o);
@@ -685,6 +691,12 @@ void box_view::enable_menu_actions()
 		l_o->setEnabled(selected >= 1);
 	}*/
 
+	m_oTextAlignMenu->setEnabled(selected >= 1);
+	foreach(QAction* l_o, m_oTextAlignGroup->actions())
+	{
+		l_o->setEnabled(selected >= 1);
+	}
+
 	m_oAlignMenu->setEnabled(selected > 1);
 	foreach(QAction* l_o, m_oAlignGroup->actions())
 	{
@@ -827,6 +839,7 @@ void box_view::slot_add_element()
 	if (sender == m_oAddLabel)
 	{
 		add->box->m_iType = data_box::LABEL;
+		add->box->m_iAlign = Qt::AlignLeft;
 		add->box->m_iWW = 60;
 		add->box->m_iHH = 30;
 		add->box->m_oCustom.m_oInnerColor = Qt::black;
@@ -1398,6 +1411,32 @@ void box_view::slot_size()
 	mem->apply();
 }
 
+void box_view::slot_text_align()
+{
+	int l_i = ((QAction*) QObject::sender())->data().toInt();
+	Qt::AlignmentFlag l_oAlign = Qt::AlignCenter;
+	if (l_i == ALIGN_LEFT)
+	{
+		l_oAlign = Qt::AlignLeft;
+	}
+	else if (l_i == ALIGN_RIGHT)
+	{
+		l_oAlign = Qt::AlignRight;
+	}
+
+	mem_text_align_box *l_oMem = new mem_text_align_box(m_oMediator, m_iId);
+	l_oMem->m_oAlign = l_oAlign;
+	foreach (QGraphicsItem* l_oItem, scene()->selectedItems())
+        {
+		if (connectable* c = dynamic_cast<connectable*>(l_oItem))
+		{
+			data_box *box = c->m_oBox;
+			l_oMem->m_oPrevValues.append(*box);
+		}
+	}
+	l_oMem->apply();
+}
+
 void box_view::slot_align()
 {
 	int l_i = ((QAction*) QObject::sender())->data().toInt();
@@ -1713,6 +1752,15 @@ void box_view::notify_pos_box(int id, const QList<data_box*>& items)
 	foreach (data_box *box, items)
 	{
 		m_oItems[box->m_iId]->update_data();
+	}
+}
+
+void box_view::notify_text_align(int id, const QList<data_box>& items)
+{
+	Q_ASSERT(id == m_iId);
+	foreach (data_box box, items)
+	{
+		m_oItems[box.m_iId]->update_data();
 	}
 }
 

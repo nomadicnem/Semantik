@@ -1626,3 +1626,7 @@ void sem_mediator::notify_font()
 {
 	emit sync_font();
 }
+
+void sem_mediator::notify_text_align(int id, const QList<data_box>& items) {
+	emit sig_text_align(id, items);
+}

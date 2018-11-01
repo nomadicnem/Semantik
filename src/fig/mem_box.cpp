@@ -514,4 +514,29 @@ void mem_size_sequence::undo() {
 	undo_dirty();
 }
 
+///////////////////////////////////////////////////////////////////
+
+mem_text_align_box::mem_text_align_box(sem_mediator* mod, int id) : mem_command(mod)
+{
+	m_iId = id;
+}
+
+void mem_text_align_box::redo() {
+	data_item& l_oItem = model->m_oItems[m_iId];
+	foreach (data_box box, m_oPrevValues)
+	{
+		l_oItem.m_oBoxes[box.m_iId]->m_iAlign = m_oAlign;
+	}
+	model->notify_text_align(m_iId, m_oPrevValues);
+	redo_dirty();
+}
+
+void mem_text_align_box::undo() {
+	data_item& l_oItem = model->m_oItems[m_iId];
+	foreach (data_box box, m_oPrevValues) {
+		 l_oItem.m_oBoxes[box.m_iId]->m_iAlign = box.m_iAlign;
+	}
+	model->notify_text_align(m_iId, m_oPrevValues);
+	undo_dirty();
+}
 

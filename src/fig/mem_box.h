@@ -245,5 +245,19 @@ class mem_size_sequence : public mem_command {
 		IType type() { return SIZE_SEQUENCE; }
 };
 
+
+class mem_text_align_box : public mem_command {
+	public:
+		mem_text_align_box(sem_mediator*, int);
+		int m_iId;
+
+		void undo();
+		void redo();
+
+		QList<data_box> m_oPrevValues;
+		Qt::AlignmentFlag m_oAlign;
+		IType type() { return TEXT_ALIGN_BOX; }
+};
+
 #endif
 

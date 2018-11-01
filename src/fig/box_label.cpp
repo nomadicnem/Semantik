@@ -35,7 +35,7 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	QTextOption l_oOption = doc.defaultTextOption();
 	l_oOption.setAlignment(m_oBox->m_iAlign);
 	doc.setDefaultTextOption(l_oOption);
-	doc.setPlainText(m_oBox->m_sText);
+	doc.setHtml(m_oBox->m_sText);
 
 	qreal pad = 0.5;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
@@ -55,14 +55,6 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, m_oBox->getColor(m_oView->m_oMediator));
 	doc.documentLayout()->draw(painter, ctx);
-}
-
-void box_label::properties()
-{
-	box_item::properties();
-	// TODO
-	//box_class_properties props(m_oView, this);
-	//props.exec();
 }
 
 /*QVariant box_label::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue)

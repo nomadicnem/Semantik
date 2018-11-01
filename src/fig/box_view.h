@@ -47,6 +47,7 @@ class box_view : public QGraphicsView
 		//QMenu* m_oWidthMenu;
 		//QMenu* m_oStyleMenu;
 		QMenu* m_oAddBoxMenu;
+		QMenu* m_oTextAlignMenu;
 		QMenu* m_oAlignMenu;
 		QMenu* m_oSizeMenu;
 		QMenu* m_oFileMenu;
@@ -99,6 +100,7 @@ class box_view : public QGraphicsView
 
 		QActionGroup *m_oWidthGroup;
 		QActionGroup *m_oStyleGroup;
+		QActionGroup *m_oTextAlignGroup;
 		QActionGroup *m_oAlignGroup;
 		QActionGroup *m_oSizeGroup;
 
@@ -133,6 +135,7 @@ class box_view : public QGraphicsView
 		void slot_delete();
 		void slot_add_item();
 		void slot_edit_properties();
+		void slot_text_align();
 		void slot_align();
 		void slot_size();
 
@@ -155,6 +158,7 @@ class box_view : public QGraphicsView
 		void notify_box_props(int id, const QList<diagram_item*>&);
 		void notify_pos_box(int, const QList<data_box*>&);
 		void notify_size_box(int, const QList<data_box*>&);
+		void notify_text_align(int, const QList<data_box>&);
 		void notify_change_link_box(int id, data_link*link);
 		void notify_change_properties(void *);
 		void notify_sequence_box(int, int);

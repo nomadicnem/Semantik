@@ -151,7 +151,7 @@ data_box::data_box(int id) : diagram_item(), node()
 	m_iType = data_box::ACTIVITY;
 	m_iWW = 100;
 	m_iHH = 40;
-	m_iAlign = Qt::AlignHCenter;
+	m_iAlign = Qt::AlignCenter;
 	m_oCustom.m_oInnerColor = QColor("#a7e89b");
 
 	m_bAbstract = false;
