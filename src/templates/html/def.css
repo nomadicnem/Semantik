@@ -27,9 +27,8 @@ body {
 	margin: 0px auto;
 	background-color: white;
 	border-style: solid;
-	border-width : 0px 1px 0px 1px;
-	border-left-color : #3e8d21;
-	border-right-color : #3e8d21;
+	border-width : 1px;
+	border-color : #3e8d21;
 }
 
 .show_niv {
@@ -60,25 +59,21 @@ ol {
 
 a:link {
 	color: #000;
-	background-color: #f3f3f3;
 	text-decoration: underline;
 }
 
 a:visited {
 	color: #000;
-	background-color: #f3f3f3;
 	text-decoration: underline;
 }
 
 a:hover {
-	color: #000;
-	background-color: #e2eed7;
+	color: #3e8d21;
 	text-decoration: underline;
 }
 
 a:active {
-	color: #000;
-	background-color: #e2eed7;
+	color: #3e8d21;
 	text-decoration: underline;
 }
 
@@ -109,36 +104,34 @@ a:active {
 	min-width: 50%;
 	font-family: "DejaVu Sans", sans-serif;
 	border-collapse: collapse;
-	color: #212424;
 	margin: 30px auto;
 }
 
 .sem_table td, .sem_table th {
-	border: 1px solid black; /*#c5e894;*/
-	padding: 3px 8px;
+	border: 1px solid #cdcdcd;
+	padding: 6px 8px;
 }
 
 .sem_table tr:first-child th {
 	text-align: center;
-	background: #7e6336;  /* #524123 */
-	color: #fff;
+	background: #f7f7f7;
 }
 
 .sem_table tbody td {
-	background: #DDF0BD;
 	text-align: center;
+	padding: 8px 8px;
 }
 
 .sem_table tbody th {
-	background: #bdefae;
+	background: #f7f7f7;
 	text-align: left;
-	padding: 3px 8px;
-}
-
-.sem_table tbody td:hover {
-	background: #c5e894;
+	padding: 8px 8px;
 }
 
 .sem_table caption {
-	caption-side: bottom;
+	caption-side: top;
+	padding: 8px 10px;
+	background: #cdcdcd;
+	border: 1px solid #cdcdcd;
+	border-bottom-width: 0;
 }
