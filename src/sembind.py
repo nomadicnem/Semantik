@@ -185,22 +185,30 @@ class KeepProcessor(HTMLParser):
 	def reset(self):
 		self.keep = False
 		self.pieces = []
+		self.tags = []
 		HTMLParser.reset(self)
 
 	def handle_starttag(self, tag, attrs):
 		if tag == 'body':
 			self.keep = True
 		elif self.keep:
+			vals = ' '.join('%s="%s"' % (x, y.replace('"', '\\"')) for (x, y) in attrs)
 			if tag == 'br':
 				self.pieces.append('<br>\n')
 			else:
-				vals = ' '.join('%s="%s"' % (x, y.replace('"', '\\"')) for (x, y) in attrs)
 				if tag in ('p', 'ul', 'ol', 'li'):
 					self.pieces.append('<%s>' % tag)
+				elif tag == 'span' and self.tags and self.tags[-1] == 'a' and 'text-decoration: underline' in vals:
+					# probably a pasted document
+					self.pieces.append('<span>')
 				else:
 					self.pieces.append('<%s %s>' % (tag, vals))
+		self.tags.append(tag)
 
 	def handle_endtag(self, tag):
+		if self.tags and self.tags[-1] == tag:
+			self.tags.pop()
+
 		if tag == 'body':
 			self.keep = False
 		elif self.keep:
@@ -221,7 +229,7 @@ def truncate_html(s):
 	parser = KeepProcessor()
 	parser.feed(s)
 	parser.close()
-	return parser.output()
+	return parser.output().replace(' </span></a>', '</span></a> ')
 
 def template_dir():
 	return sembind.get_var('template_dir')
