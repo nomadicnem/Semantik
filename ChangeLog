@@ -1,6 +1,8 @@
 Semantik 1.0.7
 --------------
 * Export rich text in html/s5 document generators
+* Add new styles for the odt template
+* Add text alignment options to diagram elements
 
 Semantik 1.0.6
 --------------
