@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semantik\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-10-14 20:17+0200\n"
+"POT-Creation-Date: 2018-11-03 23:43+0100\n"
 "PO-Revision-Date: 2015-11-28 15:00+0100\n"
 "Last-Translator: St. Briest\n"
 "Language-Team:\n"
@@ -43,8 +43,8 @@ msgstr "Farbe %1"
 msgid "File saving: missing file %1"
 msgstr "Dateisicherung: fehlende Datei %1"
 
-#: base/sem_mediator.cpp:659 base/sem_mediator.cpp:1208
-#: base/sem_mediator.cpp:1257
+#: base/sem_mediator.cpp:659 base/sem_mediator.cpp:1210
+#: base/sem_mediator.cpp:1261
 msgid "Missing bindings for opening files"
 msgstr "Fehlende Verknüpfung für geöffnete Datei"
 
@@ -102,17 +102,17 @@ msgstr "Code-Erstellung fehlgeschlagen: fehlende Datei %1"
 msgid "Could not rename the output folder %1"
 msgstr "Bild kann nicht geladen wählen"
 
-#: base/sem_mediator.cpp:1177
+#: base/sem_mediator.cpp:1179
 #, fuzzy
 msgid "Could not create the output folder %1"
 msgstr "Bild kann nicht geladen wählen"
 
-#: base/sem_mediator.cpp:1214
+#: base/sem_mediator.cpp:1218
 #, fuzzy
 msgid "Document generation failed, check the output folder"
 msgstr "Dokument erfolgreich erstellt"
 
-#: base/sem_mediator.cpp:1218
+#: base/sem_mediator.cpp:1222
 msgid "Document generation completed successfully"
 msgstr "Dokument erfolgreich erstellt"
 
@@ -200,26 +200,26 @@ msgstr "Bild"
 msgid "Click to set Item %1"
 msgstr "Klicken um Element %1 zu setzen"
 
-#: canvas_view.cpp:1245 fig/box_view.cpp:2066
+#: canvas_view.cpp:1245 fig/box_view.cpp:2114
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1283 fig/box_view.cpp:2104
+#: canvas_view.cpp:1283 fig/box_view.cpp:2152
 msgid "No destination file selected"
 msgstr "Keine Zieldatei ausgewählt"
 
-#: canvas_view.cpp:1307 fig/box_view.cpp:2128
+#: canvas_view.cpp:1307 fig/box_view.cpp:2176
 msgid "Exported '%1'"
 msgstr "'%1' exportiert"
 
-#: canvas_view.cpp:1309 fig/box_view.cpp:2130
+#: canvas_view.cpp:1309 fig/box_view.cpp:2178
 msgid "Could not save to %1"
 msgstr "%1 kann nicht gesichert werden"
 
-#: canvas_view.cpp:1309 fig/box_view.cpp:2130
+#: canvas_view.cpp:1309 fig/box_view.cpp:2178
 msgid "Missing picture"
 msgstr "fehlendes Bild"
 
@@ -227,15 +227,15 @@ msgstr "fehlendes Bild"
 msgid "Semantik map"
 msgstr "Semantik map"
 
-#: canvas_view.cpp:1640 fig/box_view.cpp:1990
+#: canvas_view.cpp:1640 fig/box_view.cpp:2038
 msgid "Printing cancelled"
 msgstr "Druck abgebrochen"
 
-#: canvas_view.cpp:1651 fig/box_view.cpp:2001
+#: canvas_view.cpp:1651 fig/box_view.cpp:2049
 msgid "Printing completed"
 msgstr "Druck vollständig"
 
-#: canvas_view.cpp:1655 fig/box_view.cpp:2005
+#: canvas_view.cpp:1655 fig/box_view.cpp:2053
 msgid "Problem during printing :-("
 msgstr "Problem während des Drucks :-("
 
@@ -507,15 +507,15 @@ msgstr "Klassenname fehlt"
 msgid "Font properties"
 msgstr "Verbindungseigenschaften"
 
-#: fig/box_fork.cpp:331 fig/box_item.cpp:287
+#: fig/box_fork.cpp:331 fig/box_item.cpp:300
 msgid "%1 x %2"
 msgstr "%1 x %2"
 
-#: fig/box_item.cpp:125
+#: fig/box_item.cpp:133
 msgid "Diagram box properties"
 msgstr "Diagramm-Box-Eigenschaften"
 
-#: fig/box_item.cpp:126
+#: fig/box_item.cpp:134
 msgid "Text:"
 msgstr "Text:"
 
@@ -615,7 +615,7 @@ msgstr "Spalte %1: %2px (Größe: %3 x %4)"
 msgid "Row %1: %2px (size: %3 x %4)"
 msgstr "Zeile %1: %2px (Größe: %3 x %4)"
 
-#: fig/box_sequence.cpp:133 fig/box_sequence.cpp:168
+#: fig/box_sequence.cpp:136 fig/box_sequence.cpp:171
 #, fuzzy
 msgid "%1 x %2 (%3+%4)"
 msgstr "%1 x %2"
@@ -741,66 +741,71 @@ msgid "More elements"
 msgstr "Mehr Elemente"
 
 #: fig/box_view.cpp:332
-msgid "Alignment"
+#, fuzzy
+msgid "Text Alignment"
 msgstr "Ausrichtung"
 
-#: fig/box_view.cpp:334
+#: fig/box_view.cpp:334 fig/box_view.cpp:340
 msgid "Align left"
 msgstr "Ausrichtung links"
 
-#: fig/box_view.cpp:335
+#: fig/box_view.cpp:335 fig/box_view.cpp:341
 msgid "Align center"
 msgstr "Ausrichtung zentriert"
 
-#: fig/box_view.cpp:336
+#: fig/box_view.cpp:336 fig/box_view.cpp:342
 msgid "Align right"
 msgstr "Ausrichtung rechts"
 
 #: fig/box_view.cpp:338
+msgid "Alignment"
+msgstr "Ausrichtung"
+
+#: fig/box_view.cpp:344
 msgid "Align top"
 msgstr "Ausrichtung oben"
 
-#: fig/box_view.cpp:339
+#: fig/box_view.cpp:345
 msgid "Align middle"
 msgstr "Ausrichtung mitte"
 
-#: fig/box_view.cpp:340
+#: fig/box_view.cpp:346
 msgid "Align bottom"
 msgstr "Ausrichtung unten"
 
-#: fig/box_view.cpp:343
+#: fig/box_view.cpp:349
 msgid "Size"
 msgstr "Größe"
 
-#: fig/box_view.cpp:345
+#: fig/box_view.cpp:351
 msgid "Same width"
 msgstr "Gleiche Breite"
 
-#: fig/box_view.cpp:346
+#: fig/box_view.cpp:352
 msgid "Same height"
 msgstr "Gleiche Höhe"
 
-#: fig/box_view.cpp:347
+#: fig/box_view.cpp:353
 msgid "Same width and height"
 msgstr "Gleiche Breite und Höhe"
 
-#: fig/box_view.cpp:607 fig/box_view.cpp:1952
+#: fig/box_view.cpp:613 fig/box_view.cpp:2000
 msgid "Semantik diagram"
 msgstr "Semantik Diagramm"
 
-#: fig/box_view.cpp:1757 fig/semantik_d_win.cpp:321
+#: fig/box_view.cpp:1805 fig/semantik_d_win.cpp:321
 msgid "Choose a file to open"
 msgstr "Datei zum Öffnen wählen"
 
-#: fig/box_view.cpp:1759 fig/box_view.cpp:1797 fig/semantik_d_win.cpp:323
+#: fig/box_view.cpp:1807 fig/box_view.cpp:1845 fig/semantik_d_win.cpp:323
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.semd|Semantik Diagramm (*.semd)"
 
-#: fig/box_view.cpp:1795 semantik.cpp:449 semantik.cpp:541
+#: fig/box_view.cpp:1843 semantik.cpp:450 semantik.cpp:542
 msgid "Choose a file name"
 msgstr "Dateiname wählen"
 
-#: fig/box_view.cpp:1811 semantik.cpp:464
+#: fig/box_view.cpp:1859 semantik.cpp:465
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
@@ -808,22 +813,22 @@ msgstr ""
 "Die Datei \"%1\" existiert bereits.\n"
 "Diese überschreiben?"
 
-#: fig/box_view.cpp:1812 semantik.cpp:465
+#: fig/box_view.cpp:1860 semantik.cpp:466
 msgid "Overwrite existing file"
 msgstr "Überschreibe existierende Datei"
 
-#: fig/box_view.cpp:1835 fig/box_view.cpp:1870 semantik.cpp:476
-#: semantik.cpp:512
+#: fig/box_view.cpp:1883 fig/box_view.cpp:1918 semantik.cpp:477
+#: semantik.cpp:513
 msgid "Saved '%1'"
 msgstr "Gesichert '%1'"
 
-#: fig/box_view.cpp:1842 semantik.cpp:487 semantik.cpp:518
+#: fig/box_view.cpp:1890 semantik.cpp:488 semantik.cpp:519
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1843 semantik.cpp:488 semantik.cpp:519
+#: fig/box_view.cpp:1891 semantik.cpp:489 semantik.cpp:520
 msgid "Try again?"
 msgstr ""
 
@@ -877,11 +882,11 @@ msgstr "Semantik"
 msgid "[Untitled]"
 msgstr "[Unbenannt]"
 
-#: fig/semantik_d_win.cpp:288 semantik.cpp:612
+#: fig/semantik_d_win.cpp:288 semantik.cpp:613
 msgid "Untitled"
 msgstr "Unbenannt"
 
-#: fig/semantik_d_win.cpp:291 semantik.cpp:615
+#: fig/semantik_d_win.cpp:291 semantik.cpp:616
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -889,11 +894,11 @@ msgstr ""
 "Das Dokument \"%1\" wurde geändert.\n"
 "Sollen die Änderungen gesichert werden oder verfallen?"
 
-#: fig/semantik_d_win.cpp:292 semantik.cpp:616
+#: fig/semantik_d_win.cpp:292 semantik.cpp:617
 msgid "Close Document"
 msgstr "Dokument schließen"
 
-#: fig/semantik_d_win.cpp:429 semantik.cpp:554
+#: fig/semantik_d_win.cpp:429 semantik.cpp:555
 msgid " [Modified] "
 msgstr " [Geändert] "
 
@@ -1179,23 +1184,23 @@ msgstr "Struktur-Ansicht"
 msgid "Flag"
 msgstr "Kennzeichnung"
 
-#: semantik.cpp:374
+#: semantik.cpp:375
 msgid "Welcome to Semantik"
 msgstr "Willkommen bei Semantik"
 
-#: semantik.cpp:451
+#: semantik.cpp:452
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Semantikdateien (*.sem)"
 
-#: semantik.cpp:543
+#: semantik.cpp:544
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr "*.sem *.kdi *.mm *.vym|unterstützte Dateien (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:559
+#: semantik.cpp:560
 msgid "Semantik %1"
 msgstr "Semantik %1"
 
-#: semantik.cpp:563
+#: semantik.cpp:564
 msgid "%1 %2 - Semantik"
 msgstr "%1 %2 - Semantik"
 

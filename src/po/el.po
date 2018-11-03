@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-10-14 20:17+0200\n"
+"POT-Creation-Date: 2018-11-03 23:43+0100\n"
 "PO-Revision-Date: 2009-07-28 12:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ελληνικά <kde-i18n-doc@kde.org>\n"
@@ -39,8 +39,8 @@ msgstr "Χρώμα %1"
 msgid "File saving: missing file %1"
 msgstr "Αποθήκευση αρχείου: το αρχείο %1 λείπει"
 
-#: base/sem_mediator.cpp:659 base/sem_mediator.cpp:1208
-#: base/sem_mediator.cpp:1257
+#: base/sem_mediator.cpp:659 base/sem_mediator.cpp:1210
+#: base/sem_mediator.cpp:1261
 msgid "Missing bindings for opening files"
 msgstr "Ανυπαρξία δεσμών για το άνοιγμα των αρχείων"
 
@@ -101,16 +101,16 @@ msgstr "Η δημιουργία κώδικα απέτυχε: αρχείο που
 msgid "Could not rename the output folder %1"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: base/sem_mediator.cpp:1177
+#: base/sem_mediator.cpp:1179
 #, fuzzy
 msgid "Could not create the output folder %1"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: base/sem_mediator.cpp:1214
+#: base/sem_mediator.cpp:1218
 msgid "Document generation failed, check the output folder"
 msgstr ""
 
-#: base/sem_mediator.cpp:1218
+#: base/sem_mediator.cpp:1222
 msgid "Document generation completed successfully"
 msgstr ""
 
@@ -202,28 +202,28 @@ msgstr "Εικόνα"
 msgid "Click to set Item %1"
 msgstr "Κλικ για τον ορισμό αντικειμένου %1"
 
-#: canvas_view.cpp:1245 fig/box_view.cpp:2066
+#: canvas_view.cpp:1245 fig/box_view.cpp:2114
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1283 fig/box_view.cpp:2104
+#: canvas_view.cpp:1283 fig/box_view.cpp:2152
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1307 fig/box_view.cpp:2128
+#: canvas_view.cpp:1307 fig/box_view.cpp:2176
 #, fuzzy
 msgid "Exported '%1'"
 msgstr "Αποθηκεύτηκε '%1'"
 
-#: canvas_view.cpp:1309 fig/box_view.cpp:2130
+#: canvas_view.cpp:1309 fig/box_view.cpp:2178
 #, fuzzy
 msgid "Could not save to %1"
 msgstr "Κλικ για τον ορισμό αντικειμένου %1"
 
-#: canvas_view.cpp:1309 fig/box_view.cpp:2130
+#: canvas_view.cpp:1309 fig/box_view.cpp:2178
 #, fuzzy
 msgid "Missing picture"
 msgstr "Αλλαγή εικόνας"
@@ -233,15 +233,15 @@ msgstr "Αλλαγή εικόνας"
 msgid "Semantik map"
 msgstr "Semantik"
 
-#: canvas_view.cpp:1640 fig/box_view.cpp:1990
+#: canvas_view.cpp:1640 fig/box_view.cpp:2038
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1651 fig/box_view.cpp:2001
+#: canvas_view.cpp:1651 fig/box_view.cpp:2049
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1655 fig/box_view.cpp:2005
+#: canvas_view.cpp:1655 fig/box_view.cpp:2053
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -517,15 +517,15 @@ msgstr "Λείπουν δεδομένα"
 msgid "Font properties"
 msgstr ""
 
-#: fig/box_fork.cpp:331 fig/box_item.cpp:287
+#: fig/box_fork.cpp:331 fig/box_item.cpp:300
 msgid "%1 x %2"
 msgstr ""
 
-#: fig/box_item.cpp:125
+#: fig/box_item.cpp:133
 msgid "Diagram box properties"
 msgstr ""
 
-#: fig/box_item.cpp:126
+#: fig/box_item.cpp:134
 #, fuzzy
 msgid "Text:"
 msgstr "Κείμενο"
@@ -631,7 +631,7 @@ msgstr ""
 msgid "Row %1: %2px (size: %3 x %4)"
 msgstr ""
 
-#: fig/box_sequence.cpp:133 fig/box_sequence.cpp:168
+#: fig/box_sequence.cpp:136 fig/box_sequence.cpp:171
 msgid "%1 x %2 (%3+%4)"
 msgstr ""
 
@@ -762,99 +762,104 @@ msgstr ""
 
 #: fig/box_view.cpp:332
 #, fuzzy
-msgid "Alignment"
+msgid "Text Alignment"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:334
+#: fig/box_view.cpp:334 fig/box_view.cpp:340
 #, fuzzy
 msgid "Align left"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:335
+#: fig/box_view.cpp:335 fig/box_view.cpp:341
 #, fuzzy
 msgid "Align center"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:336
+#: fig/box_view.cpp:336 fig/box_view.cpp:342
 #, fuzzy
 msgid "Align right"
 msgstr "Επιλογή δεξιά"
 
 #: fig/box_view.cpp:338
 #, fuzzy
+msgid "Alignment"
+msgstr "Επιλογή δεξιά"
+
+#: fig/box_view.cpp:344
+#, fuzzy
 msgid "Align top"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:339
+#: fig/box_view.cpp:345
 #, fuzzy
 msgid "Align middle"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:340
+#: fig/box_view.cpp:346
 #, fuzzy
 msgid "Align bottom"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:343
+#: fig/box_view.cpp:349
 msgid "Size"
 msgstr ""
 
-#: fig/box_view.cpp:345
+#: fig/box_view.cpp:351
 #, fuzzy
 msgid "Same width"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:346
+#: fig/box_view.cpp:352
 #, fuzzy
 msgid "Same height"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:347
+#: fig/box_view.cpp:353
 #, fuzzy
 msgid "Same width and height"
 msgstr "Επιλογή δεξιά"
 
-#: fig/box_view.cpp:607 fig/box_view.cpp:1952
+#: fig/box_view.cpp:613 fig/box_view.cpp:2000
 #, fuzzy
 msgid "Semantik diagram"
 msgstr "Semantik"
 
-#: fig/box_view.cpp:1757 fig/semantik_d_win.cpp:321
+#: fig/box_view.cpp:1805 fig/semantik_d_win.cpp:321
 #, fuzzy
 msgid "Choose a file to open"
 msgstr "Επιλέξτε ένα όνομα αρχείου"
 
-#: fig/box_view.cpp:1759 fig/box_view.cpp:1797 fig/semantik_d_win.cpp:323
+#: fig/box_view.cpp:1807 fig/box_view.cpp:1845 fig/semantik_d_win.cpp:323
 #, fuzzy
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.sem|Semantik file (*.sem)"
 
-#: fig/box_view.cpp:1795 semantik.cpp:449 semantik.cpp:541
+#: fig/box_view.cpp:1843 semantik.cpp:450 semantik.cpp:542
 msgid "Choose a file name"
 msgstr "Επιλέξτε ένα όνομα αρχείου"
 
-#: fig/box_view.cpp:1811 semantik.cpp:464
+#: fig/box_view.cpp:1859 semantik.cpp:465
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
 msgstr ""
 
-#: fig/box_view.cpp:1812 semantik.cpp:465
+#: fig/box_view.cpp:1860 semantik.cpp:466
 msgid "Overwrite existing file"
 msgstr ""
 
-#: fig/box_view.cpp:1835 fig/box_view.cpp:1870 semantik.cpp:476
-#: semantik.cpp:512
+#: fig/box_view.cpp:1883 fig/box_view.cpp:1918 semantik.cpp:477
+#: semantik.cpp:513
 msgid "Saved '%1'"
 msgstr "Αποθηκεύτηκε '%1'"
 
-#: fig/box_view.cpp:1842 semantik.cpp:487 semantik.cpp:518
+#: fig/box_view.cpp:1890 semantik.cpp:488 semantik.cpp:519
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1843 semantik.cpp:488 semantik.cpp:519
+#: fig/box_view.cpp:1891 semantik.cpp:489 semantik.cpp:520
 msgid "Try again?"
 msgstr ""
 
@@ -910,11 +915,11 @@ msgstr "Semantik"
 msgid "[Untitled]"
 msgstr "Χωρίς τίτλο"
 
-#: fig/semantik_d_win.cpp:288 semantik.cpp:612
+#: fig/semantik_d_win.cpp:288 semantik.cpp:613
 msgid "Untitled"
 msgstr "Χωρίς τίτλο"
 
-#: fig/semantik_d_win.cpp:291 semantik.cpp:615
+#: fig/semantik_d_win.cpp:291 semantik.cpp:616
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -923,11 +928,11 @@ msgstr ""
 "Θέλετε να αποθηκεύσετε τις αλλαγές\n"
 "ή να τις απορρίψετε;"
 
-#: fig/semantik_d_win.cpp:292 semantik.cpp:616
+#: fig/semantik_d_win.cpp:292 semantik.cpp:617
 msgid "Close Document"
 msgstr "Κλείσιμο εγγράφου"
 
-#: fig/semantik_d_win.cpp:429 semantik.cpp:554
+#: fig/semantik_d_win.cpp:429 semantik.cpp:555
 msgid " [Modified] "
 msgstr ""
 
@@ -1220,25 +1225,25 @@ msgstr "Γραμμική προβολή"
 msgid "Flag"
 msgstr "Σημαία"
 
-#: semantik.cpp:374
+#: semantik.cpp:375
 msgid "Welcome to Semantik"
 msgstr "Καλωσήρθατε στο Semantik"
 
-#: semantik.cpp:451
+#: semantik.cpp:452
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Semantik file (*.sem)"
 
-#: semantik.cpp:543
+#: semantik.cpp:544
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 "*.sem *.kdi *.mm *.vym|Όλα τα υποστηριζόμενα αρχεία (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:559
+#: semantik.cpp:560
 #, fuzzy
 msgid "Semantik %1"
 msgstr "Semantik"
 
-#: semantik.cpp:563
+#: semantik.cpp:564
 #, fuzzy
 msgid "%1 %2 - Semantik"
 msgstr "%1 - Semantik"

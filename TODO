@@ -5,4 +5,5 @@ Display pictures on the map
 Half-broken diagram links routing with sequences
 Serialize undo operations
 Arbitrary SVG shapes
-
+Enable html in floating text boxes
+Position frame labels up or down
