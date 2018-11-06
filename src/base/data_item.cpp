@@ -263,12 +263,14 @@ void data_box::read_data(const QString& i_sTag, const QXmlAttributes& i_oAttrs)
 		{
 			case Qt::AlignLeft:
 				m_iAlign = Qt::AlignLeft;
+				break;
 			case Qt::AlignRight:
 				m_iAlign = Qt::AlignRight;
-			case Qt::AlignHCenter:
-				m_iAlign = Qt::AlignHCenter;
+				break;
 			case Qt::AlignJustify:
 				m_iAlign = Qt::AlignJustify;
+				break;
+			case Qt::AlignHCenter:
 			default:
 				m_iAlign = Qt::AlignHCenter;
 		}
