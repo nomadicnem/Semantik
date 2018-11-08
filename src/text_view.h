@@ -30,6 +30,7 @@ class text_view : public QWidget
 
 		void merge_format(const QTextCharFormat &i_oFormat);
 
+		QAction *m_oLinkAct;
 		QAction *m_oBoldAct;
 		QAction *m_oItalicAct;
 		QAction *m_oUnderLineAct;
@@ -37,9 +38,11 @@ class text_view : public QWidget
 	public slots:
 		void update_edit();
 
+		void text_link();
 		void text_bold();
 		void text_italic();
 		void text_underLine();
+		void selection_changed();
 		void spelling_language_changed(const QString &);
 
 		void char_format_changed(const QTextCharFormat&);

@@ -4,6 +4,7 @@
 #include <QtDebug>
 #include <QTextEdit>
 #include <QGridLayout>
+#include <QInputDialog>
 #include <QLineEdit>
 #include <QPalette>
 #include <QCoreApplication>
@@ -38,6 +39,9 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	connect(m_oEdit, SIGNAL(textChanged()), this, SLOT(update_edit()));
 	connect(m_oEdit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)), this, SLOT(char_format_changed(const QTextCharFormat &)));
 
+	m_oLinkAct = new QAction(QIcon::fromTheme(notr("link")), i18n("&Link"), this);
+	m_oLinkAct->setShortcut(i18n("Ctrl+L"));
+
 	m_oBoldAct = new QAction(QIcon::fromTheme(notr("format-text-bold")), i18n("&Bold"), this);
 	m_oBoldAct->setShortcut(i18n("Ctrl+B"));
 	m_oBoldAct->setCheckable(true);
@@ -51,22 +55,29 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	m_oUnderLineAct->setCheckable(true);
 
 	QToolButton *l_o = NULL;
+
 	l_o = new QToolButton(this);
-	l_o->setDefaultAction(m_oBoldAct);
+	l_o->setDefaultAction(m_oLinkAct);
 	l_oLayout->addWidget(l_o, 0, 1);
 
 	l_o = new QToolButton(this);
-	l_o->setDefaultAction(m_oItalicAct);
+	l_o->setDefaultAction(m_oBoldAct);
 	l_oLayout->addWidget(l_o, 0, 2);
 
 	l_o = new QToolButton(this);
-	l_o->setDefaultAction(m_oUnderLineAct);
+	l_o->setDefaultAction(m_oItalicAct);
 	l_oLayout->addWidget(l_o, 0, 3);
 
+	l_o = new QToolButton(this);
+	l_o->setDefaultAction(m_oUnderLineAct);
+	l_oLayout->addWidget(l_o, 0, 4);
+
+	connect(m_oLinkAct, SIGNAL(triggered()), this, SLOT(text_link()));
 	connect(m_oBoldAct, SIGNAL(triggered()), this, SLOT(text_bold()));
 	connect(m_oItalicAct, SIGNAL(triggered()), this, SLOT(text_italic()));
 	connect(m_oUnderLineAct, SIGNAL(triggered()), this, SLOT(text_underLine()));
 	//connect(m_oEdit, SIGNAL(languageChanged(const QString &)), this, SLOT(spelling_language_changed(const QString &)));
+	connect(m_oEdit, SIGNAL(selectionChanged()), this, SLOT(selection_changed()));
 }
 
 void text_view::update_edit()
@@ -176,6 +187,42 @@ void text_view::notify_select(const QList<int>& unsel, const QList<int>& sel) {
 		m_iId = sel.at(0);
 	} else {
 		m_oEdit->clear();
+	}
+}
+
+void text_view::selection_changed()
+{
+	QTextCursor l_oCursor = m_oEdit->textCursor();
+	m_oLinkAct->setEnabled(l_oCursor.hasSelection() || !m_oEdit->currentCharFormat().anchorHref().isEmpty());
+}
+
+void text_view::text_link()
+{
+	bool ok = false;
+	QString l_oAnchor = QInputDialog::getText(m_oEdit, i18n("Link definition"),
+			i18n("Link:"), QLineEdit::Normal, m_oEdit->currentCharFormat().anchorHref(), &ok).trimmed();
+	if (ok)
+	{
+		QTextCursor l_oCursor = m_oEdit->textCursor();
+
+		QTextCharFormat i_oFormat;
+		if (l_oAnchor.isEmpty())
+		{
+			i_oFormat.setAnchor(false);
+			i_oFormat.setFontUnderline(false);
+			i_oFormat.setAnchorHref(QString());
+			i_oFormat.setForeground(palette().color(QPalette::Text));
+		}
+		else
+		{
+			i_oFormat.setAnchor(true);
+			i_oFormat.setFontUnderline(true);
+			i_oFormat.setAnchorHref("http://www.google.com");
+			i_oFormat.setForeground(palette().color(QPalette::Link));
+		}
+
+		merge_format(i_oFormat);
+		update_edit();
 	}
 }
 
