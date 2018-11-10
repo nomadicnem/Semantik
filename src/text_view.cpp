@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QPalette>
 #include <QCoreApplication>
+#include <QApplication>
 #include <QToolButton>
 
 #include <sonnet/spellcheckdecorator.h>
@@ -37,7 +38,10 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	setMinimumHeight(30);
 
 
+	int l_iSize = QApplication::style()->pixelMetric(QStyle::PM_SmallIconSize);
+
 	QToolBar *l_oToolBar = new QToolBar(this);
+	l_oToolBar->setIconSize(QSize(l_iSize, l_iSize));
 	l_oLayout->addWidget(l_oToolBar, 0, 0);
 
 
@@ -60,10 +64,16 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	m_oLinkAct->setShortcut(i18n("Ctrl+L"));
 	l_oToolBar->insertSeparator(m_oLinkAct);
 
-	connect(m_oLinkAct, SIGNAL(triggered()), this, SLOT(text_link()));
+	m_oClearAct = l_oToolBar->addAction(QIcon::fromTheme(notr("edit-clear-all-symbolic")), i18n("Clear Format"));
+	m_oClearAct->setShortcut(i18n("Ctrl+L"));
+	l_oToolBar->insertSeparator(m_oClearAct);
+
+
 	connect(m_oBoldAct, SIGNAL(triggered()), this, SLOT(text_bold()));
 	connect(m_oItalicAct, SIGNAL(triggered()), this, SLOT(text_italic()));
 	connect(m_oUnderLineAct, SIGNAL(triggered()), this, SLOT(text_underLine()));
+	connect(m_oLinkAct, SIGNAL(triggered()), this, SLOT(text_link()));
+	connect(m_oClearAct, SIGNAL(triggered()), this, SLOT(text_clear()));
 	//connect(m_oEdit, SIGNAL(languageChanged(const QString &)), this, SLOT(spelling_language_changed(const QString &)));
 	connect(m_oEdit, SIGNAL(selectionChanged()), this, SLOT(selection_changed()));
 }
@@ -193,24 +203,39 @@ void text_view::text_link()
 	{
 		QTextCursor l_oCursor = m_oEdit->textCursor();
 
-		QTextCharFormat i_oFormat;
+		QTextCharFormat l_oFormat;
 		if (l_oAnchor.isEmpty())
 		{
-			i_oFormat.setAnchor(false);
-			i_oFormat.setFontUnderline(false);
-			i_oFormat.setAnchorHref(QString());
-			i_oFormat.setForeground(palette().color(QPalette::Text));
+			l_oFormat.setAnchor(false);
+			l_oFormat.setFontUnderline(false);
+			l_oFormat.setAnchorHref(QString());
+			l_oFormat.setForeground(palette().color(QPalette::Text));
 		}
 		else
 		{
-			i_oFormat.setAnchor(true);
-			i_oFormat.setFontUnderline(true);
-			i_oFormat.setAnchorHref("http://www.google.com");
-			i_oFormat.setForeground(palette().color(QPalette::Link));
+			l_oFormat.setAnchor(true);
+			l_oFormat.setFontUnderline(true);
+			l_oFormat.setAnchorHref("http://www.google.com");
+			l_oFormat.setForeground(palette().color(QPalette::Link));
 		}
 
-		merge_format(i_oFormat);
+		merge_format(l_oFormat);
 		update_edit();
 	}
+}
+
+void text_view::text_clear()
+{
+	QTextCharFormat l_oFormat;
+	l_oFormat.setAnchor(false);
+	l_oFormat.setFontUnderline(false);
+	l_oFormat.setFontWeight(QFont::Normal);
+	l_oFormat.setFontItalic(false);
+	l_oFormat.setFontStrikeOut(false);
+	l_oFormat.setAnchorHref(QString());
+	l_oFormat.setForeground(palette().color(QPalette::Text));
+	l_oFormat.clearBackground();
+	merge_format(l_oFormat);
+	update_edit();
 }
 

@@ -33,6 +33,7 @@ class text_view : public QWidget
 		QAction *m_oLinkAct;
 		QAction *m_oBoldAct;
 		QAction *m_oItalicAct;
+		QAction *m_oClearAct;
 		QAction *m_oUnderLineAct;
 
 	public slots:
@@ -42,6 +43,7 @@ class text_view : public QWidget
 		void text_bold();
 		void text_italic();
 		void text_underLine();
+		void text_clear();
 		void selection_changed();
 		void spelling_language_changed(const QString &);
 

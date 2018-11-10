@@ -1,3 +1,7 @@
+Semantik 1.0.8
+--------------
+* Add new formatting actions to the Rich Text editor: add link, clear text
+
 Semantik 1.0.7
 --------------
 * Export rich text in html/s5 document generators
