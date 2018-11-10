@@ -74,6 +74,9 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	m_oTextNumberAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-list-ordered")), i18n("Ordered list"));
 	m_oTextNumberAct->setCheckable(true);
 
+	m_oIncreaseIndentAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-indent-more")), i18n("Increase indentation"));
+	m_oDecreaseIndentAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-indent-less")), i18n("Decrease indentation"));
+
 	m_oClearAct = l_oToolBar->addAction(QIcon::fromTheme(notr("edit-clear-all-symbolic")), i18n("Clear formatting"));
 	l_oToolBar->insertSeparator(m_oClearAct);
 
@@ -88,6 +91,8 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	//connect(m_oEdit, SIGNAL(languageChanged(const QString &)), this, SLOT(spelling_language_changed(const QString &)));
 	connect(m_oEdit, SIGNAL(selectionChanged()), this, SLOT(selection_changed()));
 	connect(m_oEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursor_changed()));
+	connect(m_oIncreaseIndentAct, SIGNAL(triggered()), this, SLOT(increase_indent()));
+	connect(m_oDecreaseIndentAct, SIGNAL(triggered()), this, SLOT(decrease_indent()));
 }
 
 void text_view::update_edit()
@@ -311,8 +316,67 @@ void text_view::text_list(bool i_bEnable, QTextListFormat::Style i_oStyle)
 	else
 	{
 		QTextBlockFormat l_oBlockFormat;
+		l_oBlockFormat.setIndent(l_oCursor.blockFormat().indent());
 		l_oCursor.setBlockFormat(l_oBlockFormat);
 	}
 	update_edit();
 }
 
+void text_view::increase_indent()
+{
+	change_indent(1);
+}
+
+void text_view::decrease_indent()
+{
+	change_indent(-1);
+}
+
+void text_view::change_indent(int i_iIndent)
+{
+	QTextCursor l_oCursor = m_oEdit->textCursor();
+	QTextList *l_oList = l_oCursor.currentList();
+	if (l_oList != NULL)
+	{
+		QTextListFormat l_oListFormat = l_oList->format();
+		int l_iVal = (int) l_oListFormat.style() - i_iIndent;
+		QTextListFormat::Style l_oStyle;
+		switch (l_iVal)
+		{
+			case QTextListFormat::ListDisc:
+				l_oStyle = QTextListFormat::ListDisc;
+				break;
+			case QTextListFormat::ListCircle:
+				l_oStyle = QTextListFormat::ListCircle;
+				break;
+			case QTextListFormat::ListSquare:
+				l_oStyle = QTextListFormat::ListSquare;
+				break;
+			case QTextListFormat::ListDecimal:
+				l_oStyle = QTextListFormat::ListDecimal;
+				break;
+			case QTextListFormat::ListLowerAlpha:
+				l_oStyle = QTextListFormat::ListLowerAlpha;
+				break;
+			case QTextListFormat::ListUpperAlpha:
+				l_oStyle = QTextListFormat::ListUpperAlpha;
+				break;
+			case QTextListFormat::ListLowerRoman:
+				l_oStyle = QTextListFormat::ListLowerRoman;
+				break;
+			case QTextListFormat::ListUpperRoman:
+				l_oStyle = QTextListFormat::ListUpperRoman;
+				break;
+			default:
+				l_oStyle = QTextListFormat::ListDisc;
+				break;
+		}
+
+		if (i_iIndent > 0 || l_oListFormat.indent() + i_iIndent >= 1)
+		{
+			l_oListFormat.setIndent(l_oListFormat.indent() + i_iIndent);
+			l_oListFormat.setStyle(l_oStyle);
+			l_oCursor.createList(l_oListFormat);
+		}
+	}
+}

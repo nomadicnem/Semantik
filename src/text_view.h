@@ -39,8 +39,11 @@ class text_view : public QWidget
 		QAction *m_oUnderLineAct;
 		QAction *m_oTextBulletAct;
 		QAction *m_oTextNumberAct;
+		QAction *m_oDecreaseIndentAct;
+		QAction *m_oIncreaseIndentAct;
 
 		void text_list(bool, QTextListFormat::Style);
+		void change_indent(int);
 
 	public slots:
 		void update_edit();
@@ -53,6 +56,8 @@ class text_view : public QWidget
 		void text_color();
 		void text_bullet(bool);
 		void text_number(bool);
+		void decrease_indent();
+		void increase_indent();
 		void selection_changed();
 		void cursor_changed();
 		void spelling_language_changed(const QString &);
