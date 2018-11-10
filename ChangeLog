@@ -1,6 +1,6 @@
 Semantik 1.0.8
 --------------
-* Add new formatting actions to the Rich Text editor: add link, clear text, text color
+* Add new formatting actions to the Rich Text editor: text color, hyperlink, list, clear formatting
 
 Semantik 1.0.7
 --------------

@@ -7,6 +7,7 @@
 
 #include "con.h"
 
+#include <QTextListFormat>
 #include <QToolBar>
 #include <QList>
 
@@ -36,6 +37,10 @@ class text_view : public QWidget
 		QAction *m_oTextColorAct;
 		QAction *m_oClearAct;
 		QAction *m_oUnderLineAct;
+		QAction *m_oTextBulletAct;
+		QAction *m_oTextNumberAct;
+
+		void text_list(bool, QTextListFormat::Style);
 
 	public slots:
 		void update_edit();
@@ -46,7 +51,10 @@ class text_view : public QWidget
 		void text_underLine();
 		void text_clear();
 		void text_color();
+		void text_bullet(bool);
+		void text_number(bool);
 		void selection_changed();
+		void cursor_changed();
 		void spelling_language_changed(const QString &);
 
 		void char_format_changed(const QTextCharFormat&);

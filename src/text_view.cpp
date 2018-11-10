@@ -4,6 +4,7 @@
 #include <QAction>
 #include <QtDebug>
 #include <QTextEdit>
+#include  <QTextList>  
 #include <QGridLayout>
 #include <QInputDialog>
 #include <QLineEdit>
@@ -67,9 +68,14 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	m_oLinkAct->setShortcut(i18n("Ctrl+L"));
 	l_oToolBar->insertSeparator(m_oLinkAct);
 
-	m_oClearAct = l_oToolBar->addAction(QIcon::fromTheme(notr("edit-clear-all-symbolic")), i18n("Clear Format"));
-	l_oToolBar->insertSeparator(m_oClearAct);
+	m_oTextBulletAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-list-unordered")), i18n("Unordered list"));
+	m_oTextBulletAct->setCheckable(true);
+	l_oToolBar->insertSeparator(m_oTextBulletAct);
+	m_oTextNumberAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-list-ordered")), i18n("Ordered list"));
+	m_oTextNumberAct->setCheckable(true);
 
+	m_oClearAct = l_oToolBar->addAction(QIcon::fromTheme(notr("edit-clear-all-symbolic")), i18n("Clear formatting"));
+	l_oToolBar->insertSeparator(m_oClearAct);
 
 	connect(m_oBoldAct, SIGNAL(triggered()), this, SLOT(text_bold()));
 	connect(m_oItalicAct, SIGNAL(triggered()), this, SLOT(text_italic()));
@@ -77,8 +83,11 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	connect(m_oLinkAct, SIGNAL(triggered()), this, SLOT(text_link()));
 	connect(m_oTextColorAct, SIGNAL(triggered()), this, SLOT(text_color()));
 	connect(m_oClearAct, SIGNAL(triggered()), this, SLOT(text_clear()));
+	connect(m_oTextBulletAct, SIGNAL(triggered(bool)), this, SLOT(text_bullet(bool)));
+	connect(m_oTextNumberAct, SIGNAL(triggered(bool)), this, SLOT(text_number(bool)));
 	//connect(m_oEdit, SIGNAL(languageChanged(const QString &)), this, SLOT(spelling_language_changed(const QString &)));
 	connect(m_oEdit, SIGNAL(selectionChanged()), this, SLOT(selection_changed()));
+	connect(m_oEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursor_changed()));
 }
 
 void text_view::update_edit()
@@ -150,6 +159,24 @@ void text_view::char_format_changed(const QTextCharFormat &i_oFormat)
 	m_oBoldAct->setChecked(l_oF.bold());
 	m_oItalicAct->setChecked(l_oF.italic());
 	m_oUnderLineAct->setChecked(l_oF.underline());
+}
+
+void text_view::cursor_changed()
+{
+	QTextCursor l_oCursor = m_oEdit->textCursor();
+	QTextList *l_oList = l_oCursor.currentList();
+	if (l_oList == NULL)
+	{
+		m_oTextBulletAct->setChecked(false);
+		m_oTextNumberAct->setChecked(false);
+	}
+	else
+	{
+		QTextListFormat::Style l_oStyle = l_oList->format().style();
+		bool isBullet = l_oStyle == QTextListFormat::ListDisc || l_oStyle == QTextListFormat::ListCircle || l_oStyle == QTextListFormat::ListSquare;
+		m_oTextBulletAct->setChecked(isBullet);
+		m_oTextNumberAct->setChecked(!isBullet);
+	}
 }
 
 void text_view::notify_text(int id) {
@@ -249,6 +276,43 @@ void text_view::text_color()
 	QTextCharFormat l_oFormat;
 	l_oFormat.setForeground(l_oColor);
 	merge_format(l_oFormat);
+	update_edit();
+}
+
+void text_view::text_bullet(bool i_bEnable)
+{
+	text_list(i_bEnable, QTextListFormat::ListDisc);
+}
+
+void text_view::text_number(bool i_bEnable)
+{
+	text_list(i_bEnable, QTextListFormat::ListDecimal);
+}
+
+void text_view::text_list(bool i_bEnable, QTextListFormat::Style i_oStyle)
+{
+	QTextCursor l_oCursor = m_oEdit->textCursor();
+	if (i_bEnable)
+	{
+		QTextList *l_oList = l_oCursor.currentList();
+		if (l_oList != NULL)
+		{
+			QTextListFormat l_oListFormat = l_oList->format();
+			l_oListFormat.setStyle(i_oStyle);
+			l_oCursor.createList(l_oListFormat);
+		}
+		else
+		{
+			QTextListFormat l_oListFormat;
+			l_oListFormat.setStyle(i_oStyle);
+			l_oCursor.createList(l_oListFormat);
+		}
+	}
+	else
+	{
+		QTextBlockFormat l_oBlockFormat;
+		l_oCursor.setBlockFormat(l_oBlockFormat);
+	}
 	update_edit();
 }
 
