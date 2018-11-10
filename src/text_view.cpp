@@ -25,52 +25,40 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	QGridLayout *l_oLayout = new QGridLayout();
 	setLayout(l_oLayout);
 
+	m_iId = NO_ITEM;
+
 	m_oMediator = i_oControl;
 
 	m_oEdit = new QTextEdit(this);
 	new Sonnet::SpellCheckDecorator(m_oEdit);
 	//m_oEdit->setCheckSpellingEnabled(true);
-	l_oLayout->addWidget(m_oEdit, 1, 0, 1, 4);
+	l_oLayout->addWidget(m_oEdit, 1, 0);
 	l_oLayout->setMargin(0);
 	setMinimumHeight(30);
 
-	m_iId = NO_ITEM;
+
+	QToolBar *l_oToolBar = new QToolBar(this);
+	l_oLayout->addWidget(l_oToolBar, 0, 0);
+
 
 	connect(m_oEdit, SIGNAL(textChanged()), this, SLOT(update_edit()));
 	connect(m_oEdit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)), this, SLOT(char_format_changed(const QTextCharFormat &)));
 
-	m_oLinkAct = new QAction(QIcon::fromTheme(notr("link")), i18n("&Link"), this);
-	m_oLinkAct->setShortcut(i18n("Ctrl+L"));
-
-	m_oBoldAct = new QAction(QIcon::fromTheme(notr("format-text-bold")), i18n("&Bold"), this);
+	m_oBoldAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-text-bold")), i18n("&Bold"));
 	m_oBoldAct->setShortcut(i18n("Ctrl+B"));
 	m_oBoldAct->setCheckable(true);
 
-	m_oItalicAct = new QAction(QIcon::fromTheme(notr("format-text-italic")), i18n("&Italic"), this);
+	m_oItalicAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-text-italic")), i18n("&Italic"));
 	m_oItalicAct->setShortcut(i18n("Ctrl+I"));
 	m_oItalicAct->setCheckable(true);
 
-	m_oUnderLineAct = new QAction(QIcon::fromTheme(notr("format-text-underline")), i18n("&Underline"), this);
+	m_oUnderLineAct = l_oToolBar->addAction(QIcon::fromTheme(notr("format-text-underline")), i18n("&Underline"));
 	m_oUnderLineAct->setShortcut(i18n("Ctrl+U"));
 	m_oUnderLineAct->setCheckable(true);
 
-	QToolButton *l_o = NULL;
-
-	l_o = new QToolButton(this);
-	l_o->setDefaultAction(m_oLinkAct);
-	l_oLayout->addWidget(l_o, 0, 1);
-
-	l_o = new QToolButton(this);
-	l_o->setDefaultAction(m_oBoldAct);
-	l_oLayout->addWidget(l_o, 0, 2);
-
-	l_o = new QToolButton(this);
-	l_o->setDefaultAction(m_oItalicAct);
-	l_oLayout->addWidget(l_o, 0, 3);
-
-	l_o = new QToolButton(this);
-	l_o->setDefaultAction(m_oUnderLineAct);
-	l_oLayout->addWidget(l_o, 0, 4);
+	m_oLinkAct = l_oToolBar->addAction(QIcon::fromTheme(notr("link")), i18n("&Link"));
+	m_oLinkAct->setShortcut(i18n("Ctrl+L"));
+	l_oToolBar->insertSeparator(m_oLinkAct);
 
 	connect(m_oLinkAct, SIGNAL(triggered()), this, SLOT(text_link()));
 	connect(m_oBoldAct, SIGNAL(triggered()), this, SLOT(text_bold()));
