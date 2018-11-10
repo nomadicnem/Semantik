@@ -33,6 +33,7 @@ class text_view : public QWidget
 		QAction *m_oLinkAct;
 		QAction *m_oBoldAct;
 		QAction *m_oItalicAct;
+		QAction *m_oTextColorAct;
 		QAction *m_oClearAct;
 		QAction *m_oUnderLineAct;
 
@@ -44,6 +45,7 @@ class text_view : public QWidget
 		void text_italic();
 		void text_underLine();
 		void text_clear();
+		void text_color();
 		void selection_changed();
 		void spelling_language_changed(const QString &);
 

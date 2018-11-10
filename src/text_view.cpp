@@ -1,5 +1,6 @@
 // Thomas Nagy 2007-2018 GPLV3
 
+#include <QColorDialog>
 #include <QAction>
 #include <QtDebug>
 #include <QTextEdit>
@@ -60,12 +61,13 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	m_oUnderLineAct->setShortcut(i18n("Ctrl+U"));
 	m_oUnderLineAct->setCheckable(true);
 
+	m_oTextColorAct = l_oToolBar->addAction(QIcon::fromTheme(notr("color-picker")), i18n("Text color"));
+
 	m_oLinkAct = l_oToolBar->addAction(QIcon::fromTheme(notr("link")), i18n("&Link"));
 	m_oLinkAct->setShortcut(i18n("Ctrl+L"));
 	l_oToolBar->insertSeparator(m_oLinkAct);
 
 	m_oClearAct = l_oToolBar->addAction(QIcon::fromTheme(notr("edit-clear-all-symbolic")), i18n("Clear Format"));
-	m_oClearAct->setShortcut(i18n("Ctrl+L"));
 	l_oToolBar->insertSeparator(m_oClearAct);
 
 
@@ -73,6 +75,7 @@ text_view::text_view(QWidget *i_oParent, sem_mediator *i_oControl) : QWidget(i_o
 	connect(m_oItalicAct, SIGNAL(triggered()), this, SLOT(text_italic()));
 	connect(m_oUnderLineAct, SIGNAL(triggered()), this, SLOT(text_underLine()));
 	connect(m_oLinkAct, SIGNAL(triggered()), this, SLOT(text_link()));
+	connect(m_oTextColorAct, SIGNAL(triggered()), this, SLOT(text_color()));
 	connect(m_oClearAct, SIGNAL(triggered()), this, SLOT(text_clear()));
 	//connect(m_oEdit, SIGNAL(languageChanged(const QString &)), this, SLOT(spelling_language_changed(const QString &)));
 	connect(m_oEdit, SIGNAL(selectionChanged()), this, SLOT(selection_changed()));
@@ -235,6 +238,16 @@ void text_view::text_clear()
 	l_oFormat.setAnchorHref(QString());
 	l_oFormat.setForeground(palette().color(QPalette::Text));
 	l_oFormat.clearBackground();
+	merge_format(l_oFormat);
+	update_edit();
+}
+
+void text_view::text_color()
+{
+	QColor l_oColor = QColorDialog::getColor(m_oEdit->textColor(), this);
+        if (!l_oColor.isValid()) return;
+	QTextCharFormat l_oFormat;
+	l_oFormat.setForeground(l_oColor);
 	merge_format(l_oFormat);
 	update_edit();
 }
