@@ -88,6 +88,7 @@ void mem_edit_box::redo()
 {
 	box->m_sText = newText;
 	box->m_iHH = newHeight;
+	box->m_iLabelPosition = m_iNewLabelPosition;
 	model->notify_edit_box(item.m_iId, box->m_iId);
 	redo_dirty();
 }
@@ -96,6 +97,7 @@ void mem_edit_box::undo()
 {
 	box->m_sText = oldText;
 	box->m_iHH = oldHeight;
+	box->m_iLabelPosition = m_iOldLabelPosition;
 	model->notify_edit_box(item.m_iId, box->m_iId);
 	undo_dirty();
 }

@@ -153,6 +153,7 @@ data_box::data_box(int id) : diagram_item(), node()
 	m_iHH = 40;
 	m_iAlign = Qt::AlignCenter;
 	m_oCustom.m_oInnerColor = QColor("#a7e89b");
+	m_iLabelPosition = Qt::TopEdge;
 
 	m_bAbstract = false;
 	m_bStatic = false;
@@ -164,6 +165,7 @@ data_box& data_box::operator=(const data_box & i_o)
 	m_iId = i_o.m_iId;
 	m_sText = i_o.m_sText;
 	m_iAlign = i_o.m_iAlign;
+	m_iLabelPosition = i_o.m_iLabelPosition;
 
 	m_bIsEnd = i_o.m_bIsEnd;
 	m_bIsEnd = i_o.m_bIsEnd;
@@ -205,12 +207,13 @@ void data_box::dump_xml(QStringList & i_oS)
 		QString::number(m_iHH),
 		m_oCustom.m_oInnerColor.name(),
 		QString::number((int) m_iType),
-		QString(" v=\"%1\" e=\"%2\" seq=\"%3\" version=\"2\" color_id=\"%4\" align=\"%5\"").arg(
+		QString(" v=\"%1\" e=\"%2\" seq=\"%3\" version=\"3\" color_id=\"%4\" align=\"%5\" label_position=\"%6\"").arg(
 			QString::number((int) m_bIsVertical),
 			QString::number((int) m_bIsEnd),
 			QString::number((int) m_iBoxHeight),
 			QString::number((int) m_iColor),
-			QString::number((int) m_iAlign)
+			QString::number((int) m_iAlign),
+			QString::number((int) m_iLabelPosition)
 		)
 	);
 
@@ -249,6 +252,11 @@ void data_box::read_data(const QString& i_sTag, const QXmlAttributes& i_oAttrs)
 	m_iWW = i_oAttrs.value(notr("w")).toFloat();
 	m_iHH = i_oAttrs.value(notr("h")).toFloat();
 	m_iType = (data_box::IType) i_oAttrs.value(notr("t")).toInt();
+	m_iLabelPosition = (Qt::Edge) i_oAttrs.value(notr("label_position")).toInt();
+	if (m_iLabelPosition == 0)
+	{
+		m_iLabelPosition = Qt::TopEdge;
+	}
 	m_bIsVertical = i_oAttrs.value(notr("v")).toInt();
 	m_bIsEnd = i_oAttrs.value(notr("e")).toInt();
 	m_iBoxHeight = i_oAttrs.value(notr("seq")).toInt();

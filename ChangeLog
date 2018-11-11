@@ -1,6 +1,7 @@
 Semantik 1.0.8
 --------------
 * Add new formatting actions to the Rich Text editor: text color, hyperlink, list, clear formatting
+* Position diagram boundary captions to top or bottom
 
 Semantik 1.0.7
 --------------

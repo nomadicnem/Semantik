@@ -23,6 +23,7 @@ def build(bld):
 		moc = '''src/base/flag_scheme.h src/base/sem_mediator.h
 src/fig/box_class_properties.h
 src/fig/box_link_properties.h
+src/fig/box_frame_properties.h
 src/fig/export_fig_dialog.h
 src/fig/box_view.h
 src/fig/matrix_dialog.h

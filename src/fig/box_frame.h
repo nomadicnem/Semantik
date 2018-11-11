@@ -19,6 +19,8 @@ class box_frame : public box_item
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_frame(box_view*, int i_iId);
 		void update_links();
+		void update_data();
+		void properties();
 		QGraphicsTextItem *m_oCaption;
 };
 

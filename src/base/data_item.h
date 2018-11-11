@@ -160,6 +160,9 @@ class data_box : public diagram_item, public node
 
 	int m_iBoxHeight;
 
+	// frame
+	Qt::Edge m_iLabelPosition;
+
 	// class
 	bool m_bStatic;
 	bool m_bAbstract;

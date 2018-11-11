@@ -56,6 +56,10 @@ class mem_edit_box: public mem_command {
 
 		QString oldText;
 		QString newText;
+
+		Qt::Edge m_iOldLabelPosition;
+		Qt::Edge m_iNewLabelPosition;
+
 		IType type() { return EDIT_BOX; }
 };
 

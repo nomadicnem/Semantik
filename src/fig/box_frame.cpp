@@ -4,6 +4,8 @@
 #include <QAbstractTextDocumentLayout>
 #include <QTextDocument>
 #include <QTextDocumentFragment>
+ #include <box_frame_properties.h>
+   #include <QComboBox>
 #include <QTextList>
 #include <QClipboard>
 #include <QPainter>
@@ -46,11 +48,29 @@ void box_frame::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	painter->drawRect(l_oRect);
 }
 
-void box_frame::update_links() {
+void box_frame::update_links()
+{
 	m_oCaption->setFont(scene()->font());
 	m_oCaption->setPlainText(m_oBox->m_sText);
-	m_oCaption->setPos((m_iWW - m_oCaption->boundingRect().width()) / 2., 0);
-	//m_oCaption->setPos((m_iWW - m_oCaption->boundingRect().width()) / 2., m_iHH - m_oCaption->boundingRect().height());
+
+	QRectF l_oR = boundingRect();
+	if (m_oBox->m_iLabelPosition == Qt::TopEdge) m_oCaption->setPos((l_oR.width() - m_oCaption->boundingRect().width()) / 2., 0);
+	else
+	{
+		m_oCaption->setPos((l_oR.width() - m_oCaption->boundingRect().width()) / 2., l_oR.height() - m_oCaption->boundingRect().height());
+	}
 	box_item::update_links();
+}
+
+void box_frame::update_data()
+{
+	box_item::update_data();
+	update_links();
+}
+
+void box_frame::properties()
+{
+	box_frame_properties props(m_oView, this);
+	props.exec();
 }
 
