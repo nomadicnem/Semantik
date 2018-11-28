@@ -40,6 +40,10 @@ box_node::box_node(box_view* view, int id) : box_item(view, id)
 void box_node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	doc.setDefaultFont(scene()->font());
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	doc.setDefaultTextOption(l_oOption);
+
 
 	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	painter->setBrush(bc);

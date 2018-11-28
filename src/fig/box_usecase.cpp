@@ -30,6 +30,9 @@ box_usecase::box_usecase(box_view* view, int id) : box_item(view, id)
 void box_usecase::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	doc.setDefaultFont(scene()->font());
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	doc.setDefaultTextOption(l_oOption);
 
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
