@@ -28,6 +28,7 @@
 #include "canvas_link.h"
 #include "canvas_item.h"
 #include "canvas_view.h"
+#include  "canvas_pic.h"
 #include "canvas_sort_toggle.h"
 
 #define square_size 5
@@ -51,6 +52,11 @@ canvas_item::canvas_item(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsText
 
 	setPlainText(m_oGraph->m_oMediator->m_oItems[Id()].m_sSummary);
 	//adjustSize();
+
+	m_oPic = new canvas_pic(i_oGraphWidget, i_iId);
+	m_oPic->setParentItem(this);
+	m_oPic->setRect(QRectF(0, 0, 100, 100));
+	m_oPic->setPos(boundingRect().bottomLeft() + QPointF(0, 5));
 
 	m_oSort = new canvas_sort(i_oGraphWidget, this);
 	m_oChain = new canvas_chain(i_oGraphWidget);
@@ -123,6 +129,15 @@ void canvas_item::update_data()
 		l_oItem.m_iYY = m_oGraph->m_oLastPoint.y();
 	}
 
+	if (l_oItem.m_iDataType == VIEW_IMG)
+	{
+		m_oPic->setVisible(true);
+	}
+	else
+	{
+		m_oPic->setVisible(false);
+	}
+
 	setPos(QPointF(l_oItem.m_iXX, l_oItem.m_iYY));
 	setPlainText(l_oItem.m_sSummary);
 	adjustSize();
@@ -182,6 +197,7 @@ void canvas_item::update_flags()
 
 canvas_item::~canvas_item()
 {
+	delete m_oPic;
 	delete m_oChain;
 	delete m_oSortToggle;
 }

@@ -17,6 +17,7 @@
 #include <QUrl>
 #include  <QActionGroup> 
 #include "canvas_item.h"
+#include "canvas_pic.h"
 #include "canvas_link.h"
 #include<QCoreApplication>
 #include <QSet>
@@ -590,9 +591,11 @@ void canvas_view::notify_select(const QList<int>& unsel, const QList<int>& sel) 
 	}
 }
 
-void canvas_view::notify_pic(int id)
+void canvas_view::notify_pic(int i_iId)
 {
-	qDebug()<<"canvas_view::notify_pic to be implemented";
+	canvas_item *l_o = m_oItems[i_iId];
+	l_o->update_data();
+	l_o->m_oPic->update();
 }
 
 void canvas_view::change_colors(QAction* i_oAct)

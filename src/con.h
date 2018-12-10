@@ -12,6 +12,7 @@
 #define gratype(x) (QGraphicsItem::UserType + x)
 #define CANVAS_ITEM_T gratype(12301)
 #define CANVAS_FLAG_T gratype(12302)
+#define  CANVAS_PIC_T gratype(12308)
 #define CANVAS_LINK_T gratype(12303)
 #define CANVAS_SORT_T gratype(12304)
 #define BOX_ITEM_T gratype(12305)

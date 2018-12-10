@@ -23,6 +23,7 @@ class canvas_link;
 class canvas_sort;
 class canvas_flag;
 class canvas_chain;
+class canvas_pic;
 class canvas_sort_toggle;
 
 class canvas_item: public QGraphicsTextItem
@@ -87,6 +88,7 @@ class canvas_item: public QGraphicsTextItem
 		canvas_sort *m_oSort;
 		canvas_chain *m_oChain;
 		canvas_sort_toggle *m_oSortToggle;
+		 canvas_pic*  m_oPic;
 
 		int m_iId;
 		QColor m_oColor;
