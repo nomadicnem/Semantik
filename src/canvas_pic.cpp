@@ -24,6 +24,7 @@
 #include "sem_mediator.h"
  #include "con.h" 
 #include "data_item.h"
+#include "box_view.h"
 #include "canvas_pic.h"
 #include "canvas_view.h"
 
@@ -31,38 +32,46 @@
 
 canvas_pic::canvas_pic(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsRectItem(), m_oGraph(i_oGraphWidget)
 {
+	m_oBoxView = NULL;
 	m_iId = i_iId;
-	setZValue(99);
+	setZValue(98);
+	setFlags(QGraphicsItem::ItemStacksBehindParent);
 	setVisible(false);
 	i_oGraphWidget->scene()->addItem(this);
 }
 
+canvas_pic::~canvas_pic()
+{
+	delete m_oBoxView;
+	//m_oBoxView = NULL;
+}
+
 void canvas_pic::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+	QRectF l_o = boundingRect().adjusted(pad, pad, -pad, -pad);
 	data_item& l_oData = m_oGraph->m_oMediator->m_oItems[m_iId];
+
 	if (l_oData.m_iDataType == VIEW_IMG)
 	{
 		const QPixmap& l_oPix = l_oData.getPix(m_oGraph->m_oMediator);
-		if (!l_oPix.isNull())
+		QRect l_oPixRect = l_oPix.rect();
+		if (l_oPixRect.width() > l_oPixRect.height())
 		{
-			QRectF l_o = boundingRect().adjusted(pad, pad, -pad, -pad);
-			QRect l_oPixRect = l_oPix.rect();
-			if (l_oPixRect.width() > l_oPixRect.height())
-			{
-				l_o.setHeight(l_o.height() * (1. * l_oPixRect.height() / l_oPixRect.width()));
-			}
-			else
-			{
-				l_o.setWidth(l_o.width() * (1. * l_oPixRect.width() / l_oPixRect.height()));
-			}
-
-			i_oPainter->drawPixmap(l_o, l_oPix, l_oPixRect);
+			l_o.setHeight(l_o.height() * (1. * l_oPixRect.height() / l_oPixRect.width()));
 		}
+		else
+		{
+			l_o.setWidth(l_o.width() * (1. * l_oPixRect.width() / l_oPixRect.height()));
+		}
+		i_oPainter->drawPixmap(l_o, l_oPix, l_oPixRect);
 	}
-
-
-
-
-
+	else if (l_oData.m_iDataType == VIEW_DIAG)
+	{
+		if (m_oBoxView == NULL)
+		{
+			m_oBoxView = new box_view(m_oGraph, m_oGraph->m_oMediator);
+		}
+		m_oBoxView->drawThumb(i_oPainter, l_o, m_iId);
+	}
 }
 

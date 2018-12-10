@@ -1,7 +1,6 @@
 Improve diagram link labels positioning
 Z-index in diagrams
 Crossing diagram arrows for the one with higher z-index
-Display pictures on the map
 Half-broken diagram links routing with sequences
 Serialize undo operations
 Arbitrary SVG shapes

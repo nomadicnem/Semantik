@@ -82,7 +82,18 @@ data_item::data_item(int i_iId)
 
 const QPixmap data_item::getPix(sem_mediator* i_oMediator) const
 {
-	return i_oMediator->getPix(m_iPicId);
+	if (m_iDataType == VIEW_IMG)
+	{
+		return i_oMediator->getPix(m_iPicId);
+	}
+	else if (m_iDataType == VIEW_DIAG)
+	{
+		return i_oMediator->getPix(m_iId);
+	}
+	else
+	{
+		return QPixmap();
+	}
 }
 
 const QPixmap data_item::getThumb(sem_mediator* i_oMediator) const

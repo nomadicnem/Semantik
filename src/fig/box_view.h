@@ -118,6 +118,9 @@ class box_view : public QGraphicsView
 		int next_seq();
 		int num_seq;
 
+		const QPixmap getPix(int i_iId);
+		void drawThumb(QPainter* i_oPainter, QRectF& l_o, int m_iId);
+
 		void message(const QString &, int);
 		bool m_bDisableGradient;
 		bool m_bShowFileMenu;

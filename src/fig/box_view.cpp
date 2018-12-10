@@ -1926,6 +1926,60 @@ bool box_view::slot_save() {
 	return false;
 }
 
+void box_view::drawThumb(QPainter* i_oPainter, QRectF& i_oRect, int i_iId)
+{
+	clear_diagram();
+
+	m_iId = i_iId;
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& l_oData = m_oMediator->m_oItems[m_iId];
+	if (l_oData.m_iDataType == VIEW_DIAG)
+	{
+		if (!l_oData.m_sDiag.isEmpty())
+		{
+			from_string(l_oData.m_sDiag);
+			l_oData.m_sDiag = notr("");
+		}
+		sync_view();
+		check_canvas_size();
+	}
+	else
+	{
+		return;
+	}
+
+	QRectF l_oRect = scene()->itemsBoundingRect();
+	foreach (QGraphicsItem*it, scene()->items())
+	{
+		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
+	}
+
+	l_oRect = l_oRect.adjusted(-15, -15, 15, 15);
+	QRectF l_oR(0, 0, l_oRect.width(), l_oRect.height());
+
+	QRectF l_oDrawRect(i_oRect);
+
+	if (l_oRect.width() > l_oRect.height())
+	{
+		l_oDrawRect.setHeight(l_oDrawRect.height() * (1. * l_oRect.height() / l_oRect.width()));
+	}
+	else
+	{
+		l_oDrawRect.setWidth(l_oDrawRect.width() * (1. * l_oRect.width() / l_oRect.height()));
+	}
+
+	i_oPainter->save();
+	QPen l_oPen;
+	l_oPen.setCosmetic(true);
+	i_oPainter->setPen(l_oPen);
+	i_oPainter->setBrush(Qt::white);
+	i_oPainter->drawRect(l_oDrawRect);
+	i_oPainter->restore();
+
+	scene()->render(i_oPainter, i_oRect, l_oRect, Qt::KeepAspectRatio);
+}
+
+
 int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 {
 	QString url = i_oUrl.path();

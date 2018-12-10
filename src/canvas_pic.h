@@ -22,18 +22,21 @@ class canvas_link;
 class canvas_sort;
 class canvas_flag;
 class canvas_chain;
+class box_view;
 class canvas_sort_toggle;
 
 class canvas_pic: public QGraphicsRectItem
 {
 	public:
 		canvas_pic(canvas_view *i_oGraphWidget, int i_iId);
+		~canvas_pic();
 
 		int type() const { return CANVAS_PIC_T; }
 		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
 		canvas_view * m_oGraph;
 		QPixmap m_oPixmap;
+		box_view *m_oBoxView;
 		int m_iId;
 
 

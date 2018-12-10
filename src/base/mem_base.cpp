@@ -10,7 +10,7 @@
 #include "mem_base.h"
 
 inline uint qHash(const QPoint &p) {
-	return p.x() + p.y();
+	return p.x() + 100000 * p.y();
 }
 
 

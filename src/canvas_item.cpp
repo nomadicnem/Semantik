@@ -56,7 +56,6 @@ canvas_item::canvas_item(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsText
 	m_oPic = new canvas_pic(i_oGraphWidget, i_iId);
 	m_oPic->setParentItem(this);
 	m_oPic->setRect(QRectF(0, 0, 100, 100));
-	m_oPic->setPos(boundingRect().bottomLeft() + QPointF(0, 5));
 
 	m_oSort = new canvas_sort(i_oGraphWidget, this);
 	m_oChain = new canvas_chain(i_oGraphWidget);
@@ -80,6 +79,7 @@ canvas_item::canvas_item(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsText
 	update_flags();
 
 	document()->setDefaultFont(scene()->font());
+	m_oPic->setPos(boundingRect().bottomLeft() + QPointF(0, 5));
 }
 
 // (i_oEv == QKeySequence::DeleteEndOfWord)
@@ -129,7 +129,7 @@ void canvas_item::update_data()
 		l_oItem.m_iYY = m_oGraph->m_oLastPoint.y();
 	}
 
-	if (l_oItem.m_iDataType == VIEW_IMG)
+	if (l_oItem.m_iDataType == VIEW_IMG || l_oItem.m_iDataType == VIEW_DIAG)
 	{
 		m_oPic->setVisible(true);
 	}
@@ -162,6 +162,7 @@ void canvas_item::update_links()
 	{
 		l_oLink->update_pos();
 	}
+	m_oPic->setPos(boundingRect().bottomLeft() + QPointF(0, 5));
 }
 
 void canvas_item::update_flags()
@@ -228,6 +229,7 @@ void canvas_item::keyPressEvent(QKeyEvent* e) {
 	QGraphicsTextItem::keyPressEvent(e);
 	adjustSize();
 	update_links();
+	m_oPic->setPos(boundingRect().bottomLeft() + QPointF(0, 5));
 }
 
 void canvas_item::adjustSize() {
