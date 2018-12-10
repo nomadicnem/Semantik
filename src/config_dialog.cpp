@@ -3,6 +3,7 @@
 #include <QVariant>
 #include <QAction>
 #include <QSpinBox>
+#include <QCheckBox>
 #include <QApplication>
 #include <QButtonGroup>
 #include <QGridLayout>
@@ -15,8 +16,11 @@
 #include <QDirModel>
 #include <QCompleter>
 #include <QPushButton>
+#include <QGroupBox>
+#include <QTabWidget>
 #include <QCoreApplication>
 #include <QtDebug>
+#include <QSpacerItem>
 #include  <QColorDialog>
 
 #include "config_dialog.h"
@@ -24,58 +28,92 @@
 config_dialog::config_dialog(QWidget *i_oParent):
 	KDialog(i_oParent)
 {
-	QWidget *widget = new QWidget(this);
-	setCaption(i18n("Document settings"));
+	setCaption(i18n("Settings"));
 	setButtons(KDialog::Ok | KDialog::Cancel);
-
-	QGridLayout *l_oGridLayout = new QGridLayout(widget);
 
 	QLabel *l_sLabel;
 
-	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(i18n("Reorganization type"));
-	l_oGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
+	QTabWidget *l_oTabWidget = new QTabWidget(this);
 
-	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(i18n("Item position after keyboard insertion"));
-	l_oGridLayout->addWidget(l_sLabel, 1, 0, 1, 1);
+	QWidget *l_oDocumentGroupBox = new QGroupBox(l_oTabWidget);
+	l_oTabWidget->addTab(l_oDocumentGroupBox, i18n("Document settings"));
 
-	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(i18n("Connection type"));
-	l_oGridLayout->addWidget(l_sLabel, 2, 0, 1, 1);
+	QWidget *l_oGlobalGroupBox = new QGroupBox(l_oTabWidget);
+	l_oTabWidget->addTab(l_oGlobalGroupBox, i18n("Global settings"));
 
-	l_sLabel = new QLabel(widget);
-	l_sLabel->setText(i18n("Save document automatically"));
-	l_oGridLayout->addWidget(l_sLabel, 3, 0, 1, 1);
 
-	l_sLabel = new QLabel(widget);
+
+	QGridLayout *l_oDocumentGridLayout = new QGridLayout(l_oDocumentGroupBox);
+
+	l_sLabel = new QLabel(l_oDocumentGroupBox);
 	l_sLabel->setText(i18n("Background color"));
-	l_oGridLayout->addWidget(l_sLabel, 4, 0, 1, 1);
+	l_oDocumentGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
 
+	l_sLabel = new QLabel(l_oDocumentGroupBox);
+	l_sLabel->setText(i18n("Preview pictures"));
+	l_oDocumentGridLayout->addWidget(l_sLabel, 1, 0, 1, 1);
 
-	m_oReorgType = new QComboBox(widget);
-	m_oReorgType->addItems(QStringList()<<i18n("Fixed")<<i18n("Force-based")<<i18n("Incremental"));
-	l_oGridLayout->addWidget(m_oReorgType, 0, 1, 1, 1);
-
-	m_oAutoReorg = new QComboBox(widget);
-	m_oAutoReorg->addItems(QStringList()<<i18n("Close to parent")<<i18n("Reorganize map"));
-	l_oGridLayout->addWidget(m_oAutoReorg, 1, 1, 1, 1);
-
-	m_oConnType = new QComboBox(widget);
-	m_oConnType->addItems(QStringList()<<i18n("Lines")<<i18n("Splines"));
-	l_oGridLayout->addWidget(m_oConnType, 2, 1, 1, 1);
-
-	m_oAutoSave = new QSpinBox(widget);
-	m_oAutoSave->setSuffix(i18n(" min"));
-	m_oAutoSave->setRange(0, 69 /* 69 hmmm */);
-	l_oGridLayout->addWidget(m_oAutoSave, 3, 1, 1, 1);
-	m_oAutoSave->setToolTip(i18n("Interval in minutes for saving the document automatically, 0 for disabling this feature"));
-
-	m_oColorWidget = new QPushButton(widget);
-	l_oGridLayout->addWidget(m_oColorWidget, 4, 1, 1, 1);
+	m_oColorWidget = new QPushButton(l_oDocumentGroupBox);
+	l_oDocumentGridLayout->addWidget(m_oColorWidget, 0, 1, 1, 1);
 	connect(m_oColorWidget, SIGNAL(clicked()), this, SLOT(select_color()));
 
-	setMainWidget(widget);
+	m_oPreviewPics = new QCheckBox(l_oDocumentGroupBox);
+	l_oDocumentGridLayout->addWidget(m_oPreviewPics, 1, 1, 1, 1);
+
+	QSpacerItem *l_oSpacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+	l_oDocumentGridLayout->addItem(l_oSpacer, 2, 1, 2);
+
+
+
+	QGridLayout *l_oGlobalGridLayout = new QGridLayout(l_oGlobalGroupBox);
+
+	l_sLabel = new QLabel(l_oGlobalGroupBox);
+	l_sLabel->setText(i18n("Reorganization type"));
+	l_oGlobalGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
+
+	l_sLabel = new QLabel(l_oGlobalGroupBox);
+	l_sLabel->setText(i18n("Item position after keyboard insertion"));
+	l_oGlobalGridLayout->addWidget(l_sLabel, 1, 0, 1, 1);
+
+	l_sLabel = new QLabel(l_oGlobalGroupBox);
+	l_sLabel->setText(i18n("Connection type"));
+	l_oGlobalGridLayout->addWidget(l_sLabel, 2, 0, 1, 1);
+
+	l_sLabel = new QLabel(l_oGlobalGroupBox);
+	l_sLabel->setText(i18n("Save document automatically"));
+	l_oGlobalGridLayout->addWidget(l_sLabel, 3, 0, 1, 1);
+
+	l_sLabel = new QLabel(l_oGlobalGroupBox);
+	l_sLabel->setText(i18n("Touchpad mode"));
+	l_oGlobalGridLayout->addWidget(l_sLabel, 4, 0, 1, 1);
+
+
+	m_oReorgType = new QComboBox(l_oGlobalGroupBox);
+	m_oReorgType->addItems(QStringList()<<i18n("Fixed")); //<<i18n("Force-based")<<i18n("Incremental"));
+	l_oGlobalGridLayout->addWidget(m_oReorgType, 0, 1, 1, 1);
+
+	m_oAutoReorg = new QComboBox(l_oGlobalGroupBox);
+	m_oAutoReorg->addItems(QStringList()<<i18n("Close to parent")<<i18n("Reorganize map"));
+	l_oGlobalGridLayout->addWidget(m_oAutoReorg, 1, 1, 1, 1);
+
+	m_oConnType = new QComboBox(l_oGlobalGroupBox);
+	m_oConnType->addItems(QStringList()<<i18n("Lines")<<i18n("Splines"));
+	l_oGlobalGridLayout->addWidget(m_oConnType, 2, 1, 1, 1);
+
+	m_oAutoSave = new QSpinBox(l_oGlobalGroupBox);
+	m_oAutoSave->setSuffix(i18n(" min"));
+	m_oAutoSave->setRange(0, 69 /* 69 hmmm */);
+	l_oGlobalGridLayout->addWidget(m_oAutoSave, 3, 1, 1, 1);
+	m_oAutoSave->setToolTip(i18n("Interval in minutes for saving the document automatically, 0 for disabling this feature"));
+
+	m_oUseTouchpad = new QCheckBox(l_oGlobalGroupBox);
+	l_oGlobalGridLayout->addWidget(m_oUseTouchpad, 4, 1, 1, 1);
+
+	l_oSpacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+	l_oGlobalGridLayout->addItem(l_oSpacer, 5, 1, 2);
+
+
+	setMainWidget(l_oTabWidget);
 
 	QSize size(321, 120);
 	size = size.expandedTo(minimumSizeHint());

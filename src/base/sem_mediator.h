@@ -36,6 +36,7 @@ class html_converter : public QXmlDefaultHandler
 
 class semantik_reader;
 class data_item;
+class windef;
 class bind_node;
 class data_link;
 class sem_mediator: public QObject
@@ -54,6 +55,7 @@ class sem_mediator: public QObject
 		void sig_unlink_items(int id1, int id2);
 		void sync_flags();
 		void sync_colors();
+		void sync_background_color();
 		void sync_font();
 		void sig_select(const QList<int>& unsel, const QList<int>& sel);
 		void sig_move(const QList<int>&sel, const QList<QPointF>&pos);
@@ -92,10 +94,15 @@ class sem_mediator: public QObject
 		sem_mediator(QObject *i_oParent);
 		~sem_mediator();
 
+		windef *m_oWindef;
+
 		QString m_sOutDir;
 		QString m_sOutProject;
 		QString m_sOutTemplate;
 
+
+		void set_show_pics(bool);
+		bool m_bShowPics;
 		bool m_bExportIsWidth;
 		int m_iExportWidth;
 		int m_iExportHeight;
@@ -189,6 +196,7 @@ class sem_mediator: public QObject
 		void notify_sequence_box(int id, int);
 		void notify_change_properties(void*);
 		void notify_colors();
+		void notify_background_color();
 		void notify_flags();
 		void notify_font();
 		void notify_open_map();

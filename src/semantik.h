@@ -19,7 +19,7 @@ class QActionGroup;
 class QListWidget;
 class QMenu;
 class QTextEdit;
-
+class windef;
 class QCloseEvent;
 class QTextBrowser;
 
@@ -53,6 +53,7 @@ class semantik_win : public KXmlGuiWindow
 		image_view *m_oImageView;
 
 		box_view *m_oDiagramView;
+		windef *m_oWindef;
 
 		linear_container *m_oTree;
 		sem_mediator *m_oMediator;

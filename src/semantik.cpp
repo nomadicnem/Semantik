@@ -18,6 +18,7 @@
 #include <QIcon>
 #include <KMessageBox>
 #include <ktip.h>
+#include <windef.h>
 #include <QFrame>
 #include <QtWidgets>
 #include <QUuid>
@@ -138,7 +139,9 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	setWindowIcon(QIcon("semantik"));
 
+	m_oWindef = new windef();
 	m_oMediator = new sem_mediator(this);
+	m_oMediator->m_oWindef = m_oWindef;
 	connect(m_oMediator, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 	connect(m_oMediator, SIGNAL(sig_update_title()), this, SLOT(update_title()));
 
@@ -291,6 +294,8 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oDiagramView, SLOT(change_colors(QAction*)));
 	connect(m_oColorGroup, SIGNAL(triggered(QAction*)), m_oCanvas, SLOT(change_colors(QAction*)));
 
+	connect(m_oMediator, SIGNAL(sync_background_color()), m_oCanvas, SLOT(slot_background_color()));
+
 	m_oMediator->m_oCurrentUrl = QUrl();
 	update_title();
 
@@ -372,6 +377,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oMediator->init_flags();
 
 	read_config();
+	m_oMediator->notify_background_color();
 	statusBar()->showMessage(i18n("Welcome to Semantik"), 2000);
 	setAutoSaveSettings();
 
@@ -400,9 +406,10 @@ void semantik_win::read_config()
 	m_oRecentFilesAct->loadEntries(l_oSaveConfig);
 
 	move(l_oConfig.readEntry(notr("winpos"), QPoint(0, 0)));
-	m_oCanvas->setBackgroundBrush(QColor(l_oConfig.readEntry(notr("bgcolor"), notr("#FFFDE8"))));
+	m_oMediator->m_oColor = QColor(l_oConfig.readEntry(notr("bgcolor"), notr("#FFFDE8")));
 	m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), QDir::homePath());
 	bind_node::set_var(notr("outdir"), m_oMediator->m_sOutDir);
+	m_oWindef->m_bUseTouchpad = l_oConfig.readEntry(notr("touchpad"), false);
 
 	QString l_oGuidString = l_oConfig.readEntry(notr("guid"));
 	if (!l_oGuidString.isEmpty())
@@ -578,11 +585,12 @@ void semantik_win::slot_properties()
 	l_oGen.m_oReorgType->setCurrentIndex(l_oSettings.readEntry(notr("reorg"), 0));
 	l_oGen.m_oAutoSave->setValue(l_oSettings.readEntry(notr("auto"), 5));
 	l_oGen.m_oAutoReorg->setCurrentIndex(l_oSettings.readEntry(notr("autoReorg"), 1));
+	l_oGen.m_oUseTouchpad->setChecked(l_oSettings.readEntry(notr("touchpad"), false));
+	l_oGen.m_oPreviewPics->setChecked(m_oMediator->m_bShowPics);
 
-	QString l_o = l_oSettings.readEntry(notr("bgcolor"), notr("#FFFDE8"));
-	l_oGen.m_oColorWidget->setText(l_o);
+	l_oGen.m_oColorWidget->setText(m_oMediator->m_oColor.name());
 	QPalette l_oPalette = l_oGen.m_oColorWidget->palette();
-	l_oGen.m_oColor = QVariant(l_o).value<QColor>();
+	l_oGen.m_oColor = m_oMediator->m_oColor;
 	l_oPalette.setBrush(QPalette::Active, QPalette::Button, l_oGen.m_oColor);
 	l_oGen.m_oColorWidget->setPalette(l_oPalette);
 
@@ -591,12 +599,17 @@ void semantik_win::slot_properties()
 		//m_oMediator->m_iConnType = l_oGen.m_oConnType->currentIndex();
 		//m_oMediator->m_iReorgType = l_oGen.m_oReorgType->currentIndex();
 		l_oSettings.writeEntry(notr("conn"), m_oMediator->m_iConnType = l_oGen.m_oConnType->currentIndex());
-		l_oSettings.writeEntry(notr("reorg"), m_oMediator->m_iReorgType = l_oGen.m_oReorgType->currentIndex());
+		l_oSettings.writeEntry(notr("reorg"), m_oMediator->m_oWindef->m_iReorgType = l_oGen.m_oReorgType->currentIndex());
 		l_oSettings.writeEntry(notr("auto"), m_oMediator->m_iTimerValue = l_oGen.m_oAutoSave->value());
 		l_oSettings.writeEntry(notr("bgcolor"), l_oGen.m_oColor.name());
 		l_oSettings.writeEntry(notr("autoReorg"), m_oMediator->m_iAutoReorg = l_oGen.m_oAutoReorg->currentIndex());
-		m_oCanvas->setBackgroundBrush(l_oGen.m_oColor);
+		l_oSettings.writeEntry(notr("touchpad"), m_oMediator->m_oWindef->m_bUseTouchpad = l_oGen.m_oUseTouchpad->isChecked());
+
+		m_oMediator->set_show_pics(l_oGen.m_oPreviewPics->isChecked());
+		m_oMediator->m_oColor = l_oGen.m_oColor;
+		m_oMediator->notify_background_color();
 		m_oMediator->init_timer();
+		l_oCfg.sync();
 	}
 }
 

@@ -18,6 +18,7 @@ class QAction;
 class QActionGroup;
 class QListWidget;
 class QMenu;
+class windef;
 class QActionGroup;
 class QTextEdit;
 class KTabWidget;
@@ -43,6 +44,7 @@ class semantik_d_win : public KXmlGuiWindow
 		QAction *m_oExportSizeAct;
 		QMenu *m_oColorMenu;
 		QActionGroup *m_oColorGroup;
+		windef *m_oWindef;
 
 		void read_config();
 		void write_config();

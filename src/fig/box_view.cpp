@@ -7,7 +7,7 @@
 #include <KStandardAction>
 #include <KRecentFilesAction>
 #include <KDE/KActionCollection>
-
+#include <windef.h>
 #include <QClipboard>
 #include <QMouseEvent>
 #include <QAction>
@@ -1300,6 +1300,13 @@ void box_view::notify_change_link_box(int id, data_link*link)
 
 void box_view::wheelEvent(QWheelEvent *i_oEvent)
 {
+	bool l_bCtrl = i_oEvent->modifiers() & Qt::ControlModifier;
+	if (m_oMediator->m_oWindef->m_bUseTouchpad xor l_bCtrl)
+	{
+		QGraphicsView::wheelEvent(i_oEvent);
+		return;
+	}
+
 	QPointF l_o = mapToScene(i_oEvent->pos());
 	qreal i_iScaleFactor = pow(2.0, i_oEvent->delta() / 440.0);
 	qreal i_rFactor = matrix().scale(i_iScaleFactor, i_iScaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();

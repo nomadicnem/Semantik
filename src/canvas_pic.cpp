@@ -36,8 +36,8 @@ canvas_pic::canvas_pic(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsRectIt
 	m_iId = i_iId;
 	setZValue(98);
 	setFlags(QGraphicsItem::ItemStacksBehindParent);
-	setVisible(false);
 	i_oGraphWidget->scene()->addItem(this);
+	setVisible(false);
 	m_iOffset = pad;
 }
 

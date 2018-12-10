@@ -19,18 +19,20 @@
 #include <ktip.h>
 #include <QFrame>
 
+#include "windef.h"
 #include "diagram_document.h"
 #include "sem_mediator.h"
 #include "box_view.h"
 # include  "sembind.h"
 #include "mem_base.h"
 
-diagram_document::diagram_document(QWidget *i_oParent) : QFrame(i_oParent)
+diagram_document::diagram_document(QWidget *i_oParent, windef *i_oWindef) : QFrame(i_oParent), m_oWindef(i_oWindef)
 {
         setLineWidth(0);
         setFrameStyle(QFrame::NoFrame);
 
 	m_oMediator = new sem_mediator(this);
+	m_oMediator->m_oWindef = i_oWindef;
         m_oDiagramView = new box_view(this, m_oMediator);
 
         QGridLayout *ll = new QGridLayout(this);

@@ -124,6 +124,7 @@ class canvas_view : public QGraphicsView
 		void zoom_out();
 		void toggle_fullscreen();
 		void slot_select_subtree();
+		void slot_background_color();
 
 		void notify_focus(void* ptr);
 		void notify_pic(int id);

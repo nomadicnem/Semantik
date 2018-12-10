@@ -22,6 +22,7 @@
   %:	include<QCoreApplication>
   #include <QXmlDefaultHandler>
 #include<KConfig>
+ #include <windef.h>
 #include <KConfigGroup>
  #include <QProcess>   
   #include <QDir>
@@ -76,6 +77,7 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		m_oMediator->m_sHints = i_oAttrs.value(notr("hints"));
 		m_iVersion = i_oAttrs.value(notr("version")).toInt();
 		m_oMediator->m_bExportIsWidth = i_oAttrs.value(notr("export_is_width")) != notr("false");
+		m_oMediator->m_bShowPics = notr("true") == i_oAttrs.value(notr("show_pics"));
 
 		QString l_s = i_oAttrs.value(notr("font"));
 		if (!l_s.isEmpty()) {
@@ -101,6 +103,15 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		m_oMediator->m_sSpellingLanguage = i_oAttrs.value(notr("spelling_language"));
 
 		m_oMediator->m_sExportUrl = i_oAttrs.value(notr("export_url"));
+
+		if (i_oAttrs.index(notr("bgcolor")) > -1)
+		{
+			m_oMediator->m_oColor = QColor(i_oAttrs.value(notr("bgcolor")));
+		}
+		else
+		{
+			m_oMediator->m_oColor = notr("#FFFDE8");
+		}
 
 		if (i_oAttrs.value(notr("location")).size()) m_oMediator->m_sOutDir = i_oAttrs.value(notr("location"));
 		if (i_oAttrs.value(notr("dir")).size()) m_oMediator->m_sOutProject = i_oAttrs.value(notr("dir"));
@@ -319,10 +330,11 @@ void sem_mediator::init_colors()
 	KConfig l_oCfg("semantik");
 	KConfigGroup l_oSettings( &l_oCfg, notr("General Options"));
         m_iConnType = l_oSettings.readEntry(notr("conn"), 0);
-        m_iReorgType = l_oSettings.readEntry(notr("reorg"), 0);
 	m_dTriSize = l_oSettings.readEntry(notr("trisize"), (double) 4.5);
 	m_iTimerValue = l_oSettings.readEntry(notr("auto"), 0);
 	m_iAutoReorg = l_oSettings.readEntry(notr("autoReorg"), 1);
+
+        m_oWindef->m_iReorgType = l_oSettings.readEntry(notr("reorg"), 0);
 
 	emit sync_colors();
 }
@@ -491,11 +503,13 @@ QString sem_mediator::doc_to_xml()
 	l_oS<<notr(" dir=\"%1\"").arg(bind_node::protectXML(m_sOutProject));
 	l_oS<<notr(" output=\"%1\"").arg(bind_node::protectXML(m_sOutTemplate));
 	l_oS<<notr(" hints=\"%1\"").arg(bind_node::protectXML(m_sHints));
+	l_oS<<notr(" show_pics=\"%1\"").arg(m_bShowPics ? notr("true") : notr("false"));
 
 	l_oS<<notr(" export_is_width=\"%1\"").arg(m_bExportIsWidth ? notr("true") : notr("false"));
 	l_oS<<notr(" export_width=\"%1\"").arg(QString::number(m_iExportWidth));
 	l_oS<<notr(" export_height=\"%1\"").arg(QString::number(m_iExportHeight));
 	l_oS<<notr(" export_url=\"%1\"").arg(bind_node::protectXML(m_sExportUrl));
+	l_oS<<notr(" bgcolor=\"%1\"").arg(bind_node::protectXML(m_oColor.name()));
 	l_oS<<notr(" spelling_language=\"%1\"").arg(bind_node::protectXML(m_sSpellingLanguage));
 	l_oS<<notr(" font=\"%1\"").arg(m_oFont.toString());
 
@@ -1323,6 +1337,7 @@ sem_mediator::sem_mediator(QObject* i_oParent) : QObject(i_oParent)
 	num_seq = 1;
 	pic_seq = 1;
 
+	m_bShowPics = true;
 	m_iSortId = NO_ITEM;
 	m_iSortCursor = 0;
 
@@ -1465,6 +1480,22 @@ bool sem_mediator::load_picture(const QString & i_sPath, int id)
 	pic->m_oThumb = l_oPix.scaledToHeight(32);
 	m_oPixCache[id] = pic;
 	return true;
+}
+
+void sem_mediator::set_show_pics(bool i_b)
+{
+	if (i_b != m_bShowPics)
+	{
+		m_bShowPics = i_b;
+		foreach (int l_iVal, m_oItems.keys())
+		{
+			data_item& l_oItem = m_oItems[l_iVal];
+			if (l_oItem.m_iDataType == VIEW_IMG || l_oItem.m_iDataType == VIEW_DIAG)
+			{
+				emit notify_pic(l_iVal);
+			}
+		}
+	}
 }
 
 void sem_mediator::notify_add_item(int id)
@@ -1627,6 +1658,13 @@ void sem_mediator::notify_font()
 	emit sync_font();
 }
 
-void sem_mediator::notify_text_align(int id, const QList<data_box>& items) {
+void sem_mediator::notify_text_align(int id, const QList<data_box>& items)
+{
 	emit sig_text_align(id, items);
 }
+
+void sem_mediator::notify_background_color()
+{
+	emit sync_background_color();
+}
+

@@ -94,6 +94,7 @@ class mem_doc_open : public mem_command {
 		QString m_sOutProjectNew;
 		QString m_sOutTemplateNew;
 		bool m_bExportIsWidthNew;
+		bool m_bShowPicsNew;
 		int m_iExportWidthNew;
 		int m_iExportHeightNew;
 		QString m_sExportUrlNew;
@@ -112,6 +113,7 @@ class mem_doc_open : public mem_command {
 		QString m_sOutProjectOld;
 		QString m_sOutTemplateOld;
 		bool m_bExportIsWidthOld;
+		bool m_bShowPicsOld;
 		int m_iExportWidthOld;
 		int m_iExportHeightOld;
 		QString m_sExportUrlOld;

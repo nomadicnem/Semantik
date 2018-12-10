@@ -23,6 +23,7 @@
 #include <QSet>
 #include <QPrintDialog>
 #include "canvas_sort.h"
+#include <windef.h>
 #include <QRadioButton>
 #include "canvas_sort_toggle.h"
 #include "semantik.h"
@@ -163,6 +164,8 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 	setDragMode(QGraphicsView::RubberBandDrag);
 
 	scene()->setFont(m_oMediator->m_oFont);
+
+	setBackgroundBrush(m_oMediator->m_oColor);
 }
 
 void canvas_view::resizeEvent(QResizeEvent* e)
@@ -517,6 +520,13 @@ void canvas_view::zoom_out()
 
 void canvas_view::wheelEvent(QWheelEvent *i_oEvent)
 {
+	bool l_bCtrl = i_oEvent->modifiers() & Qt::ControlModifier;
+	if (m_oMediator->m_oWindef->m_bUseTouchpad xor l_bCtrl)
+	{
+		QGraphicsView::wheelEvent(i_oEvent);
+		return;
+	}
+
 	QPointF l_o = mapToScene(i_oEvent->pos());
 	qreal i_iScaleFactor = pow(2.0, i_oEvent->delta() / 440.0);
 	qreal i_rFactor = matrix().scale(i_iScaleFactor, i_iScaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();
@@ -1370,7 +1380,7 @@ void canvas_view::mouseMoveEvent(QMouseEvent *i_oEv)
 	QGraphicsView::mouseMoveEvent(i_oEv);
 
 	QList<QGraphicsItem*> sel = scene()->selectedItems();
-	if (sel.size() > 4) { // does not solve the repainting problem
+	/*if (sel.size() > 4) { // does not solve the repainting problem
 		QSet<canvas_link*> lst;
 		foreach (QGraphicsItem*tmp, sel) {
 			if (tmp->type() == CANVAS_ITEM_T && tmp->isSelected()) {
@@ -1383,7 +1393,7 @@ void canvas_view::mouseMoveEvent(QMouseEvent *i_oEv)
 		foreach (canvas_link* tmp, lst) {
 			tmp->update_pos();
 		}
-	} else {
+	} else*/ {
 		foreach (QGraphicsItem*tmp, sel) {
 			if (tmp->type() == CANVAS_ITEM_T && tmp->isSelected()) {
 				((canvas_item*) tmp)->update_links();
@@ -1664,4 +1674,9 @@ void canvas_view::slot_print()
 void canvas_view::notify_font()
 {
 	scene()->setFont(m_oMediator->m_oFont);
+}
+
+void canvas_view::slot_background_color()
+{
+	setBackgroundBrush(m_oMediator->m_oColor);
 }

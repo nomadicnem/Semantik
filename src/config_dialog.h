@@ -6,6 +6,7 @@
 #include <KDE/KDialog>
 #include <con.h>
 
+class QCheckBox;
 class QComboBox;
 class QSpinBox;
 class QTreeWidgetItem;
@@ -19,6 +20,8 @@ class config_dialog : public KDialog
 		QComboBox *m_oAutoReorg;
 		QComboBox *m_oConnType;
 		QSpinBox *m_oAutoSave;
+		QCheckBox *m_oUseTouchpad;
+		QCheckBox *m_oPreviewPics;
 		QPushButton *m_oColorWidget;
 		QColor m_oColor;
 

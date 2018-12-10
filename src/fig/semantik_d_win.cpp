@@ -1,5 +1,15 @@
 // Thomas Nagy 2013-2018 GPLV3
 
+#include "semantik_d_win.h"
+#include "windef.h"
+#include "diagram_document.h"
+#include "sem_mediator.h"
+#include "box_view.h"
+#include "sembind.h"
+#include "filetree.h"
+#include "semd_config_dialog.h"
+#include <KConfigGroup>
+#include <QCheckBox>
 #include <QtGui>
 #include <QFile>
 #include <QTextBrowser>
@@ -23,13 +33,6 @@
 #include <KDE/KTabWidget>
 #include <KDirModel>
 #include <QStandardPaths>
-
-#include "semantik_d_win.h"
-#include "diagram_document.h"
-#include "sem_mediator.h"
-#include "box_view.h"
-#include "sembind.h"
-#include "filetree.h"
 
 semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 {
@@ -99,8 +102,11 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oColorGroup->setExclusive(true);
 	actionCollection()->addAction(notr("color_custom"), m_oCustomColorAct);
 
+	KStandardAction::preferences(this, SLOT(slot_properties()), actionCollection());
+
 	setupGUI(QSize(1000, 800), Default, notr("semantik-dui.rc"));
 
+	m_oWindef = new windef();
 	read_config();
 	setAutoSaveSettings();
 	statusBar()->showMessage(i18n("This is Semantik-d"), 2000);
@@ -213,7 +219,7 @@ void semantik_d_win::slot_enable_undo(bool i_bUndo, bool i_bRedo)
 
 void semantik_d_win::slot_add_tab()
 {
-	m_oActiveDocument = new diagram_document(m_oTabWidget);
+	m_oActiveDocument = new diagram_document(m_oTabWidget, m_oWindef);
 	m_oActiveDocument->m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oActiveDocument->init();
 	int l_iIndex = m_oTabWidget->addTab(m_oActiveDocument, i18n("[Untitled]"));
@@ -250,6 +256,8 @@ void semantik_d_win::read_config()
 
 	KConfigGroup l_oSaveConfig(&l_oCfg, notr("Recent Files"));
 	m_oRecentFilesAct->loadEntries(l_oSaveConfig);
+
+	m_oWindef->m_bUseTouchpad = l_oConfig.readEntry(notr("touchpad"), false);
 
 	move(l_oConfig.readEntry(notr("winpos"), QPoint(0, 0)));
 	//m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), notr("/tmp/"));
@@ -337,7 +345,7 @@ void semantik_d_win::slot_open()
 
 	// just open a new tab
 	diagram_document *l_oTmp = m_oActiveDocument;
-	m_oActiveDocument = new diagram_document(m_oTabWidget);
+	m_oActiveDocument = new diagram_document(m_oTabWidget, m_oWindef);
 	m_oActiveDocument->m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oActiveDocument->init();
 	if (m_oActiveDocument->m_oDiagramView->import_from_file(l_o))
@@ -380,7 +388,7 @@ void semantik_d_win::slot_recent(const QUrl& i_oUrl)
 	}
 
 	diagram_document *l_oTmp = m_oActiveDocument;
-	m_oActiveDocument = new diagram_document(m_oTabWidget);
+	m_oActiveDocument = new diagram_document(m_oTabWidget, m_oWindef);
 	m_oActiveDocument->m_oDiagramView->m_oColorMenu = m_oColorMenu;
 	m_oActiveDocument->init();
 	if (m_oActiveDocument->m_oDiagramView->import_from_file(i_oUrl))
@@ -407,7 +415,18 @@ void semantik_d_win::record_open_url(const QUrl & i_oUrl)
 	m_oFileTree->m_oModel->expandToUrl(i_oUrl);
 }
 
-void semantik_d_win::slot_properties() {
+void semantik_d_win::slot_properties()
+{
+	semd_config_dialog l_oGen(this);
+	KConfig l_oConfig("semantik-d");
+	KConfigGroup l_oSettings(&l_oConfig, notr("General Options"));
+	l_oGen.m_oUseTouchpad->setChecked(l_oSettings.readEntry(notr("touchpad"), false));
+
+	if (l_oGen.exec() == QDialog::Accepted)
+	{
+		l_oSettings.writeEntry(notr("touchpad"), m_oWindef->m_bUseTouchpad = l_oGen.m_oUseTouchpad->isChecked());
+		l_oConfig.sync();
+	}
 }
 
 void semantik_d_win::slot_generate() {

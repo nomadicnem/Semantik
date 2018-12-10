@@ -296,6 +296,7 @@ void mem_doc_open::init_data(sem_mediator* i_oOld, sem_mediator* i_oNew)
 	m_oFlagSchemesNew = i_oNew->m_oFlagSchemes;
 	m_oItemsNew = i_oNew->m_oItems;
 	m_oLinksNew = i_oNew->m_oLinks;
+	m_bShowPicsNew = i_oNew->m_bShowPics;
 
 	m_sOutDirOld = i_oOld->m_sOutDir;
 	m_sOutProjectOld = i_oOld->m_sOutProject;
@@ -314,6 +315,7 @@ void mem_doc_open::init_data(sem_mediator* i_oOld, sem_mediator* i_oNew)
 	m_oItemsOld = i_oOld->m_oItems;
 	m_oLinksOld = i_oOld->m_oLinks;
 	m_sLastSavedOld = i_oOld->m_sLastSaved;
+	m_bShowPicsOld = i_oOld->m_bShowPics;
 }
 
 void mem_doc_open::redo()
@@ -339,6 +341,7 @@ void mem_doc_open::redo()
 	model->m_oItems = m_oItemsNew;
 	model->m_oLinks = m_oLinksNew;
 	model->m_sLastSaved = m_sLastSavedNew;
+	model->m_bShowPics = m_bShowPicsNew;
 
 	model->notify_colors();
 	model->notify_flags();
@@ -356,6 +359,7 @@ void mem_doc_open::redo()
 	model->notify_open_map();
 	model->set_dirty(false);
 	model->init_timer();
+	model->notify_background_color();
 }
 
 void mem_doc_open::undo()
@@ -388,8 +392,10 @@ void mem_doc_open::undo()
 	model->m_oItems.clear();
 	model->m_oLinks.clear();
 	model->m_sLastSaved = m_sLastSavedOld;
+	model->m_bShowPics = m_bShowPicsOld;
 
 	model->notify_colors();
+	model->notify_background_color();
 	model->notify_flags();
 	model->notify_font();
 

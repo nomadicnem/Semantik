@@ -14,15 +14,17 @@ lude <QFrame>
 
 class box_view;
 class sem_mediator;
+class windef;
 class diagram_document : public QFrame
 {
 	Q_OBJECT
 
 	public:
-		diagram_document(QWidget *i_oParent=0);
+		diagram_document(QWidget *i_oParent=0, windef* i_oWindef=0);
 		virtual ~diagram_document();
 		void init();
 
+		windef *m_oWindef;
 		box_view *m_oDiagramView;
 		sem_mediator *m_oMediator;
 
