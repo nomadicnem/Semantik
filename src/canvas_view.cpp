@@ -1214,6 +1214,8 @@ void canvas_view::reorganize() {
 		delete mv;
 	}
 
+	QRectF l_oRect = scene()->itemsBoundingRect().adjusted(-15, -15, 15, 15);
+	scene()->setSceneRect(l_oRect);
 }
 
 void canvas_view::pack(QMap<int, double> &width, QMap<int, double> &height, QMap<int, QList<int> >&children, int id, int level, int left) {
