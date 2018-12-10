@@ -1097,7 +1097,7 @@ double canvas_view::compute_height(QMap<int, double> &map, QMap<int, QList<int> 
 		}
 	}
 
-	double tmp = m_oItems[id]->boundingRect().height();
+	double tmp = m_oItems[id]->reorgHeight();
 	if (size < tmp) size = tmp;
 
 	map[id] = size;
@@ -1167,12 +1167,12 @@ void canvas_view::reorganize() {
 			left_height -= HSPACER;
 
 			int left = 1;
-			double acc_height = m_oItems[k]->y() + m_oItems[k]->boundingRect().height() / 2 - left_height / 2;
+			double acc_height = m_oItems[k]->y() + m_oItems[k]->reorgHeight() / 2 - left_height / 2;
 			foreach (int sub, tmp) {
 
 				// put the element in place, then recurse
 
-				double y = acc_height + height[sub] / 2 - m_oItems[sub]->boundingRect().height() / 2;
+				double y = acc_height + height[sub] / 2 - m_oItems[sub]->reorgHeight() / 2;
 				if (left) {
 					double x = m_oItems[k]->x() + m_oItems[k]->boundingRect().width() - width[0] - WSPACER;
 					m_oItems[sub]->setPos(x - m_oItems[sub]->boundingRect().width(), y);
@@ -1189,7 +1189,7 @@ void canvas_view::reorganize() {
 				// now to the right
 				if (sub == mid) {
 					left = 0;
-					acc_height = m_oItems[k]->y() + m_oItems[k]->boundingRect().height() / 2 - (height[k] - left_height - HSPACER) / 2;
+					acc_height = m_oItems[k]->y() + m_oItems[k]->reorgHeight() / 2 - (height[k] - left_height - HSPACER) / 2;
 				}
 			}
 		}
@@ -1220,9 +1220,9 @@ void canvas_view::pack(QMap<int, double> &width, QMap<int, double> &height, QMap
 	QMap<int, QList<int> >::iterator it = children.find(id);
 	if (it != children.end()) {
 		QList<int> &tmp = it.value();
-		double acc_height = m_oItems[id]->y() + m_oItems[id]->boundingRect().height() / 2 - height[id] / 2;
+		double acc_height = m_oItems[id]->y() + m_oItems[id]->reorgHeight() / 2 - height[id] / 2;
 		foreach (int sub, tmp) {
-			double y = acc_height + height[sub] / 2 - m_oItems[sub]->boundingRect().height()/2;
+			double y = acc_height + height[sub] / 2 - m_oItems[sub]->reorgHeight()/2;
 			if (left) {
 				double x = m_oItems[id]->x() + m_oItems[id]->boundingRect().width() - width[0] - WSPACER;
 				m_oItems[sub]->setPos(x - m_oItems[sub]->boundingRect().width(), y);

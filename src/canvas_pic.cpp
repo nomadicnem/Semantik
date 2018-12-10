@@ -38,6 +38,7 @@ canvas_pic::canvas_pic(canvas_view *i_oGraphWidget, int i_iId) : QGraphicsRectIt
 	setFlags(QGraphicsItem::ItemStacksBehindParent);
 	setVisible(false);
 	i_oGraphWidget->scene()->addItem(this);
+	m_iOffset = pad;
 }
 
 canvas_pic::~canvas_pic()
@@ -64,6 +65,7 @@ void canvas_pic::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opt
 			l_o.setWidth(l_o.width() * (1. * l_oPixRect.width() / l_oPixRect.height()));
 		}
 		i_oPainter->drawPixmap(l_o, l_oPix, l_oPixRect);
+		m_iOffset = l_o.height() + pad;
 	}
 	else if (l_oData.m_iDataType == VIEW_DIAG)
 	{
@@ -71,7 +73,8 @@ void canvas_pic::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opt
 		{
 			m_oBoxView = new box_view(m_oGraph, m_oGraph->m_oMediator);
 		}
-		m_oBoxView->drawThumb(i_oPainter, l_o, m_iId);
+		QRectF l_oDrawn = m_oBoxView->drawThumb(i_oPainter, l_o, m_iId);
+		m_iOffset = l_oDrawn.height() + pad;
 	}
 }
 

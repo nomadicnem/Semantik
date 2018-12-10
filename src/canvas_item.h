@@ -83,6 +83,8 @@ class canvas_item: public QGraphicsTextItem
 		inline qreal const x2() {return x() + boundingRect().width();}
 		inline qreal const y2() {return y() + boundingRect().height();}
 
+		qreal reorgHeight();
+
 		canvas_view *m_oGraph;
 		canvas_item *m_oParent;
 		canvas_sort *m_oSort;

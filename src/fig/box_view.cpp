@@ -1926,7 +1926,7 @@ bool box_view::slot_save() {
 	return false;
 }
 
-void box_view::drawThumb(QPainter* i_oPainter, QRectF& i_oRect, int i_iId)
+QRectF box_view::drawThumb(QPainter* i_oPainter, QRectF& i_oRect, int i_iId)
 {
 	clear_diagram();
 
@@ -1945,7 +1945,7 @@ void box_view::drawThumb(QPainter* i_oPainter, QRectF& i_oRect, int i_iId)
 	}
 	else
 	{
-		return;
+		return QRectF();
 	}
 
 	QRectF l_oRect = scene()->itemsBoundingRect();
@@ -1977,6 +1977,7 @@ void box_view::drawThumb(QPainter* i_oPainter, QRectF& i_oRect, int i_iId)
 	i_oPainter->restore();
 
 	scene()->render(i_oPainter, i_oRect, l_oRect, Qt::KeepAspectRatio);
+	return l_oDrawRect;
 }
 
 

@@ -343,3 +343,17 @@ void canvas_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	painter->restore();
 }
 
+
+qreal canvas_item::reorgHeight()
+{
+	data_item& l_oItem = m_oGraph->m_oMediator->m_oItems[Id()];
+	if (l_oItem.m_iDataType == VIEW_IMG || l_oItem.m_iDataType == VIEW_DIAG)
+	{
+		return boundingRect().height() + m_oPic->m_iOffset;
+	}
+	else
+	{
+		return boundingRect().height();
+	}
+}
+

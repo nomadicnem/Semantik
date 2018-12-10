@@ -38,6 +38,7 @@ class canvas_pic: public QGraphicsRectItem
 		QPixmap m_oPixmap;
 		box_view *m_oBoxView;
 		int m_iId;
+		int m_iOffset;
 
 
 
