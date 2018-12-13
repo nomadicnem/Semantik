@@ -15,7 +15,7 @@ Suse: zypper install python3-devel kio-devel kiconthemes-devel ki18n-devel kdeli
         libqt5-qtwebengine-devel python3-Pygments
 Fedora 27: dnf install python3-devel kf5-kio-devel kf5-kdelibs4support-devel kf5-ki18n-devel kf5-kiconthemes-devel
         gcc-c++ qt5-linguist qt5-qtsvg-devel qt5-qtwebengine-devel python3-pygments
-FreeBSD 11: pkg add qt5-svg python36 qt5-webengine kf5-kio kf5-kdelibs4support kf5-ki18n kf5-kiconthemes py36-pygments
+FreeBSD 12: pkg install qt5-svg python36 qt5-webengine kf5-kio kf5-kdelibs4support kf5-ki18n kf5-kiconthemes py36-pygments
 
 To build the project, run:
   ./waf configure build
