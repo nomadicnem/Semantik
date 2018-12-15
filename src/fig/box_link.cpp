@@ -19,6 +19,8 @@
 #define pad 25
 #define MAX 2000000000
 #define DAMP 1000000
+#define RADIUS 3
+
 
 box_link::box_link(box_view* i_oParent) : QGraphicsRectItem(), editable()
 {
@@ -140,11 +142,26 @@ void compute_angles(bool i_bParent, data_link::LineType i_iType, data_link::Dire
 
 void box_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *option, QWidget * i_oW)
 {
+	QList<QGraphicsItem*> l_oColliding = collidingItems();
+	QList<box_link*> l_oLinks;
+	foreach (QGraphicsItem* l_oItem, l_oColliding)
+	{
+		box_link *l_oLink = dynamic_cast<box_link*>(l_oItem);
+		if (l_oLink != NULL)
+		{
+			if (this > l_oLink)
+			{
+				l_oLinks.push_back(l_oLink);
+			}
+		}
+	}
+
 	i_oPainter->setBrush(m_oInnerLink.getColor(m_oView->m_oMediator));
 
 	QPen l_oPen(m_oInnerLink.pen_style);
 	l_oPen.setWidthF(0.01 + m_oInnerLink.border_width);
 	l_oPen.setColor(m_oInnerLink.getColor(m_oView->m_oMediator));
+	l_oPen.setJoinStyle(Qt::RoundJoin);
 	l_oPen.setCosmetic(false);
 	i_oPainter->setPen(l_oPen);
 
@@ -159,7 +176,96 @@ void box_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *optio
 		for (int i=0; i<m_oGood.size() - 1; ++i)
 		{
 			QLineF l_oLine(m_oGood[i].x(), m_oGood[i].y(), m_oGood[i+1].x(), m_oGood[i+1].y());
-			i_oPainter->drawLine(l_oLine);
+			if (l_oLinks.size() > 0 && l_oLine.length() > 10)
+			{
+				QList<int> l_oSub;
+				bool l_bIsVertical = m_oGood[i].x() == m_oGood[i+1].x();
+				int l_iYMin = qMin(m_oGood[i].y(), m_oGood[i + 1].y());
+				int l_iYMax = qMax(m_oGood[i].y(), m_oGood[i + 1].y());
+				int l_iXMin = qMin(m_oGood[i].x(), m_oGood[i + 1].x());
+				int l_iXMax = qMax(m_oGood[i].x(), m_oGood[i + 1].x());
+
+				foreach (box_link *l_oLink, l_oLinks)
+				{
+					for (int j=0; j<l_oLink->m_oGood.size() - 1; ++j)
+					{
+						if (l_bIsVertical)
+						{
+							int l_iXMin2 = qMin(l_oLink->m_oGood[j].x(), l_oLink->m_oGood[j + 1].x());
+							int l_iXMax2 = qMax(l_oLink->m_oGood[j].x(), l_oLink->m_oGood[j + 1].x());
+
+							if (l_oLink->m_oGood[j].y() == l_oLink->m_oGood[j + 1].y()
+								&& l_oLink->m_oGood[j].y() > l_iYMin
+								&& l_oLink->m_oGood[j].y() < l_iYMax
+								&& l_iXMin2 < l_iXMin
+								&& l_iXMax2 > l_iXMin)
+							{
+								l_oSub.append(l_oLink->m_oGood[j].y());
+							}
+						}
+						else
+						{
+							int l_iYMin2 = qMin(l_oLink->m_oGood[j].y(), l_oLink->m_oGood[j + 1].y());
+							int l_iYMax2 = qMax(l_oLink->m_oGood[j].y(), l_oLink->m_oGood[j + 1].y());
+
+							if (l_oLink->m_oGood[j].x() == l_oLink->m_oGood[j + 1].x()
+								&& l_oLink->m_oGood[j].x() > l_iXMin
+								&& l_oLink->m_oGood[j].x() < l_iXMax
+								&& l_iYMin2 < l_iYMin
+								&& l_iYMax2 > l_iYMax)
+							{
+								l_oSub.append(l_oLink->m_oGood[j].x());
+							}
+						}
+					}
+				}
+				if (l_oSub.size() > 0)
+				{
+					int l_iX = m_oGood[i].x();
+					int l_iY = m_oGood[i].y();
+					if (l_bIsVertical)
+					{
+						l_oSub.append(l_iYMin - RADIUS);
+						l_oSub.append(l_iYMax + RADIUS);
+					}
+					else
+					{
+						l_oSub.append(l_iXMin - RADIUS);
+						l_oSub.append(l_iXMax + RADIUS);
+					}
+					std::sort(l_oSub.begin(), l_oSub.end());
+					for (int k = 0; k < l_oSub.size() - 1; ++k)
+					{
+						int l_i1 = l_oSub.at(k) + RADIUS;
+						int l_i2 = l_oSub.at(k + 1) - RADIUS;
+
+						if (l_bIsVertical)
+						{
+							i_oPainter->drawLine(l_iX, l_i1, l_iX, l_i2);
+							if (k > 0)
+							{
+								i_oPainter->drawArc(l_iX - RADIUS, l_i1 - 2 * RADIUS, 2 * RADIUS, 2 * RADIUS, 90*16, 180*16);
+							}
+						}
+						else
+						{
+							i_oPainter->drawLine(l_i1, l_iY, l_i2, l_iY);
+							if (k > 0)
+							{
+								i_oPainter->drawArc(l_i1 - 2 * RADIUS, l_iY - RADIUS, 2 * RADIUS, 2 * RADIUS, 0, 180*16);
+							}
+						}
+					}
+				}
+				else
+				{
+					i_oPainter->drawLine(l_oLine);
+				}
+			}
+			else
+			{
+				i_oPainter->drawLine(l_oLine);
+			}
 		}
 	}
 
