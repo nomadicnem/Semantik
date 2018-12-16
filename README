@@ -1,7 +1,7 @@
-Semantik 1.0.9, Thomas Nagy tnagy at waf.io
-Project page:  https://waf.io/semantik.html
-Source code:   https://gitlab.com/ita1024/semantik
------------------------------------------------
+Semantik 1.1.0: Thomas Nagy tnagy at waf.io
+Project page:   https://waf.io/semantik.html
+Source code:    https://gitlab.com/ita1024/semantik
+---------------------------------------------------
 
 1. Compilation and installation:
 
@@ -10,7 +10,6 @@ Here are dependency examples for typical setups:
 
 Ubuntu 17.10: apt install libkf5kdelibs4support-dev libqt5svg5-dev qtwebengine5-dev
         qtpositioning5-dev python3-dev kio-dev python3-pygments
-Gentoo: emerge --ask kde-frameworks/kdelibs4support dev-qt/qtwebengine pygments
 Suse: zypper install python3-devel kio-devel kiconthemes-devel ki18n-devel kdelibs4support-devel
         libqt5-qtwebengine-devel python3-Pygments
 Fedora 27: dnf install python3-devel kf5-kio-devel kf5-kdelibs4support-devel kf5-ki18n-devel kf5-kiconthemes-devel
@@ -33,13 +32,14 @@ Sometimes additional installation options may be necessary:
 The generic command for creating a package is the following (packagers):
   ./waf configure clean build --prefix=/usr && DESTDIR=$fakeroot ./waf install
 
------------------------------------------------
+---------------------------------------------------
 
 2. Getting started:
 
 Consult the tips in the help menu!
 
------------------------------------------------
+---------------------------------------------------
+
 
 3. Document generators and pictures:
 
@@ -62,13 +62,14 @@ Maps picture can be exported from the command-line (png or pdf):
 Diagrams can be exported in a similar fashion:
   semantik-d diag.semd -o foo.pdf
 
------------------------------------------------
+---------------------------------------------------
 
 4. License:
 
 GPL V3
 
------------------------------------------------
+---------------------------------------------------
+
 
 5. Quirks:
 
@@ -82,5 +83,6 @@ Exported SVG document may render improperly if the fonts are not installed
 on the system; newer Semantik documents set "Monospace" as default
 font for this reason.
 
------------------------------------------------
+---------------------------------------------------
+
 
