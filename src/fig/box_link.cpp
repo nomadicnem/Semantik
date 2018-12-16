@@ -147,7 +147,7 @@ void box_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *optio
 	foreach (QGraphicsItem* l_oItem, l_oColliding)
 	{
 		box_link *l_oLink = dynamic_cast<box_link*>(l_oItem);
-		if (l_oLink != NULL)
+		if (l_oLink != NULL && !l_oLink->m_oInnerLink.m_iLineType)
 		{
 			if (m_oInnerLink.m_iId > l_oLink->m_oInnerLink.m_iId)
 			{
