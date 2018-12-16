@@ -205,6 +205,7 @@ class sem_mediator: public QObject
 
 		int next_seq();
 		int next_pic_seq();
+		int next_box_link_seq(int);
 
 		QPair<int, int> hint_size_diagram(int);
 

@@ -58,6 +58,7 @@ class data_link : public diagram_item
 	QString m_sParentCaption;
 	QString m_sChildCaption;
 
+	int m_iId;
 	int m_iParent;
 	int m_iChild;
 	int m_iParentPos;

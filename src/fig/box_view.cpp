@@ -1605,7 +1605,7 @@ void box_view::mousePressEvent(QMouseEvent *i_oEv)
 		m_oCurrent->m_oInnerLink.m_iChild = NO_ITEM;
 		m_oCurrent->m_oInnerLink.m_iChildPos = data_link::NORTH;
 		m_oCurrent->m_oInnerLink.m_oStartPoint = m_oCurrent->m_oInnerLink.m_oEndPoint = p;
-
+		m_oCurrent->m_oInnerLink.m_iId = m_oMediator->next_box_link_seq(m_iId);
 		m_oCurrent->m_oInnerLink.m_iLeftArrow = m_oMediator->m_oLinkState.m_iLeftArrow;
 		m_oCurrent->m_oInnerLink.m_iRightArrow = m_oMediator->m_oLinkState.m_iRightArrow;
 		m_oCurrent->m_oInnerLink.m_iLineType = m_oMediator->m_oLinkState.m_iLineType;

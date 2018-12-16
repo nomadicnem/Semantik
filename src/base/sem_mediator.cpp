@@ -153,6 +153,15 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		cur_link->m_sCaption = i_oAttrs.value(notr("caption"));
 		cur_link->m_sParentCaption = i_oAttrs.value(notr("parent_caption"));
 		cur_link->m_sChildCaption = i_oAttrs.value(notr("child_caption"));;
+		if (i_oAttrs.index("id") > 0)
+		{
+			cur_link->m_iId = i_oAttrs.value(notr("id")).toInt();
+		}
+		else
+		{
+			// 1.1.0
+			cur_link->m_iId = m_oMediator->next_box_link_seq(m_iId);
+		}
 	}
 	else if (i_sName == notr("linkbox_offset")) {
 		Q_ASSERT(cur_link);
@@ -594,30 +603,32 @@ QString sem_mediator::doc_to_xml()
 
 		foreach (data_link *link, l_oItem.m_oLinks)
 		{
-			l_oS<<notr("<linkbox parent=\"%1\" parentpos=\"%2\" child=\"%3\" childpos=\"%4\" color=\"%5\" border_width=\"%6\" %7 %8>\n").arg(
+			l_oS<<notr("<linkbox parent=\"%1\" parentpos=\"%2\" child=\"%3\" childpos=\"%4\" color=\"%5\" border_width=\"%6\"").arg(
 				QString::number(link->m_iParent),
 				QString::number(link->m_iParentPos),
 				QString::number(link->m_iChild),
 				QString::number(link->m_iChildPos),
 				link->m_oCustom.m_oInnerColor.name(),
-				QString::number(link->border_width),
-				QString("\n  pen_style=\"%1\" startx=\"%2\" starty=\"%3\" endx=\"%4\" endy=\"%5\" leftarrow=\"%6\" color_id=\"%7\"").arg(
-					QString::number(link->pen_style),
-					QString::number(link->m_oStartPoint.x()),
-					QString::number(link->m_oStartPoint.y()),
-					QString::number(link->m_oEndPoint.x()),
-					QString::number(link->m_oEndPoint.y()),
-					QString::number(link->m_iLeftArrow),
-					QString::number(link->m_iColor)
-				),
-				QString("\n  rightarrow=\"%1\" line_type=\"%2\" child_caption=\"%3\" parent_caption=\"%4\" caption=\"%5\"").arg(
-					QString::number(link->m_iRightArrow),
-					QString::number(link->m_iLineType),
-					bind_node::protectXML(link->m_sChildCaption),
-					bind_node::protectXML(link->m_sParentCaption),
-					bind_node::protectXML(link->m_sCaption)
-				)
+				QString::number(link->border_width)
 			);
+			l_oS<<notr("\n  pen_style=\"%1\" startx=\"%2\" starty=\"%3\" endx=\"%4\" endy=\"%5\" leftarrow=\"%6\" color_id=\"%7\"").arg(
+				QString::number(link->pen_style),
+				QString::number(link->m_oStartPoint.x()),
+				QString::number(link->m_oStartPoint.y()),
+				QString::number(link->m_oEndPoint.x()),
+				QString::number(link->m_oEndPoint.y()),
+				QString::number(link->m_iLeftArrow),
+				QString::number(link->m_iColor)
+			);
+			l_oS<<notr("\n  rightarrow=\"%1\" line_type=\"%2\" child_caption=\"%3\" parent_caption=\"%4\" caption=\"%5\" id=\"%6\"").arg(
+				QString::number(link->m_iRightArrow),
+				QString::number(link->m_iLineType),
+				bind_node::protectXML(link->m_sChildCaption),
+				bind_node::protectXML(link->m_sParentCaption),
+				bind_node::protectXML(link->m_sCaption),
+				QString::number(link->m_iId)
+			);
+			l_oS << ">\n";
 			foreach (QPoint p, link->m_oOffsets) {
 				l_oS<<notr("    <linkbox_offset x=\"%1\" y=\"%2\"/>\n").arg(QString::number(p.x()), QString::number(p.y()));
 			}
@@ -1116,6 +1127,20 @@ int sem_mediator::next_pic_seq()
 	} while (m_oPixCache.contains(pic_seq));
 	return pic_seq;
 }
+
+int sem_mediator::next_box_link_seq(int i_oId)
+{
+	Q_ASSERT(m_oItems.contains(i_oId));
+	data_item& l_oItem = m_oItems[i_oId];
+	int l_oMin = 0;
+	foreach (data_link *l_oLink, l_oItem.m_oLinks)
+	{
+		l_oMin = qMax(l_oLink->m_iId, l_oMin);
+	}
+	l_oMin += 1;
+	return l_oMin;
+}
+
 
 void sem_mediator::set_dirty(bool b)
 {

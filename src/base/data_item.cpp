@@ -376,6 +376,7 @@ data_link::data_link() : diagram_item()
 
 void data_link::copy_from(const data_link& i_oLink)
 {
+	m_iId         = i_oLink.m_iId;
 	m_sLink       = i_oLink.m_sLink;
 	m_sCaption    = i_oLink.m_sCaption;
 	m_iParent     = i_oLink.m_iParent;
