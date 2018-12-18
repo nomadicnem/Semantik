@@ -8,9 +8,11 @@
 #in\
 clude "con.h"
 
+#include <QStyledItemDelegate>
 #include <QAction>
 #include <QList>
 
+class QEvent;
 class sem_mediator;
 
 class numbered_action : public QAction
@@ -48,6 +50,17 @@ class table_view : public QTableWidget
 		void cell_changed(int i_iRow, int i_iCol);
 		void notify_select(const QList<int>& unsel, const QList<int>& sel);
 		void notify_table(int id);
+};
+
+class table_view_filter : public QStyledItemDelegate
+{
+	Q_OBJECT
+	public:
+		table_view* m_oParent;
+		table_view_filter(QWidget*);
+		QWidget* createEditor(QWidget*, const QStyleOptionViewItem&, const QModelIndex&) const;
+		void setEditorData(QWidget*, const QModelIndex &) const;
+		void setModelData(QWidget*, QAbstractItemModel*, const QModelIndex&) const;
 };
 
 #endif

@@ -99,10 +99,11 @@ def print_figure_slides(node, niv):
 				for i in range(rows):
 					out('\t<tr>\n')
 					for j in range(cols):
+						cell = xml(node.get_cell(i, j)).replace('\n', '<br/>')
 						if i>0 and j>0:
-							out('\t\t<td>%s</td>\n' % xml(node.get_cell(i, j)))
+							out('\t\t<td>%s</td>\n' % cell)
 						else:
-							out('\t\t<th>%s</th>\n' % xml(node.get_cell(i, j)))
+							out('\t\t<th>%s</th>\n' % cell)
 					out('\t</tr>\n')
 
 				out('</tbody>\n')

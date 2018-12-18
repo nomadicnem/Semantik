@@ -27,7 +27,7 @@ out = buf.append
 def p(s):
 	return sembind.protectHTML(s)
 
-def x(s):
+def xml(s):
 	return sembind.protectXML(s)
 
 def print_nodes(node, niv, lbl_lst):
@@ -65,15 +65,16 @@ def print_nodes(node, niv, lbl_lst):
 
 			out('\n')
 			out('<table class="sem_table">\n')
-			out('<caption>%s</caption>\n' % x(caption))
+			out('<caption>%s</caption>\n' % xml(caption))
 			out('<tbody>\n')
 			for i in range(rows):
 				out('\t<tr>\n')
 				for j in range(cols):
+					cell = xml(node.get_cell(i, j)).replace('\n', '<br/>')
 					if i>0 and j>0:
-						out('\t\t<td>%s</td>\n' % x(node.get_cell(i, j)))
+						out('\t\t<td>%s</td>\n' % cell)
 					else:
-						out('\t\t<th>%s</th>\n' % x(node.get_cell(i, j)))
+						out('\t\t<th>%s</th>\n' % cell)
 				out('\t</tr>\n')
 
 			out('</tbody>\n')
@@ -88,7 +89,7 @@ def print_nodes(node, niv, lbl_lst):
 
 			style = node.get_var('picstyle')
 			out('<img src=\"%s\" alt=\"%s\" title=\"%s\" %s class=\"imgcenter\">\n'
-				% (the_pic, x(caption), x(caption), style))
+				% (the_pic, xml(caption), xml(caption), style))
 
 	num = node.child_count()
 	for i in range(num):

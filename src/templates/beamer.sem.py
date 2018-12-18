@@ -153,10 +153,11 @@ def print_figure_slides(node):
 				out(' \\hline\n')
 				for i in range(rows):
 					for j in range(cols):
+						cell = tex_convert(node.get_cell(i, j)).replace('\n', ' ')
 						if i == 0 or j == 0:
-							out('\\textbf{%s}' % tex_convert(node.get_cell(i, j)))
+							out('\\textbf{%s}' % cell)
 						else:
-							out('%s' % tex_convert(node.get_cell(i, j)))
+							out('%s' % cell)
 						if j < cols - 1: out(" & ")
 					out(' \\\\ \\hline\n')
 				out('\\end{tabular}\n')

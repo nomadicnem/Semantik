@@ -6,6 +6,8 @@
 #include <QMouseEvent>
 #include <QSpinBox>
 #include<QCoreApplication>
+#include<QEvent>
+#include <QPlainTextEdit>
 
 #include "con.h"
 #include "table_dialog.h"
@@ -14,7 +16,8 @@
 #include "table_view.h"
 #include "mem_command.h"
 
-numbered_action::numbered_action(QString x, QWidget *y) : QAction(x, y) {
+numbered_action::numbered_action(QString x, QWidget *y) : QAction(x, y)
+{
 
 }
 
@@ -55,6 +58,8 @@ table_view::table_view(QWidget *i_oParent, sem_mediator *i_oControl) : QTableWid
         l_oPalette.setBrush(QPalette::Disabled, QPalette::Base, QColor(230, 230, 230));
 	setPalette(l_oPalette);
 
+	table_view_filter* l_oFilter = new table_view_filter(this);
+	setItemDelegate(l_oFilter);
 	connect(this, SIGNAL(cellChanged(int, int)), this, SLOT(cell_changed(int, int)));
 }
 
@@ -87,6 +92,7 @@ void table_view::mousePressEvent(QMouseEvent *i_oEv)
 	else
 	{
 		QTableWidget::mousePressEvent(i_oEv);
+		resizeRowsToContents();
 	}
 }
 
@@ -273,6 +279,7 @@ void table_view::notify_table(int id)
 		}
 		it->setText(l_oData.m_oTableData[t]);
 	}
+	resizeRowsToContents();
 	repaint();
 	m_bFreeze = false;
 }
@@ -304,7 +311,33 @@ void table_view::notify_select(const QList<int>& unsel, const QList<int>& sel)
 		setRowCount(0);
 		setColumnCount(0);
 	}
+	resizeRowsToContents();
 	repaint();
 	m_bFreeze = false;
+}
+
+table_view_filter::table_view_filter(QWidget* i_oParent): QStyledItemDelegate(i_oParent)
+{
+	m_oParent = dynamic_cast<table_view*>(i_oParent);
+}
+
+QWidget* table_view_filter::createEditor(QWidget *i_oParent, const QStyleOptionViewItem&, const QModelIndex&) const
+{
+	QPlainTextEdit *l_oEditor = new QPlainTextEdit(i_oParent);
+	l_oEditor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	l_oEditor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	return l_oEditor;
+}
+
+void table_view_filter::setEditorData(QWidget *i_oEditor, const QModelIndex& i_oModelIndex) const
+{
+	QPlainTextEdit *l_oEditor = dynamic_cast<QPlainTextEdit *>(i_oEditor);
+	l_oEditor->setPlainText(i_oModelIndex.data().toString());
+}
+
+void table_view_filter::setModelData(QWidget *i_oEditor, QAbstractItemModel* i_oModel, const QModelIndex& i_oIndex) const
+{
+	QPlainTextEdit* l_oEditor = dynamic_cast<QPlainTextEdit *>(i_oEditor);
+	i_oModel->setData(i_oIndex, l_oEditor->toPlainText());
 }
 
