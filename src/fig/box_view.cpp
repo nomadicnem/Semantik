@@ -544,10 +544,6 @@ void box_view::notify_export_item(int id)
 	sync_view();
 
 	QRectF l_oRect = scene()->itemsBoundingRect();
-	foreach (QGraphicsItem*it, scene()->items())
-	{
-		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
-	}
 
 	l_oRect = l_oRect.adjusted(-15, -15, 15, 15);
 
@@ -583,7 +579,9 @@ void box_view::notify_export_item(int id)
 	if (l_oP.begin(&l_oImage))
 	{
 		l_oP.setRenderHints(QPainter::Antialiasing);
+		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oP, l_oR, l_oRect, rat);
+		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 		l_oP.end();
 	}
 	l_oImage.save(notr("%1/%2/diag-%3.png").arg(m_oMediator->m_sOutDir, m_oMediator->m_sOutProject, QString::number(m_iId)));
@@ -600,7 +598,9 @@ void box_view::notify_export_item(int id)
 	if (l_oPdf.begin(&l_oPrinter))
 	{
 		m_bDisableGradient = true;
+		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oPdf, l_oR, l_oRect, rat);
+		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 		l_oPdf.end();
 		m_bDisableGradient = false;
 	}
@@ -618,7 +618,9 @@ void box_view::notify_export_item(int id)
 	if (l_oSvg.begin(&l_oGenerator))
 	{
 		l_oSvg.setRenderHints(QPainter::Antialiasing);
+		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oSvg, l_oR, l_oRect, rat);
+		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 		l_oSvg.end();
 	}
 
@@ -1956,10 +1958,6 @@ QRectF box_view::drawThumb(QPainter* i_oPainter, QRectF& i_oRect, int i_iId)
 	}
 
 	QRectF l_oRect = scene()->itemsBoundingRect();
-	foreach (QGraphicsItem*it, scene()->items())
-	{
-		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
-	}
 
 	l_oRect = l_oRect.adjusted(-15, -15, 15, 15);
 	QRectF l_oR(0, 0, l_oRect.width(), l_oRect.height());
@@ -1983,7 +1981,9 @@ QRectF box_view::drawThumb(QPainter* i_oPainter, QRectF& i_oRect, int i_iId)
 	i_oPainter->drawRect(l_oDrawRect);
 	i_oPainter->restore();
 
+	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 	scene()->render(i_oPainter, i_oRect, l_oRect, Qt::KeepAspectRatio);
+	scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 	return l_oDrawRect;
 }
 
@@ -1992,10 +1992,6 @@ int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 {
 	QString url = i_oUrl.path();
 	QRectF l_oRect = scene()->itemsBoundingRect();
-	foreach (QGraphicsItem*it, scene()->items())
-	{
-		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
-	}
 
 	l_oRect = l_oRect.adjusted(-15, -15, 15, 15);
 
@@ -2024,7 +2020,9 @@ int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 		QPainter l_oP;
 		l_oP.begin(&l_oImage);
 		l_oP.setRenderHints(QPainter::Antialiasing);
+		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oP, l_oR, l_oRect, rat);
+		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 		l_oP.end();
 
 		l_oImage.save(url);
@@ -2048,7 +2046,9 @@ int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 		if (l_oPdf.begin(&l_oPrinter))
 		{
 			m_bDisableGradient = true;
+			scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 			scene()->render(&l_oPdf, l_oR, l_oRect, rat);
+			scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 			l_oPdf.end();
 			m_bDisableGradient = false;
 		}
@@ -2066,7 +2066,9 @@ int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 		QPainter l_oP;
 		l_oP.begin(&l_oGenerator);
 		l_oP.setRenderHints(QPainter::Antialiasing);
+		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oP, l_oR, l_oRect, rat);
+		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 		l_oP.end();
 	} else {
 		return 12;
@@ -2105,7 +2107,9 @@ void box_view::slot_print()
 	if (l_oPdf.begin(l_oP))
 	{
 		m_bDisableGradient = true;
+		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oPdf, QRectF(), l_oRect, Qt::KeepAspectRatio);
+		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 		l_oPdf.end();
 		m_bDisableGradient = false;
 		emit sig_message(i18n("Printing completed"), 5000);
@@ -2119,11 +2123,6 @@ void box_view::slot_print()
 void box_view::slot_copy_picture()
 {
 	QRectF l_oRect = scene()->itemsBoundingRect();
-	foreach (QGraphicsItem*it, scene()->items())
-	{
-		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
-	}
-
 	l_oRect = l_oRect.adjusted(-15, -15, 15, 15);
 
 	QRectF l_oR(0, 0, l_oRect.width(), l_oRect.height());
@@ -2135,7 +2134,9 @@ void box_view::slot_copy_picture()
 	QPainter l_oP;
 	l_oP.begin(&l_oImage);
 	l_oP.setRenderHints(QPainter::Antialiasing);
+	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 	scene()->render(&l_oP, l_oR, l_oRect, rat);
+	scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
 	l_oP.end();
 
 	//QApplication::clipboard()->setMimeType("application/x-png");
