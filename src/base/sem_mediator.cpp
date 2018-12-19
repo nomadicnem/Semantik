@@ -648,13 +648,13 @@ QString sem_mediator::doc_to_xml()
 
 	foreach (const data_ref& l_oRef, m_oRefs)
 	{
-		l_oS<<notr("<ref p=\"%1\" v=\"%2\"/>\n").arg(l_oRef.m_iParent, l_oRef.m_iChild);
+		l_oS<<notr("<ref p=\"%1\" v=\"%2\"/>\n").arg(QString::number(l_oRef.m_iParent), QString::number(l_oRef.m_iChild));
 	}
 
 	for (int i=0; i<m_oLinks.size(); i++)
 	{
 		QPoint l_oP = m_oLinks.at(i);
-		l_oS<<notr("<link p=\"%1\" v=\"%2\"/>\n").arg(l_oP.x(), l_oP.y());
+		l_oS<<notr("<link p=\"%1\" v=\"%2\"/>\n").arg(QString::number(l_oP.x()), QString::number(l_oP.y()));
 	}
 
 	l_oS<<notr("</semantik>\n");
