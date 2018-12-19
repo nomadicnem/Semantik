@@ -1,3 +1,8 @@
+Semantik 1.2.0
+--------------
+* Add a system of references similar to what was present in kdissert
+* Fix missing crossing lines when printing or exporting diagrams
+
 Semantik 1.1.0
 --------------
 * Improve the looks of diagram crossing lines

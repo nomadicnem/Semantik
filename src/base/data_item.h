@@ -240,5 +240,13 @@ class data_item
 		int m_iObjectHeightHint;
 };
 
+class data_ref
+{
+	public:
+		data_ref(int, int);
+		int m_iParent;
+		int m_iChild;
+};
+
 #endif
 

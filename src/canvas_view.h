@@ -46,7 +46,8 @@ class canvas_view : public QGraphicsView
 		void mousePressEvent(QMouseEvent *i_oEv);
 		void mouseMoveEvent(QMouseEvent *i_oEv);
 		void mouseReleaseEvent(QMouseEvent *i_oEv);
-
+		void keyPressEvent(QKeyEvent *);
+		void  keyReleaseEvent(QKeyEvent* );
 
 		bool m_bPressed;
 		bool m_bScroll;
@@ -132,6 +133,8 @@ class canvas_view : public QGraphicsView
 		void notify_delete_item(int id);
 		void notify_link_items(int id1, int id2);
 		void notify_unlink_items(int id1, int id2);
+		void notify_ref_items(int id1, int id2);
+		void notify_unref_items(int id1, int id2);
 		void notify_select(const QList<int>& unsel, const QList<int>& sel);
 		void notify_move(const QList<int>&sel, const QList<QPointF>&pos);
 		void notify_repaint(int id);
@@ -155,6 +158,7 @@ class rubber_line : public QRubberBand
 {
 	public:
 	int _direction;
+	QColor m_oColor;
 	rubber_line(QRubberBand::Shape, QWidget*);
 	void paintEvent(QPaintEvent *);
 	void setGeometry(const QRect& i_o);

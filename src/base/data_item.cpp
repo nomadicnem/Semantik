@@ -147,6 +147,12 @@ const color_scheme& data_item::get_color_scheme_raw(sem_mediator* i_oMediator) c
 }
 
 
+data_ref::data_ref(int i_iParent, int i_iChild)
+{
+	m_iParent = i_iParent;
+	m_iChild = i_iChild;
+}
+
 diagram_item::diagram_item()
 {
 	pen_style = Qt::SolidLine;

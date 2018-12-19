@@ -125,6 +125,14 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		if (!m_oMediator->m_oItems.contains(b)) return false;
 		m_oMediator->m_oLinks.append(QPoint(a, b));
 	}
+	else if (i_sName == notr("ref"))
+	{
+		int l_iP = i_oAttrs.value(notr("p")).toInt();
+		int l_iV = i_oAttrs.value(notr("v")).toInt();
+		if (!m_oMediator->m_oItems.contains(l_iP)) return false;
+		if (!m_oMediator->m_oItems.contains(l_iV)) return false;
+		m_oMediator->m_oRefs.append(data_ref(l_iP, l_iV));
+	}
 	else if (i_sName == notr("tblsettings"))
 	{
 		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
@@ -638,10 +646,15 @@ QString sem_mediator::doc_to_xml()
 		l_oS<<notr("</item>\n");
 	}
 
+	foreach (const data_ref& l_oRef, m_oRefs)
+	{
+		l_oS<<notr("<ref p=\"%1\" v=\"%2\"/>\n").arg(l_oRef.m_iParent, l_oRef.m_iChild);
+	}
+
 	for (int i=0; i<m_oLinks.size(); i++)
 	{
 		QPoint l_oP = m_oLinks.at(i);
-		l_oS<<notr("<link p=\"%1\" v=\"%2\"/>\n").arg(l_oP.x()).arg(l_oP.y());
+		l_oS<<notr("<link p=\"%1\" v=\"%2\"/>\n").arg(l_oP.x(), l_oP.y());
 	}
 
 	l_oS<<notr("</semantik>\n");
@@ -856,6 +869,49 @@ void sem_mediator::notify_flags()
 	emit sync_flags();
 }
 
+bool sem_mediator::ref_items(int i_iParent, int i_iChild)
+{
+	Q_ASSERT(m_oItems.contains(i_iParent) && m_oItems.contains(i_iChild));
+	if (i_iParent == i_iChild) return false;
+
+	foreach (const QPoint& l_oP, m_oLinks)
+	{
+		if (l_oP.x() == i_iChild && l_oP.y() == i_iParent)
+		{
+			emit sig_message(i18n("Cannot create a reference: a direct link already exists"), 5000);
+			return false;
+		}
+		else if (l_oP.x() == i_iParent && l_oP.y() == i_iChild)
+		{
+			emit sig_message(i18n("Cannot create a reference: a direct link already exists"), 5000);
+			return false;
+		}
+	}
+
+	foreach (const data_ref& l_oRef, m_oRefs)
+	{
+		if (l_oRef.m_iParent == i_iParent && l_oRef.m_iChild == i_iChild)
+		{
+			emit sig_message(i18n("Cannot create a reference: a reference already exists"), 5000);
+			return false;
+		}
+		else if (l_oRef.m_iChild == i_iParent && l_oRef.m_iParent == i_iChild)
+		{
+			emit sig_message(i18n("Cannot create a reference: a reference already exists"), 5000);
+			return false;
+		}
+	}
+	data_ref l_oRef(i_iParent, i_iChild);
+	m_oRefs.push_back(l_oRef);
+
+	mem_ref *l_oMem = new mem_ref(this);
+	l_oMem->m_iParent = i_iParent;
+	l_oMem->m_iChild = i_iChild;
+	l_oMem->apply();
+
+	return true;
+}
+
 bool sem_mediator::link_items(int i_iParent, int i_iChild)
 {
 	Q_ASSERT(m_oItems.contains(i_iParent) && m_oItems.contains(i_iChild));
@@ -867,7 +923,10 @@ bool sem_mediator::link_items(int i_iParent, int i_iChild)
 	{
 		QPoint l_oP = m_oLinks.at(i);
 		if (l_oP.y() == i_iChild)
+		{
+			emit sig_message(i18n("Cannot create a link: only one root is allowed (try references?)"), 5000);
 			return false;
+		}
 	}
 
 	// cycles
@@ -880,12 +939,30 @@ bool sem_mediator::link_items(int i_iParent, int i_iChild)
 			QPoint l_oP = m_oLinks.at(i);
 			if (l_oP.y() == l_iIdChild)
 			{
-				if (l_oP.x() == i_iChild) return false;
+				if (l_oP.x() == i_iChild)
+				{
+					emit sig_message(i18n("Cannot create a link: cycles are not allowed (try references?)"), 5000);
+					return false;
+				}
 				l_iNew = l_oP.x();
 				break;
 			}
 		}
 		l_iIdChild = l_iNew;
+	}
+
+	foreach (const data_ref& l_oRef, m_oRefs)
+	{
+		if (l_oRef.m_iParent == i_iParent && l_oRef.m_iChild == i_iChild)
+		{
+			emit sig_message(i18n("Cannot create a link: a reference already exists"), 5000);
+			return false;
+		}
+		else if (l_oRef.m_iChild == i_iParent && l_oRef.m_iParent == i_iChild)
+		{
+			emit sig_message(i18n("Cannot create a link: a reference already exists"), 5000);
+			return false;
+		}
 	}
 
 	mem_link *lnk = new mem_link(this);
@@ -1541,6 +1618,16 @@ void sem_mediator::notify_link_items(int id1, int id2)
 void sem_mediator::notify_unlink_items(int id1, int id2)
 {
 	emit sig_unlink_items(id1, id2);
+}
+
+void sem_mediator::notify_ref_items(int i_iId1, int i_iId2)
+{
+	emit sig_ref_items(i_iId1, i_iId2);
+}
+
+void sem_mediator::notify_unref_items(int i_iId1, int i_iId2)
+{
+	emit sig_unref_items(i_iId1, i_iId2);
 }
 
 void sem_mediator::notify_select(const QList<int>& unsel, const QList<int>& sel)

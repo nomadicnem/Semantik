@@ -53,6 +53,8 @@ class sem_mediator: public QObject
 		void sig_delete_item(int id);
 		void sig_link_items(int id1, int id2);
 		void sig_unlink_items(int id1, int id2);
+		void sig_ref_items(int id1, int id2);
+		void sig_unref_items(int id1, int id2);
 		void sync_flags();
 		void sync_colors();
 		void sync_background_color();
@@ -116,6 +118,7 @@ class sem_mediator: public QObject
 
 		QHash<int, data_item> m_oItems;
 		QList<QPoint> m_oLinks;
+		QList<data_ref> m_oRefs;
 		QList<color_scheme> m_oColorSchemes;
 		QList<flag_scheme*> m_oFlagSchemes;
 
@@ -156,6 +159,7 @@ class sem_mediator: public QObject
 		// first parameter is the parent, second parameter is the wanted id
 		// and the third parameter is for copying the parents data
 		bool link_items(int id1, int id2);
+		bool ref_items(int, int);
 
 		int num_children(int i_iParent);
 		void select_root_item(int);
@@ -167,6 +171,8 @@ class sem_mediator: public QObject
 		void notify_delete_item(int id);
 		void notify_link_items(int id1, int id2);
 		void notify_unlink_items(int id1, int id2);
+		void notify_ref_items(int, int);
+		void notify_unref_items(int, int);
 		void notify_select(const QList<int>& unsel, const QList<int>& sel);
 		void notify_move(const QList<int>&sel, const QList<QPointF>&pos);
 		void notify_repaint(int id);

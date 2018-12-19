@@ -14,6 +14,7 @@
 #include<KToolBar> 
 #include<KMessageBox>
 #include <QDialog>
+#include "canvas_ref.h"
 #include <QUrl>
 #include  <QActionGroup> 
 #include "canvas_item.h"
@@ -813,24 +814,6 @@ void canvas_view::mousePressEvent(QMouseEvent *i_oEv)
 	canvas_chain *kk=NULL;
 	if (l_oItem && (kk = dynamic_cast<canvas_chain*>(l_oItem)))
 	{
-		QList<int> lst;
-		foreach (QGraphicsItem *l_o, scene()->selectedItems())
-		{
-			l_o->setSelected(false);
-			canvas_item *it = dynamic_cast<canvas_item*>(l_o);
-			if (it)
-			{
-				lst.append(it->Id());
-			}
-		}
-
-		if (lst.size())
-		{
-			mem_sel *sel = new mem_sel(m_oMediator);
-			sel->unsel = lst;
-			sel->apply();
-		}
-
 		canvas_item *l_oParent = dynamic_cast<canvas_item*>(kk->parentItem());
 		Q_ASSERT(l_oParent);
 
@@ -884,7 +867,14 @@ void canvas_view::mouseReleaseEvent(QMouseEvent *i_oEv)
 
 		if (l_oR1 && l_oR2 && l_oR1 != l_oR2)
 		{
-			m_oMediator->link_items(l_oR1->Id(), l_oR2->Id());
+			if (i_oEv->modifiers() & Qt::ControlModifier)
+			{
+				m_oMediator->ref_items(l_oR1->Id(), l_oR2->Id());
+			}
+			else
+			{
+				m_oMediator->link_items(l_oR1->Id(), l_oR2->Id());
+			}
 			deselect_all(); // TODO
 		}
 		m_oRubberLine->hide();
@@ -994,6 +984,14 @@ void canvas_view::mouseDoubleClickEvent(QMouseEvent* i_oEv)
 			link->parent = l_oLink->m_oFrom->Id();
 			link->apply();
 		}
+		else if (l_oItem->type() == CANVAS_REF_T)
+		{
+			canvas_ref *l_oRef = (canvas_ref*) l_oItem;
+			mem_unref *l_oMem  = new mem_unref(m_oMediator);
+			l_oMem->m_iChild = l_oRef->m_oTo->Id();
+			l_oMem->m_iParent= l_oRef->m_oFrom->Id();
+			l_oMem->apply();
+		}
 	} else if (i_oEv->modifiers() != Qt::ControlModifier) {
 		mem_add *add = new mem_add(m_oMediator);
 		add->item.m_iXX = m_oLastPoint.x();
@@ -1070,12 +1068,12 @@ rubber_line::rubber_line(QRubberBand::Shape i, QWidget* j) : QRubberBand(i, j)
 {
 }
 
-void rubber_line::paintEvent(QPaintEvent *)
+void rubber_line::paintEvent(QPaintEvent *i_oEv)
 {
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
-	//painter.setPen(Qt::NoPen);
-	painter.setBrush(QColor(Qt::red));
+	painter.setPen(m_oColor);
+
 	if (_direction > 0)
 	{
 		painter.drawLine(QPoint(0, 0), QPoint(size().width(), size().height()));
@@ -1431,6 +1429,41 @@ void canvas_view::notify_delete_item(int id) {
 	check_canvas_size();
 }
 
+void canvas_view::notify_ref_items(int i_iId1, int i_iId2)
+{
+	canvas_item *l_oR1 = m_oItems.value(i_iId1);
+	canvas_item *l_oR2 = m_oItems.value(i_iId2);
+	canvas_ref* l_oRef = new canvas_ref(this, l_oR1, l_oR2);
+	l_oRef->update_pos();
+	l_oR2->update();
+}
+
+void canvas_view::notify_unref_items(int i_iId1, int i_iId2)
+{
+	canvas_item *    l_oR1 = m_oItems.value(i_iId1);
+canvas_item *l_oR2 = m_oItems.value(i_iId2);
+	foreach (QGraphicsItem *l_oItem, items())
+	{
+		if (l_oItem->type() == CANVAS_REF_T)
+		{
+			canvas_ref* l_oRef = (canvas_ref*) l_oItem;
+			if (
+				(l_oRef->m_oFrom == l_oR1 && l_oRef->m_oTo == l_oR2)
+				||
+				(l_oRef->m_oFrom == l_oR2 && l_oRef->m_oTo == l_oR1)
+			   )
+			{
+				l_oRef->hide();
+				l_oRef->rm_link();
+				delete l_oRef;
+				break;
+			}
+		}
+	}
+	l_oR1->update();
+	l_oR2->update();
+}
+
 void canvas_view::notify_link_items(int id1, int id2) {
 	canvas_item *l_oR1 = m_oItems.value(id1);
 	canvas_item *l_oR2 = m_oItems.value(id2);
@@ -1680,3 +1713,32 @@ void canvas_view::slot_background_color()
 {
 	setBackgroundBrush(m_oMediator->m_oColor);
 }
+
+void canvas_view::keyPressEvent(QKeyEvent *i_oEvent)
+{
+	m_oRubberLine->m_oColor = QColor(REF_DEFAULT_COLOR);
+	if (m_oRubberLine->isVisible())
+	{
+		m_oRubberLine->hide();
+		m_oRubberLine->show();
+	}
+	else
+	{
+		QGraphicsView::keyPressEvent(i_oEvent);
+	}
+}
+
+void canvas_view::keyReleaseEvent(QKeyEvent *i_oEvent)
+{
+	m_oRubberLine->m_oColor = QColor(Qt::black);
+	if (m_oRubberLine->isVisible())
+	{
+		m_oRubberLine->hide();
+		m_oRubberLine->show();
+	}
+	else
+	{
+		QGraphicsView::keyReleaseEvent(i_oEvent);
+	}
+}
+

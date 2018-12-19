@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-11 20:47+0100\n"
+"POT-Creation-Date: 2018-12-19 16:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base/data_item.cpp:59 canvas_view.cpp:248 canvas_view.cpp:300
-#: canvas_view.cpp:312
+#: base/data_item.cpp:59 canvas_view.cpp:249 canvas_view.cpp:301
+#: canvas_view.cpp:313
 msgid "Empty"
 msgstr ""
 
@@ -26,210 +26,230 @@ msgstr ""
 msgid "Flag item(s) as..."
 msgstr ""
 
-#: base/sem_mediator.cpp:303
+#: base/sem_mediator.cpp:320
 msgid "Automatic save failed for file: %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:306
+#: base/sem_mediator.cpp:323
 msgid "%1 saved automatically"
 msgstr ""
 
-#: base/sem_mediator.cpp:325
+#: base/sem_mediator.cpp:342
 msgid "Color %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:648
+#: base/sem_mediator.cpp:672
 msgid "File saving: missing file %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:673 base/sem_mediator.cpp:1224
-#: base/sem_mediator.cpp:1275
+#: base/sem_mediator.cpp:697 base/sem_mediator.cpp:1326
+#: base/sem_mediator.cpp:1377
 msgid "Missing bindings for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:700
+#: base/sem_mediator.cpp:724
 msgid "Missing filter file %1 for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:700 base/sem_mediator.cpp:714
-#: base/sem_mediator.cpp:720
+#: base/sem_mediator.cpp:724 base/sem_mediator.cpp:738
+#: base/sem_mediator.cpp:744
 msgid "Broken installation"
 msgstr ""
 
-#: base/sem_mediator.cpp:714
+#: base/sem_mediator.cpp:738
 msgid "Missing python bindings for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:720
+#: base/sem_mediator.cpp:744
 msgid "Python execution failure"
 msgstr ""
 
-#: base/sem_mediator.cpp:732
+#: base/sem_mediator.cpp:756
 msgid "Could not load the document %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:732 base/sem_mediator.cpp:751
-#: base/sem_mediator.cpp:768 base/sem_mediator.cpp:809
-#: base/sem_mediator.cpp:818
+#: base/sem_mediator.cpp:756 base/sem_mediator.cpp:775
+#: base/sem_mediator.cpp:792 base/sem_mediator.cpp:833
+#: base/sem_mediator.cpp:842
 msgid "Broken document"
 msgstr ""
 
-#: base/sem_mediator.cpp:751 base/sem_mediator.cpp:768
+#: base/sem_mediator.cpp:775 base/sem_mediator.cpp:792
 msgid "Could not load the picture %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:809
+#: base/sem_mediator.cpp:833
 msgid "Something is wrong with %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:818
+#: base/sem_mediator.cpp:842
 msgid "Rename the picture %1 to %2 failed"
 msgstr ""
 
-#: base/sem_mediator.cpp:1159
+#: base/sem_mediator.cpp:881 base/sem_mediator.cpp:886
+msgid "Cannot create a reference: a direct link already exists"
+msgstr ""
+
+#: base/sem_mediator.cpp:895 base/sem_mediator.cpp:900
+msgid "Cannot create a reference: a reference already exists"
+msgstr ""
+
+#: base/sem_mediator.cpp:927
+msgid "Cannot create a link: only one root is allowed (try references?)"
+msgstr ""
+
+#: base/sem_mediator.cpp:944
+msgid "Cannot create a link: cycles are not allowed (try references?)"
+msgstr ""
+
+#: base/sem_mediator.cpp:958 base/sem_mediator.cpp:963
+msgid "Cannot create a link: a reference already exists"
+msgstr ""
+
+#: base/sem_mediator.cpp:1261
 msgid "Code generation failed: no root item"
 msgstr ""
 
-#: base/sem_mediator.cpp:1166
+#: base/sem_mediator.cpp:1268
 msgid "Code generation failed: missing file %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1184
+#: base/sem_mediator.cpp:1286
 msgid "Could not rename the output folder %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1193
+#: base/sem_mediator.cpp:1295
 msgid "Could not create the output folder %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1232
+#: base/sem_mediator.cpp:1334
 msgid "Document generation failed, check the output folder"
 msgstr ""
 
-#: base/sem_mediator.cpp:1236
+#: base/sem_mediator.cpp:1338
 msgid "Document generation completed successfully"
 msgstr ""
 
-#: browser.cpp:22 canvas_view.cpp:141
+#: browser.cpp:22 canvas_view.cpp:142
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: canvas_view.cpp:90
+#: canvas_view.cpp:91
 msgid "Add an element"
 msgstr ""
 
-#: canvas_view.cpp:95 fig/box_view.cpp:204
+#: canvas_view.cpp:96 fig/box_view.cpp:204
 msgid "Delete selection"
 msgstr ""
 
-#: canvas_view.cpp:100
+#: canvas_view.cpp:101
 msgid "Insert a sibling"
 msgstr ""
 
-#: canvas_view.cpp:105
+#: canvas_view.cpp:106
 msgid "Move up"
 msgstr ""
 
-#: canvas_view.cpp:106
+#: canvas_view.cpp:107
 msgid "Move down"
 msgstr ""
 
-#: canvas_view.cpp:107
+#: canvas_view.cpp:108
 msgid "Move left"
 msgstr ""
 
-#: canvas_view.cpp:108
+#: canvas_view.cpp:109
 msgid "Move right"
 msgstr ""
 
-#: canvas_view.cpp:110
+#: canvas_view.cpp:111
 msgid "Select up"
 msgstr ""
 
-#: canvas_view.cpp:111
+#: canvas_view.cpp:112
 msgid "Select down"
 msgstr ""
 
-#: canvas_view.cpp:112
+#: canvas_view.cpp:113
 msgid "Select left"
 msgstr ""
 
-#: canvas_view.cpp:113
+#: canvas_view.cpp:114
 msgid "Select right"
 msgstr ""
 
-#: canvas_view.cpp:116
+#: canvas_view.cpp:117
 msgid "Select subtree"
 msgstr ""
 
-#: canvas_view.cpp:121
+#: canvas_view.cpp:122
 msgid "Next root"
 msgstr ""
 
-#: canvas_view.cpp:124
+#: canvas_view.cpp:125
 msgid "Toggle edit"
 msgstr ""
 
-#: canvas_view.cpp:129
+#: canvas_view.cpp:130
 msgid "Cancel edit"
 msgstr ""
 
-#: canvas_view.cpp:156 fig/box_frame_properties.cpp:39
+#: canvas_view.cpp:157 fig/box_frame_properties.cpp:39
 msgid "Text"
 msgstr ""
 
-#: canvas_view.cpp:157
+#: canvas_view.cpp:158
 msgid "Diagram"
 msgstr ""
 
-#: canvas_view.cpp:158
+#: canvas_view.cpp:159
 msgid "Table"
 msgstr ""
 
-#: canvas_view.cpp:159
+#: canvas_view.cpp:160
 msgid "Image"
 msgstr ""
 
-#: canvas_view.cpp:917
+#: canvas_view.cpp:907
 msgid "Click to set Item %1"
 msgstr ""
 
-#: canvas_view.cpp:1260 fig/box_view.cpp:2176
+#: canvas_view.cpp:1258 fig/box_view.cpp:2177
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1298 fig/box_view.cpp:2214
+#: canvas_view.cpp:1296 fig/box_view.cpp:2215
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2238
+#: canvas_view.cpp:1320 fig/box_view.cpp:2239
 msgid "Exported '%1'"
 msgstr ""
 
-#: canvas_view.cpp:1324 fig/box_view.cpp:2240
+#: canvas_view.cpp:1322 fig/box_view.cpp:2241
 msgid "Could not save to %1"
 msgstr ""
 
-#: canvas_view.cpp:1324 fig/box_view.cpp:2240
+#: canvas_view.cpp:1322 fig/box_view.cpp:2241
 msgid "Missing picture"
 msgstr ""
 
-#: canvas_view.cpp:1617
+#: canvas_view.cpp:1650
 msgid "Semantik map"
 msgstr ""
 
-#: canvas_view.cpp:1655 fig/box_view.cpp:2100
+#: canvas_view.cpp:1688 fig/box_view.cpp:2102
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1666 fig/box_view.cpp:2111
+#: canvas_view.cpp:1699 fig/box_view.cpp:2115
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1670 fig/box_view.cpp:2115
+#: canvas_view.cpp:1703 fig/box_view.cpp:2119
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -329,16 +349,14 @@ msgid ""
 "<ul>\n"
 " <li>right-click on a map item and select data type: diagram</li>\n"
 " <li>in the data view, double click to add a diagram item</li>\n"
-" <li>hold the control key pressed to drag connections between items</li>\n"
-" <li>to remove a connection, double click on it with the control key "
-"pressed</li>\n"
+" <li>to remove a connection, double click on it</li>\n"
 " <li>right click on a connection or on an item to change the colors</li>\n"
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:32
+#. i18n: file: tips:31
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:31
+#: data/tips.cpp:30
 msgid ""
 "<h3>3. Advanced features</h3>\n"
 "<ul>\n"
@@ -352,9 +370,9 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:46
+#. i18n: file: tips:45
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:44
+#: data/tips.cpp:43
 msgid ""
 "<h3>4. Data types</h3>\n"
 "<ul>\n"
@@ -366,9 +384,9 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:57
+#. i18n: file: tips:56
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:54
+#: data/tips.cpp:53
 msgid ""
 "<h3>5. Diagrams</h3>\n"
 "<ul>\n"
@@ -380,20 +398,20 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#. i18n: file: tips:68
+#. i18n: file: tips:67
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:64
+#: data/tips.cpp:63
 msgid ""
 "<h3>6. LaTeX export</h3>\n"
 "<p>\n"
-"Set <b>all_latex=1</b> in the variables view to let the beamer and pdf "
+"Set <b>all_latex=1</b> in the variables view to let the Beamer and Pdf "
 "templates use LaTeX commands.\n"
 "</p>\n"
 msgstr ""
 
-#. i18n: file: tips:76
+#. i18n: file: tips:75
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:72
+#: data/tips.cpp:71
 msgid ""
 "<h3>7. Diagram size</h3>\n"
 "<p>\n"
@@ -404,9 +422,9 @@ msgid ""
 "</p>\n"
 msgstr ""
 
-#. i18n: file: tips:87
+#. i18n: file: tips:86
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:82
+#: data/tips.cpp:81
 msgid ""
 "<h3>8. Diagram editor</h3>\n"
 "<p>\n"
@@ -418,13 +436,13 @@ msgid ""
 "if it is supported:\n"
 "<pre>semantik-d /tmp/foo.semd -o /tmp/foo.svg</pre>\n"
 "The options &quot;--width&quot; and &quot;--height&quot; can be used to "
-"change the size of png files.\n"
+"change the size of Png files.\n"
 "</p>\n"
 msgstr ""
 
-#. i18n: file: tips:99
+#. i18n: file: tips:98
 #. i18n: ectx: @info:tipoftheday
-#: data/tips.cpp:93
+#: data/tips.cpp:92
 msgid ""
 "<h3>9. Code snippets</h3>\n"
 "<p>\n"
@@ -433,6 +451,25 @@ msgid ""
 "Enable Pygments by setting adding source code in the data box and adding the "
 "variable <i>code_lang</i>\n"
 "to the variables box, for example: <pre>code_lang=java</pre>\n"
+"</p>\n"
+msgstr ""
+
+#. i18n: file: tips:108
+#. i18n: ectx: @info:tipoftheday
+#: data/tips.cpp:102
+msgid ""
+"<h3>9. Links and references</h3>\n"
+"<p>\n"
+"Links can be created by selecting an item on the map, and dragging from the "
+"\"+\" sign to another item.\n"
+"Since links reflect the structure of the document generated from the map, "
+"they can contain any cycle.\n"
+"</p>\n"
+"<p>\n"
+"Special links called references allow cycles and do not appear in the "
+"generated documents.\n"
+"They they can be inserted by holding the \"Control\" key pressed while "
+"creating a link (dragging from the + sign).\n"
 "</p>\n"
 msgstr ""
 
@@ -800,40 +837,40 @@ msgstr ""
 msgid "Semantik diagram"
 msgstr ""
 
-#: fig/box_view.cpp:1812 fig/semantik_d_win.cpp:329
+#: fig/box_view.cpp:1814 fig/semantik_d_win.cpp:329
 msgid "Choose a file to open"
 msgstr ""
 
-#: fig/box_view.cpp:1814 fig/box_view.cpp:1852 fig/semantik_d_win.cpp:331
+#: fig/box_view.cpp:1816 fig/box_view.cpp:1854 fig/semantik_d_win.cpp:331
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr ""
 
-#: fig/box_view.cpp:1850 semantik.cpp:457 semantik.cpp:549
+#: fig/box_view.cpp:1852 semantik.cpp:459 semantik.cpp:551
 msgid "Choose a file name"
 msgstr ""
 
-#: fig/box_view.cpp:1866 semantik.cpp:472
+#: fig/box_view.cpp:1868 semantik.cpp:474
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
 msgstr ""
 
-#: fig/box_view.cpp:1867 semantik.cpp:473
+#: fig/box_view.cpp:1869 semantik.cpp:475
 msgid "Overwrite existing file"
 msgstr ""
 
-#: fig/box_view.cpp:1890 fig/box_view.cpp:1925 semantik.cpp:484
-#: semantik.cpp:520
+#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:486
+#: semantik.cpp:522
 msgid "Saved '%1'"
 msgstr ""
 
-#: fig/box_view.cpp:1897 semantik.cpp:495 semantik.cpp:526
+#: fig/box_view.cpp:1899 semantik.cpp:497 semantik.cpp:528
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1898 semantik.cpp:496 semantik.cpp:527
+#: fig/box_view.cpp:1900 semantik.cpp:498 semantik.cpp:529
 msgid "Try again?"
 msgstr ""
 
@@ -885,21 +922,21 @@ msgstr ""
 msgid "[Untitled]"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:296 semantik.cpp:626
+#: fig/semantik_d_win.cpp:296 semantik.cpp:628
 msgid "Untitled"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:299 semantik.cpp:629
+#: fig/semantik_d_win.cpp:299 semantik.cpp:631
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:300 semantik.cpp:630
+#: fig/semantik_d_win.cpp:300 semantik.cpp:632
 msgid "Close Document"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:448 semantik.cpp:562
+#: fig/semantik_d_win.cpp:448 semantik.cpp:564
 msgid " [Modified] "
 msgstr ""
 
@@ -1179,63 +1216,63 @@ msgstr ""
 msgid "Flag"
 msgstr ""
 
-#: semantik.cpp:381
+#: semantik.cpp:383
 msgid "Welcome to Semantik"
 msgstr ""
 
-#: semantik.cpp:459
+#: semantik.cpp:461
 msgid "*.sem|Semantik file (*.sem)"
 msgstr ""
 
-#: semantik.cpp:551
+#: semantik.cpp:553
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 
-#: semantik.cpp:567
+#: semantik.cpp:569
 msgid "Semantik %1"
 msgstr ""
 
-#: semantik.cpp:571
+#: semantik.cpp:573
 msgid "%1 %2 - Semantik"
 msgstr ""
 
-#: table_view.cpp:26 table_view.cpp:80
+#: table_view.cpp:29 table_view.cpp:85
 msgid "Add Row"
 msgstr ""
 
-#: table_view.cpp:27
+#: table_view.cpp:30
 msgid "Add a row"
 msgstr ""
 
-#: table_view.cpp:31 table_view.cpp:81
+#: table_view.cpp:34 table_view.cpp:86
 msgid "Add Column"
 msgstr ""
 
-#: table_view.cpp:32
+#: table_view.cpp:35
 msgid "Add a column"
 msgstr ""
 
-#: table_view.cpp:37 table_view.cpp:82
+#: table_view.cpp:40 table_view.cpp:87
 msgid "Remove Row"
 msgstr ""
 
-#: table_view.cpp:38
+#: table_view.cpp:41
 msgid "Remove a row"
 msgstr ""
 
-#: table_view.cpp:42 table_view.cpp:83
+#: table_view.cpp:45 table_view.cpp:88
 msgid "Remove Column"
 msgstr ""
 
-#: table_view.cpp:43
+#: table_view.cpp:46
 msgid "Remove a column"
 msgstr ""
 
-#: table_view.cpp:47
+#: table_view.cpp:50
 msgid "Redimension"
 msgstr ""
 
-#: table_view.cpp:48
+#: table_view.cpp:51
 msgid "Change table dimensions"
 msgstr ""
 

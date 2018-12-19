@@ -21,8 +21,7 @@
 <ul>
  <li>right-click on a map item and select data type: diagram</li>
  <li>in the data view, double click to add a diagram item</li>
- <li>hold the control key pressed to drag connections between items</li>
- <li>to remove a connection, double click on it with the control key pressed</li>
+ <li>to remove a connection, double click on it</li>
  <li>right click on a connection or on an item to change the colors</li>
 </ul>
 </html>
@@ -68,7 +67,7 @@
 <html>
 <h3>6. LaTeX export</h3>
 <p>
-Set <b>all_latex=1</b> in the variables view to let the beamer and pdf templates use LaTeX commands.
+Set <b>all_latex=1</b> in the variables view to let the Beamer and Pdf templates use LaTeX commands.
 </p>
 </html>
 
@@ -90,7 +89,7 @@ The size of the diagrams exported can be tuned by specific values in the variabl
 The application called "semantik-d" can be used to create diagrams individually. The diagrams can be imported or exported from the diagram view of semantik.
 Additionally, the diagrams can be exported to a variety of formats by using the command-line. Just specify the extension, and a diagram will be produced if it is supported:
 <pre>semantik-d /tmp/foo.semd -o /tmp/foo.svg</pre>
-The options &quot;--width&quot; and &quot;--height&quot; can be used to change the size of png files.
+The options &quot;--width&quot; and &quot;--height&quot; can be used to change the size of Png files.
 </p>
 </html>
 </tip>
@@ -102,6 +101,19 @@ The options &quot;--width&quot; and &quot;--height&quot; can be used to change t
 Code snippets can be highlighted by Pygments in html, S5, Beamer, Pdflatex or html documents.
 Enable Pygments by setting adding source code in the data box and adding the variable <i>code_lang</i>
 to the variables box, for example: <pre>code_lang=java</pre>
+</p>
+</html>
+
+<tip category="semantik">
+<html>
+<h3>9. Links and references</h3>
+<p>
+Links can be created by selecting an item on the map, and dragging from the "+" sign to another item.
+Since links reflect the structure of the document generated from the map, they can contain any cycle.
+</p>
+<p>
+Special links called references allow cycles and do not appear in the generated documents.
+They they can be inserted by holding the "Control" key pressed while creating a link (dragging from the + sign).
 </p>
 </html>
 </tip>

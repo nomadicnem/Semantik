@@ -18,6 +18,7 @@
 #define BOX_ITEM_T gratype(12305)
 #define BOX_LINK_T gratype(12306)
 #define CANVAS_CHAIN_T gratype(12307)
+#define CANVAS_REF_T gratype(12309)
 
 #define hash_params QHash<int, QVariant>
 
@@ -29,6 +30,7 @@
 #define data_commande 5
 #define data_type 6 // change the view stuff
 
+#define REF_DEFAULT_COLOR "#e0e0e0"
 
 #define VIEW_CANVAS 1
 #define VIEW_LINEAR 2
