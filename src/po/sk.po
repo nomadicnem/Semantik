@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semantik 0.7.3\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-20 11:42+0100\n"
+"POT-Creation-Date: 2018-12-20 15:35+0100\n"
 "PO-Revision-Date: 2010-01-26 18:08+0100\n"
 "Last-Translator: Slavko\n"
 "Language-Team: Slovenský <nomail>\n"
@@ -1288,7 +1288,7 @@ msgstr "Ukážka"
 msgid "Linear view"
 msgstr "Lineárne zobrazenie"
 
-#: semantik.cpp:285
+#: semantik.cpp:285 semantik.cpp:741
 msgid "Flag"
 msgstr "Značka"
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-20 11:42+0100\n"
+"POT-Creation-Date: 2018-12-20 15:35+0100\n"
 "PO-Revision-Date: 2012-10-21 19:45+0200\n"
 "Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -1281,7 +1281,7 @@ msgstr "Náhled"
 msgid "Linear view"
 msgstr "Přímočarý pohled"
 
-#: semantik.cpp:285
+#: semantik.cpp:285 semantik.cpp:741
 msgid "Flag"
 msgstr "Příznak"
 

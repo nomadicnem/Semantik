@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semantik\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-20 11:42+0100\n"
+"POT-Creation-Date: 2018-12-20 15:35+0100\n"
 "PO-Revision-Date: 2015-11-28 15:00+0100\n"
 "Last-Translator: St. Briest\n"
 "Language-Team:\n"
@@ -1256,7 +1256,7 @@ msgstr "Vorschau"
 msgid "Linear view"
 msgstr "Struktur-Ansicht"
 
-#: semantik.cpp:285
+#: semantik.cpp:285 semantik.cpp:741
 msgid "Flag"
 msgstr "Kennzeichnung"
 

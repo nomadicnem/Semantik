@@ -738,6 +738,7 @@ void semantik_win::sync_flags()
 		QAction *l_oAction = m_oFlagGroup->actions().at(i);
 		l_oAction->setText(l_oScheme->m_sName);
 		l_oAction->setIcon(l_oScheme->_icon());
+		l_oAction->setToolTip(i18n("Flag"));
 	}
 }
 
