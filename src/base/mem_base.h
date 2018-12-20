@@ -25,7 +25,7 @@ class mem_command {
 		enum IType {DELETE, ADD, LINK, UNLINK, SELECT, MOVE, COLOR, FLAG, EDIT, DATATYPE, TEXT, VARS, PIC, TABLE, SORT,
 			ADD_BOX, DEL_BOX, EDIT_BOX, LINK_BOX, UNLINK_BOX, PROP_BOX, POS_BOX, CHANGE_LINK_BOX, SIZE_BOX,
 			EDIT_LINK, IMPORT_BOX, SIZE_MATRIX, CHANGE_CLASS_BOX, DIAGRAM_PROPERTIES, SIZE_SEQUENCE, DOC,
-			TEXT_ALIGN_BOX, REF, UNREF};
+			TEXT_ALIGN_BOX, REF, UNREF, ALL_COLOR};
 		virtual IType type() = 0;
 };
 
@@ -124,6 +124,8 @@ class mem_doc_open : public mem_command {
 		int m_iExportHeightNew;
 		QString m_sExportUrlNew;
 		QColor m_oColorNew;
+		QColor m_oArrowColorNew;
+		QColor m_oAltArrowColorNew;
 		QString m_sSpellingLanguageNew;
 		QUrl m_oCurrentUrlNew;
 		QFont m_oFontNew;
@@ -144,6 +146,8 @@ class mem_doc_open : public mem_command {
 		int m_iExportHeightOld;
 		QString m_sExportUrlOld;
 		QColor m_oColorOld;
+		QColor m_oArrowColorOld;
+		QColor m_oAltArrowColorOld;
 		QString m_sSpellingLanguageOld;
 		QUrl m_oCurrentUrlOld;
 		QFont m_oFontOld;

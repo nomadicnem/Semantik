@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-19 16:16+0100\n"
+"POT-Creation-Date: 2018-12-20 11:42+0100\n"
 "PO-Revision-Date: 2009-07-28 12:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ελληνικά <kde-i18n-doc@kde.org>\n"
@@ -23,114 +23,114 @@ msgstr "Κενό"
 msgid "Flag item(s) as..."
 msgstr "Σημείωση αντικειμένου(ων) ως..."
 
-#: base/sem_mediator.cpp:320
+#: base/sem_mediator.cpp:338
 msgid "Automatic save failed for file: %1"
 msgstr "Απέτυχε η αυτόματη αποθήκευση για το αρχείο: %1"
 
-#: base/sem_mediator.cpp:323
+#: base/sem_mediator.cpp:341
 msgid "%1 saved automatically"
 msgstr "%1 αποθηκεύτηκε αυτόματα"
 
-#: base/sem_mediator.cpp:342
+#: base/sem_mediator.cpp:360
 msgid "Color %1"
 msgstr "Χρώμα %1"
 
-#: base/sem_mediator.cpp:672
+#: base/sem_mediator.cpp:692
 msgid "File saving: missing file %1"
 msgstr "Αποθήκευση αρχείου: το αρχείο %1 λείπει"
 
-#: base/sem_mediator.cpp:697 base/sem_mediator.cpp:1326
-#: base/sem_mediator.cpp:1377
+#: base/sem_mediator.cpp:717 base/sem_mediator.cpp:1346
+#: base/sem_mediator.cpp:1397
 msgid "Missing bindings for opening files"
 msgstr "Ανυπαρξία δεσμών για το άνοιγμα των αρχείων"
 
-#: base/sem_mediator.cpp:724
+#: base/sem_mediator.cpp:744
 msgid "Missing filter file %1 for opening files"
 msgstr "Έλλειψη φίλτρου αρχείου %1 για το άνοιγμα των αρχείων"
 
-#: base/sem_mediator.cpp:724 base/sem_mediator.cpp:738
-#: base/sem_mediator.cpp:744
+#: base/sem_mediator.cpp:744 base/sem_mediator.cpp:758
+#: base/sem_mediator.cpp:764
 msgid "Broken installation"
 msgstr ""
 
-#: base/sem_mediator.cpp:738
+#: base/sem_mediator.cpp:758
 #, fuzzy
 msgid "Missing python bindings for opening files"
 msgstr "Ανυπαρξία δεσμών για το άνοιγμα των αρχείων"
 
-#: base/sem_mediator.cpp:744
+#: base/sem_mediator.cpp:764
 msgid "Python execution failure"
 msgstr ""
 
-#: base/sem_mediator.cpp:756
+#: base/sem_mediator.cpp:776
 #, fuzzy
 msgid "Could not load the document %1"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: base/sem_mediator.cpp:756 base/sem_mediator.cpp:775
-#: base/sem_mediator.cpp:792 base/sem_mediator.cpp:833
-#: base/sem_mediator.cpp:842
+#: base/sem_mediator.cpp:776 base/sem_mediator.cpp:795
+#: base/sem_mediator.cpp:812 base/sem_mediator.cpp:853
+#: base/sem_mediator.cpp:862
 #, fuzzy
 msgid "Broken document"
 msgstr "Κλείσιμο εγγράφου"
 
-#: base/sem_mediator.cpp:775 base/sem_mediator.cpp:792
+#: base/sem_mediator.cpp:795 base/sem_mediator.cpp:812
 #, fuzzy
 msgid "Could not load the picture %1"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: base/sem_mediator.cpp:833
+#: base/sem_mediator.cpp:853
 msgid "Something is wrong with %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:842
+#: base/sem_mediator.cpp:862
 msgid "Rename the picture %1 to %2 failed"
 msgstr ""
 
-#: base/sem_mediator.cpp:881 base/sem_mediator.cpp:886
+#: base/sem_mediator.cpp:901 base/sem_mediator.cpp:906
 msgid "Cannot create a reference: a direct link already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:895 base/sem_mediator.cpp:900
+#: base/sem_mediator.cpp:915 base/sem_mediator.cpp:920
 msgid "Cannot create a reference: a reference already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:927
+#: base/sem_mediator.cpp:947
 msgid "Cannot create a link: only one root is allowed (try references?)"
 msgstr ""
 
-#: base/sem_mediator.cpp:944
+#: base/sem_mediator.cpp:964
 msgid "Cannot create a link: cycles are not allowed (try references?)"
 msgstr ""
 
-#: base/sem_mediator.cpp:958 base/sem_mediator.cpp:963
+#: base/sem_mediator.cpp:978 base/sem_mediator.cpp:983
 msgid "Cannot create a link: a reference already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:1261
+#: base/sem_mediator.cpp:1281
 #, fuzzy
 msgid "Code generation failed: no root item"
 msgstr "Η δημιουργία κώδικα απέτυχε: αρχείο που λείπει %1"
 
-#: base/sem_mediator.cpp:1268
+#: base/sem_mediator.cpp:1288
 msgid "Code generation failed: missing file %1"
 msgstr "Η δημιουργία κώδικα απέτυχε: αρχείο που λείπει %1"
 
-#: base/sem_mediator.cpp:1286
+#: base/sem_mediator.cpp:1306
 #, fuzzy
 msgid "Could not rename the output folder %1"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: base/sem_mediator.cpp:1295
+#: base/sem_mediator.cpp:1315
 #, fuzzy
 msgid "Could not create the output folder %1"
 msgstr "Κάντε κλικ για να ορίσετε μια εικόνα"
 
-#: base/sem_mediator.cpp:1334
+#: base/sem_mediator.cpp:1354
 msgid "Document generation failed, check the output folder"
 msgstr ""
 
-#: base/sem_mediator.cpp:1338
+#: base/sem_mediator.cpp:1358
 msgid "Document generation completed successfully"
 msgstr ""
 
@@ -285,56 +285,65 @@ msgstr "Χρώμα παρασκηνίου"
 
 #: config_dialog.cpp:53
 #, fuzzy
+msgid "Arrow color"
+msgstr "Προσαρμοσμένο χρώμα"
+
+#: config_dialog.cpp:57
+msgid "Reference color"
+msgstr ""
+
+#: config_dialog.cpp:61
+#, fuzzy
 msgid "Preview pictures"
 msgstr "Καθαρισμός εικόνας"
 
-#: config_dialog.cpp:71
+#: config_dialog.cpp:87
 msgid "Reorganization type"
 msgstr "Είδος αναδιοργάνωσης"
 
-#: config_dialog.cpp:75
+#: config_dialog.cpp:91
 msgid "Item position after keyboard insertion"
 msgstr ""
 
-#: config_dialog.cpp:79
+#: config_dialog.cpp:95
 msgid "Connection type"
 msgstr "Είδος συνδέσμου"
 
-#: config_dialog.cpp:83
+#: config_dialog.cpp:99
 msgid "Save document automatically"
 msgstr "Αυτόματη αποθήκευση εγγράφου"
 
-#: config_dialog.cpp:87 fig/semd_config_dialog.cpp:49
+#: config_dialog.cpp:103 fig/semd_config_dialog.cpp:49
 msgid "Touchpad mode"
 msgstr ""
 
-#: config_dialog.cpp:92
+#: config_dialog.cpp:108
 msgid "Fixed"
 msgstr "Σταθερό"
 
-#: config_dialog.cpp:96
+#: config_dialog.cpp:112
 #, fuzzy
 msgid "Close to parent"
 msgstr "Κλείσιμο εγγράφου"
 
-#: config_dialog.cpp:96
+#: config_dialog.cpp:112
 #, fuzzy
 msgid "Reorganize map"
 msgstr "&Αναδιοργάνωση του χάρτη"
 
-#: config_dialog.cpp:100
+#: config_dialog.cpp:116
 msgid "Lines"
 msgstr "Γραμμές"
 
-#: config_dialog.cpp:100
+#: config_dialog.cpp:116
 msgid "Splines"
 msgstr "Καμπύλες"
 
-#: config_dialog.cpp:104
+#: config_dialog.cpp:120
 msgid " min"
 msgstr "μίνιμουμ"
 
-#: config_dialog.cpp:107
+#: config_dialog.cpp:123
 msgid ""
 "Interval in minutes for saving the document automatically, 0 for disabling "
 "this feature"
@@ -897,32 +906,32 @@ msgstr "Επιλέξτε ένα όνομα αρχείου"
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.sem|Semantik file (*.sem)"
 
-#: fig/box_view.cpp:1852 semantik.cpp:459 semantik.cpp:551
+#: fig/box_view.cpp:1852 semantik.cpp:462 semantik.cpp:554
 msgid "Choose a file name"
 msgstr "Επιλέξτε ένα όνομα αρχείου"
 
-#: fig/box_view.cpp:1868 semantik.cpp:474
+#: fig/box_view.cpp:1868 semantik.cpp:477
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
 msgstr ""
 
-#: fig/box_view.cpp:1869 semantik.cpp:475
+#: fig/box_view.cpp:1869 semantik.cpp:478
 msgid "Overwrite existing file"
 msgstr ""
 
-#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:486
-#: semantik.cpp:522
+#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:489
+#: semantik.cpp:525
 msgid "Saved '%1'"
 msgstr "Αποθηκεύτηκε '%1'"
 
-#: fig/box_view.cpp:1899 semantik.cpp:497 semantik.cpp:528
+#: fig/box_view.cpp:1899 semantik.cpp:500 semantik.cpp:531
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1900 semantik.cpp:498 semantik.cpp:529
+#: fig/box_view.cpp:1900 semantik.cpp:501 semantik.cpp:532
 msgid "Try again?"
 msgstr ""
 
@@ -939,7 +948,7 @@ msgstr "Γραμμές"
 msgid "Columns"
 msgstr "Στήλες"
 
-#: fig/semantik_d_win.cpp:43 semantik.cpp:148
+#: fig/semantik_d_win.cpp:43 semantik.cpp:149
 msgid "Colors"
 msgstr "Χρώματα"
 
@@ -948,11 +957,11 @@ msgstr "Χρώματα"
 msgid "&Export the diagram..."
 msgstr "Κενός χάρτης"
 
-#: fig/semantik_d_win.cpp:71 semantik.cpp:182
+#: fig/semantik_d_win.cpp:71 semantik.cpp:183
 msgid "Ctrl+Shift+E"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:76 semantik.cpp:199
+#: fig/semantik_d_win.cpp:76 semantik.cpp:200
 msgid "Ctrl+H"
 msgstr ""
 
@@ -960,11 +969,11 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:92 semantik.cpp:264
+#: fig/semantik_d_win.cpp:92 semantik.cpp:265
 msgid "Color"
 msgstr "Χρώμα"
 
-#: fig/semantik_d_win.cpp:100 semantik.cpp:273
+#: fig/semantik_d_win.cpp:100 semantik.cpp:274
 msgid "Custom color"
 msgstr "Προσαρμοσμένο χρώμα"
 
@@ -978,11 +987,11 @@ msgstr "Semantik"
 msgid "[Untitled]"
 msgstr "Χωρίς τίτλο"
 
-#: fig/semantik_d_win.cpp:296 semantik.cpp:628
+#: fig/semantik_d_win.cpp:296 semantik.cpp:661
 msgid "Untitled"
 msgstr "Χωρίς τίτλο"
 
-#: fig/semantik_d_win.cpp:299 semantik.cpp:631
+#: fig/semantik_d_win.cpp:299 semantik.cpp:664
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -991,11 +1000,11 @@ msgstr ""
 "Θέλετε να αποθηκεύσετε τις αλλαγές\n"
 "ή να τις απορρίψετε;"
 
-#: fig/semantik_d_win.cpp:300 semantik.cpp:632
+#: fig/semantik_d_win.cpp:300 semantik.cpp:665
 msgid "Close Document"
 msgstr "Κλείσιμο εγγράφου"
 
-#: fig/semantik_d_win.cpp:448 semantik.cpp:564
+#: fig/semantik_d_win.cpp:448 semantik.cpp:567
 msgid " [Modified] "
 msgstr ""
 
@@ -1230,7 +1239,7 @@ msgid "<p align='center'>No preview available<br/>at this time</p>"
 msgstr ""
 "<p align='center'>Δεν υπάρχει διαθέσιμη προεπισκόπηση<br/>αυτή τη στιγμή</p>"
 
-#: semantik.cpp:50
+#: semantik.cpp:51
 msgid ""
 "The map is empty, Semantik\n"
 "cannot create documents from it"
@@ -1239,74 +1248,74 @@ msgstr ""
 "δεν μπορεί να δημιουργήσει έγγραφα\n"
 "από αυτόν."
 
-#: semantik.cpp:50
+#: semantik.cpp:51
 msgid "Empty map"
 msgstr "Κενός χάρτης"
 
-#: semantik.cpp:57
+#: semantik.cpp:58
 msgid "Template folder %1 is not readable"
 msgstr "Ο φάκελος των προτύπων %1 δεν είναι αναγνώσιμος"
 
-#: semantik.cpp:175
+#: semantik.cpp:176
 msgid "&Reorganize the map"
 msgstr "&Αναδιοργάνωση του χάρτη"
 
-#: semantik.cpp:177
+#: semantik.cpp:178
 msgid "Ctrl+R"
 msgstr ""
 
-#: semantik.cpp:180
+#: semantik.cpp:181
 #, fuzzy
 msgid "&Export the map..."
 msgstr "Κενός χάρτης"
 
-#: semantik.cpp:187
+#: semantik.cpp:188
 msgid "&Generate..."
 msgstr "&Δημιουργία"
 
-#: semantik.cpp:190
+#: semantik.cpp:191
 msgid "Ctrl+G"
 msgstr ""
 
-#: semantik.cpp:208
+#: semantik.cpp:209
 msgid "Data"
 msgstr "Δεδομένα"
 
-#: semantik.cpp:232
+#: semantik.cpp:233
 msgid "Variables"
 msgstr "Μεταβλητές"
 
-#: semantik.cpp:241
+#: semantik.cpp:242
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: semantik.cpp:253
+#: semantik.cpp:254
 msgid "Linear view"
 msgstr "Γραμμική προβολή"
 
-#: semantik.cpp:284
+#: semantik.cpp:285
 msgid "Flag"
 msgstr "Σημαία"
 
-#: semantik.cpp:383
+#: semantik.cpp:384
 msgid "Welcome to Semantik"
 msgstr "Καλωσήρθατε στο Semantik"
 
-#: semantik.cpp:461
+#: semantik.cpp:464
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Semantik file (*.sem)"
 
-#: semantik.cpp:553
+#: semantik.cpp:556
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 "*.sem *.kdi *.mm *.vym|Όλα τα υποστηριζόμενα αρχεία (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:569
+#: semantik.cpp:572
 #, fuzzy
 msgid "Semantik %1"
 msgstr "Semantik"
 
-#: semantik.cpp:573
+#: semantik.cpp:576
 #, fuzzy
 msgid "%1 %2 - Semantik"
 msgstr "%1 - Semantik"

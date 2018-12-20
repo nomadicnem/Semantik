@@ -20,9 +20,6 @@ class canvas_link: public QGraphicsPathItem
 
 		int type() const { return CANVAS_LINK_T; }
 
-		QColor get_color() {return m_oColor;}
-		void set_color(QColor c) {m_oColor=c;}
-
 		void rm_link();
 
 		void update_selected();
@@ -32,7 +29,6 @@ class canvas_link: public QGraphicsPathItem
 		canvas_view *m_oGraph;
 
 		int m_iID;
-		QColor m_oColor;
 		QString m_sLabel;
 
 		void update_pos();
@@ -41,6 +37,9 @@ class canvas_link: public QGraphicsPathItem
 
 		canvas_item *m_oFrom;
 		canvas_item *m_oTo;
+
+		virtual QColor get_color();
+		void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *i_oWidget);
 };
 
 #endif

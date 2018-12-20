@@ -113,6 +113,24 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 			m_oMediator->m_oColor = notr("#FFFDE8");
 		}
 
+		if (i_oAttrs.index(notr("arrowcolor")) > -1)
+		{
+			m_oMediator->m_oArrowColor = QColor(i_oAttrs.value(notr("arrowcolor")));
+		}
+		else
+		{
+			m_oMediator->m_oArrowColor = notr("#000000");
+		}
+
+		if (i_oAttrs.index(notr("altarrowcolor")) > -1)
+		{
+			m_oMediator->m_oAltArrowColor = QColor(i_oAttrs.value(notr("altarrowcolor")));
+		}
+		else
+		{
+			m_oMediator->m_oAltArrowColor = notr("#e0e0e0");
+		}
+
 		if (i_oAttrs.value(notr("location")).size()) m_oMediator->m_sOutDir = i_oAttrs.value(notr("location"));
 		if (i_oAttrs.value(notr("dir")).size()) m_oMediator->m_sOutProject = i_oAttrs.value(notr("dir"));
 		if (i_oAttrs.value(notr("output")).size()) m_oMediator->m_sOutTemplate = i_oAttrs.value(notr("output"));
@@ -527,6 +545,8 @@ QString sem_mediator::doc_to_xml()
 	l_oS<<notr(" export_height=\"%1\"").arg(QString::number(m_iExportHeight));
 	l_oS<<notr(" export_url=\"%1\"").arg(bind_node::protectXML(m_sExportUrl));
 	l_oS<<notr(" bgcolor=\"%1\"").arg(bind_node::protectXML(m_oColor.name()));
+	l_oS<<notr(" arrowcolor=\"%1\"").arg(bind_node::protectXML(m_oArrowColor.name()));
+	l_oS<<notr(" altarrowcolor=\"%1\"").arg(bind_node::protectXML(m_oAltArrowColor.name()));
 	l_oS<<notr(" spelling_language=\"%1\"").arg(bind_node::protectXML(m_sSpellingLanguage));
 	l_oS<<notr(" font=\"%1\"").arg(m_oFont.toString());
 

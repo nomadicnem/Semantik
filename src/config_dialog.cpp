@@ -50,18 +50,34 @@ config_dialog::config_dialog(QWidget *i_oParent):
 	l_oDocumentGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
 
 	l_sLabel = new QLabel(l_oDocumentGroupBox);
-	l_sLabel->setText(i18n("Preview pictures"));
+	l_sLabel->setText(i18n("Arrow color"));
 	l_oDocumentGridLayout->addWidget(l_sLabel, 1, 0, 1, 1);
+
+	l_sLabel = new QLabel(l_oDocumentGroupBox);
+	l_sLabel->setText(i18n("Reference color"));
+	l_oDocumentGridLayout->addWidget(l_sLabel, 2, 0, 1, 1);
+
+	l_sLabel = new QLabel(l_oDocumentGroupBox);
+	l_sLabel->setText(i18n("Preview pictures"));
+	l_oDocumentGridLayout->addWidget(l_sLabel, 3, 0, 1, 1);
 
 	m_oColorWidget = new QPushButton(l_oDocumentGroupBox);
 	l_oDocumentGridLayout->addWidget(m_oColorWidget, 0, 1, 1, 1);
 	connect(m_oColorWidget, SIGNAL(clicked()), this, SLOT(select_color()));
 
+	m_oArrowWidget = new QPushButton(l_oDocumentGroupBox);
+	l_oDocumentGridLayout->addWidget(m_oArrowWidget, 1, 1, 1, 1);
+	connect(m_oArrowWidget, SIGNAL(clicked()), this, SLOT(select_arrow_color()));
+
+	m_oAltArrowWidget = new QPushButton(l_oDocumentGroupBox);
+	l_oDocumentGridLayout->addWidget(m_oAltArrowWidget, 2, 1, 1, 1);
+	connect(m_oAltArrowWidget, SIGNAL(clicked()), this, SLOT(select_alt_arrow_color()));
+
 	m_oPreviewPics = new QCheckBox(l_oDocumentGroupBox);
-	l_oDocumentGridLayout->addWidget(m_oPreviewPics, 1, 1, 1, 1);
+	l_oDocumentGridLayout->addWidget(m_oPreviewPics, 3, 1, 1, 1);
 
 	QSpacerItem *l_oSpacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
-	l_oDocumentGridLayout->addItem(l_oSpacer, 2, 1, 2);
+	l_oDocumentGridLayout->addItem(l_oSpacer, 4, 1, 2);
 
 
 
@@ -129,5 +145,27 @@ void config_dialog::select_color()
 	QPalette l_oPalette = m_oColorWidget->palette();
 	l_oPalette.setBrush(QPalette::Active, QPalette::Button, m_oColor);
 	m_oColorWidget->setPalette(l_oPalette);
+}
+
+void config_dialog::select_arrow_color()
+{
+	m_oArrowColor = QColorDialog::getColor(m_oArrowColor, this);
+	if (!m_oArrowColor.isValid()) return;
+	m_oArrowWidget->setText(m_oArrowColor.name());
+
+	QPalette l_oPalette = m_oArrowWidget->palette();
+	l_oPalette.setBrush(QPalette::Active, QPalette::Button, m_oArrowColor);
+	m_oArrowWidget->setPalette(l_oPalette);
+}
+
+void config_dialog::select_alt_arrow_color()
+{
+	m_oAltArrowColor = QColorDialog::getColor(m_oAltArrowColor, this);
+	if (!m_oAltArrowColor.isValid()) return;
+	m_oAltArrowWidget->setText(m_oAltArrowColor.name());
+
+	QPalette l_oPalette = m_oAltArrowWidget->palette();
+	l_oPalette.setBrush(QPalette::Active, QPalette::Button, m_oAltArrowColor);
+	m_oAltArrowWidget->setPalette(l_oPalette);
 }
 

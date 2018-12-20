@@ -1716,7 +1716,10 @@ void canvas_view::slot_background_color()
 
 void canvas_view::keyPressEvent(QKeyEvent *i_oEvent)
 {
-	m_oRubberLine->m_oColor = QColor(REF_DEFAULT_COLOR);
+	if (i_oEvent->modifiers() & Qt::ControlModifier)
+	{
+		m_oRubberLine->m_oColor = m_oMediator->m_oAltArrowColor;
+	}
 	if (m_oRubberLine->isVisible())
 	{
 		m_oRubberLine->hide();
@@ -1730,7 +1733,10 @@ void canvas_view::keyPressEvent(QKeyEvent *i_oEvent)
 
 void canvas_view::keyReleaseEvent(QKeyEvent *i_oEvent)
 {
-	m_oRubberLine->m_oColor = QColor(Qt::black);
+	if (!(i_oEvent->modifiers() & Qt::ControlModifier))
+	{
+		m_oRubberLine->m_oColor = m_oMediator->m_oArrowColor;
+	}
 	if (m_oRubberLine->isVisible())
 	{
 		m_oRubberLine->hide();

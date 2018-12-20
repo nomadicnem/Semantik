@@ -42,6 +42,7 @@
 #include "doc_dialog.h"
 #include "aux.h" 
 #include "linear_view.h"
+#include      "mem_command.h"
 
 void semantik_win::slot_generate()
 {
@@ -409,6 +410,8 @@ void semantik_win::read_config()
 
 	move(l_oConfig.readEntry(notr("winpos"), QPoint(0, 0)));
 	m_oMediator->m_oColor = QColor(l_oConfig.readEntry(notr("bgcolor"), notr("#FFFDE8")));
+	m_oMediator->m_oArrowColor = QColor(l_oConfig.readEntry(notr("arrowcolor"), notr("#000000")));
+	m_oMediator->m_oAltArrowColor = QColor(l_oConfig.readEntry(notr("altarrowcolor"), notr("#e0e0e0")));
 	m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), QDir::homePath());
 	bind_node::set_var(notr("outdir"), m_oMediator->m_sOutDir);
 	m_oWindef->m_bUseTouchpad = l_oConfig.readEntry(notr("touchpad"), false);
@@ -591,10 +594,27 @@ void semantik_win::slot_properties()
 	l_oGen.m_oPreviewPics->setChecked(m_oMediator->m_bShowPics);
 
 	l_oGen.m_oColorWidget->setText(m_oMediator->m_oColor.name());
-	QPalette l_oPalette = l_oGen.m_oColorWidget->palette();
-	l_oGen.m_oColor = m_oMediator->m_oColor;
-	l_oPalette.setBrush(QPalette::Active, QPalette::Button, l_oGen.m_oColor);
-	l_oGen.m_oColorWidget->setPalette(l_oPalette);
+	l_oGen.m_oArrowWidget->setText(m_oMediator->m_oArrowColor.name());
+	l_oGen.m_oAltArrowWidget->setText(m_oMediator->m_oAltArrowColor.name());
+
+	{
+		QPalette l_oPalette = l_oGen.m_oColorWidget->palette();
+		l_oGen.m_oColor = m_oMediator->m_oColor;
+		l_oPalette.setBrush(QPalette::Active, QPalette::Button, l_oGen.m_oColor);
+		l_oGen.m_oColorWidget->setPalette(l_oPalette);
+	}
+	{
+		QPalette l_oPalette = l_oGen.m_oArrowWidget->palette();
+		l_oGen.m_oArrowColor = m_oMediator->m_oArrowColor;
+		l_oPalette.setBrush(QPalette::Active, QPalette::Button, l_oGen.m_oArrowColor);
+		l_oGen.m_oArrowWidget->setPalette(l_oPalette);
+	}
+	{
+		QPalette l_oPalette = l_oGen.m_oAltArrowWidget->palette();
+		l_oGen.m_oAltArrowColor = m_oMediator->m_oAltArrowColor;
+		l_oPalette.setBrush(QPalette::Active, QPalette::Button, l_oGen.m_oAltArrowColor);
+		l_oGen.m_oAltArrowWidget->setPalette(l_oPalette);
+	}
 
 	if (l_oGen.exec() == QDialog::Accepted)
 	{
@@ -604,12 +624,25 @@ void semantik_win::slot_properties()
 		l_oSettings.writeEntry(notr("reorg"), m_oMediator->m_oWindef->m_iReorgType = l_oGen.m_oReorgType->currentIndex());
 		l_oSettings.writeEntry(notr("auto"), m_oMediator->m_iTimerValue = l_oGen.m_oAutoSave->value());
 		l_oSettings.writeEntry(notr("bgcolor"), l_oGen.m_oColor.name());
+		l_oSettings.writeEntry(notr("arrowcolor"), l_oGen.m_oArrowColor.name());
+		l_oSettings.writeEntry(notr("altarrowcolor"), l_oGen.m_oAltArrowColor.name());
 		l_oSettings.writeEntry(notr("autoReorg"), m_oMediator->m_iAutoReorg = l_oGen.m_oAutoReorg->currentIndex());
 		l_oSettings.writeEntry(notr("touchpad"), m_oMediator->m_oWindef->m_bUseTouchpad = l_oGen.m_oUseTouchpad->isChecked());
 
 		m_oMediator->set_show_pics(l_oGen.m_oPreviewPics->isChecked());
-		m_oMediator->m_oColor = l_oGen.m_oColor;
-		m_oMediator->notify_background_color();
+
+		if (l_oGen.m_oColor != m_oMediator->m_oColor || m_oMediator->m_oArrowColor != l_oGen.m_oArrowColor || l_oGen.m_oAltArrowColor != m_oMediator->m_oAltArrowColor)
+		{
+			mem_all_color *l_oMem = new mem_all_color(m_oMediator);
+			l_oMem->m_oColor = l_oGen.m_oColor;
+			l_oMem->m_oArrowColor = l_oGen.m_oArrowColor;
+			l_oMem->m_oAltArrowColor = l_oGen.m_oAltArrowColor;
+
+			l_oMem->m_oOldColor = m_oMediator->m_oColor;
+			l_oMem->m_oOldArrowColor = m_oMediator->m_oArrowColor;
+			l_oMem->m_oOldAltArrowColor = m_oMediator->m_oAltArrowColor;
+			l_oMem->apply();
+		}
 		m_oMediator->init_timer();
 		l_oCfg.sync();
 	}

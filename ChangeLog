@@ -3,6 +3,7 @@ Semantik 1.2.0
 * Add a system of references similar to what was present in Kdissert #91
 * Add support for newlines in table attachments #89
 * Fix missing crossing lines when printing or exporting diagrams
+* Configure arrow colors
 
 Semantik 1.1.0
 --------------

@@ -111,6 +111,8 @@ class sem_mediator: public QObject
 		QString m_sExportUrl;
 
 		QColor m_oColor;
+		QColor m_oArrowColor;
+		QColor m_oAltArrowColor;
 		QString m_sSpellingLanguage;
 		QUrl m_oCurrentUrl;
 		QFont m_oFont;

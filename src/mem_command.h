@@ -10,6 +10,23 @@
 #include <QList>
 #include <QString>
 
+class mem_all_color : public mem_command {
+	public:
+		mem_all_color(sem_mediator*);
+		void undo();
+		void redo();
+
+		QColor m_oColor;
+		QColor m_oArrowColor;
+		QColor m_oAltArrowColor;
+
+		QColor m_oOldColor;
+		QColor m_oOldArrowColor;
+		QColor m_oOldAltArrowColor;
+
+		IType type() { return ALL_COLOR; }
+};
+
 class mem_unlink : public mem_command {
 	public:
 		mem_unlink(sem_mediator*);

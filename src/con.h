@@ -30,8 +30,6 @@
 #define data_commande 5
 #define data_type 6 // change the view stuff
 
-#define REF_DEFAULT_COLOR "#e0e0e0"
-
 #define VIEW_CANVAS 1
 #define VIEW_LINEAR 2
 #define VIEW_TEXT 3

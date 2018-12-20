@@ -343,6 +343,8 @@ void mem_doc_open::init_data(sem_mediator* i_oOld, sem_mediator* i_oNew)
 	m_iExportHeightNew = i_oNew->m_iExportHeight;
 	m_sExportUrlNew = i_oNew->m_sExportUrl;
 	m_oColorNew = i_oNew->m_oColor;
+	m_oArrowColorNew = i_oNew->m_oArrowColor;
+	m_oAltArrowColorNew = i_oNew->m_oAltArrowColor;
 	m_sSpellingLanguageNew = i_oNew->m_sSpellingLanguage;
 	m_oCurrentUrlNew = i_oNew->m_oCurrentUrl;
 	m_oFontNew = i_oNew->m_oFont;
@@ -362,6 +364,8 @@ void mem_doc_open::init_data(sem_mediator* i_oOld, sem_mediator* i_oNew)
 	m_iExportHeightOld = i_oOld->m_iExportHeight;
 	m_sExportUrlOld = i_oOld->m_sExportUrl;
 	m_oColorOld = i_oOld->m_oColor;
+	m_oArrowColorOld = i_oOld->m_oArrowColor;
+	m_oAltArrowColorOld = i_oOld->m_oAltArrowColor;
 	m_sSpellingLanguageOld = i_oOld->m_sSpellingLanguage;
 	m_oCurrentUrlOld = i_oOld->m_oCurrentUrl;
 	m_oFontOld = i_oOld->m_oFont;
@@ -389,6 +393,8 @@ void mem_doc_open::redo()
 	model->m_iExportHeight = m_iExportHeightNew;
 	model->m_sExportUrl = m_sExportUrlNew;
 	model->m_oColor = m_oColorNew;
+	model->m_oArrowColor = m_oArrowColorNew;
+	model->m_oAltArrowColor = m_oAltArrowColorNew;
 	model->m_sSpellingLanguage = m_sSpellingLanguageNew;
 	model->m_oCurrentUrl = m_oCurrentUrlNew;
 	model->m_oFont = m_oFontNew;
@@ -450,6 +456,8 @@ void mem_doc_open::undo()
 	model->m_iExportHeight = m_iExportHeightOld;
 	model->m_sExportUrl = m_sExportUrlOld;
 	model->m_oColor = m_oColorOld;
+	model->m_oArrowColor = m_oArrowColorOld;
+	model->m_oAltArrowColor = m_oAltArrowColorOld;
 	model->m_sSpellingLanguage = m_sSpellingLanguageOld;
 	model->m_oCurrentUrl = m_oCurrentUrlOld;
 	model->m_oFont = m_oFontOld;

@@ -19,10 +19,12 @@
 	canvas_ref::canvas_ref(canvas_view *i_oGraphWidget, canvas_item *i_oFrom, canvas_item *i_oTo)
 : canvas_link(i_oGraphWidget, i_oFrom, i_oTo)
 {
-	m_oColor = QColor(REF_DEFAULT_COLOR);
-	QBrush l_oBrush(m_oColor);
-	setBrush(l_oBrush);
-	setPen(m_oColor);
 	setZValue(40);
+}
+
+QColor 
+canvas_ref::get_color()
+{
+return m_oGraph->m_oMediator->m_oAltArrowColor;
 }
 

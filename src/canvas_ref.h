@@ -21,8 +21,7 @@ class canvas_ref: public canvas_link
 
 		int type() const { return CANVAS_REF_T; }
 
-		QColor get_color() {return m_oColor;}
-		void set_color(QColor c) {m_oColor=c;}
+		QColor get_color();
 };
 
 #endif

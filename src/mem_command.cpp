@@ -7,6 +7,27 @@
 #include "mem_command.h"
 #include "sem_mediator.h"
 
+mem_all_color::mem_all_color(sem_mediator* mod) : mem_command(mod) {
+}
+
+void mem_all_color::redo() {
+	model->m_oColor = m_oColor;
+	model->m_oArrowColor = m_oArrowColor;
+	model->m_oAltArrowColor = m_oAltArrowColor;
+	redo_dirty();
+	model->notify_background_color();
+}
+
+void mem_all_color::undo() {
+	model->m_oColor = m_oOldColor;
+	model->m_oArrowColor = m_oOldArrowColor;
+	model->m_oAltArrowColor = m_oOldAltArrowColor;
+	undo_dirty();
+	model->notify_background_color();
+}
+
+///////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////
 
 mem_unlink::mem_unlink(sem_mediator* mod) : mem_command(mod) {

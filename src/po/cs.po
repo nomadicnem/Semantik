@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-19 16:16+0100\n"
+"POT-Creation-Date: 2018-12-20 11:42+0100\n"
 "PO-Revision-Date: 2012-10-21 19:45+0200\n"
 "Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -27,112 +27,112 @@ msgstr "Prázdné"
 msgid "Flag item(s) as..."
 msgstr "Označit položku(y) jako..."
 
-#: base/sem_mediator.cpp:320
+#: base/sem_mediator.cpp:338
 msgid "Automatic save failed for file: %1"
 msgstr "Automatické uložení se nepodařilo u souboru: %1"
 
-#: base/sem_mediator.cpp:323
+#: base/sem_mediator.cpp:341
 msgid "%1 saved automatically"
 msgstr "%1 uložen automaticky"
 
-#: base/sem_mediator.cpp:342
+#: base/sem_mediator.cpp:360
 msgid "Color %1"
 msgstr "Barva %1"
 
-#: base/sem_mediator.cpp:672
+#: base/sem_mediator.cpp:692
 msgid "File saving: missing file %1"
 msgstr "Ukládání souboru: chybí soubor %1"
 
-#: base/sem_mediator.cpp:697 base/sem_mediator.cpp:1326
-#: base/sem_mediator.cpp:1377
+#: base/sem_mediator.cpp:717 base/sem_mediator.cpp:1346
+#: base/sem_mediator.cpp:1397
 msgid "Missing bindings for opening files"
 msgstr "Chybí spojení pro otevření souborů"
 
-#: base/sem_mediator.cpp:724
+#: base/sem_mediator.cpp:744
 msgid "Missing filter file %1 for opening files"
 msgstr "Chybí soubor s filtrem %1 pro otevření souborů"
 
-#: base/sem_mediator.cpp:724 base/sem_mediator.cpp:738
-#: base/sem_mediator.cpp:744
+#: base/sem_mediator.cpp:744 base/sem_mediator.cpp:758
+#: base/sem_mediator.cpp:764
 msgid "Broken installation"
 msgstr "Poškozená instalace"
 
-#: base/sem_mediator.cpp:738
+#: base/sem_mediator.cpp:758
 msgid "Missing python bindings for opening files"
 msgstr "Chybí spojení python pro otevření souborů"
 
-#: base/sem_mediator.cpp:744
+#: base/sem_mediator.cpp:764
 msgid "Python execution failure"
 msgstr ""
 
-#: base/sem_mediator.cpp:756
+#: base/sem_mediator.cpp:776
 msgid "Could not load the document %1"
 msgstr "Nepodařilo se nahrát dokument %1"
 
-#: base/sem_mediator.cpp:756 base/sem_mediator.cpp:775
-#: base/sem_mediator.cpp:792 base/sem_mediator.cpp:833
-#: base/sem_mediator.cpp:842
+#: base/sem_mediator.cpp:776 base/sem_mediator.cpp:795
+#: base/sem_mediator.cpp:812 base/sem_mediator.cpp:853
+#: base/sem_mediator.cpp:862
 msgid "Broken document"
 msgstr "Poškozený dokument"
 
-#: base/sem_mediator.cpp:775 base/sem_mediator.cpp:792
+#: base/sem_mediator.cpp:795 base/sem_mediator.cpp:812
 #, fuzzy
 msgid "Could not load the picture %1"
 msgstr "Nepodařilo se nahrát obrázek"
 
-#: base/sem_mediator.cpp:833
+#: base/sem_mediator.cpp:853
 msgid "Something is wrong with %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:842
+#: base/sem_mediator.cpp:862
 msgid "Rename the picture %1 to %2 failed"
 msgstr ""
 
-#: base/sem_mediator.cpp:881 base/sem_mediator.cpp:886
+#: base/sem_mediator.cpp:901 base/sem_mediator.cpp:906
 msgid "Cannot create a reference: a direct link already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:895 base/sem_mediator.cpp:900
+#: base/sem_mediator.cpp:915 base/sem_mediator.cpp:920
 msgid "Cannot create a reference: a reference already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:927
+#: base/sem_mediator.cpp:947
 msgid "Cannot create a link: only one root is allowed (try references?)"
 msgstr ""
 
-#: base/sem_mediator.cpp:944
+#: base/sem_mediator.cpp:964
 msgid "Cannot create a link: cycles are not allowed (try references?)"
 msgstr ""
 
-#: base/sem_mediator.cpp:958 base/sem_mediator.cpp:963
+#: base/sem_mediator.cpp:978 base/sem_mediator.cpp:983
 msgid "Cannot create a link: a reference already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:1261
+#: base/sem_mediator.cpp:1281
 #, fuzzy
 msgid "Code generation failed: no root item"
 msgstr "Vytvoření kódu se nepodařilo: chybí soubor %1"
 
-#: base/sem_mediator.cpp:1268
+#: base/sem_mediator.cpp:1288
 msgid "Code generation failed: missing file %1"
 msgstr "Vytvoření kódu se nepodařilo: chybí soubor %1"
 
-#: base/sem_mediator.cpp:1286
+#: base/sem_mediator.cpp:1306
 #, fuzzy
 msgid "Could not rename the output folder %1"
 msgstr "Nepodařilo se nahrát obrázek"
 
-#: base/sem_mediator.cpp:1295
+#: base/sem_mediator.cpp:1315
 #, fuzzy
 msgid "Could not create the output folder %1"
 msgstr "Nepodařilo se nahrát obrázek"
 
-#: base/sem_mediator.cpp:1334
+#: base/sem_mediator.cpp:1354
 #, fuzzy
 msgid "Document generation failed, check the output folder"
 msgstr "Vytvoření dokumentu úspěšně dokončeno"
 
-#: base/sem_mediator.cpp:1338
+#: base/sem_mediator.cpp:1358
 msgid "Document generation completed successfully"
 msgstr "Vytvoření dokumentu úspěšně dokončeno"
 
@@ -280,56 +280,65 @@ msgstr "Barva pozadí"
 
 #: config_dialog.cpp:53
 #, fuzzy
+msgid "Arrow color"
+msgstr "Vlastní barva"
+
+#: config_dialog.cpp:57
+msgid "Reference color"
+msgstr ""
+
+#: config_dialog.cpp:61
+#, fuzzy
 msgid "Preview pictures"
 msgstr "Smazat obrázek"
 
-#: config_dialog.cpp:71
+#: config_dialog.cpp:87
 msgid "Reorganization type"
 msgstr "Druh nového uspořádání"
 
-#: config_dialog.cpp:75
+#: config_dialog.cpp:91
 msgid "Item position after keyboard insertion"
 msgstr ""
 
-#: config_dialog.cpp:79
+#: config_dialog.cpp:95
 msgid "Connection type"
 msgstr "Druh spojení"
 
-#: config_dialog.cpp:83
+#: config_dialog.cpp:99
 msgid "Save document automatically"
 msgstr "Dokument uložit automaticky"
 
-#: config_dialog.cpp:87 fig/semd_config_dialog.cpp:49
+#: config_dialog.cpp:103 fig/semd_config_dialog.cpp:49
 msgid "Touchpad mode"
 msgstr ""
 
-#: config_dialog.cpp:92
+#: config_dialog.cpp:108
 msgid "Fixed"
 msgstr "Pevné"
 
-#: config_dialog.cpp:96
+#: config_dialog.cpp:112
 #, fuzzy
 msgid "Close to parent"
 msgstr "Zavřít dokument"
 
-#: config_dialog.cpp:96
+#: config_dialog.cpp:112
 #, fuzzy
 msgid "Reorganize map"
 msgstr "&Přeuspořádat zobrazení"
 
-#: config_dialog.cpp:100
+#: config_dialog.cpp:116
 msgid "Lines"
 msgstr "Čáry"
 
-#: config_dialog.cpp:100
+#: config_dialog.cpp:116
 msgid "Splines"
 msgstr "Křivky"
 
-#: config_dialog.cpp:104
+#: config_dialog.cpp:120
 msgid " min"
 msgstr " min"
 
-#: config_dialog.cpp:107
+#: config_dialog.cpp:123
 msgid ""
 "Interval in minutes for saving the document automatically, 0 for disabling "
 "this feature"
@@ -887,11 +896,11 @@ msgstr "Vybrat název souboru"
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.sem|Soubor pro Semantik (*.sem)"
 
-#: fig/box_view.cpp:1852 semantik.cpp:459 semantik.cpp:551
+#: fig/box_view.cpp:1852 semantik.cpp:462 semantik.cpp:554
 msgid "Choose a file name"
 msgstr "Vybrat název souboru"
 
-#: fig/box_view.cpp:1868 semantik.cpp:474
+#: fig/box_view.cpp:1868 semantik.cpp:477
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
@@ -899,22 +908,22 @@ msgstr ""
 "Soubor \"%1\" již existuje.\n"
 "Přepsat jej?"
 
-#: fig/box_view.cpp:1869 semantik.cpp:475
+#: fig/box_view.cpp:1869 semantik.cpp:478
 msgid "Overwrite existing file"
 msgstr "Přepsat stávající soubor"
 
-#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:486
-#: semantik.cpp:522
+#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:489
+#: semantik.cpp:525
 msgid "Saved '%1'"
 msgstr "Uloženo '%1'"
 
-#: fig/box_view.cpp:1899 semantik.cpp:497 semantik.cpp:528
+#: fig/box_view.cpp:1899 semantik.cpp:500 semantik.cpp:531
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1900 semantik.cpp:498 semantik.cpp:529
+#: fig/box_view.cpp:1900 semantik.cpp:501 semantik.cpp:532
 msgid "Try again?"
 msgstr ""
 
@@ -931,7 +940,7 @@ msgstr "Řádky"
 msgid "Columns"
 msgstr "Sloupce"
 
-#: fig/semantik_d_win.cpp:43 semantik.cpp:148
+#: fig/semantik_d_win.cpp:43 semantik.cpp:149
 msgid "Colors"
 msgstr "Barvy"
 
@@ -940,11 +949,11 @@ msgstr "Barvy"
 msgid "&Export the diagram..."
 msgstr "&Vyvést mapu..."
 
-#: fig/semantik_d_win.cpp:71 semantik.cpp:182
+#: fig/semantik_d_win.cpp:71 semantik.cpp:183
 msgid "Ctrl+Shift+E"
 msgstr "Ctrl+Shift+E"
 
-#: fig/semantik_d_win.cpp:76 semantik.cpp:199
+#: fig/semantik_d_win.cpp:76 semantik.cpp:200
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
@@ -953,11 +962,11 @@ msgstr "Ctrl+H"
 msgid "Files"
 msgstr "&Soubor"
 
-#: fig/semantik_d_win.cpp:92 semantik.cpp:264
+#: fig/semantik_d_win.cpp:92 semantik.cpp:265
 msgid "Color"
 msgstr "Barva"
 
-#: fig/semantik_d_win.cpp:100 semantik.cpp:273
+#: fig/semantik_d_win.cpp:100 semantik.cpp:274
 msgid "Custom color"
 msgstr "Vlastní barva"
 
@@ -971,11 +980,11 @@ msgstr "Semantik"
 msgid "[Untitled]"
 msgstr "Nepojmenovaný"
 
-#: fig/semantik_d_win.cpp:296 semantik.cpp:628
+#: fig/semantik_d_win.cpp:296 semantik.cpp:661
 msgid "Untitled"
 msgstr "Nepojmenovaný"
 
-#: fig/semantik_d_win.cpp:299 semantik.cpp:631
+#: fig/semantik_d_win.cpp:299 semantik.cpp:664
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -983,11 +992,11 @@ msgstr ""
 "Dokument \"%1\" byl změněn.\n"
 "Chcete svoje změny uložit nebo je vyhodit?"
 
-#: fig/semantik_d_win.cpp:300 semantik.cpp:632
+#: fig/semantik_d_win.cpp:300 semantik.cpp:665
 msgid "Close Document"
 msgstr "Zavřít dokument"
 
-#: fig/semantik_d_win.cpp:448 semantik.cpp:564
+#: fig/semantik_d_win.cpp:448 semantik.cpp:567
 msgid " [Modified] "
 msgstr " [Změněno] "
 
@@ -1220,7 +1229,7 @@ msgstr "fripohled.blogspot.com"
 msgid "<p align='center'>No preview available<br/>at this time</p>"
 msgstr "<p align='center'>V této chvíli<br/>není dostupný žádný náhled</p>"
 
-#: semantik.cpp:50
+#: semantik.cpp:51
 msgid ""
 "The map is empty, Semantik\n"
 "cannot create documents from it"
@@ -1228,72 +1237,72 @@ msgstr ""
 "Zobrazení je prázdné, Semantik\n"
 "z něj nedokáže vytvářet dokumenty"
 
-#: semantik.cpp:50
+#: semantik.cpp:51
 msgid "Empty map"
 msgstr "Prázdné zobrazení"
 
-#: semantik.cpp:57
+#: semantik.cpp:58
 msgid "Template folder %1 is not readable"
 msgstr "Složka s předlohami %1 je nečitelná"
 
-#: semantik.cpp:175
+#: semantik.cpp:176
 msgid "&Reorganize the map"
 msgstr "&Přeuspořádat zobrazení"
 
-#: semantik.cpp:177
+#: semantik.cpp:178
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
-#: semantik.cpp:180
+#: semantik.cpp:181
 msgid "&Export the map..."
 msgstr "&Vyvést mapu..."
 
-#: semantik.cpp:187
+#: semantik.cpp:188
 msgid "&Generate..."
 msgstr "&Vytvořit..."
 
-#: semantik.cpp:190
+#: semantik.cpp:191
 msgid "Ctrl+G"
 msgstr "Ctrl+G"
 
-#: semantik.cpp:208
+#: semantik.cpp:209
 msgid "Data"
 msgstr "Data"
 
-#: semantik.cpp:232
+#: semantik.cpp:233
 msgid "Variables"
 msgstr "Proměnné"
 
-#: semantik.cpp:241
+#: semantik.cpp:242
 msgid "Preview"
 msgstr "Náhled"
 
-#: semantik.cpp:253
+#: semantik.cpp:254
 msgid "Linear view"
 msgstr "Přímočarý pohled"
 
-#: semantik.cpp:284
+#: semantik.cpp:285
 msgid "Flag"
 msgstr "Příznak"
 
-#: semantik.cpp:383
+#: semantik.cpp:384
 msgid "Welcome to Semantik"
 msgstr "Vítejte v Semantiku"
 
-#: semantik.cpp:461
+#: semantik.cpp:464
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Soubor pro Semantik (*.sem)"
 
-#: semantik.cpp:553
+#: semantik.cpp:556
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 "*.sem *.kdi *.mm *.vym|Všechny podporované soubory (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:569
+#: semantik.cpp:572
 msgid "Semantik %1"
 msgstr "Semantik %1"
 
-#: semantik.cpp:573
+#: semantik.cpp:576
 msgid "%1 %2 - Semantik"
 msgstr "%1 %2 - Semantik"
 

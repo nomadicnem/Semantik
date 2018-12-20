@@ -30,18 +30,7 @@
 	m_oTo->add_link(this);
 
 	setZValue(50);
-	//setRect(0, 0, 20, 20);
-	//m_oColor = QColor("#FFFCD5");
-	//m_oColor = QColor("#ABFBC7");
 
-	m_oColor = QColor("#000000");
-	setBrush(m_oColor);
-
-	/*
-	   QPen l_oPen;
-	   l_oPen.setWidthF(0.01 + 5);
-	   setPen(l_oPen);
-	 */
 	i_oGraphWidget->scene()->addItem(this);
 	//setParentItem(m_oFrom);
 }
@@ -194,5 +183,18 @@ void canvas_link::update_spline()
 	}
 
 	setPath(l_oPath);
+}
+
+void canvas_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_oStyle, QWidget *i_oWidget=NULL)
+{
+	QColor l_o = get_color();
+	setBrush(l_o);
+	setPen(l_o);
+	QGraphicsPathItem::paint(i_oPainter, i_oStyle, i_oWidget);
+}
+
+QColor canvas_link::get_color()
+{
+return m_oGraph->m_oMediator->m_oArrowColor;
 }
 

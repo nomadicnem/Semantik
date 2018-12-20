@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-19 16:16+0100\n"
+"POT-Creation-Date: 2018-12-20 11:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,112 +20,112 @@ msgstr "Vide"
 msgid "Flag item(s) as..."
 msgstr "Marquer l'objet comme..."
 
-#: base/sem_mediator.cpp:320
+#: base/sem_mediator.cpp:338
 msgid "Automatic save failed for file: %1"
 msgstr "La sauvegarde automatique a échoué pour le fichier: %1"
 
-#: base/sem_mediator.cpp:323
+#: base/sem_mediator.cpp:341
 msgid "%1 saved automatically"
 msgstr "%1 sauvegardé automatiquement"
 
-#: base/sem_mediator.cpp:342
+#: base/sem_mediator.cpp:360
 msgid "Color %1"
 msgstr "Couleur %1"
 
-#: base/sem_mediator.cpp:672
+#: base/sem_mediator.cpp:692
 msgid "File saving: missing file %1"
 msgstr "Sauvegarde de fichier : le fichier %1 est absent"
 
-#: base/sem_mediator.cpp:697 base/sem_mediator.cpp:1326
-#: base/sem_mediator.cpp:1377
+#: base/sem_mediator.cpp:717 base/sem_mediator.cpp:1346
+#: base/sem_mediator.cpp:1397
 msgid "Missing bindings for opening files"
 msgstr "Ouverture de fichier impossible : dépendances manquantes"
 
-#: base/sem_mediator.cpp:724
+#: base/sem_mediator.cpp:744
 msgid "Missing filter file %1 for opening files"
 msgstr "Le filtre %1 pour l'ouverture de fichiers est manquant"
 
-#: base/sem_mediator.cpp:724 base/sem_mediator.cpp:738
-#: base/sem_mediator.cpp:744
+#: base/sem_mediator.cpp:744 base/sem_mediator.cpp:758
+#: base/sem_mediator.cpp:764
 msgid "Broken installation"
 msgstr "Installation incorrecte du logiciel"
 
-#: base/sem_mediator.cpp:738
+#: base/sem_mediator.cpp:758
 msgid "Missing python bindings for opening files"
 msgstr "Ouverture de fichier impossible : dépendances Python absentes"
 
-#: base/sem_mediator.cpp:744
+#: base/sem_mediator.cpp:764
 msgid "Python execution failure"
 msgstr ""
 
-#: base/sem_mediator.cpp:756
+#: base/sem_mediator.cpp:776
 msgid "Could not load the document %1"
 msgstr "Impossible d'ouvrir le document %1"
 
-#: base/sem_mediator.cpp:756 base/sem_mediator.cpp:775
-#: base/sem_mediator.cpp:792 base/sem_mediator.cpp:833
-#: base/sem_mediator.cpp:842
+#: base/sem_mediator.cpp:776 base/sem_mediator.cpp:795
+#: base/sem_mediator.cpp:812 base/sem_mediator.cpp:853
+#: base/sem_mediator.cpp:862
 msgid "Broken document"
 msgstr "Document corrompu"
 
-#: base/sem_mediator.cpp:775 base/sem_mediator.cpp:792
+#: base/sem_mediator.cpp:795 base/sem_mediator.cpp:812
 msgid "Could not load the picture %1"
 msgstr "Impossible de charger l'image %1"
 
-#: base/sem_mediator.cpp:833
+#: base/sem_mediator.cpp:853
 msgid "Something is wrong with %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:842
+#: base/sem_mediator.cpp:862
 msgid "Rename the picture %1 to %2 failed"
 msgstr ""
 
-#: base/sem_mediator.cpp:881 base/sem_mediator.cpp:886
+#: base/sem_mediator.cpp:901 base/sem_mediator.cpp:906
 msgid "Cannot create a reference: a direct link already exists"
 msgstr "Impossible de créer la référence: un lien existe déjà"
 
-#: base/sem_mediator.cpp:895 base/sem_mediator.cpp:900
+#: base/sem_mediator.cpp:915 base/sem_mediator.cpp:920
 msgid "Cannot create a reference: a reference already exists"
 msgstr "Impossible de créer la référence: une référene existe déjà"
 
-#: base/sem_mediator.cpp:927
+#: base/sem_mediator.cpp:947
 msgid "Cannot create a link: only one root is allowed (try references?)"
 msgstr ""
 "Impossible de créer le lien: une seule racine est permise (réessayer avec "
 "une référence?)"
 
-#: base/sem_mediator.cpp:944
+#: base/sem_mediator.cpp:964
 msgid "Cannot create a link: cycles are not allowed (try references?)"
 msgstr ""
 "Impossible de créer le lien: les cycles ne sont pas permis (réessayer avec "
 "une référence?)"
 
-#: base/sem_mediator.cpp:958 base/sem_mediator.cpp:963
+#: base/sem_mediator.cpp:978 base/sem_mediator.cpp:983
 msgid "Cannot create a link: a reference already exists"
 msgstr "Impossible de créer un lien: une référence existe déjà"
 
-#: base/sem_mediator.cpp:1261
+#: base/sem_mediator.cpp:1281
 msgid "Code generation failed: no root item"
 msgstr "Echec de la génération du code : élément racine absent"
 
-#: base/sem_mediator.cpp:1268
+#: base/sem_mediator.cpp:1288
 msgid "Code generation failed: missing file %1"
 msgstr "Echec de la génération du code : le fichier %1 est absent"
 
-#: base/sem_mediator.cpp:1286
+#: base/sem_mediator.cpp:1306
 msgid "Could not rename the output folder %1"
 msgstr "Impossible de renommer le répertoire de destination %1"
 
-#: base/sem_mediator.cpp:1295
+#: base/sem_mediator.cpp:1315
 msgid "Could not create the output folder %1"
 msgstr "Impossible de créer le répertoire de destination %1"
 
-#: base/sem_mediator.cpp:1334
+#: base/sem_mediator.cpp:1354
 msgid "Document generation failed, check the output folder"
 msgstr ""
 "Echec de la génération du document : contrôler le dossier de destination"
 
-#: base/sem_mediator.cpp:1338
+#: base/sem_mediator.cpp:1358
 msgid "Document generation completed successfully"
 msgstr "Génération de document accompli avec succès"
 
@@ -272,54 +272,62 @@ msgid "Background color"
 msgstr "Couleur de fond"
 
 #: config_dialog.cpp:53
+msgid "Arrow color"
+msgstr "Couleur des flèches"
+
+#: config_dialog.cpp:57
+msgid "Reference color"
+msgstr "Couleur des références"
+
+#: config_dialog.cpp:61
 msgid "Preview pictures"
 msgstr "Vignettes"
 
-#: config_dialog.cpp:71
+#: config_dialog.cpp:87
 msgid "Reorganization type"
 msgstr "Type de réorganisation"
 
-#: config_dialog.cpp:75
+#: config_dialog.cpp:91
 msgid "Item position after keyboard insertion"
 msgstr "Positionnement d'un élément enfant inséré au clavier"
 
-#: config_dialog.cpp:79
+#: config_dialog.cpp:95
 msgid "Connection type"
 msgstr "Type de connexion"
 
-#: config_dialog.cpp:83
+#: config_dialog.cpp:99
 msgid "Save document automatically"
 msgstr "Sauvegarder automatiquement"
 
-#: config_dialog.cpp:87 fig/semd_config_dialog.cpp:49
+#: config_dialog.cpp:103 fig/semd_config_dialog.cpp:49
 msgid "Touchpad mode"
 msgstr ""
 
-#: config_dialog.cpp:92
+#: config_dialog.cpp:108
 msgid "Fixed"
 msgstr "Fixe"
 
-#: config_dialog.cpp:96
+#: config_dialog.cpp:112
 msgid "Close to parent"
 msgstr "Contre l'élément parent"
 
-#: config_dialog.cpp:96
+#: config_dialog.cpp:112
 msgid "Reorganize map"
 msgstr "Placement intelligent"
 
-#: config_dialog.cpp:100
+#: config_dialog.cpp:116
 msgid "Lines"
 msgstr "Lignes"
 
-#: config_dialog.cpp:100
+#: config_dialog.cpp:116
 msgid "Splines"
 msgstr "Courbes"
 
-#: config_dialog.cpp:104
+#: config_dialog.cpp:120
 msgid " min"
 msgstr " min"
 
-#: config_dialog.cpp:107
+#: config_dialog.cpp:123
 msgid ""
 "Interval in minutes for saving the document automatically, 0 for disabling "
 "this feature"
@@ -940,11 +948,11 @@ msgstr "Choisir un fichier"
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.semd|Fichier Diagramme Semantik (*.semd)"
 
-#: fig/box_view.cpp:1852 semantik.cpp:459 semantik.cpp:551
+#: fig/box_view.cpp:1852 semantik.cpp:462 semantik.cpp:554
 msgid "Choose a file name"
 msgstr "Choisir un nom de fichier"
 
-#: fig/box_view.cpp:1868 semantik.cpp:474
+#: fig/box_view.cpp:1868 semantik.cpp:477
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
@@ -952,16 +960,16 @@ msgstr ""
 "Le fichier \"%1\" existe déjà.\n"
 "L'écraser ?"
 
-#: fig/box_view.cpp:1869 semantik.cpp:475
+#: fig/box_view.cpp:1869 semantik.cpp:478
 msgid "Overwrite existing file"
 msgstr "Écraser un fichier existant"
 
-#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:486
-#: semantik.cpp:522
+#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:489
+#: semantik.cpp:525
 msgid "Saved '%1'"
 msgstr "'%1' sauvegardé"
 
-#: fig/box_view.cpp:1899 semantik.cpp:497 semantik.cpp:528
+#: fig/box_view.cpp:1899 semantik.cpp:500 semantik.cpp:531
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
@@ -969,7 +977,7 @@ msgstr ""
 "Le fichier  \"%1\" n'a pas pu être enregistré à cause d'une erreur.\n"
 "Réessayer ?"
 
-#: fig/box_view.cpp:1900 semantik.cpp:498 semantik.cpp:529
+#: fig/box_view.cpp:1900 semantik.cpp:501 semantik.cpp:532
 msgid "Try again?"
 msgstr "Réessayer ?"
 
@@ -985,7 +993,7 @@ msgstr "Lignes"
 msgid "Columns"
 msgstr "Colonnes"
 
-#: fig/semantik_d_win.cpp:43 semantik.cpp:148
+#: fig/semantik_d_win.cpp:43 semantik.cpp:149
 msgid "Colors"
 msgstr "Couleurs"
 
@@ -993,11 +1001,11 @@ msgstr "Couleurs"
 msgid "&Export the diagram..."
 msgstr "&Exporter le diagramme..."
 
-#: fig/semantik_d_win.cpp:71 semantik.cpp:182
+#: fig/semantik_d_win.cpp:71 semantik.cpp:183
 msgid "Ctrl+Shift+E"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:76 semantik.cpp:199
+#: fig/semantik_d_win.cpp:76 semantik.cpp:200
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
@@ -1005,11 +1013,11 @@ msgstr "Ctrl+H"
 msgid "Files"
 msgstr "Fichiers"
 
-#: fig/semantik_d_win.cpp:92 semantik.cpp:264
+#: fig/semantik_d_win.cpp:92 semantik.cpp:265
 msgid "Color"
 msgstr "Couleur"
 
-#: fig/semantik_d_win.cpp:100 semantik.cpp:273
+#: fig/semantik_d_win.cpp:100 semantik.cpp:274
 msgid "Custom color"
 msgstr "Couleurs personnalisées"
 
@@ -1021,11 +1029,11 @@ msgstr "Semantik-d"
 msgid "[Untitled]"
 msgstr "[Sans nom]"
 
-#: fig/semantik_d_win.cpp:296 semantik.cpp:628
+#: fig/semantik_d_win.cpp:296 semantik.cpp:661
 msgid "Untitled"
 msgstr "Sans nom"
 
-#: fig/semantik_d_win.cpp:299 semantik.cpp:631
+#: fig/semantik_d_win.cpp:299 semantik.cpp:664
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -1033,11 +1041,11 @@ msgstr ""
 "Le document \"%1\" a été modifié.\n"
 "Enregistrer les modifications ou abandonner ?"
 
-#: fig/semantik_d_win.cpp:300 semantik.cpp:632
+#: fig/semantik_d_win.cpp:300 semantik.cpp:665
 msgid "Close Document"
 msgstr "Fermer"
 
-#: fig/semantik_d_win.cpp:448 semantik.cpp:564
+#: fig/semantik_d_win.cpp:448 semantik.cpp:567
 msgid " [Modified] "
 msgstr " [Modifié] "
 
@@ -1267,7 +1275,7 @@ msgid "<p align='center'>No preview available<br/>at this time</p>"
 msgstr ""
 "<p align='center'>Aucune prévisualisation<br/>disponible pour le moment</p>"
 
-#: semantik.cpp:50
+#: semantik.cpp:51
 msgid ""
 "The map is empty, Semantik\n"
 "cannot create documents from it"
@@ -1275,73 +1283,73 @@ msgstr ""
 "La carte est vide, Semantik\n"
 "ne peut pas générer de documents"
 
-#: semantik.cpp:50
+#: semantik.cpp:51
 msgid "Empty map"
 msgstr "Carte vide"
 
-#: semantik.cpp:57
+#: semantik.cpp:58
 msgid "Template folder %1 is not readable"
 msgstr "Le dossier des modèles %1 n'est pas disponible"
 
-#: semantik.cpp:175
+#: semantik.cpp:176
 msgid "&Reorganize the map"
 msgstr "&Réorganiser la carte"
 
-#: semantik.cpp:177
+#: semantik.cpp:178
 #, fuzzy
 msgid "Ctrl+R"
 msgstr "Ctrl + Espace"
 
-#: semantik.cpp:180
+#: semantik.cpp:181
 msgid "&Export the map..."
 msgstr "&Exporter la carte..."
 
-#: semantik.cpp:187
+#: semantik.cpp:188
 msgid "&Generate..."
 msgstr "&Générer..."
 
-#: semantik.cpp:190
+#: semantik.cpp:191
 #, fuzzy
 msgid "Ctrl+G"
 msgstr "Ctrl + Espace"
 
-#: semantik.cpp:208
+#: semantik.cpp:209
 msgid "Data"
 msgstr "Données"
 
-#: semantik.cpp:232
+#: semantik.cpp:233
 msgid "Variables"
 msgstr "Variables"
 
-#: semantik.cpp:241
+#: semantik.cpp:242
 msgid "Preview"
 msgstr "Prévisualisation"
 
-#: semantik.cpp:253
+#: semantik.cpp:254
 msgid "Linear view"
 msgstr "Représentation linéaire"
 
-#: semantik.cpp:284
+#: semantik.cpp:285
 msgid "Flag"
 msgstr "Drapeau"
 
-#: semantik.cpp:383
+#: semantik.cpp:384
 msgid "Welcome to Semantik"
 msgstr "Bienvenue dans Semantik"
 
-#: semantik.cpp:461
+#: semantik.cpp:464
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Fichier Semantik (*.sem)"
 
-#: semantik.cpp:553
+#: semantik.cpp:556
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr "*.sem *.kdi *.mm *.vym|Tous les fichiers (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:569
+#: semantik.cpp:572
 msgid "Semantik %1"
 msgstr "Semantik %1"
 
-#: semantik.cpp:573
+#: semantik.cpp:576
 msgid "%1 %2 - Semantik"
 msgstr "%1 %2 - Semantik"
 

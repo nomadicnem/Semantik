@@ -23,10 +23,16 @@ class config_dialog : public KDialog
 		QCheckBox *m_oUseTouchpad;
 		QCheckBox *m_oPreviewPics;
 		QPushButton *m_oColorWidget;
+		QPushButton *m_oArrowWidget;
+		QPushButton *m_oAltArrowWidget;
 		QColor m_oColor;
+		QColor m_oArrowColor;
+		QColor m_oAltArrowColor;
 
 	public slots:
 		void select_color();
+		void select_arrow_color();
+		void select_alt_arrow_color();
 };
 
 #endif
