@@ -468,6 +468,40 @@ void mem_class::init(data_box *i_oBox) {
 
 ///////////////////////////////////////////////////////////////////
 
+mem_entity::mem_entity(sem_mediator* mod, int id) : mem_command(mod),  m_oOldBox(id), m_oNewBox(id)
+{
+	m_iId = id;
+}
+
+void mem_entity::redo() {
+	data_item& item = model->m_oItems[m_iId];
+	data_box *l_oBox = item.m_oBoxes[m_iBoxId];
+	*l_oBox = m_oNewBox;
+
+	QList<data_box*> lst;
+	lst.push_back(l_oBox);
+	model->notify_size_box(m_iId, lst);
+	redo_dirty();
+}
+
+void mem_entity::undo() {
+	data_item& item = model->m_oItems[m_iId];
+	data_box *l_oBox = item.m_oBoxes[m_iBoxId];
+	*l_oBox = m_oOldBox;
+
+	QList<data_box*> lst;
+	lst.push_back(l_oBox);
+	model->notify_size_box(m_iId, lst);
+	undo_dirty();
+}
+
+void mem_entity::init(data_box *i_oBox) {
+	m_iBoxId = i_oBox->m_iId;
+	m_oNewBox = m_oOldBox = *i_oBox;
+}
+
+///////////////////////////////////////////////////////////////////
+
 mem_diagram_properties::mem_diagram_properties(sem_mediator* mod, int id) : mem_command(mod)
 {
 	m_iId = id;

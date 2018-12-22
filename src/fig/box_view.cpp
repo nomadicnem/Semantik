@@ -58,6 +58,7 @@
 #include "box_matrix.h"
 #include "box_frame.h"
 #include "box_class.h"
+#include "box_entity.h"
 #include "data_item.h"
 #include "box_usecase.h"
 #include "box_view.h"
@@ -250,6 +251,9 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	connect(m_oAddFrame, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddClass = new QAction(i18n("Class"), this);
 	connect(m_oAddClass, SIGNAL(triggered()), this, SLOT(slot_add_element()));
+	m_oAddEntity = new QAction(i18n("Entity"), this);
+	connect(m_oAddEntity, SIGNAL(triggered()), this, SLOT(slot_add_element()));
+
 
 	m_oFileImport = new QAction(i18n("Import from file..."), this);
 	connect(m_oFileImport, SIGNAL(triggered()), this, SLOT(slot_import_from_file()));
@@ -300,6 +304,7 @@ void box_view::init_menu()
 	m_oAddBoxMenu->addAction(m_oAddFrame);
 	m_oAddBoxMenu->addAction(m_oAddRectangle);
 	m_oAddBoxMenu->addAction(m_oAddClass);
+	m_oAddBoxMenu->addAction(m_oAddEntity);
 	m_oAddBoxMenu->addAction(m_oAddPipe);
 	m_oAddBoxMenu->addAction(m_oAddDatabase);
 	m_oAddBoxMenu->addAction(m_oAddSequence);
@@ -501,6 +506,10 @@ void box_view::sync_view()
 		else if (box->m_iType == data_box::CLASS)
 		{
 			l_o = new box_class(this, box->m_iId);
+		}
+		else if (box->m_iType == data_box::ENTITY)
+		{
+			l_o = new box_entity(this, box->m_iId);
 		}
 		else if (box->m_iType == data_box::DATABASE)
 		{
@@ -951,6 +960,35 @@ void box_view::slot_add_element()
 			add->box->m_oAttributes.push_back(l_o);
 		}
 	}
+	else if (sender == m_oAddEntity)
+	{
+		add->box->m_iType = data_box::ENTITY;
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
+		add->box->m_iWW = 220;
+		add->box->m_iHH = 80;
+		add->box->m_sText = "MyTable";
+
+		{
+			data_box_entity_value l_o;
+			l_o.m_sName = "id";
+			l_o.m_sKey = "PK";
+			l_o.m_sType = "INTEGER";
+			add->box->m_oEntityValues.push_back(l_o);
+		}
+		{
+			data_box_entity_value l_o;
+			l_o.m_sName = "customer_id";
+			l_o.m_sKey = "FK";
+			l_o.m_sType = "INTEGER";
+			add->box->m_oEntityValues.push_back(l_o);
+		}
+		{
+			data_box_entity_value l_o;
+			l_o.m_sName = "name";
+			l_o.m_sType = "VARCHAR2(50)";
+			add->box->m_oEntityValues.push_back(l_o);
+		}
+	}
 
 	add->apply();
 
@@ -1230,6 +1268,10 @@ void box_view::notify_add_box(int id, int box)
 	else if (db->m_iType == data_box::CLASS)
 	{
 		l_o = new box_class(this, box);
+	}
+	else if (db->m_iType == data_box::ENTITY)
+	{
+		l_o = new box_entity(this, box);
 	}
 	else if (db->m_iType == data_box::ACTIVITY_PARALLEL)
 	{

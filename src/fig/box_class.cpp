@@ -153,7 +153,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 		i_oPainter->drawLine(l_oRect.topLeft() + QPointF(0, l_fHpos +1 + PAD), l_oRect.topRight() + QPointF(0, l_fHpos + 1 + PAD));
 		l_fHpos += 1 + PAD;
 	}
-	foreach (data_box_attribute l_o, m_oBox->m_oAttributes) {
+	foreach (const data_box_attribute &l_o, m_oBox->m_oAttributes) {
 		QRectF l_oR;
 		if (l_o.m_bStatic) {
 			l_oR = l_oUnderlineFm.boundingRect(l_o.m_sText);
@@ -218,7 +218,7 @@ void box_class::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opti
 		l_fHpos += 1 + PAD;
 	}
 
-	foreach (data_box_method l_o, m_oBox->m_oMethods)
+	foreach (const data_box_method &l_o, m_oBox->m_oMethods)
 	{
 		QRectF l_oR;
 		if (l_o.m_bAbstract && l_o.m_bStatic)
@@ -330,7 +330,7 @@ QSizeF box_class::size()
 	{
 		l_iHH += 2 * PAD +  1; // 1 for the line
 	}
-	foreach (data_box_method l_o, m_oBox->m_oMethods)
+	foreach (const data_box_method &l_o, m_oBox->m_oMethods)
 	{
 		QRectF l_oR;
 
@@ -357,7 +357,7 @@ QSizeF box_class::size()
 	if (m_oBox->m_oAttributes.size() > 0) {
 		l_iHH += 2 * PAD + 1; // 1 for the line
 	}
-	foreach (data_box_attribute l_o, m_oBox->m_oAttributes) {
+	foreach (const data_box_attribute &l_o, m_oBox->m_oAttributes) {
 		QRectF l_oR;
 		if (l_o.m_bStatic) {
 			l_oR = l_oUnderlineFm.boundingRect(l_o.m_sText);
@@ -419,21 +419,21 @@ void box_class::properties()
 	QStringList l_oS;
 
 	if (props.m_oClass->m_oBox->m_bStatic) {
-		l_oS<<notr("static\t");
+		l_oS<<notr("static ");
 	}
 	if (props.m_oClass->m_oBox->m_bAbstract) {
-		l_oS<<notr("abstract\t");
+		l_oS<<notr("abstract ");
 	}
 
-	l_oS<<notr("class\t");
+	l_oS<<notr("class ");
 	l_oS<<props.m_oClass->m_oBox->m_sText<<notr("\n");
 	if (!props.m_oClass->m_oBox->m_sStereotype.isEmpty()) {
-		l_oS<<notr("stereotype\t")<<props.m_oClass->m_oBox->m_sStereotype<<notr("\n");
+		l_oS<<notr("stereotype ")<<props.m_oClass->m_oBox->m_sStereotype<<notr("\n");
 	}
 
 	l_oS<<notr("\n");
 
-	foreach (data_box_attribute l_o, m_oBox->m_oAttributes) {
+	foreach (const data_box_attribute &l_o, m_oBox->m_oAttributes) {
 		if (l_o.m_oVisibility == visibility::PUBLIC) {
 			l_oS<<notr("public\t");
 		} else if (l_o.m_oVisibility == visibility::PROTECTED) {
@@ -455,7 +455,7 @@ void box_class::properties()
 
 	l_oS<<notr("\n");
 
-	foreach (data_box_method l_o, m_oBox->m_oMethods) {
+	foreach (const data_box_method &l_o, m_oBox->m_oMethods) {
 		if (l_o.m_oVisibility == visibility::PUBLIC) {
 			l_oS<<notr("public\t");
 		} else if (l_o.m_oVisibility == visibility::PROTECTED) {

@@ -30,11 +30,7 @@
 class_editor::class_editor(QWidget *i_oParent) : QTextEdit(i_oParent)
 {
 	new class_highlighter(document());
-	//setStyleSheet("font-family: \"DejaVu Sans Mono\", \"Courier New\", Courier, monospace;");
-
-	QFont l_oFont = currentFont();
-	l_oFont.setStyleHint(QFont::Monospace);
-	setFont(l_oFont);
+	setStyleSheet("QTextEdit { font-family: monospace;}");
 
 	m_oCompleter = NULL;
 	startup = true;
@@ -299,7 +295,8 @@ void box_class_properties::apply() {
 
 		QRegExp rm("^(public|private|protected|package|derived)\\s*(static|abstract)?\\s*(static|abstract)?\\s*(\\w.*)");
 		QRegExp rs("^stereotype\\s*(\\w.*)");
-		for (int i=1; i < l_oTmp.size() - 1; ++i) {
+		for (int i=1; i < l_oTmp.size(); ++i)
+		{
 			QString l_s = l_oTmp[i];
 			if (rm.indexIn(l_s) >= 0) {
 				QString l_sData = rm.cap(4);

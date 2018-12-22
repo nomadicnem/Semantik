@@ -125,6 +125,17 @@ class data_box_attribute : public node
 		virtual void dump_xml(QStringList & other);
 };
 
+class data_box_entity_value : public node
+{
+	public:
+		QString m_sName;
+		QString m_sType;
+		QString m_sKey;
+
+		virtual void read_data(const QString&, const QXmlAttributes&);
+		virtual void dump_xml(QStringList&);
+};
+
 class data_box : public diagram_item, public node
 {
 	public:
@@ -142,7 +153,7 @@ class data_box : public diagram_item, public node
 	int m_iHH;
 	enum IType { ACTIVITY=1, ACTIVITY_START=2, ACTIVITY_PARALLEL=3, LABEL=4, COMPONENT=5, NODE=6, \
 		ACTOR=7, USECASE=8, DECISION=9, MATRIX=10, FRAME=11, CLASS=12, CAPTION=13, DATABASE=14,
-                RECTANGLE=15, PIPE=16, SEQUENCE=17};
+                RECTANGLE=15, PIPE=16, SEQUENCE=17, ENTITY=18};
 	data_box::IType m_iType;
 
 	node& make_node(const QString&, const QXmlAttributes&);
@@ -170,6 +181,9 @@ class data_box : public diagram_item, public node
 	QString m_sStereotype;
 	QList<data_box_method> m_oMethods;
 	QList<data_box_attribute> m_oAttributes;
+
+	// entity
+	QList<data_box_entity_value> m_oEntityValues;
 };
 
 class data_pic

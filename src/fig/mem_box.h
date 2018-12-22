@@ -221,6 +221,22 @@ class mem_class : public mem_command {
 		IType type() { return CHANGE_CLASS_BOX; }
 };
 
+class mem_entity : public mem_command {
+	public:
+		mem_entity(sem_mediator*, int);
+		void init(data_box*);
+		void undo();
+		void redo();
+
+		int m_iId;
+		int m_iBoxId;
+
+		data_box m_oOldBox;
+		data_box m_oNewBox;
+
+		IType type() { return CHANGE_ENTITY_BOX; }
+};
+
 class mem_diagram_properties : public mem_command {
 	public:
 		mem_diagram_properties(sem_mediator*, int);

@@ -50,6 +50,23 @@ void node::dump_xml(QStringList & other)
 	}
 }
 
+void data_box_entity_value::read_data(const QString& i_sName, const QXmlAttributes& i_oAttrs)
+{
+	Q_ASSERT(i_sName == QString("box_entity_val"));
+	m_sName = i_oAttrs.value(notr("name"));
+	m_sType = i_oAttrs.value(notr("type"));
+	m_sKey  = i_oAttrs.value(notr("key"));
+}
+
+void data_box_entity_value::dump_xml(QStringList& i_oS)
+{
+	i_oS<<notr("          <box_entity_val name=\"%1\" type=\"%2\" key=\"%3\"/>\n").arg(
+		bind_node::protectXML(m_sName),
+		bind_node::protectXML(m_sType),
+		bind_node::protectXML(m_sKey)
+	);
+}
+
 data_item::data_item(int i_iId)
 {
 	m_iDataType = VIEW_TEXT;
@@ -192,14 +209,15 @@ data_box& data_box::operator=(const data_box & i_o)
 	m_iHH = i_o.m_iHH;
 	m_oCustom.m_oInnerColor = i_o.m_oCustom.m_oInnerColor;
 
-	m_oRowSizes = i_o.m_oRowSizes;
-	m_oColSizes = i_o.m_oColSizes;
+	m_oRowSizes     = i_o.m_oRowSizes;
+	m_oColSizes     = i_o.m_oColSizes;
 
-	m_bStatic     = i_o.m_bStatic;
-	m_bAbstract   = i_o.m_bAbstract;
-	m_sStereotype = i_o.m_sStereotype;
-	m_oMethods    = i_o.m_oMethods;
-	m_oAttributes = i_o.m_oAttributes;
+	m_bStatic       = i_o.m_bStatic;
+	m_bAbstract     = i_o.m_bAbstract;
+	m_sStereotype   = i_o.m_sStereotype;
+	m_oMethods      = i_o.m_oMethods;
+	m_oAttributes   = i_o.m_oAttributes;
+	m_oEntityValues = i_o.m_oEntityValues;
 	return *this;
 }
 
@@ -255,6 +273,15 @@ void data_box::dump_xml(QStringList & i_oS)
 			l_o.dump_xml(i_oS);
 		}
 		i_oS<<notr("      </box_class>\n");
+	}
+	else if (m_iType == data_box::ENTITY)
+	{
+		i_oS<<notr("<box_entity>\n");
+		foreach (data_box_entity_value l_oValue, m_oEntityValues)
+		{
+			l_oValue.dump_xml(i_oS);
+		}
+		i_oS<<notr("</box_entity>\n");
 	}
 
 	//node::dump_xml(i_oS);
@@ -351,6 +378,14 @@ node& data_box::make_node(const QString& i_sName, const QXmlAttributes& i_oAttrs
 		m_bAbstract = i_oAttrs.value(notr("abstract")).toInt();
 		m_sStereotype = i_oAttrs.value(notr("stereotype"));
 	}
+	else if (i_sName == notr("box_entity_val"))
+	{
+		data_box_entity_value l_o;
+		l_o.read_data(i_sName, i_oAttrs);
+		m_oEntityValues.push_back(l_o);
+		return m_oEntityValues.last();
+	}
+
 	return *this;
 	// return node::make_node(i_sName, i_oAttrs);
 }

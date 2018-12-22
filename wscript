@@ -21,6 +21,7 @@ def build(bld):
 		source = bld.path.ant_glob('src/fig/*.cpp src/base/*.cpp', excl=lst),
 		target = 'semantik',
 		moc = '''src/base/flag_scheme.h src/base/sem_mediator.h
+src/fig/box_entity_properties.h
 src/fig/box_class_properties.h
 src/fig/box_link_properties.h
 src/fig/box_frame_properties.h
