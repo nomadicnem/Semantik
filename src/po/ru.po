@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semantik\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-20 15:35+0100\n"
+"POT-Creation-Date: 2018-12-23 12:08+0100\n"
 "PO-Revision-Date: 2015-02-08 01:01+0300\n"
 "Last-Translator: AlexL <loginov.alex.valer@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: base/data_item.cpp:59 canvas_view.cpp:249 canvas_view.cpp:301
+#: base/data_item.cpp:76 canvas_view.cpp:249 canvas_view.cpp:301
 #: canvas_view.cpp:313
 msgid "Empty"
 msgstr "Пусто"
@@ -145,7 +145,7 @@ msgstr "Полноэкранный режим"
 msgid "Add an element"
 msgstr "Добавить элемент"
 
-#: canvas_view.cpp:96 fig/box_view.cpp:204
+#: canvas_view.cpp:96 fig/box_view.cpp:205
 msgid "Delete selection"
 msgstr "Удалить выбранное"
 
@@ -221,26 +221,26 @@ msgstr "Картинка"
 msgid "Click to set Item %1"
 msgstr "Нажмите, чтобы установить объект %1"
 
-#: canvas_view.cpp:1258 fig/box_view.cpp:2177
+#: canvas_view.cpp:1258 fig/box_view.cpp:2219
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1296 fig/box_view.cpp:2215
+#: canvas_view.cpp:1296 fig/box_view.cpp:2257
 msgid "No destination file selected"
 msgstr "Не выбран файл назначения"
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2239
+#: canvas_view.cpp:1320 fig/box_view.cpp:2281
 msgid "Exported '%1'"
 msgstr "'%1' экспортирован"
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2241
+#: canvas_view.cpp:1322 fig/box_view.cpp:2283
 msgid "Could not save to %1"
 msgstr "Не удалось сохранить %1"
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2241
+#: canvas_view.cpp:1322 fig/box_view.cpp:2283
 msgid "Missing picture"
 msgstr "Отсутствует картинка"
 
@@ -248,15 +248,15 @@ msgstr "Отсутствует картинка"
 msgid "Semantik map"
 msgstr "Карта Semantik"
 
-#: canvas_view.cpp:1688 fig/box_view.cpp:2102
+#: canvas_view.cpp:1688 fig/box_view.cpp:2144
 msgid "Printing cancelled"
 msgstr "Печать отменена"
 
-#: canvas_view.cpp:1699 fig/box_view.cpp:2115
+#: canvas_view.cpp:1699 fig/box_view.cpp:2157
 msgid "Printing completed"
 msgstr "Печать завершена"
 
-#: canvas_view.cpp:1703 fig/box_view.cpp:2119
+#: canvas_view.cpp:1703 fig/box_view.cpp:2161
 msgid "Problem during printing :-("
 msgstr "Проблема при печати :-("
 
@@ -542,23 +542,23 @@ msgstr "Свойства ссылки"
 msgid "Caption:"
 msgstr "Расположение"
 
-#: fig/box_class_properties.cpp:90 vars_view.cpp:77
+#: fig/box_class_properties.cpp:86 vars_view.cpp:77
 msgid "Code complete"
 msgstr "Код готов"
 
-#: fig/box_class_properties.cpp:91 vars_view.cpp:78
+#: fig/box_class_properties.cpp:87 vars_view.cpp:78
 msgid "Ctrl+space"
 msgstr "Ctrl+пробел"
 
-#: fig/box_class_properties.cpp:247
+#: fig/box_class_properties.cpp:243
 msgid "Class properties"
 msgstr "Свойства класса"
 
-#: fig/box_class_properties.cpp:284
+#: fig/box_class_properties.cpp:280
 msgid "No class name given"
 msgstr "Классу не дано имя"
 
-#: fig/box_class_properties.cpp:284
+#: fig/box_class_properties.cpp:280
 msgid "Missing class name"
 msgstr "Отсутствует имя класса"
 
@@ -566,6 +566,21 @@ msgstr "Отсутствует имя класса"
 #, fuzzy
 msgid "Font properties"
 msgstr "Свойства ссылки"
+
+#: fig/box_entity_properties.cpp:75
+#, fuzzy
+msgid "Entity properties"
+msgstr "Свойства ссылки"
+
+#: fig/box_entity_properties.cpp:112
+#, fuzzy
+msgid "No entity name given"
+msgstr "Классу не дано имя"
+
+#: fig/box_entity_properties.cpp:112
+#, fuzzy
+msgid "Missing entity name"
+msgstr "Отсутствует имя класса"
 
 #: fig/box_fork.cpp:331 fig/box_item.cpp:300
 msgid "%1 x %2"
@@ -699,192 +714,196 @@ msgstr "Строка %1: %2px (размер: %3 x %4)"
 msgid "%1 x %2 (%3+%4)"
 msgstr "%1 x %2"
 
-#: fig/box_view.cpp:194
+#: fig/box_view.cpp:195
 msgid "Properties..."
 msgstr "Свойства..."
 
-#: fig/box_view.cpp:199
+#: fig/box_view.cpp:200
 msgid "Activity"
 msgstr "Деятельность"
 
-#: fig/box_view.cpp:200
+#: fig/box_view.cpp:201
 msgid "Ctrl+Return"
 msgstr "Ctrl+Enter"
 
-#: fig/box_view.cpp:205
+#: fig/box_view.cpp:206
 msgid "Delete"
 msgstr "Удалить"
 
-#: fig/box_view.cpp:209
+#: fig/box_view.cpp:210
 msgid "Raise"
 msgstr "Поднять"
 
-#: fig/box_view.cpp:210
+#: fig/box_view.cpp:211
 msgid "PgUp"
 msgstr "PgUp"
 
-#: fig/box_view.cpp:214
+#: fig/box_view.cpp:215
 msgid "Send back"
 msgstr "Отправить назад"
 
-#: fig/box_view.cpp:215
+#: fig/box_view.cpp:216
 msgid "PgDown"
 msgstr "PgDown"
 
-#: fig/box_view.cpp:219
+#: fig/box_view.cpp:220
 msgid "Floating text"
 msgstr "Плавающий текст"
 
-#: fig/box_view.cpp:221
+#: fig/box_view.cpp:222
 msgid "Component"
 msgstr "Компонент"
 
-#: fig/box_view.cpp:223
+#: fig/box_view.cpp:224
 msgid "Rectangle"
 msgstr ""
 
-#: fig/box_view.cpp:225
+#: fig/box_view.cpp:226
 msgid "Node"
 msgstr "Узел"
 
-#: fig/box_view.cpp:227
+#: fig/box_view.cpp:228
 msgid "Decision"
 msgstr "Решение"
 
-#: fig/box_view.cpp:229
+#: fig/box_view.cpp:230
 msgid "Database"
 msgstr "База данных"
 
-#: fig/box_view.cpp:231
+#: fig/box_view.cpp:232
 msgid "Pipe"
 msgstr ""
 
-#: fig/box_view.cpp:233
+#: fig/box_view.cpp:234
 msgid "Sequence"
 msgstr ""
 
-#: fig/box_view.cpp:235
+#: fig/box_view.cpp:236
 msgid "Activity start"
 msgstr "Начало деятельности"
 
-#: fig/box_view.cpp:237
+#: fig/box_view.cpp:238
 msgid "Activity end"
 msgstr "Конец деятельности"
 
-#: fig/box_view.cpp:239
+#: fig/box_view.cpp:240
 msgid "Horizontal fork/join"
 msgstr "Горизонтальное разветвление/присоединение"
 
-#: fig/box_view.cpp:241
+#: fig/box_view.cpp:242
 msgid "Vertical fork/join"
 msgstr "Вертикальное разветвление/присоединение"
 
-#: fig/box_view.cpp:243
+#: fig/box_view.cpp:244
 msgid "Actor"
 msgstr "Привязка"
 
-#: fig/box_view.cpp:245
+#: fig/box_view.cpp:246
 msgid "Usecase"
 msgstr "Вариант использования"
 
-#: fig/box_view.cpp:247
+#: fig/box_view.cpp:248
 msgid "Matrix"
 msgstr "Матрица"
 
-#: fig/box_view.cpp:249
+#: fig/box_view.cpp:250
 msgid "Boundary"
 msgstr "Граница"
 
-#: fig/box_view.cpp:251
+#: fig/box_view.cpp:252
 msgid "Class"
 msgstr "Класс"
 
 #: fig/box_view.cpp:254
+msgid "Entity"
+msgstr ""
+
+#: fig/box_view.cpp:258
 msgid "Import from file..."
 msgstr "Импортировать из файла..."
 
-#: fig/box_view.cpp:256
+#: fig/box_view.cpp:260
 msgid "Export to file..."
 msgstr "Экспортировать в файл..."
 
-#: fig/box_view.cpp:258
+#: fig/box_view.cpp:262
 msgid "Copy image to clipboard"
 msgstr "Копировать изображение в буфер обмена"
 
-#: fig/box_view.cpp:279
+#: fig/box_view.cpp:283
 msgid "File operations"
 msgstr "Файловые операции"
 
-#: fig/box_view.cpp:291
+#: fig/box_view.cpp:295
 msgid "More elements"
 msgstr "Ещё элементы"
 
-#: fig/box_view.cpp:332
+#: fig/box_view.cpp:337
 #, fuzzy
 msgid "Text Alignment"
 msgstr "Выравнивание"
 
-#: fig/box_view.cpp:334 fig/box_view.cpp:340
+#: fig/box_view.cpp:339 fig/box_view.cpp:345
 msgid "Align left"
 msgstr "Выровнять по левому краю"
 
-#: fig/box_view.cpp:335 fig/box_view.cpp:341
+#: fig/box_view.cpp:340 fig/box_view.cpp:346
 msgid "Align center"
 msgstr "Выровнять по центру"
 
-#: fig/box_view.cpp:336 fig/box_view.cpp:342
+#: fig/box_view.cpp:341 fig/box_view.cpp:347
 msgid "Align right"
 msgstr "Привязка справа"
 
-#: fig/box_view.cpp:338
+#: fig/box_view.cpp:343
 msgid "Alignment"
 msgstr "Выравнивание"
 
-#: fig/box_view.cpp:344
+#: fig/box_view.cpp:349
 msgid "Align top"
 msgstr "Выровнять по верху"
 
-#: fig/box_view.cpp:345
+#: fig/box_view.cpp:350
 msgid "Align middle"
 msgstr "Выровнять по середине"
 
-#: fig/box_view.cpp:346
+#: fig/box_view.cpp:351
 msgid "Align bottom"
 msgstr "Выровнять по низу"
 
-#: fig/box_view.cpp:349
+#: fig/box_view.cpp:354
 msgid "Size"
 msgstr "Размер"
 
-#: fig/box_view.cpp:351
+#: fig/box_view.cpp:356
 msgid "Same width"
 msgstr "Такая же ширина"
 
-#: fig/box_view.cpp:352
+#: fig/box_view.cpp:357
 msgid "Same height"
 msgstr "Такая же высота"
 
-#: fig/box_view.cpp:353
+#: fig/box_view.cpp:358
 msgid "Same width and height"
 msgstr "Такая же ширина и высота"
 
-#: fig/box_view.cpp:613 fig/box_view.cpp:2062
+#: fig/box_view.cpp:622 fig/box_view.cpp:2104
 msgid "Semantik diagram"
 msgstr "Диаграмма Semantik"
 
-#: fig/box_view.cpp:1814 fig/semantik_d_win.cpp:329
+#: fig/box_view.cpp:1856 fig/semantik_d_win.cpp:329
 msgid "Choose a file to open"
 msgstr "Укажите имя файла для открытия"
 
-#: fig/box_view.cpp:1816 fig/box_view.cpp:1854 fig/semantik_d_win.cpp:331
+#: fig/box_view.cpp:1858 fig/box_view.cpp:1896 fig/semantik_d_win.cpp:331
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.semd|Диаграмма Semantik (*.semd)"
 
-#: fig/box_view.cpp:1852 semantik.cpp:462 semantik.cpp:554
+#: fig/box_view.cpp:1894 semantik.cpp:462 semantik.cpp:554
 msgid "Choose a file name"
 msgstr "Укажите имя файла"
 
-#: fig/box_view.cpp:1868 semantik.cpp:477
+#: fig/box_view.cpp:1910 semantik.cpp:477
 msgid ""
 "The file \"%1\" already exists.\n"
 "Overwrite it?"
@@ -892,22 +911,22 @@ msgstr ""
 "Файл \"%1\" уже существует.\n"
 "Переписать его?"
 
-#: fig/box_view.cpp:1869 semantik.cpp:478
+#: fig/box_view.cpp:1911 semantik.cpp:478
 msgid "Overwrite existing file"
 msgstr "Переписать существующий файл"
 
-#: fig/box_view.cpp:1892 fig/box_view.cpp:1927 semantik.cpp:489
+#: fig/box_view.cpp:1934 fig/box_view.cpp:1969 semantik.cpp:489
 #: semantik.cpp:525
 msgid "Saved '%1'"
 msgstr "«%1» сохранён"
 
-#: fig/box_view.cpp:1899 semantik.cpp:500 semantik.cpp:531
+#: fig/box_view.cpp:1941 semantik.cpp:500 semantik.cpp:531
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1900 semantik.cpp:501 semantik.cpp:532
+#: fig/box_view.cpp:1942 semantik.cpp:501 semantik.cpp:532
 msgid "Try again?"
 msgstr ""
 
