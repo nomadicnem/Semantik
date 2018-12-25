@@ -1,6 +1,7 @@
 Semantik 1.2.1
 --------------
 * Fix duplicate reference values
+* Fix the double prompt for overwriting files
 
 Semantik 1.2.0
 --------------

@@ -469,21 +469,6 @@ bool semantik_win::slot_save_as()
 		l_o = QUrl(l_o.path()+notr(".sem"));
 	}
 
-	if (m_oMediator->m_sLastSaved != l_o.path())
-	{
-		if (l_o.isLocalFile() && QFile::exists(l_o.path()))
-		{
-			int mu = KMessageBox::questionYesNo(NULL, //this,
-			i18n("The file \"%1\" already exists.\nOverwrite it?", l_o.path()),
-			i18n("Overwrite existing file"),
-			KStandardGuiItem::yes(),
-			KStandardGuiItem::no(),
-			notr("OverwriteExistingFile"));
-			if (!mu)
-				goto choose;
-		}
-	}
-
 	if (m_oMediator->save_file(l_o.path()))
 	{
 		statusBar()->showMessage(i18n("Saved '%1'", l_o.path()), 2000);

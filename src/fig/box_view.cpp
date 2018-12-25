@@ -1901,23 +1901,6 @@ bool box_view::slot_export_to_file() {
 		l_o = QUrl(l_o.path()+notr(".semd"));
 	}
 
-	// TODO?
-	//if (m_oMediator->m_sLastSaved != l_o.path())
-	{
-		if (l_o.isLocalFile() && QFile::exists(l_o.path()))
-		{
-			int mu = KMessageBox::questionYesNo(NULL, //this,
-			i18n("The file \"%1\" already exists.\nOverwrite it?", l_o.path()),
-			i18n("Overwrite existing file"),
-			KStandardGuiItem::yes(),
-			KStandardGuiItem::no(),
-			notr("OverwriteExistingFile"));
-			if (!mu) {
-				goto choose_export;
-			}
-		}
-	}
-
 	m_oCurrentUrl = l_o;
 	emit sig_Url(m_oCurrentUrl);
 
