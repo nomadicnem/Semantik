@@ -1,3 +1,7 @@
+Semantik 1.2.1
+--------------
+* Fix duplicate reference values
+
 Semantik 1.2.0
 --------------
 * Add support for references (Kdissert) #91

@@ -170,6 +170,11 @@ data_ref::data_ref(int i_iParent, int i_iChild)
 	m_iChild = i_iChild;
 }
 
+bool data_ref::operator==(const data_ref& i_oA)
+{
+	return i_oA.m_iParent == m_iParent && i_oA.m_iChild == m_iChild;
+}
+
 diagram_item::diagram_item()
 {
 	pen_style = Qt::SolidLine;
@@ -526,4 +531,5 @@ const QColor & diagram_item::getColor(sem_mediator* i_oMediator) const
 data_item::data_item()
 {
 }
+
 

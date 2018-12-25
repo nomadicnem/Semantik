@@ -141,7 +141,11 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		int b = i_oAttrs.value(notr("v")).toInt();
 		if (!m_oMediator->m_oItems.contains(a)) return false;
 		if (!m_oMediator->m_oItems.contains(b)) return false;
-		m_oMediator->m_oLinks.append(QPoint(a, b));
+		QPoint l_oP = QPoint(a, b);
+		if (!m_oMediator->m_oLinks.contains(l_oP))
+		{
+			m_oMediator->m_oLinks.append(l_oP);
+		}
 	}
 	else if (i_sName == notr("ref"))
 	{
@@ -149,16 +153,22 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		int l_iV = i_oAttrs.value(notr("v")).toInt();
 		if (!m_oMediator->m_oItems.contains(l_iP)) return false;
 		if (!m_oMediator->m_oItems.contains(l_iV)) return false;
-		m_oMediator->m_oRefs.append(data_ref(l_iP, l_iV));
+		data_ref l_oRef(l_iP, l_iV);
+		if (!m_oMediator->m_oRefs.contains(l_oRef))
+		{
+			m_oMediator->m_oRefs.append(l_oRef);
+		}
 	}
 	else if (i_sName == notr("tblsettings"))
 	{
+		if (!m_oMediator->m_oItems.contains(m_iId)) return false;
 		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		l_oItem.m_iNumRows = i_oAttrs.value(notr("rows")).toInt();
 		l_oItem.m_iNumCols = i_oAttrs.value(notr("cols")).toInt();
 	}
 	else if (i_sName == notr("linkbox"))
 	{
+		if (!m_oMediator->m_oItems.contains(m_iId)) return false;
 		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		cur_link = new data_link();
 		l_oItem.m_oLinks.append(cur_link);
@@ -195,9 +205,26 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 	}
 	else if (i_sName == notr("tbl"))
 	{
+		if (!m_oMediator->m_oItems.contains(m_iId)) return false;
 		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		int row = i_oAttrs.value(notr("row")).toInt();
 		int col = i_oAttrs.value(notr("col")).toInt();
+		if (row >= l_oItem.m_iNumRows)
+		{
+			qDebug()<<"Found a row outside the specified dimension"<<row<<l_oItem.m_iNumRows<<m_iId;
+			return false;
+		}
+		if (col >= l_oItem.m_iNumCols)
+		{
+			qDebug()<<"Found a column outside the specified dimension"<<col<<l_oItem.m_iNumCols<<m_iId;
+			return false;
+		}
+		if (row < 0 || col < 0)
+		{
+			qDebug()<<"Invalid row/column"<<row<<col<<m_iId;
+			return false;
+		}
+
 		QPair<int, int> p(row, col);
 		l_oItem.m_oTableData[p] = i_oAttrs.value(notr("text"));
 	}
@@ -229,6 +256,11 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 
 		l_oItem.m_iNumRows = i_oAttrs.value(notr("tbl_rows")).toInt();
 		l_oItem.m_iNumCols = i_oAttrs.value(notr("tbl_cols")).toInt();
+		if (l_oItem.m_iNumRows < 0 || l_oItem.m_iNumRows > 1000 || l_oItem.m_iNumCols < 0 || l_oItem.m_iNumCols > 1000)
+		{
+			qDebug()<<"Invalid row/column value"<<m_iId<<l_oItem.m_iNumRows<<l_oItem.m_iNumCols;
+			return false;
+		}
 
 		l_oItem.m_sDiag = i_oAttrs.value(notr("dg"));
 
@@ -262,11 +294,13 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 	}
 	else if (i_sName == notr("flag"))
 	{
+		if (!m_oMediator->m_oItems.contains(m_iId)) return false;
 		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		l_oItem.m_oFlags.push_back(i_oAttrs.value(notr("id")));
 	}
 	else if (i_sName == notr("itembox"))
 	{
+		if (!m_oMediator->m_oItems.contains(m_iId)) return false;
 		data_item& l_oItem = m_oMediator->m_oItems[m_iId];
 		int bid = i_oAttrs.value(notr("id")).toInt();
 		data_box *box = new data_box(bid);
@@ -608,14 +642,17 @@ QString sem_mediator::doc_to_xml()
 			QString::number(l_oItem.m_iNumRows), QString::number(l_oItem.m_iNumCols));
 
 
-		QPair<int, int> p;
-		foreach (p, l_oItem.m_oTableData.keys())
+		QPair<int, int> l_oP;
+		foreach (l_oP, l_oItem.m_oTableData.keys())
 		{
-			l_oS<<notr("<tbl");
-			l_oS<<notr(" row=\"%1\"").arg(QString::number(p.first));
-			l_oS<<notr(" col=\"%1\"").arg(QString::number(p.second));
-			l_oS<<notr(" text=\"%1\"").arg(bind_node::protectXML(l_oItem.m_oTableData[p]));
-			l_oS<<notr("/>\n");
+			if (!l_oItem.m_oTableData[l_oP].isEmpty())
+			{
+				l_oS<<notr("<tbl");
+				l_oS<<notr(" row=\"%1\"").arg(QString::number(l_oP.first));
+				l_oS<<notr(" col=\"%1\"").arg(QString::number(l_oP.second));
+				l_oS<<notr(" text=\"%1\"").arg(bind_node::protectXML(l_oItem.m_oTableData[l_oP]));
+				l_oS<<notr("/>\n");
+			}
 		}
 
 		foreach (QString l_s, l_oItem.m_oFlags)
@@ -921,8 +958,6 @@ bool sem_mediator::ref_items(int i_iParent, int i_iChild)
 			return false;
 		}
 	}
-	data_ref l_oRef(i_iParent, i_iChild);
-	m_oRefs.push_back(l_oRef);
 
 	mem_ref *l_oMem = new mem_ref(this);
 	l_oMem->m_iParent = i_iParent;
