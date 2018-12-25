@@ -38,6 +38,7 @@ class mem_delete : public mem_command {
 
 		QList<data_item> items;
 		QSet<QPoint> links;
+		QSet<data_ref> m_oRefs;
 
 		IType type() { return DELETE; }
 };

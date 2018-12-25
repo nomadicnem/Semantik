@@ -13,6 +13,10 @@ inline uint qHash(const QPoint &p) {
 	return p.x() + 100000 * p.y();
 }
 
+inline uint qHash(const data_ref &i_oRef) {
+	return i_oRef.m_iParent + 100000 * i_oRef.m_iChild;
+}
+
 
 mem_command::mem_command(sem_mediator* mod) {
 	model = mod;
@@ -57,10 +61,22 @@ void mem_delete::init(QList<int> lst) {
 				links.insert(p);
 			}
 		}
+		foreach (const data_ref &l_oRef, model->m_oRefs)
+		{
+			if (l_oRef.m_iParent == id || l_oRef.m_iChild == id)
+			{
+				m_oRefs.insert(l_oRef);
+			}
+		}
 	}
 }
 
 void mem_delete::redo() {
+	foreach (const data_ref &l_oRef, m_oRefs) {
+		Q_ASSERT(model->m_oRefs.contains(l_oRef));
+		model->m_oRefs.removeAll(l_oRef);
+		model->notify_unref_items(l_oRef.m_iParent, l_oRef.m_iChild);
+	}
 	foreach (QPoint p, links) {
 		Q_ASSERT(model->m_oLinks.contains(p));
 		model->m_oLinks.removeAll(p);
@@ -84,6 +100,11 @@ void mem_delete::undo() {
 		Q_ASSERT(!model->m_oLinks.contains(p));
 		model->m_oLinks.append(p);
 		model->notify_link_items(p.x(), p.y());
+	}
+	foreach (const data_ref &l_oRef, m_oRefs) {
+		Q_ASSERT(!model->m_oRefs.contains(l_oRef));
+		model->m_oRefs.append(l_oRef);
+		model->notify_ref_items(l_oRef.m_iParent, l_oRef.m_iChild);
 	}
 	undo_dirty();
 }
