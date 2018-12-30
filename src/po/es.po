@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-23 12:08+0100\n"
+"POT-Creation-Date: 2018-12-30 16:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,107 +20,107 @@ msgstr "Vacio"
 msgid "Flag item(s) as..."
 msgstr ""
 
-#: base/sem_mediator.cpp:338
+#: base/sem_mediator.cpp:372
 msgid "Automatic save failed for file: %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:341
+#: base/sem_mediator.cpp:375
 msgid "%1 saved automatically"
 msgstr ""
 
-#: base/sem_mediator.cpp:360
+#: base/sem_mediator.cpp:394
 msgid "Color %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:692
+#: base/sem_mediator.cpp:729
 msgid "File saving: missing file %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:717 base/sem_mediator.cpp:1346
-#: base/sem_mediator.cpp:1397
+#: base/sem_mediator.cpp:754 base/sem_mediator.cpp:1381
+#: base/sem_mediator.cpp:1432
 msgid "Missing bindings for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:744
+#: base/sem_mediator.cpp:781
 msgid "Missing filter file %1 for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:744 base/sem_mediator.cpp:758
-#: base/sem_mediator.cpp:764
+#: base/sem_mediator.cpp:781 base/sem_mediator.cpp:795
+#: base/sem_mediator.cpp:801
 msgid "Broken installation"
 msgstr ""
 
-#: base/sem_mediator.cpp:758
+#: base/sem_mediator.cpp:795
 msgid "Missing python bindings for opening files"
 msgstr ""
 
-#: base/sem_mediator.cpp:764
+#: base/sem_mediator.cpp:801
 msgid "Python execution failure"
 msgstr ""
 
-#: base/sem_mediator.cpp:776
+#: base/sem_mediator.cpp:813
 msgid "Could not load the document %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:776 base/sem_mediator.cpp:795
-#: base/sem_mediator.cpp:812 base/sem_mediator.cpp:853
-#: base/sem_mediator.cpp:862
+#: base/sem_mediator.cpp:813 base/sem_mediator.cpp:832
+#: base/sem_mediator.cpp:849 base/sem_mediator.cpp:890
+#: base/sem_mediator.cpp:899
 msgid "Broken document"
 msgstr ""
 
-#: base/sem_mediator.cpp:795 base/sem_mediator.cpp:812
+#: base/sem_mediator.cpp:832 base/sem_mediator.cpp:849
 msgid "Could not load the picture %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:853
+#: base/sem_mediator.cpp:890
 msgid "Something is wrong with %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:862
+#: base/sem_mediator.cpp:899
 msgid "Rename the picture %1 to %2 failed"
 msgstr ""
 
-#: base/sem_mediator.cpp:901 base/sem_mediator.cpp:906
+#: base/sem_mediator.cpp:938 base/sem_mediator.cpp:943
 msgid "Cannot create a reference: a direct link already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:915 base/sem_mediator.cpp:920
+#: base/sem_mediator.cpp:952 base/sem_mediator.cpp:957
 msgid "Cannot create a reference: a reference already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:947
+#: base/sem_mediator.cpp:982
 msgid "Cannot create a link: only one root is allowed (try references?)"
 msgstr ""
 
-#: base/sem_mediator.cpp:964
+#: base/sem_mediator.cpp:999
 msgid "Cannot create a link: cycles are not allowed (try references?)"
 msgstr ""
 
-#: base/sem_mediator.cpp:978 base/sem_mediator.cpp:983
+#: base/sem_mediator.cpp:1013 base/sem_mediator.cpp:1018
 msgid "Cannot create a link: a reference already exists"
 msgstr ""
 
-#: base/sem_mediator.cpp:1281
+#: base/sem_mediator.cpp:1316
 msgid "Code generation failed: no root item"
 msgstr ""
 
-#: base/sem_mediator.cpp:1288
+#: base/sem_mediator.cpp:1323
 msgid "Code generation failed: missing file %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1306
+#: base/sem_mediator.cpp:1341
 msgid "Could not rename the output folder %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1315
+#: base/sem_mediator.cpp:1350
 msgid "Could not create the output folder %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1354
+#: base/sem_mediator.cpp:1389
 msgid "Document generation failed, check the output folder"
 msgstr ""
 
-#: base/sem_mediator.cpp:1358
+#: base/sem_mediator.cpp:1393
 msgid "Document generation completed successfully"
 msgstr ""
 
@@ -208,26 +208,26 @@ msgstr ""
 msgid "Click to set Item %1"
 msgstr ""
 
-#: canvas_view.cpp:1258 fig/box_view.cpp:2219
+#: canvas_view.cpp:1258 fig/box_view.cpp:2202
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1296 fig/box_view.cpp:2257
+#: canvas_view.cpp:1296 fig/box_view.cpp:2240
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2281
+#: canvas_view.cpp:1320 fig/box_view.cpp:2264
 msgid "Exported '%1'"
 msgstr ""
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2283
+#: canvas_view.cpp:1322 fig/box_view.cpp:2266
 msgid "Could not save to %1"
 msgstr ""
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2283
+#: canvas_view.cpp:1322 fig/box_view.cpp:2266
 msgid "Missing picture"
 msgstr ""
 
@@ -235,91 +235,95 @@ msgstr ""
 msgid "Semantik map"
 msgstr ""
 
-#: canvas_view.cpp:1688 fig/box_view.cpp:2144
+#: canvas_view.cpp:1688 fig/box_view.cpp:2127
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1699 fig/box_view.cpp:2157
+#: canvas_view.cpp:1699 fig/box_view.cpp:2140
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1703 fig/box_view.cpp:2161
+#: canvas_view.cpp:1703 fig/box_view.cpp:2144
 msgid "Problem during printing :-("
 msgstr ""
 
-#: config_dialog.cpp:31 fig/semd_config_dialog.cpp:31
+#: config_dialog.cpp:32 fig/semd_config_dialog.cpp:31
 msgid "Settings"
 msgstr ""
 
-#: config_dialog.cpp:39
+#: config_dialog.cpp:40
 msgid "Document settings"
 msgstr ""
 
-#: config_dialog.cpp:42 fig/semd_config_dialog.cpp:42
+#: config_dialog.cpp:43 fig/semd_config_dialog.cpp:42
 msgid "Global settings"
 msgstr ""
 
-#: config_dialog.cpp:49
+#: config_dialog.cpp:46
+msgid "Global variables"
+msgstr ""
+
+#: config_dialog.cpp:52
 msgid "Background color"
 msgstr ""
 
-#: config_dialog.cpp:53
+#: config_dialog.cpp:56
 msgid "Arrow color"
 msgstr ""
 
-#: config_dialog.cpp:57
+#: config_dialog.cpp:60
 msgid "Reference color"
 msgstr ""
 
-#: config_dialog.cpp:61
+#: config_dialog.cpp:64
 msgid "Preview pictures"
 msgstr ""
 
-#: config_dialog.cpp:87
+#: config_dialog.cpp:90
 msgid "Reorganization type"
 msgstr ""
 
-#: config_dialog.cpp:91
+#: config_dialog.cpp:94
 msgid "Item position after keyboard insertion"
 msgstr ""
 
-#: config_dialog.cpp:95
+#: config_dialog.cpp:98
 msgid "Connection type"
 msgstr ""
 
-#: config_dialog.cpp:99
+#: config_dialog.cpp:102
 msgid "Save document automatically"
 msgstr ""
 
-#: config_dialog.cpp:103 fig/semd_config_dialog.cpp:49
+#: config_dialog.cpp:106 fig/semd_config_dialog.cpp:49
 msgid "Touchpad mode"
 msgstr ""
 
-#: config_dialog.cpp:108
+#: config_dialog.cpp:111
 msgid "Fixed"
 msgstr ""
 
-#: config_dialog.cpp:112
+#: config_dialog.cpp:115
 msgid "Close to parent"
 msgstr ""
 
-#: config_dialog.cpp:112
+#: config_dialog.cpp:115
 msgid "Reorganize map"
 msgstr ""
 
-#: config_dialog.cpp:116
+#: config_dialog.cpp:119
 msgid "Lines"
 msgstr ""
 
-#: config_dialog.cpp:116
+#: config_dialog.cpp:119
 msgid "Splines"
 msgstr ""
 
-#: config_dialog.cpp:120
+#: config_dialog.cpp:123
 msgid " min"
 msgstr ""
 
-#: config_dialog.cpp:123
+#: config_dialog.cpp:126
 msgid ""
 "Interval in minutes for saving the document automatically, 0 for disabling "
 "this feature"
@@ -852,7 +856,7 @@ msgstr ""
 msgid "Same width and height"
 msgstr ""
 
-#: fig/box_view.cpp:622 fig/box_view.cpp:2104
+#: fig/box_view.cpp:622 fig/box_view.cpp:2087
 msgid "Semantik diagram"
 msgstr ""
 
@@ -864,32 +868,22 @@ msgstr ""
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr ""
 
-#: fig/box_view.cpp:1894 semantik.cpp:462 semantik.cpp:554
+#: fig/box_view.cpp:1894 semantik.cpp:463 semantik.cpp:540
 msgid "Choose a file name"
 msgstr ""
 
-#: fig/box_view.cpp:1910 semantik.cpp:477
-msgid ""
-"The file \"%1\" already exists.\n"
-"Overwrite it?"
-msgstr ""
-
-#: fig/box_view.cpp:1911 semantik.cpp:478
-msgid "Overwrite existing file"
-msgstr ""
-
-#: fig/box_view.cpp:1934 fig/box_view.cpp:1969 semantik.cpp:489
-#: semantik.cpp:525
+#: fig/box_view.cpp:1917 fig/box_view.cpp:1952 semantik.cpp:475
+#: semantik.cpp:511
 msgid "Saved '%1'"
 msgstr ""
 
-#: fig/box_view.cpp:1941 semantik.cpp:500 semantik.cpp:531
+#: fig/box_view.cpp:1924 semantik.cpp:486 semantik.cpp:517
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1942 semantik.cpp:501 semantik.cpp:532
+#: fig/box_view.cpp:1925 semantik.cpp:487 semantik.cpp:518
 msgid "Try again?"
 msgstr ""
 
@@ -941,21 +935,21 @@ msgstr ""
 msgid "[Untitled]"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:296 semantik.cpp:661
+#: fig/semantik_d_win.cpp:296 semantik.cpp:660
 msgid "Untitled"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:299 semantik.cpp:664
+#: fig/semantik_d_win.cpp:299 semantik.cpp:663
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:300 semantik.cpp:665
+#: fig/semantik_d_win.cpp:300 semantik.cpp:664
 msgid "Close Document"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:448 semantik.cpp:567
+#: fig/semantik_d_win.cpp:448 semantik.cpp:553
 msgid " [Modified] "
 msgstr ""
 
@@ -1232,28 +1226,36 @@ msgstr ""
 msgid "Linear view"
 msgstr ""
 
-#: semantik.cpp:285 semantik.cpp:741
+#: semantik.cpp:285 semantik.cpp:740
 msgid "Flag"
 msgstr ""
 
-#: semantik.cpp:384
+#: semantik.cpp:385
 msgid "Welcome to Semantik"
 msgstr ""
 
-#: semantik.cpp:464
+#: semantik.cpp:465
 msgid "*.sem|Semantik file (*.sem)"
 msgstr ""
 
-#: semantik.cpp:556
+#: semantik.cpp:542
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 
-#: semantik.cpp:572
+#: semantik.cpp:558
 msgid "Semantik %1"
 msgstr ""
 
-#: semantik.cpp:576
+#: semantik.cpp:562
 msgid "%1 %2 - Semantik"
+msgstr ""
+
+#: semantik.cpp:582
+msgid "Uncomment to set defaults to all documents"
+msgstr ""
+
+#: semantik.cpp:583
+msgid "Commands can only be defined here"
 msgstr ""
 
 #: table_view.cpp:29 table_view.cpp:85

@@ -117,6 +117,7 @@ class sem_mediator: public QObject
 		QUrl m_oCurrentUrl;
 		QFont m_oFont;
 		QString m_sHints;
+		QString m_sGlobalHints;
 
 		QHash<int, data_item> m_oItems;
 		QList<QPoint> m_oLinks;

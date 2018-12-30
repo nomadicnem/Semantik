@@ -3,7 +3,7 @@
 # Thomas Nagy, 2007-2018 GPLV3
 
 from html.parser import HTMLParser
-import os, re, sembind, shutil, sys
+import os, re, sembind, sys, subprocess
 
 protectXML = sembind.protectXML
 sys.path = [sembind.get_var('template_dir')]+sys.path
@@ -20,20 +20,24 @@ def subst_vars(doc, map):
 	tmp = tmp.replace(ugh, '%')
 	return tmp
 
-def visualize(type, doc):
-	var = 'command_'+type
+def visualize(template_name, doc):
+	var = 'command_%s' % template_name
 	if var in settings:
-		os.popen(settings[var] % doc).read()
+		subprocess.Popen(settings[var] % doc, shell=True)
 	else:
 		sembind.set_var('preview', doc)
 
 def read_properties(code):
-	tmp={}
+	tmp = {}
 	for x in code.split('\n'):
-		if not x: continue
-		if x[0]=="#": continue
+		x = x.strip()
+		if not x:
+			continue
+		if x.startswith("#"):
+			continue
 		lst = x.split("=")
-		if len(lst) < 2: continue
+		if len(lst) < 2:
+			continue
 		tmp[lst[0]] = "=".join(lst[1:])
 	return tmp
 
@@ -303,15 +307,24 @@ def read_file(name):
 		doc = f.read()
 	return doc
 
-def add_globals(table):
-	GLOBAL_VARS = read_properties(sembind.get_var('hints'))
+def update_dict_with_values(into, temp_dict, add_commands=False):
 	template_name = sembind.get_var('namet').split('/')[-1].replace('.sem.py', '')
-	for x in GLOBAL_VARS:
-		table[x] = GLOBAL_VARS[x]
-		lst = x.split('.')
-		# override for sub-commands
-		if len(lst)>1 and lst[1] == template_name:
-			table[lst[0]] = GLOBAL_VARS[x]
+
+	part = '.%s' % template_name
+	for k, v in temp_dict.items():
+		if not k.endswith(part):
+			if add_commands or not k.startswith('command_'):
+				into[k] = v
+	for k, v in temp_dict.items():
+		a, b, c = k.rpartition('.')
+		if not k.startswith('command_') and b == '.' and c == template_name:
+			into[a] = v
+
+def add_globals(table):
+	first = read_properties(sembind.get_var('global_hints'))
+	update_dict_with_values(table, first, add_commands=True)
+	second = read_properties(sembind.get_var('hints'))
+	update_dict_with_values(table, second, add_commands=False)
 
 def transform(template, outfile, map):
 	doc = read_file(template_dir() + template)

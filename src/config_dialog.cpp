@@ -4,6 +4,7 @@
 #include <QAction>
 #include <QSpinBox>
 #include <QCheckBox>
+#include  <QTextEdit>
 #include <QApplication>
 #include <QButtonGroup>
 #include <QGridLayout>
@@ -41,6 +42,8 @@ config_dialog::config_dialog(QWidget *i_oParent):
 	QWidget *l_oGlobalGroupBox = new QGroupBox(l_oTabWidget);
 	l_oTabWidget->addTab(l_oGlobalGroupBox, i18n("Global settings"));
 
+	QWidget *l_oGlobalTemplateBox = new QGroupBox(l_oTabWidget);
+	l_oTabWidget->addTab(l_oGlobalTemplateBox, i18n("Global variables"));
 
 
 	QGridLayout *l_oDocumentGridLayout = new QGridLayout(l_oDocumentGroupBox);
@@ -129,9 +132,18 @@ config_dialog::config_dialog(QWidget *i_oParent):
 	l_oGlobalGridLayout->addItem(l_oSpacer, 5, 1, 2);
 
 
+	QGridLayout *l_oTemplateGridLayout = new QGridLayout(l_oGlobalTemplateBox);
+
+	///l_sLabel = new QLabel(l_oGlobalTemplateBox);
+	//l_sLabel->setText(i18n("Custom template values"));
+	//l_oTemplateGridLayout->addWidget(l_sLabel, 0, 0, 1, 1);
+
+	m_oTextEdit = new config_editor(l_oGlobalTemplateBox);
+	l_oTemplateGridLayout->addWidget(m_oTextEdit, 0, 0);
+
 	setMainWidget(l_oTabWidget);
 
-	QSize size(321, 120);
+	QSize size(421, 150);
 	size = size.expandedTo(minimumSizeHint());
 	resize(size);
 }
@@ -168,4 +180,47 @@ void config_dialog::select_alt_arrow_color()
 	l_oPalette.setBrush(QPalette::Active, QPalette::Button, m_oAltArrowColor);
 	m_oAltArrowWidget->setPalette(l_oPalette);
 }
+
+config_editor::config_editor(QWidget *i_oParent) : QTextEdit(i_oParent)
+{
+	new config_highlighter(document());
+	setStyleSheet("QTextEdit { font-family: monospace;}");
+}
+
+config_highlighter::config_highlighter(QTextDocument *p): QSyntaxHighlighter(p)
+{
+	config_highlighter_rule l_oRule;
+
+	QTextCharFormat l_oSingle;
+	l_oSingle.setForeground(Qt::darkBlue);
+	l_oRule.m_oPattern = QRegExp("#[^\n]*");
+	l_oSingle.setFontItalic(true);
+	l_oRule.m_oFormat = l_oSingle;
+	m_oRules.append(l_oRule);
+
+	QTextCharFormat l_oKeyword;
+	l_oKeyword.setForeground(Qt::darkGreen);
+	l_oKeyword.setFontWeight(QFont::Bold);
+	l_oRule.m_oPattern = QRegExp("^\\w+(\\.\\w+)*");
+	l_oRule.m_oFormat = l_oKeyword;
+	m_oRules.append(l_oRule);
+}
+
+void config_highlighter::highlightBlock(const QString &i_sText)
+{
+	foreach (config_highlighter_rule l_oRule, m_oRules)
+	{
+		QRegExp l_oExp(l_oRule.m_oPattern);
+		int i = i_sText.indexOf(l_oExp);
+		while (i >= 0)
+		{
+			int l_iLen = l_oExp.matchedLength();
+
+			if (i_sText[i+l_iLen-1]==QChar('=')) l_iLen--;
+			setFormat(i, l_iLen, l_oRule.m_oFormat);
+			i = i_sText.indexOf(l_oExp, i + l_iLen);
+		}
+	}
+}
+
 

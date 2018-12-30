@@ -446,10 +446,10 @@ void mem_doc_open::redo()
 	{
 		model->notify_ref_items(l_oRef.m_iParent, l_oRef.m_iChild);
 	}
-	model->notify_open_map();
 	model->set_dirty(false);
 	model->init_timer();
 	model->notify_background_color();
+	model->notify_open_map();
 }
 
 void mem_doc_open::undo()
@@ -499,4 +499,6 @@ void mem_doc_open::undo()
 	m_oDelete->undo();
 	m_oSel->undo();
 	model->init_timer();
+	model->notify_open_map();
+
 }

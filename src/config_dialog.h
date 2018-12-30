@@ -4,6 +4,8 @@
 #define CONFIG_DIALOG_H
 
 #include <KDE/KDialog>
+#include <QSyntaxHighlighter>
+#include <QTextEdit>
 #include <con.h>
 
 class QCheckBox;
@@ -11,6 +13,29 @@ class QComboBox;
 class QSpinBox;
 class QTreeWidgetItem;
 class QPushButton;
+
+class config_highlighter_rule
+{
+	public:
+		QRegExp m_oPattern;
+		QTextCharFormat m_oFormat;
+};
+
+class config_highlighter: public QSyntaxHighlighter
+{
+	public:
+		config_highlighter(QTextDocument *i_oP=0);
+		void highlightBlock(const QString &);
+		QVector<config_highlighter_rule> m_oRules;
+};
+
+class config_editor : public QTextEdit
+{
+	Q_OBJECT
+	public:
+		config_editor(QWidget *i_oParent);
+};
+
 class config_dialog : public KDialog
 {
 	Q_OBJECT
@@ -25,6 +50,7 @@ class config_dialog : public KDialog
 		QPushButton *m_oColorWidget;
 		QPushButton *m_oArrowWidget;
 		QPushButton *m_oAltArrowWidget;
+		config_editor* m_oTextEdit;
 		QColor m_oColor;
 		QColor m_oArrowColor;
 		QColor m_oAltArrowColor;

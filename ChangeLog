@@ -1,7 +1,9 @@
 Semantik 1.2.1
 --------------
 * Fix duplicate reference values
-* Fix the double prompt for overwriting files
+* Fix double prompts for overwriting files
+* Fix invisible map variables immediately after opening a map
+* Add global settings for commands to execute after a template is called
 
 Semantik 1.2.0
 --------------

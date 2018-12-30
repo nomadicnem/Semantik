@@ -1373,6 +1373,7 @@ int sem_mediator::generate_docs(const QString &i_oFile, const QString &i_sDirNam
 	bind_node::set_var(notr("temp_dir"), m_sTempDir);
 	bind_node::set_var(notr("fulldoc"), doc_to_xml());
 	bind_node::set_var(notr("hints"), m_sHints);
+	bind_node::set_var(notr("global_hints"), m_sGlobalHints);
 	bind_node::set_var(notr("namet"), i_oFile);
 	bind_node::set_var(notr("preview"), ""); // leave this right here! get the file generated
 

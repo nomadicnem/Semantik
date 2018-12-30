@@ -351,6 +351,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	connect(m_oImageView, SIGNAL(sig_message(const QString&, int)), this, SLOT(slot_message(const QString&, int)));
 
 	connect(m_oMediator, SIGNAL(sig_open_map()), m_oCanvas, SLOT(notify_open_map()));
+	connect(m_oMediator, SIGNAL(sig_open_map()), m_oVarsView, SLOT(notify_open_map()));
 	connect(m_oMediator, SIGNAL(sig_change_data(int)), m_oCanvas, SLOT(notify_change_data(int)));
 
 	connect(m_oMediator, SIGNAL(sig_export_doc()), m_oCanvas, SLOT(notify_export_doc()));
@@ -413,6 +414,7 @@ void semantik_win::read_config()
 	m_oMediator->m_oArrowColor = QColor(l_oConfig.readEntry(notr("arrowcolor"), notr("#000000")));
 	m_oMediator->m_oAltArrowColor = QColor(l_oConfig.readEntry(notr("altarrowcolor"), notr("#e0e0e0")));
 	m_oMediator->m_sOutDir = l_oConfig.readEntry(notr("outdir"), QDir::homePath());
+	m_oMediator->m_sGlobalHints = l_oConfig.readEntry(notr("global_hints"));
 	bind_node::set_var(notr("outdir"), m_oMediator->m_sOutDir);
 	m_oWindef->m_bUseTouchpad = l_oConfig.readEntry(notr("touchpad"), false);
 
@@ -578,6 +580,10 @@ void semantik_win::slot_properties()
 	l_oGen.m_oUseTouchpad->setChecked(l_oSettings.readEntry(notr("touchpad"), false));
 	l_oGen.m_oPreviewPics->setChecked(m_oMediator->m_bShowPics);
 
+	QString l_sHint1 = i18n("Uncomment to set defaults to all documents");
+	QString l_sHint2 = i18n("Commands can only be defined here");
+	l_oGen.m_oTextEdit->setText(l_oSettings.readEntry(notr("global_hints"), notr("# %1\n# %2\n#\n# doc_company=XYZ\n# doc_author=Myself\n# command_pdflatex=cd %s/../ && ./run.sh\n# command_beamer=cd %s/../ && ./run.sh\n# command_html=firefox %s\n# command_s5=firefox %s\n# command_odt=oowriter %s\n# command_odp=ooimpress %s\n").arg(l_sHint1, l_sHint2)));
+
 	l_oGen.m_oColorWidget->setText(m_oMediator->m_oColor.name());
 	l_oGen.m_oArrowWidget->setText(m_oMediator->m_oArrowColor.name());
 	l_oGen.m_oAltArrowWidget->setText(m_oMediator->m_oAltArrowColor.name());
@@ -613,6 +619,15 @@ void semantik_win::slot_properties()
 		l_oSettings.writeEntry(notr("altarrowcolor"), l_oGen.m_oAltArrowColor.name());
 		l_oSettings.writeEntry(notr("autoReorg"), m_oMediator->m_iAutoReorg = l_oGen.m_oAutoReorg->currentIndex());
 		l_oSettings.writeEntry(notr("touchpad"), m_oMediator->m_oWindef->m_bUseTouchpad = l_oGen.m_oUseTouchpad->isChecked());
+		QString l_sText = m_oMediator->m_sGlobalHints = l_oGen.m_oTextEdit->toPlainText();
+		if (l_sText.isEmpty())
+		{
+			l_oSettings.deleteEntry(notr("global_hints"));
+		}
+		else
+		{
+			l_oSettings.writeEntry(notr("global_hints"), l_sText);
+		}
 
 		m_oMediator->set_show_pics(l_oGen.m_oPreviewPics->isChecked());
 

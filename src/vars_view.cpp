@@ -314,3 +314,9 @@ void vars_view::try_complete()
 	m_oCompleter->complete(l_oRect);
 }
 
+void vars_view::notify_open_map()
+{
+	m_iId = NO_ITEM;
+	m_oCompleter = m_oCompleterAll;
+	setText(m_oMediator->m_sHints);
+}

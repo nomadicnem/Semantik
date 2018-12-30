@@ -1,4 +1,4 @@
-Semantik 1.2.0: Thomas Nagy tnagy at waf.io
+Semantik 1.2.1: Thomas Nagy tnagy at waf.io
 Project page:   https://waf.io/semantik.html
 Source code:    https://gitlab.com/ita1024/semantik
 ---------------------------------------------------
@@ -42,21 +42,20 @@ Consult the tips in the help menu and/or the file named "example.sem"!
 
 3. Document generators and pictures:
 
-* For security reasons, only use documents that you have created yourself
+* For security reasons, only open documents that you have created yourself!
+* LaTeX commands can be inserted by using all_latex=1
 * Document generation is performed in two steps: variable substitution and preprocessing
   - Variables in the form @var_name@ are replaced by the corresponding document variables
-    The core of the document is a variable itself
   - A c-like preprocessor is then run on the resulting document, using (nested) conditionals such as:
     #if 0, #if !0, #ifdef var, #endif (the #elif construct is not supported yet)
-* External viewers can be used, from the 'variables' panel, add code in the form:
-  'command_'+template_name=command_line, for example:
+* External viewers can be defined in the global settings window (it is not per-document anymore):
+  Add code in the form 'command_'+template_name=command_line, for example:
      command_html=kfmclient newTab %s
      command_odt=oowriter %s
      command_s5=firefox %s
-  this is only necessary for documents that do not have a KDE mapping for opening them
-* LaTeX commands can be inserted by using all_latex=1
+  this is only relevant for documents that do not have a KDE mapping for opening them
 
-Maps picture can be exported from the command-line (png or pdf):
+Maps picture can be exported from the command-line (png, pdf or svg):
   semantik foo.sem -o foo.pdf
 Diagrams can be exported in a similar fashion:
   semantik-d diag.semd -o foo.pdf

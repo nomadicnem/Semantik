@@ -47,6 +47,7 @@ class vars_view : public QTextEdit
 		void try_complete();
 		void notify_select(const QList<int>& unsel, const QList<int>& sel);
 		void notify_vars(int);
+		void notify_open_map();
 };
 
 #endif

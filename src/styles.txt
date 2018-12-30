@@ -8,14 +8,6 @@ babel.pdflatex	Same thing, but only for the pdflatex template
 
 theme.beamer	Warsaw (JuanLesPins, Montpellier, )
 
-command	command to launch (%s is the resulting file)
-command.beamer	cd `echo %s | sed s/main.tex//` && ./waf configure && waf --view
-command.html	firefox %s
-command.odp	ooimpress %s
-command.odt	oowriter %s
-command.pdflatex	cd `echo %s | sed s/main.tex//` && ./waf configure && waf --view
-command.s5	firefox %s
-
 doc_author	document author
 doc_author_off	turn off the document author (latex)
 doc_class	document class (latex: a4, report, book)
