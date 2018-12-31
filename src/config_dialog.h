@@ -13,6 +13,7 @@ class QComboBox;
 class QSpinBox;
 class QTreeWidgetItem;
 class QPushButton;
+class QKeyEvent;
 
 class config_highlighter_rule
 {
@@ -31,7 +32,6 @@ class config_highlighter: public QSyntaxHighlighter
 
 class config_editor : public QTextEdit
 {
-	Q_OBJECT
 	public:
 		config_editor(QWidget *i_oParent);
 };

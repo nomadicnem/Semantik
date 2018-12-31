@@ -24,21 +24,13 @@ class entity_highlighter: public QSyntaxHighlighter
 		QVector<entity_highlighter_rule> m_oRules;
 };
 
-class entity_editor : public QTextEdit
-{
-	Q_OBJECT
-	public:
-		entity_editor(QWidget *i_oParent);
-};
-
-
 class box_entity_properties : public KDialog
 {
 	Q_OBJECT
 	public:
 		box_entity_properties(QWidget*, box_entity*);
 		box_entity *m_oEntity;
-		entity_editor *m_oEntityDefinition;
+		QTextEdit *m_oEntityDefinition;
 
 	public slots:
 		void apply();

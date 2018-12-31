@@ -52,6 +52,6 @@ echo "Cleaning up"
 cd ${WDIR}
 rm rcfiles.list
 rm infiles.list
-rm -f rc.cpp src/data/tips.cpp
+rm -f rc.cpp ../data/tips.cpp
 echo "Done"
 

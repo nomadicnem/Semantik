@@ -479,7 +479,7 @@ void box_class::properties()
 	}
 
 	props.m_oClassDefinition->setText(l_oS.join(notr("")));
-
+	props.m_oClassDefinition->selectAll();
 	props.exec();
 }
 

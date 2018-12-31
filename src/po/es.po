@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-30 16:26+0100\n"
+"POT-Creation-Date: 2018-12-31 14:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,8 +36,8 @@ msgstr ""
 msgid "File saving: missing file %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:754 base/sem_mediator.cpp:1381
-#: base/sem_mediator.cpp:1432
+#: base/sem_mediator.cpp:754 base/sem_mediator.cpp:1382
+#: base/sem_mediator.cpp:1433
 msgid "Missing bindings for opening files"
 msgstr ""
 
@@ -116,11 +116,11 @@ msgstr ""
 msgid "Could not create the output folder %1"
 msgstr ""
 
-#: base/sem_mediator.cpp:1389
+#: base/sem_mediator.cpp:1390
 msgid "Document generation failed, check the output folder"
 msgstr ""
 
-#: base/sem_mediator.cpp:1393
+#: base/sem_mediator.cpp:1394
 msgid "Document generation completed successfully"
 msgstr ""
 
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Add an element"
 msgstr ""
 
-#: canvas_view.cpp:96 fig/box_view.cpp:205
+#: canvas_view.cpp:96 fig/box_view.cpp:219
 msgid "Delete selection"
 msgstr ""
 
@@ -208,26 +208,26 @@ msgstr ""
 msgid "Click to set Item %1"
 msgstr ""
 
-#: canvas_view.cpp:1258 fig/box_view.cpp:2202
+#: canvas_view.cpp:1258 fig/box_view.cpp:2216
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1296 fig/box_view.cpp:2240
+#: canvas_view.cpp:1296 fig/box_view.cpp:2254
 msgid "No destination file selected"
 msgstr ""
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2264
+#: canvas_view.cpp:1320 fig/box_view.cpp:2278
 msgid "Exported '%1'"
 msgstr ""
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2266
+#: canvas_view.cpp:1322 fig/box_view.cpp:2280
 msgid "Could not save to %1"
 msgstr ""
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2266
+#: canvas_view.cpp:1322 fig/box_view.cpp:2280
 msgid "Missing picture"
 msgstr ""
 
@@ -235,15 +235,15 @@ msgstr ""
 msgid "Semantik map"
 msgstr ""
 
-#: canvas_view.cpp:1688 fig/box_view.cpp:2127
+#: canvas_view.cpp:1688 fig/box_view.cpp:2141
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1699 fig/box_view.cpp:2140
+#: canvas_view.cpp:1699 fig/box_view.cpp:2154
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1703 fig/box_view.cpp:2144
+#: canvas_view.cpp:1703 fig/box_view.cpp:2158
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -487,7 +487,7 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
-#: doc_dialog.cpp:34 generator_dialog.cpp:56
+#: doc_dialog.cpp:34 generator_dialog.cpp:55
 msgid "Name"
 msgstr ""
 
@@ -552,15 +552,15 @@ msgstr ""
 msgid "Entity properties"
 msgstr ""
 
-#: fig/box_entity_properties.cpp:112
+#: fig/box_entity_properties.cpp:111
 msgid "No entity name given"
 msgstr ""
 
-#: fig/box_entity_properties.cpp:112
+#: fig/box_entity_properties.cpp:111
 msgid "Missing entity name"
 msgstr ""
 
-#: fig/box_fork.cpp:331 fig/box_item.cpp:300
+#: fig/box_fork.cpp:331 fig/box_item.cpp:281
 msgid "%1 x %2"
 msgstr ""
 
@@ -578,14 +578,6 @@ msgstr ""
 
 #: fig/box_frame_properties.cpp:48
 msgid "Down"
-msgstr ""
-
-#: fig/box_item.cpp:133
-msgid "Diagram box properties"
-msgstr ""
-
-#: fig/box_item.cpp:134
-msgid "Text:"
 msgstr ""
 
 #: fig/box_link_properties.cpp:25
@@ -684,206 +676,206 @@ msgstr ""
 msgid "%1 x %2 (%3+%4)"
 msgstr ""
 
-#: fig/box_view.cpp:195
+#: fig/box_view.cpp:209
 msgid "Properties..."
 msgstr ""
 
-#: fig/box_view.cpp:200
+#: fig/box_view.cpp:214
 msgid "Activity"
 msgstr ""
 
-#: fig/box_view.cpp:201
+#: fig/box_view.cpp:215
 msgid "Ctrl+Return"
 msgstr ""
 
-#: fig/box_view.cpp:206
+#: fig/box_view.cpp:220
 msgid "Delete"
 msgstr ""
 
-#: fig/box_view.cpp:210
+#: fig/box_view.cpp:224
 msgid "Raise"
 msgstr ""
 
-#: fig/box_view.cpp:211
+#: fig/box_view.cpp:225
 msgid "PgUp"
 msgstr ""
 
-#: fig/box_view.cpp:215
+#: fig/box_view.cpp:229
 msgid "Send back"
 msgstr ""
 
-#: fig/box_view.cpp:216
+#: fig/box_view.cpp:230
 msgid "PgDown"
 msgstr ""
 
-#: fig/box_view.cpp:220
+#: fig/box_view.cpp:234
 msgid "Floating text"
 msgstr ""
 
-#: fig/box_view.cpp:222
+#: fig/box_view.cpp:236
 msgid "Component"
 msgstr ""
 
-#: fig/box_view.cpp:224
+#: fig/box_view.cpp:238
 msgid "Rectangle"
 msgstr ""
 
-#: fig/box_view.cpp:226
+#: fig/box_view.cpp:240
 msgid "Node"
 msgstr ""
 
-#: fig/box_view.cpp:228
+#: fig/box_view.cpp:242
 msgid "Decision"
 msgstr ""
 
-#: fig/box_view.cpp:230
+#: fig/box_view.cpp:244
 msgid "Database"
 msgstr ""
 
-#: fig/box_view.cpp:232
+#: fig/box_view.cpp:246
 msgid "Pipe"
 msgstr ""
 
-#: fig/box_view.cpp:234
+#: fig/box_view.cpp:248
 msgid "Sequence"
 msgstr ""
 
-#: fig/box_view.cpp:236
+#: fig/box_view.cpp:250
 msgid "Activity start"
 msgstr ""
 
-#: fig/box_view.cpp:238
+#: fig/box_view.cpp:252
 msgid "Activity end"
 msgstr ""
 
-#: fig/box_view.cpp:240
+#: fig/box_view.cpp:254
 msgid "Horizontal fork/join"
 msgstr ""
 
-#: fig/box_view.cpp:242
+#: fig/box_view.cpp:256
 msgid "Vertical fork/join"
 msgstr ""
 
-#: fig/box_view.cpp:244
+#: fig/box_view.cpp:258
 msgid "Actor"
 msgstr ""
 
-#: fig/box_view.cpp:246
+#: fig/box_view.cpp:260
 msgid "Usecase"
 msgstr ""
 
-#: fig/box_view.cpp:248
+#: fig/box_view.cpp:262
 msgid "Matrix"
 msgstr ""
 
-#: fig/box_view.cpp:250
+#: fig/box_view.cpp:264
 msgid "Boundary"
 msgstr ""
 
-#: fig/box_view.cpp:252
+#: fig/box_view.cpp:266
 msgid "Class"
 msgstr ""
 
-#: fig/box_view.cpp:254
+#: fig/box_view.cpp:268
 msgid "Entity"
 msgstr ""
 
-#: fig/box_view.cpp:258
+#: fig/box_view.cpp:272
 msgid "Import from file..."
 msgstr ""
 
-#: fig/box_view.cpp:260
+#: fig/box_view.cpp:274
 msgid "Export to file..."
 msgstr ""
 
-#: fig/box_view.cpp:262
+#: fig/box_view.cpp:276
 msgid "Copy image to clipboard"
 msgstr ""
 
-#: fig/box_view.cpp:283
+#: fig/box_view.cpp:297
 msgid "File operations"
 msgstr ""
 
-#: fig/box_view.cpp:295
+#: fig/box_view.cpp:309
 msgid "More elements"
 msgstr ""
 
-#: fig/box_view.cpp:337
+#: fig/box_view.cpp:351
 msgid "Text Alignment"
 msgstr ""
 
-#: fig/box_view.cpp:339 fig/box_view.cpp:345
+#: fig/box_view.cpp:353 fig/box_view.cpp:359
 msgid "Align left"
 msgstr ""
 
-#: fig/box_view.cpp:340 fig/box_view.cpp:346
+#: fig/box_view.cpp:354 fig/box_view.cpp:360
 msgid "Align center"
 msgstr ""
 
-#: fig/box_view.cpp:341 fig/box_view.cpp:347
+#: fig/box_view.cpp:355 fig/box_view.cpp:361
 msgid "Align right"
 msgstr ""
 
-#: fig/box_view.cpp:343
+#: fig/box_view.cpp:357
 msgid "Alignment"
 msgstr ""
 
-#: fig/box_view.cpp:349
+#: fig/box_view.cpp:363
 msgid "Align top"
 msgstr ""
 
-#: fig/box_view.cpp:350
+#: fig/box_view.cpp:364
 msgid "Align middle"
 msgstr ""
 
-#: fig/box_view.cpp:351
+#: fig/box_view.cpp:365
 msgid "Align bottom"
 msgstr ""
 
-#: fig/box_view.cpp:354
+#: fig/box_view.cpp:368
 msgid "Size"
 msgstr ""
 
-#: fig/box_view.cpp:356
+#: fig/box_view.cpp:370
 msgid "Same width"
 msgstr ""
 
-#: fig/box_view.cpp:357
+#: fig/box_view.cpp:371
 msgid "Same height"
 msgstr ""
 
-#: fig/box_view.cpp:358
+#: fig/box_view.cpp:372
 msgid "Same width and height"
 msgstr ""
 
-#: fig/box_view.cpp:622 fig/box_view.cpp:2087
+#: fig/box_view.cpp:636 fig/box_view.cpp:2101
 msgid "Semantik diagram"
 msgstr ""
 
-#: fig/box_view.cpp:1856 fig/semantik_d_win.cpp:329
+#: fig/box_view.cpp:1870 fig/semantik_d_win.cpp:331
 msgid "Choose a file to open"
 msgstr ""
 
-#: fig/box_view.cpp:1858 fig/box_view.cpp:1896 fig/semantik_d_win.cpp:331
+#: fig/box_view.cpp:1872 fig/box_view.cpp:1910 fig/semantik_d_win.cpp:333
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr ""
 
-#: fig/box_view.cpp:1894 semantik.cpp:463 semantik.cpp:540
+#: fig/box_view.cpp:1908 semantik.cpp:464 semantik.cpp:541
 msgid "Choose a file name"
 msgstr ""
 
-#: fig/box_view.cpp:1917 fig/box_view.cpp:1952 semantik.cpp:475
-#: semantik.cpp:511
+#: fig/box_view.cpp:1931 fig/box_view.cpp:1966 semantik.cpp:476
+#: semantik.cpp:512
 msgid "Saved '%1'"
 msgstr ""
 
-#: fig/box_view.cpp:1924 semantik.cpp:486 semantik.cpp:517
+#: fig/box_view.cpp:1938 semantik.cpp:487 semantik.cpp:518
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1925 semantik.cpp:487 semantik.cpp:518
+#: fig/box_view.cpp:1939 semantik.cpp:488 semantik.cpp:519
 msgid "Try again?"
 msgstr ""
 
@@ -911,82 +903,91 @@ msgstr ""
 msgid "Ctrl+Shift+E"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:76 semantik.cpp:200
+#. i18n("Ctrl+H"));
+#: fig/semantik_d_win.cpp:78 semantik.cpp:200
 msgid "Ctrl+H"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:80
+#: fig/semantik_d_win.cpp:82
 msgid "Files"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:92 semantik.cpp:265
+#: fig/semantik_d_win.cpp:94 semantik.cpp:265
 msgid "Color"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:100 semantik.cpp:274
+#: fig/semantik_d_win.cpp:102 semantik.cpp:274
 msgid "Custom color"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:112
+#: fig/semantik_d_win.cpp:114
 msgid "This is Semantik-d"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:225
+#: fig/semantik_d_win.cpp:227
 msgid "[Untitled]"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:296 semantik.cpp:660
+#: fig/semantik_d_win.cpp:298 semantik.cpp:661
 msgid "Untitled"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:299 semantik.cpp:663
+#: fig/semantik_d_win.cpp:301 semantik.cpp:664
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:300 semantik.cpp:664
+#: fig/semantik_d_win.cpp:302 semantik.cpp:665
 msgid "Close Document"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:448 semantik.cpp:553
+#: fig/semantik_d_win.cpp:450 semantik.cpp:554
 msgid " [Modified] "
 msgstr ""
 
-#: fig/semantik_d_win.cpp:453
+#: fig/semantik_d_win.cpp:455
 msgid "Semantik Diagram %1"
 msgstr ""
 
-#: fig/semantik_d_win.cpp:457
+#: fig/semantik_d_win.cpp:459
 msgid "%1 %2 - Semantik Diagram"
 msgstr ""
 
-#: fig/semd.cpp:29 main.cpp:32
+#: fig/semd.cpp:25 main.cpp:32
 msgid "A file to open on startup"
 msgstr ""
 
-#: fig/semd.cpp:30 main.cpp:33
+#: fig/semd.cpp:26 main.cpp:33
 msgid "Batch export as svg/pdf/png"
 msgstr ""
 
-#: fig/semd.cpp:31
+#: fig/semd.cpp:27
 msgid "Diagram width for printing"
 msgstr ""
 
-#: fig/semd.cpp:32
+#: fig/semd.cpp:28
 msgid "Diagram height for printing"
 msgstr ""
 
-#: fig/semd.cpp:34
+#: fig/semd.cpp:30
 msgid "Semantik-d"
 msgstr ""
 
-#: fig/semd.cpp:34
+#: fig/semd.cpp:30
 msgid "(C) 2013-2018 Thomas Nagy"
 msgstr ""
 
-#: fig/semd.cpp:36 main.cpp:39
+#: fig/semd.cpp:32 main.cpp:39
 msgid "Thomas Nagy"
+msgstr ""
+
+#: fig/special_edit.cpp:40
+msgid "Diagram box properties:"
+msgstr ""
+
+#: fig/special_edit.cpp:47
+msgid "Text:"
 msgstr ""
 
 #: generator_dialog.cpp:30
@@ -1001,23 +1002,23 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: generator_dialog.cpp:63
+#: generator_dialog.cpp:62
 msgid "Location"
 msgstr ""
 
-#: generator_dialog.cpp:114
+#: generator_dialog.cpp:115
 msgid "No document generator chosen."
 msgstr ""
 
-#: generator_dialog.cpp:114
+#: generator_dialog.cpp:115
 msgid "Missing data"
 msgstr ""
 
-#: generator_dialog.cpp:120
+#: generator_dialog.cpp:121
 msgid "Invalid output directory %1"
 msgstr ""
 
-#: generator_dialog.cpp:120
+#: generator_dialog.cpp:121
 msgid "Missing location"
 msgstr ""
 
@@ -1226,7 +1227,7 @@ msgstr ""
 msgid "Linear view"
 msgstr ""
 
-#: semantik.cpp:285 semantik.cpp:740
+#: semantik.cpp:285 semantik.cpp:741
 msgid "Flag"
 msgstr ""
 
@@ -1234,27 +1235,27 @@ msgstr ""
 msgid "Welcome to Semantik"
 msgstr ""
 
-#: semantik.cpp:465
+#: semantik.cpp:466
 msgid "*.sem|Semantik file (*.sem)"
 msgstr ""
 
-#: semantik.cpp:542
+#: semantik.cpp:543
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 
-#: semantik.cpp:558
+#: semantik.cpp:559
 msgid "Semantik %1"
 msgstr ""
 
-#: semantik.cpp:562
+#: semantik.cpp:563
 msgid "%1 %2 - Semantik"
 msgstr ""
 
-#: semantik.cpp:582
+#: semantik.cpp:583
 msgid "Uncomment to set defaults to all documents"
 msgstr ""
 
-#: semantik.cpp:583
+#: semantik.cpp:584
 msgid "Commands can only be defined here"
 msgstr ""
 

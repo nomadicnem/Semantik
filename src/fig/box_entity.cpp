@@ -29,16 +29,6 @@
 
 //#define DEBUG
 
-int fceil(qreal l_fInput, int l_iBase)
-{
-	int l_iCal = ceil(l_fInput);
-	if (l_iCal % l_iBase == 0)
-	{
-		return l_iCal;
-	}
-	return l_iBase * (1 + l_iCal / l_iBase);
-}
-
 
 box_entity::box_entity(box_view* view, int id) : box_item(view, id)
 {
@@ -301,7 +291,7 @@ void box_entity::properties()
 
 	l_oS<<notr("\n");
 	props.m_oEntityDefinition->setText(l_oS.join(notr("")));
-
+	props.m_oEntityDefinition->selectAll();
 	props.exec();
 }
 

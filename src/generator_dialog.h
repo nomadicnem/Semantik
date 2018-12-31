@@ -26,7 +26,7 @@ class generator_dialog : public KDialog
 		QString m_sShortName;
 
 	public slots:
-		void selection_changed(QTreeWidgetItem *i_o, int i_oCol);
+		void selection_changed();
 		void slotButtonClicked(int button);
 		void activate_from_name(const QString &i_s);
 };

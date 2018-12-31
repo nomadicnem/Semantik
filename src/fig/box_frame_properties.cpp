@@ -84,10 +84,10 @@ void box_frame_properties::apply() {
 	QTextOption l_oOption = doc.defaultTextOption();
 	l_oOption.setAlignment(m_oFrame->m_oBox->m_iAlign);
 	doc.setDefaultTextOption(l_oOption);
-	doc.setPlainText(m_oFrame->m_oBox->m_sText);
+	doc.setPlainText(mem->newText);
 
 	doc.setTextWidth(m_oFrame->m_oBox->m_iWW - 2 * OFF);
-	mem->newHeight = GRID * (((int) (doc.size().height() + 2 * OFF + GRID - 1)) / GRID);
+	mem->newHeight = fceil(doc.size().height() + 2 * OFF, GRID);
 	if (mem->newHeight < m_oFrame->m_oBox->m_iHH)
 		mem->newHeight = m_oFrame->m_oBox->m_iHH;
 

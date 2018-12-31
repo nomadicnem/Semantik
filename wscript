@@ -27,6 +27,7 @@ src/fig/box_link_properties.h
 src/fig/box_frame_properties.h
 src/fig/export_fig_dialog.h
 src/fig/box_view.h
+src/fig/special_edit.h
 src/fig/matrix_dialog.h
 src/fig/box_document_properties.h
 ''',

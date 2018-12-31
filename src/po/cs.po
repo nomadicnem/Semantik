@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-30 16:26+0100\n"
+"POT-Creation-Date: 2018-12-31 14:06+0100\n"
 "PO-Revision-Date: 2012-10-21 19:45+0200\n"
 "Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -43,8 +43,8 @@ msgstr "Barva %1"
 msgid "File saving: missing file %1"
 msgstr "Ukládání souboru: chybí soubor %1"
 
-#: base/sem_mediator.cpp:754 base/sem_mediator.cpp:1381
-#: base/sem_mediator.cpp:1432
+#: base/sem_mediator.cpp:754 base/sem_mediator.cpp:1382
+#: base/sem_mediator.cpp:1433
 msgid "Missing bindings for opening files"
 msgstr "Chybí spojení pro otevření souborů"
 
@@ -127,12 +127,12 @@ msgstr "Nepodařilo se nahrát obrázek"
 msgid "Could not create the output folder %1"
 msgstr "Nepodařilo se nahrát obrázek"
 
-#: base/sem_mediator.cpp:1389
+#: base/sem_mediator.cpp:1390
 #, fuzzy
 msgid "Document generation failed, check the output folder"
 msgstr "Vytvoření dokumentu úspěšně dokončeno"
 
-#: base/sem_mediator.cpp:1393
+#: base/sem_mediator.cpp:1394
 msgid "Document generation completed successfully"
 msgstr "Vytvoření dokumentu úspěšně dokončeno"
 
@@ -144,7 +144,7 @@ msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 msgid "Add an element"
 msgstr "Přidat prvek"
 
-#: canvas_view.cpp:96 fig/box_view.cpp:205
+#: canvas_view.cpp:96 fig/box_view.cpp:219
 msgid "Delete selection"
 msgstr "Smazat výběr"
 
@@ -220,26 +220,26 @@ msgstr "Obrázek"
 msgid "Click to set Item %1"
 msgstr "Klepněte pro umístění položky %1"
 
-#: canvas_view.cpp:1258 fig/box_view.cpp:2202
+#: canvas_view.cpp:1258 fig/box_view.cpp:2216
 msgid ""
 "*.png|PNG Files (*.png)\n"
 "*.svg|SVG Files (*.svg)\n"
 "*.pdf|PDF Files (*.pdf)"
 msgstr ""
 
-#: canvas_view.cpp:1296 fig/box_view.cpp:2240
+#: canvas_view.cpp:1296 fig/box_view.cpp:2254
 msgid "No destination file selected"
 msgstr "Nevybrán žádný cílový soubor"
 
-#: canvas_view.cpp:1320 fig/box_view.cpp:2264
+#: canvas_view.cpp:1320 fig/box_view.cpp:2278
 msgid "Exported '%1'"
 msgstr "Vyvedeno '%1'"
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2266
+#: canvas_view.cpp:1322 fig/box_view.cpp:2280
 msgid "Could not save to %1"
 msgstr "Nepodařilo se uložit do %1"
 
-#: canvas_view.cpp:1322 fig/box_view.cpp:2266
+#: canvas_view.cpp:1322 fig/box_view.cpp:2280
 msgid "Missing picture"
 msgstr "Chybí obrázek"
 
@@ -248,15 +248,15 @@ msgstr "Chybí obrázek"
 msgid "Semantik map"
 msgstr "Semantik"
 
-#: canvas_view.cpp:1688 fig/box_view.cpp:2127
+#: canvas_view.cpp:1688 fig/box_view.cpp:2141
 msgid "Printing cancelled"
 msgstr ""
 
-#: canvas_view.cpp:1699 fig/box_view.cpp:2140
+#: canvas_view.cpp:1699 fig/box_view.cpp:2154
 msgid "Printing completed"
 msgstr ""
 
-#: canvas_view.cpp:1703 fig/box_view.cpp:2144
+#: canvas_view.cpp:1703 fig/box_view.cpp:2158
 msgid "Problem during printing :-("
 msgstr ""
 
@@ -509,7 +509,7 @@ msgstr "<p align='center'>Nebyla vybrána žádná položka</p>"
 msgid "First Name"
 msgstr "Křestní jméno"
 
-#: doc_dialog.cpp:34 generator_dialog.cpp:56
+#: doc_dialog.cpp:34 generator_dialog.cpp:55
 msgid "Name"
 msgstr "Příjmení"
 
@@ -579,16 +579,16 @@ msgstr "Vlastnosti odkazu"
 msgid "Entity properties"
 msgstr "Vlastnosti odkazu"
 
-#: fig/box_entity_properties.cpp:112
+#: fig/box_entity_properties.cpp:111
 msgid "No entity name given"
 msgstr ""
 
-#: fig/box_entity_properties.cpp:112
+#: fig/box_entity_properties.cpp:111
 #, fuzzy
 msgid "Missing entity name"
 msgstr "Chybí data"
 
-#: fig/box_fork.cpp:331 fig/box_item.cpp:300
+#: fig/box_fork.cpp:331 fig/box_item.cpp:281
 msgid "%1 x %2"
 msgstr "%1 x %2"
 
@@ -610,15 +610,6 @@ msgstr "O stranu nahoru (PgUp)"
 #, fuzzy
 msgid "Down"
 msgstr "O stranu dolů (PgDown)"
-
-#: fig/box_item.cpp:133
-#, fuzzy
-msgid "Diagram box properties"
-msgstr "Vlastnosti odkazu"
-
-#: fig/box_item.cpp:134
-msgid "Text:"
-msgstr "Text:"
 
 #: fig/box_link_properties.cpp:25
 msgid "Link properties"
@@ -726,215 +717,215 @@ msgstr ""
 msgid "%1 x %2 (%3+%4)"
 msgstr "%1 x %2"
 
-#: fig/box_view.cpp:195
+#: fig/box_view.cpp:209
 msgid "Properties..."
 msgstr "Vlastnosti..."
 
-#: fig/box_view.cpp:200
+#: fig/box_view.cpp:214
 msgid "Activity"
 msgstr "Činnost"
 
-#: fig/box_view.cpp:201
+#: fig/box_view.cpp:215
 msgid "Ctrl+Return"
 msgstr "Ctrl+Return"
 
-#: fig/box_view.cpp:206
+#: fig/box_view.cpp:220
 msgid "Delete"
 msgstr "Smazat"
 
-#: fig/box_view.cpp:210
+#: fig/box_view.cpp:224
 msgid "Raise"
 msgstr ""
 
-#: fig/box_view.cpp:211
+#: fig/box_view.cpp:225
 msgid "PgUp"
 msgstr "O stranu nahoru (PgUp)"
 
-#: fig/box_view.cpp:215
+#: fig/box_view.cpp:229
 msgid "Send back"
 msgstr ""
 
-#: fig/box_view.cpp:216
+#: fig/box_view.cpp:230
 msgid "PgDown"
 msgstr "O stranu dolů (PgDown)"
 
-#: fig/box_view.cpp:220
+#: fig/box_view.cpp:234
 msgid "Floating text"
 msgstr "Plovoucí text"
 
-#: fig/box_view.cpp:222
+#: fig/box_view.cpp:236
 msgid "Component"
 msgstr "Součástka"
 
-#: fig/box_view.cpp:224
+#: fig/box_view.cpp:238
 msgid "Rectangle"
 msgstr ""
 
-#: fig/box_view.cpp:226
+#: fig/box_view.cpp:240
 msgid "Node"
 msgstr "Uzel"
 
-#: fig/box_view.cpp:228
+#: fig/box_view.cpp:242
 #, fuzzy
 msgid "Decision"
 msgstr "Změnit rozměry"
 
-#: fig/box_view.cpp:230
+#: fig/box_view.cpp:244
 #, fuzzy
 msgid "Database"
 msgstr "Data"
 
-#: fig/box_view.cpp:232
+#: fig/box_view.cpp:246
 msgid "Pipe"
 msgstr ""
 
-#: fig/box_view.cpp:234
+#: fig/box_view.cpp:248
 msgid "Sequence"
 msgstr ""
 
-#: fig/box_view.cpp:236
+#: fig/box_view.cpp:250
 msgid "Activity start"
 msgstr "Začátek činnosti"
 
-#: fig/box_view.cpp:238
+#: fig/box_view.cpp:252
 msgid "Activity end"
 msgstr "Konec činnosti"
 
-#: fig/box_view.cpp:240
+#: fig/box_view.cpp:254
 msgid "Horizontal fork/join"
 msgstr "Vodorovná odnož/spojnice"
 
-#: fig/box_view.cpp:242
+#: fig/box_view.cpp:256
 msgid "Vertical fork/join"
 msgstr "Svislá odnož/spojnice"
 
-#: fig/box_view.cpp:244
+#: fig/box_view.cpp:258
 msgid "Actor"
 msgstr "Herec"
 
-#: fig/box_view.cpp:246
+#: fig/box_view.cpp:260
 msgid "Usecase"
 msgstr "Případ užití"
 
-#: fig/box_view.cpp:248
+#: fig/box_view.cpp:262
 msgid "Matrix"
 msgstr ""
 
-#: fig/box_view.cpp:250
+#: fig/box_view.cpp:264
 msgid "Boundary"
 msgstr ""
 
-#: fig/box_view.cpp:252
+#: fig/box_view.cpp:266
 msgid "Class"
 msgstr ""
 
-#: fig/box_view.cpp:254
+#: fig/box_view.cpp:268
 msgid "Entity"
 msgstr ""
 
-#: fig/box_view.cpp:258
+#: fig/box_view.cpp:272
 #, fuzzy
 msgid "Import from file..."
 msgstr "&Vyvést mapu..."
 
-#: fig/box_view.cpp:260
+#: fig/box_view.cpp:274
 #, fuzzy
 msgid "Export to file..."
 msgstr "&Vyvést mapu..."
 
-#: fig/box_view.cpp:262
+#: fig/box_view.cpp:276
 msgid "Copy image to clipboard"
 msgstr ""
 
-#: fig/box_view.cpp:283
+#: fig/box_view.cpp:297
 #, fuzzy
 msgid "File operations"
 msgstr "Vlastnosti odkazu"
 
-#: fig/box_view.cpp:295
+#: fig/box_view.cpp:309
 msgid "More elements"
 msgstr "Další prvky"
 
-#: fig/box_view.cpp:337
+#: fig/box_view.cpp:351
 #, fuzzy
 msgid "Text Alignment"
 msgstr "Zarovnání"
 
-#: fig/box_view.cpp:339 fig/box_view.cpp:345
+#: fig/box_view.cpp:353 fig/box_view.cpp:359
 msgid "Align left"
 msgstr "Zarovnat vlevo"
 
-#: fig/box_view.cpp:340 fig/box_view.cpp:346
+#: fig/box_view.cpp:354 fig/box_view.cpp:360
 msgid "Align center"
 msgstr "Zarovnat na střed"
 
-#: fig/box_view.cpp:341 fig/box_view.cpp:347
+#: fig/box_view.cpp:355 fig/box_view.cpp:361
 msgid "Align right"
 msgstr "Vybrat vpravo"
 
-#: fig/box_view.cpp:343
+#: fig/box_view.cpp:357
 msgid "Alignment"
 msgstr "Zarovnání"
 
-#: fig/box_view.cpp:349
+#: fig/box_view.cpp:363
 msgid "Align top"
 msgstr "Zarovnat nahoru"
 
-#: fig/box_view.cpp:350
+#: fig/box_view.cpp:364
 msgid "Align middle"
 msgstr "Zarovnat doprostřed"
 
-#: fig/box_view.cpp:351
+#: fig/box_view.cpp:365
 msgid "Align bottom"
 msgstr "Zarovnat dolů"
 
-#: fig/box_view.cpp:354
+#: fig/box_view.cpp:368
 msgid "Size"
 msgstr "Velikost"
 
-#: fig/box_view.cpp:356
+#: fig/box_view.cpp:370
 msgid "Same width"
 msgstr "Stejná šířka"
 
-#: fig/box_view.cpp:357
+#: fig/box_view.cpp:371
 msgid "Same height"
 msgstr "Stejná výška"
 
-#: fig/box_view.cpp:358
+#: fig/box_view.cpp:372
 msgid "Same width and height"
 msgstr "Stejná šířka a výška"
 
-#: fig/box_view.cpp:622 fig/box_view.cpp:2087
+#: fig/box_view.cpp:636 fig/box_view.cpp:2101
 #, fuzzy
 msgid "Semantik diagram"
 msgstr "Semantik %1"
 
-#: fig/box_view.cpp:1856 fig/semantik_d_win.cpp:329
+#: fig/box_view.cpp:1870 fig/semantik_d_win.cpp:331
 #, fuzzy
 msgid "Choose a file to open"
 msgstr "Vybrat název souboru"
 
-#: fig/box_view.cpp:1858 fig/box_view.cpp:1896 fig/semantik_d_win.cpp:331
+#: fig/box_view.cpp:1872 fig/box_view.cpp:1910 fig/semantik_d_win.cpp:333
 #, fuzzy
 msgid "*.semd|Semantik diagram (*.semd)"
 msgstr "*.sem|Soubor pro Semantik (*.sem)"
 
-#: fig/box_view.cpp:1894 semantik.cpp:463 semantik.cpp:540
+#: fig/box_view.cpp:1908 semantik.cpp:464 semantik.cpp:541
 msgid "Choose a file name"
 msgstr "Vybrat název souboru"
 
-#: fig/box_view.cpp:1917 fig/box_view.cpp:1952 semantik.cpp:475
-#: semantik.cpp:511
+#: fig/box_view.cpp:1931 fig/box_view.cpp:1966 semantik.cpp:476
+#: semantik.cpp:512
 msgid "Saved '%1'"
 msgstr "Uloženo '%1'"
 
-#: fig/box_view.cpp:1924 semantik.cpp:486 semantik.cpp:517
+#: fig/box_view.cpp:1938 semantik.cpp:487 semantik.cpp:518
 msgid ""
 "The file \"%1\" could not be saved because an error happened.\n"
 "Try again?"
 msgstr ""
 
-#: fig/box_view.cpp:1925 semantik.cpp:487 semantik.cpp:518
+#: fig/box_view.cpp:1939 semantik.cpp:488 semantik.cpp:519
 msgid "Try again?"
 msgstr ""
 
@@ -964,38 +955,39 @@ msgstr "&Vyvést mapu..."
 msgid "Ctrl+Shift+E"
 msgstr "Ctrl+Shift+E"
 
-#: fig/semantik_d_win.cpp:76 semantik.cpp:200
+#. i18n("Ctrl+H"));
+#: fig/semantik_d_win.cpp:78 semantik.cpp:200
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: fig/semantik_d_win.cpp:80
+#: fig/semantik_d_win.cpp:82
 #, fuzzy
 msgid "Files"
 msgstr "&Soubor"
 
-#: fig/semantik_d_win.cpp:92 semantik.cpp:265
+#: fig/semantik_d_win.cpp:94 semantik.cpp:265
 msgid "Color"
 msgstr "Barva"
 
-#: fig/semantik_d_win.cpp:100 semantik.cpp:274
+#: fig/semantik_d_win.cpp:102 semantik.cpp:274
 msgid "Custom color"
 msgstr "Vlastní barva"
 
-#: fig/semantik_d_win.cpp:112
+#: fig/semantik_d_win.cpp:114
 #, fuzzy
 msgid "This is Semantik-d"
 msgstr "Semantik"
 
-#: fig/semantik_d_win.cpp:225
+#: fig/semantik_d_win.cpp:227
 #, fuzzy
 msgid "[Untitled]"
 msgstr "Nepojmenovaný"
 
-#: fig/semantik_d_win.cpp:296 semantik.cpp:660
+#: fig/semantik_d_win.cpp:298 semantik.cpp:661
 msgid "Untitled"
 msgstr "Nepojmenovaný"
 
-#: fig/semantik_d_win.cpp:299 semantik.cpp:663
+#: fig/semantik_d_win.cpp:301 semantik.cpp:664
 msgid ""
 "The document \"%1\" has been modified.\n"
 "Do you want to save your changes or discard them?"
@@ -1003,53 +995,62 @@ msgstr ""
 "Dokument \"%1\" byl změněn.\n"
 "Chcete svoje změny uložit nebo je vyhodit?"
 
-#: fig/semantik_d_win.cpp:300 semantik.cpp:664
+#: fig/semantik_d_win.cpp:302 semantik.cpp:665
 msgid "Close Document"
 msgstr "Zavřít dokument"
 
-#: fig/semantik_d_win.cpp:448 semantik.cpp:553
+#: fig/semantik_d_win.cpp:450 semantik.cpp:554
 msgid " [Modified] "
 msgstr " [Změněno] "
 
-#: fig/semantik_d_win.cpp:453
+#: fig/semantik_d_win.cpp:455
 #, fuzzy
 msgid "Semantik Diagram %1"
 msgstr "Semantik %1"
 
-#: fig/semantik_d_win.cpp:457
+#: fig/semantik_d_win.cpp:459
 #, fuzzy
 msgid "%1 %2 - Semantik Diagram"
 msgstr "%1 %2 - Semantik"
 
-#: fig/semd.cpp:29 main.cpp:32
+#: fig/semd.cpp:25 main.cpp:32
 msgid "A file to open on startup"
 msgstr "Soubor k otevření při spuštění"
 
-#: fig/semd.cpp:30 main.cpp:33
+#: fig/semd.cpp:26 main.cpp:33
 msgid "Batch export as svg/pdf/png"
 msgstr ""
 
-#: fig/semd.cpp:31
+#: fig/semd.cpp:27
 msgid "Diagram width for printing"
 msgstr ""
 
-#: fig/semd.cpp:32
+#: fig/semd.cpp:28
 msgid "Diagram height for printing"
 msgstr ""
 
-#: fig/semd.cpp:34
+#: fig/semd.cpp:30
 #, fuzzy
 msgid "Semantik-d"
 msgstr "Semantik"
 
-#: fig/semd.cpp:34
+#: fig/semd.cpp:30
 #, fuzzy
 msgid "(C) 2013-2018 Thomas Nagy"
 msgstr "(C) 2007-2017 Thomas Nagy"
 
-#: fig/semd.cpp:36 main.cpp:39
+#: fig/semd.cpp:32 main.cpp:39
 msgid "Thomas Nagy"
 msgstr "Thomas Nagy"
+
+#: fig/special_edit.cpp:40
+#, fuzzy
+msgid "Diagram box properties:"
+msgstr "Vlastnosti odkazu"
+
+#: fig/special_edit.cpp:47
+msgid "Text:"
+msgstr "Text:"
 
 #: generator_dialog.cpp:30
 msgid "Generate documents"
@@ -1063,23 +1064,23 @@ msgstr "Tvůrci"
 msgid "Description"
 msgstr "Popis"
 
-#: generator_dialog.cpp:63
+#: generator_dialog.cpp:62
 msgid "Location"
 msgstr "Umístění"
 
-#: generator_dialog.cpp:114
+#: generator_dialog.cpp:115
 msgid "No document generator chosen."
 msgstr "Nebyl vybrán žádný tvůrce dokumentu."
 
-#: generator_dialog.cpp:114
+#: generator_dialog.cpp:115
 msgid "Missing data"
 msgstr "Chybí data"
 
-#: generator_dialog.cpp:120
+#: generator_dialog.cpp:121
 msgid "Invalid output directory %1"
 msgstr "Neplatný výstupní adresář %1"
 
-#: generator_dialog.cpp:120
+#: generator_dialog.cpp:121
 msgid "Missing location"
 msgstr "Chybí umístění"
 
@@ -1292,7 +1293,7 @@ msgstr "Náhled"
 msgid "Linear view"
 msgstr "Přímočarý pohled"
 
-#: semantik.cpp:285 semantik.cpp:740
+#: semantik.cpp:285 semantik.cpp:741
 msgid "Flag"
 msgstr "Příznak"
 
@@ -1300,28 +1301,28 @@ msgstr "Příznak"
 msgid "Welcome to Semantik"
 msgstr "Vítejte v Semantiku"
 
-#: semantik.cpp:465
+#: semantik.cpp:466
 msgid "*.sem|Semantik file (*.sem)"
 msgstr "*.sem|Soubor pro Semantik (*.sem)"
 
-#: semantik.cpp:542
+#: semantik.cpp:543
 msgid "*.sem *.kdi *.mm *.vym|All Supported Files (*.sem *.kdi *.mm *.vym)"
 msgstr ""
 "*.sem *.kdi *.mm *.vym|Všechny podporované soubory (*.sem *.kdi *.mm *.vym)"
 
-#: semantik.cpp:558
+#: semantik.cpp:559
 msgid "Semantik %1"
 msgstr "Semantik %1"
 
-#: semantik.cpp:562
+#: semantik.cpp:563
 msgid "%1 %2 - Semantik"
 msgstr "%1 %2 - Semantik"
 
-#: semantik.cpp:582
+#: semantik.cpp:583
 msgid "Uncomment to set defaults to all documents"
 msgstr ""
 
-#: semantik.cpp:583
+#: semantik.cpp:584
 msgid "Commands can only be defined here"
 msgstr ""
 

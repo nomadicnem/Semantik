@@ -50,7 +50,7 @@
 
 
 int grid_int(int x);
-
+int fceil(qreal l_fInput, int l_iBase);
 
 
 #define mu(x)   #x

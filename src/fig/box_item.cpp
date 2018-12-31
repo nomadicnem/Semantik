@@ -20,6 +20,7 @@
 #include "data_item.h"
 #include "sem_mediator.h"
 #include "mem_box.h"
+#include "special_edit.h"
 
 box_item::box_item(box_view* i_oParent, int i_iId) : QGraphicsRectItem(), connectable(), editable(), resizable(), m_oView(i_oParent),
 m_oItem(m_oView->m_oMediator->m_oItems[m_oView->m_iId])
@@ -129,28 +130,8 @@ void box_item::update_size() {
 
 void box_item::properties()
 {
-	bool ok = false;
-	QString text = QInputDialog::getText(m_oView, i18n("Diagram box properties"),
-			i18n("Text:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
-	if (ok && text != m_oBox->m_sText)
-	{
-		mem_edit_box *ed = new mem_edit_box(m_oView->m_oMediator, m_oView->m_iId, m_iId);
-		ed->newText = text;
-
-		QTextDocument doc;
-		QTextOption l_oOption = doc.defaultTextOption();
-		l_oOption.setAlignment(m_oBox->m_iAlign);
-		doc.setDefaultTextOption(l_oOption);
-		doc.setPlainText(m_oBox->m_sText);
-
-
-		doc.setTextWidth(m_oBox->m_iWW - 2 * OFF);
-		ed->newHeight = GRID * (((int) (doc.size().height() + 2 * OFF + GRID - 1)) / GRID);
-		if (ed->newHeight < m_oBox->m_iHH)
-			ed->newHeight = m_oBox->m_iHH;
-
-		ed->apply();
-	}
+	special_edit_properties l_oDlg(m_oView, this);
+	l_oDlg.exec();
 }
 
 QVariant box_item::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oValue)

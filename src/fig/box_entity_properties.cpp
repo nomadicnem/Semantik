@@ -20,17 +20,10 @@
 #include <QFont>
 #include "mem_box.h"
 #include "box_view.h"
-
+#include "special_edit.h"
 #include <QtDebug>
 
 #include "box_entity_properties.h"
-
-
-entity_editor::entity_editor(QWidget *i_oParent) : QTextEdit(i_oParent)
-{
-	new entity_highlighter(document());
-	setStyleSheet("QTextEdit { font-family: monospace;}");
-}
 
 entity_highlighter::entity_highlighter(QTextDocument *p): QSyntaxHighlighter(p)
 {
@@ -75,11 +68,12 @@ box_entity_properties::box_entity_properties(QWidget *i_oParent, box_entity *i_o
 	setCaption(i18n("Entity properties"));
         setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel);
 	enableButtonApply(false);
-	m_oEntity = i_oEntity;
 
 	QGridLayout *l_oGridLayout = new QGridLayout(widget);
 
-	m_oEntityDefinition = new entity_editor(widget);
+	m_oEntityDefinition = new special_edit(widget);
+	new entity_highlighter(m_oEntityDefinition->document());
+
 	l_oGridLayout->addWidget(m_oEntityDefinition, 0, 0);
         setMainWidget(widget);
         QSize size(700, 320);

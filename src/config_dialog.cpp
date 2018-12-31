@@ -185,6 +185,7 @@ config_editor::config_editor(QWidget *i_oParent) : QTextEdit(i_oParent)
 {
 	new config_highlighter(document());
 	setStyleSheet("QTextEdit { font-family: monospace;}");
+	setTabChangesFocus(true);
 }
 
 config_highlighter::config_highlighter(QTextDocument *p): QSyntaxHighlighter(p)

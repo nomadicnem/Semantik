@@ -44,7 +44,6 @@ generator_dialog::generator_dialog(QWidget *i_oParent, QList<template_entry> i_o
 	m_oTree = new QTreeWidget(widget);
 	m_oTree->header()->hide();
 	l_oGridLayout->addWidget(m_oTree, 1, 0, 1, 2);
-	m_oTree->setFocusPolicy(Qt::NoFocus);
 
 	m_oTextEdit = new QTextEdit(widget);
 	m_oTextEdit->setReadOnly(true);
@@ -81,27 +80,29 @@ generator_dialog::generator_dialog(QWidget *i_oParent, QList<template_entry> i_o
 		l_oItem->setData(0, Qt::UserRole+4, l_o.m_sTip);
 	}
 
-	connect(m_oTree, SIGNAL(itemClicked(QTreeWidgetItem *, int)), this, SLOT(selection_changed(QTreeWidgetItem *, int)));
-
+	connect(m_oTree, SIGNAL(itemSelectionChanged()), this, SLOT(selection_changed()));
+	
 
    	setMainWidget(widget);
-
+	m_oTree->setFocus();
 	QSize size(421, 250);
 	size = size.expandedTo(minimumSizeHint());
 	resize(size);
 }
 
-void generator_dialog::selection_changed(QTreeWidgetItem * i_oItem, int i_oCol)
+void generator_dialog::selection_changed()
 {
-	if (!i_oItem)
+	QList<QTreeWidgetItem*> l_oSel = m_oTree->selectedItems();
+	if (l_oSel.isEmpty())
 	{
 		m_oTextEdit->clear();
 	}
 	else
 	{
-		m_oTextEdit->setText(i_oItem->data(0, Qt::UserRole+4).toString());
-		m_sCurrent = i_oItem->data(0, Qt::UserRole+3).toString();
-		m_sShortName = i_oItem->text(0);
+		QTreeWidgetItem *l_oItem = l_oSel.at(0);
+		m_oTextEdit->setText(l_oItem->data(0, Qt::UserRole+4).toString());
+		m_sCurrent = l_oItem->data(0, Qt::UserRole+3).toString();
+		m_sShortName = l_oItem->text(0);
 	}
 
 }
@@ -135,7 +136,6 @@ void generator_dialog::activate_from_name(const QString &i_s)
 	{
 		m_sShortName = i_s;
 		m_oTree->setCurrentItem(l_o[0]);
-		selection_changed(l_o[0], 0);
 	}
 }
 

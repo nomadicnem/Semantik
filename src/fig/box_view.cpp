@@ -175,6 +175,20 @@ bool box_reader::characters(const QString &i_s)
 	return true;
 }
 
+int fceil(qreal l_fInput, int l_iBase)
+{
+	int l_iCal = ceil(l_fInput);
+	if (l_iCal % l_iBase == 0)
+	{
+		return l_iCal;
+	}
+	return l_iBase * (1 + l_iCal / l_iBase);
+}
+
+int grid_int(int x) {
+	return GRID * (x / GRID);
+}
+
 box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView(i_oWidget)
 {
 	m_oMediator = i_oControl;
