@@ -53,27 +53,29 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	KStandardAction::openNew(this, SLOT(slot_add_tab()), actionCollection());
 	KStandardAction::quit(this, SLOT(close()), actionCollection());
-	KStandardAction::save(this, SLOT(NULL), actionCollection());
-	KStandardAction::saveAs(this, SLOT(NULL), actionCollection());
-	KStandardAction::print(this, SLOT(NULL), actionCollection());
+	KStandardAction::save(NULL, SLOT(NULL), actionCollection());
+	KStandardAction::saveAs(NULL, SLOT(NULL), actionCollection());
+	KStandardAction::print(NULL, SLOT(NULL), actionCollection());
 
-	KStandardAction::copy(this, SLOT(NULL), actionCollection());
+	KStandardAction::copy(NULL, SLOT(NULL), actionCollection());
 
 	KStandardAction::open(this, SLOT(slot_open()), actionCollection());
 	KStandardAction::tipOfDay(this, SLOT(slot_tip_of_day()), actionCollection());
-	m_oUndoAct = KStandardAction::undo(this, SLOT(NULL), actionCollection());
+	m_oUndoAct = KStandardAction::undo(NULL, SLOT(NULL), actionCollection());
 	m_oUndoAct->setEnabled(false);
-	m_oRedoAct = KStandardAction::redo(this, SLOT(NULL), actionCollection());
+	m_oRedoAct = KStandardAction::redo(NULL, SLOT(NULL), actionCollection());
 	m_oRedoAct->setEnabled(false);
 
 	m_oExportSizeAct = new QAction(i18n("&Export the diagram..."), this);
         actionCollection()->addAction(notr("export_fig_size"), m_oExportSizeAct);
-	m_oExportSizeAct->setShortcut(i18n("Ctrl+Shift+E"));
+	actionCollection()->setDefaultShortcut(m_oExportSizeAct, i18n("Ctrl+Shift+E"));
+	//m_oExportSizeAct->setShortcut(i18n("Ctrl+Shift+E"));
         connect(m_oExportSizeAct, SIGNAL(triggered(bool)), this, SLOT(slot_export_fig_size()));
 
 	QAction *l_oFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
 	l_oFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
-	l_oFitZoom->setShortcut(i18n("Ctrl+H"));
+	//l_oFitZoom->setShortcut(i18n("Ctrl+H"));
+	actionCollection()->setDefaultShortcut(l_oFitZoom, i18n("Ctrl+H"));
 
 	m_oRecentFilesAct = KStandardAction::openRecent(this, SLOT(slot_recent(const QUrl&)), actionCollection());
 

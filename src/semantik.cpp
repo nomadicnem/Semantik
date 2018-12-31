@@ -175,12 +175,12 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 
 	m_oReorgAct = new QAction(i18n("&Reorganize the map"), this);
 	actionCollection()->addAction(notr("reorganize_map"), m_oReorgAct);
-	m_oReorgAct->setShortcut(i18n("Ctrl+R"));
+	actionCollection()->setDefaultShortcut(m_oReorgAct, i18n("Ctrl+R"));
 	connect(m_oReorgAct, SIGNAL(triggered(bool)), m_oCanvas, SLOT(reorganize()));
 
 	m_oExportSizeAct = new QAction(i18n("&Export the map..."), this);
 	actionCollection()->addAction(notr("export_map_size"), m_oExportSizeAct);
-	m_oExportSizeAct->setShortcut(i18n("Ctrl+Shift+E"));
+	actionCollection()->setDefaultShortcut(m_oExportSizeAct, i18n("Ctrl+Shift+E"));
 	connect(m_oExportSizeAct, SIGNAL(triggered(bool)), m_oCanvas, SLOT(export_map_size()));
 
 	KStandardAction::preferences(this, SLOT(slot_properties()), actionCollection());
@@ -188,7 +188,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oGenerateAct = new QAction(i18n("&Generate..."), this);
 	actionCollection()->addAction(notr("generate_doc"), m_oGenerateAct);
 	m_oGenerateAct->setIcon(QIcon(notr("run-build-file")));
-	m_oGenerateAct->setShortcut(i18n("Ctrl+G"));
+	actionCollection()->setDefaultShortcut(m_oGenerateAct, i18n("Ctrl+G"));
 	connect(m_oGenerateAct, SIGNAL(triggered(bool)), SLOT(slot_generate()));
 
 	//m_oCanvasFitZoom = new QAction(i18n("Fit zoom"), this);
@@ -197,7 +197,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	//connect(m_oCanvasFitZoom, SIGNAL(triggered(bool)), m_oCanvas, SLOT(fit_zoom()));
 	m_oCanvasFitZoom = KStandardAction::fitToPage(this, SLOT(fit_zoom()), actionCollection());
 	m_oCanvasFitZoom->setIcon(QIcon(notr("zoom-best-fit")));
-	m_oCanvasFitZoom->setShortcut(i18n("Ctrl+H"));
+	actionCollection()->setDefaultShortcut(m_oCanvasFitZoom, i18n("Ctrl+H"));
 
 	KStandardAction::zoomIn(m_oCanvas, SLOT(zoom_in()), actionCollection());
 	KStandardAction::zoomOut(m_oCanvas, SLOT(zoom_out()), actionCollection());
