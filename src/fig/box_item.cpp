@@ -245,6 +245,11 @@ QPoint box_item::get_point(int i_oP)
 
 QSize box_item::best_size(const QPointF &dims)
 {
+	if (doc.toPlainText().isEmpty())
+	{
+		return QSize(fceil(dims.x(), GRID), fceil(dims.y(), GRID));
+	}
+
 	int x = dims.x();
 	x = GRID * (x / GRID);
 	if (x < GRID) x = GRID;

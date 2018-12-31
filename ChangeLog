@@ -3,8 +3,9 @@ Semantik 1.2.1
 * Fix duplicate reference values
 * Fix double prompts for overwriting files
 * Fix invisible map variables immediately after opening a map
-* Fix the tab navigation on the document generator dialog
-* Fix the text alignment on boundary objects (diagrams)
+* Fix document generator dialog's tab navigation
+* Fix boundary objects' text alignment (diagrams)
+* Fix pipe objects' resizing (diagrams)
 * Enable newlines on most diagram objects #89
 * Add global settings for commands to execute after a template is called
 
