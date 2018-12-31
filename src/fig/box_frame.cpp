@@ -22,6 +22,7 @@
 
 #include <QFont>
 
+#define PAD 2
 #define MIN_FORK_SIZE 30
 
 box_frame::box_frame(box_view* view, int id) : box_item(view, id)
@@ -54,11 +55,31 @@ void box_frame::update_links()
 	m_oCaption->setPlainText(m_oBox->m_sText);
 
 	QRectF l_oR = boundingRect();
-	if (m_oBox->m_iLabelPosition == Qt::TopEdge) m_oCaption->setPos((l_oR.width() - m_oCaption->boundingRect().width()) / 2., 0);
+	int l_iVpos;
+	if (m_oBox->m_iLabelPosition == Qt::TopEdge)
+	{
+		l_iVpos = 0;
+	}
 	else
 	{
-		m_oCaption->setPos((l_oR.width() - m_oCaption->boundingRect().width()) / 2., l_oR.height() - m_oCaption->boundingRect().height());
+		l_iVpos = l_oR.height() - m_oCaption->boundingRect().height();
 	}
+
+	int l_iHpos;
+	if (m_oBox->m_iAlign == Qt::AlignLeft)
+	{
+		l_iHpos = l_oR.left() + PAD;
+	}
+	else if (m_oBox->m_iAlign == Qt::AlignRight)
+	{
+		l_iHpos = l_oR.right() - m_oCaption->boundingRect().width() - PAD;
+	}
+	else
+	{
+		l_iHpos = (l_oR.width() - m_oCaption->boundingRect().width()) / 2.;
+	}
+
+	m_oCaption->setPos(l_iHpos, l_iVpos);
 	box_item::update_links();
 }
 
