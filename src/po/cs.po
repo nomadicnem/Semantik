@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2019-01-01 06:58+0100\n"
+"POT-Creation-Date: 2019-01-01 08:37+0100\n"
 "PO-Revision-Date: 2012-10-21 19:45+0200\n"
 "Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -276,7 +276,7 @@ msgstr "Nastavení dokumentu"
 
 #: config_dialog.cpp:46
 #, fuzzy
-msgid "Global variables"
+msgid "Default variables"
 msgstr "Proměnné"
 
 #: config_dialog.cpp:52
@@ -1026,6 +1026,15 @@ msgstr ""
 msgid "Semantik-d"
 msgstr "Semantik"
 
+#: fig/semd.cpp:30
+#, fuzzy
+msgid "© 2013-2019 Thomas Nagy"
+msgstr "(C) 2007-2017 Thomas Nagy"
+
+#: fig/semd.cpp:32 main.cpp:39
+msgid "Thomas Nagy"
+msgstr "Thomas Nagy"
+
 #: fig/special_edit.cpp:40
 #, fuzzy
 msgid "Diagram box properties:"
@@ -1114,6 +1123,11 @@ msgstr ""
 #: main.cpp:36
 msgid "Semantik"
 msgstr "Semantik"
+
+#: main.cpp:37
+#, fuzzy
+msgid "© 2007-2019 Thomas Nagy"
+msgstr "(C) 2007-2017 Thomas Nagy"
 
 #. i18n: file: data/semantik-dui.rc:5
 #. i18n: ectx: Menu (file)
@@ -1419,17 +1433,6 @@ msgstr "Kód dokončen"
 #: vars_view.cpp:78
 msgid "Ctrl+space"
 msgstr "Ctrl+mezerník"
-
-#, fuzzy
-#~ msgid "(C) 2013-2018 Thomas Nagy"
-#~ msgstr "(C) 2007-2017 Thomas Nagy"
-
-#~ msgid "Thomas Nagy"
-#~ msgstr "Thomas Nagy"
-
-#, fuzzy
-#~ msgid "(C) 2007-2018 Thomas Nagy"
-#~ msgstr "(C) 2007-2017 Thomas Nagy"
 
 #~ msgid ""
 #~ "The file \"%1\" already exists.\n"

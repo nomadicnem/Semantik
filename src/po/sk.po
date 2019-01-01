@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semantik 0.7.3\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2019-01-01 06:58+0100\n"
+"POT-Creation-Date: 2019-01-01 08:37+0100\n"
 "PO-Revision-Date: 2010-01-26 18:08+0100\n"
 "Last-Translator: Slavko\n"
 "Language-Team: Slovenský <nomail>\n"
@@ -281,7 +281,7 @@ msgstr "názov dokumentu"
 
 #: config_dialog.cpp:46
 #, fuzzy
-msgid "Global variables"
+msgid "Default variables"
 msgstr "Premenné"
 
 #: config_dialog.cpp:52
@@ -1032,6 +1032,14 @@ msgstr ""
 msgid "Semantik-d"
 msgstr "Semantik"
 
+#: fig/semd.cpp:30
+msgid "© 2013-2019 Thomas Nagy"
+msgstr ""
+
+#: fig/semd.cpp:32 main.cpp:39
+msgid "Thomas Nagy"
+msgstr ""
+
 #: fig/special_edit.cpp:40
 msgid "Diagram box properties:"
 msgstr ""
@@ -1122,6 +1130,10 @@ msgstr ""
 #: main.cpp:36
 msgid "Semantik"
 msgstr "Semantik"
+
+#: main.cpp:37
+msgid "© 2007-2019 Thomas Nagy"
+msgstr ""
 
 #. i18n: file: data/semantik-dui.rc:5
 #. i18n: ectx: Menu (file)

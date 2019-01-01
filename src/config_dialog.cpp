@@ -43,7 +43,7 @@ config_dialog::config_dialog(QWidget *i_oParent):
 	l_oTabWidget->addTab(l_oGlobalGroupBox, i18n("Global settings"));
 
 	QWidget *l_oGlobalTemplateBox = new QGroupBox(l_oTabWidget);
-	l_oTabWidget->addTab(l_oGlobalTemplateBox, i18n("Global variables"));
+	l_oTabWidget->addTab(l_oGlobalTemplateBox, i18n("Default variables"));
 
 
 	QGridLayout *l_oDocumentGridLayout = new QGridLayout(l_oDocumentGroupBox);

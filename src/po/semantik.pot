@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2019-01-01 06:58+0100\n"
+"POT-Creation-Date: 2019-01-01 08:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: base/data_item.cpp:76 canvas_view.cpp:249 canvas_view.cpp:301
@@ -266,7 +266,7 @@ msgid "Global settings"
 msgstr ""
 
 #: config_dialog.cpp:46
-msgid "Global variables"
+msgid "Default variables"
 msgstr ""
 
 #: config_dialog.cpp:52
@@ -971,6 +971,14 @@ msgstr ""
 msgid "Semantik-d"
 msgstr ""
 
+#: fig/semd.cpp:30
+msgid "© 2013-2019 Thomas Nagy"
+msgstr ""
+
+#: fig/semd.cpp:32 main.cpp:39
+msgid "Thomas Nagy"
+msgstr ""
+
 #: fig/special_edit.cpp:40
 msgid "Diagram box properties:"
 msgstr ""
@@ -1055,6 +1063,10 @@ msgstr ""
 
 #: main.cpp:36
 msgid "Semantik"
+msgstr ""
+
+#: main.cpp:37
+msgid "© 2007-2019 Thomas Nagy"
 msgstr ""
 
 #. i18n: file: data/semantik-dui.rc:5
