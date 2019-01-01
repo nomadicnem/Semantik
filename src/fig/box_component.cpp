@@ -25,7 +25,7 @@
 box_component::box_component(box_view* view, int id) : box_item(view, id)
 {
 	y_text_off = 2 * OFF + 20;
-	x_text_off = 2 * OFF + 10;
+	x_text_off = 2 * OFF;
 	setZValue(95);
 }
 
