@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2018 GPLV3
+// Thomas Nagy 2007-2019 GPLV3
 
 #ifndef TABLE_DIALOG_H
 #define TABLE_DIALOG_H

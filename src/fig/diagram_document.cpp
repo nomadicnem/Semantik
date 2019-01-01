@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2018 GPLV3
+// Thomas Nagy 2013-2019 GPLV3
 
 #include <QtGui>
 #include <QFile>

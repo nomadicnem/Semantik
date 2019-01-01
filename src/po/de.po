@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: semantik\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-31 14:06+0100\n"
+"POT-Creation-Date: 2019-01-01 06:58+0100\n"
 "PO-Revision-Date: 2015-11-28 15:00+0100\n"
 "Last-Translator: St. Briest\n"
 "Language-Team:\n"
@@ -544,23 +544,15 @@ msgstr "Verbindungseigenschaften"
 msgid "Caption:"
 msgstr "Ort"
 
-#: fig/box_class_properties.cpp:86 vars_view.cpp:77
-msgid "Code complete"
-msgstr "Code vollständig"
-
-#: fig/box_class_properties.cpp:87 vars_view.cpp:78
-msgid "Ctrl+space"
-msgstr "Strg+Leertaste"
-
-#: fig/box_class_properties.cpp:243
+#: fig/box_class_properties.cpp:70
 msgid "Class properties"
 msgstr "Klasseneigenschaften"
 
-#: fig/box_class_properties.cpp:280
+#: fig/box_class_properties.cpp:109
 msgid "No class name given"
 msgstr "Kein Klassenname vergeben"
 
-#: fig/box_class_properties.cpp:280
+#: fig/box_class_properties.cpp:109
 msgid "Missing class name"
 msgstr "Klassenname fehlt"
 
@@ -569,22 +561,22 @@ msgstr "Klassenname fehlt"
 msgid "Font properties"
 msgstr "Verbindungseigenschaften"
 
-#: fig/box_entity_properties.cpp:75
+#: fig/box_entity_properties.cpp:68
 #, fuzzy
 msgid "Entity properties"
 msgstr "Verbindungseigenschaften"
 
-#: fig/box_entity_properties.cpp:111
+#: fig/box_entity_properties.cpp:106
 #, fuzzy
 msgid "No entity name given"
 msgstr "Kein Klassenname vergeben"
 
-#: fig/box_entity_properties.cpp:111
+#: fig/box_entity_properties.cpp:106
 #, fuzzy
 msgid "Missing entity name"
 msgstr "Klassenname fehlt"
 
-#: fig/box_fork.cpp:331 fig/box_item.cpp:281
+#: fig/box_fork.cpp:331 fig/box_item.cpp:286
 msgid "%1 x %2"
 msgstr "%1 x %2"
 
@@ -1011,15 +1003,6 @@ msgstr "Diagrammhöhe zum Druck"
 msgid "Semantik-d"
 msgstr "Semantik-d"
 
-#: fig/semd.cpp:30
-#, fuzzy
-msgid "(C) 2013-2018 Thomas Nagy"
-msgstr "(C) 2007-2017 Thomas Nagy"
-
-#: fig/semd.cpp:32 main.cpp:39
-msgid "Thomas Nagy"
-msgstr "Thomas Nagy"
-
 #: fig/special_edit.cpp:40
 #, fuzzy
 msgid "Diagram box properties:"
@@ -1108,11 +1091,6 @@ msgstr ""
 #: main.cpp:36
 msgid "Semantik"
 msgstr "Semantik"
-
-#: main.cpp:37
-#, fuzzy
-msgid "(C) 2007-2018 Thomas Nagy"
-msgstr "(C) 2007-2017 Thomas Nagy"
 
 #. i18n: file: data/semantik-dui.rc:5
 #. i18n: ectx: Menu (file)
@@ -1409,6 +1387,25 @@ msgstr ""
 #, fuzzy
 msgid "Link:"
 msgstr "Pfeil"
+
+#: vars_view.cpp:77
+msgid "Code complete"
+msgstr "Code vollständig"
+
+#: vars_view.cpp:78
+msgid "Ctrl+space"
+msgstr "Strg+Leertaste"
+
+#, fuzzy
+#~ msgid "(C) 2013-2018 Thomas Nagy"
+#~ msgstr "(C) 2007-2017 Thomas Nagy"
+
+#~ msgid "Thomas Nagy"
+#~ msgstr "Thomas Nagy"
+
+#, fuzzy
+#~ msgid "(C) 2007-2018 Thomas Nagy"
+#~ msgstr "(C) 2007-2017 Thomas Nagy"
 
 #~ msgid ""
 #~ "The file \"%1\" already exists.\n"

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2018 GPLV3
+// Thomas Nagy 2007-2019 GPLV3
 
 #ifndef IMAGE_VIEW_H
 #define IMAGE_VIEW_H

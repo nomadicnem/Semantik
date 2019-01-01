@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.com/ita1024/semantik/issues\n"
-"POT-Creation-Date: 2018-12-31 14:06+0100\n"
+"POT-Creation-Date: 2019-01-01 06:58+0100\n"
 "PO-Revision-Date: 2009-07-28 12:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ελληνικά <kde-i18n-doc@kde.org>\n"
@@ -553,23 +553,15 @@ msgstr ""
 msgid "Caption:"
 msgstr "Τοποθεσία"
 
-#: fig/box_class_properties.cpp:86 vars_view.cpp:77
-msgid "Code complete"
-msgstr "Ο κώδικας συμπληρώθηκε"
-
-#: fig/box_class_properties.cpp:87 vars_view.cpp:78
-msgid "Ctrl+space"
-msgstr ""
-
-#: fig/box_class_properties.cpp:243
+#: fig/box_class_properties.cpp:70
 msgid "Class properties"
 msgstr ""
 
-#: fig/box_class_properties.cpp:280
+#: fig/box_class_properties.cpp:109
 msgid "No class name given"
 msgstr ""
 
-#: fig/box_class_properties.cpp:280
+#: fig/box_class_properties.cpp:109
 #, fuzzy
 msgid "Missing class name"
 msgstr "Λείπουν δεδομένα"
@@ -578,20 +570,20 @@ msgstr "Λείπουν δεδομένα"
 msgid "Font properties"
 msgstr ""
 
-#: fig/box_entity_properties.cpp:75
+#: fig/box_entity_properties.cpp:68
 msgid "Entity properties"
 msgstr ""
 
-#: fig/box_entity_properties.cpp:111
+#: fig/box_entity_properties.cpp:106
 msgid "No entity name given"
 msgstr ""
 
-#: fig/box_entity_properties.cpp:111
+#: fig/box_entity_properties.cpp:106
 #, fuzzy
 msgid "Missing entity name"
 msgstr "Λείπουν δεδομένα"
 
-#: fig/box_fork.cpp:331 fig/box_item.cpp:281
+#: fig/box_fork.cpp:331 fig/box_item.cpp:286
 msgid "%1 x %2"
 msgstr ""
 
@@ -1043,14 +1035,6 @@ msgstr ""
 msgid "Semantik-d"
 msgstr "Semantik"
 
-#: fig/semd.cpp:30
-msgid "(C) 2013-2018 Thomas Nagy"
-msgstr ""
-
-#: fig/semd.cpp:32 main.cpp:39
-msgid "Thomas Nagy"
-msgstr ""
-
 #: fig/special_edit.cpp:40
 msgid "Diagram box properties:"
 msgstr ""
@@ -1141,10 +1125,6 @@ msgstr ""
 #: main.cpp:36
 msgid "Semantik"
 msgstr "Semantik"
-
-#: main.cpp:37
-msgid "(C) 2007-2018 Thomas Nagy"
-msgstr ""
 
 #. i18n: file: data/semantik-dui.rc:5
 #. i18n: ectx: Menu (file)
@@ -1447,6 +1427,14 @@ msgstr ""
 #, fuzzy
 msgid "Link:"
 msgstr "&Σύνδεση"
+
+#: vars_view.cpp:77
+msgid "Code complete"
+msgstr "Ο κώδικας συμπληρώθηκε"
+
+#: vars_view.cpp:78
+msgid "Ctrl+space"
+msgstr ""
 
 #~ msgid "Force-based"
 #~ msgstr "Αναγκατικό"

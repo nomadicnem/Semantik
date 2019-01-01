@@ -1,4 +1,4 @@
-// Thomas Nagy 2018 GPLV3
+// Thomas Nagy 2018-2019 GPLV3
 
 #ifndef CANVAS_REF_H
 #define CANVAS_REF_H

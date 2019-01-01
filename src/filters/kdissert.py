@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2007-2018 GPLV3
+# Thomas Nagy, 2007-2019 GPLV3
 
 import os, sys, tarfile, io
 from xml.sax import make_parser

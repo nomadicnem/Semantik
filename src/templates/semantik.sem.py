@@ -1,7 +1,7 @@
 #sem:name: semantik document generator
 #sem:tip: used for saving semantik documents
 
-# Thomas Nagy, 2007-2018 GPLV3
+# Thomas Nagy, 2007-2019 GPLV3
 
 import os, tarfile
 import io

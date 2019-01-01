@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2018 GPLV3
+// Thomas Nagy 2007-2019 GPLV3
 
 #include <fstream>
 #include <QCoreApplication>
@@ -34,9 +34,9 @@ int main(int i_iArgc, char **i_iArgv)
 	options.add("d <folder>", ki18n("Batch document creation into the given folder (absolute path)"));
 	options.add("t <type>", ki18n("Batch document creation template pdflatex/beamer/html/s5/odp/odt"));
 	K4AboutData l_o("semantik", 0, ki18n("Semantik"), version, ki18n(description),
-			K4AboutData::License_GPL_V3, ki18n("(C) 2007-2018 Thomas Nagy"), KLocalizedString());
+			K4AboutData::License_GPL_V3, notr("© 2007-2019 Thomas Nagy"), KLocalizedString());
 	l_o.setBugAddress("https://gitlab.com/ita1024/semantik/issues");
-	l_o.addAuthor(ki18n("Thomas Nagy"), KLocalizedString());
+	l_o.addAuthor(notr("Thomas Nagy"), KLocalizedString());
 
 	KCmdLineArgs::init(i_iArgc, i_iArgv, &l_o);
 	KCmdLineArgs::addCmdLineOptions(options);

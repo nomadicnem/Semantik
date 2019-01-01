@@ -1,4 +1,4 @@
-// Thomas Nagy 2018 GPLV3
+// Thomas Nagy 2018-2019 GPLV3
 
 #include <QLabel>
 #include <QGridLayout>

@@ -1,7 +1,7 @@
 #sem:name: OpenDocument Presentation
 #sem:tip: Generates presentations for OpenOffice.org Impress
 
-# Thomas Nagy, 2007-2018 GPLV3
+# Thomas Nagy, 2007-2019 GPLV3
 
 mimetype = "application/vnd.oasis.opendocument.presentation"
 

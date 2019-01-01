@@ -1,7 +1,7 @@
 #sem:name: Beamer presentation
 #sem:tip: Generates a LaTeX presentation using Beamer
 
-# Thomas Nagy, 2007-2018 GPLV3
+# Thomas Nagy, 2007-2019 GPLV3
 
 import getpass, os, shutil, sys, time
 
