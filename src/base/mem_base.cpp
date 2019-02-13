@@ -168,12 +168,22 @@ void mem_ref::undo()
 
 mem_unref::mem_unref(sem_mediator* mod) : mem_command(mod)
 {
-	m_iPos = 0;
 }
 
 void mem_unref::redo()
 {
-	model->m_oRefs.removeAt(m_iPos);
+	int l_iPos = -1;
+	for (int i = 0 ; i < model->m_oRefs.size() ; ++ i)
+	{
+		const data_ref& l_oRef = model->m_oRefs.at(i);
+		if (l_oRef.m_iParent == m_iParent && l_oRef.m_iChild == m_iChild)
+		{
+			l_iPos = i;
+			break;
+		}
+	}
+	Q_ASSERT(l_iPos != -1);
+	model->m_oRefs.removeAt(l_iPos);
 	model->notify_unref_items(m_iParent, m_iChild);
 	redo_dirty();
 }
@@ -181,7 +191,7 @@ void mem_unref::redo()
 void mem_unref::undo()
 {
 	data_ref l_oRef(m_iParent, m_iChild);
-	model->m_oRefs.insert(m_iPos, l_oRef);
+	model->m_oRefs.push_back(l_oRef);
 	model->notify_ref_items(m_iParent, m_iChild);
 	undo_dirty();
 }

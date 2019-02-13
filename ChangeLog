@@ -1,3 +1,7 @@
+Semantik 1.2.2
+--------------
+* Fix stale connections when unconnecting multiple references
+
 Semantik 1.2.1
 --------------
 * Fix duplicate reference values

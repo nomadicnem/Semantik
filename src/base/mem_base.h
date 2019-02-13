@@ -89,7 +89,6 @@ class mem_unref : public mem_command {
 
 		int m_iParent;
 		int m_iChild;
-		int m_iPos;
 		IType type() { return UNREF; }
 };
 
