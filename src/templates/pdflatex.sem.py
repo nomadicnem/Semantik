@@ -77,7 +77,7 @@ def print_nodes(node, niv):
 			out('\\paragraph{%s}\n' % sm)
 
 	caption = node.get_var('caption')
-	if not caption:
+	if not caption and node.get_var('nocaption') != 'true'
 		caption = node.get_val('summary')
 
 	typo = node.get_val('type')

@@ -115,7 +115,8 @@ def print_figure_slides(node, niv):
 			the_pic = pics.get(node.get_val('id'))
 			if the_pic and not node.get_var('exclude_pic'):
 				caption = node.get_var('caption')
-				if not caption:
+				if not caption and node.get_var('nocaption') != 'true'
+					# TODO
 					caption = node.get_val('summary')
 				out('<div style="text-align: center; width: 100%;">\n')
 				out("<img src='%s' style='max-width:99%%;'>\n" % the_pic)

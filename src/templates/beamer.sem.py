@@ -93,7 +93,7 @@ def print_figure_slides(node):
 	diagrams_added.add(node.get_val("id"))
 
 	caption = node.get_var('caption')
-	if not caption:
+	if not caption and node.get_var('nocaption') != 'true':
 		caption = node.get_val('summary')
 
 	typo = node.get_val('type')

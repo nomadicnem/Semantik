@@ -61,7 +61,8 @@ def print_nodes(node, niv, lbl_lst):
 		cols = node.num_cols()
 		if rows > 0 and cols > 0:
 			caption = node.get_var('caption')
-			if not caption: caption = node.get_val('summary')
+			if not caption and node.get_var('nocaption') != 'true'
+				caption = node.get_val('summary')
 
 			out('\n')
 			out('<table class="sem_table">\n')
