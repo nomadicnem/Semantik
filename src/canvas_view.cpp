@@ -1044,6 +1044,13 @@ void canvas_view::slot_change_data()
 	else delete(t);
 }
 
+void canvas_view::notify_datatype(int i_iId)
+{
+        canvas_item *l_o = m_oItems[i_iId];
+        l_o->update_data();
+        l_o->m_oPic->update();
+}
+
 void canvas_view::toggle_fullscreen()
 {
 	if (isFullScreen())
