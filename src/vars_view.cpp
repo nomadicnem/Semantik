@@ -34,8 +34,9 @@ void vars_view::init_completer()
 	QTreeView *l_oTreeView = NULL;
 
 	QStandardItemModel *l_oModelItem = new QStandardItemModel(this);
-
 	fillloc(l_oModelItem);
+	l_oModelItem->sort(0);
+
 	l_oTreeView = new QTreeView;
 	m_oCompleterItem->setPopup(l_oTreeView);
 	m_oCompleterItem->setModel(l_oModelItem);
@@ -54,6 +55,7 @@ void vars_view::init_completer()
 
 	QStandardItemModel *l_oModelAll = new QStandardItemModel(this);
 	fillglo(l_oModelAll)
+	l_oModelAll->sort(0);
 
 
 	l_oTreeView = new QTreeView;

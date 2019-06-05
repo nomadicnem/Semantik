@@ -77,7 +77,7 @@ def print_nodes(node, niv):
 			out('\\paragraph{%s}\n' % sm)
 
 	caption = node.get_var('caption')
-	if not caption and node.get_var('nocaption') != 'true'
+	if not caption and not node.get_var('disable_caption', False):
 		caption = node.get_val('summary')
 
 	typo = node.get_val('type')
@@ -123,15 +123,17 @@ def print_nodes(node, niv):
 		cols = node.num_cols()
 		if rows>0 and cols>0:
 
-			out('\\begin{table}\n')
+			disable_row_header = node.get_var('disable_row_header', False)
+			disable_col_header = node.get_var('disable_col_header', False)
 
+			out('\\begin{table}\n')
 			out('\\begin{center}\n')
 			out('\\begin{tabular}{|%s}' % ('c|'*cols))
 			out(' \\hline\n')
 			for i in range(rows):
 				for j in range(cols):
 					cell = tex_convert(node.get_cell(i, j)).replace('\n', ' ')
-					if i == 0 or j == 0:
+					if (i == 0 and not disable_row_header) or (j == 0 and not disable_col_header):
 						out('\\textbf{%s}' % cell)
 					else:
 						out('%s' % cell)

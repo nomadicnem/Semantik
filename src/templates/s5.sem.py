@@ -92,6 +92,10 @@ def print_figure_slides(node, niv):
 			rows = node.num_rows()
 			cols = node.num_cols()
 			if rows>0 and cols>0:
+
+				disable_row_header = node.get_var('disable_row_header', False)
+				disable_col_header = node.get_var('disable_col_header', False)
+
 				out('\n')
 				out('<div style="text-align: center; width: 100%;">\n')
 				out('<table class="sem_table">\n')
@@ -100,10 +104,10 @@ def print_figure_slides(node, niv):
 					out('\t<tr>\n')
 					for j in range(cols):
 						cell = xml(node.get_cell(i, j)).replace('\n', '<br/>')
-						if i>0 and j>0:
-							out('\t\t<td>%s</td>\n' % cell)
-						else:
+						if (i == 0 and not disable_row_header) or (j == 0 and not disable_col_header):
 							out('\t\t<th>%s</th>\n' % cell)
+						else:
+							out('\t\t<td>%s</td>\n' % cell)
 					out('\t</tr>\n')
 
 				out('</tbody>\n')
@@ -115,8 +119,7 @@ def print_figure_slides(node, niv):
 			the_pic = pics.get(node.get_val('id'))
 			if the_pic and not node.get_var('exclude_pic'):
 				caption = node.get_var('caption')
-				if not caption and node.get_var('nocaption') != 'true'
-					# TODO
+				if not caption and not node.get_var('disable_caption', False):
 					caption = node.get_val('summary')
 				out('<div style="text-align: center; width: 100%;">\n')
 				out("<img src='%s' style='max-width:99%%;'>\n" % the_pic)

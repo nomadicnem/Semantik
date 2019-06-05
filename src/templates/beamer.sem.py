@@ -93,7 +93,7 @@ def print_figure_slides(node):
 	diagrams_added.add(node.get_val("id"))
 
 	caption = node.get_var('caption')
-	if not caption and node.get_var('nocaption') != 'true':
+	if not caption and not node.get_var('disable_caption', False):
 		caption = node.get_val('summary')
 
 	typo = node.get_val('type')
@@ -149,18 +149,26 @@ def print_figure_slides(node):
 				out('\\begin{table}\n')
 
 				out('\\begin{center}\n')
-				out('\\begin{tabular}{|%s}' % ('c|'*cols))
+				out('\\setlength{\\tabcolsep}{2pt}\n')
+
+				out('\\begin{adjustbox}{max width=\\textwidth,max totalheight=\\textheight,keepaspectratio}\n')
+				out('\\begin{tabular}{|%s}' % ('l|'*cols))
 				out(' \\hline\n')
+
+				disable_row_header = node.get_var('disable_row_header', False)
+				disable_col_header = node.get_var('disable_col_header', False)
+
 				for i in range(rows):
 					for j in range(cols):
 						cell = tex_convert(node.get_cell(i, j)).replace('\n', ' ')
-						if i == 0 or j == 0:
+						if (i == 0 and not disable_row_header) or (j == 0 and not disable_col_header):
 							out('\\textbf{%s}' % cell)
 						else:
 							out('%s' % cell)
 						if j < cols - 1: out(" & ")
 					out(' \\\\ \\hline\n')
 				out('\\end{tabular}\n')
+				out('\\end{adjustbox}\n')
 				out('\\end{center}\n')
 
 				if caption:

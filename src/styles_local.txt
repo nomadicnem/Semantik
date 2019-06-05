@@ -1,4 +1,7 @@
 
+disable_caption	set a non-empty value to disable captions under tables, diagrams and images
+disable_row_header	set a non-empty value to make the first column in tables a regular one
+disable_col_header	set a non-empty value to make the first row in tables a regular one
 
 exclude_pic	exclude the picture
 exclude_pic.html	
@@ -16,3 +19,5 @@ picstyle.html	html picture style: style="width: 99px;"
 
 make_slide.s5	fit the item on one slide
 skip_slide.s5	do not use this item for generating slides
+
+
