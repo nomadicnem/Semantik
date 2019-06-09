@@ -49,6 +49,8 @@ buf = []
 out = buf.append
 
 def print_slide(node, niv):
+	if node.get_var('disable_slide', False):
+		return
 	txt = tex_convert(node.get_val('summary'))
 
 	if niv == 0:
@@ -186,7 +188,10 @@ def print_figure_slides(node):
 				#	restrict = ""
 				#	if (w > 5*72): restrict = "[width=5in]"
 				if not restrict:
-					restrict = "[width=0.8\\textwidth,height=0.7\\textheight,keepaspectratio]"
+					rat = '0.75'
+					if caption:
+						rat = '0.7'
+					restrict = "[width=\\textwidth,height=%s\\textheight,keepaspectratio]" % rat
 
 				out('\\begin{figure}[htbp]\n')
 				out('  \\begin{center}\n')

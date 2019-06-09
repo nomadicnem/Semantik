@@ -2,6 +2,7 @@
 disable_caption	set a non-empty value to disable captions under tables, diagrams and images
 disable_row_header	set a non-empty value to make the first column in tables a regular one
 disable_col_header	set a non-empty value to make the first row in tables a regular one
+disable_slide	prevent this node from creating a single slide (beamer for now)
 
 exclude_pic	exclude the picture
 exclude_pic.html	
