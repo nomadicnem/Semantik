@@ -224,6 +224,7 @@ class sem_mediator: public QObject
 		bool save_and_load_picture(const QUrl& i_sPath, int id);
 		int generate_docs(const QString &i_oFile, const QString &i_sName, const QString &i_sLocation);
 
+		int height_of(int i_iId);
 		int parent_of(int i_iId);
 		int size_of(int i_iId);
 		int choose_root();

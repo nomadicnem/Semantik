@@ -20,7 +20,7 @@ class canvas_ref: public canvas_link
 		canvas_ref(canvas_view *i_oGraphWidget, canvas_item *i_oFrom, canvas_item * i_oTo);
 
 		int type() const { return CANVAS_REF_T; }
-
+		void paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_oStyle, QWidget *i_oWidget=NULL);
 		QColor get_color();
 };
 

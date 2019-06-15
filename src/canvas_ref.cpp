@@ -27,4 +27,11 @@ canvas_ref::get_color()
 {
 return m_oGraph->m_oMediator->m_oAltArrowColor;
 }
+void canvas_ref::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_oStyle, QWidget *i_oWidget)
+{
+	QColor l_o = get_color();
+	setBrush(l_o);
+	setPen(l_o);
+	QGraphicsPathItem::paint(i_oPainter, i_oStyle, i_oWidget);
+}
 

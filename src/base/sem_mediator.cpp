@@ -1446,6 +1446,17 @@ QPair<int, int> sem_mediator::hint_size_diagram(int id)
 	return QPair<int, int>(width, height);
 }
 
+int sem_mediator::height_of(int i_i)
+{
+	int l_i = 0;
+	int l_iItem = i_i;
+	while ((l_iItem = parent_of(l_iItem)) != NO_ITEM)
+	{
+		l_i ++;
+	}
+	return l_i;
+}
+
 int sem_mediator::size_of(int i_i)
 {
 	// warning, recursive

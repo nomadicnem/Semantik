@@ -188,13 +188,38 @@ void canvas_link::update_spline()
 void canvas_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_oStyle, QWidget *i_oWidget=NULL)
 {
 	QColor l_o = get_color();
-	setBrush(l_o);
 	setPen(l_o);
+	QColor l_oBack;
+	if (m_oTo != NULL)
+	{
+		data_item& l_oItem = m_oGraph->m_oMediator->m_oItems[m_oTo->m_iId];
+		color_scheme l_oColorScheme = l_oItem.get_color_scheme(m_oGraph->m_oMediator);
+		l_oBack = l_oColorScheme.m_oInnerColor;
+	}
+	else
+	{
+		l_oBack = QColor(Qt::green);
+	}
+
+	double l_oA;
+	if (m_oFrom != NULL)
+	{
+		l_oA = qMin(0.2 * m_oGraph->m_oMediator->height_of(m_oFrom->m_iId), 1.0);
+	}
+
+	double l_oNa = 1 - l_oA;
+	int l_oRed = l_o.red() * l_oNa + (l_oBack.red()) * l_oA;
+	int l_oGreen = l_o.green() * l_oNa + (l_oBack.green()) * l_oA;
+	int l_oBlue = l_o.blue() * l_oNa + (l_oBack.blue()) * l_oA;
+
+	QColor l_oV = QColor::fromRgb(l_oRed, l_oGreen, l_oBlue);
+	setBrush(l_oV);
+
 	QGraphicsPathItem::paint(i_oPainter, i_oStyle, i_oWidget);
 }
 
 QColor canvas_link::get_color()
 {
-return m_oGraph->m_oMediator->m_oArrowColor;
+return m_oGraph->m_oMediator->m_oArrowColor.lighter(250);
 }
 

@@ -1,6 +1,7 @@
 Semantik 1.2.2
 --------------
 * Fix stale connections when unconnecting multiple references
+* Paint long branches with a lighter color
 
 Semantik 1.2.1
 --------------
