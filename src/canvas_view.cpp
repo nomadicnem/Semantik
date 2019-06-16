@@ -1644,7 +1644,7 @@ int canvas_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p) {
 		QPainter l_oPdf;
 		if (l_oPdf.begin(&l_oPrinter))
 		{
-			m_bDisableGradient = true;
+			m_bDisableGradient = DISABLE_GRADIENT;
 			scene()->render(&l_oPdf, l_oR, l_oRect, rat);
 			l_oPdf.end();
 			m_bDisableGradient = false;
@@ -1699,7 +1699,7 @@ void canvas_view::slot_print()
 	QPainter l_oPdf;
 	if (l_oPdf.begin(l_oP))
 	{
-		m_bDisableGradient = true;
+		m_bDisableGradient = DISABLE_GRADIENT;
 		scene()->render(&l_oPdf, QRectF(), l_oRect, Qt::KeepAspectRatio);
 		l_oPdf.end();
 		m_bDisableGradient = false;

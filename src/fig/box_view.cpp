@@ -620,7 +620,7 @@ void box_view::notify_export_item(int id)
 	QPainter l_oPdf;
 	if (l_oPdf.begin(&l_oPrinter))
 	{
-		m_bDisableGradient = true;
+		m_bDisableGradient = DISABLE_GRADIENT;
 		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oPdf, l_oR, l_oRect, rat);
 		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
@@ -2084,7 +2084,7 @@ int box_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p)
 		QPainter l_oPdf;
 		if (l_oPdf.begin(&l_oPrinter))
 		{
-			m_bDisableGradient = true;
+			m_bDisableGradient = DISABLE_GRADIENT;
 			scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 			scene()->render(&l_oPdf, l_oR, l_oRect, rat);
 			scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
@@ -2145,7 +2145,7 @@ void box_view::slot_print()
 	QPainter l_oPdf;
 	if (l_oPdf.begin(l_oP))
 	{
-		m_bDisableGradient = true;
+		m_bDisableGradient = DISABLE_GRADIENT;
 		scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 		scene()->render(&l_oPdf, QRectF(), l_oRect, Qt::KeepAspectRatio);
 		scene()->setItemIndexMethod(QGraphicsScene::BspTreeIndex);

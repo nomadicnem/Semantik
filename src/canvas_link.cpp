@@ -4,6 +4,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QStyleOption>
+ #include    <QLinearGradient> 
 #include <QColor>
 #include <QPen>
 #include <QtDebug>
@@ -201,19 +202,45 @@ void canvas_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_
 		l_oBack = QColor(Qt::green);
 	}
 
-	double l_oA;
+	double l_oA, l_oB;
 	if (m_oFrom != NULL)
 	{
-		l_oA = qMin(0.2 * m_oGraph->m_oMediator->height_of(m_oFrom->m_iId), 1.0);
+		int l_oHeight = m_oGraph->m_oMediator->height_of(m_oFrom->m_iId);
+		l_oA = qMin(0.2 * l_oHeight, 1.0);
+		l_oB = qMin(0.2 * (l_oHeight + 1), 1.0);
 	}
 
 	double l_oNa = 1 - l_oA;
-	int l_oRed = l_o.red() * l_oNa + (l_oBack.red()) * l_oA;
-	int l_oGreen = l_o.green() * l_oNa + (l_oBack.green()) * l_oA;
-	int l_oBlue = l_o.blue() * l_oNa + (l_oBack.blue()) * l_oA;
+	int l_oRed1 = l_o.red() * l_oNa + (l_oBack.red()) * l_oA;
+	int l_oGreen1 = l_o.green() * l_oNa + (l_oBack.green()) * l_oA;
+	int l_oBlue1 = l_o.blue() * l_oNa + (l_oBack.blue()) * l_oA;
+	QColor l_oV1 = QColor::fromRgb(l_oRed1, l_oGreen1, l_oBlue1);
 
-	QColor l_oV = QColor::fromRgb(l_oRed, l_oGreen, l_oBlue);
-	setBrush(l_oV);
+        if (m_oGraph->m_bDisableGradient)
+        {
+                setBrush(l_oV1);
+        }
+        else
+	{
+		double l_oNb = 1 - l_oB;
+		int l_oRed2 = l_o.red() * l_oNb + (l_oBack.red()) * l_oB;
+		int l_oGreen2 = l_o.green() * l_oNb + (l_oBack.green()) * l_oB;
+		int l_oBlue2 = l_o.blue() * l_oNb + (l_oBack.blue()) * l_oB;
+		QColor l_oV2 = QColor::fromRgb(l_oRed2, l_oGreen2, l_oBlue2);
+
+		const QRectF l_oR1 = m_oFrom->boundingRect();
+		const QRectF l_oR2 = m_oTo->boundingRect();
+
+		double _x1 = m_oFrom->x() + l_oR1.width()/2. - OFF;
+		double _y1 = m_oFrom->y() + l_oR1.height()/2. - OFF;
+		double _x2 = m_oTo->x() + l_oR2.width()/2. - OFF;
+		double _y2 = m_oTo->y() + l_oR2.height()/2. - OFF;
+
+		QLinearGradient l_oGradient(_x1, _y1, _x2, _y2);
+		l_oGradient.setColorAt(0.0, l_oV1);
+		l_oGradient.setColorAt(1.0, l_oV2);
+		setBrush(l_oGradient);
+	}
 
 	QGraphicsPathItem::paint(i_oPainter, i_oStyle, i_oWidget);
 }

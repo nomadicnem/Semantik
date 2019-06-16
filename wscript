@@ -128,10 +128,10 @@ def configure(conf):
 
 	err = "Semantik cannot work on %s, please install a Linux system from http://www.opensuse.org"
 	if (test('linux')):
-		Logs.pprint('GREEN', "You are using Linux, that's good (tm)")
+		Logs.pprint('GREEN', "You are using Linux, perfect!")
 	elif (test('bsd')):
-		Logs.pprint('GREEN', "You are using a BSD system, that's good (tm)")
-	elif (test('win32') or test('cygwin')):
+		Logs.pprint('GREEN', "You are using a BSD system, that looks good!")
+	elif (test('win32') or test('cygwin') or test('msys') or os.name == 'nt'):
 		conf.fatal(err % "win32")
 	elif (test('darwin')):
 		conf.fatal(err % "osx")
@@ -298,6 +298,23 @@ def configure(conf):
 		conf.env.RPATH_NABLAH = '/usr/local/lib'
 
 	conf.define('GAP', 50, quote=False)
+
+	qt_ver = []
+	disable_gradient = 'true'
+	try:
+		version = conf.cmd_and_log(conf.env.QMAKE_QT5 + ['-query', 'QT_VERSION']).strip()
+		version = version.split('.')
+	except Exception as ex:
+		print(ex)
+	else:
+		if len(version) == 3:
+			qt_ver = tuple(int(x) for x in version)
+			if qt_ver > (5, 12, 0):
+				disable_gradient = 'false'
+	conf.msg('Enabling gradients in Pdf exports',
+		('yes, Qt:%s' % repr(qt_ver)) if disable_gradient != 'true' else 'no',
+		disable_gradient != 'true')
+	conf.define('DISABLE_GRADIENT', disable_gradient)
 
 def options(opt):
 	opt.load('compiler_c compiler_cxx')
