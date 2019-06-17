@@ -600,6 +600,7 @@ void canvas_view::notify_select(const QList<int>& unsel, const QList<int>& sel) 
 			m_oItems[k]->setSelected(false);
 		}
 	}
+	check_selected();
 }
 
 void canvas_view::notify_pic(int i_iId)
