@@ -649,7 +649,7 @@ void canvas_view::change_flags(QAction* i_oAction)
 		QAction *l_oAct = l_o->m_oFlagGroup->actions()[i];
 		if (l_oAct == i_oAction) l_iIndex = i;
 	}
-	QString l_sName = m_oMediator->m_oFlagSchemes[l_iIndex]->m_sId;
+	QString l_sName = m_oMediator->m_oFlagSchemes[l_iIndex].m_sId;
 
 	/*
 	canvas_item *l_oItem = selection()[0];
@@ -677,7 +677,7 @@ void canvas_view::check_selected()
 		if (sel.size() != 1) l_oAct->setChecked(false);
 		else
 		{
-			QString l_sName = m_oMediator->m_oFlagSchemes[i]->m_sId;
+			QString l_sName = m_oMediator->m_oFlagSchemes[i].m_sId;
 			if (m_oMediator->m_oItems.contains(sel[0]->Id()))
 			{
 				data_item& l_oData = m_oMediator->m_oItems[sel[0]->Id()];

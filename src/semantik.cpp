@@ -258,7 +258,7 @@ semantik_win::semantik_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	actionCollection()->addAction(notr("show_dock_linear"), l_oDock->toggleViewAction());
 	l_oDock->setObjectName(notr("LinearDock"));
 
-	flag_scheme l_oScheme(this, notr("crsc-app-colors"), "");
+	flag_scheme l_oScheme(notr("crsc-app-colors"), "");
 	m_oColorGroup = new QActionGroup(this);
 	for (int i = 0; i < 9; ++i)
 	{
@@ -735,10 +735,10 @@ void semantik_win::sync_flags()
 {
 	for (int i=0; i<m_oMediator->m_oFlagSchemes.size(); ++i)
 	{
-		flag_scheme *l_oScheme = m_oMediator->m_oFlagSchemes[i];
+		flag_scheme &l_oScheme = m_oMediator->m_oFlagSchemes[i];
 		QAction *l_oAction = m_oFlagGroup->actions().at(i);
-		l_oAction->setText(l_oScheme->m_sName);
-		l_oAction->setIcon(l_oScheme->_icon());
+		l_oAction->setText(l_oScheme.m_sName);
+		l_oAction->setIcon(l_oScheme._icon());
 		l_oAction->setToolTip(i18n("Flag"));
 	}
 }

@@ -87,7 +87,7 @@ semantik_d_win::semantik_d_win(QWidget *i_oParent) : KXmlGuiWindow(i_oParent)
 	m_oFileTree = new filetree(l_oDock);
 	l_oDock->setWidget(m_oFileTree);
 
-	flag_scheme l_oScheme(this, notr("crsc-app-colors"), "");
+	flag_scheme l_oScheme(notr("crsc-app-colors"), "");
 	m_oColorGroup = new QActionGroup(this);
 	for (int i = 0; i < 9; ++i)
 	{

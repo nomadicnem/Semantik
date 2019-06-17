@@ -8,7 +8,7 @@
  #include	"con.h"
 #include	 "flag_scheme.h"	
 
-flag_scheme::flag_scheme(QObject *i_oParent) : QObject(i_oParent)
+flag_scheme::flag_scheme()
 {
 	//m_sId = "key";
 	m_sName = i18n("Flag item(s) as...");
@@ -17,7 +17,7 @@ flag_scheme::flag_scheme(QObject *i_oParent) : QObject(i_oParent)
 }
 
 // name : libellé du flag en question, le path représente le nom de fichier
-flag_scheme::flag_scheme(QObject *i_oParent, QString i_sPath, QString i_sName) : QObject(i_oParent)
+flag_scheme::flag_scheme(QString i_sPath, QString i_sName)
 {
 	m_oRenderer = NULL;
 	m_sId = i_sPath;
@@ -38,7 +38,7 @@ QSvgRenderer* flag_scheme::_renderer()
 {
 	if (!m_oRenderer)
 	{
-		m_oRenderer = new QSvgRenderer(m_sIconPath, this);
+		m_oRenderer = new QSvgRenderer(m_sIconPath);
 		m_oRenderer->setFramesPerSecond(0);
 	}
 	return m_oRenderer;
@@ -49,3 +49,11 @@ const QIcon flag_scheme::_icon()
 	return QIcon(m_sIconPath);
 }
 
+flag_scheme& flag_scheme::operator=(const flag_scheme &i_o)
+{
+	m_sId = i_o.m_sId;
+	m_sName = i_o.m_sName;
+	m_sIconPath = i_o.m_sIconPath;
+	m_oRenderer = NULL;
+	return *this;
+}

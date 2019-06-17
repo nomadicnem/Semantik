@@ -341,10 +341,6 @@ sem_mediator::~sem_mediator()
 {
 	m_oTimer->disconnect();
 	clean_temp_dir();
-	while (!m_oFlagSchemes.empty())
-	{
-		delete m_oFlagSchemes.takeFirst();
-	}
 }
 
 void sem_mediator::stop_timer()
@@ -410,15 +406,10 @@ void sem_mediator::init_colors()
 
 void sem_mediator::init_flags()
 {
-	while (!m_oFlagSchemes.empty())
-	{
-		delete m_oFlagSchemes.takeFirst();
-	}
-
 	QStringList l_oLst = QString(notr("flag_delay flag_idea flag_look flag_lunch flag_money flag_ok flag_people flag_phone flag_star flag_stop flag_talk flag_target flag_time flag_tune flag_unknown flag_write")).split(" ");
 	foreach (QString l_s, l_oLst)
 	{
-		m_oFlagSchemes.push_back(new flag_scheme(this, l_s, l_s));
+		m_oFlagSchemes.push_back(flag_scheme(l_s, l_s));
 	}
 
 	emit sync_flags();
@@ -858,6 +849,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 {
 	QMutexLocker l_oLocker(&m_oSaveMutex);
 	sem_mediator l_oMediator(this);
+	l_oMediator.init_flags();
 	l_oMediator.num_seq = num_seq;
 	if (l_oMediator.open_raw(i_sUrl))
 	{
@@ -906,6 +898,7 @@ bool sem_mediator::open_file(const QString& i_sUrl)
 		l_oOpen->init_data(this, &l_oMediator);
 		l_oOpen->m_sLastSavedNew = i_sUrl;
 		l_oOpen->apply();
+
 		return true;
 	}
 	return false;

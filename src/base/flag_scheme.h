@@ -10,13 +10,12 @@ class QSvgRenderer;
 #include <QString>
 #include <con.h>
 
-class flag_scheme: public QObject
+class flag_scheme
 {
-	Q_OBJECT
 	public:
-		flag_scheme(QObject *i_oParent);
+		flag_scheme();
 		~flag_scheme();
-		flag_scheme(QObject *i_oParent, QString i_sPath, QString i_sName);
+		flag_scheme(QString i_sPath, QString i_sName);
 
 		QString m_sId;
 		QString m_sName;
@@ -24,7 +23,7 @@ class flag_scheme: public QObject
 		QSvgRenderer *m_oRenderer;
 
 		QSvgRenderer* _renderer();
-
+		flag_scheme& operator=(const flag_scheme &);
 		const QIcon _icon();
 };
 

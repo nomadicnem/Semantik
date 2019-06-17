@@ -123,7 +123,7 @@ class sem_mediator: public QObject
 		QList<QPoint> m_oLinks;
 		QList<data_ref> m_oRefs;
 		QList<color_scheme> m_oColorSchemes;
-		QList<flag_scheme*> m_oFlagSchemes;
+		QList<flag_scheme> m_oFlagSchemes;
 
 		// settings
 		double m_dTriSize;

@@ -47,9 +47,10 @@ void canvas_flag::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_
 
 	for (int i=0; i<m_oGraph->m_oMediator->m_oFlagSchemes.size(); ++i)
 	{
-		if (m_oGraph->m_oMediator->m_oFlagSchemes[i]->m_sId == l_sName)
+		flag_scheme &l_oFlag = m_oGraph->m_oMediator->m_oFlagSchemes[i];
+		if (l_oFlag.m_sId == l_sName)
 		{
-			QSvgRenderer *l_o = m_oGraph->m_oMediator->m_oFlagSchemes[i]->_renderer();
+			QSvgRenderer *l_o = l_oFlag._renderer();
 			l_o->render(i_oPainter, boundingRect());
 			break;
 		}

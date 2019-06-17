@@ -131,7 +131,7 @@ class mem_doc_open : public mem_command {
 		QFont m_oFontNew;
 		QString m_sHintsNew;
 		QList<color_scheme> m_oColorSchemesNew;
-		QList<flag_scheme*> m_oFlagSchemesNew;
+		QList<flag_scheme> m_oFlagSchemesNew;
 		QHash<int, data_item> m_oItemsNew;
 		QList<QPoint> m_oLinksNew;
 		QList<data_ref> m_oRefsNew;
@@ -153,7 +153,7 @@ class mem_doc_open : public mem_command {
 		QFont m_oFontOld;
 		QString m_sHintsOld;
 		QList<color_scheme> m_oColorSchemesOld;
-		QList<flag_scheme*> m_oFlagSchemesOld;
+		QList<flag_scheme> m_oFlagSchemesOld;
 		QHash<int, data_item> m_oItemsOld;
 		QList<QPoint> m_oLinksOld;
 		QList<data_ref> m_oRefsOld;
