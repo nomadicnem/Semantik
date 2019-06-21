@@ -12,6 +12,7 @@
 #include <QSvgGenerator>
 #include  <QColorDialog> 
 #include<KToolBar> 
+#include<KActionCollection>	
 #include<KMessageBox>
 #include <QDialog>
 #include "canvas_ref.h"
@@ -85,51 +86,54 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 	QColor l_oColor = QColor(0, 0, 150, 100);
 	l_oBrush.setColor(l_oColor);
 	//m_oRubber->setBrush(l_oBrush);
+	m_oColorMenu = i_oColorMenu;
+}
 
+void canvas_view::setupActions(KActionCollection* i_oActionCollection) {
 	QAction *l_o = NULL;
 
 	m_oAddItemAction = new QAction(i18n("Add an element"), this);
 	m_oAddItemAction->setShortcut(notr("Ctrl+Return"));
 	connect(m_oAddItemAction, SIGNAL(triggered()), this, SLOT(slot_add_item()));
-	addAction(m_oAddItemAction);
+	i_oActionCollection->addAction(notr("add_element"), m_oAddItemAction);
 
 	m_oDeleteAction = new QAction(i18n("Delete selection"), this);
 	m_oDeleteAction->setShortcut(notr("Del"));
 	connect(m_oDeleteAction, SIGNAL(triggered()), this, SLOT(slot_delete()));
-	addAction(m_oDeleteAction);
+	i_oActionCollection->addAction(notr("delete_element"), m_oDeleteAction);
 
 	m_oInsertSiblingAction = l_o = new QAction(i18n("Insert a sibling"), this);
 	l_o->setShortcut(notr("Shift+Return"));
 	connect(l_o, SIGNAL(triggered()), this, SLOT(slot_add_sibling()));
-	addAction(l_o);
+	i_oActionCollection->addAction(notr("add_sibling"), l_o);
 
-	m_oMoveUpAction = l_o = new QAction(i18n("Move up"), this); l_o->setShortcut(notr("Alt+Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(0));
-	m_oMoveDownAction = l_o = new QAction(i18n("Move down"), this); l_o->setShortcut(notr("Alt+Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(1));
-	m_oMoveLeftAction = l_o = new QAction(i18n("Move left"), this); l_o->setShortcut(notr("Alt+Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(2));
-	m_oMoveRightAction = l_o = new QAction(i18n("Move right"), this); l_o->setShortcut(notr("Alt+Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); addAction(l_o); l_o->setData(QVariant(3));
+	m_oMoveUpAction = l_o = new QAction(i18n("Move up"), this); l_o->setShortcut(notr("Alt+Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); i_oActionCollection->addAction(notr("move_up"), l_o); l_o->setData(QVariant(0));
+	m_oMoveDownAction = l_o = new QAction(i18n("Move down"), this); l_o->setShortcut(notr("Alt+Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); i_oActionCollection->addAction(notr("move_down"), l_o); l_o->setData(QVariant(1));
+	m_oMoveLeftAction = l_o = new QAction(i18n("Move left"), this); l_o->setShortcut(notr("Alt+Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); i_oActionCollection->addAction(notr("move_left"), l_o); l_o->setData(QVariant(2));
+	m_oMoveRightAction = l_o = new QAction(i18n("Move right"), this); l_o->setShortcut(notr("Alt+Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); i_oActionCollection->addAction(notr("move_right"), l_o); l_o->setData(QVariant(3));
 
-	m_oSelectUpAction = l_o = new QAction(i18n("Select up"), this); l_o->setShortcut(notr("Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(0));
-	m_oSelectDownAction = l_o = new QAction(i18n("Select down"), this); l_o->setShortcut(notr("Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(1));
-	m_oSelectLeftAction = l_o = new QAction(i18n("Select left"), this); l_o->setShortcut(notr("Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(2));
-	m_oSelectRightAction = l_o = new QAction(i18n("Select right"), this); l_o->setShortcut(notr("Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); addAction(l_o); l_o->setData(QVariant(3));
+	m_oSelectUpAction = l_o = new QAction(i18n("Select up"), this); l_o->setShortcut(notr("Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); i_oActionCollection->addAction(notr("select_up"), l_o); l_o->setData(QVariant(0));
+	m_oSelectDownAction = l_o = new QAction(i18n("Select down"), this); l_o->setShortcut(notr("Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); i_oActionCollection->addAction(notr("select_down"), l_o); l_o->setData(QVariant(1));
+	m_oSelectLeftAction = l_o = new QAction(i18n("Select left"), this); l_o->setShortcut(notr("Left")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); i_oActionCollection->addAction(notr("select_left"), l_o); l_o->setData(QVariant(2));
+	m_oSelectRightAction = l_o = new QAction(i18n("Select right"), this); l_o->setShortcut(notr("Right")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_sel())); i_oActionCollection->addAction(notr("select_right"), l_o); l_o->setData(QVariant(3));
 
 
 	m_oSelectSubtreeAction = new QAction(i18n("Select subtree"), this);
 	connect(m_oSelectSubtreeAction, SIGNAL(triggered()), this, SLOT(slot_select_subtree()));
-	addAction(m_oSelectSubtreeAction);
+	i_oActionCollection->addAction(notr("select_subtree"), m_oSelectSubtreeAction);
 
 
-	m_oNextRootAction = l_o = new QAction(i18n("Next root"), this); l_o->setShortcut(notr("PgDown")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_next_root())); addAction(l_o); l_o->setData(QVariant(1));
+	m_oNextRootAction = l_o = new QAction(i18n("Next root"), this); l_o->setShortcut(notr("PgDown")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_next_root())); i_oActionCollection->addAction(notr("next_root"), l_o); l_o->setData(QVariant(1));
 
 
 	m_oEditAction = new QAction(i18n("Toggle edit"), this);
 	m_oEditAction->setShortcut(notr("Return"));
-	addAction(m_oEditAction);
+	i_oActionCollection->addAction(notr("toggle_edit"), m_oEditAction);
 	connect(m_oEditAction, SIGNAL(triggered()), this, SLOT(slot_toggle_edit()));
 
 	m_oCancelEditAction = new QAction(i18n("Cancel edit"), this);
 	m_oCancelEditAction->setShortcut(notr("Escape"));
-	addAction(m_oCancelEditAction);
+	i_oActionCollection->addAction(notr("cancel_edit"), m_oCancelEditAction);
 	connect(m_oCancelEditAction, SIGNAL(triggered()), this, SLOT(slot_cancel_edit()));
 	m_oCancelEditAction->setEnabled(false);
 
@@ -140,11 +144,10 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 	m_oMenu->addAction(m_oSelectSubtreeAction);
 
 	QAction *fullAction = new QAction(i18n("Toggle fullscreen"), this);
-	connect(fullAction, SIGNAL(triggered()), this, SLOT(toggle_fullscreen())); addAction(l_o);
+	connect(fullAction, SIGNAL(triggered()), this, SLOT(toggle_fullscreen())); i_oActionCollection->addAction(notr("toggle_fullscreen"), l_o);
 	m_oMenu->addAction(fullAction);
 
 	//m_oDataMenu = m_oMenu->addMenu(i18n("Data type"));
-	m_oColorMenu = i_oColorMenu;
 	m_oMenu->addMenu(m_oColorMenu);
 
 #define newAction(s, v, dest)  dest = l_o = new QAction(s, this); \

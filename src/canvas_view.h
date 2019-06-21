@@ -13,6 +13,7 @@
 #include       <QAction> 
 #include        <QRubberBand>
 
+class KActionCollection;
 class QMenu;
 class canvas_link;
 class sem_mediator;
@@ -23,6 +24,7 @@ class canvas_view : public QGraphicsView
 	Q_OBJECT
 	public:
 		canvas_view(QWidget *i_oWidget, sem_mediator* i_oControl, QMenu*);
+		void setupActions(KActionCollection*);
 		void item_moved();
 
 		QMap<int, canvas_item*> m_oItems;

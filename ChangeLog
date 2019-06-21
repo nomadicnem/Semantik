@@ -3,6 +3,7 @@ Semantik 1.2.2
 * Fix stale connections when unconnecting multiple references
 * Paint long branches with a lighter color
 * Fix broken flags #98
+* Make shortcuts configurable #96
 
 Semantik 1.2.1
 --------------
