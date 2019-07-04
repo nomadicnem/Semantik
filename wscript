@@ -3,7 +3,7 @@
 # Thomas Nagy, 2007-2019 GPLV3
 
 APPNAME = 'semantik'
-VERSION = '1.2.1'
+VERSION = '1.2.2'
 
 top = '.'
 
@@ -20,7 +20,7 @@ def build(bld):
 		features = 'cxx qt5 cxxshlib',
 		source = bld.path.ant_glob('src/fig/*.cpp src/base/*.cpp', excl=lst),
 		target = 'semantik',
-		moc = '''src/base/flag_scheme.h src/base/sem_mediator.h
+		moc = '''src/base/sem_mediator.h
 src/fig/box_entity_properties.h
 src/fig/box_class_properties.h
 src/fig/box_link_properties.h
@@ -302,7 +302,7 @@ def configure(conf):
 	qt_ver = []
 	disable_gradient = 'true'
 	try:
-		version = conf.cmd_and_log(conf.env.QMAKE_QT5 + ['-query', 'QT_VERSION']).strip()
+		version = conf.cmd_and_log(conf.env.QMAKE + ['-query', 'QT_VERSION']).strip()
 		version = version.split('.')
 	except Exception as ex:
 		print(ex)
