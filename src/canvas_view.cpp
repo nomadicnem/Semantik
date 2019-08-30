@@ -87,6 +87,8 @@ canvas_view::canvas_view(QWidget *i_oWidget, sem_mediator *i_oControl, QMenu* i_
 	l_oBrush.setColor(l_oColor);
 	//m_oRubber->setBrush(l_oBrush);
 	m_oColorMenu = i_oColorMenu;
+
+	setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 }
 
 void canvas_view::setupActions(KActionCollection* i_oActionCollection) {

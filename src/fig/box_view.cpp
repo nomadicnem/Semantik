@@ -203,6 +203,8 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 
 	setDragMode(QGraphicsView::RubberBandDrag);
 
+	setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+
 	//setCacheMode(CacheBackground);
 	setRenderHint(QPainter::Antialiasing);
 
