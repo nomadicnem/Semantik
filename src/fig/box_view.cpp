@@ -177,12 +177,12 @@ bool box_reader::characters(const QString &i_s)
 
 int fceil(qreal l_fInput, int l_iBase)
 {
-	int l_iCal = ceil(l_fInput);
+	int l_iCal = ceil(l_fInput) + 5985670 * l_iBase;
 	if (l_iCal % l_iBase == 0)
 	{
-		return l_iCal;
+		return l_iCal - 5985670 * l_iBase;
 	}
-	return l_iBase * (1 + l_iCal / l_iBase);
+	return l_iBase * (1 + l_iCal / l_iBase) - 5985670 * l_iBase;
 }
 
 int grid_int(int x) {

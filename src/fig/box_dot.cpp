@@ -102,8 +102,8 @@ QVariant box_dot::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oVa
 		if (i_oChange == ItemPositionChange)
 		{
 			QPointF np = i_oValue.toPointF();
-			np.setX(((int) np.x() / GRID) * GRID);
-			np.setY(((int) np.y() / GRID) * GRID);
+			np.setX(fceil(np.x(), GRID));
+			np.setY(fceil(np.y(), GRID));
 			return np;
 		}
 		else if (i_oChange == ItemPositionHasChanged)

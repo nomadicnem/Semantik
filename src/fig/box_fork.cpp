@@ -152,8 +152,8 @@ QVariant box_fork::itemChange(GraphicsItemChange i_oChange, const QVariant &i_oV
 			}
 			else*/
 			{
-				np.setX(((int) np.x() / GRID) * GRID);
-				np.setY(((int) np.y() / GRID) * GRID);
+				np.setX(fceil(np.x(), GRID));
+				np.setY(fceil(np.y(), GRID));
 				return np;
 			}
 		}
