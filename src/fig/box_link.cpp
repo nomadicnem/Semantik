@@ -893,42 +893,102 @@ void box_link::update_text_label_pos()
 				}
 			}
 		}
-		else
+		else if (m_oGood.size() == 4)
 		{
-			if (m_oGood.size() == 4 && m_oControlPoints.at(0)->h_length() == 0)
+			if (m_oControlPoints.at(0)->h_length() == 0)
 			{
 				if (l_iStartDir == data_link::WEST && l_iEndDir == data_link::WEST)
 				{
-					mid = m_oControlPoints.at(0)->pos() + QPointF(- l_oMidRect.width() - 3, - l_oMidRect.height() / 2.);
+					mid = m_oControlPoints.at(0)->pos() + QPointF(- l_oMidRect.width() - 2, - l_oMidRect.height() / 2.);
+				}
+				else if (l_iStartDir == data_link::EAST && l_iEndDir == data_link::EAST)
+				{
+					mid = m_oControlPoints.at(0)->pos() + QPointF(2, - l_oMidRect.height() / 2.);
 				}
 				else
 				{
-					mid = m_oControlPoints.at(0)->pos() + QPointF(5, - l_oMidRect.height() / 2.);
+					mid = m_oControlPoints.at(0)->pos() + QPointF(2, - l_oMidRect.height() / 2.);
+					if (l_oStartPos.y() > l_oEndPos.y())
+					{
+
+						if (l_oStartPos.x() < l_oEndPos.x())
+							mid.setY(l_oEndPos.y() + 2);
+						else
+							mid.setY(l_oStartPos.y() - l_oMidRect.height() - 2.);
+					}
+					else if (l_oStartPos.y() < l_oEndPos.y())
+					{
+						if (l_oStartPos.x() < l_oEndPos.x())
+							mid.setY(l_oEndPos.y() - l_oMidRect.height() - 2.);
+						else
+							mid.setY(l_oStartPos.y() + 2);
+					}
 				}
 			}
 			else
 			{
-				int l_iHlen = 0;
-				box_control_point *l_oCandidate = NULL;
-
-				foreach (box_control_point *b, m_oControlPoints)
+				if (l_iStartDir == data_link::NORTH && l_iEndDir == data_link::NORTH)
 				{
-					if (b->m_iOffset >= m_oGood.size() - 3)
-					{
-						break;
-					}
+					mid = m_oControlPoints.at(0)->pos() + QPointF(- l_oMidRect.width()/2. - 2., - l_oMidRect.height() - 2.);
+				}
+				else if (l_iStartDir == data_link::SOUTH && l_iEndDir == data_link::SOUTH)
+				{
+					mid = m_oControlPoints.at(0)->pos() + QPointF(- l_oMidRect.width()/2. - 2., 2.);
+				}
+				else
+				{
+					mid = m_oControlPoints.at(0)->pos() + QPointF(- l_oMidRect.width()/2. - 2., 2.);
 
-					const int l_iCurLen = b->h_length();
-					if (l_iCurLen >= l_iHlen)
+					if (qAbs(l_oStartPos.x() - l_oEndPos.x()) < l_oMidRect.width() + 2.)
 					{
-						l_iHlen = l_iCurLen;
-						l_oCandidate = b;
+						if (l_oStartPos.x() > l_oEndPos.x())
+						{
+							if (l_oStartPos.y() < l_oEndPos.y())
+							{
+								mid.setX(l_oEndPos.x() + 2.);
+							}
+							else
+							{
+								mid.setX(l_oStartPos.x() - l_oMidRect.width() - 2.);
+							}
+						}
+						else if (l_oStartPos.x() < l_oEndPos.x())
+						{
+							if (l_oStartPos.y() < l_oEndPos.y())
+							{
+								mid.setX(l_oEndPos.x() - l_oMidRect.width() - 2.);
+							}
+							else
+							{
+								mid.setX(l_oStartPos.x() + 2.);
+							}
+						}
 					}
 				}
-				if (l_oCandidate)
+			}
+		}
+		else
+		{
+			int l_iHlen = 0;
+			box_control_point *l_oCandidate = NULL;
+
+			foreach (box_control_point *b, m_oControlPoints)
+			{
+				if (b->m_iOffset >= m_oGood.size() - 3)
 				{
-					mid = l_oCandidate->pos() + QPointF(- l_oMidRect.width() / 2., 2);
+					break;
 				}
+
+				const int l_iCurLen = b->h_length();
+				if (l_iCurLen >= l_iHlen)
+				{
+					l_iHlen = l_iCurLen;
+					l_oCandidate = b;
+				}
+			}
+			if (l_oCandidate)
+			{
+				mid = l_oCandidate->pos() + QPointF(- l_oMidRect.width() / 2., 2);
 			}
 		}
 	}
