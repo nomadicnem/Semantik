@@ -1,10 +1,13 @@
 Semantik 1.2.3
 --------------
-* Improve drawing performance
+* Eliminate drawing artifacts
+* Eliminate grid alignment issues on diagrams
+* Improve label positioning on diagrams
+* Italian translations
 
 Semantik 1.2.2
 --------------
-* Fix stale connections when unconnecting multiple references
+* Fix stale connections when disconnecting multiple references
 * Fix broken flags #98
 * Fix shortcuts configurability #96
 * Fix diagram thumbnail display on item selection
@@ -18,7 +21,7 @@ Semantik 1.2.1
 * Fix duplicate reference values
 * Fix double prompts for overwriting files
 * Fix map variables visibility when opening maps
-* Fix document generator dialog's tab navigation
+* Fix document generator dialogue's tab navigation
 * Fix boundary objects' text alignment (diagrams)
 * Fix pipe objects' resizing (diagrams)
 * Fix component objects' margin sizes
@@ -40,7 +43,7 @@ Semantik 1.1.0
 Semantik 1.0.9
 --------------
 * Display picture and diagram thumbnails on the main map
-* Add a touchpad mode for laptop users
+* Add a touch pad mode for laptop users
 
 Semantik 1.0.8
 --------------
@@ -85,7 +88,7 @@ Semantik 1.0.3
 Semantik 1.0.2
 --------------
 * Fix truncated saved documents in combination with accentuated characters
-* Deply highcolor icons to force the application icon
+* Deploy highcolor icons to force the application icon
 * Deselect currently selected diagram elements after adding a new one
 * Add spell checking to the text widget
 * Improve paragraph handling for generated OpenOffice.org text documents
