@@ -49,6 +49,7 @@ class semantik_reader : public QXmlDefaultHandler
 		int m_iVersion;
 		sem_mediator *m_oMediator;
 		int m_iId;
+		int m_iColorIndex;
 		data_link * cur_link;
 		QStack<node*> m_oNodeStack;
 
@@ -282,15 +283,33 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 	else if (i_sName == notr("color_schemes"))
 	{
 		m_oMediator->m_oColorSchemes.clear();
+		QStringList l_oS;
+		l_oS<<"#fffe8d"<<"#cafeba"<<"#bafefe"<<"#bad4fe"<<"#e0bafe"<<"#febaba"<<"#fefeba"<<"#ffffff"<<"#fcf2e2";
+
+		int i = 0;
+		foreach (QString l_s, l_oS)
+		{
+			color_scheme l_o;
+			l_o.m_oInnerColor = QColor(l_s);
+			l_o.m_sName = i18n("Color %1", QString::number(i));
+			m_oMediator->m_oColorSchemes.push_back(l_o);
+			++i;
+		}
+
+		m_iColorIndex = 0;
 	}
 	else if (i_sName == notr("color_scheme"))
 	{
-		color_scheme l_o;
-		l_o.m_sName = i_oAttrs.value(notr("name"));
-		l_o.m_oInnerColor = i_oAttrs.value(notr("inner"));
-		l_o.m_oBorderColor = i_oAttrs.value(notr("border"));
-		l_o.m_oTextColor = i_oAttrs.value(notr("text"));
-		m_oMediator->m_oColorSchemes.push_back(l_o);
+		if (m_iColorIndex < m_oMediator->m_oColorSchemes.size())
+		{
+			color_scheme l_o;
+			l_o.m_sName = i_oAttrs.value(notr("name"));
+			l_o.m_oInnerColor = i_oAttrs.value(notr("inner"));
+			l_o.m_oBorderColor = i_oAttrs.value(notr("border"));
+			l_o.m_oTextColor = i_oAttrs.value(notr("text"));
+			m_oMediator->m_oColorSchemes[m_iColorIndex] = l_o;
+			m_iColorIndex                                  ++;
+		}
 	}
 	else if (i_sName == notr("flag"))
 	{
