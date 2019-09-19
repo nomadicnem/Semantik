@@ -284,7 +284,7 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 	{
 		m_oMediator->m_oColorSchemes.clear();
 		QStringList l_oS;
-		l_oS<<"#fffe8d"<<"#cafeba"<<"#bafefe"<<"#bad4fe"<<"#e0bafe"<<"#febaba"<<"#fefeba"<<"#ffffff"<<"#fcf2e2";
+		l_oS<<"#fffe8d"<<"#cafeba"<<"#cdf5fc"<<"#bad4fe"<<"#e7cafe"<<"#fecaca"<<"#fefeca"<<"#ffffff"<<"#fcf2e2";
 
 		int i = 0;
 		foreach (QString l_s, l_oS)
@@ -399,7 +399,7 @@ void sem_mediator::init_colors()
 	m_oColorSchemes.clear();
 
 	QStringList l_oS;
-	l_oS<<"#fffe8d"<<"#cafeba"<<"#bafefe"<<"#bad4fe"<<"#e0bafe"<<"#febaba"<<"#fefeba"<<"#ffffff"<<"#fcf2e2";
+	l_oS<<"#fffe8d"<<"#cafeba"<<"#cdf5fc"<<"#bad4fe"<<"#e7cafe"<<"#fecaca"<<"#fefeca"<<"#ffffff"<<"#fcf2e2";
 
 	int i = 0;
 	foreach (QString l_s, l_oS)
