@@ -3,7 +3,7 @@
 # Thomas Nagy, 2007-2019 GPLV3
 
 APPNAME = 'semantik'
-VERSION = '1.2.3'
+VERSION = '1.2.4'
 
 top = '.'
 
