@@ -1,4 +1,4 @@
-// Thomas Nagy 2014-2019 GPLV3
+// Thomas Nagy 2014-2020 GPLV3
 
 #include <QSpinBox>
 #include <QVariant>

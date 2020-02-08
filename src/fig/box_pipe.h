@@ -1,4 +1,4 @@
-// Thomas Nagy 2017-2019 GPLV3
+// Thomas Nagy 2017-2020 GPLV3
 
 #ifndef BOX_PIPE_H
 #define BOX_PIPE_H
@@ -20,6 +20,8 @@ class box_pipe : public box_item
 		box_pipe(box_view*, int i_iId);
 		~box_pipe();
 		void update_links();
+		void properties();
+		QSize best_size(const QPointF &);
 		QGraphicsTextItem *m_oCaption;
 };
 

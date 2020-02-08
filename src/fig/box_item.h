@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2019 GPLV3
+// Thomas Nagy 2007-2020 GPLV3
 
 
 #ifndef BOX_ITEM_H
@@ -60,7 +60,7 @@ class box_item : public QGraphicsRectItem, public connectable, public editable, 
 		virtual void update_sizers();
 		int m_iLastStretchX;
 		int m_iLastStretchY;
-		QPointF validate_point(box_resize_point *p, const QPointF & orig);
+		virtual QPointF validate_point(box_resize_point *p, const QPointF & orig);
                 void freeze(bool b);
                 void commit_size(box_resize_point *p);
 };

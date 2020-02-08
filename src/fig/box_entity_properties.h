@@ -1,4 +1,4 @@
-// Thomas Nagy 2018-2019 GPLV3
+// Thomas Nagy 2018-2020 GPLV3
 
 #ifndef BOX_ENTITY_PROPERTIES_H
 #define BOX_ENTITY_PROPERTIES_H

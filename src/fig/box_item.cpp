@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2019 GPLV3
+// Thomas Nagy 2007-2020 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -247,7 +247,7 @@ QSize box_item::best_size(const QPointF &dims)
 {
 	if (doc.toPlainText().isEmpty())
 	{
-		return QSize(fceil(dims.x(), GRID), fceil(dims.y(), GRID));
+		return QSize(qMax(fceil(dims.x(), GRID), GRID), qMax(fceil(dims.y(), GRID), GRID));
 	}
 
 	int x = dims.x();

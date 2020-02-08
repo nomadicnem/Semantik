@@ -1,4 +1,4 @@
-// Thomas Nagy 2017-2019 GPLV3
+// Thomas Nagy 2017-2020 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -6,6 +6,7 @@
 #include <QTextDocumentFragment>
 #include <QTextList>
 #include <QClipboard>
+#include <QInputDialog>
 #include <QPainter>
 #include <QtDebug>
 #include <QAction>
@@ -96,8 +97,31 @@ void box_pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 void box_pipe::update_links() {
 	QRectF r = boundingRect();
 	m_oCaption->setFont(scene()->font());
+
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	m_oCaption->document()->setDefaultTextOption(l_oOption);
+
 	m_oCaption->setPlainText(m_oBox->m_sText);
+	m_oCaption->adjustSize();
 	m_oCaption->setPos((r.width() - m_oCaption->boundingRect().width()) / 2., r.height());
 	box_item::update_links();
 }
 
+void box_pipe::properties()
+{
+	bool ok = false;
+	QString text = QInputDialog::getText(m_oView, i18n("Pipe properties"),
+			i18n("Caption:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
+	if (ok && text != m_oBox->m_sText)
+	{
+		mem_edit_box *ed = new mem_edit_box(m_oView->m_oMediator, m_oView->m_iId, m_iId);
+		ed->newText = text;
+		ed->apply();
+	}
+}
+
+QSize box_pipe::best_size(const QPointF &dims)
+{
+	return QSize(qMax(fceil(dims.x(), GRID), GRID), qMax(fceil(dims.y(), GRID), GRID));
+}

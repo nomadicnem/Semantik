@@ -1,4 +1,4 @@
-// Thomas Nagy 2017-2019 GPLV3
+// Thomas Nagy 2017-2020 GPLV3
 
 #ifndef BOX_SEQUENCE_H
 #define BOX_SEQUENCE_H

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2019 GPLV3
+// Thomas Nagy 2007-2020 GPLV3
 
 #ifndef BOX_DATABASE_H
 #define BOX_DATABASE_H
@@ -20,7 +20,9 @@ class box_database : public box_item
 		box_database(box_view*, int i_iId);
 		~box_database();
 		QGraphicsTextItem *m_oCaption;
+		void properties();       
 		void update_links();
+		QSize best_size(const QPointF &);
 };
 
 #endif // BOX_DATABASE_H
