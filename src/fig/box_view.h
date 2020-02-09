@@ -58,6 +58,7 @@ class box_view : public QGraphicsView
 		QAction *m_oAddComponent;
 		QAction *m_oAddRectangle;
 		QAction *m_oAddActor;
+		QAction *m_oAddCloud;
 		QAction *m_oAddUsecase;
 		QAction *m_oAddNode;
 		QAction *m_oAddDotStart;

@@ -58,6 +58,7 @@
 #include "box_matrix.h"
 #include "box_frame.h"
 #include "box_class.h"
+#include "box_cloud.h"
 #include "box_entity.h"
 #include "data_item.h"
 #include "box_usecase.h"
@@ -259,6 +260,8 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	connect(m_oAddParallelVertical, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddActor = new QAction(i18n("Actor"), this);
 	connect(m_oAddActor, SIGNAL(triggered()), this, SLOT(slot_add_element()));
+	m_oAddCloud = new QAction(i18n("Cloud"), this);
+	connect(m_oAddCloud, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddUsecase = new QAction(i18n("Usecase"), this);
 	connect(m_oAddUsecase, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddMatrix = new QAction(i18n("Matrix"), this);
@@ -321,6 +324,7 @@ void box_view::init_menu()
 	m_oAddBoxMenu->addAction(m_oAddRectangle);
 	m_oAddBoxMenu->addAction(m_oAddClass);
 	m_oAddBoxMenu->addAction(m_oAddEntity);
+	m_oAddBoxMenu->addAction(m_oAddCloud);
 	m_oAddBoxMenu->addAction(m_oAddPipe);
 	m_oAddBoxMenu->addAction(m_oAddDatabase);
 	m_oAddBoxMenu->addAction(m_oAddSequence);
@@ -478,6 +482,10 @@ void box_view::sync_view()
 		else if (box->m_iType == data_box::ACTOR)
 		{
 			l_o = new box_actor(this, box->m_iId);
+		}
+		else if (box->m_iType == data_box::CLOUD)
+		{
+			l_o = new box_cloud(this, box->m_iId);
 		}
 		else if (box->m_iType == data_box::USECASE)
 		{
@@ -878,6 +886,13 @@ void box_view::slot_add_element()
 		add->box->m_iWW = 30;
 		add->box->m_iHH = 70;
 	}
+	else if (sender == m_oAddCloud)
+	{
+		add->box->m_iType = data_box::CLOUD;
+		add->box->m_iWW = 150;
+		add->box->m_iHH = 120;
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
+	}
 	else if (sender == m_oAddUsecase)
 	{
 		add->box->m_iType = data_box::USECASE;
@@ -1244,6 +1259,10 @@ void box_view::notify_add_box(int id, int box)
 	else if (db->m_iType == data_box::ACTOR)
 	{
 		l_o = new box_actor(this, box);
+	}
+	else if (db->m_iType == data_box::CLOUD)
+	{
+		l_o = new box_cloud(this, box);
 	}
 	else if (db->m_iType == data_box::USECASE)
 	{
