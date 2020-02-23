@@ -653,8 +653,13 @@ void semantik_win::slot_properties()
 bool semantik_win::queryClose()
 {
 	write_config();
-	if (!m_oMediator->m_bDirty) return true;
-	return proceed_save();
+	if (!m_oMediator->m_bDirty)
+	{
+		return true;
+	}
+	bool l_bRet = proceed_save();
+	write_config();
+	return l_bRet;
 }
 
 bool semantik_win::proceed_save()

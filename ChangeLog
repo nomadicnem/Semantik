@@ -1,3 +1,10 @@
+Semantik 1.2.4
+--------------
+* New cloud shape
+* Fix recent documents not appearing on save-after-quit
+* Improve interation with diagram shapes database and pipe
+* Fix text label overflow
+
 Semantik 1.2.3
 --------------
 * Eliminate drawing artifacts

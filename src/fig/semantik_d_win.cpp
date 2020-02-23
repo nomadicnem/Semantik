@@ -287,6 +287,7 @@ bool semantik_d_win::queryClose()
 			return false;
 		}
 	}
+	write_config();
 	return true;
 }
 
