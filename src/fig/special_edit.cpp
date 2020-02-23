@@ -83,6 +83,7 @@ void special_edit_properties::apply()
 		ed->newText = m_oTextEdit->toPlainText();
 
 		QTextDocument doc;
+		doc.setDefaultFont(m_oItem->scene()->font());
 		QTextOption l_oOption = doc.defaultTextOption();
 		l_oOption.setAlignment(m_oItem->m_oBox->m_iAlign);
 		doc.setDefaultTextOption(l_oOption);
