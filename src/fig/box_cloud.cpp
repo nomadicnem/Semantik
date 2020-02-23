@@ -41,6 +41,7 @@ void box_cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidthF(0.01 + 1);
+	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	painter->setPen(l_oPen);
 
 	qreal pad = l_oPen.width() / 2.;
