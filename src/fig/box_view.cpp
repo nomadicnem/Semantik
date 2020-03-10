@@ -68,6 +68,7 @@
  #include "mem_box.h"
 	#include "export_fig_dialog.h"
 #include "box_document_properties.h"
+#include "box_clip.h"
 
 #define ALIGN_LEFT 22
 #define ALIGN_CENTER 33
@@ -262,6 +263,8 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 	connect(m_oAddActor, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddCloud = new QAction(i18n("Cloud"), this);
 	connect(m_oAddCloud, SIGNAL(triggered()), this, SLOT(slot_add_element()));
+	m_oAddClip = new QAction(i18n("Clip"), this);
+	connect(m_oAddClip, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddUsecase = new QAction(i18n("Usecase"), this);
 	connect(m_oAddUsecase, SIGNAL(triggered()), this, SLOT(slot_add_element()));
 	m_oAddMatrix = new QAction(i18n("Matrix"), this);
@@ -325,6 +328,7 @@ void box_view::init_menu()
 	m_oAddBoxMenu->addAction(m_oAddClass);
 	m_oAddBoxMenu->addAction(m_oAddEntity);
 	m_oAddBoxMenu->addAction(m_oAddCloud);
+	m_oAddBoxMenu->addAction(m_oAddClip);
 	m_oAddBoxMenu->addAction(m_oAddPipe);
 	m_oAddBoxMenu->addAction(m_oAddDatabase);
 	m_oAddBoxMenu->addAction(m_oAddSequence);
@@ -482,6 +486,10 @@ void box_view::sync_view()
 		else if (box->m_iType == data_box::ACTOR)
 		{
 			l_o = new box_actor(this, box->m_iId);
+		}
+		else if (box->m_iType == data_box::CLIP)
+		{
+			l_o = new box_clip(this, box->m_iId);
 		}
 		else if (box->m_iType == data_box::CLOUD)
 		{
@@ -893,6 +901,13 @@ void box_view::slot_add_element()
 		add->box->m_iHH = 120;
 		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
 	}
+	else if (sender == m_oAddClip)
+	{
+		add->box->m_iType = data_box::CLIP;
+		add->box->m_iWW = 90;
+		add->box->m_iHH = 90;
+		add->box->m_oCustom.m_oInnerColor = QColor("#FCF2E2");
+	}
 	else if (sender == m_oAddUsecase)
 	{
 		add->box->m_iType = data_box::USECASE;
@@ -1263,6 +1278,10 @@ void box_view::notify_add_box(int id, int box)
 	else if (db->m_iType == data_box::CLOUD)
 	{
 		l_o = new box_cloud(this, box);
+	}
+	else if (db->m_iType == data_box::CLIP)
+	{
+		l_o = new box_clip(this, box);
 	}
 	else if (db->m_iType == data_box::USECASE)
 	{
