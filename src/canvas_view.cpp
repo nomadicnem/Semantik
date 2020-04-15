@@ -584,7 +584,7 @@ void canvas_view::notify_open_map() {
 		return;
 	}
 	check_canvas_size();
-	fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
+	fit_zoom();
 }
 
 void canvas_view::notify_select(const QList<int>& unsel, const QList<int>& sel) {
@@ -1038,7 +1038,20 @@ void canvas_view::fit_zoom()
 	}
 	else
 	{
-		fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
+		if (scene()->items().size())
+		{
+			QRectF l_oRect = scene()->items().at(0)->sceneBoundingRect();
+			foreach (QGraphicsItem *l_o, scene()->items())
+			{
+				if (!l_o->isVisible())
+				{
+					continue;
+				}
+				l_oRect |= l_o->sceneBoundingRect();
+			}
+			l_oRect = QRectF(l_oRect.topLeft() - QPointF(PIPAD, PIPAD), l_oRect.bottomRight() + QPointF(PIPAD, PIPAD));
+			fitInView(l_oRect, Qt::KeepAspectRatio);
+		}
 	}
 }
 
