@@ -24,6 +24,8 @@ class linear_view : public QTreeWidget
 		bool filter_item(QTreeWidgetItem * i_oItem, const QString & i_oS);
 
 		void dropEvent(QDropEvent *);
+		void check_colors();
+		bool event(QEvent* i_oEvent);
 
 		int m_iLockSelect;
 

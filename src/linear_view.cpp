@@ -23,6 +23,29 @@ linear_view::linear_view(QWidget *i_oParent, sem_mediator *i_oControl) : QTreeWi
 	m_oMediator = i_oControl;
 	connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(selection_changed()));
 	m_iLockSelect = 0;
+	check_colors();
+}
+
+void linear_view::check_colors()
+{
+	QPalette l_oPalette = palette();
+	QColor l_oForeground = l_oPalette.color(QPalette::Active, QPalette::WindowText);
+	QColor l_oBackground = l_oPalette.color(QPalette::Active, QPalette::Window);
+	if (l_oForeground.value() > l_oBackground.value())
+	{
+		setStyleSheet("QTreeWidget { background-color: white; color: black; }");
+	}
+}
+
+bool linear_view::event(QEvent* i_oEvent)
+{
+	if (i_oEvent->type() == QEvent::ApplicationPaletteChange or i_oEvent->type() == QEvent::PaletteChange)
+	{
+		bool l_bResult = QWidget::event(i_oEvent);
+		check_colors();
+		return l_bResult;
+	}
+	return QWidget::event(i_oEvent);
 }
 
 void linear_view::notify_add_item(int id)
