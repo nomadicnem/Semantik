@@ -265,7 +265,7 @@ QPainterPath canvas_item::opaqueArea() const
 
 void canvas_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->save();
+	//painter->save();
 
 	QRectF l_oRect = boundingRect().adjusted(PAD, PAD, -PAD, -PAD);
 	data_item& l_oItem = m_oGraph->m_oMediator->m_oItems[Id()];
@@ -340,7 +340,7 @@ void canvas_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	ctx.clip = l_oRect;
 	document()->documentLayout()->draw(painter, ctx);
 
-	painter->restore();
+	//painter->restore();
 }
 
 

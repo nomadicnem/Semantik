@@ -95,19 +95,19 @@ void canvas_view::setupActions(KActionCollection* i_oActionCollection) {
 	QAction *l_o = NULL;
 
 	m_oAddItemAction = new QAction(i18n("Add an element"), this);
-	m_oAddItemAction->setShortcut(notr("Ctrl+Return"));
 	connect(m_oAddItemAction, SIGNAL(triggered()), this, SLOT(slot_add_item()));
 	i_oActionCollection->addAction(notr("add_element"), m_oAddItemAction);
+	i_oActionCollection->setDefaultShortcut(m_oAddItemAction, QKeySequence(notr("Ctrl+Return")));
 
 	m_oDeleteAction = new QAction(i18n("Delete selection"), this);
-	m_oDeleteAction->setShortcut(notr("Del"));
 	connect(m_oDeleteAction, SIGNAL(triggered()), this, SLOT(slot_delete()));
 	i_oActionCollection->addAction(notr("delete_element"), m_oDeleteAction);
+	i_oActionCollection->setDefaultShortcut(m_oDeleteAction, QKeySequence(notr("Del")));
 
 	m_oInsertSiblingAction = l_o = new QAction(i18n("Insert a sibling"), this);
-	l_o->setShortcut(notr("Shift+Return"));
 	connect(l_o, SIGNAL(triggered()), this, SLOT(slot_add_sibling()));
 	i_oActionCollection->addAction(notr("add_sibling"), l_o);
+	i_oActionCollection->setDefaultShortcut(m_oInsertSiblingAction, QKeySequence(notr("Shift+Return")));
 
 	m_oMoveUpAction = l_o = new QAction(i18n("Move up"), this); l_o->setShortcut(notr("Alt+Up")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); i_oActionCollection->addAction(notr("move_up"), l_o); l_o->setData(QVariant(0));
 	m_oMoveDownAction = l_o = new QAction(i18n("Move down"), this); l_o->setShortcut(notr("Alt+Down")); connect(l_o, SIGNAL(triggered()), this, SLOT(slot_move())); i_oActionCollection->addAction(notr("move_down"), l_o); l_o->setData(QVariant(1));
@@ -184,6 +184,36 @@ void canvas_view::resizeEvent(QResizeEvent* e)
 	br = br.united(ar);
 
 	scene()->setSceneRect(br);
+}
+
+QRectF canvas_view::visibleRect()
+{
+	if (scene()->items().size())
+	{
+		int l_iCount = 0;
+		QRectF l_oRect;
+		foreach (QGraphicsItem *l_o, scene()->items())
+		{
+			if (!l_o->isVisible())
+			{
+				continue;
+			}
+			if (l_iCount == 0)
+			{
+				l_oRect = l_o->sceneBoundingRect();
+			}
+			else
+			{
+				l_oRect |= l_o->sceneBoundingRect();
+			}
+			l_iCount += 1;
+		}
+		if (l_iCount)
+		{
+			return l_oRect;
+		}
+	}
+	return scene()->itemsBoundingRect();
 }
 
 void canvas_view::check_selection()
@@ -538,42 +568,76 @@ void canvas_view::wheelEvent(QWheelEvent *i_oEvent)
 	qreal i_rFactor = matrix().scale(i_iScaleFactor, i_iScaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();
 	if (i_rFactor < 0.01 || i_rFactor > 1000) return;
 
+	QRectF l_oRect;
 	if (scene()->selectedItems().size())
 	{
-		QRectF l_oRect = scene()->selectedItems().at(0)->sceneBoundingRect();
+		l_oRect = scene()->selectedItems().at(0)->sceneBoundingRect();
 		foreach (QGraphicsItem *l_o, scene()->selectedItems())
 		{
 			l_oRect |= l_o->sceneBoundingRect();
 		}
-		l_oRect = QRectF(l_oRect.topLeft() - QPointF(10, 10), l_oRect.bottomRight() + QPointF(10, 10));
+	}
+	else
+	{
+		l_oRect = visibleRect();
+	}
 
-		QRectF l_oViewRect = viewport()->rect();
-		QRectF l_oNewRect = matrix().scale(i_iScaleFactor, i_iScaleFactor).mapRect(l_oRect);
+	qreal l_fPad;
+	QSize l_oSize = viewport()->size();
+	if (l_oSize.width() * l_oRect.height() < l_oSize.height() * l_oRect.width())
+	{
+		l_fPad = (1.0 * l_oRect.width() * (1.0 * PIPAD / (l_oSize.width() - PIPAD * 1.0)));
+	}
+	else
+	{
+		l_fPad = (1.0 * l_oRect.height() * (1.0 * PIPAD / (l_oSize.height() - PIPAD * 1.0)));
+	}
+	l_oRect.adjust(-l_fPad, -l_fPad, l_fPad, l_fPad);
+	QRectF l_oViewRect = viewport()->rect();
+	QRectF l_oNewRect = matrix().scale(i_iScaleFactor, i_iScaleFactor).mapRect(l_oRect);
+
+	if (scene()->selectedItems().size())
+	{
 		if (l_oNewRect.width() > l_oViewRect.width() or l_oNewRect.height() > l_oViewRect.height())
 		{
 			return;
 		}
 		scale(i_iScaleFactor, i_iScaleFactor);
-		centerOn(l_o + mapToScene(viewport()->rect().center()) - mapToScene(i_oEvent->pos()));
-		ensureVisible(l_oRect, 5, 5);
+
+		QPointF l_oB = l_oViewRect.center();
+		QPointF l_oOrig = mapToScene(l_oB.x(), l_oB.y());
+		QPointF l_oCenter = l_oOrig + (1 - 1 / i_iScaleFactor) * (l_o - l_oOrig);
+		centerOn(l_oCenter);
+
+		ensureVisible(l_oRect);
 	}
 	else
 	{
-		// AAAAAA!!!
-		QRectF l_oRect = scene()->itemsBoundingRect();
-		l_oRect = QRectF(l_oRect.topLeft() - QPointF(PIPAD, PIPAD), l_oRect.bottomRight() + QPointF(PIPAD, PIPAD));
-		l_oRect = matrix().scale(i_iScaleFactor, i_iScaleFactor).mapRect(l_oRect);
-
-		QRectF l_oViewRect = viewport()->rect();
-		if (i_rFactor < 1 and i_iScaleFactor < 1 and 1.1 * l_oRect.width() < l_oViewRect.width() and 1.1 * l_oRect.height() < l_oViewRect.height())
+		qreal l_oDiff = qMin(l_oViewRect.width() - l_oRect.width(), l_oViewRect.height() - l_oRect.height()) / 2.;
+		if (l_oDiff > 0)
 		{
-			ensureVisible(scene()->itemsBoundingRect(), 10, 10);
-			return;
+			l_oRect.adjust(-l_oDiff, -l_oDiff, l_oDiff, l_oDiff);
+			l_oNewRect = matrix().scale(i_iScaleFactor, i_iScaleFactor).mapRect(l_oRect);
 		}
 
-		scale(i_iScaleFactor, i_iScaleFactor);
-		centerOn(l_o + mapToScene(viewport()->rect().center()) - mapToScene(i_oEvent->pos()));
+		if (i_iScaleFactor < 1 and i_iScaleFactor * l_oNewRect.width() < l_oViewRect.width() and i_iScaleFactor * l_oNewRect.height() < l_oViewRect.height())
+		{
+			fitInView(l_oRect, Qt::KeepAspectRatio);
+			centerOn(l_oRect.center());
+		}
+		else
+		{
+			QPointF l_oB = l_oViewRect.center();
+			QPointF l_oOrig = mapToScene(l_oB.x(), l_oB.y());
+			QPointF l_oCenter = l_oOrig + (1 - 1 / i_iScaleFactor) * (l_o - l_oOrig);
+
+			scale(i_iScaleFactor, i_iScaleFactor);
+			centerOn(l_oCenter);
+		}
 	}
+
+	i_rFactor = matrix().mapRect(QRectF(0, 0, 1, 1)).width();
+	emit sig_message(i18n("Zoom: %1%", QString::number(i_rFactor * 100, 'g', 4)), 2000);
 }
 
 void canvas_view::notify_open_map() {
@@ -1026,33 +1090,32 @@ void canvas_view::fit_zoom()
 	}
 #endif
 	//check_canvas_size();
+	QRectF l_oRect;
 	if (scene()->selectedItems().size())
 	{
-		QRectF l_oRect = scene()->selectedItems().at(0)->sceneBoundingRect();
+		l_oRect = scene()->selectedItems().at(0)->sceneBoundingRect();
 		foreach (QGraphicsItem *l_o, scene()->selectedItems())
 		{
 			l_oRect |= l_o->sceneBoundingRect();
 		}
-		l_oRect = QRectF(l_oRect.topLeft() - QPointF(PIPAD, PIPAD), l_oRect.bottomRight() + QPointF(PIPAD, PIPAD));
-		fitInView(l_oRect, Qt::KeepAspectRatio);
 	}
 	else
 	{
-		if (scene()->items().size())
-		{
-			QRectF l_oRect = scene()->items().at(0)->sceneBoundingRect();
-			foreach (QGraphicsItem *l_o, scene()->items())
-			{
-				if (!l_o->isVisible())
-				{
-					continue;
-				}
-				l_oRect |= l_o->sceneBoundingRect();
-			}
-			l_oRect = QRectF(l_oRect.topLeft() - QPointF(PIPAD, PIPAD), l_oRect.bottomRight() + QPointF(PIPAD, PIPAD));
-			fitInView(l_oRect, Qt::KeepAspectRatio);
-		}
+		l_oRect = visibleRect();
 	}
+
+	qreal l_fPad;
+	QSize l_oSize = viewport()->size();
+	if (l_oSize.width() * l_oRect.height() < l_oSize.height() * l_oRect.width())
+	{
+		l_fPad = (1.0 * l_oRect.width() * (1.0 * PIPAD / (l_oSize.width() - PIPAD * 1.0)));
+	}
+	else
+	{
+		l_fPad = (1.0 * l_oRect.height() * (1.0 * PIPAD / (l_oSize.height() - PIPAD * 1.0)));
+
+	}
+	fitInView(l_oRect.adjusted(-l_fPad, -l_fPad, l_fPad, l_fPad), Qt::KeepAspectRatio);
 }
 
 void canvas_view::slot_change_data()
@@ -1248,7 +1311,7 @@ void canvas_view::reorganize() {
 		delete mv;
 	}
 
-	QRectF l_oRect = scene()->itemsBoundingRect().adjusted(-15, -15, 15, 15);
+	QRectF l_oRect = visibleRect().adjusted(-PIPAD, -PIPAD, PIPAD, PIPAD);
 	scene()->setSceneRect(l_oRect);
 }
 
@@ -1275,8 +1338,7 @@ void canvas_view::pack(QMap<int, double> &width, QMap<int, double> &height, QMap
 
 void canvas_view::export_map_size()
 {
-	QRectF l_oRect = scene()->itemsBoundingRect();
-	l_oRect = QRectF(l_oRect.topLeft() - QPointF(PIPAD, PIPAD), l_oRect.bottomRight() + QPointF(PIPAD, PIPAD));
+	QRectF l_oRect = visibleRect().adjusted(-PIPAD, -PIPAD, PIPAD, PIPAD);
 
 	export_map_dialog* exp = new export_map_dialog(this);
 
@@ -1351,8 +1413,7 @@ void canvas_view::export_map_size()
 
 void canvas_view::notify_export_doc()
 {
-	QRectF l_oRect = scene()->itemsBoundingRect();
-	l_oRect = QRectF(l_oRect.topLeft() - QPointF(PIPAD, PIPAD), l_oRect.bottomRight() + QPointF(PIPAD, PIPAD));
+	QRectF l_oRect = visibleRect().adjusted(-PIPAD, -PIPAD, PIPAD, PIPAD);
 	QRectF l_oR(0, 0, l_oRect.width(), l_oRect.height());
 
 	// fill with white
@@ -1613,13 +1674,11 @@ void canvas_view::slot_select_subtree()
 
 int canvas_view::batch_print_map(const QUrl& i_oUrl, QPair<int, int> & p) {
 
-	QRectF l_oRect = scene()->itemsBoundingRect();
+	QRectF l_oRect = visibleRect().adjusted(-PIPAD, -PIPAD, PIPAD, PIPAD);
 	foreach (QGraphicsItem*it, scene()->items())
 	{
 		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
 	}
-
-	l_oRect = l_oRect.adjusted(-15, -15, 15, 15);
 
 	QRectF l_oR(0, 0, l_oRect.width(), l_oRect.height());
 
@@ -1693,13 +1752,11 @@ void canvas_view::slot_print()
 {
 	QPrinter *l_oP = new QPrinter;
 
-	QRectF l_oRect = scene()->itemsBoundingRect();
+	QRectF l_oRect = visibleRect().adjusted(-PIPAD, -PIPAD, PIPAD, PIPAD);
 	foreach (QGraphicsItem*it, scene()->items())
 	{
 		it->setCacheMode(QGraphicsItem::NoCache); // the magic happens here
 	}
-
-	l_oRect = l_oRect.adjusted(-15, -15, 15, 15);
 
 	QRectF l_oR(0, 0, l_oRect.width(), l_oRect.height());
 

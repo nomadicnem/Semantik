@@ -107,6 +107,7 @@ class canvas_view : public QGraphicsView
 		QAction *m_oNextRootAction;
 
 		void resizeEvent(QResizeEvent*);
+		QRectF visibleRect();
 
 	public slots:
 		void export_map_size();
