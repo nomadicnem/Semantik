@@ -2287,7 +2287,7 @@ void box_view::slot_copy_picture()
 {
 	QRectF l_oRect = visibleRect().adjusted(-PIPAD, -PIPAD, PIPAD, PIPAD);
 
-	QRectF l_oR(0, 0, l_oRect.width(), l_oRect.height());
+	QRectF l_oR(0, 0, 2*l_oRect.width(), 2*l_oRect.height());
 	Qt::AspectRatioMode rat = Qt::KeepAspectRatio;
 
 	QImage l_oImage((int) l_oR.width(), (int) l_oR.height(), QImage::Format_RGB32);
