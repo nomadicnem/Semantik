@@ -120,7 +120,14 @@ void text_view::update_edit()
 		tmp->oldText = l_oData.m_sText;
 		tmp->add();
 	}
-	tmp->newText = m_oMediator->m_oItems[tmp->m_iId].m_sText = m_oEdit->toHtml().replace(QChar(0), "");
+	if (m_oEdit->document()->isEmpty())
+	{
+		tmp->newText = m_oMediator->m_oItems[tmp->m_iId].m_sText = "";
+	}
+	else
+	{
+		tmp->newText = m_oMediator->m_oItems[tmp->m_iId].m_sText = m_oEdit->toHtml().replace(QChar(0), "");
+	}
 	m_oMediator->m_oItems[m_iId].m_iTextLength = m_oEdit->toPlainText().length();
 }
 
