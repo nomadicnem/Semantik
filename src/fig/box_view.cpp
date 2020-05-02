@@ -208,6 +208,7 @@ box_view::box_view(QWidget *i_oWidget, sem_mediator *i_oControl) : QGraphicsView
 
 	//setCacheMode(CacheBackground);
 	setRenderHint(QPainter::Antialiasing);
+	setMinimumSize(100, 100);
 
 	m_oPropertiesAction = new QAction(i18n("Properties..."), this);
 	//m_oPropertiesAction->setShortcut(i18n("Return"));
