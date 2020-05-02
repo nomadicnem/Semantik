@@ -314,66 +314,79 @@ void mem_import_box::init(QList<data_box*> _items, QList<data_link*> _links)
 	new_items = _items;
 	new_links = _links;
 
-	data_item& item = model->m_oItems[m_iId];
-	old_items.append(item.m_oBoxes.values());
-	old_links.append(item.m_oLinks);
-	m_iOldFont = item.m_oDiagramFont;
+	data_item& l_oItem = model->m_oItems[m_iId];
+	old_items.append(l_oItem.m_oBoxes.values());
+	old_links.append(l_oItem.m_oLinks);
+	m_iOldFont = l_oItem.m_oDiagramFont;
+
+	m_bExportIsWidthOld = l_oItem.m_bExportIsWidth;
+	m_iExportWidthOld = l_oItem.m_iExportWidth;
+	m_iExportHeightOld = l_oItem.m_iExportHeight;
+	m_sExportUrlOld = l_oItem.m_sExportUrl;
 }
 
 
 void mem_import_box::undo()
 {
-	data_item& item = model->m_oItems[m_iId];
-	item.m_oDiagramFont = m_iOldFont;
+	data_item& l_oItem = model->m_oItems[m_iId];
+	l_oItem.m_oDiagramFont = m_iOldFont;
 	model->notify_change_properties(NULL);
 	foreach (data_link *k, new_links) {
 		model->notify_unlink_box(m_iId, k);
-		item.m_oLinks.removeAll(k);
+		l_oItem.m_oLinks.removeAll(k);
 	}
 	foreach (data_box *k, new_items) {
 		model->notify_del_box(m_iId, k->m_iId);
-		item.m_oBoxes.remove(k->m_iId);
+		l_oItem.m_oBoxes.remove(k->m_iId);
 	}
 	foreach (data_box *k, old_items) {
-		item.m_oBoxes[k->m_iId] = k;
+		l_oItem.m_oBoxes[k->m_iId] = k;
 		model->notify_add_box(m_iId, k->m_iId);
 	}
 	foreach (data_link *k, old_links) {
-		item.m_oLinks.append(k);
+		l_oItem.m_oLinks.append(k);
 		model->notify_link_box(m_iId, k);
 	}
 	if (model->m_bIsDiagram)
 	{
 		model->m_oColorSchemes = m_oOldColorSchemes;
 	}
+	l_oItem.m_bExportIsWidth = m_bExportIsWidthOld;
+	l_oItem.m_iExportWidth = m_iExportWidthOld;
+	l_oItem.m_iExportHeight = m_iExportHeightOld;
+	l_oItem.m_sExportUrl = m_sExportUrlOld;
 	undo_dirty();
 }
 
 void mem_import_box::redo()
 {
-	data_item& item = model->m_oItems[m_iId];
-	item.m_oDiagramFont = m_iNewFont;
+	data_item& l_oItem = model->m_oItems[m_iId];
+	l_oItem.m_oDiagramFont = m_iNewFont;
 	model->notify_change_properties(NULL);
 	foreach (data_link *k, old_links) {
 		model->notify_unlink_box(m_iId, k);
-		item.m_oLinks.removeAll(k);
+		l_oItem.m_oLinks.removeAll(k);
 	}
 	foreach (data_box *k, old_items) {
 		model->notify_del_box(m_iId, k->m_iId);
-		item.m_oBoxes.remove(k->m_iId);
+		l_oItem.m_oBoxes.remove(k->m_iId);
 	}
 	foreach (data_box *k, new_items) {
-		item.m_oBoxes[k->m_iId] = k;
+		l_oItem.m_oBoxes[k->m_iId] = k;
 		model->notify_add_box(m_iId, k->m_iId);
 	}
 	foreach (data_link *k, new_links) {
-		item.m_oLinks.append(k);
+		l_oItem.m_oLinks.append(k);
 		model->notify_link_box(m_iId, k);
 	}
 	if (model->m_bIsDiagram)
 	{
 		model->m_oColorSchemes = m_oNewColorSchemes;
 	}
+	l_oItem.m_bExportIsWidth = m_bExportIsWidthNew;
+	l_oItem.m_iExportWidth = m_iExportWidthNew;
+	l_oItem.m_iExportHeight = m_iExportHeightNew;
+	l_oItem.m_sExportUrl = m_sExportUrlNew;
 	redo_dirty();
 }
 

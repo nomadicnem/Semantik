@@ -274,6 +274,24 @@ bool semantik_reader::startElement(const QString&, const QString&, const QString
 		l_oItem.m_oCustom.m_oBorderColor = QColor(i_oAttrs.value(notr("custom_border")));
 		l_oItem.m_oCustom.m_oTextColor = QColor(i_oAttrs.value(notr("custom_text")));
 
+
+		l_oItem.m_bExportIsWidth = i_oAttrs.value(notr("export_is_width")) != notr("false");
+		if (i_oAttrs.index(notr("export_width")) > -1)
+			l_oItem.m_iExportWidth = i_oAttrs.value(notr("export_width")).toInt();
+		else
+			l_oItem.m_iExportWidth = 0;
+		if (l_oItem.m_iExportWidth < 0 || l_oItem.m_iExportWidth > 30000)
+			l_oItem.m_iExportWidth = 0;
+
+		if (i_oAttrs.index(notr("export_height")) > -1)
+			l_oItem.m_iExportHeight = i_oAttrs.value(notr("export_height")).toInt();
+		else
+			l_oItem.m_iExportHeight = 0;
+		if (m_oMediator->m_iExportHeight < 0 || m_oMediator->m_iExportHeight > 30000)
+			l_oItem.m_iExportHeight = 0;
+
+		l_oItem.m_sExportUrl = i_oAttrs.value(notr("export_url"));
+
 		QString l_s = i_oAttrs.value(notr("diagram_font"));
 		if (!l_s.isEmpty()) {
 			l_oItem.m_oDiagramFont.fromString(l_s);
@@ -643,6 +661,11 @@ QString sem_mediator::doc_to_xml()
 		l_oS<<notr(" custom_border=\"%1\"").arg(l_o.m_oBorderColor.name());
 		l_oS<<notr(" custom_inner=\"%1\"").arg(l_o.m_oInnerColor.name());
 		l_oS<<notr(" custom_text=\"%1\"").arg(l_o.m_oTextColor.name());
+
+		l_oS<<notr(" export_is_width=\"%1\"").arg(l_oItem.m_bExportIsWidth ? notr("true") : notr("false"));
+		l_oS<<notr(" export_width=\"%1\"").arg(QString::number(l_oItem.m_iExportWidth));
+		l_oS<<notr(" export_height=\"%1\"").arg(QString::number(l_oItem.m_iExportHeight));
+		l_oS<<notr(" export_url=\"%1\"").arg(bind_node::protectXML(l_oItem.m_sExportUrl));
 
 		l_oS<<notr(" diagram_font=\"%1\"").arg(l_oItem.m_oDiagramFont.toString());
 

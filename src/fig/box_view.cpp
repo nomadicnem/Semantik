@@ -1967,10 +1967,24 @@ void box_view::message(const QString &s, int d)
 }
 
 bool box_view::slot_import_from_file() {
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& l_oItem = m_oMediator->m_oItems[m_iId];
+
+	QUrl l_oDefault = QUrl(l_oItem.m_sExportUrl);
+	if (!l_oDefault.isValid())
+	{
+		l_oDefault = QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+	}
+
 	QUrl l_o = QFileDialog::getOpenFileUrl(this, i18n("Choose a file to open"),
-                QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
+                l_oDefault,
 		i18n("*.semd|Semantik diagram (*.semd)"));
-	return import_from_file(l_o);
+	bool l_bRet = import_from_file(l_o);
+	if (l_bRet)
+	{
+		l_oItem.m_sExportUrl = l_o.url();
+	}
+	return l_bRet;
 }
 
 bool box_view::import_from_file(const QUrl& l_o)
@@ -1992,6 +2006,12 @@ bool box_view::import_from_file(const QUrl& l_o)
 		imp->m_iNewFont = tmp.m_oDiagramFont;
 		imp->m_oOldColorSchemes = m_oMediator->m_oColorSchemes;
 		imp->m_oNewColorSchemes = x->m_oColorSchemes;
+
+		imp->m_bExportIsWidthNew = tmp.m_bExportIsWidth;
+		imp->m_iExportWidthNew = tmp.m_iExportWidth;
+		imp->m_iExportHeightNew = tmp.m_iExportHeight;
+		imp->m_sExportUrlNew = tmp.m_sExportUrl;
+
 		imp->apply();
 
 		m_oCurrentUrl = l_o;
@@ -2004,9 +2024,18 @@ bool box_view::import_from_file(const QUrl& l_o)
 }
 
 bool box_view::slot_export_to_file() {
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& l_oItem = m_oMediator->m_oItems[m_iId];
+
+	QUrl l_oDefault = QUrl(l_oItem.m_sExportUrl);
+	if (!l_oDefault.isValid())
+	{
+		l_oDefault = QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+	}
+
 	choose_export:
 	QUrl l_o = QFileDialog::getSaveFileUrl(this, i18n("Choose a file name"),
-                QUrl(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)),
+                l_oDefault,
 		i18n("*.semd|Semantik diagram (*.semd)"));
 
 	if (l_o.path().isEmpty()) return false;
@@ -2026,6 +2055,7 @@ bool box_view::slot_export_to_file() {
 	x->m_oItems.insert(1, l_oData);
 	x->m_oColorSchemes = m_oMediator->m_oColorSchemes;
 
+	l_oItem.m_sExportUrl = l_o.url();
 	if (x->save_file(l_o.path()))
 	{
 		emit sig_message(i18n("Saved '%1'", l_o.path()), 2000);
@@ -2307,37 +2337,41 @@ void box_view::export_fig_size()
 	exp->kurlrequester->setMode(KFile::File | KFile::LocalOnly);
 	exp->kurlrequester->setFilter(i18n("*.png|PNG Files (*.png)\n*.svg|SVG Files (*.svg)\n*.pdf|PDF Files (*.pdf)"));
 
-	exp->kurlrequester->setUrl(QUrl(m_oMediator->m_sExportUrl));
-	exp->m_oWidthC->setChecked(m_oMediator->m_bExportIsWidth);
+	Q_ASSERT(m_oMediator->m_oItems.contains(m_iId));
+	data_item& l_oItem = m_oMediator->m_oItems[m_iId];
+
+	exp->kurlrequester->setUrl(QUrl(l_oItem.m_sExportUrl));
+	exp->m_oWidthC->setChecked(l_oItem.m_bExportIsWidth);
+	exp->m_oHeightC->setChecked(!l_oItem.m_bExportIsWidth);
 	exp->m_iBaseWidth = l_oRect.width();
 	exp->m_iBaseHeight = l_oRect.height();
 
-	if (m_oMediator->m_bExportIsWidth)
+	if (l_oItem.m_bExportIsWidth)
 	{
-		if (m_oMediator->m_iExportWidth > 0)
-			exp->m_oWidth->setValue(m_oMediator->m_iExportWidth);
+		if (l_oItem.m_iExportWidth > 0)
+			exp->m_oWidth->setValue(l_oItem.m_iExportWidth);
 		else
 			exp->m_oWidth->setValue(l_oRect.width());
 	}
 	else
 	{
-		if (m_oMediator->m_iExportHeight > 0)
-			exp->m_oHeight->setValue(m_oMediator->m_iExportHeight);
+		if (l_oItem.m_iExportHeight > 0)
+			exp->m_oHeight->setValue(l_oItem.m_iExportHeight);
 		else
 			exp->m_oHeight->setValue(l_oRect.height());
 	}
 
 	if (exp->exec() == QDialog::Accepted)
 	{
-		if (m_oMediator->m_iExportWidth != exp->m_oWidth->value())
+		if (l_oItem.m_iExportWidth != exp->m_oWidth->value())
 		{
-			m_oMediator->m_iExportWidth = exp->m_oWidth->value();
+			l_oItem.m_iExportWidth = exp->m_oWidth->value();
 			m_oMediator->set_dirty();
 		}
 
-		if (m_oMediator->m_iExportHeight != exp->m_oHeight->value())
+		if (l_oItem.m_iExportHeight != exp->m_oHeight->value())
 		{
-			m_oMediator->m_iExportHeight = exp->m_oHeight->value();
+			l_oItem.m_iExportHeight = exp->m_oHeight->value();
 			m_oMediator->set_dirty();
 		}
 
@@ -2347,9 +2381,9 @@ void box_view::export_fig_size()
 			return;
 		}
 
-		if (m_oMediator->m_sExportUrl != exp->kurlrequester->url().url())
+		if (l_oItem.m_sExportUrl != exp->kurlrequester->url().url())
 		{
-			m_oMediator->m_sExportUrl = exp->kurlrequester->url().url();
+			l_oItem.m_sExportUrl = exp->kurlrequester->url().url();
 			m_oMediator->set_dirty();
 		}
 

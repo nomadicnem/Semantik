@@ -184,6 +184,16 @@ class mem_import_box : public mem_command {
 		QList<color_scheme> m_oNewColorSchemes;
 		QList<color_scheme> m_oOldColorSchemes;
 
+		bool m_bExportIsWidthNew;
+		int m_iExportWidthNew;
+		int m_iExportHeightNew;
+		QString m_sExportUrlNew;
+
+		bool m_bExportIsWidthOld;
+		int m_iExportWidthOld;
+		int m_iExportHeightOld;
+		QString m_sExportUrlOld;
+
 		IType type() { return IMPORT_BOX; }
 };
 

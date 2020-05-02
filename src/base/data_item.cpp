@@ -530,6 +530,9 @@ const QColor & diagram_item::getColor(sem_mediator* i_oMediator) const
 
 data_item::data_item()
 {
+	m_bExportIsWidth = true;
+	m_iExportWidth = 0;
+	m_iExportHeight = 0;
 }
 
 

@@ -221,6 +221,12 @@ class data_item
 		const color_scheme& get_color_scheme(sem_mediator* i_oMediator) const;
 		const color_scheme& get_color_scheme_raw(sem_mediator* i_oMediator) const;
 
+		bool m_bExportIsWidth;
+		int m_iExportWidth;
+		int m_iExportHeight;
+		QString m_sExportUrl;
+
+
 		int m_iId;
 		bool m_bSelected;
 		double m_iXX;
