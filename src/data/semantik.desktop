@@ -2,6 +2,7 @@
 Name=Semantik
 Exec=semantik %f
 GenericName=Mind mapping software
+GenericName[fr]=Logiciel de cartes mentales
 GenericName[ru]=Ассоциативные карты
 GenericName[tr]=Zihin haritalama uygulaması
 GenericName[el]=Λογισμικό χαρτογράφησης ιδεών
@@ -12,7 +13,7 @@ GenericName[hu]=Gondolattérkép-készítő
 Comment=A mind-mapping tool for KDE
 Comment[ru]=Программа для создания диаграмм связей для KDE
 Comment[cs]=Nástroj na vytváření myšlenkových map pro KDE
-Comment[fr]=Carte mentales pour KDE
+Comment[fr]=Cartes mentales pour KDE
 Type=Application
 Terminal=false
 Icon=semantik
