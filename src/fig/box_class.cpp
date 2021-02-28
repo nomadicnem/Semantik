@@ -31,12 +31,13 @@
 box_class::box_class(box_view* view, int id) : box_item(view, id)
 {
         setZValue(80);
+	doc.setDefaultFont(scene()->font());
 	update_size();
 }
 
 void box_class::force_size()
 {
-	QSizeF l_o = size();
+	QSizeF l_o = size_min();
 	setRect(0, 0, l_o.width(), l_o.height());
 
 	m_iWW = m_oBox->m_iWW = l_o.width();
@@ -307,7 +308,29 @@ qreal box_class::minVisibility(const QFontMetricsF i_oFm)
 	return l_iHVisibility;
 }
 
-QSizeF box_class::size()
+QSize box_class::best_size(const QPointF &dims)
+{
+	QSizeF size_min_val = size_min();
+
+	int x = dims.x();
+	x = GRID * (x / GRID);
+	if (x < GRID) x = GRID;
+
+	while (x < size_min_val.width()) {
+		x += GRID;
+	}
+
+	int y = dims.y();
+	y = GRID * (y / GRID);
+	if (y < GRID) y = GRID;
+	while (y < size_min_val.height())
+	{
+		y += GRID;
+	}
+	return QSize(x, y);
+}
+
+QSizeF box_class::size_min()
 {
 	QFont l_oNormalFont(scene()->font());
 	QFontMetricsF l_oNormalFm(l_oNormalFont);

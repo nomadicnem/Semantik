@@ -19,7 +19,8 @@ class box_entity : public box_item
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 
 		box_entity(box_view*, int i_iId);
-		QSizeF size();
+		virtual QSize best_size(const QPointF &dims);
+		QSizeF size_min();
 		void force_size();
 
 		void properties();

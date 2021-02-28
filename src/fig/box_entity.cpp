@@ -33,12 +33,13 @@
 box_entity::box_entity(box_view* view, int id) : box_item(view, id)
 {
         setZValue(80);
+	doc.setDefaultFont(scene()->font());
 	update_size();
 }
 
 void box_entity::force_size()
 {
-	QSizeF l_o = size();
+	QSizeF l_o = size_min();
 
 	int l_iWW = fceil(l_o.width(), GRID);
 	int l_iHH = fceil(l_o.height(), GRID);
@@ -202,7 +203,30 @@ void box_entity::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *opt
 	}
 }
 
-QSizeF box_entity::size()
+QSize box_entity::best_size(const QPointF &dims)
+{
+	QSizeF size_min_val = size_min();
+
+	int x = dims.x();
+	x = GRID * (x / GRID);
+	if (x < GRID) x = GRID;
+
+	while (x < size_min_val.width()) {
+		x += GRID;
+	}
+
+	int y = dims.y();
+	y = GRID * (y / GRID);
+	if (y < GRID) y = GRID;
+	while (y < size_min_val.height())
+	{
+		y += GRID;
+	}
+	return QSize(x, y);
+}
+
+
+QSizeF box_entity::size_min()
 {
 	QFont l_oNormalFont(scene()->font());
 	QFontMetricsF l_oNormalFm(l_oNormalFont);

@@ -202,7 +202,7 @@ void canvas_link::paint(QPainter *i_oPainter, const QStyleOptionGraphicsItem *i_
 		l_oBack = QColor(Qt::green);
 	}
 
-	double l_oA, l_oB;
+	double l_oA=0, l_oB=0;
 	if (m_oFrom != NULL)
 	{
 		int l_oHeight = m_oGraph->m_oMediator->height_of(m_oFrom->m_iId);

@@ -26,17 +26,19 @@
 
 box_cloud::box_cloud(box_view* view, int id) : box_item(view, id)
 {
-	m_oCaption = new QGraphicsTextItem();
-	m_oCaption->setParentItem(this);
-	m_oCaption->setPos(0, 0);
+	doc.setDefaultFont(scene()->font());
 }
 
 box_cloud::~box_cloud() {
-	delete m_oCaption;
 }
 
 void box_cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+	doc.setDefaultFont(scene()->font());
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	doc.setDefaultTextOption(l_oOption);
+
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
@@ -49,8 +51,6 @@ void box_cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 	qreal xtop = l_oRect.x();
 	qreal ytop = l_oRect.y();
-	qreal xcoord = xtop + l_oRect.width() / 2.0;
-	qreal ycoord = l_oRect.height() / 5.;
 
 	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
@@ -116,13 +116,22 @@ void box_cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 	painter->setPen(Qt::NoPen);
 	painter->drawRect(l_oRect.adjusted(dx/4., dy/4., -dx/4., -dy/4.));
+
+	QAbstractTextDocumentLayout::PaintContext ctx;
+	ctx.palette = QApplication::palette("QTextControl");
+	ctx.palette.setColor(QPalette::Text, Qt::black); // white on black kde themes
+	QAbstractTextDocumentLayout * lay = doc.documentLayout();
+	qreal yoff = lay->documentSize().height();
+
+	painter->translate(OFF, OFF + (rect().height() - 2 * OFF - yoff) / 2.);
+	lay->draw(painter, ctx);
 }
 
 void box_cloud::properties()
 {
 	bool ok = false;
 	QString text = QInputDialog::getText(m_oView, i18n("Cloud properties"),
-			i18n("Caption:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
+		  i18n("Caption:"), QLineEdit::Normal, m_oBox->m_sText, &ok);
 	if (ok && text != m_oBox->m_sText)
 	{
 		mem_edit_box *ed = new mem_edit_box(m_oView->m_oMediator, m_oView->m_iId, m_iId);
@@ -130,24 +139,3 @@ void box_cloud::properties()
 		ed->apply();
 	}
 }
-
-void box_cloud::update_size() {
-	m_iWW = m_oBox->m_iWW;
-	m_iHH = m_oBox->m_iHH;
-
-	prepareGeometryChange();
-	setRect(0, 0, m_iWW, m_iHH);
-	m_oChain->setPos(m_iWW + 3, 0);
-
-	update_links();
-	update_sizers();
-}
-
-void box_cloud::update_links() {
-	QRectF r = boundingRect();
-	m_oCaption->setFont(scene()->font());
-	m_oCaption->setPlainText(m_oBox->m_sText);
-	m_oCaption->setPos((r.width() - m_oCaption->boundingRect().width()) / 2., (r.height() - m_oCaption->boundingRect().height()) / 2.);
-	box_item::update_links();
-}
-

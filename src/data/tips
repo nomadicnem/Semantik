@@ -109,7 +109,7 @@ to the variables box, for example: <pre>code_lang=java</pre>
 <h3>9. Links and references</h3>
 <p>
 Links can be created by selecting an item on the map, and dragging from the "+" sign to another item.
-Since links reflect the structure of the document generated from the map, they can't contain any cycle.
+Since links reflect the structure of the document generated from the map, they cannot contain cycles.
 </p>
 <p>
 Special links called references allow cycles and do not appear in the generated documents.

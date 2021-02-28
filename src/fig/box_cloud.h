@@ -20,10 +20,7 @@ class box_cloud : public box_item
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_cloud(box_view*, int i_iId);
 		~box_cloud();
-		QGraphicsTextItem *m_oCaption;
 		void properties();
-		void update_size();
-		void update_links();
 };
 
 #endif // BOX_CLOUD_H
