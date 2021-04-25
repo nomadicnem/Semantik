@@ -21,6 +21,8 @@ lst = os.listdir(temp_dir)
 
 tmp = str(sembind.get_item_ids()).split(",")
 for x in tmp:
+	if not x:
+		continue
 	item = sembind.get_item_by_id(int(x))
 	if item:
 		pid = sembind.get_val(item, "pic_id")
