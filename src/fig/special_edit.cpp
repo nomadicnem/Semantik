@@ -90,9 +90,16 @@ void special_edit_properties::apply()
 		doc.setPlainText(ed->newText);
 		doc.setTextWidth(m_oItem->m_oBox->m_iWW - 2 * OFF);
 
-		ed->newHeight = fceil(doc.size().height() + 2 * OFF, GRID);
-		if (ed->newHeight < m_oItem->m_oBox->m_iHH)
-			ed->newHeight = m_oItem->m_oBox->m_iHH;
+		int l_iNewHeight = fceil(doc.size().height() + 2 * OFF, GRID);
+		if (m_oItem->m_oBox->m_iType == data_box::SEQUENCE)
+		{
+			ed->m_iNewBoxHeight = qMax(l_iNewHeight, m_oItem->m_oBox->m_iBoxHeight);
+			ed->newHeight += ed->m_iNewBoxHeight - ed->m_iOldBoxHeight;
+		}
+		else
+		{
+			ed->newHeight = qMax(l_iNewHeight, m_oItem->m_oBox->m_iHH);
+		}
 
 		ed->apply();
 	}

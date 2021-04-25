@@ -32,8 +32,6 @@ m_oItem(m_oView->m_oMediator->m_oItems[m_oView->m_iId])
 	m_oChain = new box_chain(i_oParent);
 	m_oChain->setParentItem(this);
 
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-
 	setZValue(100);
 	setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
 

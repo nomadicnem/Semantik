@@ -62,6 +62,7 @@ void box_rectangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
 	painter->setPen(l_oPen);
 	painter->drawRect(l_oRect);
+	painter->setClipRect(l_oRect);
 
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");

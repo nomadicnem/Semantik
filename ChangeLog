@@ -1,3 +1,7 @@
+Semantik 1.2.7
+--------------
+* Fix the rendering of activity elements start/end
+
 Semantik 1.2.6
 --------------
 * Hide top-right corner data flags on empty map items #103

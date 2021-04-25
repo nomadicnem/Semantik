@@ -69,6 +69,8 @@ void box_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	QPointF l_oBottom = (l_oRect.bottomLeft() + l_oRect.bottomRight()) / 2.;
 	painter->drawLine(l_oBottom, l_oMidBottom);
 
+	painter->setClipRect(l_oRect);
+
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, Qt::black); // white on black kde themes
@@ -204,13 +206,6 @@ void box_sequence::freeze(bool b)
 	{
 		setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
 	}
-}
-
-void box_sequence::update_data()
-{
-	m_iBoxHeight = m_oBox->m_iBoxHeight;
-	box_item::update_data();
-	update_size();
 }
 
 void box_sequence::update_sizers()
@@ -360,3 +355,9 @@ int box_sequence::may_use(const QPair<int, int>& i_oA, const QPair<int, int>& i_
 	return true;
 }
 
+void box_sequence::update_data() {
+	setPos(QPointF(m_oBox->m_iXX, m_oBox->m_iYY));
+	update_size();
+	update();
+	update_sizers();
+}

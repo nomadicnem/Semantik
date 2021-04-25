@@ -116,6 +116,7 @@ void box_cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 	painter->setPen(Qt::NoPen);
 	painter->drawRect(l_oRect.adjusted(dx/4., dy/4., -dx/4., -dy/4.));
+	painter->setClipRect(l_oRect);
 
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");

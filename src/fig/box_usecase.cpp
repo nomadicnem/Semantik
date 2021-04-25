@@ -14,6 +14,7 @@
 #include "box_usecase.h"
 #include "data_item.h"
  #include "res:zable.h"
+#include <QRegion>
 #include "box_view.h"
  #include "box_link.h"
 #include "sem_mediator.h"
@@ -60,13 +61,17 @@ void box_usecase::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 	painter->drawEllipse(l_oRect);
 
+
+	QRegion l_oRegion(l_oRect.toAlignedRect(), QRegion::Ellipse);
+	painter->setClipRegion(l_oRegion);
+
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, Qt::black); // white on black kde themes
 	QAbstractTextDocumentLayout * lay = doc.documentLayout();
 	qreal yoff = lay->documentSize().height();
 
-	painter->translate(OFF, OFF + (m_iHH - 2 * OFF - yoff) / 2.);
+	painter->translate(OFF, OFF + (rect().height() - 2 * OFF - yoff) / 2.);
 	lay->draw(painter, ctx);
 }
 

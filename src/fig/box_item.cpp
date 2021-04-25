@@ -89,6 +89,7 @@ void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 
 	painter->drawRoundRect(l_oRect, 20, 20);
+	painter->setClipRect(l_oRect);
 
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");

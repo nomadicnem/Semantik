@@ -54,6 +54,9 @@ class mem_edit_box: public mem_command {
 		int oldHeight;
 		int newHeight;
 
+		int m_iOldBoxHeight;
+		int m_iNewBoxHeight;
+
 		QString oldText;
 		QString newText;
 

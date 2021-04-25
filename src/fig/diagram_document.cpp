@@ -58,6 +58,7 @@ void diagram_document::init()
 	connect(m_oMediator, SIGNAL(sig_text_align(int, const QList<data_box>&)), m_oDiagramView, SLOT(notify_text_align(int, const QList<data_box>&)));
 	connect(m_oMediator, SIGNAL(sig_focus(void *)), m_oDiagramView, SLOT(notify_focus(void *)));
 	connect(m_oMediator, SIGNAL(sig_change_properties(void *)), m_oDiagramView, SLOT(notify_change_properties(void *)));
+	connect(m_oMediator, SIGNAL(sig_sequence_box(int, int)), m_oDiagramView, SLOT(notify_sequence_box(int, int)));
 
 	connect(m_oDiagramView, SIGNAL(sig_Url(const QUrl&)), this, SLOT(slot_tab_name(const QUrl&)));
 
