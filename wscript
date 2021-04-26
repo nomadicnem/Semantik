@@ -208,7 +208,7 @@ def configure(conf):
 
 		p = '%s/qt_%s.pri' % (path, name)
 		for line in Utils.readf(p).splitlines():
-			lst = line.strip().split(' = ')
+			lst = line.replace('$$PWD', path).strip().split(' = ')
 			if lst[0].endswith('.name'):
 				conf.env.append_value('LIB_KDECORE', lst[1])
 			elif lst[0].endswith('.includes'):
@@ -220,7 +220,8 @@ def configure(conf):
 
 	conf.env.append_value('LIB_KDECORE', 'KF5KDELibs4Support')
 
-	for x in ('', '/usr/include/KF5/KDELibs4Support', '/usr/local/include/KF5/KDELibs4Support'):
+	kdelibs4support_candidates = ['', '/usr/include/KF5/KDELibs4Support', '/usr/local/include/KF5/KDELibs4Support']
+	for x in kdelibs4support_candidates:
 		conf.env.stash()
 		if os.path.exists(x):
 			conf.env.append_value('INCLUDES_KDECORE', x)
@@ -232,8 +233,8 @@ def configure(conf):
 			break
 		except conf.errors.ConfigurationError:
 			conf.env.revert()
-		else:
-			conf.fatal('kdelibs4support was not found, check the config.log file')
+	else:
+		conf.fatal('kdelibs4support was not found, check the config.log file')
 
 	for x in ('', '/usr/local/include'):
 		conf.env.stash()
@@ -247,8 +248,8 @@ def configure(conf):
 			break
 		except conf.errors.ConfigurationError:
 			conf.env.revert()
-		else:
-			conf.fatal('It seems that QtGui is not working properly, check the config.log')
+	else:
+		conf.fatal('It seems that QtGui is not working properly, check the config.log')
 
 	conf.define('cmd_add_item', 0)
 	conf.define('cmd_update_item', 1)
