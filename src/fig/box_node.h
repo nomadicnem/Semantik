@@ -19,6 +19,7 @@ class box_node : public box_item
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_node(box_view*, int i_iId);
 		void mousePressEvent(QGraphicsSceneMouseEvent* e);
+		QSize best_size(const QPointF &dims);
 };
 
 #endif // BOX_NODE_H

@@ -29,6 +29,10 @@ box_component::box_component(box_view* view, int id) : box_item(view, id)
 	setZValue(95);
 }
 
+QSize box_component::best_size(const QPointF &dims) {
+	return box_item::best_size(dims).expandedTo(QSize(40, 30));
+}
+
 void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	doc.setDefaultFont(scene()->font());

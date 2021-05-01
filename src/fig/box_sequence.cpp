@@ -164,7 +164,7 @@ QPointF box_sequence::validate_point(box_resize_point *p, const QPointF & orig)
 		}
 
 		m_iHH = m_iLastStretchY = int_val(orig.y());
-		if (m_iLastStretchY < m_iBoxHeight + l_iMinOff) m_iLastStretchY = m_iBoxHeight + l_iMinOff;
+		if (m_iLastStretchY < m_iBoxHeight + l_iMinOff) m_iLastStretchY = m_iHH = m_iBoxHeight + l_iMinOff;
 
 		prepareGeometryChange();
 		setRect(0, 0, m_oBox->m_iWW, m_iLastStretchY);

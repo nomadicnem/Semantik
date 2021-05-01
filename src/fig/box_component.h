@@ -18,7 +18,7 @@ class box_component : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_component(box_view*, int i_iId);
-
+		QSize best_size(const QPointF &dims);
 };
 
 #endif // BOX_COMPONENT_H

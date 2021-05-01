@@ -103,4 +103,6 @@ void box_node::mousePressEvent(QGraphicsSceneMouseEvent* e)
 	QGraphicsRectItem::mousePressEvent(e);
 }
 
-
+QSize box_node::best_size(const QPointF &dims) {
+	return box_item::best_size(dims).expandedTo(QSize(30, 30));
+}
