@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2020 GPLV3
+// Thomas Nagy 2007-2021 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -27,15 +27,16 @@
 
 box_frame::box_frame(box_view* view, int id) : box_item(view, id)
 {
-	m_oCaption = new QGraphicsTextItem();
-	m_oCaption->setParentItem(this);
-	m_oCaption->setPos(0, 0);
-
 	setZValue(80);
 }
 
 void box_frame::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+	doc.setDefaultFont(scene()->font());
+	QTextOption l_oOption = doc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	doc.setDefaultTextOption(l_oOption);
+
 	QPen l_oPen = QPen(Qt::SolidLine);
 	l_oPen.setColor(Qt::black);
 	l_oPen.setCosmetic(false);
@@ -43,50 +44,30 @@ void box_frame::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	l_oPen.setWidthF(0.01 + 1);
 	painter->setPen(l_oPen);
 
+
 	qreal pad = l_oPen.width() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
+	painter->setClipRect(rect());
 
 	painter->drawRect(l_oRect);
-}
 
-void box_frame::update_links()
-{
-	m_oCaption->setFont(scene()->font());
-	m_oCaption->setPlainText(m_oBox->m_sText);
+	QAbstractTextDocumentLayout::PaintContext ctx;
+	ctx.palette = QApplication::palette("QTextControl");
+	ctx.palette.setColor(QPalette::Text, Qt::black); // white on black kde themes
+	QAbstractTextDocumentLayout * lay = doc.documentLayout();
 
-	QRectF l_oR = boundingRect();
-	int l_iVpos;
+	qreal l_fYpos;
 	if (m_oBox->m_iLabelPosition == Qt::TopEdge)
 	{
-		l_iVpos = 0;
+		l_fYpos = OFF;
 	}
 	else
 	{
-		l_iVpos = l_oR.height() - m_oCaption->boundingRect().height();
+		l_fYpos = l_oRect.height() - OFF - lay->documentSize().height();;
 	}
 
-	int l_iHpos;
-	if (m_oBox->m_iAlign == Qt::AlignLeft)
-	{
-		l_iHpos = l_oR.left() + PAD;
-	}
-	else if (m_oBox->m_iAlign == Qt::AlignRight)
-	{
-		l_iHpos = l_oR.right() - m_oCaption->boundingRect().width() - PAD;
-	}
-	else
-	{
-		l_iHpos = (l_oR.width() - m_oCaption->boundingRect().width()) / 2.;
-	}
-
-	m_oCaption->setPos(l_iHpos, l_iVpos);
-	box_item::update_links();
-}
-
-void box_frame::update_data()
-{
-	box_item::update_data();
-	update_links();
+	painter->translate(OFF, l_fYpos);
+	lay->draw(painter, ctx);
 }
 
 void box_frame::properties()

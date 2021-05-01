@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2020 GPLV3
+// Thomas Nagy 2007-2021 GPLV3
 
 #ifndef BOX_FRAME_H
 #define BOX_FRAME_H
@@ -18,10 +18,7 @@ class box_frame : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_frame(box_view*, int i_iId);
-		void update_links();
-		void update_data();
 		void properties();
-		QGraphicsTextItem *m_oCaption;
 };
 
 #endif // BOX_FRAME_H

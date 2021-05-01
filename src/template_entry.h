@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2020 GPLV3
+// Thomas Nagy 2007-2021 GPLV3
 
 #ifndef TEMPLATE_ENTRY_H
 #define TEMPLATE_ENTRY_H

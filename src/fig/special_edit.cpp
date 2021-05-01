@@ -1,4 +1,4 @@
-// Thomas Nagy 2018-2020 GPLV3
+// Thomas Nagy 2018-2021 GPLV3
 
 #include <QLabel>
 #include <QGridLayout>
@@ -91,7 +91,11 @@ void special_edit_properties::apply()
 		doc.setTextWidth(m_oItem->m_oBox->m_iWW - 2 * OFF);
 
 		int l_iNewHeight = fceil(doc.size().height() + 2 * OFF, GRID);
-		if (m_oItem->m_oBox->m_iType == data_box::SEQUENCE)
+		if (m_oItem->m_oBox->m_iType == data_box::DECISION)
+		{
+			// do nothing
+		}
+		else if (m_oItem->m_oBox->m_iType == data_box::SEQUENCE)
 		{
 			ed->m_iNewBoxHeight = qMax(l_iNewHeight, m_oItem->m_oBox->m_iBoxHeight);
 			ed->newHeight += ed->m_iNewBoxHeight - ed->m_iOldBoxHeight;

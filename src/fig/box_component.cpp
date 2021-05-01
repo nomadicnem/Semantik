@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2020 GPLV3
+// Thomas Nagy 2007-2021 GPLV3
 
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
@@ -81,6 +81,7 @@ void box_component::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 	QRectF l_o3(w - 24, 14, 8, 3);
 	painter->drawRect(l_o3);
 
+	painter->setClipRect(l_oRect);
 
 	painter->translate(OFF, OFF + 15);
 	QAbstractTextDocumentLayout::PaintContext ctx;

@@ -1,4 +1,4 @@
-// Thomas Nagy 2007-2020 GPLV3
+// Thomas Nagy 2007-2021 GPLV3
 
 #ifndef BOX_CHAIN_H
 #define BOX_CHAIN_H

@@ -1,4 +1,4 @@
-// Thomas Nagy 2020-2020 GPLV3
+// Thomas Nagy 2020-2021 GPLV3
 
 #ifndef BOX_CLOUD_H
 #define BOX_CLOUD_H

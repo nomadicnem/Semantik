@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2007-2020 GPLV3
+# Thomas Nagy, 2007-2021 GPLV3
 
 APPNAME = 'semantik'
 VERSION = '1.2.7'

@@ -1,4 +1,4 @@
-// Thomas Nagy 2013-2020 GPLV3
+// Thomas Nagy 2013-2021 GPLV3
 
 %: ifndef SEMANTIKD_H
 #define SEMANTIKD_H
