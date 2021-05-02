@@ -80,29 +80,16 @@ void special_edit_properties::apply()
 	if (m_oTextEdit->toPlainText() != m_oItem->m_oBox->m_sText)
 	{
 		mem_edit_box *ed = new mem_edit_box(m_oItem->m_oView->m_oMediator, m_oItem->m_oView->m_iId, m_oItem->m_oBox->m_iId);
-		ed->newText = m_oTextEdit->toPlainText();
+		ed->newText = m_oTextEdit->toPlainText().trimmed();
 
-		QTextDocument doc;
-		doc.setDefaultFont(m_oItem->scene()->font());
-		QTextOption l_oOption = doc.defaultTextOption();
-		l_oOption.setAlignment(m_oItem->m_oBox->m_iAlign);
-		doc.setDefaultTextOption(l_oOption);
-		doc.setPlainText(ed->newText);
-		doc.setTextWidth(m_oItem->m_oBox->m_iWW - 2 * OFF);
+		QSize l_oSize = m_oItem->best_size_for(ed->newText);
+		ed->newHeight = l_oSize.height();
+		ed->newWidth = l_oSize.width();
 
-		int l_iNewHeight = fceil(doc.size().height() + 2 * OFF, GRID);
-		if (m_oItem->m_oBox->m_iType == data_box::DECISION)
+		if (m_oItem->m_oBox->m_iType == data_box::SEQUENCE)
 		{
-			// do nothing
-		}
-		else if (m_oItem->m_oBox->m_iType == data_box::SEQUENCE)
-		{
-			ed->m_iNewBoxHeight = qMax(l_iNewHeight, m_oItem->m_oBox->m_iBoxHeight);
-			ed->newHeight += ed->m_iNewBoxHeight - ed->m_iOldBoxHeight;
-		}
-		else
-		{
-			ed->newHeight = qMax(l_iNewHeight, m_oItem->m_oBox->m_iHH);
+			ed->m_iNewBoxHeight = ed->newHeight;
+			ed->newHeight = ed->m_iNewBoxHeight + ed->oldHeight - ed->m_iOldBoxHeight;
 		}
 
 		ed->apply();

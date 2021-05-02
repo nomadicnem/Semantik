@@ -44,7 +44,7 @@ int box_usecase::linesCount(const QString& i_sInput, int i_iNumLines, qreal i_fW
 	qreal l_fW2 = pow(i_fWidth, 2);
 	qreal l_fH2 = pow(i_fHeight, 2);
 
-	QTextLayout l_oTextLayout(doc.toPlainText(), scene()->font());
+	QTextLayout l_oTextLayout(i_sInput, scene()->font());
 	l_oTextLayout.setTextOption(l_oOption);
 	l_oTextLayout.beginLayout();
 
@@ -61,11 +61,12 @@ int box_usecase::linesCount(const QString& i_sInput, int i_iNumLines, qreal i_fW
 		qreal l_iX1 = qMax(0.0, pow((1 - 4 * pow(l_iY - i_fHeight/2, 2) / l_fH2) * (l_fW2 / 4), .5));
 		qreal l_iX2 = qMax(0.0, pow((1 - 4 * pow(l_iY + l_fLineHeight - i_fHeight/2, 2) / l_fH2) * (l_fW2 / 4), .5));
 
-		qreal l_iLineWidth = qMin(l_iX1, l_iX2) * 2 - 2 * OFF;
+		qreal l_iLineWidth = qMax(qMin(l_iX1, l_iX2) * 2 - 2 * OFF, 1.);
 		qreal l_iX = i_fWidth/2. - l_iLineWidth / 2.;
 
 		l_oLine.setLineWidth(l_iLineWidth);
 		l_oLine.setPosition(QPointF(l_iX, l_iY));
+
 		l_iY += l_oLine.height();
 	}
 	l_oTextLayout.endLayout();
@@ -138,26 +139,30 @@ void box_usecase::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	}
 	else
 	{
-		l_iNumLines = linesCount(l_sText, l_iMaxLines, l_fWidth, l_fHeight);
-		while (true)
+
+		int l_iBestCount = linesCount(l_sText, l_iMaxLines, l_fWidth, l_fHeight);
+		int l_iBestIndex = l_iMaxLines;
+
+		for (int i=l_iMaxLines; i > 0; i--)
 		{
-			int l_iNumLineTry = linesCount(l_sText, l_iNumLines - 1, l_fWidth, l_fHeight);
-			if (l_iNumLineTry < l_iNumLines)
+			int l_iNumLineTry = linesCount(l_sText, i, l_fWidth, l_fHeight);
+			if (l_iNumLineTry <= l_iBestCount && l_iNumLineTry <= i)
 			{
-				l_iNumLines -= 1;
+				l_iBestCount = l_iNumLineTry;
+				l_iBestIndex = i;
 			}
-			else
+			else if (l_iNumLineTry > i)
 			{
 				break;
 			}
 		}
+
 		m_sLastText = l_sText;
 		m_fLastLineHeight = l_fLineHeight;
 		m_fLastHeight = l_fHeight;
 		m_fLastWidth = l_fWidth;
-		m_iLastLineCount = l_iNumLines;
+		m_iLastLineCount = l_iNumLines = l_iBestIndex;
 	}
-
 
 	qreal l_iY = (l_fHeight - l_iNumLines * l_fLineHeight) / 2.;
 
@@ -223,6 +228,60 @@ QSize box_usecase::best_size(const QPointF &dims)
 		if (l_iNumLines > l_iMaxLines)
 		{
 			y += GRID;
+		}
+		else
+		{
+			break;
+		}
+	}
+	while (true);
+
+	return QSize(x, y);
+}
+
+QSize box_usecase::best_size_for(const QString &i_sText)
+{
+	if (i_sText.isEmpty())
+	{
+		return QSize(m_oBox->m_iWW, m_oBox->m_iHH);
+	}
+
+	int x = m_oBox->m_iWW;
+	x = GRID * (x / GRID);
+	if (x < 3 * GRID) x = 3 * GRID;
+
+	int y = m_oBox->m_iHH;
+	y = GRID * (y / GRID);
+	if (y < GRID) y = GRID;
+
+	do {
+
+		qreal l_fWidth = x - (1 + 0.01);
+		qreal l_fHeight = y - (1 + 0.01);
+
+		qreal l_fW2 = pow(l_fWidth, 2);
+
+		QFontMetricsF l_oFontMetrics(scene()->font());
+		qreal l_fLineHeight = l_oFontMetrics.height();
+
+		qreal l_fMinWidth = l_oFontMetrics.maxWidth() + 2 * OFF;
+		qreal l_fMinHeight = (l_fHeight/2.) * (1 - pow(1 - (l_fMinWidth * l_fMinWidth) / l_fW2, 0.5));
+
+		qreal l_fMaxHeight = l_fHeight - 2 * l_fMinHeight;
+		int l_iMaxLines = l_fMaxHeight / l_fLineHeight;
+
+		int l_iNumLines = linesCount(i_sText, l_iMaxLines, l_fWidth, l_fHeight);
+
+		if (l_iNumLines > l_iMaxLines)
+		{
+			if (2 * y >= x)
+			{
+				x += GRID;
+			}
+			else
+			{
+				y += GRID;
+			}
 		}
 		else
 		{

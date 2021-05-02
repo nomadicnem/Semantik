@@ -40,6 +40,7 @@ class box_sequence : public box_item
 
 		int m_iBoxHeight;
 		virtual int may_use(const QPair<int, int>&, const QPair<int, int>&, const int, const QPoint&) const;
+		QSize best_size_for(const QString &);
 };
 
 #endif // BOX_SEQUENCE_H

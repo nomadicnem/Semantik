@@ -48,7 +48,7 @@ void box_database::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	}
 	painter->setPen(l_oPen);
 
-	qreal pad = l_oPen.width() / 2.;
+	qreal pad = l_oPen.widthF() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	QRectF l_oRect2(l_oRect);

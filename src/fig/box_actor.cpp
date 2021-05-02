@@ -43,7 +43,7 @@ void box_actor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	l_oPen.setWidthF(0.01 + 1);
 	painter->setPen(l_oPen);
 
-	qreal pad = l_oPen.width() / 2.;
+	qreal pad = l_oPen.widthF() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	qreal xtop = l_oRect.x();

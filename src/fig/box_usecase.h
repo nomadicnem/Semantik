@@ -25,6 +25,7 @@ class box_usecase : public box_item
 		qreal m_fLastHeight;
 		 int m_iLastLineCount;
 		QSize best_size(const QPointF & orig);
+		QSize best_size_for(const QString &);
 };
 
 #endif // BOX_USECASE_H

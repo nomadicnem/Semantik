@@ -19,6 +19,13 @@ class box_decision : public box_item
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_decision(box_view*, int i_iId);
 		QSize best_size(const QPointF &dims);
+		int linesCount(const QString& i_sInput, int i_iNumLines, qreal i_fWidth, qreal i_fHeight);
+		QString m_sLastText;
+		qreal m_fLastLineHeight;
+		qreal m_fLastWidth;
+		qreal m_fLastHeight;
+		 int m_iLastLineCount;
+		QSize best_size_for(const QString &);
 };
 
 #endif // BOX_DECISION_H

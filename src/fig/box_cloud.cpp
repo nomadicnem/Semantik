@@ -46,7 +46,7 @@ void box_cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	if (isSelected()) l_oPen.setStyle(Qt::DotLine);
 	painter->setPen(l_oPen);
 
-	qreal pad = l_oPen.width() / 2.;
+	qreal pad = l_oPen.widthF() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	qreal xtop = l_oRect.x();

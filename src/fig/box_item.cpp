@@ -69,7 +69,7 @@ void box_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	l_oPen.setCosmetic(false);
 	l_oPen.setWidthF(0.01 + 1);
 
-	qreal pad = l_oPen.width() / 2.;
+	qreal pad = l_oPen.widthF() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	painter->setPen(l_oPen);
@@ -271,6 +271,56 @@ QSize box_item::best_size(const QPointF &dims)
 		y += GRID;
 	}
 	return QSize(x, y);
+}
+
+QSize box_item::best_size_for(const QString &i_sText)
+{
+	if (i_sText.isEmpty())
+	{
+		return QSize(m_oBox->m_iWW, m_oBox->m_iHH);
+	}
+
+	QTextDocument l_oDoc;
+	l_oDoc.setDefaultFont(scene()->font());
+	QTextOption l_oOption = l_oDoc.defaultTextOption();
+	l_oOption.setAlignment(m_oBox->m_iAlign);
+	l_oDoc.setDefaultTextOption(l_oOption);
+	l_oDoc.setPlainText(i_sText);
+
+	int l_iWidth = m_oBox->m_iWW;
+	l_oDoc.setTextWidth(l_iWidth - x_text_off);
+	if (l_oDoc.size().height() <= m_oBox->m_iHH - y_text_off)
+	{
+		return QSize(m_oBox->m_iWW, m_oBox->m_iHH);
+	}
+
+	if (l_oDoc.size().height() > l_oDoc.size().width())
+	{
+		l_oDoc.adjustSize();
+		int l_iWantedW = l_oDoc.size().width() + x_text_off;
+		l_iWidth = GRID * (l_iWantedW / GRID);
+		if (l_iWidth < GRID)
+		{
+			l_iWidth = GRID;
+		}
+		while (l_iWidth < l_iWantedW)
+		{
+			l_iWidth += GRID;
+		}
+		l_oDoc.setTextWidth(l_iWidth - x_text_off);
+	}
+
+	int l_iWantedHeight = l_oDoc.size().height() + y_text_off;
+	int l_iHeight = GRID * (l_iWantedHeight / GRID);
+	if (l_iHeight < GRID)
+	{
+		l_iHeight = GRID;
+	}
+	while (l_iHeight < l_iWantedHeight)
+	{
+		l_iHeight += GRID;
+	}
+	return QSize(l_iWidth, l_iHeight);
 }
 
 QPointF box_item::validate_point(box_resize_point *p, const QPointF & orig)

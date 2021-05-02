@@ -55,7 +55,8 @@ class box_item : public QGraphicsRectItem, public connectable, public editable, 
 		int m_iHH;
 
 		box_resize_point *m_oResize;
-		virtual QSize best_size(const QPointF & orig);
+		virtual QSize best_size(const QPointF &);
+		virtual QSize best_size_for(const QString &);
 
 		virtual void update_sizers();
 		int m_iLastStretchX;

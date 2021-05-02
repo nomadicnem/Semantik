@@ -53,6 +53,8 @@ class mem_edit_box: public mem_command {
 
 		int oldHeight;
 		int newHeight;
+		int oldWidth;
+		int newWidth;
 
 		int m_iOldBoxHeight;
 		int m_iNewBoxHeight;

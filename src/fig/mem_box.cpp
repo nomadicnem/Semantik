@@ -82,6 +82,7 @@ item(model->m_oItems[id])
 	box = item.m_oBoxes[bid];
 	oldText = box->m_sText;
 	newHeight = oldHeight = box->m_iHH;
+	newWidth = oldWidth = box->m_iWW;
 	m_iNewBoxHeight = m_iOldBoxHeight = box->m_iBoxHeight;
 }
 
@@ -89,6 +90,7 @@ void mem_edit_box::redo()
 {
 	box->m_sText = newText;
 	box->m_iHH = newHeight;
+	box->m_iWW = newWidth;
 	box->m_iLabelPosition = m_iNewLabelPosition;
 	box->m_iBoxHeight = m_iNewBoxHeight;
 	model->notify_edit_box(item.m_iId, box->m_iId);
@@ -99,6 +101,7 @@ void mem_edit_box::undo()
 {
 	box->m_sText = oldText;
 	box->m_iHH = oldHeight;
+	box->m_iWW = oldWidth;
 	box->m_iLabelPosition = m_iOldLabelPosition;
 	box->m_iBoxHeight = m_iOldBoxHeight;
 	model->notify_edit_box(item.m_iId, box->m_iId);
