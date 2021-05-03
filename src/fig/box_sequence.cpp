@@ -50,7 +50,7 @@ void box_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	qreal pad = l_oPen.widthF() / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 	QPointF l_oMidBottom = (l_oRect.bottomLeft() + l_oRect.bottomRight()) / 2.;
-	l_oRect.setBottomLeft(l_oRect.topLeft() + QPointF(0, m_iBoxHeight));
+	l_oRect.setBottomLeft(l_oRect.topLeft() + QPointF(0, m_iBoxHeight - 2*pad));
 
 	QColor bc = m_oBox->getColor(m_oView->m_oMediator);
 	if (m_oView->m_bDisableGradient)
@@ -78,7 +78,7 @@ void box_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	QAbstractTextDocumentLayout * lay = doc.documentLayout();
 	qreal yoff = lay->documentSize().height();
 
-	painter->translate(OFF, OFF + (l_oRect.height() - 2 * OFF - yoff) / 2.);
+	painter->translate(OFF, (l_oRect.height() + 2*pad - yoff)/2.);
 	lay->draw(painter, ctx);
 }
 
@@ -371,6 +371,7 @@ QSize box_sequence::best_size_for(const QString &i_sText)
 	}
 
 	QTextDocument l_oDoc;
+	l_oDoc.setDocumentMargin(0);
 	l_oDoc.setDefaultFont(scene()->font());
 	QTextOption l_oOption = l_oDoc.defaultTextOption();
 	l_oOption.setAlignment(m_oBox->m_iAlign);

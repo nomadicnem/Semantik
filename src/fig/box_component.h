@@ -18,7 +18,15 @@ class box_component : public box_item
 	public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 		box_component(box_view*, int i_iId);
+		int linesCount(const QString &, int, qreal, qreal);
+		QString m_sLastText;
+		qreal m_fLastLineHeight;
 		QSize best_size(const QPointF &dims);
+		qreal m_fLastWidth;
+		 qreal m_fLastHeight;
+		int m_iLastLineCount;
+
+		QSize best_size_for(const QString &);
 };
 
 #endif // BOX_COMPONENT_H

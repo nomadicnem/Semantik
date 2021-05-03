@@ -47,6 +47,8 @@ m_oItem(m_oView->m_oMediator->m_oItems[m_oView->m_iId])
 	setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
 	x_text_off = 2 * OFF;
 	y_text_off = 2 * OFF;
+
+	doc.setDocumentMargin(0);
 }
 
 box_item::~box_item()
@@ -281,6 +283,7 @@ QSize box_item::best_size_for(const QString &i_sText)
 	}
 
 	QTextDocument l_oDoc;
+	l_oDoc.setDocumentMargin(0);
 	l_oDoc.setDefaultFont(scene()->font());
 	QTextOption l_oOption = l_oDoc.defaultTextOption();
 	l_oOption.setAlignment(m_oBox->m_iAlign);

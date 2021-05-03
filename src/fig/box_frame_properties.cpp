@@ -80,16 +80,14 @@ void box_frame_properties::apply() {
 	mem_edit_box *mem = new mem_edit_box(m_oFrame->m_oView->m_oMediator, m_oFrame->m_oView->m_iId, m_oFrame->m_iId);
 	mem->newText = m_oEdit->text();
 
-	QTextDocument doc;
-	QTextOption l_oOption = doc.defaultTextOption();
-	l_oOption.setAlignment(m_oFrame->m_oBox->m_iAlign);
-	doc.setDefaultTextOption(l_oOption);
-	doc.setPlainText(mem->newText);
-
-	doc.setTextWidth(m_oFrame->m_oBox->m_iWW - 2 * OFF);
-	mem->newHeight = fceil(doc.size().height() + 2 * OFF, GRID);
+	QSize l_oSize = m_oFrame->best_size_for(mem->newText);
+	mem->newHeight = l_oSize.height();
 	if (mem->newHeight < m_oFrame->m_oBox->m_iHH)
 		mem->newHeight = m_oFrame->m_oBox->m_iHH;
+
+	mem->newWidth = l_oSize.width();
+	if (mem->newWidth < m_oFrame->m_oBox->m_iWW)
+		mem->newWidth = m_oFrame->m_oBox->m_iWW;
 
 	mem->m_iOldLabelPosition = m_oFrame->m_oBox->m_iLabelPosition;
 	mem->m_iNewLabelPosition = (Qt::Edge) m_oLabelPosition->currentData().toInt();

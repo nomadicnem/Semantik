@@ -194,6 +194,13 @@ QSize box_decision::best_size(const QPointF &dims)
 
 		qreal l_fMaxHeight = l_fHeight - 2 * l_fMinHeight;
 		int l_iMaxLines = l_fMaxHeight / l_fLineHeight;
+		if (l_iMaxLines < 1)
+		{
+			x += GRID;
+			y += GRID;
+			continue;
+		}
+
 
 		int l_iNumLines = linesCount(l_sText, l_iMaxLines, l_fWidth, l_fHeight);
 
@@ -214,6 +221,7 @@ QSize box_decision::best_size(const QPointF &dims)
 
 int box_decision::linesCount(const QString& i_sInput, int i_iNumLines, qreal i_fWidth, qreal i_fHeight)
 {
+	if (i_iNumLines <= 0) return 0;
 	doc.setDefaultFont(scene()->font());
 	QTextOption l_oOption = doc.defaultTextOption();
 	l_oOption.setAlignment(m_oBox->m_iAlign);
@@ -293,6 +301,11 @@ QSize box_decision::best_size_for(const QString &i_sText)
 
 		qreal l_fMaxHeight = l_fHeight - 2 * l_fMinHeight;
 		int l_iMaxLines = l_fMaxHeight / l_fLineHeight;
+		if (l_iMaxLines < 1)
+		{
+			x += GRID;
+			continue;
+		}
 
 		int l_iNumLines = linesCount(i_sText, l_iMaxLines, l_fWidth, l_fHeight);
 
