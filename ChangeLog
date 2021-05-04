@@ -1,6 +1,9 @@
 Semantik 1.2.7
 --------------
 * Fix the rendering of activity elements start/end
+* Fix the installation on Arch
+* Fix saving empty documents
+* Improve the layout for various diagram elements (usecase/component/decision)
 
 Semantik 1.2.6
 --------------

@@ -37,7 +37,7 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	doc.setDefaultTextOption(l_oOption);
 	doc.setHtml(m_oBox->m_sText);
 
-	qreal pad = 0.5;
+	qreal pad = (0.01 + 1) / 2.;
 	QRectF l_oRect = rect().adjusted(pad, pad, -pad, -pad);
 
 	if (isSelected())
@@ -50,7 +50,7 @@ void box_label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 		painter->drawRoundRect(l_oRect, 20, 20);
 	}
 
-	painter->translate(OFF, OFF);
+	painter->translate(OFF, OFF + 4);
 	QAbstractTextDocumentLayout::PaintContext ctx;
 	ctx.palette = QApplication::palette("QTextControl");
 	ctx.palette.setColor(QPalette::Text, m_oBox->getColor(m_oView->m_oMediator));

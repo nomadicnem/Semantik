@@ -80,7 +80,7 @@ void special_edit_properties::apply()
 	if (m_oTextEdit->toPlainText() != m_oItem->m_oBox->m_sText)
 	{
 		mem_edit_box *ed = new mem_edit_box(m_oItem->m_oView->m_oMediator, m_oItem->m_oView->m_iId, m_oItem->m_oBox->m_iId);
-		ed->newText = m_oTextEdit->toPlainText().trimmed();
+		ed->newText = m_oTextEdit->toPlainText().remove(QRegExp("\\s+$"));
 
 		QSize l_oSize = m_oItem->best_size_for(ed->newText);
 		ed->newHeight = l_oSize.height();
