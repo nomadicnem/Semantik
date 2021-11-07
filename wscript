@@ -102,11 +102,11 @@ src/fig/diagram_document.h
 	bld.install_files('${MIME_DIR}/', 'src/data/semantik.xml')
 
 	for x in ('', '-d'):
-		bld.install_as('${ICONDIR}/hicolor/128x128/apps/semantik%s.png' % x, 'src/data/hi128-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/hicolor/64x64/apps/semantik%s.png'% x, 'src/data/hi64-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/hicolor/48x48/apps/semantik%s.png'% x, 'src/data/hi48-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/hicolor/32x32/apps/semantik%s.png'% x, 'src/data/hi32-app-semantik%s.png'%x)
-		bld.install_as('${ICONDIR}/hicolor/22x22/apps/semantik%s.png'% x, 'src/data/hi22-app-semantik%s.png'%x)
+		#bld.install_as('${ICONDIR}/hicolor/128x128/apps/semantik%s.png' % x, 'src/data/hi128-app-semantik%s.png'%x)
+		#bld.install_as('${ICONDIR}/hicolor/64x64/apps/semantik%s.png'% x, 'src/data/hi64-app-semantik%s.png'%x)
+		#bld.install_as('${ICONDIR}/hicolor/48x48/apps/semantik%s.png'% x, 'src/data/hi48-app-semantik%s.png'%x)
+		#bld.install_as('${ICONDIR}/hicolor/32x32/apps/semantik%s.png'% x, 'src/data/hi32-app-semantik%s.png'%x)
+		#bld.install_as('${ICONDIR}/hicolor/22x22/apps/semantik%s.png'% x, 'src/data/hi22-app-semantik%s.png'%x)
 
 		#bld(rule="${GZIP} -c ${SRC} > ${TGT}", source='src/data/semantik%s.svg'%x, target='src/data/semantik%s.svgz'%x)
 		bld.install_as('${ICONDIR}/hicolor/scalable/apps/semantik%s.svg'%x, 'src/data/semantik%s.svg'%x)
