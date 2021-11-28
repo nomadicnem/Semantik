@@ -47,11 +47,11 @@ rep = {
 }
 
 class QTXMLHandler(ContentHandler):
-	def __init__(self):
+	def __init__(self, pic_map):
 		self.buf = []
 		self.out = []
 		self.trucs = []
-
+		self.pic_map = pic_map
 		self.out.append(head)
 
 	def init_tbl(self):
@@ -82,6 +82,9 @@ class QTXMLHandler(ContentHandler):
 		if name == 'item':
 			self.out.append('<item ')
 
+			if self.tbl.get('id', '') in self.pic_map:
+				self.out.append(' datatype="4" ')
+
 			for x in lst_vars:
 				value = self.tbl.get(x, '')
 				if x == 'id': value = str(int(value)+1) # offset +1
@@ -103,9 +106,9 @@ class QTXMLHandler(ContentHandler):
 	def characters(self, cars):
 		self.buf.append(cars)
 
-def parse_string(s):
+def parse_string(s, pic_map):
 	parser = make_parser()
-	curHandler = QTXMLHandler()
+	curHandler = QTXMLHandler(pic_map)
 	parser.setContentHandler(curHandler)
 	parser.parse(io.StringIO(str(s)))
 	return "".join(curHandler.out)
@@ -116,7 +119,7 @@ def parse_file(infile, tmpdir):
 		tar.extract(tarinfo, path=tmpdir)
 
 	# offset +1
-	lst = os.listdir('.')
+	lst = os.listdir(tmpdir)
 	map = {}
 	for x in lst:
 		if x[:4] != 'pic-': continue
@@ -128,16 +131,15 @@ def parse_file(infile, tmpdir):
 	for u in k:
 		name = map[u]
 		ext = name.split('.')[1]
-		os.rename(name, 'pic-%d.%s' % (int(u)+1, ext))
-
+		os.rename(tmpdir + '/' + name, tmpdir + '/pic-%d.%s' % (int(u)+1, ext))
 	tar.close()
 
-	with open('maindoc.xml', 'r', encoding='utf-8') as f:
+	with open(tmpdir + '/maindoc.xml', 'r', encoding='utf-8') as f:
 		txt = f.read()
-	os.remove('maindoc.xml')
+	os.remove(tmpdir + '/maindoc.xml')
 
 	truc = txt.replace('<?xml version="1.0" encoding="utf8"?>', '<?xml version="1.0" encoding="UTF-8"?>')
-	truc = parse_string(truc)
+	truc = parse_string(truc, map)
 
 	#file = open("/tmp/con.xml", "w")
 	#file.write(truc)
